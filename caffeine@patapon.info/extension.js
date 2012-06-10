@@ -31,10 +31,6 @@ const DBusSessionManagerIface = <interface name="org.gnome.SessionManager">
 <method name="Uninhibit">
     <arg type="u" direction="in" />
 </method>
-<method name="IsInhibited">
-    <arg type="u" direction="in" />
-    <arg type="b" direction="out" />
-</method>
 <signal name="InhibitorAdded">
     <arg type="o" direction="out" />
 </signal>
@@ -58,7 +54,7 @@ const EnabledIcon = 'caffeine-on';
 let CaffeineIndicator;
 
 const Caffeine = new Lang.Class({
-    Name: 'Caffeine',
+    Name: IndicatorName,
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
