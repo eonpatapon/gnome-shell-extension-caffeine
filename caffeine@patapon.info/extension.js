@@ -58,7 +58,7 @@ const Caffeine = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
-        this.parent(null, IndicatorName, true);
+        this.parent(null, IndicatorName, false);
 
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
@@ -149,4 +149,5 @@ function enable() {
 
 function disable() {
     CaffeineIndicator.destroy();
+    CaffeineIndicator = null;
 }
