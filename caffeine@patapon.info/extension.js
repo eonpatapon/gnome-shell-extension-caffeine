@@ -102,7 +102,7 @@ const Caffeine = new Lang.Class({
         if (this._cookie)
             this._sessionManager.UninhibitRemote(this._cookie);
         else
-            global.logError("Can't uninhibit. Cookie not available.");
+            log("Can't uninhibit. Cookie not available.");
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {

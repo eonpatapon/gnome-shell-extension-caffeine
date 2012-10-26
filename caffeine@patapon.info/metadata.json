@@ -1,5 +1,5 @@
 {
-"shell-version": ["3.4", "3.5.91", "3.6"],
+"shell-version": ["3.4", "3.5.91", "3.6", "3.7.1"],
 "uuid": "caffeine@patapon.info",
 "name": "Caffeine",
 "description": "Disable the screensaver and auto suspend",
