@@ -48,8 +48,8 @@ const DBusSessionManagerInhibitorIface = <interface name="org.gnome.SessionManag
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = "Caffeine";
-const DisabledIcon = 'caffeine-off-symbolic';
-const EnabledIcon = 'caffeine-on-symbolic';
+const DisabledIcon = 'my-caffeine-off-symbolic';
+const EnabledIcon = 'my-caffeine-on-symbolic';
 
 let CaffeineIndicator;
 
