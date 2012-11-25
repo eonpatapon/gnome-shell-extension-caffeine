@@ -19,6 +19,9 @@ const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
+const Shell = imports.gi.Shell;
+
+const InhibitApps = [];
 
 const DBusSessionManagerIface = <interface name="org.gnome.SessionManager">
 <method name="Inhibit">
@@ -68,6 +71,14 @@ const Caffeine = new Lang.Class({
         this._sessionManager.connectSignal('InhibitorRemoved',
                                            Lang.bind(this, this._inhibitorRemoved));
 
+        // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
+        this._windowTracker = Shell.WindowTracker.get_default();
+        let display = global.screen.get_display();
+        // Connect after so the handler from ShellWindowTracker has already run
+        this._windowCreatedId = display.connect_after('window-created', Lang.bind(this, this._mayInhibit));
+        let shellwm = global.window_manager;
+        this._windowDestroyedId = shellwm.connect('destroy', Lang.bind(this, this._mayUninhibit));
+
         this._icon = new St.Icon({
             icon_name: DisabledIcon,
             style_class: 'system-status-icon'
@@ -76,6 +87,9 @@ const Caffeine = new Lang.Class({
         this._state = false;
         this._object = false;
         this._cookie = "";
+        // who has requested the inhibition
+        this._current_requestor = "";
+        this._requestors = [];
 
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
@@ -84,39 +98,49 @@ const Caffeine = new Lang.Class({
 
     toggleState: function() {
         if (this._state)
-            this.removeInhibit();
+            this.removeInhibit('user');
         else
-            this.addInhibit();
+            this.addInhibit('user');
     },
 
-    addInhibit: function() {
+    addInhibit: function(requestor) {
         this._sessionManager.InhibitRemote(IndicatorName,
             0, "Inhibit by %s".format(IndicatorName), 8,
             Lang.bind(this, function(cookie) {
                 this._cookie = cookie;
+                this._current_requestor = requestor;
             })
         );
     },
 
-    removeInhibit: function() {
-        if (this._cookie)
+    removeInhibit: function(requestor) {
+        // User can remove the inhibit manually
+        if (requestor == "user")
+            this._requestors = [];
+        else {
+            // remove the requestor from the list
+            let index = this._requestors.indexOf(requestor);
+            if (index > -1)
+                this._requestors.splice(index, 1);
+        }
+        // remove inhibit if the requestors list is empty
+        if (this._requestors.length == 0 && this._cookie) {
             this._sessionManager.UninhibitRemote(this._cookie);
-        else
-            log("Can't uninhibit. Cookie not available.");
+        }
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {
         let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
                                                              'org.gnome.SessionManager',
                                                              object);
-        this._added_object = object;
-
         // Is the new inhibitor Caffeine ?
         inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
             if (app_id == IndicatorName) {
                 this._icon.icon_name = EnabledIcon;
                 this._state = true;
-                this._object = this._added_object;
+                this._object = object;
+                this._requestors.push(this._current_requestor);
+                this._current_requestor = "";
             }
         }));
     },
@@ -130,8 +154,37 @@ const Caffeine = new Lang.Class({
         }
     },
 
+    _mayInhibit: function(display, window, noRecurse) {
+        if (!this._windowTracker.is_window_interesting(window))
+            return;
+
+        let app = this._windowTracker.get_window_app(window);
+        if (!app) {
+            if (!noRecurse) {
+                // window is not tracked yet
+                Mainloop.idle_add(Lang.bind(this, function() {
+                    this._mayInhibit(display, window, true);
+                    return false;
+                }));
+            } else
+                log ('Cannot find application for window');
+            return;
+        }
+        if (InhibitApps.indexOf(app.get_id()) > -1)
+            this.addInhibit(window);
+    },
+
+    _mayUninhibit: function(shellwm, actor) {
+        let window = actor.meta_window;
+        this.removeInhibit(window);
+    },
+
     destroy: function() {
         this.removeInhibit();
+        if (this._windowCreatedId) {
+            global.screen.get_display().disconnect(this._windowCreatedId);
+            this._windowCreatedId = 0;
+        }
         this.parent();
     }
 });
