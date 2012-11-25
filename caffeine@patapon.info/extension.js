@@ -185,6 +185,10 @@ const Caffeine = new Lang.Class({
             global.screen.get_display().disconnect(this._windowCreatedId);
             this._windowCreatedId = 0;
         }
+        if (this._windowDestroyedId) {
+            global.window_manager.disconnect(this._windowDestroyedId);
+            this._windowDestroyedId = 0;
+        }
         this.parent();
     }
 });
