@@ -98,7 +98,7 @@ const Caffeine = new Lang.Class({
 
     toggleState: function() {
         if (this._state)
-            this.removeInhibit('user');
+            this.removeInhibit();
         else
             this.addInhibit('user');
     },
@@ -113,20 +113,8 @@ const Caffeine = new Lang.Class({
         );
     },
 
-    removeInhibit: function(requestor) {
-        // User can remove the inhibit manually
-        if (requestor == "user")
-            this._requestors = [];
-        else {
-            // remove the requestor from the list
-            let index = this._requestors.indexOf(requestor);
-            if (index > -1)
-                this._requestors.splice(index, 1);
-        }
-        // remove inhibit if the requestors list is empty
-        if (this._requestors.length == 0 && this._cookie) {
-            this._sessionManager.UninhibitRemote(this._cookie);
-        }
+    removeInhibit: function() {
+        this._sessionManager.UninhibitRemote(this._cookie);
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {
@@ -170,13 +158,18 @@ const Caffeine = new Lang.Class({
                 log ('Cannot find application for window');
             return;
         }
-        if (InhibitApps.indexOf(app.get_id()) > -1)
+        if (InhibitApps.indexOf(app.get_id()) > -1 && !this._state)
             this.addInhibit(window);
     },
 
     _mayUninhibit: function(shellwm, actor) {
         let window = actor.meta_window;
-        this.removeInhibit(window);
+        // remove the requestor from the list
+        let index = this._requestors.indexOf(window);
+        if (index > -1)
+            this._requestors.splice(index, 1);
+        if (this._requestors.length == 0 && this._state)
+            this.removeInhibit();
     },
 
     destroy: function() {
