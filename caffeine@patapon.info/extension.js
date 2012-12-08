@@ -20,8 +20,15 @@ const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const Shell = imports.gi.Shell;
+const MessageTray = imports.ui.messageTray;
 
-const InhibitApps = [];
+const INHIBIT_APPS_KEY = 'inhibit-apps';
+
+const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
+const _ = Gettext.gettext;
+
+const Me = imports.misc.extensionUtils.getCurrentExtension();
+const Lib = Me.imports.lib;
 
 const DBusSessionManagerIface = <interface name="org.gnome.SessionManager">
 <method name="Inhibit">
@@ -94,6 +101,7 @@ const Caffeine = new Lang.Class({
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
+
     },
 
     toggleState: function() {
@@ -129,6 +137,8 @@ const Caffeine = new Lang.Class({
                 this._object = object;
                 this._requestors.push(this._current_requestor);
                 this._current_requestor = "";
+                let source = new CaffeineNotifier(EnabledIcon);
+                source.enable();
             }
         }));
     },
@@ -139,6 +149,8 @@ const Caffeine = new Lang.Class({
             this._state = false;
             this._object = false;
             this._cookie = "";
+            let source = new CaffeineNotifier(DisabledIcon);
+            source.disable();
         }
     },
 
@@ -158,7 +170,8 @@ const Caffeine = new Lang.Class({
                 log ('Cannot find application for window');
             return;
         }
-        if (InhibitApps.indexOf(app.get_id()) > -1 && !this._state)
+        let apps = gsettings.get_strv(INHIBIT_APPS_KEY);
+        if (apps.indexOf(app.get_id()) > -1 && !this._state)
             this.addInhibit(window);
     },
 
@@ -186,7 +199,33 @@ const Caffeine = new Lang.Class({
     }
 });
 
+const CaffeineNotifier = new Lang.Class({
+    Name: 'CaffeineNotifier',
+    Extends: MessageTray.Source,
+
+    _init: function(icon) {
+        this.parent('', icon);
+        Main.messageTray.add(this);
+    },
+
+    enable: function() {
+        let notification = new MessageTray.Notification(this, _("Caffeine enabled"));
+        notification.setTransient(true);
+        this.notify(notification);
+    },
+
+    disable: function() {
+        let notification = new MessageTray.Notification(this, _("Caffeine disabled"));
+        notification.setTransient(true);
+        this.notify(notification);
+    }
+});
+
+let gsettings;
+
 function init(extensionMeta) {
+    gsettings = Lib.getSettings(Me);
+    Lib.initTranslations(Me);
     let theme = imports.gi.Gtk.IconTheme.get_default();
     theme.append_search_path(extensionMeta.path + "/icons");
 }

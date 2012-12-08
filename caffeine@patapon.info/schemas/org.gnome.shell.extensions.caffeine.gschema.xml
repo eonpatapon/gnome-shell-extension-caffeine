@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions-caffeine-daemon">
+  <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
+    <key type="as" name="inhibit-apps">
+        <default>[ ]</default>
+        <summary>Application list</summary>
+        <description>A list of strings, each containing an application id (desktop file name)</description>
+    </key>
+  </schema>
+</schemalist>
