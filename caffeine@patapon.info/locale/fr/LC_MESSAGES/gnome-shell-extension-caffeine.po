@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-08 12:07+0100\n"
-"PO-Revision-Date: 2012-12-08 12:20+0100\n"
+"POT-Creation-Date: 2012-12-09 14:42+0100\n"
+"PO-Revision-Date: 2012-12-09 14:43+0100\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -23,3 +23,19 @@ msgstr "Caféine est activé"
 #: ../../../caffeine@patapon.info/extension.js:218
 msgid "Caffeine disabled"
 msgstr "Caféine est désactivé"
+
+#: ../../../caffeine@patapon.info/prefs.js:43
+msgid "Application"
+msgstr "Application"
+
+#: ../../../caffeine@patapon.info/prefs.js:59
+msgid "Add application"
+msgstr "Ajouter une application"
+
+#: ../../../caffeine@patapon.info/prefs.js:73
+msgid "Create new matching rule"
+msgstr "Nouvelle règle"
+
+#: ../../../caffeine@patapon.info/prefs.js:77
+msgid "Add"
+msgstr "Ajouter"

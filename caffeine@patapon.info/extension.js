@@ -70,6 +70,8 @@ const Caffeine = new Lang.Class({
     _init: function(metadata, params) {
         this.parent(null, IndicatorName, false);
 
+        this._settings = Lib.getSettings(Me);
+
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
                                                           '/org/gnome/SessionManager');
@@ -167,11 +169,11 @@ const Caffeine = new Lang.Class({
                     return false;
                 }));
             } else
-                log ('Cannot find application for window');
+                log('Cannot find application for window');
             return;
         }
-        let apps = gsettings.get_strv(INHIBIT_APPS_KEY);
-        if (apps.indexOf(app.get_id()) > -1 && !this._state)
+        let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
+        if (apps.indexOf(app.get_id()) != -1 && !this._state)
             this.addInhibit(window);
     },
 
@@ -221,10 +223,7 @@ const CaffeineNotifier = new Lang.Class({
     }
 });
 
-let gsettings;
-
 function init(extensionMeta) {
-    gsettings = Lib.getSettings(Me);
     Lib.initTranslations(Me);
     let theme = imports.gi.Gtk.IconTheme.get_default();
     theme.append_search_path(extensionMeta.path + "/icons");
