@@ -14,6 +14,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
+const SHOW_INDICATOR_KEY = 'show-indicator';
 
 const Columns = {
     APPINFO: 0,
@@ -32,6 +33,26 @@ const CaffeineWidget = new Lang.Class({
         this._settings.connect('changed', Lang.bind(this, this._refresh));
         this._changedPermitted = false;
 
+
+        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                margin: 7});
+
+        let label = new Gtk.Label({label: _("Show Caffeine in top panel"),
+                                           xalign: 0 });
+
+        let show = new Gtk.Switch({active: this._settings.get_boolean(SHOW_INDICATOR_KEY)});
+        show.connect('notify::active', Lang.bind(this, function(button) {
+            this._settings.set_boolean(SHOW_INDICATOR_KEY, button.active);
+        }));
+
+        hbox.pack_start(label, true, true, 0);
+        hbox.add(show);
+
+        this.w.add(hbox);
+
+        let label = new Gtk.Label({label: _(''),
+                                           xalign: 0 });
+
         this._store = new Gtk.ListStore();
         this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
 
@@ -40,7 +61,7 @@ const CaffeineWidget = new Lang.Class({
         this._treeView.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
 
         let appColumn = new Gtk.TreeViewColumn({ expand: true, sort_column_id: Columns.DISPLAY_NAME,
-                                                 title: _("Application") });
+                                                 title: _("Applications which enable Caffeine automatically") });
         let iconRenderer = new Gtk.CellRendererPixbuf;
         appColumn.pack_start(iconRenderer, false);
         appColumn.add_attribute(iconRenderer, "gicon", Columns.ICON);

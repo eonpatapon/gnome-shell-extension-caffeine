@@ -23,6 +23,7 @@ const Shell = imports.gi.Shell;
 const MessageTray = imports.ui.messageTray;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
+const SHOW_INDICATOR_KEY = 'show-indicator';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -71,6 +72,14 @@ const Caffeine = new Lang.Class({
         this.parent(null, IndicatorName, false);
 
         this._settings = Lib.getSettings(Me);
+        this._settings.connect("changed::" + SHOW_INDICATOR_KEY, Lang.bind(this, function() {
+            if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
+                this.actor.show();
+            else
+                this.actor.hide();
+        }));
+        if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
+            this.actor.hide();
 
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
@@ -103,7 +112,6 @@ const Caffeine = new Lang.Class({
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
-
     },
 
     toggleState: function() {

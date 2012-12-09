@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-09 14:42+0100\n"
-"PO-Revision-Date: 2012-12-09 14:43+0100\n"
+"POT-Creation-Date: 2012-12-09 15:32+0100\n"
+"PO-Revision-Date: 2012-12-09 15:33+0100\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -16,26 +16,33 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../caffeine@patapon.info/extension.js:212
+#: ../../../extension.js:222
 msgid "Caffeine enabled"
 msgstr "Caféine est activé"
 
-#: ../../../caffeine@patapon.info/extension.js:218
+#: ../../../extension.js:228
 msgid "Caffeine disabled"
 msgstr "Caféine est désactivé"
 
-#: ../../../caffeine@patapon.info/prefs.js:43
-msgid "Application"
-msgstr "Application"
+#: ../../../prefs.js:40
+msgid "Show Caffeine in top panel"
+msgstr "Afficher Caféine dans le panneau supérieur"
 
-#: ../../../caffeine@patapon.info/prefs.js:59
+#: ../../../prefs.js:64
+msgid "Applications which enable Caffeine automatically"
+msgstr "Applications qui activent Caféine automatiquement"
+
+#: ../../../prefs.js:80
 msgid "Add application"
 msgstr "Ajouter une application"
 
-#: ../../../caffeine@patapon.info/prefs.js:73
+#: ../../../prefs.js:94
 msgid "Create new matching rule"
 msgstr "Nouvelle règle"
 
-#: ../../../caffeine@patapon.info/prefs.js:77
+#: ../../../prefs.js:98
 msgid "Add"
 msgstr "Ajouter"
+
+#~ msgid "Application"
+#~ msgstr "Application"

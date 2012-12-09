@@ -6,5 +6,10 @@
         <summary>Application list</summary>
         <description>A list of strings, each containing an application id (desktop file name)</description>
     </key>
+    <key type="b" name="show-indicator">
+        <default>'true'</default>
+        <summary>Show indicator</summary>
+        <description>Show the indicator on the top panel</description>
+    </key>
   </schema>
 </schemalist>
