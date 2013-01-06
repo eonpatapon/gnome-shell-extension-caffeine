@@ -24,6 +24,7 @@ const MessageTray = imports.ui.messageTray;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
+const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -147,8 +148,10 @@ const Caffeine = new Lang.Class({
                 this._object = object;
                 this._requestors.push(this._current_requestor);
                 this._current_requestor = "";
-                let source = new CaffeineNotifier(EnabledIcon);
-                source.enable();
+                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
+                    let source = new CaffeineNotifier(EnabledIcon);
+                    source.enable();
+                }
             }
         }));
     },
@@ -159,8 +162,10 @@ const Caffeine = new Lang.Class({
             this._state = false;
             this._object = false;
             this._cookie = "";
-            let source = new CaffeineNotifier(DisabledIcon);
-            source.disable();
+            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)){
+                let source = new CaffeineNotifier(DisabledIcon);
+                source.disable();
+            }
         }
     },
 
