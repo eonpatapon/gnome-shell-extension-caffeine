@@ -39,38 +39,33 @@ const CaffeineWidget = new Lang.Class({
                                 margin: 7});
 
         let label = new Gtk.Label({label: _("Show Caffeine in top panel"),
-                                           xalign: 0 });
+                                           xalign: 0});
 
         let show = new Gtk.Switch({active: this._settings.get_boolean(SHOW_INDICATOR_KEY)});
         show.connect('notify::active', Lang.bind(this, function(button) {
             this._settings.set_boolean(SHOW_INDICATOR_KEY, button.active);
         }));
-        
+
         hbox.pack_start(label, true, true, 0);
         hbox.add(show);
-        
-        this.w.add(hbox);
-        
-        //
-        
-        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                        margin: 7});
 
-        let label = new Gtk.Label({label: _("Show notifications when enabled/disabled"),
-                                   xalign: 0 });
+        this.w.add(hbox);
+
+        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                margin: 7});
+
+        let label = new Gtk.Label({label: _("Enable notifications"),
+                                   xalign: 0});
 
         let show = new Gtk.Switch({active: this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)});
         show.connect('notify::active', Lang.bind(this, function(button) {
             this._settings.set_boolean(SHOW_NOTIFICATIONS_KEY, button.active);
         }));
-        
+
         hbox.pack_start(label, true, true, 0);
         hbox.add(show);
 
         this.w.add(hbox);
-
-        let label = new Gtk.Label({label: _(''),
-                                           xalign: 0 });
 
         this._store = new Gtk.ListStore();
         this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
