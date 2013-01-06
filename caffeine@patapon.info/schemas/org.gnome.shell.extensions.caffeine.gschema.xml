@@ -7,9 +7,14 @@
         <description>A list of strings, each containing an application id (desktop file name)</description>
     </key>
     <key type="b" name="show-indicator">
-        <default>'true'</default>
+        <default>true</default>
         <summary>Show indicator</summary>
         <description>Show the indicator on the top panel</description>
+    </key>
+    <key type="b" name="show-notifications">
+        <default>true</default>
+        <summary>Show notifications</summary>
+        <description>Show notifications when enabled/disabled</description>
     </key>
   </schema>
 </schemalist>
