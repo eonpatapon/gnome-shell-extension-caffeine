@@ -85,10 +85,10 @@ const Caffeine = new Lang.Class({
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
                                                           '/org/gnome/SessionManager');
-        this._sessionManager.connectSignal('InhibitorAdded',
-                                           Lang.bind(this, this._inhibitorAdded));
-        this._sessionManager.connectSignal('InhibitorRemoved',
-                                           Lang.bind(this, this._inhibitorRemoved));
+        this._inhibitorAddedId = this._sessionManager.connectSignal('InhibitorAdded',
+                                                                    Lang.bind(this, this._inhibitorAdded));
+        this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved',
+                                                                      Lang.bind(this, this._inhibitorRemoved));
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
         this._windowTracker = Shell.WindowTracker.get_default();
@@ -162,7 +162,7 @@ const Caffeine = new Lang.Class({
             this._state = false;
             this._object = false;
             this._cookie = "";
-            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)){
+            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
                 let source = new CaffeineNotifier(DisabledIcon);
                 source.disable();
             }
@@ -202,6 +202,14 @@ const Caffeine = new Lang.Class({
 
     destroy: function() {
         this.removeInhibit();
+        if (this._inhibitorAddedId) {
+            this._sessionManager.disconnectSignal(this._inhibitorAddedId);
+            this._inhibitorAddedId = 0;
+        }
+        if (this._inhibitorRemovedId) {
+            this._sessionManager.disconnectSignal(this._inhibitorRemovedId);
+            this._inhibitorRemovedId = 0;
+        }
         if (this._windowCreatedId) {
             global.screen.get_display().disconnect(this._windowCreatedId);
             this._windowCreatedId = 0;
