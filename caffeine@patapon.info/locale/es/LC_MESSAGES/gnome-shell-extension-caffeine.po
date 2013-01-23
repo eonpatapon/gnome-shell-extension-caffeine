@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-09 15:32+0100\n"
-"PO-Revision-Date: 2013-01-23 18:00-0300\n"
+"PO-Revision-Date: 2013-01-23 18:19-0300\n"
 "Last-Translator: Cristian Beroiza <cberoiza@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -28,6 +28,10 @@ msgstr "Caffeine desactivado"
 #: ../../../prefs.js:40
 msgid "Show Caffeine in top panel"
 msgstr "Mostrar Caffeine en el panel superior"
+
+#: ../../../prefs.js:57
+msgid "Enable notifications"
+msgstr "Activar las notificaciones"
 
 #: ../../../prefs.js:64
 msgid "Applications which enable Caffeine automatically"
