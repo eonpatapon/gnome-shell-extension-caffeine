@@ -21,6 +21,7 @@ const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const Shell = imports.gi.Shell;
 const MessageTray = imports.ui.messageTray;
+const Atk = imports.gi.Atk;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -70,7 +71,8 @@ const Caffeine = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
-        this.parent(null, IndicatorName, false);
+        this.parent(null, IndicatorName);
+        this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
 
         this._settings = Lib.getSettings(Me);
         this._settings.connect("changed::" + SHOW_INDICATOR_KEY, Lang.bind(this, function() {
@@ -113,6 +115,26 @@ const Caffeine = new Lang.Class({
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
+
+        // Fake menu
+        this.menu.open = Lang.bind(this, this._onMenuOpenRequest);
+        this.menu.close = Lang.bind(this, this._onMenuCloseRequest);
+        this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
+    },
+
+    _onMenuOpenRequest: function() {
+        this.menu.isOpen = true;
+        this.menu.emit('open-state-changed', true);
+    },
+
+    _onMenuCloseRequest: function() {
+        this.menu.isOpen = false;
+        this.menu.emit('open-state-changed', false);
+    },
+
+    _onMenuToggleRequest: function() {
+        this.menu.isOpen = !this.menu.isOpen;
+        this.menu.emit('open-state-changed', this.menu.isOpen);
     },
 
     toggleState: function() {
