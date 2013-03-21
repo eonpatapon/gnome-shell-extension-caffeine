@@ -139,7 +139,7 @@ const Caffeine = new Lang.Class({
 
     toggleState: function() {
         if (this._state)
-            this.removeInhibit();
+            this._mayUninhibit(null, 'user');
         else
             this.addInhibit('user');
     },
@@ -213,7 +213,9 @@ const Caffeine = new Lang.Class({
     },
 
     _mayUninhibit: function(shellwm, actor) {
-        let window = actor.meta_window;
+        let window = actor;
+        if (window != 'user')
+            window = actor.meta_window;
         // remove the requestor from the list
         let index = this._requestors.indexOf(window);
         if (index > -1)
