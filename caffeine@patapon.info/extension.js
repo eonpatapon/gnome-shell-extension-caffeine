@@ -170,10 +170,8 @@ const Caffeine = new Lang.Class({
                 this._object = object;
                 this._requestors.push(this._current_requestor);
                 this._current_requestor = "";
-                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
-                    let source = new CaffeineNotifier(EnabledIcon);
-                    source.enable();
-                }
+                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    Main.notify(_("Caffeine enabled"));
             }
         }));
     },
@@ -184,10 +182,8 @@ const Caffeine = new Lang.Class({
             this._state = false;
             this._object = false;
             this._cookie = "";
-            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
-                let source = new CaffeineNotifier(DisabledIcon);
-                source.disable();
-            }
+            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                Main.notify(_("Caffeine disabled"));
         }
     },
 
@@ -243,28 +239,6 @@ const Caffeine = new Lang.Class({
             this._windowDestroyedId = 0;
         }
         this.parent();
-    }
-});
-
-const CaffeineNotifier = new Lang.Class({
-    Name: 'CaffeineNotifier',
-    Extends: MessageTray.Source,
-
-    _init: function(icon) {
-        this.parent('', icon);
-        Main.messageTray.add(this);
-    },
-
-    enable: function() {
-        let notification = new MessageTray.Notification(this, _("Caffeine enabled"));
-        notification.setTransient(true);
-        this.notify(notification);
-    },
-
-    disable: function() {
-        let notification = new MessageTray.Notification(this, _("Caffeine disabled"));
-        notification.setTransient(true);
-        this.notify(notification);
     }
 });
 
