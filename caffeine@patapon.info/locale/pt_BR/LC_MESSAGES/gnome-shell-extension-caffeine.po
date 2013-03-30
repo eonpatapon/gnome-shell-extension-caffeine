@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-30-03 04:59+0100\n"
+"PO-Revision-Date: 2013-30-03 04:59+0100\n"
+"Last-Translator: Márcio Almada <marcio.web2@gmail.com>\n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n>1)\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: ../../../prefs.js:41
+msgid "Show Caffeine in top panel"
+msgstr "Mostrar Caffeine no painel superior"
+
+#: ../../../prefs.js:57
+msgid "Enable notifications"
+msgstr "Ativar notificações"
+
+#: ../../../prefs.js:78
+msgid "Applications which enable Caffeine automatically"
+msgstr "Aplicativos que ativam o modo Caffeine automaticamente"
+
+#: ../../../prefs.js:94
+msgid "Add application"
+msgstr "Adicionar aplicação"
+
+#: ../../../prefs.js:108
+msgid "Create new matching rule"
+msgstr "Nova regra"
+
+#: ../../../prefs.js:112
+msgid "Add"
+msgstr "Adicionar"
+
+#: ../../../extension.js:227
+msgid "Caffeine enabled"
+msgstr "Caffeine ativado"
+
+#: ../../../extension.js:233
+msgid "Caffeine disabled"
+msgstr "Caffeine desativado"
+
+#~ msgid "Application"
+#~ msgstr "Application"
