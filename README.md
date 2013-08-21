@@ -2,7 +2,7 @@
 
 Fill the cup to inhibit auto suspend and screensaver!
 
-This extension supports gnome-shell 3.4 and 3.6.
+This extension supports gnome-shell 3.4, 3.6, and 3.8.
 
 ![Screenshot](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot.png)
 
