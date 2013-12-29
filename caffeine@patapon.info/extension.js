@@ -184,15 +184,17 @@ const Caffeine = new Lang.Class({
         // Is the new inhibitor Caffeine ?
         inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
             if (app_id == this._last_app) {
-                this._icon.icon_name = EnabledIcon;
                 this._apps.push(this._last_app);
                 this._cookies.push(this._last_cookie);
                 this._objects.push(object);
-                this._state = true;
                 this._last_app = "";
                 this._last_cookie = "";
-                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    Main.notify(_("Caffeine enabled"));
+                if (this._state == false) {
+                    this._state = true;
+                    this._icon.icon_name = EnabledIcon;
+                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                        Main.notify(_("Caffeine enabled"));
+                }
             }
         }));
     },
