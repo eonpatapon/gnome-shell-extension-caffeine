@@ -125,6 +125,11 @@ const Caffeine = new Lang.Class({
             this.menu.close = Lang.bind(this, this._onMenuCloseRequest);
             this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
         }
+
+        // List current windows to check if we need to inhibit
+        global.get_window_actors().map(Lang.bind(this, function(window) {
+            this._mayInhibit(null, window.meta_window, null);
+        }));
     },
 
     _onMenuOpenRequest: function() {
