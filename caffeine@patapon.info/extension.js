@@ -133,7 +133,7 @@ const Caffeine = new Lang.Class({
         }));
         // restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY))
-            this.addInhibit('user');
+            this.toggleState();
     },
 
     _onMenuOpenRequest: function() {
@@ -157,13 +157,14 @@ const Caffeine = new Lang.Class({
                 this.removeInhibit(app_id);
             }));
         }
-        else
+        else {
             this.addInhibit('user');
+        }
     },
 
     addInhibit: function(app_id) {
         this._sessionManager.InhibitRemote(app_id,
-            0, "Inhibit by %s".format(IndicatorName), 8,
+            0, "Inhibit by %s".format(IndicatorName), 12,
             Lang.bind(this, function(cookie) {
                 this._last_cookie = cookie;
                 this._last_app = app_id;
