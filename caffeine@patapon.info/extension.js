@@ -27,6 +27,7 @@ const Config = imports.misc.config;
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
+const USER_ENABLED_KEY = 'user-enabled';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -130,6 +131,9 @@ const Caffeine = new Lang.Class({
         global.get_window_actors().map(Lang.bind(this, function(window) {
             this._mayInhibit(null, window.meta_window, null);
         }));
+        // restore user state
+        if (this._settings.get_boolean(USER_ENABLED_KEY))
+            this.addInhibit('user');
     },
 
     _onMenuOpenRequest: function() {
@@ -241,7 +245,16 @@ const Caffeine = new Lang.Class({
     },
 
     destroy: function() {
-        this.removeInhibit();
+        // save user state
+        if (this._apps.indexOf('user') == -1)
+            this._settings.set_boolean(USER_ENABLED_KEY, false)
+        else
+            this._settings.set_boolean(USER_ENABLED_KEY, true)
+        // remove all inhibitors
+        this._apps.map(Lang.bind(this, function(app_id) {
+            this.removeInhibit(app_id);
+        }));
+        // disconnect from signals
         if (this._inhibitorAddedId) {
             this._sessionManager.disconnectSignal(this._inhibitorAddedId);
             this._inhibitorAddedId = 0;
