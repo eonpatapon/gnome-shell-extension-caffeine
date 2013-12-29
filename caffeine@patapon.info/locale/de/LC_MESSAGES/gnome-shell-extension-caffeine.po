@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-09 15:32+0100\n"
-"PO-Revision-Date: 2013-02-02 12:30+0100\n"
-"Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
+"POT-Creation-Date: 2013-12-29 13:17+0100\n"
+"PO-Revision-Date: 2013-12-29 13:17+0100\n"
+"Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -17,30 +17,34 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../extension.js:222
-msgid "Caffeine enabled"
-msgstr "Caffeine aktiviert"
-
-#: ../../../extension.js:228
-msgid "Caffeine disabled"
-msgstr "Caffeine deaktiviert"
-
-#: ../../../prefs.js:40
+#: ../../../prefs.js:41
 msgid "Show Caffeine in top panel"
-msgstr "Zeige Caffeine im Top Panel"
+msgstr "Zeige Caffeine im obere leiste"
 
-#: ../../../prefs.js:64
+#: ../../../prefs.js:57
+msgid "Enable notifications"
+msgstr ""
+
+#: ../../../prefs.js:78
 msgid "Applications which enable Caffeine automatically"
-msgstr "Applikationen welche Caffeine automatsich aktivieren"
+msgstr "Anwendungen welche Caffeine automatsich aktivieren"
 
-#: ../../../prefs.js:80
+#: ../../../prefs.js:94
 msgid "Add application"
 msgstr "Füge Applikation hinzu"
 
-#: ../../../prefs.js:94
+#: ../../../prefs.js:108
 msgid "Create new matching rule"
 msgstr "Erstelle neue Regel"
 
-#: ../../../prefs.js:98
+#: ../../../prefs.js:112
 msgid "Add"
 msgstr "Hinzufügen"
+
+#: ../../../extension.js:180
+msgid "Caffeine enabled"
+msgstr "Caffeine aktiviert"
+
+#: ../../../extension.js:192
+msgid "Caffeine disabled"
+msgstr "Caffeine deaktiviert"
