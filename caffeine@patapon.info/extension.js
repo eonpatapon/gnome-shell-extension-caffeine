@@ -22,6 +22,7 @@ const PanelMenu = imports.ui.panelMenu;
 const Shell = imports.gi.Shell;
 const MessageTray = imports.ui.messageTray;
 const Atk = imports.gi.Atk;
+const Config = imports.misc.config;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -116,10 +117,13 @@ const Caffeine = new Lang.Class({
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
 
-        // Fake menu
-        this.menu.open = Lang.bind(this, this._onMenuOpenRequest);
-        this.menu.close = Lang.bind(this, this._onMenuCloseRequest);
-        this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
+        let version = Config.PACKAGE_VERSION.split(".");
+        // Fake menu signals for gnome shell < 3.10
+        if (parseInt(version[1]) < 10) {
+            this.menu.open = Lang.bind(this, this._onMenuOpenRequest);
+            this.menu.close = Lang.bind(this, this._onMenuCloseRequest);
+            this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
+        }
     },
 
     _onMenuOpenRequest: function() {
