@@ -107,11 +107,12 @@ const Caffeine = new Lang.Class({
         });
 
         this._state = false;
-        this._object = false;
-        this._cookie = "";
         // who has requested the inhibition
-        this._current_requestor = "";
-        this._requestors = [];
+        this._last_app = "";
+        this._last_cookie = "";
+        this._apps = [];
+        this._cookies = [];
+        this._objects = [];
 
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
@@ -143,25 +144,27 @@ const Caffeine = new Lang.Class({
 
     toggleState: function() {
         if (this._state) {
-            this._requestors = [];
-            this.removeInhibit();
+            this._apps.map(Lang.bind(this, function(app_id) {
+                this.removeInhibit(app_id);
+            }));
         }
         else
             this.addInhibit('user');
     },
 
-    addInhibit: function(requestor) {
-        this._sessionManager.InhibitRemote(IndicatorName,
+    addInhibit: function(app_id) {
+        this._sessionManager.InhibitRemote(app_id,
             0, "Inhibit by %s".format(IndicatorName), 8,
             Lang.bind(this, function(cookie) {
-                this._cookie = cookie;
-                this._current_requestor = requestor;
+                this._last_cookie = cookie;
+                this._last_app = app_id;
             })
         );
     },
 
-    removeInhibit: function() {
-        this._sessionManager.UninhibitRemote(this._cookie);
+    removeInhibit: function(app_id) {
+        let index = this._apps.indexOf(app_id)
+        this._sessionManager.UninhibitRemote(this._cookies[index]);
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {
@@ -170,12 +173,14 @@ const Caffeine = new Lang.Class({
                                                              object);
         // Is the new inhibitor Caffeine ?
         inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
-            if (app_id == IndicatorName) {
+            if (app_id == this._last_app) {
                 this._icon.icon_name = EnabledIcon;
+                this._apps.push(this._last_app);
+                this._cookies.push(this._last_cookie);
+                this._objects.push(object);
                 this._state = true;
-                this._object = object;
-                this._requestors.push(this._current_requestor);
-                this._current_requestor = "";
+                this._last_app = "";
+                this._last_cookie = "";
                 if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     Main.notify(_("Caffeine enabled"));
             }
@@ -183,13 +188,18 @@ const Caffeine = new Lang.Class({
     },
 
     _inhibitorRemoved: function(proxy, sender, [object]) {
-        if (object == this._object) {
-            this._icon.icon_name = DisabledIcon;
-            this._state = false;
-            this._object = false;
-            this._cookie = "";
-            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                Main.notify(_("Caffeine disabled"));
+        let index = this._objects.indexOf(object);
+        if (index != -1) {
+            // Remove app from list
+            this._apps.splice(index, 1);
+            this._cookies.splice(index, 1);
+            this._objects.splice(index, 1);
+            if (this._apps.length == 0) {
+                this._state = false;
+                this._icon.icon_name = DisabledIcon;
+                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    Main.notify(_("Caffeine disabled"));
+            }
         }
     },
 
@@ -209,19 +219,20 @@ const Caffeine = new Lang.Class({
                 log('Cannot find application for window');
             return;
         }
+        let app_id = app.get_id();
         let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
-        if (apps.indexOf(app.get_id()) != -1 && !this._state)
-            this.addInhibit(window);
+        if (apps.indexOf(app_id) != -1)
+            this.addInhibit(app_id);
     },
 
     _mayUninhibit: function(shellwm, actor) {
         let window = actor.meta_window;
-        // remove the requestor from the list
-        let index = this._requestors.indexOf(window);
-        if (index > -1)
-            this._requestors.splice(index, 1);
-        if (this._requestors.length == 0 && this._state)
-            this.removeInhibit();
+        let app = this._windowTracker.get_window_app(window);
+        if (app) {
+            let app_id = app.get_id();
+            if (this._apps.indexOf(app_id) != -1)
+                this.removeInhibit(app_id);
+        }
     },
 
     destroy: function() {
