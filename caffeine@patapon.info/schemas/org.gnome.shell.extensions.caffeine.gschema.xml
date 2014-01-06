@@ -21,5 +21,10 @@
         <summary>Show notifications</summary>
         <description>Show notifications when enabled/disabled</description>
     </key>
+    <key type="b" name="enable-fullscreen">
+        <default>true</default>
+        <summary>Enable when a fullscreen application is running</summary>
+        <description>Enable when a fullscreen application is running</description>
+    </key>
   </schema>
 </schemalist>

@@ -28,6 +28,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const USER_ENABLED_KEY = 'user-enabled';
+const FULLSCREEN_KEY = 'enable-fullscreen';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -127,13 +128,19 @@ const Caffeine = new Lang.Class({
             this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
         }
 
+        // Enable caffeine when fullscreen app is running
+        if (this._settings.get_boolean(FULLSCREEN_KEY)) {
+            this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
+            this.toggleFullscreen();
+        }
         // List current windows to check if we need to inhibit
         global.get_window_actors().map(Lang.bind(this, function(window) {
             this._mayInhibit(null, window.meta_window, null);
         }));
         // restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY))
+        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
             this.toggleState();
+        }
     },
 
     _onMenuOpenRequest: function() {
@@ -149,6 +156,25 @@ const Caffeine = new Lang.Class({
     _onMenuToggleRequest: function() {
         this.menu.isOpen = !this.menu.isOpen;
         this.menu.emit('open-state-changed', this.menu.isOpen);
+    },
+
+    get inFullscreen() {
+        let nb_monitors = global.screen.get_n_monitors();
+        let inFullscreen = false;
+        for (let i=0; i<nb_monitors; i++) {
+            if (global.screen.get_monitor_in_fullscreen(i)) {
+                inFullscreen = true;
+                break;
+            }
+        }
+        return inFullscreen;
+    },
+
+    toggleFullscreen: function() {
+        if (this.inFullscreen && this._apps.indexOf('fullscreen') == -1)
+            this.addInhibit('fullscreen');
+        if (!this.inFullscreen && this._apps.indexOf('fullscreen') != -1)
+            this.removeInhibit('fullscreen');
     },
 
     toggleState: function() {
@@ -258,6 +284,8 @@ const Caffeine = new Lang.Class({
             this.removeInhibit(app_id);
         }));
         // disconnect from signals
+        if (this._settings.get_boolean(FULLSCREEN_KEY))
+            global.screen.disconnect(this._inFullscreenId);
         if (this._inhibitorAddedId) {
             this._sessionManager.disconnectSignal(this._inhibitorAddedId);
             this._inhibitorAddedId = 0;
