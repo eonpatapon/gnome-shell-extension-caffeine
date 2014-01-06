@@ -210,6 +210,8 @@ const Caffeine = new Lang.Class({
         // Is the new inhibitor Caffeine ?
         inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
             if (app_id == this._last_app) {
+                if (this._last_app == 'user')
+                    this._settings.set_boolean(USER_ENABLED_KEY, true)
                 this._apps.push(this._last_app);
                 this._cookies.push(this._last_cookie);
                 this._objects.push(object);
@@ -228,6 +230,8 @@ const Caffeine = new Lang.Class({
     _inhibitorRemoved: function(proxy, sender, [object]) {
         let index = this._objects.indexOf(object);
         if (index != -1) {
+            if (this._apps[index] == 'user')
+                this._settings.set_boolean(USER_ENABLED_KEY, false)
             // Remove app from list
             this._apps.splice(index, 1);
             this._cookies.splice(index, 1);
@@ -274,11 +278,6 @@ const Caffeine = new Lang.Class({
     },
 
     destroy: function() {
-        // save user state
-        if (this._apps.indexOf('user') == -1)
-            this._settings.set_boolean(USER_ENABLED_KEY, false)
-        else
-            this._settings.set_boolean(USER_ENABLED_KEY, true)
         // remove all inhibitors
         this._apps.map(Lang.bind(this, function(app_id) {
             this.removeInhibit(app_id);
