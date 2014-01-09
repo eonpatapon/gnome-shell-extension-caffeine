@@ -5,6 +5,7 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const GObject = imports.gi.GObject;
+const Config = imports.misc.config;
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -23,6 +24,8 @@ const Columns = {
     DISPLAY_NAME: 1,
     ICON: 2
 };
+
+let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
 const CaffeineWidget = new Lang.Class({
     Name: 'CaffeineWidget',
@@ -52,21 +55,23 @@ const CaffeineWidget = new Lang.Class({
 
         this.w.add(hbox);
 
-        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                                margin: 7});
+        if (ShellVersion > 6) {
+            let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                    margin: 7});
 
-        let label = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
-                                   xalign: 0});
+            let label = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
+                                       xalign: 0});
 
-        let show = new Gtk.Switch({active: this._settings.get_boolean(FULLSCREEN_KEY)});
-        show.connect('notify::active', Lang.bind(this, function(button) {
-            this._settings.set_boolean(FULLSCREEN_KEY, button.active);
-        }));
+            let show = new Gtk.Switch({active: this._settings.get_boolean(FULLSCREEN_KEY)});
+            show.connect('notify::active', Lang.bind(this, function(button) {
+                this._settings.set_boolean(FULLSCREEN_KEY, button.active);
+            }));
 
-        hbox.pack_start(label, true, true, 0);
-        hbox.add(show);
+            hbox.pack_start(label, true, true, 0);
+            hbox.add(show);
 
-        this.w.add(hbox);
+            this.w.add(hbox);
+        }
 
         let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});

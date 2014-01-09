@@ -68,6 +68,7 @@ const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 
 let CaffeineIndicator;
+let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
 const Caffeine = new Lang.Class({
     Name: IndicatorName,
@@ -120,16 +121,15 @@ const Caffeine = new Lang.Class({
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
 
-        let version = Config.PACKAGE_VERSION.split(".");
         // Fake menu signals for gnome shell < 3.10
-        if (parseInt(version[1]) < 10) {
+        if (ShellVersion < 10) {
             this.menu.open = Lang.bind(this, this._onMenuOpenRequest);
             this.menu.close = Lang.bind(this, this._onMenuCloseRequest);
             this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
         }
 
         // Enable caffeine when fullscreen app is running
-        if (this._settings.get_boolean(FULLSCREEN_KEY)) {
+        if (this._settings.get_boolean(FULLSCREEN_KEY) && ShellVersion > 6) {
             this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
             this.toggleFullscreen();
         }
