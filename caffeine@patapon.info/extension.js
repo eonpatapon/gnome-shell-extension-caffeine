@@ -36,31 +36,35 @@ const _ = Gettext.gettext;
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 
-const DBusSessionManagerIface = <interface name="org.gnome.SessionManager">
-<method name="Inhibit">
-    <arg type="s" direction="in" />
-    <arg type="u" direction="in" />
-    <arg type="s" direction="in" />
-    <arg type="u" direction="in" />
-    <arg type="u" direction="out" />
-</method>
-<method name="Uninhibit">
-    <arg type="u" direction="in" />
-</method>
-<signal name="InhibitorAdded">
-    <arg type="o" direction="out" />
-</signal>
-<signal name="InhibitorRemoved">
-    <arg type="o" direction="out" />
-</signal>
-</interface>;
+const DBusSessionManagerIface = '<node>\
+  <interface name="org.gnome.SessionManager">\
+    <method name="Inhibit">\
+        <arg type="s" direction="in" />\
+        <arg type="u" direction="in" />\
+        <arg type="s" direction="in" />\
+        <arg type="u" direction="in" />\
+        <arg type="u" direction="out" />\
+    </method>\
+    <method name="Uninhibit">\
+        <arg type="u" direction="in" />\
+    </method>\
+    <signal name="InhibitorAdded">\
+        <arg type="o" direction="out" />\
+    </signal>\
+    <signal name="InhibitorRemoved">\
+        <arg type="o" direction="out" />\
+    </signal>\
+  </interface>\
+</node>';
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
 
-const DBusSessionManagerInhibitorIface = <interface name="org.gnome.SessionManager.Inhibitor">
-<method name="GetAppId">
-    <arg type="s" direction="out" />
-</method>
-</interface>;
+const DBusSessionManagerInhibitorIface = '<node>\
+  <interface name="org.gnome.SessionManager.Inhibitor">\
+    <method name="GetAppId">\
+        <arg type="s" direction="out" />\
+    </method>\
+  </interface>\
+</node>';
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = "Caffeine";
