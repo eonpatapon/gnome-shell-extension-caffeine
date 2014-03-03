@@ -125,15 +125,12 @@ const Caffeine = new Lang.Class({
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
 
-        // Fake menu signals for gnome shell < 3.10
-        if (ShellVersion < 10) {
-            this.menu.open = Lang.bind(this, this._onMenuOpenRequest);
-            this.menu.close = Lang.bind(this, this._onMenuCloseRequest);
-            this.menu.toggle = Lang.bind(this, this._onMenuToggleRequest);
+        // Restore user state
+        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
+            this.toggleState();
         }
-
         // Enable caffeine when fullscreen app is running
-        if (this._settings.get_boolean(FULLSCREEN_KEY) && ShellVersion > 6) {
+        if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
             this.toggleFullscreen();
         }
@@ -141,25 +138,6 @@ const Caffeine = new Lang.Class({
         global.get_window_actors().map(Lang.bind(this, function(window) {
             this._mayInhibit(null, window.meta_window, null);
         }));
-        // restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
-            this.toggleState();
-        }
-    },
-
-    _onMenuOpenRequest: function() {
-        this.menu.isOpen = true;
-        this.menu.emit('open-state-changed', true);
-    },
-
-    _onMenuCloseRequest: function() {
-        this.menu.isOpen = false;
-        this.menu.emit('open-state-changed', false);
-    },
-
-    _onMenuToggleRequest: function() {
-        this.menu.isOpen = !this.menu.isOpen;
-        this.menu.emit('open-state-changed', this.menu.isOpen);
     },
 
     get inFullscreen() {
