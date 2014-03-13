@@ -228,9 +228,6 @@ const Caffeine = new Lang.Class({
     },
 
     _mayInhibit: function(display, window, noRecurse) {
-        if (!this._windowTracker.is_window_interesting(window))
-            return;
-
         let app = this._windowTracker.get_window_app(window);
         if (!app) {
             if (!noRecurse) {
