@@ -18,6 +18,7 @@ const Lang = imports.lang;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
+const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
 const Shell = imports.gi.Shell;
 const MessageTray = imports.ui.messageTray;
