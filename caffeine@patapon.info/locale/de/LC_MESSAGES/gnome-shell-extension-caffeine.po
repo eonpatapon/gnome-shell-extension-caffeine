@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-29 13:17+0100\n"
-"PO-Revision-Date: 2013-12-29 13:17+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2014-04-12 22:59+0100\n"
+"Last-Translator: Roman Spirgi <the.ant@gmx.net>\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -19,23 +19,23 @@ msgstr ""
 
 #: ../../../prefs.js:41
 msgid "Show Caffeine in top panel"
-msgstr "Zeige Caffeine im obere leiste"
+msgstr "Caffeine im Gnome-Panel anzeigen"
 
 #: ../../../prefs.js:57
 msgid "Enable notifications"
-msgstr ""
+msgstr "Benachrichtigungen aktivieren"
 
 #: ../../../prefs.js:78
 msgid "Applications which enable Caffeine automatically"
-msgstr "Anwendungen welche Caffeine automatsich aktivieren"
+msgstr "Anwendungen, welche Caffeine automatisch aktivieren"
 
 #: ../../../prefs.js:94
 msgid "Add application"
-msgstr "Füge Applikation hinzu"
+msgstr "Applikation hinzufügen"
 
 #: ../../../prefs.js:108
 msgid "Create new matching rule"
-msgstr "Erstelle neue Regel"
+msgstr "Neue Regel erstellen"
 
 #: ../../../prefs.js:112
 msgid "Add"
