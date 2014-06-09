@@ -1,4 +1,9 @@
 /* -*- mode: js2 - indent-tabs-mode: nil - js2-basic-offset: 4 -*- */
+/*jshint multistr:true */
+/*jshint esnext:true */
+/*global imports: true */
+/*global global: true */
+/*global log: true */
 /**
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -13,6 +18,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
+
+'use strict';
 
 const Lang = imports.lang;
 const St = imports.gi.St;
@@ -182,7 +189,7 @@ const Caffeine = new Lang.Class({
     },
 
     removeInhibit: function(app_id) {
-        let index = this._apps.indexOf(app_id)
+        let index = this._apps.indexOf(app_id);
         this._sessionManager.UninhibitRemote(this._cookies[index]);
     },
 
@@ -194,13 +201,13 @@ const Caffeine = new Lang.Class({
         inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
             if (app_id == this._last_app) {
                 if (this._last_app == 'user')
-                    this._settings.set_boolean(USER_ENABLED_KEY, true)
+                    this._settings.set_boolean(USER_ENABLED_KEY, true);
                 this._apps.push(this._last_app);
                 this._cookies.push(this._last_cookie);
                 this._objects.push(object);
                 this._last_app = "";
                 this._last_cookie = "";
-                if (this._state == false) {
+                if (this._state === false) {
                     this._state = true;
                     this._icon.icon_name = EnabledIcon;
                     if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
@@ -214,12 +221,12 @@ const Caffeine = new Lang.Class({
         let index = this._objects.indexOf(object);
         if (index != -1) {
             if (this._apps[index] == 'user')
-                this._settings.set_boolean(USER_ENABLED_KEY, false)
+                this._settings.set_boolean(USER_ENABLED_KEY, false);
             // Remove app from list
             this._apps.splice(index, 1);
             this._cookies.splice(index, 1);
             this._objects.splice(index, 1);
-            if (this._apps.length == 0) {
+            if (this._apps.length === 0) {
                 this._state = false;
                 this._icon.icon_name = DisabledIcon;
                 if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
