@@ -181,10 +181,15 @@ const Caffeine = new Lang.Class({
     },
 
     toggleFullscreen: function() {
-        if (this.inFullscreen && this._apps.indexOf('fullscreen') == -1)
-            this.addInhibit('fullscreen');
-        if (!this.inFullscreen && this._apps.indexOf('fullscreen') != -1)
-            this.removeInhibit('fullscreen');
+        Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
+          if (this.inFullscreen && this._apps.indexOf('fullscreen') == -1) {
+              this.addInhibit('fullscreen');
+          }
+        }));
+
+        if (!this.inFullscreen && this._apps.indexOf('fullscreen') != -1) {
+              this.removeInhibit('fullscreen');
+        }
     },
 
     toggleState: function() {
@@ -262,7 +267,7 @@ const Caffeine = new Lang.Class({
                 if (this._state === false) {
                     this._state = true;
                     this._icon.icon_name = EnabledIcon;
-                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                         Main.notify(_("Auto suspend and screensaver disabled"));
                 }
             }
