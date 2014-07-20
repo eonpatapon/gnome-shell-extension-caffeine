@@ -302,8 +302,7 @@ const Caffeine = new Lang.Class({
                     this._mayInhibit(display, window, true);
                     return false;
                 }));
-            } else
-                log('Cannot find application for window');
+            }
             return;
         }
         let app_id = app.get_id();
