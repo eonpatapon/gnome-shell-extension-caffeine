@@ -327,7 +327,7 @@ const Caffeine = new Lang.Class({
 
 		// Restart status on power off
 		if (this._settings.get_boolean(DISABLE_ON_POWER_OFF_KEY))
-			this._settings.set_boolean(USER_ENABLED_KEY, true);
+			this._settings.set_boolean(USER_ENABLED_KEY, false);
 
         // disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY))
