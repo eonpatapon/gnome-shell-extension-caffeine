@@ -28,7 +28,7 @@
     </key>
 	<key type="b" name="disable-on-power-off">
 		<default>true</default>
-		<sumary>Disable while powering off</sumary>
+		<summary>Disable while powering off</summary>
 		<description>Disable extension status when destroyed (Power off or disabling extension)</description>
 	</key>
   </schema>
