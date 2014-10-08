@@ -26,5 +26,10 @@
         <summary>Enable when a fullscreen application is running</summary>
         <description>Enable when a fullscreen application is running</description>
     </key>
+	<key type="b" name="disable-on-power-off">
+		<default>true</default>
+		<sumary>Disable while powering off</sumary>
+		<description>Disable extension status when destroyed (Power off or disabling extension)</description>
+	</key>
   </schema>
 </schemalist>
