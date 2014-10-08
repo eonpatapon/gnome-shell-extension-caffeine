@@ -326,7 +326,7 @@ const Caffeine = new Lang.Class({
         this.unblockHandleLid();
 
 		// Restart status on power off
-		if (this._settings.get_bolean(DISABLE_ON_POWER_OFF_KEY))
+		if (this._settings.get_boolean(DISABLE_ON_POWER_OFF_KEY))
 			this._settings.set_boolean(USER_ENABLED_KEY, true);
 
         // disconnect from signals
