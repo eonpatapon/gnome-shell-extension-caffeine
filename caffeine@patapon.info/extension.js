@@ -154,6 +154,10 @@ const Caffeine = new Lang.Class({
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
 
+		// Restart status on power off
+		if (this._settings.get_boolean(DISABLE_ON_POWER_OFF_KEY))
+			this._settings.set_boolean(USER_ENABLED_KEY, false);
+
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY)) {
             this.toggleState();
@@ -324,10 +328,6 @@ const Caffeine = new Lang.Class({
             this.removeInhibit(app_id);
         }));
         this.unblockHandleLid();
-
-		// Restart status on power off
-		if (this._settings.get_boolean(DISABLE_ON_POWER_OFF_KEY))
-			this._settings.set_boolean(USER_ENABLED_KEY, false);
 
         // disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY))
