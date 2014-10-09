@@ -1,0 +1,39 @@
+#: extension.js:271
+msgid "Auto suspend and screensaver disabled"
+msgstr ""
+
+#: extension.js:291
+msgid "Auto suspend and screensaver enabled"
+msgstr ""
+
+#: prefs.js:46
+msgid "Show Caffeine in top panel"
+msgstr ""
+
+#: prefs.js:63
+msgid "Enable when a fullscreen application is running"
+msgstr ""
+
+#: prefs.js:80
+msgid "Enable notifications"
+msgstr ""
+
+#: prefs.js:96
+msgid "Disable on Power Off"
+msgstr ""
+
+#: prefs.js:116
+msgid "Applications which enable Caffeine automatically"
+msgstr ""
+
+#: prefs.js:132
+msgid "Add application"
+msgstr ""
+
+#: prefs.js:146
+msgid "Create new matching rule"
+msgstr ""
+
+#: prefs.js:150
+msgid "Add"
+msgstr ""
