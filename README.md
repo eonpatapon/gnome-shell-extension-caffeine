@@ -4,9 +4,9 @@ Fill the cup to inhibit auto suspend and screensaver.
 
 This extension supports gnome-shell 3.12.
 
-![Screenshot](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot.png)
+![Screenshot](screenshot.png)
 
-![Preferences](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot-prefs.png)
+![Preferences](screenshot-prefs.png)
 
 Empty cup = normal auto suspend and screensaver.
 Filled cup = auto suspend and screensaver off.
