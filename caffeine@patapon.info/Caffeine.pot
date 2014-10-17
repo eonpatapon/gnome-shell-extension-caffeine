@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-10-17 12:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: prefs.js:45
+msgid "Show Caffeine in top panel"
+msgstr ""
+
+#: prefs.js:62
+msgid "Enable when a fullscreen application is running"
+msgstr ""
+
+#: prefs.js:79
+msgid "Enable notifications"
+msgstr ""
+
+#: prefs.js:100
+msgid "Applications which enable Caffeine automatically"
+msgstr ""
+
+#: prefs.js:116
+msgid "Add application"
+msgstr ""
+
+#: prefs.js:130
+msgid "Create new matching rule"
+msgstr ""
+
+#: prefs.js:134
+msgid "Add"
+msgstr ""
+
+#: extension.js:271
+msgid "Auto suspend and screensaver disabled"
+msgstr ""
+
+#: extension.js:291
+msgid "Auto suspend and screensaver enabled"
+msgstr ""
