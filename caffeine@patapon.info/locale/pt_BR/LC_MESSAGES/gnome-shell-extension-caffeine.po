@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-19 17:32-0300\n"
-"PO-Revision-Date: 2014-02-19 17:34-0300\n"
-"Last-Translator: Junior Polegato <linux@juniorpolegato.com.br>\n"
+"POT-Creation-Date: 2014-11-07 10:01+0100\n"
+"PO-Revision-Date: 2014-11-07 10:01+0100\n"
+"Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: Brazilian Portuguese\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -14,16 +14,16 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../extension.js:224
-msgid "Caffeine enabled"
-msgstr "Caffeine ativado"
+#: ../../../extension.js:271
+msgid "Auto suspend and screensaver disabled"
+msgstr ""
 
-#: ../../../extension.js:243
-msgid "Caffeine disabled"
-msgstr "Caffeine desativado"
+#: ../../../extension.js:291
+msgid "Auto suspend and screensaver enabled"
+msgstr ""
 
 #: ../../../prefs.js:45
 msgid "Show Caffeine in top panel"
@@ -52,3 +52,9 @@ msgstr "Criar nova regra"
 #: ../../../prefs.js:134
 msgid "Add"
 msgstr "Adicionar"
+
+#~ msgid "Caffeine enabled"
+#~ msgstr "Caffeine ativado"
+
+#~ msgid "Caffeine disabled"
+#~ msgstr "Caffeine desativado"

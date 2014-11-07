@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-08 12:26+0100\n"
-"PO-Revision-Date: 2014-06-08 12:27+0100\n"
+"POT-Creation-Date: 2014-11-07 10:01+0100\n"
+"PO-Revision-Date: 2014-11-07 10:01+0100\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,14 +14,14 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../extension.js:207
+#: ../../../extension.js:271
 msgid "Auto suspend and screensaver disabled"
 msgstr "Mise en veille et écran de veille désactivés"
 
-#: ../../../extension.js:226
+#: ../../../extension.js:291
 msgid "Auto suspend and screensaver enabled"
 msgstr "Mise en veille et écran de veille activés"
 
