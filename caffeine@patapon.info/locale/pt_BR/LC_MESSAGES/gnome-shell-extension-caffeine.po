@@ -1,10 +1,15 @@
+# Brazilian Portuguese translation for GNOME Shell Extension Caffeine.
+# Copyright (C) 2014 Jean-Philippe Braun
+# This file is distributed under the same license as the gnome-shell-extesion-caffeine package.
+# Rafael Ferreira <rafael.f.f1@gmail.com>, 2014.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-07 10:01+0100\n"
-"PO-Revision-Date: 2014-11-07 10:01+0100\n"
-"Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
+"PO-Revision-Date: 2014-11-12 07:17-0300\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +24,11 @@ msgstr ""
 
 #: ../../../extension.js:271
 msgid "Auto suspend and screensaver disabled"
-msgstr ""
+msgstr "Suspensão e proteção de tela automáticas desativadas"
 
 #: ../../../extension.js:291
 msgid "Auto suspend and screensaver enabled"
-msgstr ""
+msgstr "Suspensão e proteção de tela automáticas ativadas"
 
 #: ../../../prefs.js:45
 msgid "Show Caffeine in top panel"
