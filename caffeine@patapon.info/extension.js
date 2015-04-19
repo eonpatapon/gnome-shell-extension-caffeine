@@ -44,7 +44,7 @@ const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
-const Lib = Me.imports.lib;
+const Convenience = Me.imports.convenience;
 
 const DBusSessionManagerIface = '<node>\
   <interface name="org.gnome.SessionManager">\
@@ -105,7 +105,7 @@ const Caffeine = new Lang.Class({
         this.parent(null, IndicatorName);
         this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
 
-        this._settings = Lib.getSettings(Me);
+        this._settings = Convenience.getSettings();
         this._settings.connect("changed::" + SHOW_INDICATOR_KEY, Lang.bind(this, function() {
             if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
                 this.actor.show();
@@ -351,7 +351,7 @@ const Caffeine = new Lang.Class({
 });
 
 function init(extensionMeta) {
-    Lib.initTranslations(Me);
+    Convenience.initTranslations();
     let theme = imports.gi.Gtk.IconTheme.get_default();
     theme.append_search_path(extensionMeta.path + "/icons");
 }
