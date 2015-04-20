@@ -39,6 +39,7 @@ const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const USER_ENABLED_KEY = 'user-enabled';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const DISABLE_ON_POWER_OFF_KEY = 'disable-on-power-off';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -152,6 +153,10 @@ const Caffeine = new Lang.Class({
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
+
+		// Restart status on power off
+		if (this._settings.get_boolean(DISABLE_ON_POWER_OFF_KEY))
+			this._settings.set_boolean(USER_ENABLED_KEY, false);
 
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY)) {
@@ -327,6 +332,7 @@ const Caffeine = new Lang.Class({
             this.removeInhibit(app_id);
         }));
         this.unblockHandleLid();
+
         // disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY))
             global.screen.disconnect(this._inFullscreenId);

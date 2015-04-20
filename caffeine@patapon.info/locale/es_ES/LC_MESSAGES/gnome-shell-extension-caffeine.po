@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Thu, 09 Oct 2014 05:06:35 -0500\n"
+"PO-Revision-Date: 2014-10-09 05:16-0500\n"
+"Last-Translator: 814ckf0x <814ckf0x@gmail.com>\n"
+"Language-Team: Spanish; Castilian <>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Gtranslator 2.91.6\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+msgid "Add"
+msgstr "Añadir."
+
+msgid "Add application"
+msgstr "Añadir programa."
+
+msgid "Applications which enable Caffeine automatically"
+msgstr "Programas que activan Caffeine automáticamente."
+
+msgid "Auto suspend and screensaver disabled"
+msgstr "Protector de pantalla desactivado."
+
+msgid "Auto suspend and screensaver enabled"
+msgstr "Protector de pantalla activado."
+
+msgid "Create new matching rule"
+msgstr "Crear nueva regla."
+
+msgid "Disable on Power Off"
+msgstr "Desactivar al apagar."
+
+msgid "Enable notifications"
+msgstr "Activar notificaciones."
+
+msgid "Enable when a fullscreen application is running"
+msgstr "Activar cuando se ejecute un programa en pantalla completa."
+
+msgid "Show Caffeine in top panel"
+msgstr "Mostrar Caffeine en el panel superior."

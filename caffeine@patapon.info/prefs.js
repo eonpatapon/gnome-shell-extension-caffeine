@@ -18,6 +18,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const DISABLE_ON_POWER_OFF_KEY = 'disable-on-power-off';
 
 const Columns = {
     APPINFO: 0,
@@ -89,6 +90,21 @@ const CaffeineWidget = new Lang.Class({
 
         this.w.add(hbox);
 
+        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                margin: 7});
+
+        let label = new Gtk.Label({label: _("Disable on Power Off"),
+                                   xalign: 0});
+
+        let show = new Gtk.Switch({active: this._settings.get_boolean(DISABLE_ON_POWER_OFF_KEY)});
+        show.connect('notify::active', Lang.bind(this, function(button) {
+            this._settings.set_boolean(DISABLE_ON_POWER_OFF_KEY, button.active);
+        }));
+
+        hbox.pack_start(label, true, true, 0);
+        hbox.add(show);
+
+        this.w.add(hbox);
         this._store = new Gtk.ListStore();
         this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
 
