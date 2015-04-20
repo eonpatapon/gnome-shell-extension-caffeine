@@ -12,7 +12,7 @@ const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const Lib = Me.imports.lib;
+const Convenience = Me.imports.convenience;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -34,7 +34,7 @@ const CaffeineWidget = new Lang.Class({
         this.w = new Gtk.Grid(params);
         this.w.set_orientation(Gtk.Orientation.VERTICAL);
 
-        this._settings = Lib.getSettings(Me);
+        this._settings = Convenience.getSettings();
         this._settings.connect('changed', Lang.bind(this, this._refresh));
         this._changedPermitted = false;
 
@@ -234,7 +234,7 @@ const CaffeineWidget = new Lang.Class({
 });
 
 function init() {
-    Lib.initTranslations(Me);
+    Convenience.initTranslations();
 }
 
 function buildPrefsWidget() {
