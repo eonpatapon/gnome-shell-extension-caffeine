@@ -326,7 +326,7 @@ const Caffeine = new Lang.Class({
         this._apps.map(Lang.bind(this, function(app_id) {
             this.removeInhibit(app_id);
         }));
-        this.unblockHandleLid();
+        this._handle_lid_fd = null;
         // disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY))
             global.screen.disconnect(this._inFullscreenId);
