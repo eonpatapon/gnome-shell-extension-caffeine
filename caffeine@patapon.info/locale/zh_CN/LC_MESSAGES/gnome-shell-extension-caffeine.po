@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-07 10:01+0100\n"
-"PO-Revision-Date: 2014-11-07 10:01+0100\n"
-"Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
+"PO-Revision-Date: 2015-11-21 19:55+0800\n"
+"Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -14,16 +14,16 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: ../../../extension.js:271
 msgid "Auto suspend and screensaver disabled"
-msgstr ""
+msgstr "自动挂起与屏幕保护程序已禁用"
 
 #: ../../../extension.js:291
 msgid "Auto suspend and screensaver enabled"
-msgstr ""
+msgstr "自动挂起与屏幕保护程序已启用"
 
 #: ../../../prefs.js:45
 msgid "Show Caffeine in top panel"
@@ -31,15 +31,15 @@ msgstr "在顶部面板显示 Caffeine"
 
 #: ../../../prefs.js:62
 msgid "Enable when a fullscreen application is running"
-msgstr ""
+msgstr "运行全屏程序时自动启动"
 
 #: ../../../prefs.js:79
 msgid "Enable notifications"
-msgstr ""
+msgstr "启用通知"
 
 #: ../../../prefs.js:100
 msgid "Applications which enable Caffeine automatically"
-msgstr "自动开启 Caffeine 的程序"
+msgstr "自动激活 Caffeine 的程序"
 
 #: ../../../prefs.js:116
 msgid "Add application"
@@ -60,4 +60,4 @@ msgstr "添加"
 #~ msgstr "Caffeine 已关闭"
 
 #~ msgid "Application"
-#~ msgstr "Application"
+#~ msgstr "应用程序"
