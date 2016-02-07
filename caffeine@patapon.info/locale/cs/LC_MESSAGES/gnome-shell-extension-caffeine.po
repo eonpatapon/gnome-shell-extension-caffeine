@@ -3,58 +3,46 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-07 10:00+0100\n"
-"PO-Revision-Date: 2014-11-07 10:01+0100\n"
+"PO-Revision-Date: Sun Feb 07 2016 06:53:59 GMT+0100 (CET)\n"
 "Last-Translator: Roman Spirgi <bigant@fedoraproject.org>\n"
 "Language-Team: German\n"
-"Language: de\n"
+"Language: German\n"
+"Plural-Forms: nplurals=2; plural=(n>1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Loco-Source-Locale: cs_CZ\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n>1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Loco - https://localise.biz/\n"
 "X-Poedit-SearchPath-0: ../../..\n"
+"X-Loco-Parser: loco_parse_mo\n"
+"X-Loco-Target-Locale: de"
 
-#: ../../../extension.js:271
-msgid "Auto suspend and screensaver disabled"
-msgstr "Bereitschaftsmodus und Bildschirmschoner deaktviert"
-
-#: ../../../extension.js:291
-msgid "Auto suspend and screensaver enabled"
-msgstr "Bereitschaftsmodus und Bildschirmschoner aktviert"
-
-#: ../../../prefs.js:45
-msgid "Show Caffeine in top panel"
-msgstr "Caffeine im Gnome-Panel anzeigen"
-
-#: ../../../prefs.js:62
-msgid "Enable when a fullscreen application is running"
-msgstr "Aktivieren, sobald eine Anwendung im Vollbildmodus läuft"
-
-#: ../../../prefs.js:79
-msgid "Enable notifications"
-msgstr "Benachrichtigungen aktivieren"
-
-#: ../../../prefs.js:100
-msgid "Applications which enable Caffeine automatically"
-msgstr "Anwendungen, welche Caffeine automatisch aktivieren"
-
-#: ../../../prefs.js:116
-msgid "Add application"
-msgstr "Anwendung hinzufügen"
-
-#: ../../../prefs.js:130
-msgid "Create new matching rule"
-msgstr "Neue Regel definieren"
-
-#: ../../../prefs.js:134
 msgid "Add"
-msgstr "Hinzufügen"
+msgstr "Přidat"
 
-#~ msgid "Caffeine enabled"
-#~ msgstr "Caffeine aktiviert"
+msgid "Add application"
+msgstr "Přidat aplikaci"
 
-#~ msgid "Caffeine disabled"
-#~ msgstr "Caffeine deaktiviert"
+msgid "Applications which enable Caffeine automatically"
+msgstr "Aplikace které automaticky aktivují Caffeine"
+
+msgid "Auto suspend and screensaver disabled"
+msgstr "Automatické uspání a spořič obrazovky jsou vypnuty"
+
+msgid "Auto suspend and screensaver enabled"
+msgstr "Automatické uspání a spořič obrazovky jsou zapnuty"
+
+msgid "Create new matching rule"
+msgstr "Vytvořit nové pravidlo"
+
+msgid "Enable notifications"
+msgstr "Upozorňovat"
+
+msgid "Enable when a fullscreen application is running"
+msgstr "Aktivovat pokud aplikace běží na celé obrazovce"
+
+msgid "Show Caffeine in top panel"
+msgstr "Ikona v hlavním panelu"
