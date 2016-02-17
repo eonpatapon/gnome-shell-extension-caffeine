@@ -35,7 +35,6 @@ const Config = imports.misc.config;
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
-const USER_ENABLED_KEY = 'user-enabled';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
@@ -133,10 +132,6 @@ const Caffeine = new Lang.Class({
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
 
-        // Restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
-            this.toggleState();
-        }
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
@@ -205,8 +200,6 @@ const Caffeine = new Lang.Class({
         // Is the new inhibitor Caffeine ?
         inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
             if (app_id == this._last_app) {
-                if (this._last_app == 'user')
-                    this._settings.set_boolean(USER_ENABLED_KEY, true);
                 this._apps.push(this._last_app);
                 this._cookies.push(this._last_cookie);
                 this._objects.push(object);
@@ -225,8 +218,6 @@ const Caffeine = new Lang.Class({
     _inhibitorRemoved: function(proxy, sender, [object]) {
         let index = this._objects.indexOf(object);
         if (index != -1) {
-            if (this._apps[index] == 'user')
-                this._settings.set_boolean(USER_ENABLED_KEY, false);
             // Remove app from list
             this._apps.splice(index, 1);
             this._cookies.splice(index, 1);
