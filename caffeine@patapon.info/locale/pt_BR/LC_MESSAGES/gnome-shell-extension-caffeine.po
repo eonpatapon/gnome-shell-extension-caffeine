@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-07 10:01+0100\n"
+"POT-Creation-Date: 2016-03-16 16:11-0300\n"
 "PO-Revision-Date: 2014-11-12 07:17-0300\n"
 "Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -22,39 +22,39 @@ msgstr ""
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../extension.js:271
+#: extension.js:212
 msgid "Auto suspend and screensaver disabled"
 msgstr "Suspensão e proteção de tela automáticas desativadas"
 
-#: ../../../extension.js:291
+#: extension.js:229
 msgid "Auto suspend and screensaver enabled"
 msgstr "Suspensão e proteção de tela automáticas ativadas"
 
-#: ../../../prefs.js:45
+#: prefs.js:45
 msgid "Show Caffeine in top panel"
 msgstr "Mostrar Caffeine no painel superior"
 
-#: ../../../prefs.js:62
+#: prefs.js:62
 msgid "Enable when a fullscreen application is running"
 msgstr "Ativar enquanto um aplicativo em tela cheia estiver executando"
 
-#: ../../../prefs.js:79
+#: prefs.js:79
 msgid "Enable notifications"
 msgstr "Ativar as notificações"
 
-#: ../../../prefs.js:100
+#: prefs.js:100
 msgid "Applications which enable Caffeine automatically"
 msgstr "Aplicativos que ativam o Caffeine automaticamente"
 
-#: ../../../prefs.js:116
+#: prefs.js:116
 msgid "Add application"
 msgstr "Adicionar aplicativo"
 
-#: ../../../prefs.js:130
+#: prefs.js:130
 msgid "Create new matching rule"
 msgstr "Criar nova regra"
 
-#: ../../../prefs.js:134
+#: prefs.js:134
 msgid "Add"
 msgstr "Adicionar"
 
