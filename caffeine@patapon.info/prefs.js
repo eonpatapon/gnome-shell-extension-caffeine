@@ -18,6 +18,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const RESTORE_KEY = 'restore-state';
 
 const Columns = {
     APPINFO: 0,
@@ -72,6 +73,22 @@ const CaffeineWidget = new Lang.Class({
 
             this.w.add(hbox);
         }
+
+        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                margin: 7});
+
+        let label = new Gtk.Label({label: _("Restore state across reboots"),
+                                   xalign: 0});
+
+        let show = new Gtk.Switch({active: this._settings.get_boolean(RESTORE_KEY)});
+        show.connect('notify::active', Lang.bind(this, function(button) {
+            this._settings.set_boolean(RESTORE_KEY, button.active);
+        }));
+
+        hbox.pack_start(label, true, true, 0);
+        hbox.add(show);
+
+        this.w.add(hbox);
 
         let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});

@@ -11,6 +11,11 @@
         <summary>Store caffeine user state</summary>
         <description></description>
     </key>
+    <key type="b" name="restore-state">
+        <default>false</default>
+        <summary>Restore caffeine state</summary>
+        <description></description>
+    </key>
     <key type="b" name="show-indicator">
         <default>true</default>
         <summary>Show indicator</summary>

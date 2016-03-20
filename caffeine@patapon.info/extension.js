@@ -36,6 +36,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const USER_ENABLED_KEY = 'user-enabled';
+const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
@@ -134,7 +135,7 @@ const Caffeine = new Lang.Class({
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
 
         // Restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
+        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
             this.toggleState();
         }
         // Enable caffeine when fullscreen app is running
