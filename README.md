@@ -21,6 +21,8 @@ https://extensions.gnome.org/extension/517/caffeine/
 
     git clone git://github.com/eonpatapon/gnome-shell-extension-caffeine.git
     cd gnome-shell-extension-caffeine
+    ./update-locale.sh
+    glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
     cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions
 
 Restart the shell and then enable the extension.
