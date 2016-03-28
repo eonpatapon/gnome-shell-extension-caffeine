@@ -4,6 +4,7 @@ cd caffeine@patapon.info
 
 pot=gnome-shell-extension-caffeine.pot
 
+touch $pot
 xgettext -j *.js -o $pot
 
 for locale_lang in locale/*; do
