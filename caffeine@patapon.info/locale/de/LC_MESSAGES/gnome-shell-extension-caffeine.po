@@ -23,7 +23,7 @@ msgstr "Bereitschaftsmodus und Bildschirmschoner deaktviert"
 
 #: extension.js:229
 msgid "Auto suspend and screensaver enabled"
-msgstr "Bereitschaftsmodus und Bildschirmschoner aktviert"
+msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
 
 #: prefs.js:45
 msgid "Show Caffeine in top panel"
