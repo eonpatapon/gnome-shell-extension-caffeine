@@ -19,7 +19,7 @@ msgstr ""
 
 #: extension.js:212
 msgid "Auto suspend and screensaver disabled"
-msgstr "Bereitschaftsmodus und Bildschirmschoner deaktviert"
+msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
 
 #: extension.js:229
 msgid "Auto suspend and screensaver enabled"
