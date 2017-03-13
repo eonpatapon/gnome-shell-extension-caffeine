@@ -217,7 +217,7 @@ const Caffeine = new Lang.Class({
                     this._state = true;
                     this._icon.icon_name = EnabledIcon;
                     if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
-                        Main.notify(_("Auto suspend and screensaver disabled"));
+                        Main.notify(_("Auto suspend and screensaver enabled"));
                 }
             }
         }));
@@ -236,7 +236,7 @@ const Caffeine = new Lang.Class({
                 this._state = false;
                 this._icon.icon_name = DisabledIcon;
                 if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    Main.notify(_("Auto suspend and screensaver enabled"));
+                    Main.notify(_("Auto suspend and screensaver disabled"));
             }
         }
     },
