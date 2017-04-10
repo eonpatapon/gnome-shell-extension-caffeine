@@ -40,71 +40,71 @@ const CaffeineWidget = new Lang.Class({
         this._changedPermitted = false;
 
 
-        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+        let showCaffeineBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});
 
-        let label = new Gtk.Label({label: _("Show Caffeine in top panel"),
+        let showCaffeineLabel = new Gtk.Label({label: _("Show Caffeine in top panel"),
                                            xalign: 0});
 
-        let show = new Gtk.Switch({active: this._settings.get_boolean(SHOW_INDICATOR_KEY)});
-        show.connect('notify::active', Lang.bind(this, function(button) {
+        let showCaffeineSwitch = new Gtk.Switch({active: this._settings.get_boolean(SHOW_INDICATOR_KEY)});
+        showCaffeineSwitch.connect('notify::active', Lang.bind(this, function(button) {
             this._settings.set_boolean(SHOW_INDICATOR_KEY, button.active);
         }));
 
-        hbox.pack_start(label, true, true, 0);
-        hbox.add(show);
+        showCaffeineBox.pack_start(showCaffeineLabel, true, true, 0);
+        showCaffeineBox.add(showCaffeineSwitch);
 
-        this.w.add(hbox);
+        this.w.add(showCaffeineBox);
 
         if (ShellVersion > 6) {
             let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                     margin: 7});
 
-            let label = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
+            let enableFullscreenLabel = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
                                        xalign: 0});
 
-            let show = new Gtk.Switch({active: this._settings.get_boolean(FULLSCREEN_KEY)});
-            show.connect('notify::active', Lang.bind(this, function(button) {
+            let enableFullscreenSwitch = new Gtk.Switch({active: this._settings.get_boolean(FULLSCREEN_KEY)});
+            enableFullscreenSwitch.connect('notify::active', Lang.bind(this, function(button) {
                 this._settings.set_boolean(FULLSCREEN_KEY, button.active);
             }));
 
-            hbox.pack_start(label, true, true, 0);
-            hbox.add(show);
+            hbox.pack_start(enableFullscreenLabel, true, true, 0);
+            hbox.add(enableFullscreenSwitch);
 
             this.w.add(hbox);
         }
 
-        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+        let stateBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});
 
-        let label = new Gtk.Label({label: _("Restore state across reboots"),
+        let stateLabel = new Gtk.Label({label: _("Restore state across reboots"),
                                    xalign: 0});
 
-        let show = new Gtk.Switch({active: this._settings.get_boolean(RESTORE_KEY)});
-        show.connect('notify::active', Lang.bind(this, function(button) {
+        let stateSwitch = new Gtk.Switch({active: this._settings.get_boolean(RESTORE_KEY)});
+        stateSwitch.connect('notify::active', Lang.bind(this, function(button) {
             this._settings.set_boolean(RESTORE_KEY, button.active);
         }));
 
-        hbox.pack_start(label, true, true, 0);
-        hbox.add(show);
+        stateBox.pack_start(stateLabel, true, true, 0);
+        stateBox.add(stateSwitch);
 
-        this.w.add(hbox);
+        this.w.add(stateBox);
 
-        let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+        let notificationsBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});
 
-        let label = new Gtk.Label({label: _("Enable notifications"),
+        let notificationsLabel = new Gtk.Label({label: _("Enable notifications"),
                                    xalign: 0});
 
-        let show = new Gtk.Switch({active: this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)});
-        show.connect('notify::active', Lang.bind(this, function(button) {
+        let notificationsSwitch = new Gtk.Switch({active: this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)});
+        notificationsSwitch.connect('notify::active', Lang.bind(this, function(button) {
             this._settings.set_boolean(SHOW_NOTIFICATIONS_KEY, button.active);
         }));
 
-        hbox.pack_start(label, true, true, 0);
-        hbox.add(show);
+        notificationsBox.pack_start(notificationsLabel, true, true, 0);
+        notificationsBox.add(notificationsSwitch);
 
-        this.w.add(hbox);
+        this.w.add(notificationsBox);
 
         this._store = new Gtk.ListStore();
         this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
