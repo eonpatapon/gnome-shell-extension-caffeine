@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-16 16:11-0300\n"
+"POT-Creation-Date: 2017-02-08 21:38+0800\n"
 "PO-Revision-Date: 2013-01-23 18:19-0300\n"
 "Last-Translator: Demetri0 <d3i0@ya.ru>\n"
 "Language-Team: Russian\n"
@@ -17,41 +17,82 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:212
+#: extension.js:220
 msgid "Auto suspend and screensaver disabled"
 msgstr "Автоматическое отключение экрана выключено"
 
-#: extension.js:229
+#: extension.js:239
 msgid "Auto suspend and screensaver enabled"
 msgstr "Автоматическое отключение экрана включено"
 
-#: prefs.js:45
+#: prefs.js:46
 msgid "Show Caffeine in top panel"
 msgstr "Отображать значёк Caffeine на панели"
 
-#: prefs.js:62
+#: prefs.js:63 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Включать при работе приложений в полноэкранном режиме"
 
-#: prefs.js:79
+#: prefs.js:80
+msgid "Restore state across reboots"
+msgstr ""
+
+#: prefs.js:96
 msgid "Enable notifications"
 msgstr "Включить уведомления"
 
-#: prefs.js:100
+#: prefs.js:117
 msgid "Applications which enable Caffeine automatically"
 msgstr "Приложения, которые активируют Caffeine автоматически"
 
-#: prefs.js:116
+#: prefs.js:133
 msgid "Add application"
 msgstr "Добавить приложение"
 
-#: prefs.js:130
+#: prefs.js:147
 msgid "Create new matching rule"
 msgstr "Создайте новое правило соответствия"
 
-#: prefs.js:134
+#: prefs.js:151
 msgid "Add"
 msgstr "Добавить"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
+#, fuzzy
+msgid "Application list"
+msgstr "Добавить приложение"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
+msgid "Store caffeine user state"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
+msgid "Restore caffeine state"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
+msgid "Show indicator"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+#, fuzzy
+msgid "Show the indicator on the top panel"
+msgstr "Отображать значёк Caffeine на панели"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
+#, fuzzy
+msgid "Show notifications"
+msgstr "Включить уведомления"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+msgid "Show notifications when enabled/disabled"
+msgstr ""
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine включен"
