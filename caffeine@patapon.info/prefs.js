@@ -57,7 +57,7 @@ const CaffeineWidget = new Lang.Class({
         this.w.add(showCaffeineBox);
 
         if (ShellVersion > 6) {
-            let hbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+            let gtkhbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                     margin: 7});
 
             let enableFullscreenLabel = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
@@ -68,10 +68,10 @@ const CaffeineWidget = new Lang.Class({
                 this._settings.set_boolean(FULLSCREEN_KEY, button.active);
             }));
 
-            hbox.pack_start(enableFullscreenLabel, true, true, 0);
-            hbox.add(enableFullscreenSwitch);
+            gtkhbox.pack_start(enableFullscreenLabel, true, true, 0);
+            gtkhbox.add(enableFullscreenSwitch);
 
-            this.w.add(hbox);
+            this.w.add(gtkhbox);
         }
 
         let stateBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
