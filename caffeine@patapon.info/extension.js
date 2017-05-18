@@ -205,7 +205,7 @@ const Caffeine = new Lang.Class({
                                                              object);
         // Is the new inhibitor Caffeine ?
         inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
-            if (app_id == this._last_app) {
+            if (app_id != '' && app_id == this._last_app) {
                 if (this._last_app == 'user')
                     this._settings.set_boolean(USER_ENABLED_KEY, true);
                 this._apps.push(this._last_app);
