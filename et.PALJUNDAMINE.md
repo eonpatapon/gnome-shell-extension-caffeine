@@ -1,7 +1,5 @@
 GNU Üldine Avalik Litsents
 
-GNU Üldine Avalik Litsents
-
 Versioon number 2, juuni 1991
 
 Autoriõigus (c) 1989, 1991 Free Software Foundation, Inc. 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
