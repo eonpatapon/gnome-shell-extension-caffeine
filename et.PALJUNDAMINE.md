@@ -120,7 +120,7 @@ HÜpoteetilised käsud "show w'' ja "show c'' peaksid olema vastavad osad GNU Ü
 Kui Te töötate programmeerijana, peaksite Te laskma oma tööandjal või koolil alla kirjutada autoriõiguslike pretensioonide loobumise kohta käivale dokumendile. Siin on näidis, muutke ise nimed:
 
 Yoyodyne, Inc., loobub kõigist autoriõigustest programmile Gnomovision, mille on kirjutanud James Hacker.
-
+ 
 See Üldine Avalik Litsents ei anna õigust liita Teie programmi omandiõiguslike programmidega. Kui Teie programm on alamfunktsioonide teek, on Teil kasulikum lubada linkimist teegiga. Kui Te tahate seda teha, siis kasutage GNU Üldist Avalikku Teegilitsentsi käesoleva Litsentsi asemel.
 
 
