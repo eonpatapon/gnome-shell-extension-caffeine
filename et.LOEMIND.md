@@ -8,7 +8,7 @@ Kasuta gnome-shell-before-3.10 haru vanematele gnome shell 3.4, 3.6 ja 3.8.
 
 ![Screenshot](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot.png)
 
-![Preferences](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot-prefs.png)
+![Preferences](https://github.com/janls/gnome-shell-extension-caffeine/raw/master/et.screenshot-prefs.png)
 
 Tühi tass = ise-uinumine ja ekraanisäästja süsteemi sättete alusel. Täidetud tass = ise-uinumine ja ekraanisäästja tõkestatud.
 
