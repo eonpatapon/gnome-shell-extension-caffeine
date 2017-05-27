@@ -28,5 +28,6 @@ https://extensions.gnome.org/extension/517/caffeine/
 Taaskäivita kest ning luba laiendus:
 
 1. Vajuta korraga alla klahvid <kbd>Alt</kbd> ja <kbd>F2</kbd>,
- : selle peale avaneb aken “Palun sisesta käsk”.
+: selle peale avaneb aken “Palun sisesta käsk”.
 2. Trüki avanenud aknasse “__r__” ja vajuta klahvi <kbd>Enter</kbd>.
+
