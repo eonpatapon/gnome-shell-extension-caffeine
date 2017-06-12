@@ -30,4 +30,4 @@ https://extensions.gnome.org/extension/517/caffeine/
 Restart the shell and then enable the extension.
 
 
-[et_rme]: https://github.com/janls/gnome-shell-extension-caffeine/master/et.LOEMIND.md "Link version of readme in Estonian."
+[et_rme]: https://github.com/janls/gnome-shell-extension-caffeine/blob/master/et.LOEMIND.md "Link version of readme in Estonian."
