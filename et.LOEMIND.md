@@ -1,6 +1,6 @@
 # gnome-shell-extension-caffeine
 
-_[English](/orig.rme)_
+_[English][en.rme]_
 
 Täida tass tõkestamaks ekraanisäästjat ja ise-uinumist.
 
@@ -33,4 +33,4 @@ Taaskäivita kest ning luba laiendus:
 : selle peale avaneb aken “Palun sisesta käsk”.
 2. Trüki avanenud aknasse “__r__” ja vajuta klahvi <kbd>Enter</kbd>.
 
-[orig.rm]: https://github.com/eonpatapon/gnome-shell-extension-caffeine/master/Readme.md "Link to orirginal readme in English."
+[en.rme]: https://github.com/eonpatapon/gnome-shell-extension-caffeine/master/Readme.md "Link to orirginal readme in English."
