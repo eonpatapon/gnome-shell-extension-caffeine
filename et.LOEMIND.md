@@ -1,6 +1,6 @@
 # gnome-shell-extension-caffeine
 
-_(English)[/orig.rme]_
+_[English](/orig.rme)_
 
 Täida tass tõkestamaks ekraanisäästjat ja ise-uinumist.
 
