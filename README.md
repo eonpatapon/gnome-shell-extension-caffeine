@@ -1,4 +1,6 @@
-# gnome-shell-extension-caffeine
+# This extension is not maintained anymore, it also suffer from a nasty bug #67. New maintainers are welcome!
+
+## gnome-shell-extension-caffeine
 
 Fill the cup to inhibit auto suspend and screensaver.
 
