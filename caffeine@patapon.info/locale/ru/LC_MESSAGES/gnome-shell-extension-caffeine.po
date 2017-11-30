@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-08 21:38+0800\n"
-"PO-Revision-Date: 2013-01-23 18:19-0300\n"
-"Last-Translator: Demetri0 <d3i0@ya.ru>\n"
+"PO-Revision-Date: 2017-07-30 15:53+0300\n"
+"Last-Translator: Alex Gluck <alexgluck@bk.ru>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:220
@@ -36,7 +36,7 @@ msgstr "Включать при работе приложений в полно�
 
 #: prefs.js:80
 msgid "Restore state across reboots"
-msgstr ""
+msgstr "Восстанавливать после перезагрузки"
 
 #: prefs.js:96
 msgid "Enable notifications"
@@ -59,40 +59,36 @@ msgid "Add"
 msgstr "Добавить"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
-#, fuzzy
 msgid "Application list"
 msgstr "Добавить приложение"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
-msgid ""
-"A list of strings, each containing an application id (desktop file name)"
-msgstr ""
+msgid "A list of strings, each containing an application id (desktop file name)"
+msgstr "Список строк, содержащих название программы (включая файлы .desktop)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
 msgid "Store caffeine user state"
-msgstr ""
+msgstr "Сохранять пользовательский выбор"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
 msgid "Restore caffeine state"
-msgstr ""
+msgstr "Восстанавливать значения приложения"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
 msgid "Show indicator"
-msgstr ""
+msgstr "Показывать значок"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
-#, fuzzy
 msgid "Show the indicator on the top panel"
-msgstr "Отображать значёк Caffeine на панели"
+msgstr "Отображать значок Caffeine на панели"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
-#, fuzzy
 msgid "Show notifications"
 msgstr "Включить уведомления"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
-msgstr ""
+msgstr "Показывать уведомление когда включено/выключено"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine включен"
