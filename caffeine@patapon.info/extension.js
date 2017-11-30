@@ -27,10 +27,12 @@ const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
+const PopupMenu = imports.ui.popupMenu;
 const Shell = imports.gi.Shell;
 const MessageTray = imports.ui.messageTray;
 const Atk = imports.gi.Atk;
 const Config = imports.misc.config;
+const Util = imports.misc.util;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -85,21 +87,12 @@ let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
 const Caffeine = new Lang.Class({
     Name: IndicatorName,
-    Extends: PanelMenu.Button,
+    Extends: PanelMenu.SystemIndicator,
 
     _init: function(metadata, params) {
-        this.parent(null, IndicatorName);
-        this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
+        this.parent();
 
         this._settings = Convenience.getSettings();
-        this._settings.connect("changed::" + SHOW_INDICATOR_KEY, Lang.bind(this, function() {
-            if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
-                this.actor.show();
-            else
-                this.actor.hide();
-        }));
-        if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
-            this.actor.hide();
 
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
@@ -117,10 +110,9 @@ const Caffeine = new Lang.Class({
         let shellwm = global.window_manager;
         this._windowDestroyedId = shellwm.connect('destroy', Lang.bind(this, this._mayUninhibit));
 
-        this._icon = new St.Icon({
-            icon_name: DisabledIcon,
-            style_class: 'system-status-icon'
-        });
+        this._statusIndicator = this._addIndicator();
+        this._statusIndicator.icon_name = EnabledIcon;
+        this._statusIndicator.visible = false;
 
         this._state = false;
         // who has requested the inhibition
@@ -130,9 +122,28 @@ const Caffeine = new Lang.Class({
         this._cookies = [];
         this._objects = [];
 
-        this.actor.add_actor(this._icon);
-        this.actor.add_style_class_name('panel-status-button');
-        this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
+        this._subMenuItem = new PopupMenu.PopupSubMenuMenuItem("Caffeine", true);
+        this._subMenuItem.icon.icon_name = DisabledIcon;
+        this.menu.addMenuItem(this._subMenuItem);
+
+        this._toggleStateMenuAction = this._subMenuItem.menu.addAction(_("Disable Auto Suspend and Screensaver"),
+                Lang.bind(this, this.toggleState));
+        this._subMenuItem.menu.addAction(_("Caffeine Settings"),
+                function () {
+                    Util.spawnCommandLine('gnome-shell-extension-prefs ' + Me.uuid);
+                });
+
+        this._settings.connect("changed::" + SHOW_INDICATOR_KEY, Lang.bind(this, function() {
+            if (this._settings.get_boolean(SHOW_INDICATOR_KEY)) {
+                this._subMenuItem.actor.visible = true;
+                this._statusIndicator.visible = this._state;
+            } else {
+                this._subMenuItem.actor.visible = false;
+                this._statusIndicator.visible = false;
+            }
+        }));
+        if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
+            this._subMenuItem.actor.visible = false;
 
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
@@ -215,7 +226,10 @@ const Caffeine = new Lang.Class({
                 this._last_cookie = "";
                 if (this._state === false) {
                     this._state = true;
-                    this._icon.icon_name = EnabledIcon;
+                    if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
+                        this._statusIndicator.visible = true;
+                    this._subMenuItem.icon.icon_name = EnabledIcon;
+                    this._toggleStateMenuAction.label.text = _("Enable Auto Suspend and Screensaver");
                     if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                         Main.notify(_("Auto suspend and screensaver disabled"));
                 }
@@ -234,7 +248,9 @@ const Caffeine = new Lang.Class({
             this._objects.splice(index, 1);
             if (this._apps.length === 0) {
                 this._state = false;
-                this._icon.icon_name = DisabledIcon;
+                this._statusIndicator.visible = false;
+                this._subMenuItem.icon.icon_name = DisabledIcon;
+                this._toggleStateMenuAction.label.text = _("Disable Auto Suspend and Screensaver");
                 if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     Main.notify(_("Auto suspend and screensaver enabled"));
             }
@@ -305,7 +321,12 @@ function init(extensionMeta) {
 
 function enable() {
     CaffeineIndicator = new Caffeine();
-    Main.panel.addToStatusArea(IndicatorName, CaffeineIndicator);
+
+    let aggregateMenuPanelButton = Main.panel.statusArea['aggregateMenu'];
+    let powerIndicator = aggregateMenuPanelButton._power;
+    let powerSubmenuPosition = aggregateMenuPanelButton.menu._getMenuItems().indexOf(powerIndicator.menu);
+    aggregateMenuPanelButton._indicators.insert_child_below(CaffeineIndicator.indicators, powerIndicator.indicators);
+    aggregateMenuPanelButton.menu.addMenuItem(CaffeineIndicator.menu, powerSubmenuPosition);
 }
 
 function disable() {

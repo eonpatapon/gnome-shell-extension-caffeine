@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 21:38+0800\n"
+"POT-Creation-Date: 2017-10-07 23:17-0300\n"
 "PO-Revision-Date: 2017-02-08 21:42+0800\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -17,11 +17,26 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:220
+#: extension.js:128 extension.js:250
+#, fuzzy
+msgid "Disable Auto Suspend and Screensaver"
+msgstr "自动挂起与屏幕保护程序已启用"
+
+#: extension.js:130
+#, fuzzy
+msgid "Caffeine Settings"
+msgstr "Caffeine 已开启"
+
+#: extension.js:229
+#, fuzzy
+msgid "Enable Auto Suspend and Screensaver"
+msgstr "自动挂起与屏幕保护程序已启用"
+
+#: extension.js:231
 msgid "Auto suspend and screensaver disabled"
 msgstr "自动挂起与屏幕保护程序已禁用"
 
-#: extension.js:239
+#: extension.js:252
 msgid "Auto suspend and screensaver enabled"
 msgstr "自动挂起与屏幕保护程序已启用"
 
@@ -63,7 +78,8 @@ msgid "Application list"
 msgstr "应用程序列表"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
-msgid "A list of strings, each containing an application id (desktop file name)"
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
 msgstr "一个字符串的列表，每个字符串包含一个应用程序 id（desktop 文件名称）"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
@@ -89,9 +105,6 @@ msgstr "显示通知"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "启用/禁用时显示通知"
-
-#~ msgid "Caffeine enabled"
-#~ msgstr "Caffeine 已开启"
 
 #~ msgid "Caffeine disabled"
 #~ msgstr "Caffeine 已关闭"
