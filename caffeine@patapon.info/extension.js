@@ -21,6 +21,7 @@
 
 'use strict';
 
+const Clutter = imports.gi.Clutter;
 const Lang = imports.lang;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
@@ -80,8 +81,8 @@ const DBusSessionManagerInhibitorIface = '<node>\
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = "Caffeine";
-const DisabledIcon = 'my-caffeine-off-symbolic';
-const EnabledIcon = 'my-caffeine-on-symbolic';
+const DisabledIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
+const EnabledIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
 let CaffeineIndicator;
 let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
@@ -91,6 +92,7 @@ const Caffeine = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
+    	this._mode = 'app';
         this._state = false;
         this._apps = [];
         this._cookies = [];
@@ -120,14 +122,24 @@ const Caffeine = new Lang.Class({
         this._windowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(this, this._mayInhibit));
         this._windowDestroyedId = global.window_manager.connect('destroy', Lang.bind(this, this._mayUninhibit));
 
+        let icon_name = DisabledIcon['app'];
+        if (this._settings.get_boolean(USER_ENABLED_KEY))
+        	icon_name = DisabledIcon['user'];
+        	
         this._icon = new St.Icon({
-            icon_name: DisabledIcon,
+            icon_name: icon_name,
             style_class: 'system-status-icon'
         });
 
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
         this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
+        this.actor.connect_after('key-release-event', Lang.bind(this, function (actor, event) {
+        	let symbol = event.get_key_symbol();
+            if (symbol == Clutter.KEY_Return || symbol == Clutter.KEY_space) {
+            	this.toggleState();
+            }
+        }));
 
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
@@ -136,6 +148,7 @@ const Caffeine = new Lang.Class({
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
+            this.toggleFullscreen();
         }
         
         // List current windows to check if we need to inhibit
@@ -169,18 +182,23 @@ const Caffeine = new Lang.Class({
     },
     
     toggleIcon: function(state) {
+    	if (this._settings.get_boolean(USER_ENABLED_KEY) && this._mode == 'app') return; // handle by user
     	if (state === false) {
         	if (this.inFullscreen && this._state) return; // auto suspend already disabled
         	
             this._state = true;
-            this._icon.icon_name = EnabledIcon;
+            if (this._settings.get_boolean(USER_ENABLED_KEY))
+            	this._icon.icon_name = EnabledIcon['user'];
+            else this._icon.icon_name = EnabledIcon['app'];
             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                 Main.notify(_("Auto suspend and screensaver disabled"));
         } else {
         	if (!this.inFullscreen && !this._state) return; // auto suspend already enabled
         	
         	this._state = false;
-            this._icon.icon_name = DisabledIcon;
+            if (this._settings.get_boolean(USER_ENABLED_KEY))
+            	this._icon.icon_name = DisabledIcon['user'];
+            else this._icon.icon_name = DisabledIcon['app'];
             if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                 Main.notify(_("Auto suspend and screensaver enabled"));
         }
@@ -231,8 +249,12 @@ const Caffeine = new Lang.Class({
         let index = this._apps.indexOf(app_id);
         if (index == -1)  return;
         var cookie_remove = this._cookies[index];
+        this._mode = 'app';
 
-        if (this._apps[index] == 'user') this.toggleUserFlag(false);
+        if (this._apps[index] == 'user') {
+        	this._mode = 'user';
+        	this.toggleUserFlag(false);
+        }
     	this.doApp('remove', index);
         
         this._sessionManager.UninhibitRemote(cookie_remove);
@@ -247,7 +269,12 @@ const Caffeine = new Lang.Class({
                                                          object);
             inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
             	if (app_id == "") return;
-                if (app_id == 'user') this.toggleUserFlag(true);
+            	
+            	this._mode = 'app';
+                if (app_id == 'user'){
+                	this._mode = 'user';
+                	this.toggleUserFlag(true);
+                }
                 this.toggleIcon(false); // disable auto suspend
             }));
         }));
