@@ -63,6 +63,9 @@ const DBusSessionManagerIface = '<node>\
     <signal name="InhibitorAdded">\
         <arg type="o" direction="out" />\
     </signal>\
+    <signal name="InhibitorRemoved">\
+	    <arg type="o" />\
+	</signal>\
   </interface>\
 </node>';
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
@@ -88,6 +91,10 @@ const Caffeine = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
+        this._state = false;
+        this._apps = [];
+        this._cookies = [];
+        
         this.parent(null, IndicatorName);
         this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
 
@@ -106,27 +113,17 @@ const Caffeine = new Lang.Class({
                                                           '/org/gnome/SessionManager');
         this._inhibitorAddedId = this._sessionManager.connectSignal('InhibitorAdded',
                                                                     Lang.bind(this, this._inhibitorAdded));
+        this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved',
+                													Lang.bind(this, this._inhibitorRemoved));
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
-        this._windowTracker = Shell.WindowTracker.get_default();
-        let display = global.screen.get_display();
-        // Connect after so the handler from ShellWindowTracker has already run
-        this._windowCreatedId = display.connect_after('window-created', Lang.bind(this, this._mayInhibit));
-        let shellwm = global.window_manager;
-        this._windowDestroyedId = shellwm.connect('destroy', Lang.bind(this, this._mayUninhibit));
+        this._windowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(this, this._mayInhibit));
+        this._windowDestroyedId = global.window_manager.connect('destroy', Lang.bind(this, this._mayUninhibit));
 
         this._icon = new St.Icon({
             icon_name: DisabledIcon,
             style_class: 'system-status-icon'
         });
-
-        this._state = false;
-        // who has requested the inhibition
-        this._last_app = "";
-        this._last_cookie = "";
-        this._apps = [];
-        this._cookies = [];
-        this._objects = [];
 
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
@@ -139,11 +136,11 @@ const Caffeine = new Lang.Class({
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
-            this.toggleFullscreen();
         }
+        
         // List current windows to check if we need to inhibit
         global.get_window_actors().map(Lang.bind(this, function(window) {
-            this._mayInhibit(null, window.meta_window, null);
+            this._mayInhibit(global.screen.get_display(), window.meta_window, true);
         }));
     },
 
@@ -156,19 +153,8 @@ const Caffeine = new Lang.Class({
                 break;
             }
         }
+        
         return inFullscreen;
-    },
-
-    toggleFullscreen: function() {
-        Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
-          if (this.inFullscreen && this._apps.indexOf('fullscreen') == -1) {
-              this.addInhibit('fullscreen');
-          }
-
-          if (!this.inFullscreen && this._apps.indexOf('fullscreen') != -1) {
-                this.removeInhibit('fullscreen');
-          }
-        }));
     },
 
     toggleState: function() {
@@ -181,67 +167,98 @@ const Caffeine = new Lang.Class({
             this.addInhibit('user');
         }
     },
+    
+    toggleIcon: function(state) {
+    	if (state === false) {
+        	if (this.inFullscreen && this._state) return; // auto suspend already disabled
+        	
+            this._state = true;
+            this._icon.icon_name = EnabledIcon;
+            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
+                Main.notify(_("Auto suspend and screensaver disabled"));
+        } else {
+        	if (!this.inFullscreen && !this._state) return; // auto suspend already enabled
+        	
+        	this._state = false;
+            this._icon.icon_name = DisabledIcon;
+            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                Main.notify(_("Auto suspend and screensaver enabled"));
+        }
+    },
+    
+    toggleUserFlag: function(state) {
+    	this._settings.set_boolean(USER_ENABLED_KEY, state);
+    },
+    
+    toggleFullscreen: function(test_obj1, test_obj2) {
+        let app_index = this._apps.indexOf('fullscreen');
+        Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
+            let inFullscreen = this.inFullscreen;
+            if (inFullscreen && app_index == -1) {
+            	this.addInhibit('fullscreen');
+            }else if (!inFullscreen && app_index != -1) {
+            	this.removeInhibit('fullscreen');
+            }
+        }));
+    },
+    
+    doApp: function(act, index, app_id, cookie) {
+    	switch(act) {
+    	case 'add':
+            this._apps.push(app_id);
+            this._cookies.push(cookie);
+    		break;
+    	case 'remove':
+    		this._apps.splice(index, 1);
+            this._cookies.splice(index, 1);
+    		break;
+    	default:
+    		log("Warning: ", act, " undefined!");
+    		break;
+    	}
+    },
 
     addInhibit: function(app_id) {
         this._sessionManager.InhibitRemote(app_id,
             0, "Inhibit by %s".format(IndicatorName), 12,
             Lang.bind(this, function(cookie) {
-                this._last_cookie = cookie;
-                this._last_app = app_id;
+            	this.doApp('add', 0, app_id, cookie);
             })
         );
     },
 
     removeInhibit: function(app_id) {
         let index = this._apps.indexOf(app_id);
+        if (index == -1)  return;
         var cookie_remove = this._cookies[index];
 
-        if (this._apps[index] == 'user')
-            this._settings.set_boolean(USER_ENABLED_KEY, false);
-        
-        // Remove app from list
-        this._apps.splice(index, 1);
-        this._cookies.splice(index, 1);
-        this._objects.splice(index, 1);
-        if (this._apps.length === 0) {
-            this._state = false;
-            this._icon.icon_name = DisabledIcon;
-            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                Main.notify(_("Auto suspend and screensaver enabled"));
-        }
+        if (this._apps[index] == 'user') this.toggleUserFlag(false);
+    	this.doApp('remove', index);
         
         this._sessionManager.UninhibitRemote(cookie_remove);
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {
         this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function([inhibitors]){
-        	if (inhibitors.indexOf(object) != -1) {
-                let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
-                                                             'org.gnome.SessionManager',
-                                                             object);
-                inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
-                    if (app_id != '' && app_id == this._last_app) {
-                        if (this._last_app == 'user')
-                            this._settings.set_boolean(USER_ENABLED_KEY, true);
-                        this._apps.push(this._last_app);
-                        this._cookies.push(this._last_cookie);
-                        this._objects.push(object);
-                        this._last_app = "";
-                        this._last_cookie = "";
-                        if (this._state === false) {
-                            this._state = true;
-                            this._icon.icon_name = EnabledIcon;
-                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
-                                Main.notify(_("Auto suspend and screensaver disabled"));
-                        }
-                    }
-                }));
-        	}
+        	if (!this._apps.length) return; // no app to handle
+
+            let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
+                                                         'org.gnome.SessionManager',
+                                                         object);
+            inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
+            	if (app_id == "") return;
+                if (app_id == 'user') this.toggleUserFlag(true);
+                this.toggleIcon(false); // disable auto suspend
+            }));
         }));
+    },
+    
+    _inhibitorRemoved: function(proxy, sender, [object]) {
+        this.toggleIcon(true); // enable auto suspend
     },
 
     _mayInhibit: function(display, window, noRecurse) {
-        let app = this._windowTracker.get_window_app(window);
+    	let app = Shell.WindowTracker.get_default().get_window_app(window);
         if (!app) {
             if (!noRecurse) {
                 // window is not tracked yet
@@ -257,10 +274,9 @@ const Caffeine = new Lang.Class({
         if (apps.indexOf(app_id) != -1)
             this.addInhibit(app_id);
     },
-
+    
     _mayUninhibit: function(shellwm, actor) {
-        let window = actor.meta_window;
-        let app = this._windowTracker.get_window_app(window);
+        let app = Shell.WindowTracker.get_default().get_window_app(actor.meta_window);
         if (app) {
             let app_id = app.get_id();
             if (this._apps.indexOf(app_id) != -1)
@@ -274,11 +290,16 @@ const Caffeine = new Lang.Class({
             this.removeInhibit(app_id);
         }));
         // disconnect from signals
-        if (this._settings.get_boolean(FULLSCREEN_KEY))
+        if (this._settings.get_boolean(FULLSCREEN_KEY)){
             global.screen.disconnect(this._inFullscreenId);
+        }
         if (this._inhibitorAddedId) {
             this._sessionManager.disconnectSignal(this._inhibitorAddedId);
             this._inhibitorAddedId = 0;
+        }
+        if (this._inhibitorRemovedId) {
+            this._sessionManager.disconnectSignal(this._inhibitorRemovedId);
+            this._inhibitorRemovedId = 0;
         }
         if (this._windowCreatedId) {
             global.screen.get_display().disconnect(this._windowCreatedId);
