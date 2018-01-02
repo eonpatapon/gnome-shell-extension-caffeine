@@ -183,7 +183,7 @@ const Caffeine = new Lang.Class({
             if (this._settings.get_boolean(USER_ENABLED_KEY))
             	this._icon.icon_name = EnabledIcon['user'];
             else this._icon.icon_name = EnabledIcon['app'];
-            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
+            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                 Main.notify(_("Auto suspend and screensaver disabled"));
         } else {
         	if (this._inhibitors.length) return; // auto suspend already enabled
@@ -280,12 +280,14 @@ const Caffeine = new Lang.Class({
 		}));
         
         // List current windows to check if we need to inhibit
-    	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
-    		global.get_window_actors().map(Lang.bind(this, function(window) {
-	            // check fullscreen
-	            this._mayFullScreen(global.screen.get_display(), window.meta_window, true);
-	        }));
-    	}));
+        if (this._settings.get_boolean(FULLSCREEN_KEY)) {
+        	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
+        		global.get_window_actors().map(Lang.bind(this, function(window) {
+    	            // check fullscreen
+    	            this._mayFullScreen(global.screen.get_display(), window.meta_window, true);
+    	        }));
+        	}));
+        }
     },
     
     _mayUserUninhibit: function(shellwm, actor) {
