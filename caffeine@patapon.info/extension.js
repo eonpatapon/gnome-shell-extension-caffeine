@@ -198,15 +198,13 @@ const Caffeine = new Lang.Class({
     },
     
     toggleFullscreen: function(screen) {
-    	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
-        	let window = screen.get_display().get_focus_window();
-        	let app_id = window.get_wm_class_instance();
-        	if (window.is_fullscreen()) {
-        		this.addInhibit(app_id);
-        	} else {
-        		this.removeInhibit(app_id);
-        	}
-    	}));
+    	let window = screen.get_display().get_focus_window();
+    	let app_id = window.get_wm_class_instance();
+    	if (window.is_fullscreen()) {
+    		this.addInhibit(app_id);
+    	} else {
+    		this.removeInhibit(app_id);
+    	}
     },
     
     doApp: function(act, index, app_id, cookie) {
@@ -227,7 +225,7 @@ const Caffeine = new Lang.Class({
 
     addInhibit: function(app_id) {
         this._sessionManager.InhibitRemote(app_id,
-            0, "Inhibit by %s".format(IndicatorName), MASK_SUSPEND_DISABLE_INHIBIT,
+            0, "Inhibit by %s".format(IndicatorName), INHIBIT_SUSPEND | INHIBIT_IDLE,
             Lang.bind(this, function(cookie) {
             	this.doApp('add', 0, app_id, cookie);
             })
