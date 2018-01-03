@@ -315,7 +315,7 @@ const Caffeine = new Lang.Class({
     },
     
     _inhibitorRemoved: function(proxy, sender, [object]) {
-    	// never create session proxy direct from object, 
+    	// never create session proxy from object directly, 
     	// some actions like logout, switch or shutdown would be delay till reach timeout(default value is 30s)
     	// if you have to get info from inhibitor, call SessionManager method first, like the way in method _inhibitorAdded
     	let index = this._inhibitors.indexOf(object);
@@ -339,17 +339,18 @@ const Caffeine = new Lang.Class({
 		}));
         
         // List current windows to check if we need to inhibit
-        if (this._settings.get_boolean(FULLSCREEN_KEY)) {
-        	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
-        		global.get_window_actors().map(Lang.bind(this, function(actor) {
-        			let window = actor.meta_window;
-                	let app_id = this.getWindowID(window);
-            		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+    	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
+    		global.get_window_actors().map(Lang.bind(this, function(actor) {
+    			let window = actor.meta_window;
+            	let app_id = this.getWindowID(window);
+        		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+        		
+                if (this._settings.get_boolean(FULLSCREEN_KEY)) {
     	            // check fullscreen
     	            this._mayFullScreen(global.screen.get_display(), window, true);
-    	        }));
-        	}));
-        }
+                }
+	        }));
+    	}));
     },
     
     // handle action close from user custom apps
@@ -359,7 +360,8 @@ const Caffeine = new Lang.Class({
             let app_id = app.get_id();
             let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
             if (apps.indexOf(app_id) != -1){
-                this.removeInhibit(app_id);
+            	let window_id = this.getWindowID(actor.meta_window);
+                this.removeInhibit(window_id);
             }
         }
     },
@@ -377,7 +379,8 @@ const Caffeine = new Lang.Class({
         let app_id = app.get_id();
         let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
         if (apps.indexOf(app_id) != -1){
-            this.addInhibit(app_id);
+        	let window_id = this.getWindowID(window);
+            this.addInhibit(window_id);
         }
     },
     
