@@ -21,6 +21,8 @@
 
 'use strict';
 
+const Meta = imports.gi.Meta;
+const Clutter = imports.gi.Clutter;
 const Lang = imports.lang;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
@@ -31,6 +33,17 @@ const Shell = imports.gi.Shell;
 const MessageTray = imports.ui.messageTray;
 const Atk = imports.gi.Atk;
 const Config = imports.misc.config;
+
+// below are default inhibit flags
+const INHIBIT_LOGOUT = 1; // logging out
+const INHIBIT_SWITCH = 2; // switching user
+const INHIBIT_SUSPEND = 4; // well, weird value
+const INHIBIT_IDLE = 8; // playing, for fullscreen: 4 + 8
+const INHIBIT_AUTO_MOUNT = 16; // auto-mouting media
+
+// mask for inhibit flags
+const MASK_SUSPEND_DISABLE_INHIBIT = INHIBIT_SUSPEND | INHIBIT_IDLE | INHIBIT_AUTO_MOUNT;
+const MASK_SUSPEND_ENABLE_INHIBIT =  INHIBIT_LOGOUT | INHIBIT_SWITCH;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -64,25 +77,29 @@ const DBusSessionManagerIface = '<node>\
         <arg type="o" direction="out" />\
     </signal>\
     <signal name="InhibitorRemoved">\
-        <arg type="o" direction="out" />\
-    </signal>\
+	    <arg type="o" />\
+	</signal>\
+    <signal name="ClientRemoved">\
+	    <arg type="o" />\
+	</signal>\
   </interface>\
 </node>';
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
 
 const DBusSessionManagerInhibitorIface = '<node>\
   <interface name="org.gnome.SessionManager.Inhibitor">\
-    <method name="GetAppId">\
-        <arg type="s" direction="out" />\
-    </method>\
+    <method name="GetFlags">\
+	    <arg type="u" direction="out" />\
+	</method>\
   </interface>\
 </node>';
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = "Caffeine";
-const DisabledIcon = 'my-caffeine-off-symbolic';
-const EnabledIcon = 'my-caffeine-on-symbolic';
+const DisabledIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
+const EnabledIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
+var __next_objid=1;
 let CaffeineIndicator;
 let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
@@ -91,6 +108,13 @@ const Caffeine = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
+        this._state = false;
+        this._apps = []; // for caffeine
+        this._cookies = [];
+        
+        this._inhibitors = []; // for handling inhibitors from system
+        this._windows = []; // for handling window instance
+        
         this.parent(null, IndicatorName);
         this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
 
@@ -107,182 +131,276 @@ const Caffeine = new Lang.Class({
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
                                                           '/org/gnome/SessionManager');
+        
+        // handle all inhibitors from system, include created by other apps
         this._inhibitorAddedId = this._sessionManager.connectSignal('InhibitorAdded',
                                                                     Lang.bind(this, this._inhibitorAdded));
+        
+        // handle all inhibitors removed
         this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved',
-                                                                      Lang.bind(this, this._inhibitorRemoved));
+                													Lang.bind(this, this._inhibitorRemoved));
+        
+        // handle all apps 
+        this._windowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(this, function (display, window, noRecurse) {
+        	if (this._settings.get_boolean(FULLSCREEN_KEY)) {
+        		// screen signal "in-fullscreen-changed" not always catch the right window instance
+        		// so need to listen signal "size-changed" on per app
+            	let app_id = this.getWindowID(window);
+        		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+        	}
+        	this._mayUserInhibit(display, window, noRecurse);
+        }));
+        this._windowDestroyedId = global.window_manager.connect('destroy', Lang.bind(this, function (shellwm, actor) {
+        	let app_id = this.getWindowID(actor.meta_window);
+        	this.removeInhibit(app_id);
+        	if (this._windows[app_id]) {
+        		actor.meta_window.disconnect(this._windows[app_id]);
+            	delete this._windows[app_id];
+            }
+        	this._mayUserUninhibit(shellwm, actor);
+        }));
 
-        // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
-        this._windowTracker = Shell.WindowTracker.get_default();
-        let display = global.screen.get_display();
-        // Connect after so the handler from ShellWindowTracker has already run
-        this._windowCreatedId = display.connect_after('window-created', Lang.bind(this, this._mayInhibit));
-        let shellwm = global.window_manager;
-        this._windowDestroyedId = shellwm.connect('destroy', Lang.bind(this, this._mayUninhibit));
-
+        let icon_name = DisabledIcon['app'];
+        if (this._settings.get_boolean(USER_ENABLED_KEY))
+        	icon_name = DisabledIcon['user'];
+        	
         this._icon = new St.Icon({
-            icon_name: DisabledIcon,
+            icon_name: icon_name,
             style_class: 'system-status-icon'
         });
 
-        this._state = false;
-        // who has requested the inhibition
-        this._last_app = "";
-        this._last_cookie = "";
-        this._apps = [];
-        this._cookies = [];
-        this._objects = [];
-
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
-        this.actor.connect('button-press-event', Lang.bind(this, this.toggleState));
+        this.actor.connect('button-press-event', Lang.bind(this, this.userToggleState));
+        this.actor.connect_after('key-release-event', Lang.bind(this, function (actor, event) {
+        	let symbol = event.get_key_symbol();
+            if (symbol == Clutter.KEY_Return || symbol == Clutter.KEY_space) {
+            	this.userToggleState();
+            }
+        }));
 
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
-            this.toggleState();
+            this.userToggleState();
         }
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
-            this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
-            this.toggleFullscreen();
+        	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
+            	// handle apps in fullcreen
+                this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreenDisplay));
+        	}));
         }
-        // List current windows to check if we need to inhibit
-        global.get_window_actors().map(Lang.bind(this, function(window) {
-            this._mayInhibit(null, window.meta_window, null);
-        }));
+        // handle inhibitors exists, or create inhibitor for custom apps which is running
+        this._mayInhibit();
     },
-
-    get inFullscreen() {
-        let nb_monitors = global.screen.get_n_monitors();
-        let inFullscreen = false;
-        for (let i=0; i<nb_monitors; i++) {
-            if (global.screen.get_monitor_in_fullscreen(i)) {
-                inFullscreen = true;
-                break;
-            }
-        }
-        return inFullscreen;
+    // cause no identity id exists in metawindow object
+    // this method make caffeine to identity per window precisely
+    getWindowID: function(window) {
+    	if (window.__id != undefined) return window.__id;
+    	let app_name = window.get_wm_class_instance();
+    	
+    	window.__id = app_name+':xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    	    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    	    return v.toString(16);
+    	  });
+    	
+    	return window.__id;
     },
-
-    toggleFullscreen: function() {
-        Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
-          if (this.inFullscreen && this._apps.indexOf('fullscreen') == -1) {
-              this.addInhibit('fullscreen');
-          }
-        }));
-
-        if (!this.inFullscreen && this._apps.indexOf('fullscreen') != -1) {
-              this.removeInhibit('fullscreen');
-        }
-    },
-
-    toggleState: function() {
+    
+    userToggleState: function() {
+    	this._settings.set_boolean(USER_ENABLED_KEY, !this._state);
         if (this._state) {
-            this._apps.map(Lang.bind(this, function(app_id) {
-                this.removeInhibit(app_id);
-            }));
+        	this.removeInhibit('user');
         }
         else {
             this.addInhibit('user');
         }
     },
+    
+    toggleIcon: function(state) {
+    	if (!state) {
+    		if (!this._inhibitors.length) return; // auto suspend already disabled
+        	
+            this._state = true;
+            if (this._settings.get_boolean(USER_ENABLED_KEY))
+            	this._icon.icon_name = EnabledIcon['user'];
+            else this._icon.icon_name = EnabledIcon['app'];
+            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                Main.notify(_("Auto suspend and screensaver disabled"));
+        } else {
+        	if (this._inhibitors.length) return; // auto suspend already enabled
+        	
+        	this._state = false;
+            if (this._settings.get_boolean(USER_ENABLED_KEY))
+            	this._icon.icon_name = DisabledIcon['user'];
+            else this._icon.icon_name = DisabledIcon['app'];
+            if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                Main.notify(_("Auto suspend and screensaver enabled"));
+        }
+    },
+    
+    toggleFullscreenWindow: function(window) {
+    	let app_id = this.getWindowID(window);
+    	if (window.is_fullscreen()) {
+    		this.addInhibit(app_id);
+    	} else {
+    		this.removeInhibit(app_id);
+    	}
+    },
+    
+    toggleFullscreenDisplay: function(screen) {
+    	let window = screen.get_display().get_focus_window();
+    	let app_id = this.getWindowID(window);
+    	if (window.is_fullscreen()) {
+    		this.addInhibit(app_id);
+    	} else {
+    		this.removeInhibit(app_id);
+    	}
+    },
+    
+    doApp: function(act, index, app_id, cookie) {
+    	switch(act) {
+    	case 'add':
+            this._apps.push(app_id);
+            this._cookies.push(cookie);
+    		break;
+    	case 'remove':
+    		this._apps.splice(index, 1);
+            this._cookies.splice(index, 1);
+    		break;
+    	default:
+    		log("Warning: ", act, " undefined!");
+    		break;
+    	}
+    },
 
     addInhibit: function(app_id) {
+        let index = this._apps.indexOf(app_id);
+        if (index != -1)  return;
         this._sessionManager.InhibitRemote(app_id,
-            0, "Inhibit by %s".format(IndicatorName), 12,
+            0, "Inhibit by %s".format(IndicatorName), INHIBIT_SUSPEND | INHIBIT_IDLE,
             Lang.bind(this, function(cookie) {
-                this._last_cookie = cookie;
-                this._last_app = app_id;
+            	this.doApp('add', 0, app_id, cookie);
             })
         );
     },
 
     removeInhibit: function(app_id) {
         let index = this._apps.indexOf(app_id);
-        this._sessionManager.UninhibitRemote(this._cookies[index]);
+        if (index == -1)  return;
+        var cookie_remove = this._cookies[index];
+    	this.doApp('remove', index);
+        this._sessionManager.UninhibitRemote(cookie_remove);
+    },
+    
+    inSuspend: function(flags) {
+    	return (flags & MASK_SUSPEND_DISABLE_INHIBIT);
+    },
+    
+    _makeInhibitorProxy: function(path) {
+    	return new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
+                'org.gnome.SessionManager',
+                path);
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {
-        this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function([inhibitors]){
-            for(var i in inhibitors) {
-                let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
-                                                             'org.gnome.SessionManager',
-                                                             inhibitors[i]);
-                inhibitor.GetAppIdRemote(Lang.bind(this, function(app_id) {
-                    if (app_id != '' && app_id == this._last_app) {
-                        if (this._last_app == 'user')
-                            this._settings.set_boolean(USER_ENABLED_KEY, true);
-                        this._apps.push(this._last_app);
-                        this._cookies.push(this._last_cookie);
-                        this._objects.push(object);
-                        this._last_app = "";
-                        this._last_cookie = "";
-                        if (this._state === false) {
-                            this._state = true;
-                            this._icon.icon_name = EnabledIcon;
-                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
-                                Main.notify(_("Auto suspend and screensaver disabled"));
-                        }
-                    }
-                }));
-            }
-        }));
+		this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function(){ // call it for ensure getting updated InhibitedActions
+			let inhibitor = this._makeInhibitorProxy(object);
+			inhibitor.GetFlagsRemote(Lang.bind(this, function(flags){
+				if (!this.inSuspend(flags)) return;
+				this._inhibitors.push(object);
+				this.toggleIcon(false);
+			}));
+		}));
+    },
+    
+    _inhibitorRemoved: function(proxy, sender, [object]) {
+    	// never create session proxy from object directly, 
+    	// some actions like logout, switch or shutdown would be delay till reach timeout(default value is 30s)
+    	// if you have to get info from inhibitor, call SessionManager method first, like the way in method _inhibitorAdded
+    	let index = this._inhibitors.indexOf(object);
+    	if (index == -1) return;
+    	this._inhibitors.splice(index, 1);
+    	this.toggleIcon(true); // enable auto suspend
     },
 
-    _inhibitorRemoved: function(proxy, sender, [object]) {
-        let index = this._objects.indexOf(object);
-        if (index != -1) {
-            if (this._apps[index] == 'user')
-                this._settings.set_boolean(USER_ENABLED_KEY, false);
-            // Remove app from list
-            this._apps.splice(index, 1);
-            this._cookies.splice(index, 1);
-            this._objects.splice(index, 1);
-            if (this._apps.length === 0) {
-                this._state = false;
-                this._icon.icon_name = DisabledIcon;
-                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    Main.notify(_("Auto suspend and screensaver enabled"));
+    _mayInhibit: function() {
+    	// check if some inhibitors exists while caffeine startup
+        this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function([inhibitors]){ // call it for ensure getting updated InhibitedActions
+        	for (var i in inhibitors) {
+	    		if (this._inhibitors.indexOf(inhibitors[i]) != -1) continue;
+        		let inhibitor = this._makeInhibitorProxy(inhibitors[i]);
+        		inhibitor.GetFlagsRemote(Lang.bind(this, function(flags){
+        			if (!this.inSuspend(flags)) return;
+    	    		this._inhibitors.push(inhibitors[i]);
+        		}));
+	    	}
+	    	this.toggleIcon(false);
+		}));
+        
+        // List current windows to check if we need to inhibit
+    	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
+    		global.get_window_actors().map(Lang.bind(this, function(actor) {
+    			let window = actor.meta_window;
+            	let app_id = this.getWindowID(window);
+        		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+        		
+                if (this._settings.get_boolean(FULLSCREEN_KEY)) {
+    	            // check fullscreen
+    	            this._mayFullScreen(global.screen.get_display(), window, true);
+                }
+	        }));
+    	}));
+    },
+    
+    // handle action close from user custom apps
+    _mayUserUninhibit: function(shellwm, actor) {
+        let app = Shell.WindowTracker.get_default().get_window_app(actor.meta_window);
+        if (app) {
+            let app_id = app.get_id();
+            let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
+            if (apps.indexOf(app_id) != -1){
+            	let window_id = this.getWindowID(actor.meta_window);
+                this.removeInhibit(window_id);
             }
         }
     },
-
-    _mayInhibit: function(display, window, noRecurse) {
-        let app = this._windowTracker.get_window_app(window);
+    
+    // handle user custom apps
+    _mayUserInhibit: function(display, window, noRecurse) {
+    	let app = Shell.WindowTracker.get_default().get_window_app(window);
         if (!app) {
             if (!noRecurse) {
-                // window is not tracked yet
-                Mainloop.idle_add(Lang.bind(this, function() {
-                    this._mayInhibit(display, window, true);
-                    return false;
-                }));
+            	this._mayUserInhibit(display, window, true);
+                return false;
             }
             return;
         }
         let app_id = app.get_id();
         let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
-        if (apps.indexOf(app_id) != -1)
-            this.addInhibit(app_id);
-    },
-
-    _mayUninhibit: function(shellwm, actor) {
-        let window = actor.meta_window;
-        let app = this._windowTracker.get_window_app(window);
-        if (app) {
-            let app_id = app.get_id();
-            if (this._apps.indexOf(app_id) != -1)
-                this.removeInhibit(app_id);
+        if (apps.indexOf(app_id) != -1){
+        	let window_id = this.getWindowID(window);
+            this.addInhibit(window_id);
         }
+    },
+    
+    // check if some apps in fullscreen
+    _mayFullScreen: function(display, window, noRecurse) {
+    	let app_id = this.getWindowID(window);
+    	if (window.is_fullscreen()) {
+    		this.addInhibit(app_id);
+    	}
     },
 
     destroy: function() {
-        // remove all inhibitors
+        // remove all inhibitors created by caffeine
         this._apps.map(Lang.bind(this, function(app_id) {
             this.removeInhibit(app_id);
         }));
         // disconnect from signals
-        if (this._settings.get_boolean(FULLSCREEN_KEY))
+        if (this._settings.get_boolean(FULLSCREEN_KEY)){
             global.screen.disconnect(this._inFullscreenId);
+        }
         if (this._inhibitorAddedId) {
             this._sessionManager.disconnectSignal(this._inhibitorAddedId);
             this._inhibitorAddedId = 0;

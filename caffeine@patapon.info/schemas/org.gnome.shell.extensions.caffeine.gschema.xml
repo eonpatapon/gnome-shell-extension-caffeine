@@ -22,7 +22,7 @@
         <description>Show the indicator on the top panel</description>
     </key>
     <key type="b" name="show-notifications">
-        <default>true</default>
+        <default>false</default>
         <summary>Show notifications</summary>
         <description>Show notifications when enabled/disabled</description>
     </key>
