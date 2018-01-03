@@ -79,6 +79,9 @@ const DBusSessionManagerIface = '<node>\
     <signal name="InhibitorRemoved">\
 	    <arg type="o" />\
 	</signal>\
+    <signal name="ClientRemoved">\
+	    <arg type="o" />\
+	</signal>\
   </interface>\
 </node>';
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
@@ -96,6 +99,7 @@ const IndicatorName = "Caffeine";
 const DisabledIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
 const EnabledIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
+var __next_objid=1;
 let CaffeineIndicator;
 let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
@@ -109,6 +113,7 @@ const Caffeine = new Lang.Class({
         this._cookies = [];
         
         this._inhibitors = []; // for handling inhibitors from system
+        this._windows = []; // for handling window instance
         
         this.parent(null, IndicatorName);
         this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
@@ -135,9 +140,25 @@ const Caffeine = new Lang.Class({
         this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved',
                 													Lang.bind(this, this._inhibitorRemoved));
         
-        // handle user custom apps
-        this._windowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(this, this._mayUserInhibit));
-        this._windowDestroyedId = global.window_manager.connect('destroy', Lang.bind(this, this._mayUserUninhibit));
+        // handle all apps 
+        this._windowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(this, function (display, window, noRecurse) {
+        	if (this._settings.get_boolean(FULLSCREEN_KEY)) {
+        		// screen signal "in-fullscreen-changed" not always catch the right window instance
+        		// so need to listen signal "size-changed" on per app
+            	let app_id = this.getWindowID(window);
+        		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+        	}
+        	this._mayUserInhibit(display, window, noRecurse);
+        }));
+        this._windowDestroyedId = global.window_manager.connect('destroy', Lang.bind(this, function (shellwm, actor) {
+        	let app_id = this.getWindowID(actor.meta_window);
+        	this.removeInhibit(app_id);
+        	if (this._windows[app_id]) {
+        		actor.meta_window.disconnect(this._windows[app_id]);
+            	delete this._windows[app_id];
+            }
+        	this._mayUserUninhibit(shellwm, actor);
+        }));
 
         let icon_name = DisabledIcon['app'];
         if (this._settings.get_boolean(USER_ENABLED_KEY))
@@ -164,11 +185,26 @@ const Caffeine = new Lang.Class({
         }
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
-        	// handle apps in fullcreen
-            this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
+        	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
+            	// handle apps in fullcreen
+                this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreenDisplay));
+        	}));
         }
         // handle inhibitors exists, or create inhibitor for custom apps which is running
         this._mayInhibit();
+    },
+    // cause no identity id exists in metawindow object
+    // this method make caffeine to identity per window precisely
+    getWindowID: function(window) {
+    	if (window.__id != undefined) return window.__id;
+    	let app_name = window.get_wm_class_instance();
+    	
+    	window.__id = app_name+':xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    	    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    	    return v.toString(16);
+    	  });
+    	
+    	return window.__id;
     },
     
     userToggleState: function() {
@@ -203,9 +239,18 @@ const Caffeine = new Lang.Class({
         }
     },
     
-    toggleFullscreen: function(screen) {
+    toggleFullscreenWindow: function(window) {
+    	let app_id = this.getWindowID(window);
+    	if (window.is_fullscreen()) {
+    		this.addInhibit(app_id);
+    	} else {
+    		this.removeInhibit(app_id);
+    	}
+    },
+    
+    toggleFullscreenDisplay: function(screen) {
     	let window = screen.get_display().get_focus_window();
-    	let app_id = window.get_wm_class_instance();
+    	let app_id = this.getWindowID(window);
     	if (window.is_fullscreen()) {
     		this.addInhibit(app_id);
     	} else {
@@ -230,6 +275,8 @@ const Caffeine = new Lang.Class({
     },
 
     addInhibit: function(app_id) {
+        let index = this._apps.indexOf(app_id);
+        if (index != -1)  return;
         this._sessionManager.InhibitRemote(app_id,
             0, "Inhibit by %s".format(IndicatorName), INHIBIT_SUSPEND | INHIBIT_IDLE,
             Lang.bind(this, function(cookie) {
@@ -294,9 +341,12 @@ const Caffeine = new Lang.Class({
         // List current windows to check if we need to inhibit
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
         	Mainloop.timeout_add_seconds(2, Lang.bind(this, function() {
-        		global.get_window_actors().map(Lang.bind(this, function(window) {
+        		global.get_window_actors().map(Lang.bind(this, function(actor) {
+        			let window = actor.meta_window;
+                	let app_id = this.getWindowID(window);
+            		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
     	            // check fullscreen
-    	            this._mayFullScreen(global.screen.get_display(), window.meta_window, true);
+    	            this._mayFullScreen(global.screen.get_display(), window, true);
     	        }));
         	}));
         }
@@ -333,8 +383,8 @@ const Caffeine = new Lang.Class({
     
     // check if some apps in fullscreen
     _mayFullScreen: function(display, window, noRecurse) {
-    	let app_id = window.get_wm_class_instance();
-    	if (window.is_fullscreen() && !window.has_focus()) { // exclude focused window, cause it will be handled by toggleFullscreen
+    	let app_id = this.getWindowID(window);
+    	if (window.is_fullscreen()) {
     		this.addInhibit(app_id);
     	}
     },
