@@ -34,12 +34,14 @@ const MessageTray = imports.ui.messageTray;
 const Atk = imports.gi.Atk;
 const Config = imports.misc.config;
 
+// below are default inhibit flags
 const INHIBIT_LOGOUT = 1; // logging out
 const INHIBIT_SWITCH = 2; // switching user
 const INHIBIT_SUSPEND = 4; // well, weird value
 const INHIBIT_IDLE = 8; // playing, for fullscreen: 4 + 8
 const INHIBIT_AUTO_MOUNT = 16; // auto-mouting media
 
+// mask for inhibit flags
 const MASK_SUSPEND_DISABLE_INHIBIT = INHIBIT_SUSPEND | INHIBIT_IDLE | INHIBIT_AUTO_MOUNT;
 const MASK_SUSPEND_ENABLE_INHIBIT =  INHIBIT_LOGOUT | INHIBIT_SWITCH;
 
@@ -124,10 +126,16 @@ const Caffeine = new Lang.Class({
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
                                                           '/org/gnome/SessionManager');
+        
+        // handle all inhibitors from system, include created by other apps
         this._inhibitorAddedId = this._sessionManager.connectSignal('InhibitorAdded',
                                                                     Lang.bind(this, this._inhibitorAdded));
+        
+        // handle all inhibitors removed
         this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved',
                 													Lang.bind(this, this._inhibitorRemoved));
+        
+        // handle user custom apps
         this._windowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(this, this._mayUserInhibit));
         this._windowDestroyedId = global.window_manager.connect('destroy', Lang.bind(this, this._mayUserUninhibit));
 
@@ -156,13 +164,11 @@ const Caffeine = new Lang.Class({
         }
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
+        	// handle apps in fullcreen
             this._inFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(this, this.toggleFullscreen));
         }
+        // handle inhibitors exists, or create inhibitor for custom apps which is running
         this._mayInhibit();
-    },
-    
-    inSuspend: function(flags) {
-    	return (flags & MASK_SUSPEND_DISABLE_INHIBIT);
     },
     
     userToggleState: function() {
@@ -240,6 +246,10 @@ const Caffeine = new Lang.Class({
         this._sessionManager.UninhibitRemote(cookie_remove);
     },
     
+    inSuspend: function(flags) {
+    	return (flags & MASK_SUSPEND_DISABLE_INHIBIT);
+    },
+    
     _makeInhibitorProxy: function(path) {
     	return new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
                 'org.gnome.SessionManager',
@@ -258,6 +268,9 @@ const Caffeine = new Lang.Class({
     },
     
     _inhibitorRemoved: function(proxy, sender, [object]) {
+    	// never create session proxy direct from object, 
+    	// some actions like logout, switch or shutdown would be delay till reach timeout(default value is 30s)
+    	// if you have to get info from inhibitor, call SessionManager method first, like the way in method _inhibitorAdded
     	let index = this._inhibitors.indexOf(object);
     	if (index == -1) return;
     	this._inhibitors.splice(index, 1);
@@ -265,6 +278,7 @@ const Caffeine = new Lang.Class({
     },
 
     _mayInhibit: function() {
+    	// check if some inhibitors exists while caffeine startup
         this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function([inhibitors]){ // call it for ensure getting updated InhibitedActions
         	for (var i in inhibitors) {
 	    		if (this._inhibitors.indexOf(inhibitors[i]) != -1) continue;
@@ -288,6 +302,7 @@ const Caffeine = new Lang.Class({
         }
     },
     
+    // handle action close from user custom apps
     _mayUserUninhibit: function(shellwm, actor) {
         let app = Shell.WindowTracker.get_default().get_window_app(actor.meta_window);
         if (app) {
@@ -299,6 +314,7 @@ const Caffeine = new Lang.Class({
         }
     },
     
+    // handle user custom apps
     _mayUserInhibit: function(display, window, noRecurse) {
     	let app = Shell.WindowTracker.get_default().get_window_app(window);
         if (!app) {
@@ -315,9 +331,10 @@ const Caffeine = new Lang.Class({
         }
     },
     
+    // check if some apps in fullscreen
     _mayFullScreen: function(display, window, noRecurse) {
     	let app_id = window.get_wm_class_instance();
-    	if (window.is_fullscreen() && !window.has_focus()) { // exclude focused window, cause that will be handle by toggleFullscreen
+    	if (window.is_fullscreen() && !window.has_focus()) { // exclude focused window, cause it will be handled by toggleFullscreen
     		this.addInhibit(app_id);
     	}
     },
