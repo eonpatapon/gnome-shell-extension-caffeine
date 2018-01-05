@@ -96,8 +96,8 @@ const DBusSessionManagerInhibitorIface = '<node>\
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = "Caffeine";
-const DisabledIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
-const EnabledIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
+const enableSuspendIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
+const disableSuspendIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
 var __next_objid=1;
 let CaffeineIndicator;
@@ -108,7 +108,6 @@ const Caffeine = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
-        this._state = false;
         this._apps = []; // for caffeine
         this._cookies = [];
         
@@ -160,9 +159,9 @@ const Caffeine = new Lang.Class({
         	this._mayUserUninhibit(shellwm, actor);
         }));
 
-        let icon_name = DisabledIcon['app'];
+        let icon_name = enableSuspendIcon['app'];
         if (this._settings.get_boolean(USER_ENABLED_KEY))
-        	icon_name = DisabledIcon['user'];
+        	icon_name = enableSuspendIcon['user'];
         	
         this._icon = new St.Icon({
             icon_name: icon_name,
@@ -180,7 +179,8 @@ const Caffeine = new Lang.Class({
         }));
 
         // Restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
+    	if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
+        	this._settings.set_boolean(USER_ENABLED_KEY, false);
             this.userToggleState();
         }
         // Enable caffeine when fullscreen app is running
@@ -208,8 +208,9 @@ const Caffeine = new Lang.Class({
     },
     
     userToggleState: function() {
-    	this._settings.set_boolean(USER_ENABLED_KEY, !this._state);
-        if (this._state) {
+    	this._settings.set_boolean(USER_ENABLED_KEY, !this._settings.get_boolean(USER_ENABLED_KEY));
+    	
+        if (!this._settings.get_boolean(USER_ENABLED_KEY)) {
         	this.removeInhibit('user');
         }
         else {
@@ -217,23 +218,22 @@ const Caffeine = new Lang.Class({
         }
     },
     
-    toggleIcon: function(state) {
-    	if (!state) {
-    		if (!this._inhibitors.length) return; // auto suspend already disabled
-        	
-            this._state = true;
-            if (this._settings.get_boolean(USER_ENABLED_KEY))
-            	this._icon.icon_name = EnabledIcon['user'];
-            else this._icon.icon_name = EnabledIcon['app'];
+    toggleIcon: function(autoSuspend) {
+    	if (this._inhibitors.length) { // auto suspend keeping disabled
+    		if (this._settings.get_boolean(USER_ENABLED_KEY) && this._icon.icon_name != disableSuspendIcon['user']) { // user mode enable
+    			this._icon.icon_name = disableSuspendIcon['user'];
+        	} else if (!this._settings.get_boolean(USER_ENABLED_KEY) && this._icon.icon_name != disableSuspendIcon['app']) { // user mode enable
+    			this._icon.icon_name = disableSuspendIcon['app'];
+        	}
             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                 Main.notify(_("Auto suspend and screensaver disabled"));
-        } else {
-        	if (this._inhibitors.length) return; // auto suspend already enabled
-        	
-        	this._state = false;
-            if (this._settings.get_boolean(USER_ENABLED_KEY))
-            	this._icon.icon_name = DisabledIcon['user'];
-            else this._icon.icon_name = DisabledIcon['app'];
+    		return;
+    	}
+		
+    	if (autoSuspend) {
+            if (this._settings.get_boolean(USER_ENABLED_KEY)) 
+            	this._icon.icon_name = enableSuspendIcon['user'];
+            else this._icon.icon_name = enableSuspendIcon['app'];
             if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                 Main.notify(_("Auto suspend and screensaver enabled"));
         }
@@ -321,7 +321,7 @@ const Caffeine = new Lang.Class({
     	let index = this._inhibitors.indexOf(object);
     	if (index == -1) return;
     	this._inhibitors.splice(index, 1);
-    	this.toggleIcon(true); // enable auto suspend
+    	this.toggleIcon(true); // try to enable auto suspend
     },
 
     _mayInhibit: function() {
