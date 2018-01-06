@@ -79,9 +79,6 @@ const DBusSessionManagerIface = '<node>\
     <signal name="InhibitorRemoved">\
 	    <arg type="o" />\
 	</signal>\
-    <signal name="ClientRemoved">\
-	    <arg type="o" />\
-	</signal>\
   </interface>\
 </node>';
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
@@ -243,7 +240,7 @@ const Caffeine = new Lang.Class({
     	let app_id = this.getWindowID(window);
     	if (window.is_fullscreen()) {
     		this.addInhibit(app_id);
-    	} else {
+    	} else if (!this._inUserApps(window)) {
     		this.removeInhibit(app_id);
     	}
     },
@@ -253,7 +250,7 @@ const Caffeine = new Lang.Class({
     	let app_id = this.getWindowID(window);
     	if (window.is_fullscreen()) {
     		this.addInhibit(app_id);
-    	} else {
+    	} else if (!this._inUserApps(window)) {
     		this.removeInhibit(app_id);
     	}
     },
@@ -323,6 +320,17 @@ const Caffeine = new Lang.Class({
     	this._inhibitors.splice(index, 1);
     	this.toggleIcon(true); // try to enable auto suspend
     },
+    
+    _inUserApps: function(meta_window) {
+        let app = Shell.WindowTracker.get_default().get_window_app(meta_window);
+        if (app) {
+            let app_id = app.get_id();
+            let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
+            if (apps.indexOf(app_id) != -1) return true;
+        }
+        
+        return false;
+    },
 
     _mayInhibit: function() {
     	// check if some inhibitors exists while caffeine startup
@@ -355,15 +363,11 @@ const Caffeine = new Lang.Class({
     
     // handle action close from user custom apps
     _mayUserUninhibit: function(shellwm, actor) {
-        let app = Shell.WindowTracker.get_default().get_window_app(actor.meta_window);
-        if (app) {
-            let app_id = app.get_id();
-            let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
-            if (apps.indexOf(app_id) != -1){
-            	let window_id = this.getWindowID(actor.meta_window);
-                this.removeInhibit(window_id);
-            }
-        }
+    	let window = actor.meta_window;
+    	if (this._inUserApps(window)) {
+    		let window_id = this.getWindowID(window);
+            this.removeInhibit(window_id);
+    	}
     },
     
     // handle user custom apps
@@ -376,9 +380,7 @@ const Caffeine = new Lang.Class({
             }
             return;
         }
-        let app_id = app.get_id();
-        let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
-        if (apps.indexOf(app_id) != -1){
+        if (this._inUserApps(window)) {
         	let window_id = this.getWindowID(window);
             this.addInhibit(window_id);
         }
