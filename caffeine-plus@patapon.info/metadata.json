@@ -16,6 +16,6 @@
   "name": "Caffeine-Plus",
   "settings-schema": "org.gnome.shell.extensions.caffeine-plus",
   "gettext-domain": "gnome-shell-extension-caffeine-plus",
-  "description": "Disable the screensaver and auto suspend",
-  "url": "https://github.com/qunxyz/gnome-shell-extension-caffeine-plus"
+  "description": "Disable the screensaver and auto suspend. (@eonpatapon is not gonna maintain caffeine anymore, this extension base on caffeine. but almost rewrote, also fixed the nasty freeze-bug)",
+  "url": "https://github.com/qunxyz/gnome-shell-extension-caffeine"
 }
