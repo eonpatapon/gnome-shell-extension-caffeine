@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rm -f caffeine@patapon.info.zip
-cd caffeine@patapon.info && zip -r ../caffeine@patapon.info.zip *
+rm -f caffeine-plus@patapon.info.zip
+cd caffeine-plus@patapon.info && zip -r ../caffeine-plus@patapon.info.zip *
