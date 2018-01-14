@@ -341,9 +341,9 @@ const Caffeine = new Lang.Class({
         		inhibitor.GetFlagsRemote(Lang.bind(this, function(flags){
         			if (!this.inSuspend(flags)) return;
     	    		this._inhibitors.push(inhibitors[i]);
+    		    	this.toggleIcon(false);
         		}));
 	    	}
-	    	this.toggleIcon(false);
 		}));
         
         // List current windows to check if we need to inhibit
