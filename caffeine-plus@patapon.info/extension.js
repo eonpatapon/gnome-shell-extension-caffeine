@@ -37,12 +37,13 @@ const Config = imports.misc.config;
 // below are default inhibit flags
 const INHIBIT_LOGOUT = 1; // logging out
 const INHIBIT_SWITCH = 2; // switching user
-const INHIBIT_SUSPEND = 4; // well, weird value
+const INHIBIT_SUSPEND = 4; // well, weird value, seems got it while playing audio stream only
 const INHIBIT_IDLE = 8; // playing, for fullscreen: 4 + 8
 const INHIBIT_AUTO_MOUNT = 16; // auto-mouting media
 
 // mask for inhibit flags
-const MASK_SUSPEND_DISABLE_INHIBIT = INHIBIT_SUSPEND | INHIBIT_IDLE | INHIBIT_AUTO_MOUNT;
+//const MASK_SUSPEND_DISABLE_INHIBIT = INHIBIT_SUSPEND | INHIBIT_IDLE | INHIBIT_AUTO_MOUNT;
+const MASK_SUSPEND_DISABLE_INHIBIT = INHIBIT_IDLE | INHIBIT_AUTO_MOUNT;
 const MASK_SUSPEND_ENABLE_INHIBIT =  INHIBIT_LOGOUT | INHIBIT_SWITCH;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
