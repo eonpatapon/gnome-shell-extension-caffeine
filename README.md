@@ -19,6 +19,9 @@ Green: No empty cup status. Filled cup = auto suspend and screensaver off always
 
 ## Installation from e.g.o
 
+seems e.g.o did not approved my version, waiting long long time but pending only. 
+following installation from git as well
+
 https://extensions.gnome.org/extension/517/caffeine/
 
 ## Installation from git
