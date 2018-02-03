@@ -97,7 +97,6 @@ const IndicatorName = "Caffeine";
 const enableSuspendIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
 const disableSuspendIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
-var __next_objid=1;
 let CaffeineIndicator;
 let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
@@ -198,9 +197,9 @@ const Caffeine = new Lang.Class({
     	let app_name = window.get_wm_class_instance();
     	
     	window.__id = app_name+':xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    	    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    		let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     	    return v.toString(16);
-    	  });
+    	});
     	
     	return window.__id;
     },
@@ -286,7 +285,7 @@ const Caffeine = new Lang.Class({
     removeInhibit: function(app_id) {
         let index = this._apps.indexOf(app_id);
         if (index == -1)  return;
-        var cookie_remove = this._cookies[index];
+        let cookie_remove = this._cookies[index];
     	this.doApp('remove', index);
         this._sessionManager.UninhibitRemote(cookie_remove);
     },
@@ -302,6 +301,7 @@ const Caffeine = new Lang.Class({
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {
+    	if (this._inhibitors.indexOf(object) != -1) return;
 		this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function(){ // call it for ensure getting updated InhibitedActions
 			let inhibitor = this._makeInhibitorProxy(object);
 			inhibitor.GetFlagsRemote(Lang.bind(this, function(flags){
@@ -336,7 +336,7 @@ const Caffeine = new Lang.Class({
     _mayInhibit: function() {
     	// check if some inhibitors exists while caffeine startup
         this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function([inhibitors]){ // call it for ensure getting updated InhibitedActions
-        	for (var i in inhibitors) {
+        	for (let i in inhibitors) {
 	    		if (this._inhibitors.indexOf(inhibitors[i]) != -1) continue;
         		let inhibitor = this._makeInhibitorProxy(inhibitors[i]);
         		inhibitor.GetFlagsRemote(Lang.bind(this, function(flags){
