@@ -261,7 +261,10 @@ const Caffeine = new Lang.Class({
                 }
                 box.add(item._icon);
                 box.add(new St.Label({ text: ' ' }));
-                box.add(new St.Label({ text: (metaWindow.get_title().substr(0, titleLength)+'...'), x_expand: true }));
+                
+                let title = metaWindow.get_title();
+                if (title.length > titleLength) title = title.substr(0, titleLength)+'...';
+                box.add(new St.Label({ text: title, x_expand: true }));
                 item.actor.add_actor(box);
                 this.menu.addMenuItem(item);
             }
