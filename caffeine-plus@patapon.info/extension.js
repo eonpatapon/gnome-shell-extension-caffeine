@@ -104,6 +104,8 @@ const IndicatorName = "Caffeine";
 const enableSuspendIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
 const disableSuspendIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
+const titleLength = 100;
+
 let CaffeineIndicator;
 let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
@@ -200,9 +202,7 @@ const Caffeine = new Lang.Class({
 		}));
     },
     
-    showMenu: function() {
-        this.menu.removeAll();
-
+    buildCheckBox: function() {
         let item = new PopupMenu.PopupMenuItem("")
         let box = new St.BoxLayout( { x_expand: true  } );
         
@@ -220,37 +220,10 @@ const Caffeine = new Lang.Class({
         item.connect('activate', Lang.bind(this, this.userToggleState));
         this.menu.addMenuItem(item);
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        
-    	if (!Object.keys(this._windows).length) {
-            let item = new PopupMenu.PopupMenuItem(_("No open windows"))
-            
-            item.actor.reactive = false;
-            item.actor.can_focus = false;
-            this.menu.addMenuItem(item);
-
-            this.actor.hide();
-    		return;
-    	}
-    	
-    	let n_workspaces = global.screen.n_workspaces;
-    	let window_list = [];
-    	for (var index in this._windows) {
-    		var window = this._windows[index]['window'];
-    		let workspace = window.get_workspace();
-
-    		if ( window.is_skip_taskbar() || window.is_on_all_workspaces() ) {
-    			if (window_list[0] == undefined) window_list[0] = [];
-        		window_list[0].push(window);
-    			continue;
-    		}
-
-    		let workspace_index = workspace.index()+1;
-    		
-			if (window_list[workspace_index] == undefined) window_list[workspace_index] = [];
-    		window_list[workspace_index].push(window);
-    	}
-
-        let tracker = Shell.WindowTracker.get_default();
+    },
+    
+    buildMenuItems: function(window_list) {
+    	let tracker = Shell.WindowTracker.get_default();
     	for (var index in window_list) {
     		if (index > 0) {
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -288,11 +261,48 @@ const Caffeine = new Lang.Class({
                 }
                 box.add(item._icon);
                 box.add(new St.Label({ text: ' ' }));
-                box.add(new St.Label({ text: ellipsizedWindowTitle(metaWindow), x_expand: true }));
+                box.add(new St.Label({ text: (metaWindow.get_title().substr(0, titleLength)+'...'), x_expand: true }));
                 item.actor.add_actor(box);
                 this.menu.addMenuItem(item);
             }
     	}
+    },
+    
+    showMenu: function() {
+        this.menu.removeAll();
+
+        this.buildCheckBox();
+        
+    	if (!Object.keys(this._windows).length) {
+            let item = new PopupMenu.PopupMenuItem(_("No open windows"))
+            
+            item.actor.reactive = false;
+            item.actor.can_focus = false;
+            this.menu.addMenuItem(item);
+
+        	this.actor.show();
+    		return;
+    	}
+    	
+    	let n_workspaces = global.screen.n_workspaces;
+    	let window_list = [];
+    	for (var index in this._windows) {
+    		var window = this._windows[index]['window'];
+    		let workspace = window.get_workspace();
+
+    		if ( window.is_skip_taskbar() || window.is_on_all_workspaces() ) {
+    			if (window_list[0] == undefined) window_list[0] = [];
+        		window_list[0].push(window);
+    			continue;
+    		}
+
+    		let workspace_index = workspace.index()+1;
+    		
+			if (window_list[workspace_index] == undefined) window_list[workspace_index] = [];
+    		window_list[workspace_index].push(window);
+    	}
+
+        this.buildMenuItems(window_list);
 
     	this.actor.show();
     },
@@ -435,6 +445,12 @@ const Caffeine = new Lang.Class({
     	if (!inhibitor) return;
 
     	let cookie_remove = inhibitor["cookie"];
+    	// nothing we can do, if triggered uninhibit action
+    	// just splice item here
+    	for (var index in this._inhibitors) 
+    		if (this._inhibitors[index]["app_id"] == app_id)
+    			this._inhibitors.splice(index, 1); 
+
         this._sessionManager.UninhibitRemote(cookie_remove);
     },
     
@@ -477,11 +493,6 @@ const Caffeine = new Lang.Class({
     	// never create session proxy from object directly, 
     	// some actions like logout, switch or shutdown would be delay till reach timeout(default value is 30s)
     	// if you have to get info from inhibitor, call SessionManager method first, like the way in method _inhibitorAdded
-    	for (var index in this._inhibitors) {
-    		if (this._inhibitors[index]["object"] == undefined) continue;
-    		if (this._inhibitors[index]["object"] == object)
-    			this._inhibitors.splice(index, 1);
-    	}
     	this.toggleIcon(true); // try to enable auto suspend
     },
     
@@ -623,15 +634,4 @@ function enable() {
 function disable() {
     CaffeineIndicator.destroy();
     CaffeineIndicator = null;
-}
-
-function ellipsizeString(s, l){
-    if(s.length > l) { 
-        return s.substr(0, l)+'...';
-    }
-    return s; 
-}
-
-function ellipsizedWindowTitle(w){
-    return ellipsizeString(w.get_title(), 100);
 }
