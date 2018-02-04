@@ -29,8 +29,11 @@ const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
+const PopupMenu = imports.ui.popupMenu;
+const Panel = imports.ui.panel;
 const Shell = imports.gi.Shell;
 const MessageTray = imports.ui.messageTray;
+const CheckBox = imports.ui.checkBox;
 const Atk = imports.gi.Atk;
 const Config = imports.misc.config;
 
@@ -52,6 +55,7 @@ const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const ADDRESS_INHIBITOR_KEY = 'address-inhibitor';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine-plus');
 const _ = Gettext.gettext;
@@ -89,6 +93,9 @@ const DBusSessionManagerInhibitorIface = '<node>\
     <method name="GetFlags">\
 	    <arg type="u" direction="out" />\
 	</method>\
+    <method name="GetAppId">\
+	    <arg type="s" direction="out" />\
+	</method>\
   </interface>\
 </node>';
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
@@ -105,10 +112,7 @@ const Caffeine = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(metadata, params) {
-        this._apps = []; // for caffeine
-        this._cookies = [];
-        
-        this._inhibitors = []; // for handling inhibitors from system
+        this._inhibitors = []; // a array of map for handling inhibitors, three keys: app_id, inhibitor, cookie
         this._windows = []; // for handling window instance
         
         this.parent(null, IndicatorName);
@@ -142,16 +146,19 @@ const Caffeine = new Lang.Class({
         		// screen signal "in-fullscreen-changed" not always catch the right window instance
         		// so need to listen signal "size-changed" on per app
             	let app_id = this.getWindowID(window);
-        		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+            	let size_changed = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+            	let item = {'window': window, 'size_changed': size_changed};
+            	this._windows[app_id] = item;
         	}
         	this._mayUserInhibit(display, window, noRecurse);
         }));
         this._windowDestroyedId = global.window_manager.connect('destroy', Lang.bind(this, function (shellwm, actor) {
         	let app_id = this.getWindowID(actor.meta_window);
-        	this.removeInhibit(app_id);
+        	this.removeInhibit(app_id, actor.meta_window);
         	if (this._windows[app_id]) {
-        		actor.meta_window.disconnect(this._windows[app_id]);
-            	delete this._windows[app_id];
+        		actor.meta_window.disconnect(this._windows[app_id]['size_changed']);
+        		delete this._windows[app_id]['window'];
+        		delete this._windows[app_id];
             }
         	this._mayUserUninhibit(shellwm, actor);
         }));
@@ -167,13 +174,6 @@ const Caffeine = new Lang.Class({
 
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
-        this.actor.connect('button-press-event', Lang.bind(this, this.userToggleState));
-        this.actor.connect_after('key-release-event', Lang.bind(this, function (actor, event) {
-        	let symbol = event.get_key_symbol();
-            if (symbol == Clutter.KEY_Return || symbol == Clutter.KEY_space) {
-            	this.userToggleState();
-            }
-        }));
 
         // Restore user state
     	if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
@@ -189,7 +189,121 @@ const Caffeine = new Lang.Class({
         }
         // handle inhibitors exists, or create inhibitor for custom apps which is running
         this._mayInhibit();
+
+		this._restacked = global.screen.connect('restacked', Lang.bind(this, this.showMenu));
+		this.actor.connect('button-press-event', Lang.bind(this, this.showMenu));
+		this.actor.connect_after('key-release-event', Lang.bind(this, function (actor, event) {
+			let symbol = event.get_key_symbol();
+			if (symbol == Clutter.KEY_Return || symbol == Clutter.KEY_space) {
+				this.showMenu();
+			}
+		}));
     },
+    
+    showMenu: function() {
+        this.menu.removeAll();
+
+        let item = new PopupMenu.PopupMenuItem("")
+        let box = new St.BoxLayout( { x_expand: true  } );
+        
+        var cb = new CheckBox.CheckBox();
+        cb.getLabelActor().text = _("Inhibit suspend globally");
+        cb.actor.checked = this._settings.get_boolean(USER_ENABLED_KEY);
+        cb.actor.connect('clicked', Lang.bind(this, this.userToggleState));
+        cb.actor.set_size("720", "24")
+        
+        box.add(cb.actor);
+        box.add(new St.Label({ text: ' ' }));
+        item.actor.add_actor(box);
+        item.actor.reactive = false;
+        item.actor.can_focus = true;
+        item.connect('activate', Lang.bind(this, this.userToggleState));
+        this.menu.addMenuItem(item);
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        
+    	if (!Object.keys(this._windows).length) {
+            let item = new PopupMenu.PopupMenuItem(_("No open windows"))
+            
+            item.actor.reactive = false;
+            item.actor.can_focus = false;
+            this.menu.addMenuItem(item);
+
+            this.actor.hide();
+    		return;
+    	}
+    	
+    	let n_workspaces = global.screen.n_workspaces;
+    	let window_list = [];
+    	for (var index in this._windows) {
+    		var window = this._windows[index]['window'];
+    		let workspace = window.get_workspace();
+
+    		if ( window.is_skip_taskbar() || window.is_on_all_workspaces() ) {
+    			if (window_list[0] == undefined) window_list[0] = [];
+        		window_list[0].push(window);
+    			continue;
+    		}
+
+    		let workspace_index = workspace.index()+1;
+    		
+			if (window_list[workspace_index] == undefined) window_list[workspace_index] = [];
+    		window_list[workspace_index].push(window);
+    	}
+
+        let tracker = Shell.WindowTracker.get_default();
+    	for (var index in window_list) {
+    		if (index > 0) {
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    			let workspace_name = Meta.prefs_get_workspace_name(index-1);
+                let item = new PopupMenu.PopupMenuItem(workspace_name);
+                
+                item.actor.reactive = false;
+                item.actor.can_focus = false;
+                if(index == global.screen.get_active_workspace().index() + 1)
+                    item.setOrnament(PopupMenu.Ornament.DOT);
+
+                this.menu.addMenuItem(item);
+    		}
+
+            for ( let i = 0; i < window_list[index].length; ++i ) {
+                let metaWindow = window_list[index][i];
+                let app = tracker.get_window_app(metaWindow);
+                if (!app) continue;
+
+                let item = new PopupMenu.PopupMenuItem('');
+                
+                item.connect('activate', Lang.bind(this, function() { this.activateWindow(metaWindow.get_workspace(), metaWindow); } ));
+                
+                let box = new St.BoxLayout( { x_expand: true  } );
+                
+                item._icon = app.create_icon_texture(24);
+                if (this.checkIsInhibit(metaWindow)) {
+                    box.add(new St.Icon({
+                        icon_name: disableSuspendIcon['app'],
+                        icon_size: 22
+                    }));
+                    box.add(new St.Label({ text: ' ' }));
+                	
+                }
+                box.add(item._icon);
+                box.add(new St.Label({ text: ' ' }));
+                box.add(new St.Label({ text: ellipsizedWindowTitle(metaWindow), x_expand: true }));
+                item.actor.add_actor(box);
+                this.menu.addMenuItem(item);
+            }
+    	}
+
+    	this.actor.show();
+    },
+
+    activateWindow: function(metaWorkspace, metaWindow) {
+        if(!metaWindow.is_on_all_workspaces()) { metaWorkspace.activate(global.get_current_time()); }
+        metaWindow.unminimize(global.get_current_time());
+        metaWindow.unshade(global.get_current_time());
+        metaWindow.activate(global.get_current_time());
+    },
+    
     // cause no identity id exists in metawindow object
     // this method make caffeine to identity per window precisely
     getWindowID: function(window) {
@@ -238,55 +352,89 @@ const Caffeine = new Lang.Class({
     
     toggleFullscreenWindow: function(window) {
     	let app_id = this.getWindowID(window);
+
     	if (window.is_fullscreen()) {
-    		this.addInhibit(app_id);
+    		this.addInhibit(app_id, window);
     	} else if (!this._inUserApps(window)) {
-    		this.removeInhibit(app_id);
+    		this.removeInhibit(app_id, window);
     	}
     },
     
     toggleFullscreenDisplay: function(screen) {
     	let window = screen.get_display().get_focus_window();
+
     	let app_id = this.getWindowID(window);
     	if (window.is_fullscreen()) {
-    		this.addInhibit(app_id);
+    		this.addInhibit(app_id, window);
     	} else if (!this._inUserApps(window)) {
-    		this.removeInhibit(app_id);
+    		this.removeInhibit(app_id, window);
     	}
     },
     
-    doApp: function(act, index, app_id, cookie) {
-    	switch(act) {
-    	case 'add':
-            this._apps.push(app_id);
-            this._cookies.push(cookie);
-    		break;
-    	case 'remove':
-    		this._apps.splice(index, 1);
-            this._cookies.splice(index, 1);
-    		break;
-    	default:
-    		log("Warning: ", act, " undefined!");
-    		break;
+    checkIsInhibit: function(window) {
+    	var app_id = this.getWindowID(window);
+    	for (var index in this._inhibitors) {
+    		if (this._inhibitors[index]["app_id"] == app_id) return true;
+    	}
+    	
+    	if (!this._settings.get_boolean(ADDRESS_INHIBITOR_KEY)) return false;
+    	
+    	let pid = window.get_pid();
+    	for (var index in this._inhibitors) {
+    		if (this._inhibitors[index]["pid"] != undefined && this._inhibitors[index]["pid"] == pid) return true;
+    	}
+    	
+    	let app_name = window.get_wm_class_instance().toLowerCase();
+    	for (var index in this._inhibitors) {
+    		var app_id = this._inhibitors[index]["app_id"].toLowerCase();
+    		if (app_id.indexOf(app_name) != -1) return true;
+    	}
+    	
+    	app_name = window.get_wm_class().toLowerCase();
+    	for (var index in this._inhibitors) {
+    		var app_id = this._inhibitors[index]["app_id"].toLowerCase();
+    		if (app_id.indexOf(app_name) != -1) return true;
+    	}
+    	
+    	return false;
+    },
+    
+    getInhibitor: function(app_id) {
+    	for (var index in this._inhibitors) {
+    		if (this._inhibitors[index]["app_id"] == app_id) return this._inhibitors[index];
+    	}
+    	
+    	return false;
+    },
+    
+    saveCookie: function(app_id, cookie) {
+    	for (var index in this._inhibitors) {
+    		if (this._inhibitors[index]["app_id"] == app_id) {
+    			this._inhibitors[index]["cookie"] = cookie;
+    		}
     	}
     },
 
-    addInhibit: function(app_id) {
-        let index = this._apps.indexOf(app_id);
-        if (index != -1)  return;
+    addInhibit: function(app_id, window) {
+    	if (this.getInhibitor(app_id)) return;
+    	let pid = 0;
+    	let app_name = "";
+    	if (window != undefined) pid = window.get_pid();
+    	let inhibitor = {"app_id": app_id, "pid": pid};
+    	this._inhibitors.push(inhibitor);
         this._sessionManager.InhibitRemote(app_id,
-            0, "Inhibit by %s".format(IndicatorName), INHIBIT_SUSPEND | INHIBIT_IDLE,
+        		pid, "Inhibit by %s".format(IndicatorName), INHIBIT_SUSPEND | INHIBIT_IDLE,
             Lang.bind(this, function(cookie) {
-            	this.doApp('add', 0, app_id, cookie);
+            	this.saveCookie(app_id, cookie);
             })
         );
     },
 
     removeInhibit: function(app_id) {
-        let index = this._apps.indexOf(app_id);
-        if (index == -1)  return;
-        let cookie_remove = this._cookies[index];
-    	this.doApp('remove', index);
+    	let inhibitor = this.getInhibitor(app_id);
+    	if (!inhibitor) return;
+
+    	let cookie_remove = inhibitor["cookie"];
         this._sessionManager.UninhibitRemote(cookie_remove);
     },
     
@@ -301,13 +449,26 @@ const Caffeine = new Lang.Class({
     },
 
     _inhibitorAdded: function(proxy, sender, [object]) {
-    	if (this._inhibitors.indexOf(object) != -1) return;
 		this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function(){ // call it for ensure getting updated InhibitedActions
 			let inhibitor = this._makeInhibitorProxy(object);
 			inhibitor.GetFlagsRemote(Lang.bind(this, function(flags){
 				if (!this.inSuspend(flags)) return;
-				this._inhibitors.push(object);
-				this.toggleIcon(false);
+
+				inhibitor.GetAppIdRemote(Lang.bind(this, function([app_id]){
+					let needInsert = true;
+					for (var index in this._inhibitors) {
+			    		if (this._inhibitors[index]["app_id"] == app_id) {
+			    			needInsert = false;
+			    			this._inhibitors[index]["object"] = object;
+			    		}
+			    	}
+					if (needInsert){
+				    	let item = {"app_id": app_id, "object": object};
+				    	this._inhibitors.push(item);
+					}
+					
+					this.toggleIcon(false);
+				}));
 			}));
 		}));
     },
@@ -316,9 +477,11 @@ const Caffeine = new Lang.Class({
     	// never create session proxy from object directly, 
     	// some actions like logout, switch or shutdown would be delay till reach timeout(default value is 30s)
     	// if you have to get info from inhibitor, call SessionManager method first, like the way in method _inhibitorAdded
-    	let index = this._inhibitors.indexOf(object);
-    	if (index == -1) return;
-    	this._inhibitors.splice(index, 1);
+    	for (var index in this._inhibitors) {
+    		if (this._inhibitors[index]["object"] == undefined) continue;
+    		if (this._inhibitors[index]["object"] == object)
+    			this._inhibitors.splice(index, 1);
+    	}
     	this.toggleIcon(true); // try to enable auto suspend
     },
     
@@ -337,12 +500,33 @@ const Caffeine = new Lang.Class({
     	// check if some inhibitors exists while caffeine startup
         this._sessionManager.GetInhibitorsRemote(Lang.bind(this, function([inhibitors]){ // call it for ensure getting updated InhibitedActions
         	for (let i in inhibitors) {
-	    		if (this._inhibitors.indexOf(inhibitors[i]) != -1) continue;
+        		var isContinue = false;
+        		for (var index in this._inhibitors) {
+        			if (this._inhibitors[index][object] == inhibitors[i]) {
+        				isContinue = true;
+        				break;
+        			}
+        		}
+        		if (isContinue) continue;
         		let inhibitor = this._makeInhibitorProxy(inhibitors[i]);
         		inhibitor.GetFlagsRemote(Lang.bind(this, function(flags){
         			if (!this.inSuspend(flags)) return;
-    	    		this._inhibitors.push(inhibitors[i]);
-    		    	this.toggleIcon(false);
+
+    				inhibitor.GetAppIdRemote(Lang.bind(this, function([app_id]){
+    					let needInsert = true;
+    					for (var index in this._inhibitors) {
+    			    		if (this._inhibitors[index]["app_id"] == app_id) {
+    			    			needInsert = false;
+    			    			this._inhibitors[index]["object"] = object;
+    			    		}
+    			    	}
+    					if (needInsert){
+    				    	let item = {"app_id": app_id, "object": inhibitors[i]};
+    				    	this._inhibitors.push(item);
+    					}
+    					
+    					this.toggleIcon(false);
+    				}));
         		}));
 	    	}
 		}));
@@ -352,7 +536,9 @@ const Caffeine = new Lang.Class({
     		global.get_window_actors().map(Lang.bind(this, function(actor) {
     			let window = actor.meta_window;
             	let app_id = this.getWindowID(window);
-        		this._windows[app_id] = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+            	let size_changed = window.connect('size-changed', Lang.bind(this, this.toggleFullscreenWindow));
+            	let item = {'window': window, 'size_changed': size_changed };
+            	this._windows[app_id] = item;
         		
                 if (this._settings.get_boolean(FULLSCREEN_KEY)) {
     	            // check fullscreen
@@ -367,7 +553,7 @@ const Caffeine = new Lang.Class({
     	let window = actor.meta_window;
     	if (this._inUserApps(window)) {
     		let window_id = this.getWindowID(window);
-            this.removeInhibit(window_id);
+            this.removeInhibit(window_id, window);
     	}
     },
     
@@ -383,7 +569,7 @@ const Caffeine = new Lang.Class({
         }
         if (this._inUserApps(window)) {
         	let window_id = this.getWindowID(window);
-            this.addInhibit(window_id);
+            this.addInhibit(window_id, window);
         }
     },
     
@@ -391,15 +577,14 @@ const Caffeine = new Lang.Class({
     _mayFullScreen: function(display, window, noRecurse) {
     	let app_id = this.getWindowID(window);
     	if (window.is_fullscreen()) {
-    		this.addInhibit(app_id);
+    		this.addInhibit(app_id, window);
     	}
     },
 
     destroy: function() {
         // remove all inhibitors created by caffeine
-        this._apps.map(Lang.bind(this, function(app_id) {
-            this.removeInhibit(app_id);
-        }));
+    	for (var inhibitor in this._inhibitors)
+    		this.removeInhibit(inhibitor["app_id"]);
         // disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY)){
             global.screen.disconnect(this._inFullscreenId);
@@ -438,4 +623,15 @@ function enable() {
 function disable() {
     CaffeineIndicator.destroy();
     CaffeineIndicator = null;
+}
+
+function ellipsizeString(s, l){
+    if(s.length > l) { 
+        return s.substr(0, l)+'...';
+    }
+    return s; 
+}
+
+function ellipsizedWindowTitle(w){
+    return ellipsizeString(w.get_title(), 100);
 }

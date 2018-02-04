@@ -19,6 +19,7 @@ const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const RESTORE_KEY = 'restore-state';
+const ADDRESS_INHIBITOR_KEY = 'address-inhibitor';
 
 const Columns = {
     APPINFO: 0,
@@ -89,6 +90,24 @@ const CaffeineWidget = new Lang.Class({
         stateBox.add(stateSwitch);
 
         this.w.add(stateBox);
+        /////////////////////////////////////////////////////////////////
+
+        let addressInhibitorBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                margin: 7});
+
+        let addressInhibitorLabel = new Gtk.Label({label: _("Address Inhibiting Apps including from system(like playing video via browser, wouldn't missed any app, but not precisely)"),
+                                   xalign: 0});
+
+        let addressInhibitorSwitch = new Gtk.Switch({active: this._settings.get_boolean(ADDRESS_INHIBITOR_KEY)});
+        addressInhibitorSwitch.connect('notify::active', Lang.bind(this, function(button) {
+            this._settings.set_boolean(ADDRESS_INHIBITOR_KEY, button.active);
+        }));
+
+        addressInhibitorBox.pack_start(addressInhibitorLabel, true, true, 0);
+        addressInhibitorBox.add(addressInhibitorSwitch);
+
+        this.w.add(addressInhibitorBox);
+        /////////////////////////////////////////////////////////////////
 
         let notificationsBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});
