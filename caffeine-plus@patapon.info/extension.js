@@ -220,6 +220,31 @@ const Caffeine = new Lang.Class({
         item.connect('activate', Lang.bind(this, this.userToggleState));
         this.menu.addMenuItem(item);
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        //////////////////////////////////////////////////////////
+        for ( var index in this._inhibitors) {
+        	let inhibitor = this._inhibitors[index];
+
+            let item = new PopupMenu.PopupMenuItem('');
+            
+            item.connect('activate', Lang.bind(this, function() { this.activateWindow(metaWindow.get_workspace(), metaWindow); } ));
+            
+            let box = new St.BoxLayout( { x_expand: true  } );
+            box.add(new St.Icon({
+                icon_name: disableSuspendIcon['app'],
+                icon_size: 22
+            }));
+            box.add(new St.Label({ text: ' ' }));
+            box.add(new St.Label({ text: ' ' }));
+            
+            let title = inhibitor['app_id'];
+            box.add(new St.Label({ text: title, x_expand: true }));
+            item.actor.add_actor(box);
+            item.actor.reactive = false;
+            item.actor.can_focus = false;
+            this.menu.addMenuItem(item);
+        }
+        if (this._inhibitors.length)
+        	this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     },
     
     buildMenuItems: function(window_list) {
