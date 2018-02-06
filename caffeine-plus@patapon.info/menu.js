@@ -1,4 +1,4 @@
-//
+
 const Meta = imports.gi.Meta;
 const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
@@ -6,23 +6,27 @@ const St = imports.gi.St;
 const CheckBox = imports.ui.checkBox;
 const Shell = imports.gi.Shell;
 
-
-const enableSuspendIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
 const disableSuspendIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
 const USER_ENABLED_KEY = 'user-enabled';
 const titleLength = 100;
 
 let self;
+
+let signalRestackedId;
+let signalKeyFocusInId;
+let signalButtonPressEventId;
+let signalKeyReleaseEventId;
 function init(ext) {
 	self = ext;
 
-	self._restacked = global.screen.connect('restacked', Lang.bind(self, showMenu));
-	self.actor.connect('button-press-event', Lang.bind(self, showMenu));
-	self.actor.connect_after('key-release-event', Lang.bind(self, function (actor, event) {
+	signalRestackedId = global.screen.connect('restacked', Lang.bind(self, show));
+	signalKeyFocusInId = self.actor.connect('key-focus-in', Lang.bind(self, show));
+	signalButtonPressEventId = self.actor.connect('button-press-event', Lang.bind(self, show));
+	signalKeyReleaseEventId = self.actor.connect_after('key-release-event', Lang.bind(self, function (actor, event) {
 		let symbol = event.get_key_symbol();
 		if (symbol == Clutter.KEY_Return || symbol == Clutter.KEY_space) {
-			showMenu();
+			show();
 		}
 	}));
 }
@@ -52,8 +56,6 @@ function buildCheckBox() {
 
         let item = new PopupMenu.PopupMenuItem('');
         
-        item.connect('activate', Lang.bind(self, function() { activateWindow(metaWindow.get_workspace(), metaWindow); } ));
-        
         let box = new St.BoxLayout( { x_expand: true  } );
         box.add(new St.Icon({
             icon_name: disableSuspendIcon['app'],
@@ -62,7 +64,7 @@ function buildCheckBox() {
         box.add(new St.Label({ text: ' ' }));
         box.add(new St.Label({ text: ' ' }));
         
-        let reason = '';
+        let reason = 'might be playing video';
         if (inhibitor['reason'] != undefined) reason = inhibitor['reason'];
         let title = inhibitor['app_id'] + ' ' + reason;
         box.add(new St.Label({ text: title, x_expand: true }));
@@ -124,7 +126,7 @@ function buildMenuItems(window_list) {
 	}
 }
 
-function showMenu() {
+function show() {
     self.menu.removeAll();
 
     buildCheckBox();
@@ -170,5 +172,29 @@ function activateWindow(metaWorkspace, metaWindow) {
     metaWindow.unshade(global.get_current_time());
     metaWindow.activate(global.get_current_time());
 }
+
+function kill() {
+
+	if (signalRestackedId) {
+		global.screen.disconnect(signalRestackedId);
+		signalRestackedId = 0;
+	}
+
+	if (signalKeyFocusInId) {
+		self.actor.disconnect(signalKeyFocusInId);
+		signalKeyFocusInId = 0;
+	}
+
+	if (signalButtonPressEventId) {
+		self.actor.disconnect(signalButtonPressEventId);
+		signalButtonPressEventId = 0;
+	}
+
+	if (signalKeyReleaseEventId) {
+		self.actor.disconnect(signalKeyReleaseEventId);
+		signalKeyReleaseEventId = 0;
+	}
+}
+
 
 

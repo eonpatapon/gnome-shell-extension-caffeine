@@ -1,27 +1,11 @@
-
-const Clutter = imports.gi.Clutter;
 const Lang = imports.lang;
-const St = imports.gi.St;
-const Gio = imports.gi.Gio;
-const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
-const PanelMenu = imports.ui.panelMenu;
-const PopupMenu = imports.ui.popupMenu;
-const Panel = imports.ui.panel;
 const Shell = imports.gi.Shell;
-const MessageTray = imports.ui.messageTray;
-const Atk = imports.gi.Atk;
-const Config = imports.misc.config;
 
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
-const SHOW_INDICATOR_KEY = 'show-indicator';
-const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
-const USER_ENABLED_KEY = 'user-enabled';
-const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const ADDRESS_INHIBITOR_KEY = 'address-inhibitor';
-
 
 let self;
 let windows = [];
@@ -86,6 +70,7 @@ function getWindowID(window) {
 
 function toggleFullscreen(window) {
 	let app_id = "%s-FullScreen".format(getWindowID(window));
+	if (inUserApps(window)) return;
 	
 	if (window.is_fullscreen()) {
 		self.inhibitor.add(app_id, ReasonFullScreen, window.get_pid());
@@ -157,6 +142,28 @@ function destroy(window) {
 		delete windows[app_id]['window'];
 		delete windows[app_id];
     }
+}
+
+function kill() {
+	if (signalWindowCreatedId) {
+		global.screen.get_display().disconnect(signalWindowCreatedId);
+		signalWindowCreatedId = 0;
+	}
+	if (signalWindowDestroyedId) {
+		global.window_manager.disconnect(signalWindowDestroyedId);
+		signalWindowDestroyedId = 0;
+	}
+	if (signalInFullscreenId) {
+		global.screen.disconnect(signalInFullscreenId);
+		signalInFullscreenId = 0;
+	}
+	for (var index in windows) {
+		if (windows[index]['size_changed'] != undefined) {
+			windows[index]['window'].disconnect(windows[index]['size_changed']);
+			delete windows[index]['window'];
+			delete windows[index];
+	    }
+	}
 }
 
 

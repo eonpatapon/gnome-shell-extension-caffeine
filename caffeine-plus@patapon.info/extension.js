@@ -21,39 +21,16 @@
 
 'use strict';
 
-const Clutter = imports.gi.Clutter;
 const Lang = imports.lang;
 const St = imports.gi.St;
-const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
-const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
-const PopupMenu = imports.ui.popupMenu;
-const Panel = imports.ui.panel;
-const Shell = imports.gi.Shell;
-const MessageTray = imports.ui.messageTray;
 const Atk = imports.gi.Atk;
 const Config = imports.misc.config;
 
-// below are default inhibit flags
-const INHIBIT_LOGOUT = 1; // logging out
-const INHIBIT_SWITCH = 2; // switching user
-const INHIBIT_SUSPEND = 4; // well, weird value, seems got it while playing audio stream only
-const INHIBIT_IDLE = 8; // playing, for fullscreen: 4 + 8
-const INHIBIT_AUTO_MOUNT = 16; // auto-mouting media
-
-// mask for inhibit flags
-//const MASK_SUSPEND_DISABLE_INHIBIT = INHIBIT_SUSPEND | INHIBIT_IDLE | INHIBIT_AUTO_MOUNT;
-const MASK_SUSPEND_DISABLE_INHIBIT = INHIBIT_IDLE | INHIBIT_AUTO_MOUNT;
-const MASK_SUSPEND_ENABLE_INHIBIT =  INHIBIT_LOGOUT | INHIBIT_SWITCH;
-
-const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
-const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
-const FULLSCREEN_KEY = 'enable-fullscreen';
-const ADDRESS_INHIBITOR_KEY = 'address-inhibitor';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine-plus');
 const _ = Gettext.gettext;
@@ -91,11 +68,6 @@ const Caffeine = new Lang.Class({
         if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
             this.actor.hide();
 
-        Inhibitor.init(this);
-        this.inhibitor = Inhibitor;
-        Window.init(this);
-        this.window = Window;
-
         let icon_name = enableSuspendIcon['app'];
         if (this._settings.get_boolean(USER_ENABLED_KEY))
         	icon_name = enableSuspendIcon['user'];
@@ -107,6 +79,12 @@ const Caffeine = new Lang.Class({
 
         this.actor.add_actor(this._icon);
         this.actor.add_style_class_name('panel-status-button');
+
+        Inhibitor.init(this);
+        this.inhibitor = Inhibitor;
+        
+        Window.init(this);
+        this.window = Window;
 
         // Restore user state
     	if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
@@ -132,29 +110,9 @@ const Caffeine = new Lang.Class({
     },
 
     destroy: function() {
-//        // remove all inhibitors created by caffeine
-//    	for (var inhibitor in this._inhibitors)
-//    		this.removeInhibit(inhibitor["app_id"]);
-//        // disconnect from signals
-//        if (this._settings.get_boolean(FULLSCREEN_KEY)){
-//            global.screen.disconnect(this._inFullscreenId);
-//        }
-//        if (this._inhibitorAddedId) {
-//            this._sessionManager.disconnectSignal(this._inhibitorAddedId);
-//            this._inhibitorAddedId = 0;
-//        }
-//        if (this._inhibitorRemovedId) {
-//            this._sessionManager.disconnectSignal(this._inhibitorRemovedId);
-//            this._inhibitorRemovedId = 0;
-//        }
-//        if (this._windowCreatedId) {
-//            global.screen.get_display().disconnect(this._windowCreatedId);
-//            this._windowCreatedId = 0;
-//        }
-//        if (this._windowDestroyedId) {
-//            global.window_manager.disconnect(this._windowDestroyedId);
-//            this._windowDestroyedId = 0;
-//        }
+    	this.window.kill();
+    	this.inhibitor.kill();
+    	Menu.kill();
         this.parent();
     }
 });

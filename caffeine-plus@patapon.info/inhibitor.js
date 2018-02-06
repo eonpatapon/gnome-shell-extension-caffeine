@@ -1,26 +1,8 @@
 
-const Clutter = imports.gi.Clutter;
 const Lang = imports.lang;
-const St = imports.gi.St;
 const Gio = imports.gi.Gio;
-const Main = imports.ui.main;
-const Mainloop = imports.mainloop;
-const PanelMenu = imports.ui.panelMenu;
-const PopupMenu = imports.ui.popupMenu;
-const Panel = imports.ui.panel;
-const Shell = imports.gi.Shell;
-const MessageTray = imports.ui.messageTray;
-const Atk = imports.gi.Atk;
-const Config = imports.misc.config;
 
-
-const INHIBIT_APPS_KEY = 'inhibit-apps';
-const SHOW_INDICATOR_KEY = 'show-indicator';
-const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const USER_ENABLED_KEY = 'user-enabled';
-const RESTORE_KEY = 'restore-state';
-const FULLSCREEN_KEY = 'enable-fullscreen';
-const ADDRESS_INHIBITOR_KEY = 'address-inhibitor';
 
 const DBusSessionManagerIface = '<node>\
   <interface name="org.gnome.SessionManager">\
@@ -217,7 +199,10 @@ function toggleIcon() {
 	self._icon.icon_name = enableSuspendIcon['app'];
 }
 
-
+function kill() {
+	for (var index in inhibitors)
+		remove(inhibitors[index]["app_id"]);
+}
 
 
 
