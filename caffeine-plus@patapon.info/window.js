@@ -18,8 +18,8 @@ let signalInFullscreenId;
 function init(ext) {
 	self = ext;
 
-	ReasonFullScreen = "Inhibit by %s for full screen".format(ext.Name);
-	ReasonUserApps = "Inhibit by %s for user apps".format(ext.Name);
+	ReasonFullScreen = "Inhibit by %s for full screen".format(self.getName());
+	ReasonUserApps = "Inhibit by %s for user apps".format(self.getName());
 	
 	signalWindowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(self, function (display, window, noRecurse) {
 		listenWindow(window);

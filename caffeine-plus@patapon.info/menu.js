@@ -150,7 +150,7 @@ function show() {
 		var window = windows[index]['window'];
 		let workspace = window.get_workspace();
 
-		if ( window.is_skip_taskbar() || window.is_on_all_workspaces() ) {
+		if ( window.is_skip_taskbar() || window.is_on_all_workspaces() || workspace == null) {
 			if (window_list[0] == undefined) window_list[0] = [];
     		window_list[0].push(window);
 			continue;

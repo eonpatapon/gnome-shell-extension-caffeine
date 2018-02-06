@@ -42,7 +42,7 @@ const Window = Me.imports.window;
 const Inhibitor = Me.imports.inhibitor;
 
 
-const IndicatorName = "Caffeine";
+const IndicatorName = "Caffeine Plus";
 const enableSuspendIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
 const disableSuspendIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
 
@@ -95,6 +95,10 @@ const Caffeine = new Lang.Class({
         }
 
         Menu.init(this);
+    },
+    
+    getName: function() {
+    	return IndicatorName;
     },
     
     userToggleState: function() {
