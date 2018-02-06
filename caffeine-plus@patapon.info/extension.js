@@ -109,6 +109,18 @@ const Caffeine = new Lang.Class({
         }
     },
 
+    toggleIcon: function() {
+    	if (this.inhibitor.isInhibited()) { // auto suspend keeping disabled
+    		let icon_name = disableSuspendIcon['app'];
+    		if (this._settings.get_boolean(USER_ENABLED_KEY))
+    			icon_name = disableSuspendIcon['user'];
+    		
+    		this._icon.icon_name = icon_name;
+    		return;
+    	}
+    	this._icon.icon_name = enableSuspendIcon['app'];
+    },
+
     destroy: function() {
     	this.window.kill();
     	this.inhibitor.kill();

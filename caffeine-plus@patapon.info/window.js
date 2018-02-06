@@ -9,15 +9,18 @@ const ADDRESS_INHIBITOR_KEY = 'address-inhibitor';
 
 let self;
 let windows = [];
-const IndicatorName = "Caffeine";
-const ReasonFullScreen = "Inhibit by %s for full screen".format(IndicatorName);
-const ReasonUserApps = "Inhibit by %s for user apps".format(IndicatorName);
+let ReasonFullScreen;
+let ReasonUserApps;
 let signalWindowCreatedId;
 let signalWindowDestroyedId;
 let signalInFullscreenId;
 
 function init(ext) {
 	self = ext;
+
+	ReasonFullScreen = "Inhibit by %s for full screen".format(ext.Name);
+	ReasonUserApps = "Inhibit by %s for user apps".format(ext.Name);
+	
 	signalWindowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(self, function (display, window, noRecurse) {
 		listenWindow(window);
 	}));

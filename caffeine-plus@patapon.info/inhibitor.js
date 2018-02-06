@@ -45,9 +45,6 @@ const DBusSessionManagerInhibitorIface = '<node>\
 </node>';
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
-const enableSuspendIcon = {'app': 'my-caffeine-off-symbolic', 'user': 'my-caffeine-off-symbolic-user'};
-const disableSuspendIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffeine-on-symbolic-user'};
-
 //below are default inhibit flags
 const INHIBIT_LOGOUT = 1; // logging out
 const INHIBIT_SWITCH = 2; // switching user
@@ -156,7 +153,7 @@ function removed(proxy, sender, [object]) {
 function check() {
 	sessionManager.IsInhibitedRemote(MASK_SUSPEND_DISABLE_INHIBIT, Lang.bind(self, function([is_inhibited]) {
 		hasInhibitors = is_inhibited;
-		toggleIcon();
+		self.toggleIcon();
     }));
 }
 
@@ -185,18 +182,6 @@ function get(val, query_type) {
 	}
 	
 	return false;
-}
-
-function toggleIcon() {
-	if (isInhibited()) { // auto suspend keeping disabled
-		let icon_name = disableSuspendIcon['app'];
-		if (self._settings.get_boolean(USER_ENABLED_KEY))
-			icon_name = disableSuspendIcon['user'];
-		
-		self._icon.icon_name = icon_name;
-		return;
-	}
-	self._icon.icon_name = enableSuspendIcon['app'];
 }
 
 function kill() {

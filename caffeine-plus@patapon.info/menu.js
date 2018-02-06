@@ -1,5 +1,6 @@
 
 const Meta = imports.gi.Meta;
+const Clutter = imports.gi.Clutter;
 const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
