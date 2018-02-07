@@ -14,6 +14,8 @@ let ReasonUserApps;
 let signalWindowCreatedId;
 let signalWindowDestroyedId;
 let signalInFullscreenId;
+let mainloopFullScreenId;
+let mainloopWindowId;
 
 function init(ext) {
 	self = ext;
@@ -29,7 +31,7 @@ function init(ext) {
 	}));
     // Enable caffeine when fullscreen app is running
 	if (self._settings.get_boolean(FULLSCREEN_KEY)) {
-	  	Mainloop.timeout_add_seconds(2, Lang.bind(self, function() {
+		mainloopFullScreenId = Mainloop.timeout_add_seconds(2, Lang.bind(self, function() {
 	      	// handle apps in fullcreen
 	  		signalInFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(self, function (screen) {
 	  	    	toggleFullscreen(screen.get_display().get_focus_window())
@@ -37,7 +39,7 @@ function init(ext) {
 	  	}));
 	}
 
-	Mainloop.timeout_add_seconds(2, Lang.bind(self, function() {
+	mainloopWindowId = Mainloop.timeout_add_seconds(2, Lang.bind(self, function() {
 		global.get_window_actors().map(Lang.bind(self, function(actor) {
 			listenWindow(actor.meta_window);
         }));
@@ -167,6 +169,9 @@ function kill() {
 			delete windows[index];
 	    }
 	}
+
+	Mainloop.source_remove(mainloopFullScreenId);
+	Mainloop.source_remove(mainloopWindowId);
 }
 
 
