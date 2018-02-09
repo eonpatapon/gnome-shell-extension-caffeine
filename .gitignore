@@ -1,3 +1,5 @@
-caffeine@patapon.info.zip
+caffeine-plus@patapon.info.zip
 *.mo
 gschemas.compiled
+.project
+.settings
