@@ -41,6 +41,9 @@ const DBusSessionManagerInhibitorIface = '<node>\
     <method name="GetAppId">\
 	    <arg type="s" direction="out" />\
 	</method>\
+    <method name="GetReason">\
+	    <arg type="s" direction="out" />\
+	</method>\
   </interface>\
 </node>';
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
@@ -88,8 +91,10 @@ function checkSysInhibitors() {
     		    		}
     		    	}
     				if (needInsert){
-    			    	let item = {"app_id": app_id, "object": sys_inhibitors[i]};
-    			    	inhibitors.push(item);
+    					inhibitor.GetReasonRemote(Lang.bind(self, function([reason]){
+        			    	let item = {"app_id": app_id, "object": sys_inhibitors[i], "reason": reason};
+        			    	inhibitors.push(item);
+    					}));
     				}
     			}));
     		}));
@@ -128,8 +133,10 @@ function added(proxy, sender, [object]) {
 	    		}
 	    	}
 			if (needInsert){
-		    	let item = {"app_id": app_id, "object": object};
-		    	inhibitors.push(item);
+				inhibitor.GetReasonRemote(Lang.bind(self, function([reason]){
+			    	let item = {"app_id": app_id, "object": inhibitors[index], "reason": reason};
+			    	inhibitors.push(item);
+				}));
 			}
 		}));
 	}));
