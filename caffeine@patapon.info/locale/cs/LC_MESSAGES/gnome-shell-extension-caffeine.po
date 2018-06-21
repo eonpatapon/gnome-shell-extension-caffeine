@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-07 10:00+0100\n"
+"PO-Revision-Date: 2016-02-07 07:10+0100\n"
+"Last-Translator: Jiri Doubravsky <jiri.doubravsky@gmail.com>\n"
+"Language-Team: CZL10N <jiri.doubravsky@gmail.com>\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+msgid "Add"
+msgstr "Přidat"
+
+msgid "Add application"
+msgstr "Přidat aplikaci"
+
+msgid "Applications which enable Caffeine automatically"
+msgstr "Aplikace které automaticky aktivují Caffeine"
+
+msgid "Auto suspend and screensaver disabled"
+msgstr "Automatické uspání a spořič obrazovky jsou vypnuty"
+
+msgid "Auto suspend and screensaver enabled"
+msgstr "Automatické uspání a spořič obrazovky jsou zapnuty"
+
+msgid "Create new matching rule"
+msgstr "Vytvořit nové pravidlo"
+
+msgid "Enable notifications"
+msgstr "Upozorňovat"
+
+msgid "Enable when a fullscreen application is running"
+msgstr "Aktivovat pokud aplikace běží na celé obrazovce"
+
+msgid "Show Caffeine in top panel"
+msgstr "Ikona v hlavním panelu"
