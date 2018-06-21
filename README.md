@@ -2,6 +2,8 @@
 
 ## gnome-shell-extension-caffeine
 
+_[Eesti][et_rme]_
+
 Fill the cup to inhibit auto suspend and screensaver.
 
 This extension supports gnome-shell 3.4 to 3.26.
@@ -28,3 +30,6 @@ https://extensions.gnome.org/extension/517/caffeine/
     cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions
 
 Restart the shell and then enable the extension.
+
+
+[et_rme]: https://github.com/janls/gnome-shell-extension-caffeine/blob/master/et.LOEMIND.md "Link version of readme in Estonian."
