@@ -1,0 +1,86 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-22 21:11+0200\n"
+"PO-Revision-Date: 2018-06-22 21:22+0200\n"
+"Last-Translator: Kardos László <lacesz@NOSPAM@ox dot io>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: extension.js:224
+msgid "Auto suspend and screensaver disabled"
+msgstr "Az automatikus felfüggesztés és a képernyővédő letiltva"
+
+#: extension.js:245
+msgid "Auto suspend and screensaver enabled"
+msgstr "Az automatikus felfüggesztés és a képernyővédő engedélyezve"
+
+#: prefs.js:46
+msgid "Show Caffeine in top panel"
+msgstr "Caffeine mutatása a felső panelen"
+
+#: prefs.js:63 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+msgid "Enable when a fullscreen application is running"
+msgstr "Engedélyezés, ha teljes képernyős alkalmazás fut"
+
+#: prefs.js:80
+msgid "Restore state across reboots"
+msgstr "Állapot visszaállítása újraindítás közben"
+
+#: prefs.js:96
+msgid "Enable notifications"
+msgstr "Értesítések engedélyezése"
+
+#: prefs.js:117
+msgid "Applications which enable Caffeine automatically"
+msgstr "Alkalmazások, amelyek lehetővé teszik a Caffeine automatikus működését"
+
+#: prefs.js:133
+msgid "Add application"
+msgstr "Alkalmazás hozzáadás"
+
+#: prefs.js:147
+msgid "Create new matching rule"
+msgstr "Új egyezési szabály létrehozása"
+
+#: prefs.js:151
+msgid "Add"
+msgstr "Hozzáadás\t"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
+msgid "Application list"
+msgstr "Alkalmazáslista"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
+msgid "A list of strings, each containing an application id (desktop file name)"
+msgstr "A karakterláncok listája, amelyek mindegyike tartalmaz egy alkalmazásazonosítót (asztali fájlnév)"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
+msgid "Store caffeine user state"
+msgstr "Caffeine felhasználói állapot tárolása"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
+msgid "Restore caffeine state"
+msgstr "Caffeine állapot visszaállítása"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
+msgid "Show indicator"
+msgstr "Megjenelnítés az indikátoron"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+msgid "Show the indicator on the top panel"
+msgstr "Indikátor megjelenítése a panelen"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
+msgid "Show notifications"
+msgstr "Értesítések mutatása"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+msgid "Show notifications when enabled/disabled"
+msgstr "Értesítések mutatásának engedélyezése/tiltása"
