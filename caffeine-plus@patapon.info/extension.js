@@ -36,6 +36,7 @@ const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine-plus');
 const _ = Gettext.gettext;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
+const Func = Me.imports.func;
 const Convenience = Me.imports.convenience;
 const Menu = Me.imports.menu;
 const Window = Me.imports.window;
@@ -48,7 +49,6 @@ const disableSuspendIcon = {'app': 'my-caffeine-on-symbolic', 'user': 'my-caffei
 
 
 let CaffeineIndicator;
-let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
 const Caffeine = new Lang.Class({
     Name: IndicatorName,
@@ -57,6 +57,7 @@ const Caffeine = new Lang.Class({
     _init: function(metadata, params) {
         this.parent(null, IndicatorName);
         this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
+        this.func = Func;
 
         this._settings = Convenience.getSettings();
         this._settings.connect("changed::" + SHOW_INDICATOR_KEY, Lang.bind(this, function() {

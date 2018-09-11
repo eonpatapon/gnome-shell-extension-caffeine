@@ -21,7 +21,7 @@ let signalKeyReleaseEventId;
 function init(ext) {
 	self = ext;
 
-	signalRestackedId = global.screen.connect('restacked', Lang.bind(self, show));
+	signalRestackedId = self.func.get_screen().connect('restacked', Lang.bind(self, show));
 	signalKeyFocusInId = self.actor.connect('key-focus-in', Lang.bind(self, show));
 	signalButtonPressEventId = self.actor.connect('button-press-event', Lang.bind(self, show));
 	signalKeyReleaseEventId = self.actor.connect_after('key-release-event', Lang.bind(self, function (actor, event) {
@@ -89,7 +89,7 @@ function buildMenuItems(window_list) {
             
             item.actor.reactive = false;
             item.actor.can_focus = false;
-            if(index == global.screen.get_active_workspace().index() + 1)
+            if(index == self.func.get_active_workspace_index() + 1)
                 item.setOrnament(PopupMenu.Ornament.DOT);
 
             self.menu.addMenuItem(item);
@@ -144,7 +144,7 @@ function show() {
 		return;
 	}
 	
-	let n_workspaces = global.screen.n_workspaces;
+	let n_workspaces = self.func.get_screen().n_workspaces;
 	let window_list = [];
 	for (var index in windows) {
 		var window = windows[index]['window'];
@@ -177,7 +177,7 @@ function activateWindow(metaWorkspace, metaWindow) {
 function kill() {
 
 	if (signalRestackedId) {
-		global.screen.disconnect(signalRestackedId);
+		self.func.get_screen().disconnect(signalRestackedId);
 		signalRestackedId = 0;
 	}
 

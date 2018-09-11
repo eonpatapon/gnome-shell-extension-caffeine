@@ -23,7 +23,7 @@ function init(ext) {
 	ReasonFullScreen = "Inhibit by %s for full screen".format(self.getName());
 	ReasonUserApps = "Inhibit by %s for user apps".format(self.getName());
 	
-	signalWindowCreatedId = global.screen.get_display().connect_after('window-created', Lang.bind(self, function (display, window, noRecurse) {
+	signalWindowCreatedId = self.func.get_display().connect_after('window-created', Lang.bind(self, function (display, window, noRecurse) {
 		listenWindow(window);
 	}));
 	signalWindowDestroyedId = global.window_manager.connect('destroy', Lang.bind(self, function (shellwm, actor) {
@@ -33,8 +33,8 @@ function init(ext) {
 	if (self._settings.get_boolean(FULLSCREEN_KEY)) {
 		mainloopFullScreenId = Mainloop.timeout_add_seconds(2, Lang.bind(self, function() {
 	      	// handle apps in fullcreen
-	  		signalInFullscreenId = global.screen.connect('in-fullscreen-changed', Lang.bind(self, function (screen) {
-	  	    	toggleFullscreen(screen.get_display().get_focus_window())
+	  		signalInFullscreenId = self.func.get_screen().connect('in-fullscreen-changed', Lang.bind(self, function (screen) {
+	  	    	toggleFullscreen(self.func.get_display(screen).get_focus_window())
 	  		}));
 	  	}));
 	}
@@ -151,7 +151,7 @@ function destroy(window) {
 
 function kill() {
 	if (signalWindowCreatedId) {
-		global.screen.get_display().disconnect(signalWindowCreatedId);
+		self.func.get_display().disconnect(signalWindowCreatedId);
 		signalWindowCreatedId = 0;
 	}
 	if (signalWindowDestroyedId) {
@@ -159,7 +159,7 @@ function kill() {
 		signalWindowDestroyedId = 0;
 	}
 	if (signalInFullscreenId) {
-		global.screen.disconnect(signalInFullscreenId);
+		self.func.get_screen().disconnect(signalInFullscreenId);
 		signalInFullscreenId = 0;
 	}
 	for (var index in windows) {

@@ -12,6 +12,7 @@ const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
+const Func = Me.imprts.func;
 const Convenience = Me.imports.convenience;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
@@ -26,8 +27,6 @@ const Columns = {
     DISPLAY_NAME: 1,
     ICON: 2
 };
-
-let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
 const CaffeineWidget = new Lang.Class({
     Name: 'CaffeineWidget',
@@ -57,7 +56,7 @@ const CaffeineWidget = new Lang.Class({
 
         this.w.add(showCaffeineBox);
 
-        if (ShellVersion > 6) {
+        if (Func.ShellVersion > 6) {
             let gtkhbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                     margin: 7});
 
