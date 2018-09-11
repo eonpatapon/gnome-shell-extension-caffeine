@@ -79,25 +79,7 @@ function checkSysInhibitors() {
 	sessionManager.GetInhibitorsRemote(Lang.bind(self, function([sys_inhibitors]){ // call it for ensure getting updated InhibitedActions
     	for (let i in sys_inhibitors) {
     		if (inhibitors.indexOf(sys_inhibitors[i]) != -1) continue;
-    		let inhibitor = makeProxy(sys_inhibitors[i]);
-    		inhibitor.GetFlagsRemote(Lang.bind(self, function(flags){
-    			if (!(flags & MASK_SUSPEND_DISABLE_INHIBIT)) return;
-    			inhibitor.GetAppIdRemote(Lang.bind(self, function([app_id]){
-    				let needInsert = true;
-    				for (var index in inhibitors) {
-    		    		if (inhibitors[index]["app_id"] == app_id) {
-    		    			needInsert = false;
-    		    			inhibitors[index]["object"] = object;
-    		    		}
-    		    	}
-    				if (needInsert){
-    					inhibitor.GetReasonRemote(Lang.bind(self, function([reason]){
-        			    	let item = {"app_id": app_id, "object": sys_inhibitors[i], "reason": reason};
-        			    	inhibitors.push(item);
-    					}));
-    				}
-    			}));
-    		}));
+    		handleAddInhibitor(sys_inhibitors[i], "system");
     	}
 	}));
 }
@@ -110,7 +92,7 @@ function add(app_id, reason, pid) {
 	if (get(app_id)) return;
 	if (pid == undefined) pid = 0;
 	
-	let inhibitor = {"app_id": app_id, "pid": pid, "reason": reason};
+	let inhibitor = {"app_id": app_id, "pid": pid, "reason": reason, "type": "user"};
 	inhibitors.push(inhibitor);
 	sessionManager.InhibitRemote(app_id, pid, reason, INHIBIT_SUSPEND | INHIBIT_IDLE, Lang.bind(self, function(cookie) {
 		saveCookie(app_id, cookie);
@@ -122,8 +104,14 @@ function added(proxy, sender, [object]) {
 		if (!is_inhibited) return;
 		
 		check();
-		
-		let inhibitor = makeProxy(object);
+		handleAddInhibitor(object);
+	}));
+}
+
+function handleAddInhibitor(object, type) {
+	let inhibitor = makeProxy(object);
+	inhibitor.GetFlagsRemote(Lang.bind(self, function(flags){
+		if (!(flags & MASK_SUSPEND_DISABLE_INHIBIT)) return;
 		inhibitor.GetAppIdRemote(Lang.bind(self, function([app_id]){
 			let needInsert = true;
 			for (var index in inhibitors) {
@@ -134,7 +122,8 @@ function added(proxy, sender, [object]) {
 	    	}
 			if (needInsert){
 				inhibitor.GetReasonRemote(Lang.bind(self, function([reason]){
-			    	let item = {"app_id": app_id, "object": inhibitors[index], "reason": reason};
+			    	let item = {"app_id": app_id, "object": object, "reason": reason};
+			    	if (type != undefined) item.type = type;
 			    	inhibitors.push(item);
 				}));
 			}

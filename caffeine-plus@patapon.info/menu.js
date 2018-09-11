@@ -67,7 +67,7 @@ function buildCheckBox() {
         
         let reason = 'might be playing video';
         if (inhibitor['reason'] != undefined) reason = inhibitor['reason'];
-        let title = inhibitor['app_id'] + ' ' + reason;
+        let title = '[' + inhibitor['type'] + ']' + inhibitor['app_id'] + ' ' + reason;
         box.add(new St.Label({ text: title, x_expand: true }));
         item.actor.add_actor(box);
         item.actor.reactive = false;
