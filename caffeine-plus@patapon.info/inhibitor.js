@@ -122,7 +122,7 @@ function handleAddInhibitor(object, type) {
 	    	}
 			if (needInsert){
 				inhibitor.GetReasonRemote(Lang.bind(self, function([reason]){
-			    	let item = {"app_id": app_id, "object": object, "reason": reason};
+			    	let item = {"app_id": app_id, "object": object, "reason": reason, "type": "system"};
 			    	if (type != undefined) item.type = type;
 			    	inhibitors.push(item);
 				}));
