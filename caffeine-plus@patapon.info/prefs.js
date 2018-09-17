@@ -12,7 +12,7 @@ const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const Func = Me.imprts.func;
+const Func = Me.imports.func;
 const Convenience = Me.imports.convenience;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
