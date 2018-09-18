@@ -117,7 +117,7 @@ const Caffeine = new Lang.Class({
 
         if (global.screen) {
             this._screen = global.screen;
-            this._display = this_screen.get_display();
+            this._display = this._screen.get_display();
         }
         else {
             this._screen = global.display;
