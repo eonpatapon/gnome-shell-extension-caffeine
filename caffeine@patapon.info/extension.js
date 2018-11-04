@@ -115,7 +115,7 @@ const Caffeine = new Lang.Class({
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
         this._windowTracker = Shell.WindowTracker.get_default();
 
-        if (global.screen) {
+        if ("screen" in global) {
             this._screen = global.screen;
             this._display = this._screen.get_display();
         }
