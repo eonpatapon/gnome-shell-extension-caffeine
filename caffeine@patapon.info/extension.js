@@ -130,9 +130,9 @@ const Caffeine = new Lang.Class({
         this._windowDestroyedId = shellwm.connect('destroy', Lang.bind(this, this._mayUninhibit));
 
         this._icon = new St.Icon({
-            icon_name: DisabledIcon,
             style_class: 'system-status-icon'
         });
+        this._icon.gicon = Gio.icon_new_for_string(Me.path + '/icons/' + DisabledIcon +'.svg');
 
         this._state = false;
         // who has requested the inhibition
@@ -228,7 +228,7 @@ const Caffeine = new Lang.Class({
                         this._last_cookie = "";
                         if (this._state === false) {
                             this._state = true;
-                            this._icon.icon_name = EnabledIcon;
+                            this._icon.gicon = Gio.icon_new_for_string(Me.path + '/icons/' + EnabledIcon +'.svg');;
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 Main.notify(_("Auto suspend and screensaver disabled"));
                         }
@@ -249,7 +249,7 @@ const Caffeine = new Lang.Class({
             this._objects.splice(index, 1);
             if (this._apps.length === 0) {
                 this._state = false;
-                this._icon.icon_name = DisabledIcon;
+                this._icon.gicon = Gio.icon_new_for_string(Me.path + '/icons/' + DisabledIcon +'.svg');;
                 if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     Main.notify(_("Auto suspend and screensaver enabled"));
             }
