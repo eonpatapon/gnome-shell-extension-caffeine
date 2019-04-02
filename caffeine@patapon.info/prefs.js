@@ -3,7 +3,6 @@
 
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const GObject = imports.gi.GObject;
 const Config = imports.misc.config;
 
@@ -28,15 +27,13 @@ const Columns = {
 
 let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
 
-const CaffeineWidget = new Lang.Class({
-    Name: 'CaffeineWidget',
-
-    _init: function(params) {
+class CaffeineWidget {
+    constructor(params) {
         this.w = new Gtk.Grid(params);
         this.w.set_orientation(Gtk.Orientation.VERTICAL);
 
         this._settings = Convenience.getSettings();
-        this._settings.connect('changed', Lang.bind(this, this._refresh));
+        this._settings.connect('changed', this._refresh.bind(this));
         this._changedPermitted = false;
 
 
@@ -47,9 +44,9 @@ const CaffeineWidget = new Lang.Class({
                                            xalign: 0});
 
         let showCaffeineSwitch = new Gtk.Switch({active: this._settings.get_boolean(SHOW_INDICATOR_KEY)});
-        showCaffeineSwitch.connect('notify::active', Lang.bind(this, function(button) {
+        showCaffeineSwitch.connect('notify::active', button => {
             this._settings.set_boolean(SHOW_INDICATOR_KEY, button.active);
-        }));
+        });
 
         showCaffeineBox.pack_start(showCaffeineLabel, true, true, 0);
         showCaffeineBox.add(showCaffeineSwitch);
@@ -57,16 +54,16 @@ const CaffeineWidget = new Lang.Class({
         this.w.add(showCaffeineBox);
 
         if (ShellVersion > 6) {
-            let gtkhbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+            const gtkhbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                     margin: 7});
 
-            let enableFullscreenLabel = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
+            const enableFullscreenLabel = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
                                        xalign: 0});
 
-            let enableFullscreenSwitch = new Gtk.Switch({active: this._settings.get_boolean(FULLSCREEN_KEY)});
-            enableFullscreenSwitch.connect('notify::active', Lang.bind(this, function(button) {
+            const enableFullscreenSwitch = new Gtk.Switch({active: this._settings.get_boolean(FULLSCREEN_KEY)});
+            enableFullscreenSwitch.connect('notify::active', button => {
                 this._settings.set_boolean(FULLSCREEN_KEY, button.active);
-            }));
+            });
 
             gtkhbox.pack_start(enableFullscreenLabel, true, true, 0);
             gtkhbox.add(enableFullscreenSwitch);
@@ -74,32 +71,32 @@ const CaffeineWidget = new Lang.Class({
             this.w.add(gtkhbox);
         }
 
-        let stateBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+        const stateBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});
 
-        let stateLabel = new Gtk.Label({label: _("Restore state across reboots"),
+        const stateLabel = new Gtk.Label({label: _("Restore state across reboots"),
                                    xalign: 0});
 
-        let stateSwitch = new Gtk.Switch({active: this._settings.get_boolean(RESTORE_KEY)});
-        stateSwitch.connect('notify::active', Lang.bind(this, function(button) {
+        const stateSwitch = new Gtk.Switch({active: this._settings.get_boolean(RESTORE_KEY)});
+        stateSwitch.connect('notify::active', button => {
             this._settings.set_boolean(RESTORE_KEY, button.active);
-        }));
+        });
 
         stateBox.pack_start(stateLabel, true, true, 0);
         stateBox.add(stateSwitch);
 
         this.w.add(stateBox);
 
-        let notificationsBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+        const notificationsBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
                                 margin: 7});
 
-        let notificationsLabel = new Gtk.Label({label: _("Enable notifications"),
+        const notificationsLabel = new Gtk.Label({label: _("Enable notifications"),
                                    xalign: 0});
 
-        let notificationsSwitch = new Gtk.Switch({active: this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)});
-        notificationsSwitch.connect('notify::active', Lang.bind(this, function(button) {
+        const notificationsSwitch = new Gtk.Switch({active: this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)});
+        notificationsSwitch.connect('notify::active', button => {
             this._settings.set_boolean(SHOW_NOTIFICATIONS_KEY, button.active);
-        }));
+        });
 
         notificationsBox.pack_start(notificationsLabel, true, true, 0);
         notificationsBox.add(notificationsSwitch);
@@ -113,58 +110,58 @@ const CaffeineWidget = new Lang.Class({
                                             hexpand: true, vexpand: true });
         this._treeView.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
 
-        let appColumn = new Gtk.TreeViewColumn({ expand: true, sort_column_id: Columns.DISPLAY_NAME,
+        const appColumn = new Gtk.TreeViewColumn({ expand: true, sort_column_id: Columns.DISPLAY_NAME,
                                                  title: _("Applications which enable Caffeine automatically") });
-        let iconRenderer = new Gtk.CellRendererPixbuf;
+        const iconRenderer = new Gtk.CellRendererPixbuf;
         appColumn.pack_start(iconRenderer, false);
         appColumn.add_attribute(iconRenderer, "gicon", Columns.ICON);
-        let nameRenderer = new Gtk.CellRendererText;
+        const nameRenderer = new Gtk.CellRendererText;
         appColumn.pack_start(nameRenderer, true);
         appColumn.add_attribute(nameRenderer, "text", Columns.DISPLAY_NAME);
         this._treeView.append_column(appColumn);
 
         this.w.add(this._treeView);
 
-        let toolbar = new Gtk.Toolbar();
+        const toolbar = new Gtk.Toolbar();
         toolbar.get_style_context().add_class(Gtk.STYLE_CLASS_INLINE_TOOLBAR);
         this.w.add(toolbar);
 
-        let newButton = new Gtk.ToolButton({ stock_id: Gtk.STOCK_NEW,
+        const newButton = new Gtk.ToolButton({ stock_id: Gtk.STOCK_NEW,
                                              label: _("Add application"),
                                              is_important: true });
-        newButton.connect('clicked', Lang.bind(this, this._createNew));
+        newButton.connect('clicked', this._createNew.bind(this));
         toolbar.add(newButton);
 
-        let delButton = new Gtk.ToolButton({ stock_id: Gtk.STOCK_DELETE });
-        delButton.connect('clicked', Lang.bind(this, this._deleteSelected));
+        const delButton = new Gtk.ToolButton({ stock_id: Gtk.STOCK_DELETE });
+        delButton.connect('clicked', this._deleteSelected.bind(this));
         toolbar.add(delButton);
 
         this._changedPermitted = true;
         this._refresh();
-    },
+    }
 
-    _createNew: function() {
-        let dialog = new Gtk.Dialog({ title: _("Create new matching rule"),
+    _createNew() {
+        const dialog = new Gtk.Dialog({ title: _("Create new matching rule"),
                                       transient_for: this.w.get_toplevel(),
                                       modal: true });
         dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL);
         dialog.add_button(_("Add"), Gtk.ResponseType.OK);
         dialog.set_default_response(Gtk.ResponseType.OK);
 
-        let grid = new Gtk.Grid({ column_spacing: 10,
+        const grid = new Gtk.Grid({ column_spacing: 10,
                                   row_spacing: 15,
                                   margin: 10 });
         dialog._appChooser = new Gtk.AppChooserWidget({ show_all: true });
         grid.attach(dialog._appChooser, 0, 0, 2, 1);
         dialog.get_content_area().add(grid);
 
-        dialog.connect('response', Lang.bind(this, function(dialog, id) {
+        dialog.connect('response', (dialog, id) => {
             if (id != Gtk.ResponseType.OK) {
                 dialog.destroy();
                 return;
             }
 
-            let appInfo = dialog._appChooser.get_app_info();
+            const appInfo = dialog._appChooser.get_app_info();
             if (!appInfo)
                 return;
 
@@ -181,40 +178,40 @@ const CaffeineWidget = new Lang.Class({
             this._changedPermitted = true;
 
             dialog.destroy();
-        }));
+        });
         dialog.show_all();
-    },
+    }
 
-    _deleteSelected: function() {
-        let [any, model, iter] = this._treeView.get_selection().get_selected();
+    _deleteSelected() {
+        const [any, , iter] = this._treeView.get_selection().get_selected();
 
         if (any) {
-            let appInfo = this._store.get_value(iter, Columns.APPINFO);
+            const appInfo = this._store.get_value(iter, Columns.APPINFO);
 
             this._changedPermitted = false;
             this._removeItem(appInfo.get_id());
             this._store.remove(iter);
             this._changedPermitted = true;
         }
-    },
+    }
 
-    _refresh: function() {
+    _refresh() {
         if (!this._changedPermitted)
             // Ignore this notification, model is being modified outside
             return;
 
         this._store.clear();
 
-        let currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
-        let validItems = [ ];
+        const currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
+        const validItems = [ ];
         for (let i = 0; i < currentItems.length; i++) {
-            let id = currentItems[i];
-            let appInfo = Gio.DesktopAppInfo.new(id);
+            const id = currentItems[i];
+            const appInfo = Gio.DesktopAppInfo.new(id);
             if (!appInfo)
                 continue;
             validItems.push(currentItems[i]);
 
-            let iter = this._store.append();
+            const iter = this._store.append();
             this._store.set(iter,
                             [Columns.APPINFO, Columns.ICON, Columns.DISPLAY_NAME],
                             [appInfo, appInfo.get_icon(), appInfo.get_display_name()]);
@@ -222,13 +219,12 @@ const CaffeineWidget = new Lang.Class({
 
         if (validItems.length != currentItems.length) // some items were filtered out
             this._settings.set_strv(INHIBIT_APPS_KEY, validItems);
-    },
+    }
 
-    _appendItem: function(id) {
-        let currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
-        let alreadyHave = currentItems.indexOf(id) != -1;
+    _appendItem(id) {
+        const currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
 
-        if (alreadyHave) {
+        if (currentItems.includes(id)) {
             printerr("Already have an item for this id");
             return false;
         }
@@ -236,11 +232,11 @@ const CaffeineWidget = new Lang.Class({
         currentItems.push(id);
         this._settings.set_strv(INHIBIT_APPS_KEY, currentItems);
         return true;
-    },
+    }
 
-    _removeItem: function(id) {
-        let currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
-        let index = currentItems.indexOf(id);
+    _removeItem(id) {
+        const currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
+        const index = currentItems.indexOf(id);
 
         if (index < 0)
             return;
@@ -248,14 +244,14 @@ const CaffeineWidget = new Lang.Class({
         currentItems.splice(index, 1);
         this._settings.set_strv(INHIBIT_APPS_KEY, currentItems);
     }
-});
+}
 
 function init() {
     Convenience.initTranslations();
 }
 
 function buildPrefsWidget() {
-    let widget = new CaffeineWidget();
+    const widget = new CaffeineWidget();
     widget.w.show_all();
 
     return widget.w;
