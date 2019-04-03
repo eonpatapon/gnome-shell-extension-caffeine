@@ -27,7 +27,7 @@ msgstr "Автоматическое отключение экрана вклю�
 
 #: prefs.js:46
 msgid "Show Caffeine in top panel"
-msgstr "Отображать значёк Caffeine на панели"
+msgstr "Отображать значок Caffeine на панели"
 
 #: prefs.js:63 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
@@ -88,7 +88,7 @@ msgstr "Включить уведомления"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
-msgstr "Показывать уведомление когда включено/выключено"
+msgstr "Показывать уведомление, когда включено/выключено"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine включен"
