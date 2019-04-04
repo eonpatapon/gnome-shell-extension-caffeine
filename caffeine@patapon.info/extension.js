@@ -114,8 +114,9 @@ const Caffeine = new Lang.Class({
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
         this._windowTracker = Shell.WindowTracker.get_default();
-
-        if ("screen" in global) {
+        
+        // ("screen" in global) is false on 3.28, although global.screen exists
+        if (typeof global.screen !== "undefined") {
             this._screen = global.screen;
             this._display = this._screen.get_display();
         }
