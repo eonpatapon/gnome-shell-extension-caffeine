@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 21:38+0800\n"
+"POT-Creation-Date: 2020-02-23 13:03+0100\n"
 "PO-Revision-Date: 2015-11-28 21:06-0300\n"
 "Last-Translator: Sergio D. Márquez <marquez.sergio.d@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -17,44 +17,36 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:220
-msgid "Auto suspend and screensaver disabled"
-msgstr "Auto suspensión y salvapantallas deshabilitados"
-
-#: extension.js:239
-msgid "Auto suspend and screensaver enabled"
-msgstr "Auto suspensión y salvapantallas habilitados"
-
-#: prefs.js:46
+#: prefs.js:43
 msgid "Show Caffeine in top panel"
 msgstr "Mostrar Caffeine en el panel superior"
 
-#: prefs.js:63 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
-#: prefs.js:80
+#: prefs.js:77
 msgid "Restore state across reboots"
 msgstr "Restablecer estado despues de reiniciar"
 
-#: prefs.js:96
+#: prefs.js:93
 msgid "Enable notifications"
 msgstr "Activar las notificaciones"
 
-#: prefs.js:117
+#: prefs.js:114
 msgid "Applications which enable Caffeine automatically"
 msgstr "Aplicaciones que activan Caffeine automáticamente"
 
-#: prefs.js:133
+#: prefs.js:130
 msgid "Add application"
 msgstr "Agregar aplicación"
 
-#: prefs.js:147
+#: prefs.js:144
 msgid "Create new matching rule"
 msgstr "Crear nueva regla"
 
-#: prefs.js:151
+#: prefs.js:148
 msgid "Add"
 msgstr "Agregar"
 
@@ -64,8 +56,11 @@ msgid "Application list"
 msgstr "Agregar aplicación"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
-msgid "A list of strings, each containing an application id (desktop file name)"
-msgstr "Una lista de cadenas de texto, cada una conteninedo un id de aplicación (nombre de archivo desktop)"
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
+msgstr ""
+"Una lista de cadenas de texto, cada una conteninedo un id de aplicación "
+"(nombre de archivo desktop)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
 msgid "Store caffeine user state"
@@ -92,6 +87,12 @@ msgstr "Activar las notificaciones"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "Mostrar notificaciones de habilitado/deshabilitado"
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Auto suspensión y salvapantallas deshabilitados"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Auto suspensión y salvapantallas habilitados"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine activado"

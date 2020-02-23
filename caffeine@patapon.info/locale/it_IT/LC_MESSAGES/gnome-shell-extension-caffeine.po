@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-30 15:23+0200\n"
+"POT-Creation-Date: 2020-02-23 13:03+0100\n"
 "PO-Revision-Date: 2017-04-30 15:26+0200\n"
 "Last-Translator: Giuseppe Pignataro <rogepix@gmail.com>\n"
 "Language-Team: Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>\n"
@@ -17,79 +17,79 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../extension.js:220
-msgid "Auto suspend and screensaver disabled"
-msgstr "Auto sospensione e screensaver disabilitato"
-
-#: ../../../extension.js:239
-msgid "Auto suspend and screensaver enabled"
-msgstr "Auto sospensione e screensaver abilitato"
-
-#: ../../../prefs.js:46
+#: prefs.js:43
 msgid "Show Caffeine in top panel"
 msgstr "Mostra Caffeine nel pannello in alto"
 
-#: ../../../prefs.js:63
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Abilita quando è avviata una applicazione a schermo intero"
 
-#: ../../../prefs.js:80
+#: prefs.js:77
 msgid "Restore state across reboots"
 msgstr "Ripristina lo stato dopo i riavvii"
 
-#: ../../../prefs.js:96
+#: prefs.js:93
 msgid "Enable notifications"
 msgstr "Abilita notifiche"
 
-#: ../../../prefs.js:117
+#: prefs.js:114
 msgid "Applications which enable Caffeine automatically"
 msgstr "Applicazioni che abilitano Caffeine automaticamente"
 
-#: ../../../prefs.js:133
+#: prefs.js:130
 msgid "Add application"
 msgstr "Aggiungi applicazione"
 
-#: ../../../prefs.js:147
+#: prefs.js:144
 msgid "Create new matching rule"
 msgstr "Crea una nuova regola corrispondente"
 
-#: ../../../prefs.js:151
+#: prefs.js:148
 msgid "Add"
 msgstr "Aggiungi"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
 msgid "Application list"
 msgstr "Elenco applicazioni"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
-msgid "A list of strings, each containing an application id (desktop file name)"
-msgstr "Un'elecno di stringhe, ognuna contenente un id applicazione ( nome del file desktop)"
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
+msgstr ""
+"Un'elecno di stringhe, ognuna contenente un id applicazione ( nome del file "
+"desktop)"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
 msgid "Store caffeine user state"
 msgstr "Salva lo stato di caffeine dell'utente"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
 msgid "Restore caffeine state"
 msgstr "Ripristina lo stato di caffeine"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
 msgid "Show indicator"
 msgstr "Mostra indicatore"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Show the indicator on the top panel"
 msgstr "Mostra indicatore nel pannello in alto"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
 msgid "Show notifications"
 msgstr "Mostra notifiche"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "Mostra notifiche quando abilitato/disabilitato"
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Auto sospensione e screensaver disabilitato"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Auto sospensione e screensaver abilitato"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine aktiviert"

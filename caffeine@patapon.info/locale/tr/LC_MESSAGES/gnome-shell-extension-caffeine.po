@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-21 06:42+0300\n"
+"POT-Creation-Date: 2020-02-23 13:03+0100\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -18,44 +18,36 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Gtranslator 3.32.0\n"
 
-#: extension.js:233
-msgid "Auto suspend and screensaver disabled"
-msgstr "Ekran koruyucu ve otomatik karartma kapalı"
-
-#: extension.js:254
-msgid "Auto suspend and screensaver enabled"
-msgstr "Ekran koruyucu ve otomatik karartma açık"
-
-#: prefs.js:46
+#: prefs.js:43
 msgid "Show Caffeine in top panel"
 msgstr "Caffeine üst panelde görünsün"
 
-#: prefs.js:63 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
 
-#: prefs.js:80
+#: prefs.js:77
 msgid "Restore state across reboots"
 msgstr "Yeniden başlatma arasında durumu geri yükle"
 
-#: prefs.js:96
+#: prefs.js:93
 msgid "Enable notifications"
 msgstr "Bildirimleri aktif et"
 
-#: prefs.js:117
+#: prefs.js:114
 msgid "Applications which enable Caffeine automatically"
 msgstr "Kafeini otomatik olarak etkinleştiren uygulamalar"
 
-#: prefs.js:133
+#: prefs.js:130
 msgid "Add application"
 msgstr "Uygulama ekle"
 
-#: prefs.js:147
+#: prefs.js:144
 msgid "Create new matching rule"
 msgstr "Yeni eşleşme kuralı oluştur"
 
-#: prefs.js:151
+#: prefs.js:148
 msgid "Add"
 msgstr "Ekle"
 
@@ -92,6 +84,12 @@ msgstr "Bildirimleri göster"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Ekran koruyucu ve otomatik karartma kapalı"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Ekran koruyucu ve otomatik karartma açık"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine aktif"

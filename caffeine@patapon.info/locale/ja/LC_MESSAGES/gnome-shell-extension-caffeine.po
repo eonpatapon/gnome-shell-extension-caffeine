@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-05 22:28+0900\n"
+"POT-Creation-Date: 2020-02-23 13:03+0100\n"
 "PO-Revision-Date: 2017-05-05 22:28+0900\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
@@ -17,79 +17,77 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../extension.js:220
-msgid "Auto suspend and screensaver disabled"
-msgstr "自動サスペンドを無効にしました"
-
-#: ../../../extension.js:239
-msgid "Auto suspend and screensaver enabled"
-msgstr "自動サスペンドを有効にしました"
-
-#: ../../../prefs.js:46
+#: prefs.js:43
 msgid "Show Caffeine in top panel"
 msgstr "Caffeine をトップバーに表示する"
 
-#: ../../../prefs.js:63
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "フルスクリーンアプリケーション実行時に有効にする"
 
-#: ../../../prefs.js:80
+#: prefs.js:77
 msgid "Restore state across reboots"
 msgstr "再起動後も状態を維持する"
 
-#: ../../../prefs.js:96
+#: prefs.js:93
 msgid "Enable notifications"
 msgstr "通知を有効にする"
 
-#: ../../../prefs.js:117
+#: prefs.js:114
 msgid "Applications which enable Caffeine automatically"
 msgstr "Caffeine を自動的に有効にするアプリケーション"
 
-#: ../../../prefs.js:133
+#: prefs.js:130
 msgid "Add application"
 msgstr "アプリケーションを追加"
 
-#: ../../../prefs.js:147
+#: prefs.js:144
 msgid "Create new matching rule"
 msgstr "新規ルール"
 
-#: ../../../prefs.js:151
+#: prefs.js:148
 msgid "Add"
 msgstr "追加"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
 msgid "Application list"
 msgstr "アプリケーションリスト"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
-msgid "A list of strings, each containing an application id (desktop file name)"
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
 msgstr ""
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
 msgid "Store caffeine user state"
 msgstr ""
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
 msgid "Restore caffeine state"
 msgstr ""
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
 msgid "Show indicator"
 msgstr ""
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Show the indicator on the top panel"
 msgstr "Caffeine をトップバーに表示する"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
 msgid "Show notifications"
 msgstr "通知を有効にする"
 
-#: ../../../schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr ""
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "自動サスペンドを無効にしました"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "自動サスペンドを有効にしました"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caféine est activé"

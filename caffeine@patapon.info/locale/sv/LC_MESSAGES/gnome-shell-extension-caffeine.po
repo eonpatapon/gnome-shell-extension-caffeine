@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-04 19:34+0200\n"
+"POT-Creation-Date: 2020-02-23 13:03+0100\n"
 "PO-Revision-Date: 2018-04-04 20:35+0200\n"
 "Last-Translator: Morgan Antonsson <morgan.antonsson@gmail.com>\n"
 "Language-Team: \n"
@@ -11,44 +11,36 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:224
-msgid "Auto suspend and screensaver disabled"
-msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
-
-#: extension.js:245
-msgid "Auto suspend and screensaver enabled"
-msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"
-
-#: prefs.js:46
+#: prefs.js:43
 msgid "Show Caffeine in top panel"
 msgstr "Visa Caffeine i panelen"
 
-#: prefs.js:63 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Aktivera när ett program använder helskärmsläget"
 
-#: prefs.js:80
+#: prefs.js:77
 msgid "Restore state across reboots"
 msgstr "Återställ tillstånd efter omstart"
 
-#: prefs.js:96
+#: prefs.js:93
 msgid "Enable notifications"
 msgstr "Aktivera notifieringar"
 
-#: prefs.js:117
+#: prefs.js:114
 msgid "Applications which enable Caffeine automatically"
 msgstr "Program som automatiskt aktiverar Caffeine"
 
-#: prefs.js:133
+#: prefs.js:130
 msgid "Add application"
 msgstr "Lägg till program"
 
-#: prefs.js:147
+#: prefs.js:144
 msgid "Create new matching rule"
 msgstr "Skapa ny matchande regel"
 
-#: prefs.js:151
+#: prefs.js:148
 msgid "Add"
 msgstr "Lägg till"
 
@@ -84,3 +76,9 @@ msgstr "Visa notifieringar"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "Visa notifieringar vid aktivering/inaktivering"
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"

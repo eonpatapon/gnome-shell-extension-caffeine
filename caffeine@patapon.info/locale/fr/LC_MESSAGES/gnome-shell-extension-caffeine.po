@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-08 21:38+0800\n"
+"POT-Creation-Date: 2020-02-23 13:03+0100\n"
 "PO-Revision-Date: 2014-11-07 10:01+0100\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
@@ -17,44 +17,36 @@ msgstr ""
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:220
-msgid "Auto suspend and screensaver disabled"
-msgstr "Mise en veille et écran de veille désactivés"
-
-#: extension.js:239
-msgid "Auto suspend and screensaver enabled"
-msgstr "Mise en veille et écran de veille activés"
-
-#: prefs.js:46
+#: prefs.js:43
 msgid "Show Caffeine in top panel"
 msgstr "Afficher Caféine dans le panneau supérieur"
 
-#: prefs.js:63 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Activer lorsqu'une application est en plein écran"
 
-#: prefs.js:80
+#: prefs.js:77
 msgid "Restore state across reboots"
 msgstr ""
 
-#: prefs.js:96
+#: prefs.js:93
 msgid "Enable notifications"
 msgstr "Activer les notifications"
 
-#: prefs.js:117
+#: prefs.js:114
 msgid "Applications which enable Caffeine automatically"
 msgstr "Applications qui activent Caféine automatiquement"
 
-#: prefs.js:133
+#: prefs.js:130
 msgid "Add application"
 msgstr "Ajouter une application"
 
-#: prefs.js:147
+#: prefs.js:144
 msgid "Create new matching rule"
 msgstr "Nouvelle règle"
 
-#: prefs.js:151
+#: prefs.js:148
 msgid "Add"
 msgstr "Ajouter"
 
@@ -93,6 +85,12 @@ msgstr "Activer les notifications"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr ""
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Mise en veille et écran de veille désactivés"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Mise en veille et écran de veille activés"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caféine est activé"
