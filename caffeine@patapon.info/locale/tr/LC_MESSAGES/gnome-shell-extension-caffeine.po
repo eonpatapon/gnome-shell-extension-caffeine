@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 13:03+0100\n"
+"POT-Creation-Date: 2020-02-26 19:42+0100\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Gtranslator 3.32.0\n"
+
+#: extension.js:231
+msgid "Auto suspend and screensaver disabled"
+msgstr "Ekran koruyucu ve otomatik karartma kapalı"
+
+#: extension.js:252
+msgid "Auto suspend and screensaver enabled"
+msgstr "Ekran koruyucu ve otomatik karartma açık"
 
 #: prefs.js:43
 msgid "Show Caffeine in top panel"
@@ -84,12 +92,6 @@ msgstr "Bildirimleri göster"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Ekran koruyucu ve otomatik karartma kapalı"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Ekran koruyucu ve otomatik karartma açık"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine aktif"

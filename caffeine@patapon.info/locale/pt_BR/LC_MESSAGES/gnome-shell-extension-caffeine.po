@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 13:03+0100\n"
+"POT-Creation-Date: 2020-02-26 19:42+0100\n"
 "PO-Revision-Date: 2020-02-25 20:16-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -21,6 +21,14 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Gtranslator 3.32.0\n"
 "X-Poedit-SearchPath-0: ../../..\n"
+
+#: extension.js:231
+msgid "Auto suspend and screensaver disabled"
+msgstr "Suspensão e proteção de tela automáticas desativadas"
+
+#: extension.js:252
+msgid "Auto suspend and screensaver enabled"
+msgstr "Suspensão e proteção de tela automáticas ativadas"
 
 #: prefs.js:43
 msgid "Show Caffeine in top panel"
@@ -89,12 +97,6 @@ msgstr "Mostrar notificações"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "Mostra notificações quando ativado/desativado"
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Suspensão e proteção de tela automáticas desativadas"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Suspensão e proteção de tela automáticas ativadas"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine ativado"

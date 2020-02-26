@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 13:03+0100\n"
+"POT-Creation-Date: 2020-02-26 19:42+0100\n"
 "PO-Revision-Date: 2017-02-08 21:42+0800\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: ../../..\n"
+
+#: extension.js:231
+msgid "Auto suspend and screensaver disabled"
+msgstr "自动挂起与屏幕保护程序已禁用"
+
+#: extension.js:252
+msgid "Auto suspend and screensaver enabled"
+msgstr "自动挂起与屏幕保护程序已启用"
 
 #: prefs.js:43
 msgid "Show Caffeine in top panel"
@@ -82,12 +90,6 @@ msgstr "显示通知"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "启用/禁用时显示通知"
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "自动挂起与屏幕保护程序已禁用"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "自动挂起与屏幕保护程序已启用"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine 已开启"

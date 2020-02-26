@@ -45,42 +45,40 @@ const _ = Gettext.gettext;
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Convenience = Me.imports.convenience;
 
-const DBusSessionManagerIface = `
-<node>
-  <interface name="org.gnome.SessionManager">
-    <method name="Inhibit">
-        <arg type="s" direction="in" />
-        <arg type="u" direction="in" />
-        <arg type="s" direction="in" />
-        <arg type="u" direction="in" />
-        <arg type="u" direction="out" />
-    </method>
-    <method name="Uninhibit">
-        <arg type="u" direction="in" />
-    </method>
-    <method name="GetInhibitors">
-        <arg type="ao" direction="out" />
-    </method>
-    <signal name="InhibitorAdded">
-        <arg type="o" direction="out" />
-    </signal>
-    <signal name="InhibitorRemoved">
-        <arg type="o" direction="out" />
-    </signal>
-  </interface>
-</node>
-`.trim();
+const DBusSessionManagerIface = '<node>\
+  <interface name="org.gnome.SessionManager">\
+    <method name="Inhibit">\
+        <arg type="s" direction="in" />\
+        <arg type="u" direction="in" />\
+        <arg type="s" direction="in" />\
+        <arg type="u" direction="in" />\
+        <arg type="u" direction="out" />\
+    </method>\
+    <method name="Uninhibit">\
+        <arg type="u" direction="in" />\
+    </method>\
+       <method name="GetInhibitors">\
+           <arg type="ao" direction="out" />\
+       </method>\
+    <signal name="InhibitorAdded">\
+        <arg type="o" direction="out" />\
+    </signal>\
+    <signal name="InhibitorRemoved">\
+        <arg type="o" direction="out" />\
+    </signal>\
+  </interface>\
+</node>';
+
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
 
-const DBusSessionManagerInhibitorIface = `
-<node>
-  <interface name="org.gnome.SessionManager.Inhibitor">
-    <method name="GetAppId">
-        <arg type="s" direction="out" />
-    </method>
-  </interface>
-</node>
-`.trim();
+const DBusSessionManagerInhibitorIface = '<node>\
+  <interface name="org.gnome.SessionManager.Inhibitor">\
+    <method name="GetAppId">\
+        <arg type="s" direction="out" />\
+    </method>\
+  </interface>\
+</node>';
+
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = "Caffeine";
@@ -313,7 +311,7 @@ class Caffeine extends PanelMenu.Button {
 function init(extensionMeta) {
     Convenience.initTranslations();
     let theme = imports.gi.Gtk.IconTheme.get_default();
-    theme.append_search_path(`${extensionMeta.path}/icons`);
+    theme.append_search_path(extensionMeta.path + "/icons");
 }
 
 function enable() {

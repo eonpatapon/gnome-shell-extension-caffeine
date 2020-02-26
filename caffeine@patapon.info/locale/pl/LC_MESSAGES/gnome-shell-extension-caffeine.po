@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 13:03+0100\n"
+"POT-Creation-Date: 2020-02-26 19:42+0100\n"
 "PO-Revision-Date: 2016-10-02 17:24+0100\n"
 "Last-Translator: Piotr Wittchen <piotr@wittchen.biz.pl>\n"
 "Language-Team: Polish\n"
@@ -16,6 +16,14 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Vim\n"
 "X-Poedit-SearchPath-0: ../../..\n"
+
+#: extension.js:231
+msgid "Auto suspend and screensaver disabled"
+msgstr "Automatycze wstrzymywanie i wygaszacz ekranu wyłączone"
+
+#: extension.js:252
+msgid "Auto suspend and screensaver enabled"
+msgstr "Automatyczne wstrzymywanie i wygaszacz ekranu włączone"
 
 #: prefs.js:43
 msgid "Show Caffeine in top panel"
@@ -85,12 +93,6 @@ msgstr "Włącz notyfikacje"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Automatycze wstrzymywanie i wygaszacz ekranu wyłączone"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Automatyczne wstrzymywanie i wygaszacz ekranu włączone"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine włączone"
