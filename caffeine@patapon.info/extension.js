@@ -310,8 +310,6 @@ class Caffeine extends PanelMenu.Button {
 
 function init(extensionMeta) {
     Convenience.initTranslations();
-    let theme = imports.gi.Gtk.IconTheme.get_default();
-    theme.append_search_path(extensionMeta.path + "/icons");
 }
 
 function enable() {
