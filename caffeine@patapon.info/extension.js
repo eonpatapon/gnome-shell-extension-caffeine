@@ -93,17 +93,17 @@ class Caffeine extends PanelMenu.Button {
     _init() {
         super._init(null, IndicatorName);
 
-        this.actor.accessible_role = Atk.Role.TOGGLE_BUTTON;
+        this.accessible_role = Atk.Role.TOGGLE_BUTTON;
 
         this._settings = Convenience.getSettings();
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
             if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
-                this.actor.show();
+                this.show();
             else
-                this.actor.hide();
+                this.hide();
         });
         if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
-            this.actor.hide();
+            this.hide();
 
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
@@ -142,9 +142,9 @@ class Caffeine extends PanelMenu.Button {
         this._cookies = [];
         this._objects = [];
 
-        this.actor.add_actor(this._icon);
-        this.actor.add_style_class_name('panel-status-button');
-        this.actor.connect('button-press-event', this.toggleState.bind(this));
+        this.add_actor(this._icon);
+        this.add_style_class_name('panel-status-button');
+        this.connect('button-press-event', this.toggleState.bind(this));
 
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
