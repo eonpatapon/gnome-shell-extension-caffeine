@@ -145,6 +145,7 @@ class Caffeine extends PanelMenu.Button {
         this.add_actor(this._icon);
         this.add_style_class_name('panel-status-button');
         this.connect('button-press-event', this.toggleState.bind(this));
+        this.connect('touch-event', this.toggleState.bind(this));
 
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
