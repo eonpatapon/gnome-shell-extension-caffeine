@@ -261,8 +261,9 @@ class Caffeine extends PanelMenu.Button {
                         if (this._state === false) {
                             this._state = true;
                             this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
-                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
-                                Main.notify(_('Auto suspend and screensaver disabled'));
+                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen) {
+                                this._sendNotification('enabled');
+                            }
                         }
                     }
                 });
@@ -282,8 +283,26 @@ class Caffeine extends PanelMenu.Button {
             if (this._apps.length === 0) {
                 this._state = false;
                 this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
-                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    Main.notify(_('Auto suspend and screensaver enabled'));
+                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
+                    this._sendNotification('disabled');
+                }
+            }
+        }
+    }
+
+    _sendNotification(state){
+        if (state == 'enabled') {
+          if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && this._proxy.DisabledUntilTomorrow) {
+              Main.notify(_('Auto suspend and screensaver disabled. Night Light paused.'));
+          } else {
+              Main.notify(_('Auto suspend and screensaver disabled'));
+          }
+        }
+        if (state == 'disabled') {
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && !this._proxy.DisabledUntilTomorrow) {
+                Main.notify(_('Auto suspend and screensaver enabled. Night Light resumed.'));
+            } else {
+                Main.notify(_('Auto suspend and screensaver enabled'));
             }
         }
     }
