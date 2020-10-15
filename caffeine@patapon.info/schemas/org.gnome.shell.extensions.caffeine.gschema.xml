@@ -31,5 +31,15 @@
         <summary>Enable when a fullscreen application is running</summary>
         <description>Enable when a fullscreen application is running</description>
     </key>
+    <key type="b" name="control-nightlight">
+        <default>false</default>
+        <summary>Pause/resume Night Light</summary>
+        <description>Pause/resume Night Light when enabled/disabled</description>
+    </key>
+    <key type="b" name="control-nightlight-for-app">
+        <default>false</default>
+        <summary>Pause/resume Night Light for defined applications only</summary>
+        <description>Pause/resume Night Light for defined applicationa when enabled/disabled</description>
+    </key>
   </schema>
 </schemalist>

@@ -38,12 +38,23 @@ const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const NIGHT_LIGHT_KEY = 'control-nightlight';
+const NIGHT_LIGHT_APP_ONLY_KEY = 'control-nightlight-for-app';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Convenience = Me.imports.convenience;
+
+const ColorInterface = '<node> \
+  <interface name="org.gnome.SettingsDaemon.Color"> \
+    <property name="DisabledUntilTomorrow" type="b" access="readwrite"/>\
+    <property name="NightLightActive" type="b" access="read"/>\
+  </interface>\
+  </node>';
+
+const ColorProxy = Gio.DBusProxy.makeProxyWrapper(ColorInterface);
 
 const DBusSessionManagerIface = '<node>\
   <interface name="org.gnome.SessionManager">\
@@ -104,6 +115,15 @@ class Caffeine extends PanelMenu.Button {
         });
         if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
             this.hide();
+
+        this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
+            if (error) {
+              log(error.message);
+              return;
+            }
+        });
+
+        this._night_light = false;
 
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
                                                           'org.gnome.SessionManager',
@@ -190,9 +210,21 @@ class Caffeine extends PanelMenu.Button {
     toggleState() {
         if (this._state) {
             this._apps.forEach(app_id => this.removeInhibit(app_id));
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+                this._proxy.DisabledUntilTomorrow = false;
+                this._night_light = true;
+            } else {
+                this._night_light = false;
+            }
         }
         else {
             this.addInhibit('user');
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+                this._proxy.DisabledUntilTomorrow = true;
+                this._night_light = true;
+            } else {
+                this._night_light = false;
+            }
         }
     }
 
