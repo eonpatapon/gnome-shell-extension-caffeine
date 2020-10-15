@@ -112,8 +112,12 @@ class Caffeine extends PanelMenu.Button {
         this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved', this._inhibitorRemoved.bind(this));
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
-        this._windowTracker = Shell.WindowTracker.get_default();
-        
+        this._appSystem = Shell.AppSystem.get_default();
+
+        this._appsChangedId =
+            this._appSystem.connect('installed-changed',
+                this._updateAppData.bind(this));
+
         // ("screen" in global) is false on 3.28, although global.screen exists
         if (typeof global.screen !== "undefined") {
             this._screen = global.screen;
@@ -123,11 +127,6 @@ class Caffeine extends PanelMenu.Button {
             this._screen = global.display;
             this._display = this._screen;
         }
-
-        // Connect after so the handler from ShellWindowTracker has already run
-        this._windowCreatedId = this._display.connect_after('window-created', this._mayInhibit.bind(this));
-        let shellwm = global.window_manager;
-        this._windowDestroyedId = shellwm.connect('destroy', this._mayUninhibit.bind(this));
 
         this._icon = new St.Icon({
             style_class: 'system-status-icon'
@@ -156,10 +155,12 @@ class Caffeine extends PanelMenu.Button {
             this._inFullscreenId = this._screen.connect('in-fullscreen-changed', this.toggleFullscreen.bind(this));
             this.toggleFullscreen();
         }
-        // List current windows to check if we need to inhibit
-        global.get_window_actors().map(window => {
-            this._mayInhibit(null, window.meta_window, null);
-        });
+
+        this._appConfigs = [];
+        this._appData = new Map();
+
+        this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
+        this._updateAppConfigs();
     }
 
     get inFullscreen() {
@@ -255,31 +256,57 @@ class Caffeine extends PanelMenu.Button {
         }
     }
 
-    _mayInhibit(display, window, noRecurse) {
-        let app = this._windowTracker.get_window_app(window);
-        if (!app) {
-            if (!noRecurse) {
-                // window is not tracked yet
-                Mainloop.idle_add(() => {
-                    this._mayInhibit(display, window, true);
-                    return false;
-                });
-            }
-            return;
-        }
-        let app_id = app.get_id();
-        let apps = this._settings.get_strv(INHIBIT_APPS_KEY);
-        if (apps.includes(app_id))
-            this.addInhibit(app_id);
+    _updateAppConfigs() {
+        this._appConfigs.length = 0;
+        this._settings.get_strv(INHIBIT_APPS_KEY).forEach(appId => {
+            this._appConfigs.push(appId);
+        });
+        this._updateAppData();
     }
 
-    _mayUninhibit(shellwm, actor) {
-        let window = actor.meta_window;
-        let app = this._windowTracker.get_window_app(window);
-        if (app) {
-            let app_id = app.get_id();
-            if (this._apps.includes(app_id))
-                this.removeInhibit(app_id);
+    _updateAppData() {
+        let ids = this._appConfigs.slice()
+        let removedApps = [...this._appData.keys()]
+            .filter(a => !ids.includes(a.id));
+        removedApps.forEach(app => {
+            app.disconnect(this._appData.get(app).windowsChangedId);
+            let id = app.get_id();
+            this._appData.delete(app);
+        });
+        let addedApps = ids
+            .map(id => this._appSystem.lookup_app(id))
+            .filter(app => app && !this._appData.has(app));
+        addedApps.forEach(app => {
+            let data = {
+                windowsChangedId: app.connect('windows-changed',
+                    this._appWindowsChanged.bind(this)),
+            };
+            let id = app.get_id();
+            this._appData.set(app, data);
+        });
+    }
+
+    _appWindowsChanged(app) {
+        let app_id = app.get_id();
+        let appState = app.get_state();
+        // app is STARTING (1) or RUNNING (2)
+        if ((appState == 1) || (appState == 2)) {
+            this.addInhibit(app_id);
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive) {
+                this._proxy.DisabledUntilTomorrow = true;
+                this._night_light = true;
+            } else {
+                this._night_light = false;
+            }
+        // app is STOPPED (0)
+        } else {
+            this.removeInhibit(app_id);
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive) {
+                this._proxy.DisabledUntilTomorrow = false;
+                this._night_light = true;
+            } else {
+                this._night_light = false;
+            }
         }
     }
 
@@ -305,6 +332,12 @@ class Caffeine extends PanelMenu.Button {
             global.window_manager.disconnect(this._windowDestroyedId);
             this._windowDestroyedId = 0;
         }
+        if (this._appsChangedId) {
+            this._appSystem.disconnect(this._appsChangedId);
+            this._appsChangedId = 0;
+        }
+        this._appConfigs.length = 0;
+        this._updateAppData();
         super.destroy();
     }
 });
