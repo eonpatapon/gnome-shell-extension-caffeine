@@ -197,13 +197,15 @@ class Caffeine extends PanelMenu.Button {
 
     toggleFullscreen() {
         Mainloop.timeout_add_seconds(2, () => {
-          if (this.inFullscreen && !this._apps.includes('fullscreen')) {
-              this.addInhibit('fullscreen');
-          }
+            if (this.inFullscreen && !this._apps.includes('fullscreen')) {
+                this.addInhibit('fullscreen');
+                this._manageNightLight('disabled');
+            }
         });
 
         if (!this.inFullscreen && this._apps.includes('fullscreen')) {
-              this.removeInhibit('fullscreen');
+            this.removeInhibit('fullscreen');
+            this._manageNightLight('enabled');
         }
     }
 
