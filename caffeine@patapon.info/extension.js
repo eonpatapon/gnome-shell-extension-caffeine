@@ -210,21 +210,11 @@ class Caffeine extends PanelMenu.Button {
     toggleState() {
         if (this._state) {
             this._apps.forEach(app_id => this.removeInhibit(app_id));
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
-                this._proxy.DisabledUntilTomorrow = false;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
+            this._manageNightLight('enabled');
         }
         else {
             this.addInhibit('user');
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
-                this._proxy.DisabledUntilTomorrow = true;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
+            this._manageNightLight('disabled');
         }
     }
 
@@ -287,6 +277,25 @@ class Caffeine extends PanelMenu.Button {
                     this._sendNotification('disabled');
                 }
             }
+        }
+    }
+
+    _manageNightLight(state){
+        if (state == 'enabled') {
+          if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+              this._proxy.DisabledUntilTomorrow = false;
+              this._night_light = true;
+          } else {
+              this._night_light = false;
+          }
+        }
+        if (state == 'disabled') {
+          if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+              this._proxy.DisabledUntilTomorrow = true;
+              this._night_light = true;
+          } else {
+              this._night_light = false;
+          }
         }
     }
 
