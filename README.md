@@ -1,12 +1,12 @@
-# This extension is not maintained anymore. New maintainers are welcome!
+# This extension is barely maintained anymore. New maintainers are welcome!
 
 ## gnome-shell-extension-caffeine
 
 Fill the cup to inhibit auto suspend and screensaver.
 
-This extension supports gnome-shell 3.4 to 3.36:
+This extension supports gnome-shell 3.4 to 3.38:
 
-    * master: 3.36
+    * master: 3.36 -> 3.38
     * gnome-shell-3.32-3.34: 3.32 -> 3.34
     * gnome-shell-3.10-3.30: 3.10 -> 3.30
     * gnome-shell-before-3.10: 3.4 -> 3.8
