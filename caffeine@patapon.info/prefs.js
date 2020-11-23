@@ -18,6 +18,8 @@ const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const RESTORE_KEY = 'restore-state';
+const NIGHT_LIGHT_KEY = 'control-nightlight';
+const NIGHT_LIGHT_APP_ONLY_KEY = 'control-nightlight-for-app';
 
 const Columns = {
     APPINFO: 0,
@@ -102,6 +104,46 @@ class CaffeineWidget {
         notificationsBox.add(notificationsSwitch);
 
         this.w.add(notificationsBox);
+
+        const nightlightBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                margin: 7});
+
+        const nightlightLabel = new Gtk.Label({label: _("Pause/resume Night Light if enabled"),
+                                   xalign: 0});
+
+        const nightlightSwitch = new Gtk.Switch({active: this._settings.get_boolean(NIGHT_LIGHT_KEY)});
+        nightlightSwitch.connect('notify::active', button => {
+            this._settings.set_boolean(NIGHT_LIGHT_KEY, button.active);
+        });
+
+        nightlightBox.pack_start(nightlightLabel, true, true, 0);
+        nightlightBox.add(nightlightSwitch);
+
+        this.w.add(nightlightBox);
+
+        const nightlightAppBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
+                                margin: 7});
+
+        const nightlightAppLabel = new Gtk.Label({label: _("Pause/resume Night Light for defined applications only"),
+                                   xalign: 0});
+
+        const nightlightAppSwitch = new Gtk.Switch({active: this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)});
+        nightlightAppSwitch.connect('notify::active', button => {
+            this._settings.set_boolean(NIGHT_LIGHT_APP_ONLY_KEY, button.active);
+        });
+        nightlightSwitch.connect('notify::active', button => {
+          if (button.active) {
+            nightlightAppSwitch.set_sensitive(true);
+          } else {
+              nightlightAppSwitch.set_active(false);
+              nightlightAppSwitch.set_sensitive(false);
+          }
+        });
+
+        nightlightAppBox.pack_start(nightlightAppLabel, true, true, 0);
+        nightlightAppBox.add(nightlightAppSwitch);
+
+        this.w.add(nightlightAppBox);
 
         this._store = new Gtk.ListStore();
         this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
