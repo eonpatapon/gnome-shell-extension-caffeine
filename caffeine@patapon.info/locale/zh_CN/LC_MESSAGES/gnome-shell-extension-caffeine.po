@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 19:42+0100\n"
+"POT-Creation-Date: 2020-11-23 14:56+0100\n"
 "PO-Revision-Date: 2017-02-08 21:42+0800\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -17,44 +17,62 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:231
+#: extension.js:307
+#, fuzzy
+msgid "Auto suspend and screensaver disabled. Night Light paused."
+msgstr "自动挂起与屏幕保护程序已禁用"
+
+#: extension.js:309
 msgid "Auto suspend and screensaver disabled"
 msgstr "自动挂起与屏幕保护程序已禁用"
 
-#: extension.js:252
+#: extension.js:314
+#, fuzzy
+msgid "Auto suspend and screensaver enabled. Night Light resumed."
+msgstr "自动挂起与屏幕保护程序已启用"
+
+#: extension.js:316
 msgid "Auto suspend and screensaver enabled"
 msgstr "自动挂起与屏幕保护程序已启用"
 
-#: prefs.js:43
+#: prefs.js:45
 msgid "Show Caffeine in top panel"
 msgstr "在顶部面板显示 Caffeine"
 
-#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: prefs.js:62 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "运行全屏程序时自动启动"
 
-#: prefs.js:77
+#: prefs.js:79
 msgid "Restore state across reboots"
 msgstr "重启后保持原有状态"
 
-#: prefs.js:93
+#: prefs.js:95
 msgid "Enable notifications"
 msgstr "启用通知"
 
-#: prefs.js:114
+#: prefs.js:111
+msgid "Pause/resume Night Light if enabled"
+msgstr ""
+
+#: prefs.js:127 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:41
+msgid "Pause/resume Night Light for defined applications only"
+msgstr ""
+
+#: prefs.js:156
 msgid "Applications which enable Caffeine automatically"
 msgstr "自动激活 Caffeine 的程序"
 
-#: prefs.js:130
+#: prefs.js:172
 msgid "Add application"
 msgstr "添加程序"
 
-#: prefs.js:144
+#: prefs.js:186
 msgid "Create new matching rule"
 msgstr "创建新的匹配规则"
 
-#: prefs.js:148
+#: prefs.js:190
 msgid "Add"
 msgstr "添加"
 
@@ -90,6 +108,19 @@ msgstr "显示通知"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "启用/禁用时显示通知"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:36
+msgid "Pause/resume Night Light"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+#, fuzzy
+msgid "Pause/resume Night Light when enabled/disabled"
+msgstr "启用/禁用时显示通知"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+msgid "Pause/resume Night Light for defined applicationa when enabled/disabled"
+msgstr ""
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine 已开启"

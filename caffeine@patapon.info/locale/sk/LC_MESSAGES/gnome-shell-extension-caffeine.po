@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 19:42+0100\n"
+"POT-Creation-Date: 2020-11-23 14:56+0100\n"
 "PO-Revision-Date: 2015-01-16 10:24+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak\n"
@@ -17,44 +17,62 @@ msgstr ""
 "X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:231
+#: extension.js:307
+#, fuzzy
+msgid "Auto suspend and screensaver disabled. Night Light paused."
+msgstr "Automatické uspanie a šetrič obrazovky sú zakázané"
+
+#: extension.js:309
 msgid "Auto suspend and screensaver disabled"
 msgstr "Automatické uspanie a šetrič obrazovky sú zakázané"
 
-#: extension.js:252
+#: extension.js:314
+#, fuzzy
+msgid "Auto suspend and screensaver enabled. Night Light resumed."
+msgstr "Automatické uspanie a šetrič obrazovky sú povolené"
+
+#: extension.js:316
 msgid "Auto suspend and screensaver enabled"
 msgstr "Automatické uspanie a šetrič obrazovky sú povolené"
 
-#: prefs.js:43
+#: prefs.js:45
 msgid "Show Caffeine in top panel"
 msgstr "Zobraziť Caffeine v hornej lište"
 
-#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: prefs.js:62 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Povoliť, keď je spustená aplikácia v režime na celú obrazovku"
 
-#: prefs.js:77
+#: prefs.js:79
 msgid "Restore state across reboots"
 msgstr ""
 
-#: prefs.js:93
+#: prefs.js:95
 msgid "Enable notifications"
 msgstr "Povoliť oznámenia"
 
-#: prefs.js:114
+#: prefs.js:111
+msgid "Pause/resume Night Light if enabled"
+msgstr ""
+
+#: prefs.js:127 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:41
+msgid "Pause/resume Night Light for defined applications only"
+msgstr ""
+
+#: prefs.js:156
 msgid "Applications which enable Caffeine automatically"
 msgstr "Aplikácie, ktoré automaticky povolia Caffeine"
 
-#: prefs.js:130
+#: prefs.js:172
 msgid "Add application"
 msgstr "Pridať aplikáciu"
 
-#: prefs.js:144
+#: prefs.js:186
 msgid "Create new matching rule"
 msgstr "Vytvorenie nového pravidla"
 
-#: prefs.js:148
+#: prefs.js:190
 msgid "Add"
 msgstr "Pridať"
 
@@ -92,6 +110,18 @@ msgstr "Povoliť oznámenia"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:36
+msgid "Pause/resume Night Light"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+msgid "Pause/resume Night Light when enabled/disabled"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+msgid "Pause/resume Night Light for defined applicationa when enabled/disabled"
 msgstr ""
 
 #~ msgid "Caffeine enabled"

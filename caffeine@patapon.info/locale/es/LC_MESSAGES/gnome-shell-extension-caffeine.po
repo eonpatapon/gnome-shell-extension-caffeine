@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 19:42+0100\n"
+"POT-Creation-Date: 2020-11-23 14:56+0100\n"
 "PO-Revision-Date: 2015-11-28 21:06-0300\n"
 "Last-Translator: Sergio D. Márquez <marquez.sergio.d@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -17,44 +17,62 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:231
+#: extension.js:307
+#, fuzzy
+msgid "Auto suspend and screensaver disabled. Night Light paused."
+msgstr "Auto suspensión y salvapantallas deshabilitados"
+
+#: extension.js:309
 msgid "Auto suspend and screensaver disabled"
 msgstr "Auto suspensión y salvapantallas deshabilitados"
 
-#: extension.js:252
+#: extension.js:314
+#, fuzzy
+msgid "Auto suspend and screensaver enabled. Night Light resumed."
+msgstr "Auto suspensión y salvapantallas habilitados"
+
+#: extension.js:316
 msgid "Auto suspend and screensaver enabled"
 msgstr "Auto suspensión y salvapantallas habilitados"
 
-#: prefs.js:43
+#: prefs.js:45
 msgid "Show Caffeine in top panel"
 msgstr "Mostrar Caffeine en el panel superior"
 
-#: prefs.js:60 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
+#: prefs.js:62 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Enable when a fullscreen application is running"
 msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
-#: prefs.js:77
+#: prefs.js:79
 msgid "Restore state across reboots"
 msgstr "Restablecer estado despues de reiniciar"
 
-#: prefs.js:93
+#: prefs.js:95
 msgid "Enable notifications"
 msgstr "Activar las notificaciones"
 
-#: prefs.js:114
+#: prefs.js:111
+msgid "Pause/resume Night Light if enabled"
+msgstr ""
+
+#: prefs.js:127 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:41
+msgid "Pause/resume Night Light for defined applications only"
+msgstr ""
+
+#: prefs.js:156
 msgid "Applications which enable Caffeine automatically"
 msgstr "Aplicaciones que activan Caffeine automáticamente"
 
-#: prefs.js:130
+#: prefs.js:172
 msgid "Add application"
 msgstr "Agregar aplicación"
 
-#: prefs.js:144
+#: prefs.js:186
 msgid "Create new matching rule"
 msgstr "Crear nueva regla"
 
-#: prefs.js:148
+#: prefs.js:190
 msgid "Add"
 msgstr "Agregar"
 
@@ -95,6 +113,19 @@ msgstr "Activar las notificaciones"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show notifications when enabled/disabled"
 msgstr "Mostrar notificaciones de habilitado/deshabilitado"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:36
+msgid "Pause/resume Night Light"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+#, fuzzy
+msgid "Pause/resume Night Light when enabled/disabled"
+msgstr "Mostrar notificaciones de habilitado/deshabilitado"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+msgid "Pause/resume Night Light for defined applicationa when enabled/disabled"
+msgstr ""
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine activado"
