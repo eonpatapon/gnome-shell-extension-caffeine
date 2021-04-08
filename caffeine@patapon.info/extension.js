@@ -1,9 +1,9 @@
 /* -*- mode: js2 - indent-tabs-mode: nil - js2-basic-offset: 4 -*- */
-/*jshint multistr:true */
-/*jshint esnext:true */
-/*global imports: true */
-/*global global: true */
-/*global log: true */
+/* jshint multistr:true */
+/* jshint esnext:true */
+/* global imports: true */
+/* global global: true */
+/* global log: true */
 /**
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -92,12 +92,12 @@ const DBusSessionManagerInhibitorIface = '<node>\
 
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
-const IndicatorName = "Caffeine";
+const IndicatorName = 'Caffeine';
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 
 let CaffeineIndicator;
-let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
+let ShellVersion = parseInt(Config.PACKAGE_VERSION.split('.')[1]);
 
 const Caffeine = GObject.registerClass(
 class Caffeine extends PanelMenu.Button {
@@ -117,17 +117,15 @@ class Caffeine extends PanelMenu.Button {
             this.hide();
 
         this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
-            if (error) {
-              log(error.message);
-              return;
-            }
+            if (error)
+                log(error.message);
         });
 
         this._night_light = false;
 
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
-                                                          'org.gnome.SessionManager',
-                                                          '/org/gnome/SessionManager');
+            'org.gnome.SessionManager',
+            '/org/gnome/SessionManager');
         this._inhibitorAddedId = this._sessionManager.connectSignal('InhibitorAdded', this._inhibitorAdded.bind(this));
         this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved', this._inhibitorRemoved.bind(this));
 
@@ -139,24 +137,23 @@ class Caffeine extends PanelMenu.Button {
                 this._updateAppData.bind(this));
 
         // ("screen" in global) is false on 3.28, although global.screen exists
-        if (typeof global.screen !== "undefined") {
+        if (typeof global.screen !== 'undefined') {
             this._screen = global.screen;
             this._display = this._screen.get_display();
-        }
-        else {
+        } else {
             this._screen = global.display;
             this._display = this._screen;
         }
 
         this._icon = new St.Icon({
-            style_class: 'system-status-icon'
+            style_class: 'system-status-icon',
         });
         this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
 
         this._state = false;
         // who has requested the inhibition
-        this._last_app = "";
-        this._last_cookie = "";
+        this._last_app = '';
+        this._last_cookie = '';
         this._apps = [];
         this._cookies = [];
         this._objects = [];
@@ -167,9 +164,9 @@ class Caffeine extends PanelMenu.Button {
         this.connect('touch-event', this.toggleState.bind(this));
 
         // Restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
+        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY))
             this.toggleState();
-        }
+
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._inFullscreenId = this._screen.connect('in-fullscreen-changed', this.toggleFullscreen.bind(this));
@@ -186,7 +183,7 @@ class Caffeine extends PanelMenu.Button {
     get inFullscreen() {
         let nb_monitors = this._screen.get_n_monitors();
         let inFullscreen = false;
-        for (let i=0; i<nb_monitors; i++) {
+        for (let i = 0; i < nb_monitors; i++) {
             if (this._screen.get_monitor_in_fullscreen(i)) {
                 inFullscreen = true;
                 break;
@@ -213,8 +210,7 @@ class Caffeine extends PanelMenu.Button {
         if (this._state) {
             this._apps.forEach(app_id => this.removeInhibit(app_id));
             this._manageNightLight('enabled');
-        }
-        else {
+        } else {
             this.addInhibit('user');
             this._manageNightLight('disabled');
         }
@@ -222,7 +218,7 @@ class Caffeine extends PanelMenu.Button {
 
     addInhibit(app_id) {
         this._sessionManager.InhibitRemote(app_id,
-            0, "Inhibit by %s".format(IndicatorName), 12,
+            0, 'Inhibit by %s'.format(IndicatorName), 12,
             cookie => {
                 this._last_cookie = cookie;
                 this._last_app = app_id;
@@ -237,10 +233,10 @@ class Caffeine extends PanelMenu.Button {
 
     _inhibitorAdded(proxy, sender, [object]) {
         this._sessionManager.GetInhibitorsRemote(([inhibitors]) => {
-            for(var i in inhibitors) {
+            for (var i in inhibitors) {
                 let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
-                                                             'org.gnome.SessionManager',
-                                                             inhibitors[i]);
+                    'org.gnome.SessionManager',
+                    inhibitors[i]);
                 inhibitor.GetAppIdRemote(app_id => {
                     if (app_id != '' && app_id == this._last_app) {
                         if (this._last_app == 'user')
@@ -248,14 +244,13 @@ class Caffeine extends PanelMenu.Button {
                         this._apps.push(this._last_app);
                         this._cookies.push(this._last_cookie);
                         this._objects.push(object);
-                        this._last_app = "";
-                        this._last_cookie = "";
+                        this._last_app = '';
+                        this._last_cookie = '';
                         if (this._state === false) {
                             this._state = true;
                             this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
-                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen) {
+                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendNotification('enabled');
-                            }
                         }
                     }
                 });
@@ -275,46 +270,43 @@ class Caffeine extends PanelMenu.Button {
             if (this._apps.length === 0) {
                 this._state = false;
                 this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
-                if(this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
+                if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendNotification('disabled');
-                }
             }
         }
     }
 
-    _manageNightLight(state){
+    _manageNightLight(state) {
         if (state == 'enabled') {
-          if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
-              this._proxy.DisabledUntilTomorrow = false;
-              this._night_light = true;
-          } else {
-              this._night_light = false;
-          }
-        }
-        if (state == 'disabled') {
-          if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
-              this._proxy.DisabledUntilTomorrow = true;
-              this._night_light = true;
-          } else {
-              this._night_light = false;
-          }
-        }
-    }
-
-    _sendNotification(state){
-        if (state == 'enabled') {
-          if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && this._proxy.DisabledUntilTomorrow) {
-              Main.notify(_('Auto suspend and screensaver disabled. Night Light paused.'));
-          } else {
-              Main.notify(_('Auto suspend and screensaver disabled'));
-          }
-        }
-        if (state == 'disabled') {
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && !this._proxy.DisabledUntilTomorrow) {
-                Main.notify(_('Auto suspend and screensaver enabled. Night Light resumed.'));
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+                this._proxy.DisabledUntilTomorrow = false;
+                this._night_light = true;
             } else {
-                Main.notify(_('Auto suspend and screensaver enabled'));
+                this._night_light = false;
             }
+        }
+        if (state == 'disabled') {
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+                this._proxy.DisabledUntilTomorrow = true;
+                this._night_light = true;
+            } else {
+                this._night_light = false;
+            }
+        }
+    }
+
+    _sendNotification(state) {
+        if (state == 'enabled') {
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && this._proxy.DisabledUntilTomorrow)
+                Main.notify(_('Auto suspend and screensaver disabled. Night Light paused.'));
+            else
+                Main.notify(_('Auto suspend and screensaver disabled'));
+        }
+        if (state == 'disabled') {
+            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && !this._proxy.DisabledUntilTomorrow)
+                Main.notify(_('Auto suspend and screensaver enabled. Night Light resumed.'));
+            else
+                Main.notify(_('Auto suspend and screensaver enabled'));
         }
     }
 
@@ -327,7 +319,7 @@ class Caffeine extends PanelMenu.Button {
     }
 
     _updateAppData() {
-        let ids = this._appConfigs.slice()
+        let ids = this._appConfigs.slice();
         let removedApps = [...this._appData.keys()]
             .filter(a => !ids.includes(a.id));
         removedApps.forEach(app => {
