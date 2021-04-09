@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extensions-caffeine-daemon">
+   <enum id="org.gnome.shell.extensions.caffeine.control-nightlight">
+        <value value="0" nick="never"/>
+        <value value="1" nick="always"/>
+        <value value="2" nick="for-apps"/>
+    </enum>
+
   <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
     <key type="as" name="inhibit-apps">
         <default>[ ]</default>
@@ -31,15 +37,10 @@
         <summary>Enable when a fullscreen application is running</summary>
         <description>Enable when a fullscreen application is running</description>
     </key>
-    <key type="b" name="control-nightlight">
-        <default>false</default>
+    <key name="control-nightlight" enum="org.gnome.shell.extensions.caffeine.control-nightlight">
+        <default>"never"</default>
         <summary>Pause/resume Night Light</summary>
         <description>Pause/resume Night Light when enabled/disabled</description>
-    </key>
-    <key type="b" name="control-nightlight-for-app">
-        <default>false</default>
-        <summary>Pause/resume Night Light for defined applications only</summary>
-        <description>Pause/resume Night Light for defined applicationa when enabled/disabled</description>
     </key>
   </schema>
 </schemalist>

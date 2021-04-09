@@ -31,7 +31,6 @@ const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const NIGHT_LIGHT_KEY = 'control-nightlight';
-const NIGHT_LIGHT_APP_ONLY_KEY = 'control-nightlight-for-app';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -87,6 +86,12 @@ const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSess
 const IndicatorName = 'Caffeine';
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
+
+const ControlNightLight = {
+    NEVER: 0,
+    ALWAYS: 1,
+    FOR_APPS: 2,
+};
 
 let CaffeineIndicator;
 
@@ -269,8 +274,9 @@ class Caffeine extends PanelMenu.Button {
     }
 
     _manageNightLight(state) {
+        const controlNl = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlNightLight.ALWAYS;
         if (state === 'enabled') {
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+            if (controlNl && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = false;
                 this._night_light = true;
             } else {
@@ -278,7 +284,7 @@ class Caffeine extends PanelMenu.Button {
             }
         }
         if (state === 'disabled') {
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive && !this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)) {
+            if (controlNl && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = true;
                 this._night_light = true;
             } else {
@@ -288,14 +294,15 @@ class Caffeine extends PanelMenu.Button {
     }
 
     _sendNotification(state) {
+        const controllingNl = this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlNightLight.NEVER;
         if (state === 'enabled') {
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && this._proxy.DisabledUntilTomorrow)
+            if (controllingNl && this._night_light && this._proxy.DisabledUntilTomorrow)
                 Main.notify(_('Auto suspend and screensaver disabled. Night Light paused.'));
             else
                 Main.notify(_('Auto suspend and screensaver disabled'));
         }
         if (state === 'disabled') {
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._night_light && !this._proxy.DisabledUntilTomorrow)
+            if (controllingNl && this._night_light && !this._proxy.DisabledUntilTomorrow)
                 Main.notify(_('Auto suspend and screensaver enabled. Night Light resumed.'));
             else
                 Main.notify(_('Auto suspend and screensaver enabled'));
@@ -333,18 +340,17 @@ class Caffeine extends PanelMenu.Button {
     _appWindowsChanged(app) {
         let appId = app.get_id();
         let appState = app.get_state();
-        if ((appState === Shell.AppState.STARTING) || (appState === Shell.AppState.RUNNING)) {
+        if (appState !== Shell.AppState.STOPPED) {
             this.addInhibit(appId);
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive) {
+            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlNightLight.NEVER && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = true;
                 this._night_light = true;
             } else {
                 this._night_light = false;
             }
-        // app is STOPPED (0)
         } else {
             this.removeInhibit(appId);
-            if (this._settings.get_boolean(NIGHT_LIGHT_KEY) && this._proxy.NightLightActive) {
+            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlNightLight.NEVER && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = false;
                 this._night_light = true;
             } else {
