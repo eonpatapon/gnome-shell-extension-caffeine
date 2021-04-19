@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 21:13-0400\n"
+"POT-Creation-Date: 2021-04-19 16:05-0400\n"
 "PO-Revision-Date: 2017-05-05 22:28+0900\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
@@ -148,11 +148,27 @@ msgid "Enable when a fullscreen application is running"
 msgstr "フルスクリーンアプリケーション実行時に有効にする"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-msgid "Pause/resume Night Light"
+msgid "DEPRECATED. Pause/resume Night Light"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Pause/resume Night Light when enabled/disabled"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+msgid "Pause/resume Night Light for defined application when enabled/disabled"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+msgid "Night Light control mode"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
 
 #~ msgid "Show Caffeine in top panel"

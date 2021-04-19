@@ -16,7 +16,7 @@ const SettingsKey = {
     SHOW_NOTIFICATIONS: 'show-notifications',
     FULLSCREEN: 'enable-fullscreen',
     RESTORE: 'restore-state',
-    NIGHT_LIGHT: 'control-nightlight',
+    NIGHT_LIGHT: 'nightlight-control',
 };
 
 const SettingListBoxRow = GObject.registerClass({

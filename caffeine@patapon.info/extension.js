@@ -393,6 +393,21 @@ class Caffeine extends PanelMenu.Button {
 
 function init() {
     ExtensionUtils.initTranslations();
+
+    // Migrate old nightlight settings
+    const _settings = ExtensionUtils.getSettings();
+    const controlNightLight = _settings.get_value('control-nightlight');
+    const controlNightLightForApp = _settings.get_value('control-nightlight-for-app');
+    if (controlNightLight.unpack() === true) {
+        let nightlightControl = ControlNightLight.ALWAYS;
+        if (controlNightLightForApp.unpack() === true)
+            nightlightControl = ControlNightLight.FOR_APPS;
+        _settings.set_enum('nightlight-control', nightlightControl);
+    }
+
+    // remove deprecated settings
+    _settings.reset('control-nightlight');
+    _settings.reset('control-nightlight-for-app');
 }
 
 function enable() {

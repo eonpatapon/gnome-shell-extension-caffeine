@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 21:13-0400\n"
+"POT-Creation-Date: 2021-04-19 16:05-0400\n"
 "PO-Revision-Date: 2021-04-09 21:31-0400\n"
 "Last-Translator: Felix Kaechele <felix@kaechele.ca>\n"
 "Language-Team: German\n"
@@ -20,8 +20,7 @@ msgstr ""
 #: extension.js:300
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr ""
-"Bereitschaftsmodus und Bildschirmschoner deaktiviert. Nachtmodus "
-"pausiert."
+"Bereitschaftsmodus und Bildschirmschoner deaktiviert. Nachtmodus pausiert."
 
 #: extension.js:302
 msgid "Auto suspend and screensaver disabled"
@@ -30,8 +29,7 @@ msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
 #: extension.js:306
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr ""
-"Bereitschaftsmodus und Bildschirmschoner aktiviert. Nachtmodus "
-"fortgesetzt."
+"Bereitschaftsmodus und Bildschirmschoner aktiviert. Nachtmodus fortgesetzt."
 
 #: extension.js:308
 msgid "Auto suspend and screensaver enabled"
@@ -67,8 +65,7 @@ msgstr "Aktiviere für Vollbild Anwendungen"
 
 #: prefs.js:142
 msgid "Automatically enable when an app enters fullscreen mode"
-msgstr ""
-"Automatisch aktivieren wenn Anwendung in den Vollbildmodus wechselt"
+msgstr "Automatisch aktivieren wenn Anwendung in den Vollbildmodus wechselt"
 
 #: prefs.js:145
 msgid "Pause and resume Night Light"
@@ -147,12 +144,30 @@ msgid "Enable when a fullscreen application is running"
 msgstr "Aktivieren, sobald eine Anwendung im Vollbildmodus läuft"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-msgid "Pause/resume Night Light"
+#, fuzzy
+msgid "DEPRECATED. Pause/resume Night Light"
 msgstr "Nachtmodus unterbrechen"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Pause/resume Night Light when enabled/disabled"
 msgstr "Nachtmodus unterbrechen wenn aktiviert"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#, fuzzy
+msgid "Pause/resume Night Light for defined application when enabled/disabled"
+msgstr "Nachtmodus unterbrechen wenn aktiviert"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+msgid "Night Light control mode"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+msgid "Set the way Caffeine interacts with the Night light setting."
+msgstr ""
 
 #~ msgid "Show Caffeine in top panel"
 #~ msgstr "Caffeine in der oberen Leiste anzeigen"
