@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 14:56+0100\n"
-"PO-Revision-Date: 2017-06-08 00:10+0100\n"
-"Last-Translator: Roman Spirgi <bigant@fedoraproject.org>\n"
+"POT-Creation-Date: 2021-04-19 16:05-0400\n"
+"PO-Revision-Date: 2021-04-09 21:31-0400\n"
+"Last-Translator: Felix Kaechele <felix@kaechele.ca>\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -14,115 +14,175 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:307
-#, fuzzy
+#: extension.js:300
 msgid "Auto suspend and screensaver disabled. Night Light paused."
-msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
+msgstr ""
+"Bereitschaftsmodus und Bildschirmschoner deaktiviert. Nachtmodus pausiert."
 
-#: extension.js:309
+#: extension.js:302
 msgid "Auto suspend and screensaver disabled"
 msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
 
-#: extension.js:314
-#, fuzzy
+#: extension.js:306
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
-msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
+msgstr ""
+"Bereitschaftsmodus und Bildschirmschoner aktiviert. Nachtmodus fortgesetzt."
 
-#: extension.js:316
+#: extension.js:308
 msgid "Auto suspend and screensaver enabled"
 msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
 
-#: prefs.js:45
-msgid "Show Caffeine in top panel"
-msgstr "Caffeine in der oberen Leiste anzeigen"
+#: prefs.js:133
+msgid "Show status indicator in top panel"
+msgstr "Indikator-Icon in der oberen Leiste anzeigen"
 
-#: prefs.js:62 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
-msgid "Enable when a fullscreen application is running"
-msgstr "Aktivieren, sobald eine Anwendung im Vollbildmodus läuft"
+#: prefs.js:133
+msgid "Enable or disable the Caffeine icon in the top panel"
+msgstr "Aktiviert oder deaktiviert das Caffeine Icon in der oberen Leiste"
 
-#: prefs.js:79
-msgid "Restore state across reboots"
+#: prefs.js:136
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#: prefs.js:136
+msgid "Enable notifications when Caffeine is enabled or disabled"
+msgstr "Benachrichtigungen anzeigen, wenn aktiviert/deaktiviert"
+
+#: prefs.js:139
+msgid "Remember state"
+msgstr "Zustand wiederherstellen"
+
+#: prefs.js:139
+msgid "Remember the last state across sessions and reboots"
 msgstr "Nach einem Neustart den Zustand wiederherstellen"
 
-#: prefs.js:95
-msgid "Enable notifications"
-msgstr "Benachrichtigungen aktivieren"
+#: prefs.js:142
+msgid "Enable for fullscreen apps"
+msgstr "Aktiviere für Vollbild Anwendungen"
 
-#: prefs.js:111
-msgid "Pause/resume Night Light if enabled"
-msgstr ""
+#: prefs.js:142
+msgid "Automatically enable when an app enters fullscreen mode"
+msgstr "Automatisch aktivieren wenn Anwendung in den Vollbildmodus wechselt"
 
-#: prefs.js:127 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:41
-msgid "Pause/resume Night Light for defined applications only"
-msgstr ""
+#: prefs.js:145
+msgid "Pause and resume Night Light"
+msgstr "Nachtmodus unterbrechen"
 
-#: prefs.js:156
-msgid "Applications which enable Caffeine automatically"
-msgstr "Anwendungen, welche Caffeine automatisch aktivieren"
+#: prefs.js:145
+msgid "Toggles the night light together with Caffeine's state"
+msgstr "Unterbricht den Nachtmodus wenn Caffeine aktiviert wird"
 
-#: prefs.js:172
-msgid "Add application"
+#: prefs.js:147
+msgid "Never"
+msgstr "Nie"
+
+#: prefs.js:147
+msgid "Always"
+msgstr "Immer"
+
+#: prefs.js:147
+msgid "For apps on list"
+msgstr "Für Apps auf Liste"
+
+#: prefs.js:181
+msgid "Apps that trigger Caffeine"
+msgstr "Anwendungen, die Caffeine aktivieren"
+
+#: prefs.js:353
+msgid "Add Application"
 msgstr "Anwendung hinzufügen"
 
-#: prefs.js:186
-msgid "Create new matching rule"
-msgstr "Neue Regel definieren"
+#: prefs.js:391
+msgid "General"
+msgstr "Allgemein"
 
-#: prefs.js:190
-msgid "Add"
-msgstr "Hinzufügen"
+#: prefs.js:394
+msgid "Apps"
+msgstr "Anwendungen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
 msgid "Application list"
-msgstr "Anwendung hinzufügen"
+msgstr "Anwendungsliste"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:13
 msgid ""
 "A list of strings, each containing an application id (desktop file name)"
 msgstr ""
 "Eine Liste aus Zeichenfolgen, die jeweils eine Anwendungs-ID enthält "
 "(Desktop-Dateiname)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
 msgid "Store caffeine user state"
-msgstr "Caffeines Benutzereinstellung speichern"
+msgstr "Speichert die benutzerdefinierten Zustand"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Restore caffeine state"
 msgstr "Caffeines Zustand wiederherstellen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show indicator"
 msgstr "Indikator anzeigen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:28
 msgid "Show the indicator on the top panel"
 msgstr "Caffeine-Indikator in der oberen Leiste anzeigen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Show notifications"
 msgstr "Benachrichtigungen aktivieren"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
 msgid "Show notifications when enabled/disabled"
-msgstr "Benachrichtigungen anzeigen, wenn aktiviert/ deaktiviert"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:36
-msgid "Pause/resume Night Light"
-msgstr ""
+msgstr "Benachrichtigungen anzeigen, wenn aktiviert/deaktiviert"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
-#, fuzzy
-msgid "Pause/resume Night Light when enabled/disabled"
-msgstr "Benachrichtigungen anzeigen, wenn aktiviert/ deaktiviert"
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+msgid "Enable when a fullscreen application is running"
+msgstr "Aktivieren, sobald eine Anwendung im Vollbildmodus läuft"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-msgid "Pause/resume Night Light for defined applicationa when enabled/disabled"
+#, fuzzy
+msgid "DEPRECATED. Pause/resume Night Light"
+msgstr "Nachtmodus unterbrechen"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+msgid "Pause/resume Night Light when enabled/disabled"
+msgstr "Nachtmodus unterbrechen wenn aktiviert"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
 msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#, fuzzy
+msgid "Pause/resume Night Light for defined application when enabled/disabled"
+msgstr "Nachtmodus unterbrechen wenn aktiviert"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+msgid "Night Light control mode"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+msgid "Set the way Caffeine interacts with the Night light setting."
+msgstr ""
+
+#~ msgid "Show Caffeine in top panel"
+#~ msgstr "Caffeine in der oberen Leiste anzeigen"
+
+#~ msgid "Enable notifications"
+#~ msgstr "Benachrichtigungen aktivieren"
+
+#~ msgid "Applications which enable Caffeine automatically"
+#~ msgstr "Anwendungen, welche Caffeine automatisch aktivieren"
+
+#~ msgid "Create new matching rule"
+#~ msgstr "Neue Regel definieren"
+
+#~ msgid "Add"
+#~ msgstr "Hinzufügen"
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine aktiviert"

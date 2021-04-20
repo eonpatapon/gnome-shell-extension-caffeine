@@ -1,300 +1,405 @@
 // -*- mode: js2; indent-tabs-mode: nil; js2-basic-offset: 4 -*-
-// Adapted from auto-move-windows@gnome-shell-extensions.gcampax.github.com
+/* exported init buildPrefsWidget */
 
-const Gio = imports.gi.Gio;
-const Gtk = imports.gi.Gtk;
-const GObject = imports.gi.GObject;
-const Config = imports.misc.config;
+// loosely based on https://gitlab.gnome.org/GNOME/gnome-shell-extensions/-/blob/master/extensions/auto-move-windows/prefs.js
+
+const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Convenience = Me.imports.convenience;
 
-const INHIBIT_APPS_KEY = 'inhibit-apps';
-const SHOW_INDICATOR_KEY = 'show-indicator';
-const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
-const FULLSCREEN_KEY = 'enable-fullscreen';
-const RESTORE_KEY = 'restore-state';
-const NIGHT_LIGHT_KEY = 'control-nightlight';
-const NIGHT_LIGHT_APP_ONLY_KEY = 'control-nightlight-for-app';
-
-const Columns = {
-    APPINFO: 0,
-    DISPLAY_NAME: 1,
-    ICON: 2
+const SettingsKey = {
+    INHIBIT_APPS: 'inhibit-apps',
+    SHOW_INDICATOR: 'show-indicator',
+    SHOW_NOTIFICATIONS: 'show-notifications',
+    FULLSCREEN: 'enable-fullscreen',
+    RESTORE: 'restore-state',
+    NIGHT_LIGHT: 'nightlight-control',
 };
 
-let ShellVersion = parseInt(Config.PACKAGE_VERSION.split(".")[1]);
+const SettingListBoxRow = GObject.registerClass({
+    Properties: {
+        'label': GObject.ParamSpec.string(
+            'label', 'Settings Label', 'label',
+            GObject.ParamFlags.READWRITE,
+            ''),
+        'description': GObject.ParamSpec.string(
+            'description', 'Settings Description', 'description',
+            GObject.ParamFlags.READWRITE,
+            ''),
+        'settingsKey': GObject.ParamSpec.string(
+            'settingsKey', 'Settings Key', 'settingsKey',
+            GObject.ParamFlags.READWRITE,
+            ''),
+        'type': GObject.ParamSpec.string(
+            'type', 'Control Type', 'type',
+            GObject.ParamFlags.READWRITE,
+            'switch'),
+        'options': GObject.param_spec_variant(
+            'options', 'Options for Control', 'options',
+            new GLib.VariantType('a{sv}'),
+            null,
+            GObject.ParamFlags.READWRITE),
+    },
+},
+class SettingListBoxRow extends Gtk.ListBoxRow {
+    _init(label, description, settingsKey, type, options) {
+        this.rowType = type;
+        this._settings = ExtensionUtils.getSettings();
 
-class CaffeineWidget {
-    constructor(params) {
-        this.w = new Gtk.Grid(params);
-        this.w.set_orientation(Gtk.Orientation.VERTICAL);
-
-        this._settings = Convenience.getSettings();
-        this._settings.connect('changed', this._refresh.bind(this));
-        this._changedPermitted = false;
-
-
-        let showCaffeineBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                                margin: 7});
-
-        let showCaffeineLabel = new Gtk.Label({label: _("Show Caffeine in top panel"),
-                                           xalign: 0});
-
-        let showCaffeineSwitch = new Gtk.Switch({active: this._settings.get_boolean(SHOW_INDICATOR_KEY)});
-        showCaffeineSwitch.connect('notify::active', button => {
-            this._settings.set_boolean(SHOW_INDICATOR_KEY, button.active);
+        const _hbox = new Gtk.Box({
+            spacing: 12,
+            margin_top: 12,
+            margin_bottom: 12,
+            margin_start: 12,
+            margin_end: 12,
+        });
+        super._init({
+            child: _hbox,
         });
 
-        showCaffeineBox.pack_start(showCaffeineLabel, true, true, 0);
-        showCaffeineBox.add(showCaffeineSwitch);
+        let _vbox = new Gtk.Box({
+            orientation: Gtk.Orientation.VERTICAL,
+        });
+        _hbox.append(_vbox);
 
-        this.w.add(showCaffeineBox);
+        let _label = new Gtk.Label({
+            label,
+            halign: Gtk.Align.START,
+            hexpand: true,
+        });
+        _vbox.append(_label);
 
-        if (ShellVersion > 6) {
-            const gtkhbox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                                    margin: 7});
+        const _descriptionAttributes = new Pango.AttrList();
+        _descriptionAttributes.insert(Pango.attr_scale_new(0.83));
+        let _description = new Gtk.Label({
+            label: description,
+            halign: Gtk.Align.START,
+            attributes: _descriptionAttributes,
+        });
+        _description.get_style_context().add_class('dim-label');
+        _vbox.append(_description);
 
-            const enableFullscreenLabel = new Gtk.Label({label: _("Enable when a fullscreen application is running"),
-                                       xalign: 0});
-
-            const enableFullscreenSwitch = new Gtk.Switch({active: this._settings.get_boolean(FULLSCREEN_KEY)});
-            enableFullscreenSwitch.connect('notify::active', button => {
-                this._settings.set_boolean(FULLSCREEN_KEY, button.active);
+        switch (type) {
+        case 'combobox':
+            this.control = new Gtk.ComboBoxText();
+            for (let item of options.values)
+                this.control.append_text(item);
+            this._settings.connect(`changed::${settingsKey}`, () => {
+                this.control.set_active(this._settings.get_enum(settingsKey));
             });
-
-            gtkhbox.pack_start(enableFullscreenLabel, true, true, 0);
-            gtkhbox.add(enableFullscreenSwitch);
-
-            this.w.add(gtkhbox);
+            this.control.connect('changed', combobox => {
+                this._settings.set_enum(settingsKey, combobox.get_active());
+            });
+            this.control.set_active(this._settings.get_enum(settingsKey) || 0);
+            break;
+        default:
+            this.rowType = 'switch';
+            this.control = new Gtk.Switch({
+                active: this._settings.get_boolean(settingsKey),
+                halign: Gtk.Align.END,
+                valign: Gtk.Align.CENTER,
+            });
+            this._settings.bind(settingsKey, this.control, 'active', Gio.SettingsBindFlags.DEFAULT);
         }
-
-        const stateBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                                margin: 7});
-
-        const stateLabel = new Gtk.Label({label: _("Restore state across reboots"),
-                                   xalign: 0});
-
-        const stateSwitch = new Gtk.Switch({active: this._settings.get_boolean(RESTORE_KEY)});
-        stateSwitch.connect('notify::active', button => {
-            this._settings.set_boolean(RESTORE_KEY, button.active);
-        });
-
-        stateBox.pack_start(stateLabel, true, true, 0);
-        stateBox.add(stateSwitch);
-
-        this.w.add(stateBox);
-
-        const notificationsBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                                margin: 7});
-
-        const notificationsLabel = new Gtk.Label({label: _("Enable notifications"),
-                                   xalign: 0});
-
-        const notificationsSwitch = new Gtk.Switch({active: this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)});
-        notificationsSwitch.connect('notify::active', button => {
-            this._settings.set_boolean(SHOW_NOTIFICATIONS_KEY, button.active);
-        });
-
-        notificationsBox.pack_start(notificationsLabel, true, true, 0);
-        notificationsBox.add(notificationsSwitch);
-
-        this.w.add(notificationsBox);
-
-        const nightlightBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                                margin: 7});
-
-        const nightlightLabel = new Gtk.Label({label: _("Pause/resume Night Light if enabled"),
-                                   xalign: 0});
-
-        const nightlightSwitch = new Gtk.Switch({active: this._settings.get_boolean(NIGHT_LIGHT_KEY)});
-        nightlightSwitch.connect('notify::active', button => {
-            this._settings.set_boolean(NIGHT_LIGHT_KEY, button.active);
-        });
-
-        nightlightBox.pack_start(nightlightLabel, true, true, 0);
-        nightlightBox.add(nightlightSwitch);
-
-        this.w.add(nightlightBox);
-
-        const nightlightAppBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL,
-                                margin: 7});
-
-        const nightlightAppLabel = new Gtk.Label({label: _("Pause/resume Night Light for defined applications only"),
-                                   xalign: 0});
-
-        const nightlightAppSwitch = new Gtk.Switch({active: this._settings.get_boolean(NIGHT_LIGHT_APP_ONLY_KEY)});
-        nightlightAppSwitch.connect('notify::active', button => {
-            this._settings.set_boolean(NIGHT_LIGHT_APP_ONLY_KEY, button.active);
-        });
-        nightlightSwitch.connect('notify::active', button => {
-          if (button.active) {
-            nightlightAppSwitch.set_sensitive(true);
-          } else {
-              nightlightAppSwitch.set_active(false);
-              nightlightAppSwitch.set_sensitive(false);
-          }
-        });
-
-        nightlightAppBox.pack_start(nightlightAppLabel, true, true, 0);
-        nightlightAppBox.add(nightlightAppSwitch);
-
-        this.w.add(nightlightAppBox);
-
-        this._store = new Gtk.ListStore();
-        this._store.set_column_types([Gio.AppInfo, GObject.TYPE_STRING, Gio.Icon]);
-
-        this._treeView = new Gtk.TreeView({ model: this._store,
-                                            hexpand: true, vexpand: true });
-        this._treeView.get_selection().set_mode(Gtk.SelectionMode.SINGLE);
-
-        const appColumn = new Gtk.TreeViewColumn({ expand: true, sort_column_id: Columns.DISPLAY_NAME,
-                                                 title: _("Applications which enable Caffeine automatically") });
-        const iconRenderer = new Gtk.CellRendererPixbuf;
-        appColumn.pack_start(iconRenderer, false);
-        appColumn.add_attribute(iconRenderer, "gicon", Columns.ICON);
-        const nameRenderer = new Gtk.CellRendererText;
-        appColumn.pack_start(nameRenderer, true);
-        appColumn.add_attribute(nameRenderer, "text", Columns.DISPLAY_NAME);
-        this._treeView.append_column(appColumn);
-
-        this.w.add(this._treeView);
-
-        const toolbar = new Gtk.Toolbar();
-        toolbar.get_style_context().add_class(Gtk.STYLE_CLASS_INLINE_TOOLBAR);
-        this.w.add(toolbar);
-
-        const newButton = new Gtk.ToolButton({ stock_id: Gtk.STOCK_NEW,
-                                             label: _("Add application"),
-                                             is_important: true });
-        newButton.connect('clicked', this._createNew.bind(this));
-        toolbar.add(newButton);
-
-        const delButton = new Gtk.ToolButton({ stock_id: Gtk.STOCK_DELETE });
-        delButton.connect('clicked', this._deleteSelected.bind(this));
-        toolbar.add(delButton);
-
-        this._changedPermitted = true;
-        this._refresh();
-    }
-
-    _createNew() {
-        const dialog = new Gtk.Dialog({ title: _("Create new matching rule"),
-                                      transient_for: this.w.get_toplevel(),
-                                      modal: true });
-        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL);
-        dialog.add_button(_("Add"), Gtk.ResponseType.OK);
-        dialog.set_default_response(Gtk.ResponseType.OK);
-
-        const grid = new Gtk.Grid({ column_spacing: 10,
-                                  row_spacing: 15,
-                                  margin: 10 });
-        dialog._appChooser = new Gtk.AppChooserWidget({ show_all: true });
-        grid.attach(dialog._appChooser, 0, 0, 2, 1);
-        dialog.get_content_area().add(grid);
-
-        dialog.connect('response', (dialog, id) => {
-            if (id != Gtk.ResponseType.OK) {
-                dialog.destroy();
-                return;
-            }
-
-            const appInfo = dialog._appChooser.get_app_info();
-            if (!appInfo)
-                return;
-
-            this._changedPermitted = false;
-            if (!this._appendItem(appInfo.get_id())) {
-                this._changedPermitted = true;
-                return;
-            }
-            let iter = this._store.append();
-
-            this._store.set(iter,
-                            [Columns.APPINFO, Columns.ICON, Columns.DISPLAY_NAME],
-                            [appInfo, appInfo.get_icon(), appInfo.get_display_name()]);
-            this._changedPermitted = true;
-
-            dialog.destroy();
-        });
-        dialog.show_all();
-    }
-
-    _deleteSelected() {
-        const [any, , iter] = this._treeView.get_selection().get_selected();
-
-        if (any) {
-            const appInfo = this._store.get_value(iter, Columns.APPINFO);
-
-            this._changedPermitted = false;
-            this._removeItem(appInfo.get_id());
-            this._store.remove(iter);
-            this._changedPermitted = true;
-        }
-    }
-
-    _refresh() {
-        if (!this._changedPermitted)
-            // Ignore this notification, model is being modified outside
-            return;
-
-        this._store.clear();
-
-        const currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
-        const validItems = [ ];
-        for (let i = 0; i < currentItems.length; i++) {
-            const id = currentItems[i];
-            const appInfo = Gio.DesktopAppInfo.new(id);
-            if (!appInfo)
-                continue;
-            validItems.push(currentItems[i]);
-
-            const iter = this._store.append();
-            this._store.set(iter,
-                            [Columns.APPINFO, Columns.ICON, Columns.DISPLAY_NAME],
-                            [appInfo, appInfo.get_icon(), appInfo.get_display_name()]);
-        }
-
-        if (validItems.length != currentItems.length) // some items were filtered out
-            this._settings.set_strv(INHIBIT_APPS_KEY, validItems);
-    }
-
-    _appendItem(id) {
-        const currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
-
-        if (currentItems.includes(id)) {
-            printerr("Already have an item for this id");
-            return false;
-        }
-
-        currentItems.push(id);
-        this._settings.set_strv(INHIBIT_APPS_KEY, currentItems);
-        return true;
-    }
-
-    _removeItem(id) {
-        const currentItems = this._settings.get_strv(INHIBIT_APPS_KEY);
-        const index = currentItems.indexOf(id);
-
-        if (index < 0)
-            return;
-
-        currentItems.splice(index, 1);
-        this._settings.set_strv(INHIBIT_APPS_KEY, currentItems);
+        _hbox.append(this.control);
     }
 }
+);
+
+const SettingsPane = GObject.registerClass(
+    class SettingsPane extends Gtk.Frame {
+        _init() {
+            super._init({
+                margin_top: 36,
+                margin_bottom: 36,
+                margin_start: 36,
+                margin_end: 36,
+            });
+
+            const _listBox = new Gtk.ListBox({
+                selection_mode: Gtk.SelectionMode.NONE,
+                valign: Gtk.Align.START,
+                show_separators: true,
+            });
+            this.set_child(_listBox);
+
+            _listBox.connect('row-activated', (widget, row) => {
+                this._rowActivated(widget, row);
+            });
+
+            const _showIndicator = new SettingListBoxRow(_('Show status indicator in top panel'), _('Enable or disable the Caffeine icon in the top panel'), SettingsKey.SHOW_INDICATOR);
+            _listBox.append(_showIndicator);
+
+            const _showNotifications = new SettingListBoxRow(_('Notifications'), _('Enable notifications when Caffeine is enabled or disabled'), SettingsKey.SHOW_NOTIFICATIONS);
+            _listBox.append(_showNotifications);
+
+            const _rememberState = new SettingListBoxRow(_('Remember state'), _('Remember the last state across sessions and reboots'), SettingsKey.RESTORE);
+            _listBox.append(_rememberState);
+
+            const _fullscreenApps = new SettingListBoxRow(_('Enable for fullscreen apps'), _('Automatically enable when an app enters fullscreen mode'), SettingsKey.FULLSCREEN);
+            _listBox.append(_fullscreenApps);
+
+            const _controlNightlight = new SettingListBoxRow(_('Pause and resume Night Light'), _('Toggles the night light together with Caffeine\'s state'), SettingsKey.NIGHT_LIGHT, 'combobox', {
+                values: [
+                    _('Never'), _('Always'), _('For apps on list'),
+                ],
+            });
+            _listBox.append(_controlNightlight);
+        }
+
+        _rowActivated(widget, row) {
+            if (row.rowType === 'switch' || row.rowType === undefined)
+                row.control.set_active(!row.control.get_active());
+            else if (row.rowType === 'combobox')
+                row.control.popup();
+        }
+    }
+);
+
+const AppsPane = GObject.registerClass(
+    class AppsPane extends Gtk.ScrolledWindow {
+        _init() {
+            super._init({
+                hscrollbar_policy: Gtk.PolicyType.NEVER,
+            });
+
+            const box = new Gtk.Box({
+                orientation: Gtk.Orientation.VERTICAL,
+                halign: Gtk.Align.CENTER,
+                spacing: 12,
+                margin_top: 36,
+                margin_bottom: 36,
+                margin_start: 36,
+                margin_end: 36,
+            });
+            this.set_child(box);
+
+            box.append(new Gtk.Label({
+                label: '<b>%s</b>'.format(_('Apps that trigger Caffeine')),
+                use_markup: true,
+                halign: Gtk.Align.START,
+            }));
+
+            this._list = new Gtk.ListBox({
+                selection_mode: Gtk.SelectionMode.NONE,
+                valign: Gtk.Align.START,
+                show_separators: true,
+            });
+            box.append(this._list);
+
+            const context = this._list.get_style_context();
+            const cssProvider = new Gtk.CssProvider();
+            cssProvider.load_from_data(
+                'list { min-width: 30em; }');
+
+            context.add_provider(cssProvider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            context.add_class('frame');
+
+            this._list.append(new NewAppRow());
+
+            this._actionGroup = new Gio.SimpleActionGroup();
+            this._list.insert_action_group('rules', this._actionGroup);
+
+            let action;
+            action = new Gio.SimpleAction({ name: 'add' });
+            action.connect('activate', this._onAddActivated.bind(this));
+            this._actionGroup.add_action(action);
+
+            action = new Gio.SimpleAction({
+                name: 'remove',
+                parameter_type: new GLib.VariantType('s'),
+            });
+            action.connect('activate', this._onRemoveActivated.bind(this));
+            this._actionGroup.add_action(action);
+
+            action = new Gio.SimpleAction({ name: 'update' });
+            action.connect('activate', () => {
+                this._settings.set_strv(SettingsKey.INHIBIT_APPS,
+                    this._getRuleRows());
+            });
+            this._actionGroup.add_action(action);
+            this._updateAction = action;
+
+            this._settings = ExtensionUtils.getSettings();
+            this._changedId = this._settings.connect('changed',
+                this._sync.bind(this));
+            this._sync();
+
+            this.connect('destroy', () => this._settings.run_dispose());
+        }
+
+        _onAddActivated() {
+            const dialog = new NewAppDialog(this.get_root());
+            dialog.connect('response', (dlg, id) => {
+                const appInfo = id === Gtk.ResponseType.OK
+                    ? dialog.get_widget().get_app_info() : null;
+                const apps = this._settings.get_strv(SettingsKey.INHIBIT_APPS);
+                if (appInfo && !apps.some(a => a === appInfo.get_id())) {
+                    this._settings.set_strv(SettingsKey.INHIBIT_APPS, [
+                        ...apps, appInfo.get_id(),
+                    ]);
+                }
+                dialog.destroy();
+            });
+            dialog.show();
+        }
+
+        _onRemoveActivated(action, param) {
+            const removed = param.deepUnpack();
+            this._settings.set_strv(SettingsKey.INHIBIT_APPS,
+                this._settings.get_strv(SettingsKey.INHIBIT_APPS).filter(id => {
+                    return id !== removed;
+                }));
+        }
+
+        _getRuleRows() {
+            return [...this._list].filter(row => !!row.id);
+        }
+
+        _sync() {
+            const oldRules = this._getRuleRows();
+            const newRules = this._settings.get_strv(SettingsKey.INHIBIT_APPS);
+
+            this._settings.block_signal_handler(this._changedId);
+            this._updateAction.enabled = false;
+
+            newRules.forEach((id, index) => {
+                const appInfo = Gio.DesktopAppInfo.new(id);
+
+                if (appInfo)
+                    this._list.insert(new AppRow(appInfo), index);
+            });
+
+            const removed = oldRules.filter(
+                id => !newRules.find(r => r.id === id));
+            removed.forEach(r => this._list.remove(r));
+
+            this._settings.unblock_signal_handler(this._changedId);
+            this._updateAction.enabled = true;
+        }
+    });
+
+const AppRow = GObject.registerClass({
+    Properties: {
+        'id': GObject.ParamSpec.string(
+            'id', 'id', 'id',
+            GObject.ParamFlags.READABLE,
+            ''),
+    },
+}, class AppRow extends Gtk.ListBoxRow {
+    _init(appInfo) {
+        const box = new Gtk.Box({
+            spacing: 6,
+            margin_top: 6,
+            margin_bottom: 6,
+            margin_start: 6,
+            margin_end: 6,
+        });
+
+        super._init({
+            activatable: false,
+            child: box,
+        });
+        this._appInfo = appInfo;
+
+        const icon = new Gtk.Image({
+            gicon: appInfo.get_icon(),
+            pixel_size: 32,
+        });
+        icon.get_style_context().add_class('icon-dropshadow');
+        box.append(icon);
+
+        const label = new Gtk.Label({
+            label: appInfo.get_display_name(),
+            halign: Gtk.Align.START,
+            hexpand: true,
+            max_width_chars: 20,
+            ellipsize: Pango.EllipsizeMode.END,
+        });
+        box.append(label);
+
+        const button = new Gtk.Button({
+            action_name: 'rules.remove',
+            action_target: new GLib.Variant('s', this.id),
+            icon_name: 'edit-delete-symbolic',
+        });
+        box.append(button);
+    }
+
+    get id() {
+        return this._appInfo.get_id();
+    }
+});
+
+const NewAppRow = GObject.registerClass(
+    class NewAppRow extends Gtk.ListBoxRow {
+        _init() {
+            super._init({
+                action_name: 'rules.add',
+                child: new Gtk.Image({
+                    icon_name: 'list-add-symbolic',
+                    pixel_size: 16,
+                    margin_top: 12,
+                    margin_bottom: 12,
+                    margin_start: 12,
+                    margin_end: 12,
+                }),
+            });
+            this.update_property(
+                [Gtk.AccessibleProperty.LABEL], [_('Add Application')]);
+        }
+    });
+
+const NewAppDialog = GObject.registerClass(
+    class NewAppDialog extends Gtk.AppChooserDialog {
+        _init(parent) {
+            super._init({
+                transient_for: parent,
+                modal: true,
+            });
+
+            this._settings = ExtensionUtils.getSettings();
+
+            this.get_widget().set({
+                show_all: true,
+                show_other: true, // hide more button
+            });
+
+            this.get_widget().connect('application-selected',
+                this._updateSensitivity.bind(this));
+            this._updateSensitivity();
+        }
+
+        _updateSensitivity() {
+            const apps = this._settings.get_strv(SettingsKey.INHIBIT_APPS);
+            const appInfo = this.get_widget().get_app_info();
+            this.set_response_sensitive(Gtk.ResponseType.OK,
+                appInfo && !apps.some(i => i.startsWith(appInfo.get_id())));
+        }
+    });
+
+const CaffeineSettingsWidget = GObject.registerClass(
+    class CaffeineSettingsWidget extends Gtk.Notebook {
+        _init() {
+            super._init();
+
+            const _settingsPane = new SettingsPane();
+            this.append_page(_settingsPane, new Gtk.Label({ label: _('General') }));
+
+            const _appsPane = new AppsPane();
+            this.append_page(_appsPane, new Gtk.Label({ label: _('Apps') }));
+        }
+    }
+);
 
 function init() {
-    Convenience.initTranslations();
+    ExtensionUtils.initTranslations();
 }
 
 function buildPrefsWidget() {
-    const widget = new CaffeineWidget();
-    widget.w.show_all();
-
-    return widget.w;
+    return new CaffeineSettingsWidget();
 }

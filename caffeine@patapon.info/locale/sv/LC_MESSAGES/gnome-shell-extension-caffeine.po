@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 14:56+0100\n"
+"POT-Creation-Date: 2021-04-19 16:05-0400\n"
 "PO-Revision-Date: 2018-04-04 20:35+0200\n"
 "Last-Translator: Morgan Antonsson <morgan.antonsson@gmail.com>\n"
 "Language-Team: \n"
@@ -11,107 +11,176 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:307
+#: extension.js:300
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
 
-#: extension.js:309
+#: extension.js:302
 msgid "Auto suspend and screensaver disabled"
 msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
 
-#: extension.js:314
+#: extension.js:306
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"
 
-#: extension.js:316
+#: extension.js:308
 msgid "Auto suspend and screensaver enabled"
 msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"
 
-#: prefs.js:45
-msgid "Show Caffeine in top panel"
-msgstr "Visa Caffeine i panelen"
+#: prefs.js:133
+#, fuzzy
+msgid "Show status indicator in top panel"
+msgstr "Visa indikator i panelen"
 
-#: prefs.js:62 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:31
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
-msgid "Enable when a fullscreen application is running"
-msgstr "Aktivera när ett program använder helskärmsläget"
+#: prefs.js:133
+#, fuzzy
+msgid "Enable or disable the Caffeine icon in the top panel"
+msgstr "Visa indikator i panelen"
 
-#: prefs.js:79
-msgid "Restore state across reboots"
+#: prefs.js:136
+#, fuzzy
+msgid "Notifications"
+msgstr "Visa notifieringar"
+
+#: prefs.js:136
+#, fuzzy
+msgid "Enable notifications when Caffeine is enabled or disabled"
+msgstr "Visa notifieringar vid aktivering/inaktivering"
+
+#: prefs.js:139
+msgid "Remember state"
+msgstr ""
+
+#: prefs.js:139
+#, fuzzy
+msgid "Remember the last state across sessions and reboots"
 msgstr "Återställ tillstånd efter omstart"
 
-#: prefs.js:95
-msgid "Enable notifications"
-msgstr "Aktivera notifieringar"
+#: prefs.js:142
+#, fuzzy
+msgid "Enable for fullscreen apps"
+msgstr "Aktivera när ett program använder helskärmsläget"
 
-#: prefs.js:111
-msgid "Pause/resume Night Light if enabled"
+#: prefs.js:142
+msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: prefs.js:127 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:41
-msgid "Pause/resume Night Light for defined applications only"
+#: prefs.js:145
+#, fuzzy
+msgid "Pause and resume Night Light"
+msgstr "Visa notifieringar vid aktivering/inaktivering"
+
+#: prefs.js:145
+msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: prefs.js:156
-msgid "Applications which enable Caffeine automatically"
-msgstr "Program som automatiskt aktiverar Caffeine"
+#: prefs.js:147
+msgid "Never"
+msgstr ""
 
-#: prefs.js:172
-msgid "Add application"
+#: prefs.js:147
+msgid "Always"
+msgstr ""
+
+#: prefs.js:147
+msgid "For apps on list"
+msgstr ""
+
+#: prefs.js:181
+msgid "Apps that trigger Caffeine"
+msgstr ""
+
+#: prefs.js:353
+#, fuzzy
+msgid "Add Application"
 msgstr "Lägg till program"
 
-#: prefs.js:186
-msgid "Create new matching rule"
-msgstr "Skapa ny matchande regel"
+#: prefs.js:391
+msgid "General"
+msgstr ""
 
-#: prefs.js:190
-msgid "Add"
-msgstr "Lägg till"
+#: prefs.js:394
+msgid "Apps"
+msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:6
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
 msgid "Application list"
 msgstr "Programlista"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:7
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:13
 msgid ""
 "A list of strings, each containing an application id (desktop file name)"
 msgstr "En lista av strängar med program-ID:n (skrivbordets filnamn)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:11
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
 msgid "Store caffeine user state"
 msgstr "Spara caffeines användarstatus"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:16
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Restore caffeine state"
 msgstr "Återställ caffeine-status"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:21
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show indicator"
 msgstr "Visa indikator"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:28
 msgid "Show the indicator on the top panel"
 msgstr "Visa indikator i panelen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:26
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Show notifications"
 msgstr "Visa notifieringar"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
 msgid "Show notifications when enabled/disabled"
 msgstr "Visa notifieringar vid aktivering/inaktivering"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:36
-msgid "Pause/resume Night Light"
-msgstr ""
-
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+msgid "Enable when a fullscreen application is running"
+msgstr "Aktivera när ett program använder helskärmsläget"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#, fuzzy
+msgid "DEPRECATED. Pause/resume Night Light"
+msgstr "Visa notifieringar vid aktivering/inaktivering"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 #, fuzzy
 msgid "Pause/resume Night Light when enabled/disabled"
 msgstr "Visa notifieringar vid aktivering/inaktivering"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-msgid "Pause/resume Night Light for defined applicationa when enabled/disabled"
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
 msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#, fuzzy
+msgid "Pause/resume Night Light for defined application when enabled/disabled"
+msgstr "Visa notifieringar vid aktivering/inaktivering"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+msgid "Night Light control mode"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+msgid "Set the way Caffeine interacts with the Night light setting."
+msgstr ""
+
+#~ msgid "Show Caffeine in top panel"
+#~ msgstr "Visa Caffeine i panelen"
+
+#~ msgid "Enable notifications"
+#~ msgstr "Aktivera notifieringar"
+
+#~ msgid "Applications which enable Caffeine automatically"
+#~ msgstr "Program som automatiskt aktiverar Caffeine"
+
+#~ msgid "Create new matching rule"
+#~ msgstr "Skapa ny matchande regel"
+
+#~ msgid "Add"
+#~ msgstr "Lägg till"

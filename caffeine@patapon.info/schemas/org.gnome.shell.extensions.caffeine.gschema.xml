@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extensions-caffeine-daemon">
+   <enum id="org.gnome.shell.extensions.caffeine.nightlight-control">
+        <value value="0" nick="never"/>
+        <value value="1" nick="always"/>
+        <value value="2" nick="for-apps"/>
+    </enum>
+
   <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
     <key type="as" name="inhibit-apps">
         <default>[ ]</default>
@@ -33,13 +39,18 @@
     </key>
     <key type="b" name="control-nightlight">
         <default>false</default>
-        <summary>Pause/resume Night Light</summary>
+        <summary>DEPRECATED. Pause/resume Night Light</summary>
         <description>Pause/resume Night Light when enabled/disabled</description>
     </key>
     <key type="b" name="control-nightlight-for-app">
         <default>false</default>
-        <summary>Pause/resume Night Light for defined applications only</summary>
-        <description>Pause/resume Night Light for defined applicationa when enabled/disabled</description>
+        <summary>DEPRECATED. Pause/resume Night Light for defined applications only</summary>
+        <description>Pause/resume Night Light for defined application when enabled/disabled</description>
+    </key>
+    <key name="nightlight-control" enum="org.gnome.shell.extensions.caffeine.nightlight-control">
+        <default>"never"</default>
+        <summary>Night Light control mode</summary>
+        <description>Set the way Caffeine interacts with the Night light setting.</description>
     </key>
   </schema>
 </schemalist>
