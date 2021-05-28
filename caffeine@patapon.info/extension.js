@@ -23,6 +23,12 @@ const { Atk, Gio, GObject, Shell, St } = imports.gi;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
+const Shell = imports.gi.Shell;
+const MessageTray = imports.ui.messageTray;
+const Atk = imports.gi.Atk;
+const Config = imports.misc.config;
+const Util = imports.misc.util;
+
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -31,6 +37,11 @@ const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const NIGHT_LIGHT_KEY = 'control-nightlight';
+const NIGHT_LIGHT_APP_ONLY_KEY = 'control-nightlight-for-app';
+const XSCREENSAVER_STOP = "xscreensaver-command -exit";
+const XSCREENSAVER_START = "xscreensaver -nosplash";
+
+
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -236,6 +247,8 @@ class Caffeine extends PanelMenu.Button {
                 inhibitor.GetAppIdRemote(appId => {
                     appId = String(appId);
                     if (appId !== '' && appId === this._last_app) {
+                        // disable xscreensaver
+                        Util.trySpawnCommandLine( XSCREENSAVER_STOP );
                         if (this._last_app === 'user')
                             this._settings.set_boolean(USER_ENABLED_KEY, true);
                         this._apps.push(this._last_app);
@@ -257,7 +270,10 @@ class Caffeine extends PanelMenu.Button {
 
     _inhibitorRemoved(proxy, sender, [object]) {
         let index = this._objects.indexOf(object);
+
         if (index !== -1) {
+            // start screensaver daemon back up
+            Util.trySpawnCommandLine( XSCREENSAVER_START );
             if (this._apps[index] === 'user')
                 this._settings.set_boolean(USER_ENABLED_KEY, false);
             // Remove app from list
