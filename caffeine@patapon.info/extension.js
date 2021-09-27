@@ -393,7 +393,9 @@ class Caffeine extends PanelMenu.Button {
 
 function init() {
     ExtensionUtils.initTranslations();
+}
 
+function enable() {
     // Migrate old nightlight settings
     const _settings = ExtensionUtils.getSettings();
     const controlNightLight = _settings.get_value('control-nightlight');
@@ -404,13 +406,10 @@ function init() {
             nightlightControl = ControlNightLight.FOR_APPS;
         _settings.set_enum('nightlight-control', nightlightControl);
     }
-
     // remove deprecated settings
     _settings.reset('control-nightlight');
     _settings.reset('control-nightlight-for-app');
-}
 
-function enable() {
     CaffeineIndicator = new Caffeine();
     Main.panel.addToStatusArea(IndicatorName, CaffeineIndicator);
 }
