@@ -4,9 +4,9 @@
 
 Fill the cup to inhibit auto suspend and screensaver.
 
-This extension supports gnome-shell 3.4 to 41
+This extension supports gnome-shell 3.4 to 42
 
-* master: 40 -> 41
+* master: 40 -> 42
 * gnome-shell-3.36-3.38: 3.36 -> 3.38
 * gnome-shell-3.32-3.34: 3.32 -> 3.34
 * gnome-shell-3.10-3.30: 3.10 -> 3.30
