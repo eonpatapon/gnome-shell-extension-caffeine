@@ -24,7 +24,11 @@ screensaver off.
 https://extensions.gnome.org/extension/517/caffeine/
 
 ## Installation from git
-
+```
+make build
+make install
+```
+Alternatively:
 ```sh
 git clone git://github.com/eonpatapon/gnome-shell-extension-caffeine.git
 cd gnome-shell-extension-caffeine
