@@ -4,9 +4,9 @@
 
 Fill the cup to inhibit auto suspend and screensaver.
 
-This extension supports gnome-shell 3.4 to 41
+This extension supports gnome-shell 3.4 to 42
 
-* master: 40 -> 41
+* master: 40 -> 42
 * gnome-shell-3.36-3.38: 3.36 -> 3.38
 * gnome-shell-3.32-3.34: 3.32 -> 3.34
 * gnome-shell-3.10-3.30: 3.10 -> 3.30
@@ -24,13 +24,9 @@ screensaver off.
 https://extensions.gnome.org/extension/517/caffeine/
 
 ## Installation from git
-
-```sh
-git clone git://github.com/eonpatapon/gnome-shell-extension-caffeine.git
-cd gnome-shell-extension-caffeine
-./update-locale.sh
-glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
-cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions
+```
+make build
+make install
 ```
 
 Restart the shell and then enable the extension.
