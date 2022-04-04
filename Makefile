@@ -15,4 +15,7 @@ install:
 	cp -a caffeine@patapon.info/ ~/.local/share/gnome-shell/extensions/
 
 lint:
-	eslint caffeine@patapon.info
+	eslint --resolve-plugins-relative-to "$(shell npm root -g)" caffeine@patapon.info
+
+lint-fix:
+	eslint --resolve-plugins-relative-to "$(shell npm root -g)" --fix caffeine@patapon.info
