@@ -396,10 +396,16 @@ const CaffeineSettingsWidget = GObject.registerClass(
     }
 );
 
+/**
+ * Preferences widget initialization steps
+ */
 function init() {
     ExtensionUtils.initTranslations();
 }
 
+/**
+ * Function called by the settings app to build the preferences widget
+ */
 function buildPrefsWidget() {
     return new CaffeineSettingsWidget();
 }
