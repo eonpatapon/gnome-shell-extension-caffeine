@@ -1,32 +1,28 @@
-# This extension is barely maintained anymore. New maintainers are welcome!
+# This extension is barely maintained anymore, new maintainers are welcome!
 
 ## gnome-shell-extension-caffeine
+  - Fill the cup to inhibit auto suspend and screensaver
+  - This extension supports GNOME Shell `3.4` -> `42`
+    - `master`: `40` -> `42`
+    - `gnome-shell-3.36-3.38`: `3.36` -> `3.38`
+    - `gnome-shell-3.32-3.34`: `3.32` -> `3.34`
+    - `gnome-shell-3.10-3.30`: `3.10` -> `3.30`
+    - `gnome-shell-before-3.10`: `3.4` -> `3.8`
 
-Fill the cup to inhibit auto suspend and screensaver.
-
-This extension supports gnome-shell 3.4 to 42
-
-* master: 40 -> 42
-* gnome-shell-3.36-3.38: 3.36 -> 3.38
-* gnome-shell-3.32-3.34: 3.32 -> 3.34
-* gnome-shell-3.10-3.30: 3.10 -> 3.30
-* gnome-shell-before-3.10: 3.4 -> 3.8
-
+## Screenshots
 ![Screenshot](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot.png)
+  - Empty cup = normal auto suspend and screensaver
+  - Filled cup = auto suspend and screensaver off
 
 ![Preferences](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot-prefs.png)
 
-Empty cup = normal auto suspend and screensaver. Filled cup = auto suspend and
-screensaver off.
+## Installation from GNOME Extensions
+  - Get the extension [here](https://extensions.gnome.org/extension/517/caffeine/)
 
-## Installation from e.g.o
-
-https://extensions.gnome.org/extension/517/caffeine/
-
-## Installation from git
+## Installation from source
 ```
 make build
 make install
 ```
-
-Restart the shell and then enable the extension.
+  - Restart the shell
+  - Enable the extension
