@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-19 16:05-0400\n"
-"PO-Revision-Date: 2017-04-30 15:26+0200\n"
-"Last-Translator: Giuseppe Pignataro <rogepix@gmail.com>\n"
+"PO-Revision-Date: 2022-05-09 16:53+0200\n"
+"Last-Translator: Simone Esposito <simoespo159@gmail.com>\n"
 "Language-Team: Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Mostra notifiche quando abilitato/disabilitato"
 
 #: prefs.js:139
 msgid "Remember state"
-msgstr ""
+msgstr "Ricorda stato"
 
 #: prefs.js:139
 #, fuzzy
@@ -71,7 +71,7 @@ msgstr "Abilita quando è avviata una applicazione a schermo intero"
 
 #: prefs.js:142
 msgid "Automatically enable when an app enters fullscreen mode"
-msgstr ""
+msgstr "Abilita automaticamente quando un'app entra in modalità schermo intero"
 
 #: prefs.js:145
 #, fuzzy
@@ -80,23 +80,23 @@ msgstr "Mostra notifiche quando abilitato/disabilitato"
 
 #: prefs.js:145
 msgid "Toggles the night light together with Caffeine's state"
-msgstr ""
+msgstr "Attiva la modalità notturna insieme allo stato di caffeine"
 
 #: prefs.js:147
 msgid "Never"
-msgstr ""
+msgstr "Mai"
 
 #: prefs.js:147
 msgid "Always"
-msgstr ""
+msgstr "Sempre"
 
 #: prefs.js:147
 msgid "For apps on list"
-msgstr ""
+msgstr "Per le applicazioni in elenco"
 
 #: prefs.js:181
 msgid "Apps that trigger Caffeine"
-msgstr ""
+msgstr "Applicazioni che abilitano caffeine"
 
 #: prefs.js:353
 #, fuzzy
@@ -105,11 +105,11 @@ msgstr "Aggiungi applicazione"
 
 #: prefs.js:391
 msgid "General"
-msgstr ""
+msgstr "Generali"
 
 #: prefs.js:394
 msgid "Apps"
-msgstr ""
+msgstr "Applicazioni"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
 msgid "Application list"
@@ -172,11 +172,11 @@ msgstr "Mostra notifiche quando abilitato/disabilitato"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Night Light control mode"
-msgstr ""
+msgstr "Modalità di controllo della modalità notturna"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr ""
+msgstr "Imposta il modo in cui caffeine interagisce con l'impostazione della Modalità notturna."
 
 #~ msgid "Show Caffeine in top panel"
 #~ msgstr "Mostra Caffeine nel pannello in alto"
