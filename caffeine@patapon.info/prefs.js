@@ -3,7 +3,7 @@
 
 // loosely based on https://gitlab.gnome.org/GNOME/gnome-shell-extensions/-/blob/master/extensions/auto-move-windows/prefs.js
 
-const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
+const { Gio, GLib, GObject, Gtk, Pango, Gdk } = imports.gi;
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -17,6 +17,7 @@ const SettingsKey = {
     FULLSCREEN: 'enable-fullscreen',
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
+    TOGGLE_SHORTCUT: 'toggle-shortcut',
 };
 
 const SettingListBoxRow = GObject.registerClass({
@@ -95,6 +96,10 @@ class SettingListBoxRow extends Gtk.ListBoxRow {
             });
             this.control.set_active(this._settings.get_enum(settingsKey) || 0);
             break;
+        case 'shortcut':
+            this.rowType = 'shortcut';
+            this.control = new ShortcutSettingWidget(this._settings, SettingsKey.TOGGLE_SHORTCUT);
+            break;
         default:
             this.rowType = 'switch';
             this.control = new Gtk.Switch({
@@ -148,6 +153,9 @@ const SettingsPane = GObject.registerClass(
                 ],
             });
             _listBox.append(_controlNightlight);
+
+            const _toggleShortcut = new SettingListBoxRow(_('Toggle shortcut'), _('Use Backspace to clear'), SettingsKey.TOGGLE_SHORTCUT, 'shortcut');
+            _listBox.append(_toggleShortcut);
         }
 
         _rowActivated(widget, row) {
@@ -392,6 +400,80 @@ const CaffeineSettingsWidget = GObject.registerClass(
 
             const _appsPane = new AppsPane();
             this.append_page(_appsPane, new Gtk.Label({ label: _('Apps') }));
+        }
+    }
+);
+
+const ShortcutSettingWidget = GObject.registerClass(
+    class ShortcutSetting extends Gtk.Box{
+        _init(settings, keyName) {
+            this._settings = settings;
+            this._keyName = keyName;
+
+            super._init();
+
+            const label = this._fetchShortcutLabelFromSettings();
+
+            const model = new Gtk.ListStore();
+            model.set_column_types([GObject.TYPE_STRING]);
+            model.set(model.insert(0), [0], [label]);
+
+            const renderer = new Gtk.CellRendererAccel({
+                editable: true,
+                accel_mode: Gtk.CellRendererAccelMode.GTK,
+                alignment: Pango.Alignment.RIGHT,
+                xalign: 1,
+            });
+
+            renderer.connect('accel-edited', (_, iter, key, mods) => {
+                if (!key) return;
+
+                const name = Gtk.accelerator_name(key, mods);
+                const [, iterator] = model.get_iter_from_string(iter);
+
+                const label = this._getShortcutLabel(key, mods);
+                model.set(iterator, [0], [label]);
+
+                settings.set_value(keyName, new GLib.Variant('as', [name]));
+            });
+
+            renderer.connect('accel-cleared', (_, iter) => {
+                const [, iterator] = model.get_iter_from_string(iter);
+
+                const label = this._getShortcutLabel();
+                model.set(iterator, [0], [label]);
+
+                settings.set_value(keyName, new GLib.Variant('as', []));
+            });
+
+            const tree = new Gtk.TreeView({ model: model, headers_visible: false });
+
+            const column = new Gtk.TreeViewColumn();
+            column.pack_end(renderer, false);
+            column.add_attribute(renderer, 'text', 0);
+
+            tree.append_column(column);
+
+            this.append(tree);
+        }
+
+        _fetchShortcutLabelFromSettings() {
+            const shortcut = this._settings.get_value(this._keyName).deep_unpack()[0];
+
+            let key, mods;
+            if (shortcut == null)
+                [key, mods] = [0, 0];
+            else if (Gtk.get_major_version() >= 4)
+                [, key, mods] = Gtk.accelerator_parse(shortcut);
+            else
+                [key, mods] = Gtk.accelerator_parse(shortcut);
+
+            return this._getShortcutLabel(key, mods);
+        }
+
+        _getShortcutLabel(key, mods) {
+            if (!key && !mods) return _('None');
+            return Gtk.accelerator_get_label(key, mods);
         }
     }
 );

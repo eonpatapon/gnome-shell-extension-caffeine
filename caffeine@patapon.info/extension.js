@@ -19,7 +19,7 @@
 
 'use strict';
 
-const { Atk, Gio, GObject, Shell, St } = imports.gi;
+const { Atk, Gio, GObject, Shell, St, Meta } = imports.gi;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PanelMenu = imports.ui.panelMenu;
@@ -31,6 +31,7 @@ const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const NIGHT_LIGHT_KEY = 'control-nightlight';
+const TOGGLE_SHORTCUT = 'toggle-shortcut';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -418,6 +419,11 @@ function enable() {
 
     CaffeineIndicator = new Caffeine();
     Main.panel.addToStatusArea(IndicatorName, CaffeineIndicator);
+
+    // Register shortcut
+    Main.wm.addKeybinding(TOGGLE_SHORTCUT, _settings, Meta.KeyBindingFlags.IGNORE_AUTOREPEAT, Shell.ActionMode.ALL, () => {
+        CaffeineIndicator.toggleState();
+    });
 }
 
 /**
@@ -426,4 +432,7 @@ function enable() {
 function disable() {
     CaffeineIndicator.destroy();
     CaffeineIndicator = null;
+
+    // Unregister shortcut
+    Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
