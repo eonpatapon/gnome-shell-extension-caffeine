@@ -321,8 +321,10 @@ class Caffeine extends PanelMenu.Button {
     }
 
     _updateState() {
-        if (this._settings.get_boolean(USER_ENABLED_KEY) !== this._userState)
+        if (this._settings.get_boolean(USER_ENABLED_KEY) !== this._userState) {
+            this._userState = !this._userState;
             this.toggleState();
+        }
     }
 
     _saveUserState(state) {
