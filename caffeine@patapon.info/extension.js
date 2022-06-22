@@ -169,10 +169,15 @@ class Caffeine extends PanelMenu.Button {
             this.toggleFullscreen();
         }
 
+        // Sync saved state with local state
+        this._settings.set_boolean(USER_ENABLED_KEY, this._state);
+
         this._appConfigs = [];
         this._appData = new Map();
 
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
+        this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateState.bind(this));
+
         this._updateAppConfigs();
     }
 
@@ -315,6 +320,11 @@ class Caffeine extends PanelMenu.Button {
             this._appConfigs.push(appId);
         });
         this._updateAppData();
+    }
+
+    _updateState() {
+        if (this._settings.get_boolean(USER_ENABLED_KEY) != this._state)
+            this.toggleState();
     }
 
     _updateAppData() {
