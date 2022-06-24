@@ -174,7 +174,7 @@ class Caffeine extends PanelMenu.Button {
         this._appData = new Map();
 
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
-        this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateState.bind(this));
+        this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
 
         this._updateAppConfigs();
     }
@@ -320,7 +320,7 @@ class Caffeine extends PanelMenu.Button {
         this._updateAppData();
     }
 
-    _updateState() {
+    _updateUserState() {
         if (this._settings.get_boolean(USER_ENABLED_KEY) !== this._userState) {
             this._userState = !this._userState;
             this.toggleState();
