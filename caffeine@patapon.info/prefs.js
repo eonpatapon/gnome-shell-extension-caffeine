@@ -3,12 +3,12 @@
 
 // loosely based on https://gitlab.gnome.org/GNOME/gnome-shell-extensions/-/blob/master/extensions/auto-move-windows/prefs.js
 
-const { Gio, GLib, GObject, Gtk, Pango, Gdk } = imports.gi;
+const { Adw, Gio, GLib, GObject, Gtk, Pango, Gdk } = imports.gi;
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
-
 const ExtensionUtils = imports.misc.extensionUtils;
+const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, name, GObject.ParamFlags.READWRITE, ...dflt);
 
 const SettingsKey = {
     INHIBIT_APPS: 'inhibit-apps',
@@ -404,79 +404,130 @@ const CaffeineSettingsWidget = GObject.registerClass(
     }
 );
 
-const ShortcutSettingWidget = GObject.registerClass(
-    class ShortcutSetting extends Gtk.Box{
-        _init(settings, keyName) {
-            this._settings = settings;
-            this._keyName = keyName;
-
-            super._init();
-
-            const label = this._fetchShortcutLabelFromSettings();
-
-            const model = new Gtk.ListStore();
-            model.set_column_types([GObject.TYPE_STRING]);
-            model.set(model.insert(0), [0], [label]);
-
-            const renderer = new Gtk.CellRendererAccel({
-                editable: true,
-                accel_mode: Gtk.CellRendererAccelMode.GTK,
-                alignment: Pango.Alignment.RIGHT,
-                xalign: 1,
-            });
-
-            renderer.connect('accel-edited', (_, iter, key, mods) => {
-                if (!key) return;
-
-                const name = Gtk.accelerator_name(key, mods);
-                const [, iterator] = model.get_iter_from_string(iter);
-
-                const label = this._getShortcutLabel(key, mods);
-                model.set(iterator, [0], [label]);
-
-                settings.set_value(keyName, new GLib.Variant('as', [name]));
-            });
-
-            renderer.connect('accel-cleared', (_, iter) => {
-                const [, iterator] = model.get_iter_from_string(iter);
-
-                const label = this._getShortcutLabel();
-                model.set(iterator, [0], [label]);
-
-                settings.set_value(keyName, new GLib.Variant('as', []));
-            });
-
-            const tree = new Gtk.TreeView({ model: model, headers_visible: false });
-
-            const column = new Gtk.TreeViewColumn();
-            column.pack_end(renderer, false);
-            column.add_attribute(renderer, 'text', 0);
-
-            tree.append_column(column);
-
-            this.append(tree);
-        }
-
-        _fetchShortcutLabelFromSettings() {
-            const shortcut = this._settings.get_value(this._keyName).deep_unpack()[0];
-
-            let key, mods;
-            if (shortcut == null)
-                [key, mods] = [0, 0];
-            else if (Gtk.get_major_version() >= 4)
-                [, key, mods] = Gtk.accelerator_parse(shortcut);
-            else
-                [key, mods] = Gtk.accelerator_parse(shortcut);
-
-            return this._getShortcutLabel(key, mods);
-        }
-
-        _getShortcutLabel(key, mods) {
-            if (!key && !mods) return _('None');
-            return Gtk.accelerator_get_label(key, mods);
-        }
+const ShortcutSettingWidget = class extends Gtk.Button {
+    static {
+        GObject.registerClass({
+            Properties: {
+                shortcut: genParam('string', 'shortcut', ''),
+            },
+            Signals: {
+                changed: { param_types: [GObject.TYPE_STRING] },
+            },
+        }, this);
     }
-);
+
+    constructor(settings, key) {
+        super({ valign: Gtk.Align.CENTER, has_frame: false });
+        this._key = key;
+        this._settings = settings;
+
+        this.connect('clicked', this._onActivated.bind(this));
+
+        let label = new Gtk.ShortcutLabel({ disabled_text: _('New accelerator…') });
+        this.set_child(label);
+
+        this.bind_property('shortcut', label, 'accelerator', GObject.BindingFlags.DEFAULT);
+        [this.shortcut] = this._settings.get_strv(this._key);
+    }
+
+    _onActivated(widget) {
+        let ctl = new Gtk.EventControllerKey();
+
+        let content = new Adw.StatusPage({
+            title: _('New accelerator…'),
+            icon_name: 'preferences-desktop-keyboard-shortcuts-symbolic',
+        });
+
+        this._editor = new Adw.Window({
+            modal: true,
+            hide_on_close: true,
+            transient_for: widget.get_root(),
+            width_request: 480,
+            height_request: 320,
+            content,
+        });
+
+        this._editor.add_controller(ctl);
+        ctl.connect('key-pressed', this._onKeyPressed.bind(this));
+        this._editor.present();
+    }
+
+    _onKeyPressed(_widget, keyval, keycode, state) {
+        let mask = state & Gtk.accelerator_get_default_mod_mask();
+        mask &= ~Gdk.ModifierType.LOCK_MASK;
+
+        if (!mask && keyval === Gdk.KEY_Escape) {
+            this._editor.close();
+            return Gdk.EVENT_STOP;
+        }
+
+        if (keyval === Gdk.KEY_BackSpace) {
+            this.saveShortcut(); // Clear shortcut
+            return Gdk.EVENT_STOP;
+        }
+
+        if (!this.isValidBinding(mask, keycode, keyval) || !this.isValidAccel(mask, keyval))
+            return Gdk.EVENT_STOP;
+
+        this.saveShortcut(keyval, keycode, mask);
+        return Gdk.EVENT_STOP;
+    }
+
+    saveShortcut(keyval, keycode, mask) {
+        if (!keyval && !keycode) {
+            this.shortcut = "";
+        } else {
+            this.shortcut = Gtk.accelerator_name_with_keycode(null, keyval, keycode, mask);
+        }
+
+        this.emit('changed', this.shortcut);
+        this._settings.set_strv(this._key, [this.shortcut]);
+        this._editor.destroy();
+    }
+
+    // Functions from https://gitlab.gnome.org/GNOME/gnome-control-center/-/blob/master/panels/keyboard/keyboard-shortcuts.c
+
+    keyvalIsForbidden(keyval) {
+        return [
+            // Navigation keys
+            Gdk.KEY_Home,
+            Gdk.KEY_Left,
+            Gdk.KEY_Up,
+            Gdk.KEY_Right,
+            Gdk.KEY_Down,
+            Gdk.KEY_Page_Up,
+            Gdk.KEY_Page_Down,
+            Gdk.KEY_End,
+            Gdk.KEY_Tab,
+
+            // Return
+            Gdk.KEY_KP_Enter,
+            Gdk.KEY_Return,
+
+            Gdk.KEY_Mode_switch,
+        ].includes(keyval);
+    }
+
+    isValidBinding(mask, keycode, keyval) {
+        return !(mask === 0 || mask === Gdk.SHIFT_MASK && keycode !== 0 &&
+                 ((keyval >= Gdk.KEY_a && keyval <= Gdk.KEY_z) ||
+                     (keyval >= Gdk.KEY_A && keyval <= Gdk.KEY_Z) ||
+                     (keyval >= Gdk.KEY_0 && keyval <= Gdk.KEY_9) ||
+                     (keyval >= Gdk.KEY_kana_fullstop && keyval <= Gdk.KEY_semivoicedsound) ||
+                     (keyval >= Gdk.KEY_Arabic_comma && keyval <= Gdk.KEY_Arabic_sukun) ||
+                     (keyval >= Gdk.KEY_Serbian_dje && keyval <= Gdk.KEY_Cyrillic_HARDSIGN) ||
+                     (keyval >= Gdk.KEY_Greek_ALPHAaccent && keyval <= Gdk.KEY_Greek_omega) ||
+                     (keyval >= Gdk.KEY_hebrew_doublelowline && keyval <= Gdk.KEY_hebrew_taf) ||
+                     (keyval >= Gdk.KEY_Thai_kokai && keyval <= Gdk.KEY_Thai_lekkao) ||
+                     (keyval >= Gdk.KEY_Hangul_Kiyeog && keyval <= Gdk.KEY_Hangul_J_YeorinHieuh) ||
+                     (keyval === Gdk.KEY_space && mask === 0) || this.keyvalIsForbidden(keyval))
+        );
+    }
+
+    isValidAccel(mask, keyval) {
+        return Gtk.accelerator_valid(keyval, mask) || (keyval === Gdk.KEY_Tab && mask !== 0);
+    }
+};
 
 /**
  * Preferences widget initialization steps
