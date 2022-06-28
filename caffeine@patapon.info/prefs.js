@@ -485,7 +485,7 @@ const ShortcutSettingWidget = class extends Gtk.Button {
         this._editor.destroy();
     }
 
-    // Functions from https://gitlab.gnome.org/GNOME/gnome-control-center/-/blob/master/panels/keyboard/keyboard-shortcuts.c
+    // Functions from https://gitlab.gnome.org/GNOME/gnome-control-center/-/blob/main/panels/keyboard/keyboard-shortcuts.c
 
     keyvalIsForbidden(keyval) {
         return [
