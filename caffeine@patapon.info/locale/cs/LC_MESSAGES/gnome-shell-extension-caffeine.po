@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 16:05-0400\n"
+"POT-Creation-Date: 2022-06-29 01:39+0300\n"
 "PO-Revision-Date: 2022-04-13 15:18+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech\n"
@@ -17,96 +17,112 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:300
+#: extension.js:304
 msgid "Auto suspend and screensaver disabled. Night Light paused."
-msgstr "Automatické uspání a šetřič obrazovky jsou zakázané. Noční světlo pozastaveno."
+msgstr ""
+"Automatické uspání a šetřič obrazovky jsou zakázané. Noční světlo "
+"pozastaveno."
 
-#: extension.js:302
+#: extension.js:306
 msgid "Auto suspend and screensaver disabled"
 msgstr "Automatické uspání a šetřič obrazovky jsou zakázané"
 
-#: extension.js:306
+#: extension.js:310
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
-msgstr "Automatické uspání a šetřič obrazovky jsou povolené. Noční světlo obnoveno."
+msgstr ""
+"Automatické uspání a šetřič obrazovky jsou povolené. Noční světlo obnoveno."
 
-#: extension.js:308
+#: extension.js:312
 msgid "Auto suspend and screensaver enabled"
 msgstr "Automatické uspání a šetřič obrazovky jsou povolené"
 
-#: prefs.js:133
+#: prefs.js:138
 msgid "Show status indicator in top panel"
 msgstr "Zobrazit indikátor stavu v horní liště"
 
-#: prefs.js:133
+#: prefs.js:138
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Povolit nebo zakázat ikonu Caffeine v horní liště"
 
-#: prefs.js:136
+#: prefs.js:141
 msgid "Notifications"
 msgstr "Upozornění"
 
-#: prefs.js:136
+#: prefs.js:141
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Povolit upozornění, když je Caffeine povoleno nebo zakázáno"
 
-#: prefs.js:139
+#: prefs.js:144
 msgid "Remember state"
 msgstr "Pamatovat stav"
 
-#: prefs.js:139
+#: prefs.js:144
 msgid "Remember the last state across sessions and reboots"
 msgstr "Pamatovat si poslední stav mezi sezeními a restarty"
 
-#: prefs.js:142
+#: prefs.js:147
 msgid "Enable for fullscreen apps"
 msgstr "Povolit pro celoobrazovkové aplikace"
 
-#: prefs.js:142
+#: prefs.js:147
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "Automaticky povolit, když aplikace přejde do režimu celé obrazovky"
 
-#: prefs.js:145
+#: prefs.js:150
 msgid "Pause and resume Night Light"
 msgstr "Pozastavit a obnovit Noční světlo"
 
-#: prefs.js:145
+#: prefs.js:150
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Přepne noční světlo spolu se stavem Caffeine"
 
-#: prefs.js:147
+#: prefs.js:152
 msgid "Never"
 msgstr "Nikdy"
 
-#: prefs.js:147
+#: prefs.js:152
 msgid "Always"
 msgstr "Vždy"
 
-#: prefs.js:147
+#: prefs.js:152
 msgid "For apps on list"
 msgstr "Pro aplikace na seznamu"
 
-#: prefs.js:181
+#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+msgid "Toggle shortcut"
+msgstr ""
+
+#: prefs.js:157
+msgid "Use Backspace to clear"
+msgstr ""
+
+#: prefs.js:189
 msgid "Apps that trigger Caffeine"
 msgstr "Aplikace, které spouštějí Caffeine"
 
-#: prefs.js:353
+#: prefs.js:361
 msgid "Add Application"
 msgstr "Přidat aplikaci"
 
-#: prefs.js:391
+#: prefs.js:399
 msgid "General"
 msgstr "Obecné"
 
-#: prefs.js:394
+#: prefs.js:402
 msgid "Apps"
 msgstr "Aplikace"
+
+#: prefs.js:426 prefs.js:437
+msgid "New accelerator…"
+msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
 msgid "Application list"
 msgstr "Seznam aplikací"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:13
-msgid "A list of strings, each containing an application id (desktop file name)"
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
 msgstr "Seznam řetězců, každý obsahující id aplikace (název desktop souboru)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
@@ -152,7 +168,9 @@ msgstr "ZASTARALÉ. Pozastavit/obnovit Noční světlo pouze pro určené aplika
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 msgid "Pause/resume Night Light for defined application when enabled/disabled"
-msgstr "Pozastavit/obnovit Noční světlo pro určené aplikace, když je povoleno/zakázáno"
+msgstr ""
+"Pozastavit/obnovit Noční světlo pro určené aplikace, když je povoleno/"
+"zakázáno"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Night Light control mode"
@@ -160,4 +178,9 @@ msgstr "Režim řízení Nočního světla"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr "Nastavte způsob, kterým Caffeine interaguje s nastavením Nočního světla."
+msgstr ""
+"Nastavte způsob, kterým Caffeine interaguje s nastavením Nočního světla."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+msgid "Shortcut to toggle Caffeine."
+msgstr ""
