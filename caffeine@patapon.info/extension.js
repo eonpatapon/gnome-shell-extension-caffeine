@@ -147,6 +147,7 @@ class Caffeine extends PanelMenu.Button {
         this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
 
         this._state = false;
+        this._userState = false;
         // who has requested the inhibition
         this._last_app = '';
         this._last_cookie = '';
@@ -173,6 +174,8 @@ class Caffeine extends PanelMenu.Button {
         this._appData = new Map();
 
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
+        this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
+
         this._updateAppConfigs();
     }
 
@@ -237,7 +240,7 @@ class Caffeine extends PanelMenu.Button {
                     appId = String(appId);
                     if (appId !== '' && appId === this._last_app) {
                         if (this._last_app === 'user')
-                            this._settings.set_boolean(USER_ENABLED_KEY, true);
+                            this._saveUserState(true);
                         this._apps.push(this._last_app);
                         this._cookies.push(this._last_cookie);
                         this._objects.push(object);
@@ -259,7 +262,7 @@ class Caffeine extends PanelMenu.Button {
         let index = this._objects.indexOf(object);
         if (index !== -1) {
             if (this._apps[index] === 'user')
-                this._settings.set_boolean(USER_ENABLED_KEY, false);
+                this._saveUserState(false);
             // Remove app from list
             this._apps.splice(index, 1);
             this._cookies.splice(index, 1);
@@ -315,6 +318,18 @@ class Caffeine extends PanelMenu.Button {
             this._appConfigs.push(appId);
         });
         this._updateAppData();
+    }
+
+    _updateUserState() {
+        if (this._settings.get_boolean(USER_ENABLED_KEY) !== this._userState) {
+            this._userState = !this._userState;
+            this.toggleState();
+        }
+    }
+
+    _saveUserState(state) {
+        this._userState = state;
+        this._settings.set_boolean(USER_ENABLED_KEY, state);
     }
 
     _updateAppData() {

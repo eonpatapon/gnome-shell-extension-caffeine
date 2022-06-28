@@ -26,3 +26,20 @@ make install
 ```
   - Restart the shell
   - Enable the extension
+
+## CLI
+
+- Get current state:
+  ```sh
+  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ get org.gnome.shell.extensions.caffeine user-enabled
+  ```
+- Enable Caffeine:
+  ```sh
+  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ set org.gnome.shell.extensions.caffeine user-enabled true
+  ```
+- Disable Caffeine:
+  ```sh
+  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ set org.gnome.shell.extensions.caffeine user-enabled false
+  ```
+
+`--schemadir` — path to the extension schemas directory. It may be different on your system.
