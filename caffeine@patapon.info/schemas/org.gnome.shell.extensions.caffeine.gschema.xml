@@ -52,5 +52,11 @@
         <summary>Night Light control mode</summary>
         <description>Set the way Caffeine interacts with the Night light setting.</description>
     </key>
+    <key type="b" name="screen-blank">
+        <default>false</default>
+        <summary>Allow screen blank</summary>
+        <description>Allow turning off screen when Caffeine is enabled</description>
+    </key>
+
   </schema>
 </schemalist>

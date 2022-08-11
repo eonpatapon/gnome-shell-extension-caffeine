@@ -17,6 +17,7 @@ const SettingsKey = {
     FULLSCREEN: 'enable-fullscreen',
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
+    SCREENBLANK: 'screen-blank',
 };
 
 const SettingListBoxRow = GObject.registerClass({
@@ -148,6 +149,10 @@ const SettingsPane = GObject.registerClass(
                 ],
             });
             _listBox.append(_controlNightlight);
+
+            const _screenBlank = new SettingListBoxRow(_('Allow screen blank'), _('Allow turning off screen when Caffeine is enabled'), SettingsKey.SCREENBLANK);
+            _listBox.append(_screenBlank);
+
         }
 
         _rowActivated(widget, row) {

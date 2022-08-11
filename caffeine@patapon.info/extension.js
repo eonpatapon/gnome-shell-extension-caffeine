@@ -31,6 +31,7 @@ const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const NIGHT_LIGHT_KEY = 'control-nightlight';
+const SCREEN_BLANK = 'screen-blank';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -216,8 +217,13 @@ class Caffeine extends PanelMenu.Button {
     }
 
     addInhibit(appId) {
+        let inhibitFlags = 12
+        if (this._settings.get_boolean(SCREEN_BLANK)) {
+            inhibitFlags = 4
+        }
+
         this._sessionManager.InhibitRemote(appId,
-            0, 'Inhibit by %s'.format(IndicatorName), 12,
+            0, 'Inhibit by %s'.format(IndicatorName), inhibitFlags,
             cookie => {
                 this._last_cookie = cookie;
                 this._last_app = appId;
