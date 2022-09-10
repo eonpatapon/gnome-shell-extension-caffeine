@@ -32,7 +32,7 @@ msgstr "자동 대기 모드 진입 및 화면 보호기가 활성화됨"
 
 #: caffeine@patapon.info/prefs.js:133
 msgid "Show status indicator in top panel"
-msgstr "상단 패널에 인디케이터를 표시합니다."
+msgstr "상단 패널에 인디케이터 표시"
 
 #: caffeine@patapon.info/prefs.js:133
 msgid "Enable or disable the Caffeine icon in the top panel"
