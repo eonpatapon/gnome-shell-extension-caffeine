@@ -16,7 +16,7 @@ msgstr ""
 
 #: caffeine@patapon.info/extension.js:303
 msgid "Auto suspend and screensaver disabled. Night Light paused."
-msgstr "자동 대기 모드 진입 및 화면 보호기가 비활성화되었습니다. 야간 모드를 멉춥니다."
+msgstr "자동 대기 모드 진입 및 화면 보호기가 비활성화되었습니다. 야간 모드를 멈춥니다."
 
 #: caffeine@patapon.info/extension.js:305
 msgid "Auto suspend and screensaver disabled"
