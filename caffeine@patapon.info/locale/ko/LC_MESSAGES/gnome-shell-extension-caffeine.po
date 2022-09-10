@@ -84,7 +84,7 @@ msgstr "제어할 프로그램"
 
 #: caffeine@patapon.info/prefs.js:181
 msgid "Apps that trigger Caffeine"
-msgstr "카페인을 제어할 프로그램의 목록입니다."
+msgstr "카페인을 제어할 프로그램"
 
 #: caffeine@patapon.info/prefs.js:353
 msgid "Add Application"
