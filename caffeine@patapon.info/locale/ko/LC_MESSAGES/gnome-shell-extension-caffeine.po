@@ -80,7 +80,7 @@ msgstr "항상"
 
 #: caffeine@patapon.info/prefs.js:147
 msgid "For apps on list"
-msgstr "제어할 프로그램"
+msgstr "목록에 있는 프로그램만"
 
 #: caffeine@patapon.info/prefs.js:181
 msgid "Apps that trigger Caffeine"
