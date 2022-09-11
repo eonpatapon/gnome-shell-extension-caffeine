@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 16:05-0400\n"
+"POT-Creation-Date: 2022-06-29 01:39+0300\n"
 "PO-Revision-Date: 2022-05-09 16:53+0200\n"
 "Last-Translator: Simone Esposito <simoespo159@gmail.com>\n"
 "Language-Team: Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>\n"
@@ -17,99 +17,111 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:300
+#: extension.js:304
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Auto sospensione e screensaver disabilitato"
 
-#: extension.js:302
+#: extension.js:306
 msgid "Auto suspend and screensaver disabled"
 msgstr "Auto sospensione e screensaver disabilitato"
 
-#: extension.js:306
+#: extension.js:310
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Auto sospensione e screensaver abilitato"
 
-#: extension.js:308
+#: extension.js:312
 msgid "Auto suspend and screensaver enabled"
 msgstr "Auto sospensione e screensaver abilitato"
 
-#: prefs.js:133
+#: prefs.js:138
 #, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Mostra indicatore nel pannello in alto"
 
-#: prefs.js:133
+#: prefs.js:138
 #, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Mostra indicatore nel pannello in alto"
 
-#: prefs.js:136
+#: prefs.js:141
 #, fuzzy
 msgid "Notifications"
 msgstr "Mostra notifiche"
 
-#: prefs.js:136
+#: prefs.js:141
 #, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Mostra notifiche quando abilitato/disabilitato"
 
-#: prefs.js:139
+#: prefs.js:144
 msgid "Remember state"
 msgstr "Ricorda stato"
 
-#: prefs.js:139
+#: prefs.js:144
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Ripristina lo stato dopo i riavvii"
 
-#: prefs.js:142
+#: prefs.js:147
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Abilita quando è avviata una applicazione a schermo intero"
 
-#: prefs.js:142
+#: prefs.js:147
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "Abilita automaticamente quando un'app entra in modalità schermo intero"
 
-#: prefs.js:145
+#: prefs.js:150
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Mostra notifiche quando abilitato/disabilitato"
 
-#: prefs.js:145
+#: prefs.js:150
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Attiva la modalità notturna insieme allo stato di caffeine"
 
-#: prefs.js:147
+#: prefs.js:152
 msgid "Never"
 msgstr "Mai"
 
-#: prefs.js:147
+#: prefs.js:152
 msgid "Always"
 msgstr "Sempre"
 
-#: prefs.js:147
+#: prefs.js:152
 msgid "For apps on list"
 msgstr "Per le applicazioni in elenco"
 
-#: prefs.js:181
+#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+msgid "Toggle shortcut"
+msgstr ""
+
+#: prefs.js:157
+msgid "Use Backspace to clear"
+msgstr ""
+
+#: prefs.js:189
 msgid "Apps that trigger Caffeine"
 msgstr "Applicazioni che abilitano caffeine"
 
-#: prefs.js:353
+#: prefs.js:361
 #, fuzzy
 msgid "Add Application"
 msgstr "Aggiungi applicazione"
 
-#: prefs.js:391
+#: prefs.js:399
 msgid "General"
 msgstr "Generali"
 
-#: prefs.js:394
+#: prefs.js:402
 msgid "Apps"
 msgstr "Applicazioni"
+
+#: prefs.js:426 prefs.js:437
+msgid "New accelerator…"
+msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
 msgid "Application list"
@@ -176,7 +188,13 @@ msgstr "Modalità di controllo della modalità notturna"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr "Imposta il modo in cui caffeine interagisce con l'impostazione della Modalità notturna."
+msgstr ""
+"Imposta il modo in cui caffeine interagisce con l'impostazione della "
+"Modalità notturna."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+msgid "Shortcut to toggle Caffeine."
+msgstr ""
 
 #~ msgid "Show Caffeine in top panel"
 #~ msgstr "Mostra Caffeine nel pannello in alto"

@@ -4,7 +4,7 @@
         <value value="0" nick="never"/>
         <value value="1" nick="always"/>
         <value value="2" nick="for-apps"/>
-    </enum>
+   </enum>
 
   <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
     <key type="as" name="inhibit-apps">
@@ -51,6 +51,11 @@
         <default>"never"</default>
         <summary>Night Light control mode</summary>
         <description>Set the way Caffeine interacts with the Night light setting.</description>
+    </key>
+    <key type="as" name="toggle-shortcut">
+        <default><![CDATA[[]]]></default>
+        <summary>Toggle shortcut</summary>
+        <description>Shortcut to toggle Caffeine.</description>
     </key>
   </schema>
 </schemalist>
