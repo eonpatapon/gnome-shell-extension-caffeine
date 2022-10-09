@@ -1,5 +1,5 @@
-# FRENCH TRANSLATION OF GNOME EXTENSION "MEMENTO MORI"
-# This file is distributed under the same license as the Memento Mori extension.
+# FRENCH TRANSLATION OF GNOME EXTENSION "CAFFEINE"
+# This file is distributed under the same license as the Caffeine extension.
 # Jean-Philippe Braun <eon@patapon.info>, 2014.
 # Simon Elst <kirmaha@duck.com>, 2022.
 #
