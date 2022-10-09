@@ -124,7 +124,7 @@ msgstr "Liste des applications"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:13
 msgid "A list of strings, each containing an application id (desktop file name)"
-msgstr "Liste de chaînes, chacune contenu l’id d’une application (nom de fichier desktop)"
+msgstr "Liste de chaînes, chacune contenant l’id d’une application (nom de fichier desktop)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
 msgid "Store caffeine user state"
