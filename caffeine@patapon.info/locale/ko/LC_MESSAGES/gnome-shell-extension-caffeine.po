@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-09-10 10:40+0900\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-10 09:19+0200\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -14,147 +15,168 @@ msgstr ""
 "X-Poedit-Basepath: ../../gnome-shell-extension-caffeine-master\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: caffeine@patapon.info/extension.js:303
+#: extension.js:304
 msgid "Auto suspend and screensaver disabled. Night Light paused."
-msgstr "자동 대기 모드 진입 및 화면 보호기가 비활성화되었습니다. 야간 모드를 멈춥니다."
+msgstr ""
+"자동 대기 모드 진입 및 화면 보호기가 비활성화되었습니다. 야간 모드를 멈춥니"
+"다."
 
-#: caffeine@patapon.info/extension.js:305
+#: extension.js:306
 msgid "Auto suspend and screensaver disabled"
 msgstr "자동 대기 모드 진입 및 화면 보호기가 비활성화됨"
 
-#: caffeine@patapon.info/extension.js:309
+#: extension.js:310
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
-msgstr "자동 대기 모드 진입 및 화면 보호기가 활성화되었습니다. 야간 모드를 다시 켭니다."
+msgstr ""
+"자동 대기 모드 진입 및 화면 보호기가 활성화되었습니다. 야간 모드를 다시 켭니"
+"다."
 
-#: caffeine@patapon.info/extension.js:311
+#: extension.js:312
 msgid "Auto suspend and screensaver enabled"
 msgstr "자동 대기 모드 진입 및 화면 보호기가 활성화됨"
 
-#: caffeine@patapon.info/prefs.js:133
+#: prefs.js:138
 msgid "Show status indicator in top panel"
 msgstr "상단 패널에 인디케이터 표시"
 
-#: caffeine@patapon.info/prefs.js:133
+#: prefs.js:138
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "카페인 아이콘을 상단에 표시할지 결정합니다."
 
-#: caffeine@patapon.info/prefs.js:136
+#: prefs.js:141
 msgid "Notifications"
 msgstr "알림"
 
-#: caffeine@patapon.info/prefs.js:136
+#: prefs.js:141
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "카페인을 켜고 끌 때마다 알림을 표시합니다."
 
-#: caffeine@patapon.info/prefs.js:139
+#: prefs.js:144
 msgid "Remember state"
 msgstr "상태 기억하기"
 
-#: caffeine@patapon.info/prefs.js:139
+#: prefs.js:144
 msgid "Remember the last state across sessions and reboots"
 msgstr "세션을 바꾸거나 다시 시작할 때 마지막 상태를 기억합니다."
 
-#: caffeine@patapon.info/prefs.js:142
+#: prefs.js:147
 msgid "Enable for fullscreen apps"
 msgstr "전체 화면 프로그램에서 활성화"
 
-#: caffeine@patapon.info/prefs.js:142
+#: prefs.js:147
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "전체 화면 모드에 진입한 프로그램을 사용할 시 자동으로 활성화합니다."
 
-#: caffeine@patapon.info/prefs.js:145
+#: prefs.js:150
 msgid "Pause and resume Night Light"
 msgstr "야간 모드를 멈추거나 다시 켜기"
 
-#: caffeine@patapon.info/prefs.js:145
+#: prefs.js:150
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "카페인의 상태에 맞춰 야간 모드를 제어합니다."
 
-#: caffeine@patapon.info/prefs.js:147
+#: prefs.js:152
 msgid "Never"
 msgstr "안 함"
 
-#: caffeine@patapon.info/prefs.js:147
+#: prefs.js:152
 msgid "Always"
 msgstr "항상"
 
-#: caffeine@patapon.info/prefs.js:147
+#: prefs.js:152
 msgid "For apps on list"
 msgstr "목록에 있는 프로그램만"
 
-#: caffeine@patapon.info/prefs.js:181
+#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+msgid "Toggle shortcut"
+msgstr ""
+
+#: prefs.js:157
+msgid "Use Backspace to clear"
+msgstr ""
+
+#: prefs.js:189
 msgid "Apps that trigger Caffeine"
 msgstr "카페인을 제어할 프로그램"
 
-#: caffeine@patapon.info/prefs.js:353
+#: prefs.js:361
 msgid "Add Application"
 msgstr "프로그램 추가"
 
-#: caffeine@patapon.info/prefs.js:391
+#: prefs.js:399
 msgid "General"
 msgstr "일반"
 
-#: caffeine@patapon.info/prefs.js:394
+#: prefs.js:402
 msgid "Apps"
 msgstr "프로그램"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
+#: prefs.js:426 prefs.js:437
+msgid "New accelerator…"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
 msgid "Application list"
 msgstr "프로그램 목록"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:13
-msgid "A list of strings, each containing an application id (desktop file name)"
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:13
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
 msgstr "프로그램 ID 같은 문자열을 포함한 목록"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
 msgid "Store caffeine user state"
 msgstr "카페인 사용자 상태를 저장"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Restore caffeine state"
 msgstr "카페인 상태를 복원"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Show indicator"
 msgstr "인디케이터 표시"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:28
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:28
 msgid "Show the indicator on the top panel"
 msgstr "상단 패널에 인디케이터 표시"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Show notifications"
 msgstr "알림 표시"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
 msgid "Show notifications when enabled/disabled"
 msgstr "카페인을 켜고 끌 때마다 알림 표시"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Enable when a fullscreen application is running"
 msgstr "전체 화면 프로그램을 실행할 시 카페인 활성화"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "DEPRECATED. Pause/resume Night Light"
 msgstr ""
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Pause/resume Night Light when enabled/disabled"
 msgstr ""
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
 msgstr ""
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 msgid "Pause/resume Night Light for defined application when enabled/disabled"
 msgstr "카페인을 제어하게끔 정의된 프로그램에서 야간 모드를 제어"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Night Light control mode"
 msgstr "야간 모드 제어 모드"
 
-#: caffeine@patapon.info/schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "카페인 설정을 야간 모드 설정에 연동시킵니다."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+msgid "Shortcut to toggle Caffeine."
+msgstr ""
