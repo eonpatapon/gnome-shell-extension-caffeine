@@ -18,6 +18,7 @@ const SettingsKey = {
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
     TOGGLE_SHORTCUT: 'toggle-shortcut',
+    SCREEN_BLANK: 'screen-blank',
 };
 
 const SettingListBoxRow = GObject.registerClass({
@@ -156,6 +157,9 @@ const SettingsPane = GObject.registerClass(
 
             const _toggleShortcut = new SettingListBoxRow(_('Toggle shortcut'), _('Use Backspace to clear'), SettingsKey.TOGGLE_SHORTCUT, 'shortcut');
             _listBox.append(_toggleShortcut);
+
+            const _screenBlank = new SettingListBoxRow(_('Allow screen blank'), _('Allow turning off screen when Caffeine is enabled'), SettingsKey.SCREEN_BLANK);
+            _listBox.append(_screenBlank);
         }
 
         _rowActivated(widget, row) {

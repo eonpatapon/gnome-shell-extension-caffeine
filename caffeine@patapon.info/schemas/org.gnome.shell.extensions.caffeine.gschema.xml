@@ -57,5 +57,10 @@
         <summary>Toggle shortcut</summary>
         <description>Shortcut to toggle Caffeine.</description>
     </key>
+    <key type="b" name="screen-blank">
+        <default>false</default>
+        <summary>Allow screen blank</summary>
+        <description>Allow turning off screen when Caffeine is enabled</description>
+    </key>
   </schema>
 </schemalist>
