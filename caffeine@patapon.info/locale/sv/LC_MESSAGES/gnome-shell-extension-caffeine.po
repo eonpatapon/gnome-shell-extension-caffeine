@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 01:39+0300\n"
+"POT-Creation-Date: 2022-10-11 08:31+0700\n"
 "PO-Revision-Date: 2018-04-04 20:35+0200\n"
 "Last-Translator: Morgan Antonsson <morgan.antonsson@gmail.com>\n"
 "Language-Team: \n"
@@ -11,109 +11,118 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:304
+#: extension.js:310
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
 
-#: extension.js:306
+#: extension.js:312
 msgid "Auto suspend and screensaver disabled"
 msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
 
-#: extension.js:310
+#: extension.js:316
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"
 
-#: extension.js:312
+#: extension.js:318
 msgid "Auto suspend and screensaver enabled"
 msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"
 
-#: prefs.js:138
+#: prefs.js:139
 #, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Visa indikator i panelen"
 
-#: prefs.js:138
+#: prefs.js:139
 #, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Visa indikator i panelen"
 
-#: prefs.js:141
+#: prefs.js:142
 #, fuzzy
 msgid "Notifications"
 msgstr "Visa notifieringar"
 
-#: prefs.js:141
+#: prefs.js:142
 #, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Visa notifieringar vid aktivering/inaktivering"
 
-#: prefs.js:144
+#: prefs.js:145
 msgid "Remember state"
 msgstr ""
 
-#: prefs.js:144
+#: prefs.js:145
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Återställ tillstånd efter omstart"
 
-#: prefs.js:147
+#: prefs.js:148
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Aktivera när ett program använder helskärmsläget"
 
-#: prefs.js:147
+#: prefs.js:148
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: prefs.js:150
+#: prefs.js:151
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Visa notifieringar vid aktivering/inaktivering"
 
-#: prefs.js:150
+#: prefs.js:151
 msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "Never"
 msgstr ""
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "Always"
 msgstr ""
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "For apps on list"
 msgstr ""
 
-#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: prefs.js:158 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Toggle shortcut"
 msgstr ""
 
-#: prefs.js:157
+#: prefs.js:158
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: prefs.js:189
+#: prefs.js:161 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Allow screen blank"
+msgstr ""
+
+#: prefs.js:161 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#, fuzzy
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr "Visa notifieringar vid aktivering/inaktivering"
+
+#: prefs.js:193
 msgid "Apps that trigger Caffeine"
 msgstr ""
 
-#: prefs.js:361
+#: prefs.js:365
 #, fuzzy
 msgid "Add Application"
 msgstr "Lägg till program"
 
-#: prefs.js:399
+#: prefs.js:403
 msgid "General"
 msgstr ""
 
-#: prefs.js:402
+#: prefs.js:406
 msgid "Apps"
 msgstr ""
 
-#: prefs.js:426 prefs.js:437
+#: prefs.js:430 prefs.js:441
 msgid "New accelerator…"
 msgstr ""
 

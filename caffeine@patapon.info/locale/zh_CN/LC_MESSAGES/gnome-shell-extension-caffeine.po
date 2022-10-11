@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-30 23:20+0300\n"
+"POT-Creation-Date: 2022-10-11 08:31+0700\n"
 "PO-Revision-Date: 2022-06-30 11:54-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -17,99 +17,108 @@ msgstr ""
 "X-Generator: Poedit 3.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:304
+#: extension.js:310
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "自动挂起与屏幕保护程序已禁用。夜灯已暂停。"
 
-#: extension.js:306
+#: extension.js:312
 msgid "Auto suspend and screensaver disabled"
 msgstr "自动挂起与屏幕保护程序已禁用"
 
-#: extension.js:310
+#: extension.js:316
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "自动挂起与屏幕保护程序已启用。夜灯已恢复。"
 
-#: extension.js:312
+#: extension.js:318
 msgid "Auto suspend and screensaver enabled"
 msgstr "自动挂起与屏幕保护程序已启用"
 
-#: prefs.js:138
+#: prefs.js:139
 msgid "Show status indicator in top panel"
 msgstr "在顶部面板显示状态指示器"
 
-#: prefs.js:138
+#: prefs.js:139
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "在顶部面板启用或禁用 Caffeine 图标"
 
-#: prefs.js:141
+#: prefs.js:142
 msgid "Notifications"
 msgstr "通知"
 
-#: prefs.js:141
+#: prefs.js:142
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "在 Caffeine 被启用或禁用时显示通知"
 
-#: prefs.js:144
+#: prefs.js:145
 msgid "Remember state"
 msgstr "记住状态"
 
-#: prefs.js:144
+#: prefs.js:145
 msgid "Remember the last state across sessions and reboots"
 msgstr "跨会话和重启记住上一次的状态"
 
-#: prefs.js:147
+#: prefs.js:148
 msgid "Enable for fullscreen apps"
 msgstr "为全屏程序启用"
 
-#: prefs.js:147
+#: prefs.js:148
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "在有应用进入全屏模式时自动启用"
 
-#: prefs.js:150
+#: prefs.js:151
 msgid "Pause and resume Night Light"
 msgstr "暂停和恢复夜灯"
 
-#: prefs.js:150
+#: prefs.js:151
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "随 Caffeine 的状态切换夜灯"
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "Never"
 msgstr "从不"
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "Always"
 msgstr "总是"
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "For apps on list"
 msgstr "用于列表上的应用"
 
-#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: prefs.js:158 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Toggle shortcut"
 msgstr ""
 
-#: prefs.js:157
+#: prefs.js:158
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: prefs.js:189
+#: prefs.js:161 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Allow screen blank"
+msgstr ""
+
+#: prefs.js:161 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#, fuzzy
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr "在 Caffeine 被启用或禁用时显示通知"
+
+#: prefs.js:193
 msgid "Apps that trigger Caffeine"
 msgstr "触发 Caffeine 的应用"
 
-#: prefs.js:361
+#: prefs.js:365
 msgid "Add Application"
 msgstr "添加应用程序"
 
-#: prefs.js:399
+#: prefs.js:403
 msgid "General"
 msgstr "常规"
 
-#: prefs.js:402
+#: prefs.js:406
 msgid "Apps"
 msgstr "应用"
 
-#: prefs.js:426 prefs.js:437
+#: prefs.js:430 prefs.js:441
 msgid "New accelerator…"
 msgstr ""
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 01:39+0300\n"
+"POT-Creation-Date: 2022-10-11 08:31+0700\n"
 "PO-Revision-Date: 2022-02-08 13:07+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -17,104 +17,113 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:304
+#: extension.js:310
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr ""
 "Автоматический режим ожидания и заставка отключены. Ночная подсветка "
 "приостановлена."
 
-#: extension.js:306
+#: extension.js:312
 msgid "Auto suspend and screensaver disabled"
 msgstr "Автоматический режим ожидания и заставка отключены"
 
-#: extension.js:310
+#: extension.js:316
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr ""
 "Автоматический режим ожидания и заставка включены. Ночная подсветка "
 "возобновлена."
 
-#: extension.js:312
+#: extension.js:318
 msgid "Auto suspend and screensaver enabled"
 msgstr "Автоматический режим ожидания и заставка включены"
 
-#: prefs.js:138
+#: prefs.js:139
 msgid "Show status indicator in top panel"
 msgstr "Показывать индикатор состояния на верхней панели"
 
-#: prefs.js:138
+#: prefs.js:139
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Включить или отключить значок Кофеина на верхней панели"
 
-#: prefs.js:141
+#: prefs.js:142
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: prefs.js:141
+#: prefs.js:142
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Включить уведомления о включении или отключении Кофеина"
 
-#: prefs.js:144
+#: prefs.js:145
 msgid "Remember state"
 msgstr "Запомнить состояние"
 
-#: prefs.js:144
+#: prefs.js:145
 msgid "Remember the last state across sessions and reboots"
 msgstr "Запомнить последнее состояние после смены сеанса и перезагрузки"
 
-#: prefs.js:147
+#: prefs.js:148
 msgid "Enable for fullscreen apps"
 msgstr "Включить для полноэкранных приложений"
 
-#: prefs.js:147
+#: prefs.js:148
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 "Автоматически включать, когда приложение переходит в полноэкранный режим"
 
-#: prefs.js:150
+#: prefs.js:151
 msgid "Pause and resume Night Light"
 msgstr "Приостановка и возобновление ночной подсветки"
 
-#: prefs.js:150
+#: prefs.js:151
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Переключение ночной подсветки вместе с состоянием Кофеина"
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "Never"
 msgstr "Никогда"
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "Always"
 msgstr "Всегда"
 
-#: prefs.js:152
+#: prefs.js:153
 msgid "For apps on list"
 msgstr "Для приложений из списка"
 
-#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: prefs.js:158 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Toggle shortcut"
 msgstr ""
 
-#: prefs.js:157
+#: prefs.js:158
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: prefs.js:189
+#: prefs.js:161 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Allow screen blank"
+msgstr ""
+
+#: prefs.js:161 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#, fuzzy
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr "Включить уведомления о включении или отключении Кофеина"
+
+#: prefs.js:193
 msgid "Apps that trigger Caffeine"
 msgstr "Приложения, запускающие действие Кофеина"
 
-#: prefs.js:361
+#: prefs.js:365
 msgid "Add Application"
 msgstr "Добавить приложение"
 
-#: prefs.js:399
+#: prefs.js:403
 msgid "General"
 msgstr "Общие"
 
-#: prefs.js:402
+#: prefs.js:406
 msgid "Apps"
 msgstr "Приложения"
 
-#: prefs.js:426 prefs.js:437
+#: prefs.js:430 prefs.js:441
 msgid "New accelerator…"
 msgstr ""
 
