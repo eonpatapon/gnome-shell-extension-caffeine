@@ -139,7 +139,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         this._settings = ExtensionUtils.getSettings();
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
-            if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
+            if (this._settings.get_boolean(SHOW_INDICATOR_KEY) && !this._state)
                 this._indicator.visible = true;
             else
                 this._indicator.visible = false;
@@ -292,6 +292,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                         this._last_cookie = '';
                         if (this._state === false) {
                             this._state = true;
+                            this._indicator.visible = true;
                             this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendNotification('enabled');
@@ -313,6 +314,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._objects.splice(index, 1);
             if (this._apps.length === 0) {
                 this._state = false;
+                if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
+                    this._indicator.visible = false;
                 this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
                 if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendNotification('disabled');
