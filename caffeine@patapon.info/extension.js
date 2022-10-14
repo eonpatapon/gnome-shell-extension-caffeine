@@ -95,6 +95,12 @@ const ControlNightLight = {
     FOR_APPS: 2,
 };
 
+const ShowIndicator = {
+    ONLY_ACTIVE: 0,
+    ALWAYS: 1,
+    NEVER: 2,
+};
+
 let CaffeineIndicator;
 
 const FeatureToggle = GObject.registerClass(
@@ -139,13 +145,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         this._settings = ExtensionUtils.getSettings();
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
-            if (this._settings.get_boolean(SHOW_INDICATOR_KEY) && !this._state)
-                this._indicator.visible = true;
-            else
-                this._indicator.visible = false;
+            this._manageShowIndicator();
         });
-        if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
-            this._indicator.visible = false;
 
         this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
             if (error)
@@ -191,8 +192,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._objects = [];
 
         // Restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY))
+        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
             this.toggleState();
+        } else {
+            // reset user state
+            this._saveUserState(false);
+        }
+
+        // Show icon
+        this._manageShowIndicator();
 
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
@@ -288,7 +296,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                         this._last_cookie = '';
                         if (this._state === false) {
                             this._state = true;
-                            this._indicator.visible = true;
+                            this._manageShowIndicator();
                             this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendNotification('enabled');
@@ -310,11 +318,26 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._objects.splice(index, 1);
             if (this._apps.length === 0) {
                 this._state = false;
-                if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
-                    this._indicator.visible = false;
+                this._manageShowIndicator();
                 this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
                 if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendNotification('disabled');
+            }
+        }
+    }
+    
+    _manageShowIndicator() {
+        if (this._state) {
+            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.NEVER) {
+                this._indicator.visible = false;
+            } else {
+                this._indicator.visible = true;
+            }
+        } else {        
+            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.ALWAYS) {
+                this._indicator.visible = true;
+            } else {
+                this._indicator.visible = false;
             }
         }
     }
@@ -492,3 +515,4 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
+

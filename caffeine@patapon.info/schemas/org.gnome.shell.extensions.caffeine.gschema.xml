@@ -5,6 +5,11 @@
         <value value="1" nick="always"/>
         <value value="2" nick="for-apps"/>
    </enum>
+   <enum id="org.gnome.shell.extensions.caffeine.show-indicator">
+        <value value="0" nick="only-active"/>
+        <value value="1" nick="always"/>
+        <value value="2" nick="never"/>
+   </enum>
 
   <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
     <key type="as" name="inhibit-apps">
@@ -22,8 +27,8 @@
         <summary>Restore caffeine state</summary>
         <description></description>
     </key>
-    <key type="b" name="show-indicator">
-        <default>true</default>
+    <key name="show-indicator" enum="org.gnome.shell.extensions.caffeine.show-indicator">
+        <default>"only-active"</default>
         <summary>Show indicator</summary>
         <description>Show the indicator on the top panel</description>
     </key>
