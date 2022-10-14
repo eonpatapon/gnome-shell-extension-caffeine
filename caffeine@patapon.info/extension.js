@@ -22,7 +22,8 @@
 const { Atk, Gio, GObject, Shell, St, Meta } = imports.gi;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
-const PanelMenu = imports.ui.panelMenu;
+const QuickSettings = imports.ui.quickSettings;
+const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -96,22 +97,55 @@ const ControlNightLight = {
 
 let CaffeineIndicator;
 
-const Caffeine = GObject.registerClass(
-class Caffeine extends PanelMenu.Button {
+const FeatureToggle = GObject.registerClass(
+class FeatureToggle extends QuickSettings.QuickToggle {
     _init() {
-        super._init(null, IndicatorName);
+        super._init({
+            label: IndicatorName,
+            toggleMode: true,
+        });
 
-        this.accessible_role = Atk.Role.TOGGLE_BUTTON;
+        this._settings = ExtensionUtils.getSettings();
+
+        this._settings.bind(`${USER_ENABLED_KEY}`,
+            this, 'checked',
+            Gio.SettingsBindFlags.DEFAULT);
+
+        this._iconName();
+
+        this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
+            this._iconName();
+        });
+    }
+
+    _iconName() {
+        switch (this._settings.get_boolean(USER_ENABLED_KEY)) {
+        case true:
+            this.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
+            break;
+        case false:
+            this.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+            break;
+        }
+    }    
+});
+
+const Caffeine = GObject.registerClass(
+class Caffeine extends QuickSettings.SystemIndicator {
+    _init() {
+        super._init();
+
+        this._indicator = this._addIndicator();
 
         this._settings = ExtensionUtils.getSettings();
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
             if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
-                this.show();
+                this._indicator.visible = true;
             else
-                this.hide();
+                this._indicator.visible = false;
         });
         if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
-            this.hide();
+            this._indicator.visible = false;
 
         this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
             if (error)
@@ -145,7 +179,7 @@ class Caffeine extends PanelMenu.Button {
         this._icon = new St.Icon({
             style_class: 'system-status-icon',
         });
-        this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
 
         this._state = false;
         this._userState = false;
@@ -156,7 +190,6 @@ class Caffeine extends PanelMenu.Button {
         this._cookies = [];
         this._objects = [];
 
-        this.add_actor(this._icon);
         this.add_style_class_name('panel-status-button');
         this.connect('button-press-event', this.toggleState.bind(this));
         this.connect('touch-event', this.toggleState.bind(this));
@@ -178,6 +211,16 @@ class Caffeine extends PanelMenu.Button {
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
 
         this._updateAppConfigs();
+        
+        // QuickSettings
+        this.quickSettingsItems.push(new FeatureToggle());
+
+        this.connect('destroy', () => {
+            this.quickSettingsItems.forEach(item => item.destroy());
+        });
+
+        QuickSettingsMenu._indicators.add_child(this);
+        QuickSettingsMenu._addItems(this.quickSettingsItems);
     }
 
     get inFullscreen() {
@@ -249,7 +292,7 @@ class Caffeine extends PanelMenu.Button {
                         this._last_cookie = '';
                         if (this._state === false) {
                             this._state = true;
-                            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
+                            this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendNotification('enabled');
                         }
@@ -270,7 +313,7 @@ class Caffeine extends PanelMenu.Button {
             this._objects.splice(index, 1);
             if (this._apps.length === 0) {
                 this._state = false;
-                this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+                this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
                 if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendNotification('disabled');
             }
@@ -433,7 +476,6 @@ function enable() {
     _settings.reset('control-nightlight-for-app');
 
     CaffeineIndicator = new Caffeine();
-    Main.panel.addToStatusArea(IndicatorName, CaffeineIndicator);
 
     // Register shortcut
     Main.wm.addKeybinding(TOGGLE_SHORTCUT, _settings, Meta.KeyBindingFlags.IGNORE_AUTOREPEAT, Shell.ActionMode.ALL, () => {
