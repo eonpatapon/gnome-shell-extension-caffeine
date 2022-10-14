@@ -190,10 +190,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._cookies = [];
         this._objects = [];
 
-        this.add_style_class_name('panel-status-button');
-        this.connect('button-press-event', this.toggleState.bind(this));
-        this.connect('touch-event', this.toggleState.bind(this));
-
         // Restore user state
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY))
             this.toggleState();
