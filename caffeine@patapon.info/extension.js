@@ -177,10 +177,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._display = this._screen;
         }
 
-        this._icon = new St.Icon({
-            style_class: 'system-status-icon',
-        });
-        this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        // Icons
+        this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._indicator.gicon = this._icon_desactived;
 
         this._state = false;
         this._userState = false;
@@ -322,8 +322,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                         this._last_cookie = '';
                         if (this._state === false) {
                             this._state = true;
+                            // Indicator icon
                             this._manageShowIndicator();
-                            this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
+                            this._indicator.gicon = this._icon_actived;
                             // Shell OSD notifications
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendOSDNotification(true);
@@ -345,8 +346,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._objects.splice(index, 1);
             if (this._apps.length === 0) {
                 this._state = false;
+                // Indicator icon
                 this._manageShowIndicator();
-                this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+                this._indicator.gicon = this._icon_desactived;
+                // Shell OSD notifications
                 if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendOSDNotification(false);
             }
@@ -391,11 +394,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
     
     _sendOSDNotification(state) {
         if (state) {
-            Main.osdWindowManager.show(-1, Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`),
+            Main.osdWindowManager.show(-1, this._icon_actived,
                 "Auto suspend and screensaver disabled", null, null);
         }
         else {
-            Main.osdWindowManager.show(-1, Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`), 
+            Main.osdWindowManager.show(-1, this._icon_desactived, 
                 "Auto suspend and screensaver enabled", null, null);
         }
     }
