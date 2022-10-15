@@ -288,11 +288,17 @@ class Caffeine extends QuickSettings.SystemIndicator {
             case Clutter.ScrollDirection.UP:
                 // User state on - UP
                 this._settings.set_boolean(USER_ENABLED_KEY, true);
+                // Force notification here if disable in prefs
+                if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    this._sendOSDNotification(true);                
                 this._updateUserState();
                 break;
             case Clutter.ScrollDirection.DOWN:
                 // User state off - DOWN
-                this._settings.set_boolean(USER_ENABLED_KEY, false);
+                this._settings.set_boolean(USER_ENABLED_KEY, false)
+                // Force notification here if disable in prefs
+                if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    this._sendOSDNotification(false);
                 this._updateUserState();
                 break;
         }
@@ -318,8 +324,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             this._state = true;
                             this._manageShowIndicator();
                             this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
+                            // Shell OSD notifications
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
-                                this._sendNotification('enabled');
+                                this._sendOSDNotification(true);
                         }
                     }
                 });
@@ -341,7 +348,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._manageShowIndicator();
                 this._indicator.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
                 if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    this._sendNotification('disabled');
+                    this._sendOSDNotification(false);
             }
         }
     }
@@ -381,7 +388,19 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
         }
     }
+    
+    _sendOSDNotification(state) {
+        if (state) {
+            Main.osdWindowManager.show(-1, Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`),
+                "Auto suspend and screensaver disabled", null, null);
+        }
+        else {
+            Main.osdWindowManager.show(-1, Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`), 
+                "Auto suspend and screensaver enabled", null, null);
+        }
+    }
 
+    // DEPRECATED
     _sendNotification(state) {
         const controllingNl = this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlNightLight.NEVER;
         if (state === 'enabled') {
