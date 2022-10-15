@@ -19,7 +19,7 @@
 
 'use strict';
 
-const { Atk, Gio, GObject, Shell, St, Meta } = imports.gi;
+const { Atk, Gio, GObject, Shell, St, Meta, Clutter } = imports.gi;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const QuickSettings = imports.ui.quickSettings;
@@ -218,7 +218,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
         
         // QuickSettings
         this.quickSettingsItems.push(new FeatureToggle());
-
+        
+        // Change user state on icon scroll event
+        this._indicator.reactive = true;
+        this._indicator.connect('scroll-event',
+            (actor, event) => this._handleScrollEvent(event));    
+            
         this.connect('destroy', () => {
             this.quickSettingsItems.forEach(item => item.destroy());
         });
@@ -276,6 +281,21 @@ class Caffeine extends QuickSettings.SystemIndicator {
     removeInhibit(appId) {
         let index = this._apps.indexOf(appId);
         this._sessionManager.UninhibitRemote(this._cookies[index]);
+    }
+
+    _handleScrollEvent(event) {
+        switch(event.get_scroll_direction()) {
+            case Clutter.ScrollDirection.UP:
+                // User state on - UP
+                this._settings.set_boolean(USER_ENABLED_KEY, true);
+                this._updateUserState();
+                break;
+            case Clutter.ScrollDirection.DOWN:
+                // User state off - DOWN
+                this._settings.set_boolean(USER_ENABLED_KEY, false);
+                this._updateUserState();
+                break;
+        }
     }
 
     _inhibitorAdded(proxy, sender, [object]) {
@@ -515,4 +535,6 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
+
+
 
