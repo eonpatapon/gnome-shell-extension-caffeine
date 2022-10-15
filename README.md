@@ -3,7 +3,8 @@
 ## gnome-shell-extension-caffeine
   - Fill the cup to inhibit auto suspend and screensaver
   - This extension supports GNOME Shell `3.4` -> `43`
-    - `master`: `40` -> `43`
+    - `master`: `43`
+    - `gnome-shell-40-43`: `40` -> `43`
     - `gnome-shell-3.36-3.38`: `3.36` -> `3.38`
     - `gnome-shell-3.32-3.34`: `3.32` -> `3.34`
     - `gnome-shell-3.10-3.30`: `3.10` -> `3.30`
@@ -11,6 +12,7 @@
 
 ## Screenshots
 ![Screenshot](screenshot.png)
+
   - Empty cup = normal auto suspend and screensaver
   - Filled cup = auto suspend and screensaver off
 
