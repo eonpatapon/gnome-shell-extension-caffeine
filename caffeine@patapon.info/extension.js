@@ -395,11 +395,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _sendOSDNotification(state) {
         if (state) {
             Main.osdWindowManager.show(-1, this._icon_actived,
-                "Auto suspend and screensaver disabled", null, null);
+                _('Auto suspend and screensaver disabled'), null, null);
         }
         else {
             Main.osdWindowManager.show(-1, this._icon_desactived, 
-                "Auto suspend and screensaver enabled", null, null);
+                _('Auto suspend and screensaver enabled'), null, null);
         }
     }
 
