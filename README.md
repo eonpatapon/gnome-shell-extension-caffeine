@@ -11,12 +11,13 @@
     - `gnome-shell-before-3.10`: `3.4` -> `3.8`
 
 ## Screenshots
-### Quick Toggle
+### <ins>Quick Toggle</ins>
 ![Screenshot](screenshots/screenshot.png)
 
 Enable/Disable auto suspend with quick setting toggle.
 
-### Scroll Indicator Icon
+
+### <ins>Scroll Indicator Icon</ins>
 ![Screenshot](screenshots/screenshot-scroll-up.png)
 ![Screenshot](screenshots/screenshot-scroll-down.png)
 
@@ -25,9 +26,15 @@ You can scroll on the indicator icon to Enable/disable auto suspend:
 - Scroll UP -> Filled cup : auto suspend and screensaver off. 
 - Scroll DOWN -> Empty cup : normal auto suspend and screensaver.
 
-<u>__Note__</u>: the option "Show status indicator" must be set on "always" (see below).
+<ins>__Note__</ins>: the option "Show status indicator" must be set on "always" (see below).
 
-### Preferences
+
+### <ins>Notifications</ins>
+![Screenshot](screenshots/screenshot-notification-enable.png)
+![Screenshot](screenshots/screenshot-notification-disable.png)
+
+
+### <ins>Preferences</ins>
 ![Preferences](screenshots/screenshot-prefs.png)
 
 
