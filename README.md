@@ -11,12 +11,25 @@
     - `gnome-shell-before-3.10`: `3.4` -> `3.8`
 
 ## Screenshots
-![Screenshot](screenshot.png)
+### Quick Toggle
+![Screenshot](screenshots/screenshot.png)
 
-  - Empty cup = normal auto suspend and screensaver
-  - Filled cup = auto suspend and screensaver off
+Enable/Disable auto suspend with quick setting toggle.
 
-![Preferences](screenshot-prefs.png)
+### Scroll Indicator Icon
+![Screenshot](screenshots/screenshot-scroll-up.png)
+![Screenshot](screenshots/screenshot-scroll-down.png)
+
+You can scroll on the indicator icon to Enable/disable auto suspend:
+
+- Scroll UP -> Filled cup : auto suspend and screensaver off. 
+- Scroll DOWN -> Empty cup : normal auto suspend and screensaver.
+
+<u>__Note__</u>: the option "Show status indicator" must be set on "always" (see below).
+
+### Preferences
+![Preferences](screenshots/screenshot-prefs.png)
+
 
 ## Installation from GNOME Extensions
   - Get the extension [here](https://extensions.gnome.org/extension/517/caffeine/)
