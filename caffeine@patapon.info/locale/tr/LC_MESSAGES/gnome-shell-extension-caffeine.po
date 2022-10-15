@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 01:39+0300\n"
+"POT-Creation-Date: 2022-10-15 22:02+0200\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -18,22 +18,22 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Gtranslator 3.32.0\n"
 
-#: extension.js:304
+#: extension.js:398 extension.js:413
+msgid "Auto suspend and screensaver disabled"
+msgstr "Ekran koruyucu ve otomatik karartma kapalı"
+
+#: extension.js:402 extension.js:419
+msgid "Auto suspend and screensaver enabled"
+msgstr "Ekran koruyucu ve otomatik karartma açık"
+
+#: extension.js:411
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Ekran koruyucu ve otomatik karartma kapalı"
 
-#: extension.js:306
-msgid "Auto suspend and screensaver disabled"
-msgstr "Ekran koruyucu ve otomatik karartma kapalı"
-
-#: extension.js:310
+#: extension.js:417
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
-msgstr "Ekran koruyucu ve otomatik karartma açık"
-
-#: extension.js:312
-msgid "Auto suspend and screensaver enabled"
 msgstr "Ekran koruyucu ve otomatik karartma açık"
 
 #: prefs.js:138
@@ -46,151 +46,155 @@ msgstr "Göstergeyi üst panelde göster"
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Göstergeyi üst panelde göster"
 
-#: prefs.js:141
+#: prefs.js:140
+msgid "Only when active"
+msgstr "Yalnızca etkin olduğunda"
+
+#: prefs.js:140 prefs.js:156
+msgid "Always"
+msgstr "Hep"
+
+#: prefs.js:140 prefs.js:156
+msgid "Never"
+msgstr "Hiçbir zaman"
+
+#: prefs.js:145
 #, fuzzy
 msgid "Notifications"
 msgstr "Bildirimleri göster"
 
-#: prefs.js:141
+#: prefs.js:145
 #, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: prefs.js:144
+#: prefs.js:148
 msgid "Remember state"
 msgstr ""
 
-#: prefs.js:144
+#: prefs.js:148
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Yeniden başlatma arasında durumu geri yükle"
 
-#: prefs.js:147
+#: prefs.js:151
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
 
-#: prefs.js:147
+#: prefs.js:151
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: prefs.js:150
+#: prefs.js:154
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: prefs.js:150
+#: prefs.js:154
 msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: prefs.js:152
-msgid "Never"
-msgstr ""
-
-#: prefs.js:152
-msgid "Always"
-msgstr ""
-
-#: prefs.js:152
+#: prefs.js:156
 msgid "For apps on list"
 msgstr ""
 
-#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: prefs.js:161 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Toggle shortcut"
 msgstr ""
 
-#: prefs.js:157
+#: prefs.js:161
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: prefs.js:189
+#: prefs.js:193
 msgid "Apps that trigger Caffeine"
 msgstr ""
 
-#: prefs.js:361
+#: prefs.js:365
 #, fuzzy
 msgid "Add Application"
 msgstr "Uygulama ekle"
 
-#: prefs.js:399
+#: prefs.js:403
 msgid "General"
 msgstr ""
 
-#: prefs.js:402
+#: prefs.js:406
 msgid "Apps"
 msgstr ""
 
-#: prefs.js:426 prefs.js:437
+#: prefs.js:430 prefs.js:441
 msgid "New accelerator…"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
 msgid "Application list"
 msgstr "Uygulama listesi"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:13
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:18
 msgid ""
 "A list of strings, each containing an application id (desktop file name)"
 msgstr ""
 "Her biri bir uygulama kimliği içeren bir dize listesi (masaüstü dosya adı)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:17
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Store caffeine user state"
 msgstr "Kafein kullanıcı durumunu sakla"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Restore caffeine state"
 msgstr "Kafein durumunu geri yükle"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Show indicator"
 msgstr "Göstergeyi göster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:28
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
 msgid "Show the indicator on the top panel"
 msgstr "Göstergeyi üst panelde göster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 msgid "Show notifications"
 msgstr "Bildirimleri göster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Show notifications when enabled/disabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Enable when a fullscreen application is running"
 msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 #, fuzzy
 msgid "DEPRECATED. Pause/resume Night Light"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 #, fuzzy
 msgid "Pause/resume Night Light when enabled/disabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 #, fuzzy
 msgid "Pause/resume Night Light for defined application when enabled/disabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Night Light control mode"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Shortcut to toggle Caffeine."
 msgstr ""
 

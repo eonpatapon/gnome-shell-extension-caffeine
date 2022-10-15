@@ -19,10 +19,11 @@
 
 'use strict';
 
-const { Atk, Gio, GObject, Shell, St, Meta } = imports.gi;
+const { Atk, Gio, GObject, Shell, St, Meta, Clutter } = imports.gi;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
-const PanelMenu = imports.ui.panelMenu;
+const QuickSettings = imports.ui.quickSettings;
+const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -94,24 +95,58 @@ const ControlNightLight = {
     FOR_APPS: 2,
 };
 
+const ShowIndicator = {
+    ONLY_ACTIVE: 0,
+    ALWAYS: 1,
+    NEVER: 2,
+};
+
 let CaffeineIndicator;
 
-const Caffeine = GObject.registerClass(
-class Caffeine extends PanelMenu.Button {
+const FeatureToggle = GObject.registerClass(
+class FeatureToggle extends QuickSettings.QuickToggle {
     _init() {
-        super._init(null, IndicatorName);
+        super._init({
+            label: IndicatorName,
+            toggleMode: true,
+        });
 
-        this.accessible_role = Atk.Role.TOGGLE_BUTTON;
+        this._settings = ExtensionUtils.getSettings();
+
+        this._settings.bind(`${USER_ENABLED_KEY}`,
+            this, 'checked',
+            Gio.SettingsBindFlags.DEFAULT);
+
+        this._iconName();
+
+        this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
+            this._iconName();
+        });
+    }
+
+    _iconName() {
+        switch (this._settings.get_boolean(USER_ENABLED_KEY)) {
+        case true:
+            this.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
+            break;
+        case false:
+            this.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+            break;
+        }
+    }    
+});
+
+const Caffeine = GObject.registerClass(
+class Caffeine extends QuickSettings.SystemIndicator {
+    _init() {
+        super._init();
+
+        this._indicator = this._addIndicator();
 
         this._settings = ExtensionUtils.getSettings();
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
-            if (this._settings.get_boolean(SHOW_INDICATOR_KEY))
-                this.show();
-            else
-                this.hide();
+            this._manageShowIndicator();
         });
-        if (!this._settings.get_boolean(SHOW_INDICATOR_KEY))
-            this.hide();
 
         this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
             if (error)
@@ -142,10 +177,10 @@ class Caffeine extends PanelMenu.Button {
             this._display = this._screen;
         }
 
-        this._icon = new St.Icon({
-            style_class: 'system-status-icon',
-        });
-        this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        // Icons
+        this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._indicator.gicon = this._icon_desactived;
 
         this._state = false;
         this._userState = false;
@@ -156,14 +191,16 @@ class Caffeine extends PanelMenu.Button {
         this._cookies = [];
         this._objects = [];
 
-        this.add_actor(this._icon);
-        this.add_style_class_name('panel-status-button');
-        this.connect('button-press-event', this.toggleState.bind(this));
-        this.connect('touch-event', this.toggleState.bind(this));
-
         // Restore user state
-        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY))
+        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
             this.toggleState();
+        } else {
+            // reset user state
+            this._saveUserState(false);
+        }
+
+        // Show icon
+        this._manageShowIndicator();
 
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
@@ -178,6 +215,21 @@ class Caffeine extends PanelMenu.Button {
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
 
         this._updateAppConfigs();
+        
+        // QuickSettings
+        this.quickSettingsItems.push(new FeatureToggle());
+        
+        // Change user state on icon scroll event
+        this._indicator.reactive = true;
+        this._indicator.connect('scroll-event',
+            (actor, event) => this._handleScrollEvent(event));    
+            
+        this.connect('destroy', () => {
+            this.quickSettingsItems.forEach(item => item.destroy());
+        });
+
+        QuickSettingsMenu._indicators.add_child(this);
+        QuickSettingsMenu._addItems(this.quickSettingsItems);
     }
 
     get inFullscreen() {
@@ -231,6 +283,27 @@ class Caffeine extends PanelMenu.Button {
         this._sessionManager.UninhibitRemote(this._cookies[index]);
     }
 
+    _handleScrollEvent(event) {
+        switch(event.get_scroll_direction()) {
+            case Clutter.ScrollDirection.UP:
+                // User state on - UP
+                this._settings.set_boolean(USER_ENABLED_KEY, true);
+                // Force notification here if disable in prefs
+                if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    this._sendOSDNotification(true);                
+                this._updateUserState();
+                break;
+            case Clutter.ScrollDirection.DOWN:
+                // User state off - DOWN
+                this._settings.set_boolean(USER_ENABLED_KEY, false)
+                // Force notification here if disable in prefs
+                if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    this._sendOSDNotification(false);
+                this._updateUserState();
+                break;
+        }
+    }
+
     _inhibitorAdded(proxy, sender, [object]) {
         this._sessionManager.GetInhibitorsRemote(([inhibitors]) => {
             for (let i of inhibitors) {
@@ -249,9 +322,12 @@ class Caffeine extends PanelMenu.Button {
                         this._last_cookie = '';
                         if (this._state === false) {
                             this._state = true;
-                            this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
+                            // Indicator icon
+                            this._manageShowIndicator();
+                            this._indicator.gicon = this._icon_actived;
+                            // Shell OSD notifications
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
-                                this._sendNotification('enabled');
+                                this._sendOSDNotification(true);
                         }
                     }
                 });
@@ -270,9 +346,28 @@ class Caffeine extends PanelMenu.Button {
             this._objects.splice(index, 1);
             if (this._apps.length === 0) {
                 this._state = false;
-                this._icon.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+                // Indicator icon
+                this._manageShowIndicator();
+                this._indicator.gicon = this._icon_desactived;
+                // Shell OSD notifications
                 if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    this._sendNotification('disabled');
+                    this._sendOSDNotification(false);
+            }
+        }
+    }
+    
+    _manageShowIndicator() {
+        if (this._state) {
+            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.NEVER) {
+                this._indicator.visible = false;
+            } else {
+                this._indicator.visible = true;
+            }
+        } else {        
+            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.ALWAYS) {
+                this._indicator.visible = true;
+            } else {
+                this._indicator.visible = false;
             }
         }
     }
@@ -296,7 +391,19 @@ class Caffeine extends PanelMenu.Button {
             }
         }
     }
+    
+    _sendOSDNotification(state) {
+        if (state) {
+            Main.osdWindowManager.show(-1, this._icon_actived,
+                _('Auto suspend and screensaver disabled'), null, null);
+        }
+        else {
+            Main.osdWindowManager.show(-1, this._icon_desactived, 
+                _('Auto suspend and screensaver enabled'), null, null);
+        }
+    }
 
+    // DEPRECATED
     _sendNotification(state) {
         const controllingNl = this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlNightLight.NEVER;
         if (state === 'enabled') {
@@ -433,7 +540,6 @@ function enable() {
     _settings.reset('control-nightlight-for-app');
 
     CaffeineIndicator = new Caffeine();
-    Main.panel.addToStatusArea(IndicatorName, CaffeineIndicator);
 
     // Register shortcut
     Main.wm.addKeybinding(TOGGLE_SHORTCUT, _settings, Meta.KeyBindingFlags.IGNORE_AUTOREPEAT, Shell.ActionMode.ALL, () => {
@@ -451,3 +557,6 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
+
+
+

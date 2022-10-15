@@ -134,8 +134,12 @@ const SettingsPane = GObject.registerClass(
             _listBox.connect('row-activated', (widget, row) => {
                 this._rowActivated(widget, row);
             });
-
-            const _showIndicator = new SettingListBoxRow(_('Show status indicator in top panel'), _('Enable or disable the Caffeine icon in the top panel'), SettingsKey.SHOW_INDICATOR);
+           
+            const _showIndicator = new SettingListBoxRow(_('Show status indicator in top panel'), _('Enable or disable the Caffeine icon in the top panel'), SettingsKey.SHOW_INDICATOR, 'combobox', {
+                values: [
+                    _('Only when active'), _('Always'), _('Never'),
+                ],
+            });
             _listBox.append(_showIndicator);
 
             const _showNotifications = new SettingListBoxRow(_('Notifications'), _('Enable notifications when Caffeine is enabled or disabled'), SettingsKey.SHOW_NOTIFICATIONS);
