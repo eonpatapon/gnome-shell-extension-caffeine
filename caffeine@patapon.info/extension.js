@@ -22,6 +22,7 @@
 const { Atk, Gio, GObject, Shell, St, Meta, Clutter } = imports.gi;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
+const PopupMenu = imports.ui.popupMenu;
 const QuickSettings = imports.ui.quickSettings;
 const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
 
@@ -33,6 +34,7 @@ const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const NIGHT_LIGHT_KEY = 'control-nightlight';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
+const TIMER_KEY = 'countdown-timer';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -101,17 +103,41 @@ const ShowIndicator = {
     NEVER: 2,
 };
 
+//label: C_('Power profile', 'Performance'),
+const TIMERS = [    
+    {5:['5:00', 'timer-symbolic']},
+    {10:['10:00', 'timer-symbolic']},
+    {30:['30:00', 'timer-symbolic']},
+    {0:['∞ Infinite', null]},
+];
+
 let CaffeineIndicator;
 
 const FeatureToggle = GObject.registerClass(
-class FeatureToggle extends QuickSettings.QuickToggle {
+class FeatureToggle extends QuickSettings.QuickMenuToggle {
     _init() {
         super._init({
             label: IndicatorName,
             toggleMode: true,
         });
-
+        
         this._settings = ExtensionUtils.getSettings();
+        
+        // Keep last timer - restore user settings
+        if (!this._settings.get_boolean(RESTORE_KEY)) {
+            this._settings.set_int(TIMER_KEY, 0);
+        }
+        
+        // Menu
+        this.menu.setHeader('stopwatch-symbolic', 'Caffeine timers',
+            'Timers options');
+            
+        this._timerItems = new Map();
+        this._itemsSection = new PopupMenu.PopupMenuSection();
+
+        this._syncTimers();
+        this._sync();
+        this.menu.addMenuItem(this._itemsSection);        
 
         this._settings.bind(`${USER_ENABLED_KEY}`,
             this, 'checked',
@@ -122,6 +148,44 @@ class FeatureToggle extends QuickSettings.QuickToggle {
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
             this._iconName();
         });
+        this._settings.connect(`changed::${TIMER_KEY}`, () => {
+            this._sync();
+        });
+    }
+       
+    _syncTimers() {
+        this._itemsSection.removeAll();
+        this._timerItems.clear();
+
+        for (const timer of TIMERS) {
+            const key = Object.keys(timer);
+            const label = timer[key][0];
+            const iconName = timer[key][1];
+            if (!label)
+                continue;
+
+            const item = new PopupMenu.PopupImageMenuItem(label, iconName);
+            //item.connect('activate',() => (log(label + ' is activated')));
+            item.connect('activate',() => (this._checkTimer(Number(key))));
+            this._timerItems.set(Number(key), item);
+            this._itemsSection.addMenuItem(item);
+        }
+
+        this.menuEnabled = TIMERS.length > 2;
+    }
+    
+    _sync() {
+        const activeTimerId = this._settings.get_int(TIMER_KEY);
+
+        for (const [timerId, item] of this._timerItems) {            
+            item.setOrnament(timerId === activeTimerId
+                ? PopupMenu.Ornament.CHECK
+                : PopupMenu.Ornament.NONE);
+        }
+    }
+    
+    _checkTimer(timerId) {
+        this._settings.set_int(TIMER_KEY, timerId);
     }
 
     _iconName() {

@@ -22,6 +22,11 @@
         <summary>Store caffeine user state</summary>
         <description></description>
     </key>
+    <key type="i" name="countdown-timer">
+        <default>0</default>
+        <summary>Specify time (minutes) for the timer countdown</summary>
+        <description>Specify time (minutes) for the timer countdown</description>
+    </key>
     <key type="b" name="restore-state">
         <default>false</default>
         <summary>Restore caffeine state</summary>
@@ -64,3 +69,4 @@
     </key>
   </schema>
 </schemalist>
+
