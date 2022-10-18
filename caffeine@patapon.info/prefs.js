@@ -14,6 +14,7 @@ const SettingsKey = {
     INHIBIT_APPS: 'inhibit-apps',
     SHOW_INDICATOR: 'show-indicator',
     SHOW_NOTIFICATIONS: 'show-notifications',
+    SHOW_TIMER: 'show-timer',
     FULLSCREEN: 'enable-fullscreen',
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
@@ -141,6 +142,9 @@ const SettingsPane = GObject.registerClass(
                 ],
             });
             _listBox.append(_showIndicator);
+            
+            const _showTimer = new SettingListBoxRow(_('Show timer in top panel'), _('Enable or disable the timer in the top panel'), SettingsKey.SHOW_TIMER);
+            _listBox.append(_showTimer);
 
             const _showNotifications = new SettingListBoxRow(_('Notifications'), _('Enable notifications when Caffeine is enabled or disabled'), SettingsKey.SHOW_NOTIFICATIONS);
             _listBox.append(_showNotifications);

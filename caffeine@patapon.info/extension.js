@@ -29,6 +29,7 @@ const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
+const SHOW_TIMER_KEY= 'show-timer';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
@@ -245,6 +246,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             y_expand: true,
             y_align: Clutter.ActorAlign.CENTER,
         });
+        this._timerLabel.visible = false;
         this.add_child(this._timerLabel);
 
         // Icons
@@ -264,6 +266,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Init Timers
         this._timeOut = null;
         this._timePrint = null;
+        this._timerEnable = false;
 
         // Init settings keys and restore user state
         this._settings.reset(USER_ENABLED_KEY);
@@ -291,7 +294,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
         this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, this._startTimer.bind(this));
-            
+        /* 'bind' method is not used her because showing a empty/null string 
+            label in system indicator introduce a visual space.
+        */
+        this._settings.connect(`changed::${SHOW_TIMER_KEY}`, this._showIndicatorLabel.bind(this));
+        //this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, this._showIndicatorLabel.bind(this));
+        this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
+            this._manageShowIndicator();
+            this._showIndicatorLabel();
+        });    
         this._updateAppConfigs();
         
         // QuickSettings
@@ -341,7 +352,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     log("ToggleState()");
     log("State: " + this._state );
         if (this._state) {
-            this._removeTimer();
+            this._removeTimer(false);
             log("Remove timer !");
             this._apps.forEach(appId => this.removeInhibit(appId));
             this._manageNightLight('enabled');
@@ -366,11 +377,23 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let index = this._apps.indexOf(appId);
         this._sessionManager.UninhibitRemote(this._cookies[index]);
     }
+    
+    _showIndicatorLabel() {
+        if(this._settings.get_boolean(SHOW_TIMER_KEY) 
+          && (this._settings.get_enum(SHOW_INDICATOR_KEY) !== ShowIndicator.NEVER)
+          && this._timerEnable) {
+            this._timerLabel.visible=true;
+        } else {
+            this._timerLabel.visible=false;
+        }
+    }
 
     _startTimer() {       
-        if(this._settings.get_boolean(TIMER_ENABLED_KEY)) {
+        if(this._settings.get_boolean(TIMER_ENABLED_KEY)) {        
+            this._timerEnable = true;
+            
             // Reset Timer
-            this._removeTimer();
+            this._removeTimer(true);
             
             // Enable Caffeine
             this._settings.set_boolean(USER_ENABLED_KEY, true);
@@ -383,6 +406,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 let secondLeft = timerDelay;
                 timerDelay += 1;
                 //this._updateUserState();
+                this._showIndicatorLabel();
                 this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
                     const min = Math.floor(secondLeft / 60);	                  
 	                  const minS = Math.floor(secondLeft % 60).toLocaleString('en-US', {
@@ -398,7 +422,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 
                 this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {    
                     // Disable Caffeine when timer ended
-                    this._removeTimer();
+                    this._removeTimer(false);
                     this._settings.set_boolean(USER_ENABLED_KEY, false);
                     return GLib.SOURCE_REMOVE;
                 });
@@ -406,7 +430,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
     
-    _removeTimer() {
+    _removeTimer(reset) {
+        if(!reset)
+            this._timerEnable = false;
         this._settings.set_boolean(TIMER_ENABLED_KEY, false); 
         this._updateLabelTimer(null);
         
@@ -436,7 +462,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 break;
             case Clutter.ScrollDirection.DOWN:
                 // 
-                this._removeTimer();
+                this._removeTimer(false);
                 // User state off - DOWN
                 this._settings.set_boolean(USER_ENABLED_KEY, false);
                 // Force notification here if disable in prefs
