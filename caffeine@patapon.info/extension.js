@@ -128,12 +128,12 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         this._settings = ExtensionUtils.getSettings();
             
         // Menu
-        this.menu.setHeader('stopwatch-symbolic', 'Caffeine timers',
-            null);
+        this.menu.setHeader(TimerMenuIcon, TimerMenuName, null);    
             
         this._timerItems = new Map();
         this._itemsSection = new PopupMenu.PopupMenuSection();
-
+        
+        // Init Timers
         this._syncTimers();
         this._sync();
         this.menu.addMenuItem(this._itemsSection);        
@@ -141,7 +141,8 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         this._settings.bind(`${USER_ENABLED_KEY}`,
             this, 'checked',
             Gio.SettingsBindFlags.DEFAULT);
-
+        
+        // icon
         this._iconName();
 
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
@@ -164,12 +165,10 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
                 continue;
 
             const item = new PopupMenu.PopupImageMenuItem(label, iconName);
-            //item.connect('activate',() => (log(label + ' is activated')));
             item.connect('activate',() => (this._checkTimer(Number(key))));
             this._timerItems.set(Number(key), item);
             this._itemsSection.addMenuItem(item);
         }
-
         this.menuEnabled = TIMERS.length > 2;
     }
     
@@ -208,9 +207,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._indicator = this._addIndicator();
 
         this._settings = ExtensionUtils.getSettings();
-        this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
-            this._manageShowIndicator();
-        });
 
         this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
             if (error)
@@ -290,19 +286,17 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         this._appConfigs = [];
         this._appData = new Map();
-
+        
+        // Events
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
         this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, this._startTimer.bind(this));
-        /* 'bind' method is not used her because showing a empty/null string 
-            label in system indicator introduce a visual space.
-        */
         this._settings.connect(`changed::${SHOW_TIMER_KEY}`, this._showIndicatorLabel.bind(this));
-        //this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, this._showIndicatorLabel.bind(this));
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
             this._manageShowIndicator();
             this._showIndicatorLabel();
         });    
+        
         this._updateAppConfigs();
         
         // QuickSettings
@@ -349,15 +343,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     toggleState() {
-    log("ToggleState()");
-    log("State: " + this._state );
         if (this._state) {
             this._removeTimer(false);
-            log("Remove timer !");
             this._apps.forEach(appId => this.removeInhibit(appId));
             this._manageNightLight('enabled');
         } else {     
-            log("Enable inibit !");
             this.addInhibit('user');
             this._manageNightLight('disabled');
         }
@@ -405,7 +395,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
             if(timerDelay !== 0) {         
                 let secondLeft = timerDelay;
                 timerDelay += 1;
-                //this._updateUserState();
                 this._showIndicatorLabel();
                 this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
                     const min = Math.floor(secondLeft / 60);	                  
@@ -458,7 +447,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 // Force notification here if disable in prefs
                 if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendOSDNotification(true);                
-         //       this._updateUserState();
                 break;
             case Clutter.ScrollDirection.DOWN:
                 // 
@@ -468,7 +456,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 // Force notification here if disable in prefs
                 if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendOSDNotification(false);
-         //       this._updateUserState();
                 break;
         }
     }
