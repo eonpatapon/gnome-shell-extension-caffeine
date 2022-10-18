@@ -390,22 +390,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
             
             // Get duration 
             let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
-            
+
             // Execute Timer only if duration isn't set on infinite time
             if(timerDelay !== 0) {         
                 let secondLeft = timerDelay;
-                timerDelay += 1;
                 this._showIndicatorLabel();
+                this._printTimer(secondLeft);
                 this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
-                    const min = Math.floor(secondLeft / 60);	                  
-	                  const minS = Math.floor(secondLeft % 60).toLocaleString('en-US', {
-                        minimumIntegerDigits: 2,
-                        useGrouping: false
-                    });
-
-                    // Print Timer in system Indicator and Toggle menu subLabel
-                    this._updateLabelTimer(min + ':' + minS);
                     secondLeft -= 1;
+                    this._printTimer(secondLeft);
                     return GLib.SOURCE_CONTINUE;
                 });
                 
@@ -417,6 +410,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 });
             }  
         }
+    }
+    
+    _printTimer(second) {
+        const min = Math.floor(second / 60);	                  
+        const minS = Math.floor(second % 60).toLocaleString('en-US', {
+            minimumIntegerDigits: 2,
+            useGrouping: false
+        });
+        // Print Timer in system Indicator and Toggle menu subLabel
+        this._updateLabelTimer(min + ':' + minS);        
     }
     
     _removeTimer(reset) {
