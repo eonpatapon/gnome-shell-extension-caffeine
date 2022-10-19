@@ -423,8 +423,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
     
     _removeTimer(reset) {
-        if(!reset)
+        if(!reset) {
+            // Set duration back to 0
+            this._settings.set_int(TIMER_KEY, 0);
+            // End timer
             this._timerEnable = false;
+        }
         this._settings.set_boolean(TIMER_ENABLED_KEY, false); 
         this._updateLabelTimer(null);
         
@@ -586,7 +590,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         });
         this._updateAppData();
     }
-
+    
     _updateUserState() {
         if (this._settings.get_boolean(USER_ENABLED_KEY) !== this._userState) {
             this._userState = !this._userState;
