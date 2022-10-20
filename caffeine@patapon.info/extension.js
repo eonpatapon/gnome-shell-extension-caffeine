@@ -109,10 +109,10 @@ const ShowIndicator = {
 
 //label: C_('Power profile', 'Performance'),
 const TIMERS = [    
-    {5:['5:00', 'timer-symbolic']},
-    {10:['10:00', 'timer-symbolic']},
-    {30:['30:00', 'timer-symbolic']},
-    {0:['∞ Infinite', null]},
+    {5:['5:00', 'caffeine-short-timer-symbolic']},
+    {10:['10:00', 'caffeine-medium-timer-symbolic']},
+    {30:['30:00', 'caffeine-long-timer-symbolic']},
+    {0:['Infinite', 'caffeine-infinite-timer-symbolic']},
 ];
 
 let CaffeineIndicator;
@@ -160,11 +160,11 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         for (const timer of TIMERS) {
             const key = Object.keys(timer);
             const label = timer[key][0];
-            const iconName = timer[key][1];
+            //const iconName = timer[key][1];
             if (!label)
                 continue;
-
-            const item = new PopupMenu.PopupImageMenuItem(label, iconName);
+            const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[key][1]}.svg`);
+            const item = new PopupMenu.PopupImageMenuItem(label, icon);
             item.connect('activate',() => (this._checkTimer(Number(key))));
             this._timerItems.set(Number(key), item);
             this._itemsSection.addMenuItem(item);
