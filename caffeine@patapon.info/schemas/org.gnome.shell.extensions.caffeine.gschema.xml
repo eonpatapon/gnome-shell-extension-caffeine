@@ -22,6 +22,16 @@
         <summary>Store caffeine user state</summary>
         <description></description>
     </key>
+    <key type="b" name="countdown-timer-enabled">
+        <default>false</default>
+        <summary>Start Timer countdown</summary>
+        <description></description>
+    </key>
+    <key type="i" name="countdown-timer">
+        <default>0</default>
+        <summary>Specify time (minutes) for the timer countdown</summary>
+        <description>Specify time (minutes) for the timer countdown</description>
+    </key>
     <key type="b" name="restore-state">
         <default>false</default>
         <summary>Restore caffeine state</summary>
@@ -36,6 +46,11 @@
         <default>true</default>
         <summary>Show notifications</summary>
         <description>Show notifications when enabled/disabled</description>
+    </key>
+    <key type="b" name="show-timer">
+        <default>true</default>
+        <summary>Show timer</summary>
+        <description>Show timer when enabled/disabled</description>
     </key>
     <key type="b" name="enable-fullscreen">
         <default>true</default>
@@ -64,3 +79,5 @@
     </key>
   </schema>
 </schemalist>
+
+
