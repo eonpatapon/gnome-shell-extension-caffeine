@@ -6,6 +6,7 @@ pot="gnome-shell-extension-caffeine.pot"
 
 touch "$pot"
 xgettext -j ./*.js -o "$pot" --from-code UTF-8 --no-wrap
+xgettext -j preferences/*.js -o "$pot" --from-code UTF-8 --no-wrap
 xgettext -j schemas/*.xml -o "$pot" --from-code UTF-8 --no-wrap
 
 for locale_lang in locale/*; do

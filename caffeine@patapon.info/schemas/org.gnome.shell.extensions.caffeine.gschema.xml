@@ -77,6 +77,14 @@
         <summary>Toggle shortcut</summary>
         <description>Shortcut to toggle Caffeine.</description>
     </key>
+    <key type="i" name="prefs-default-width">
+      <default>700</default>
+      <summary>Default width for the preferences window</summary>
+    </key>
+    <key type="i" name="prefs-default-height">
+      <default>600</default>
+      <summary>Default height for the preferences window</summary>
+    </key>
   </schema>
 </schemalist>
 
