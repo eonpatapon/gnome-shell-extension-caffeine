@@ -312,7 +312,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this.quickSettingsItems.forEach(item => item.destroy());
         });
 
-        QuickSettingsMenu._indicators.add_child(this);
+        QuickSettingsMenu._indicators.insert_child_at_index(this,0);
         QuickSettingsMenu._addItems(this.quickSettingsItems);
     }
 
