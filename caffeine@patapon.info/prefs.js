@@ -16,6 +16,7 @@
    
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
+'use strict';
 
 const { Adw, Gtk, Gdk } = imports.gi;
 
