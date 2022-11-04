@@ -29,7 +29,7 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({
             title: _("Display"),
-            icon_name: 'display-symbolic',
+            icon_name: 'video-display-symbolic',
             name: 'DisplayPage'
         });
         this._settings = settings;
