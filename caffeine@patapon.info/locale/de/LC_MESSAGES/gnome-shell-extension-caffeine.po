@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 19:04+0100\n"
+"POT-Creation-Date: 2022-11-05 12:54+0100\n"
 "PO-Revision-Date: 2021-04-09 21:31-0400\n"
 "Last-Translator: Felix Kaechele <felix@kaechele.ca>\n"
 "Language-Team: German\n"
@@ -17,20 +17,29 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:561 extension.js:576
+#: extension.js:93
+#, fuzzy
+msgid "Caffeine timer"
+msgstr "Caffeine schaltuhr"
+
+#: extension.js:115
+msgid "Infinite"
+msgstr "unendlich"
+
+#: extension.js:588 extension.js:603
 msgid "Auto suspend and screensaver disabled"
 msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
 
-#: extension.js:565 extension.js:582
+#: extension.js:592 extension.js:609
 msgid "Auto suspend and screensaver enabled"
 msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
 
-#: extension.js:574
+#: extension.js:601
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr ""
 "Bereitschaftsmodus und Bildschirmschoner deaktiviert. Nachtmodus pausiert."
 
-#: extension.js:580
+#: extension.js:607
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr ""
 "Bereitschaftsmodus und Bildschirmschoner aktiviert. Nachtmodus fortgesetzt."
@@ -230,6 +239,14 @@ msgstr ""
 msgid "Shortcut to toggle Caffeine."
 msgstr ""
 
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+msgid "Default width for the preferences window"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:86
+msgid "Default height for the preferences window"
+msgstr ""
+
 #~ msgid "Add Application"
 #~ msgstr "Anwendung hinzufügen"
 
@@ -244,6 +261,3 @@ msgstr ""
 
 #~ msgid "Caffeine enabled"
 #~ msgstr "Caffeine aktiviert"
-
-#~ msgid "Caffeine disabled"
-#~ msgstr "Caffeine deaktiviert"

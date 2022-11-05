@@ -90,7 +90,7 @@ const DBusSessionManagerInhibitorIface = '<node>\
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = 'Caffeine';
-const TimerMenuName = 'Caffeine timers';
+const TimerMenuName = _('Caffeine timer');
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';

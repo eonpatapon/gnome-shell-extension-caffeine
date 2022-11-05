@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 19:04+0100\n"
+"POT-Creation-Date: 2022-11-05 12:54+0100\n"
 "PO-Revision-Date: 2018-06-22 21:22+0200\n"
 "Last-Translator: Kardos László <lacesz@NOSPAM@ox dot io>\n"
 "Language-Team: \n"
@@ -12,20 +12,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: extension.js:561 extension.js:576
+#: extension.js:93
+msgid "Caffeine timer"
+msgstr ""
+
+#: extension.js:115
+msgid "Infinite"
+msgstr ""
+
+#: extension.js:588 extension.js:603
 msgid "Auto suspend and screensaver disabled"
 msgstr "Az automatikus felfüggesztés és a képernyővédő letiltva"
 
-#: extension.js:565 extension.js:582
+#: extension.js:592 extension.js:609
 msgid "Auto suspend and screensaver enabled"
 msgstr "Az automatikus felfüggesztés és a képernyővédő engedélyezve"
 
-#: extension.js:574
+#: extension.js:601
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Az automatikus felfüggesztés és a képernyővédő letiltva"
 
-#: extension.js:580
+#: extension.js:607
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Az automatikus felfüggesztés és a képernyővédő engedélyezve"
@@ -233,6 +241,14 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Shortcut to toggle Caffeine."
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+msgid "Default width for the preferences window"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:86
+msgid "Default height for the preferences window"
 msgstr ""
 
 #, fuzzy
