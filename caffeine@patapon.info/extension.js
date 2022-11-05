@@ -288,7 +288,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerEnable = false;
 
         // Init settings keys and restore user state
-        this._settings.reset(USER_ENABLED_KEY);
         this._settings.reset(TIMER_ENABLED_KEY);
         this._settings.reset(TIMER_KEY);
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
