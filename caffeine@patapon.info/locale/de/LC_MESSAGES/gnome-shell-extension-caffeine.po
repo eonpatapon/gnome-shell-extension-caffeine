@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 12:54+0100\n"
+"POT-Creation-Date: 2022-11-05 19:05+0100\n"
 "PO-Revision-Date: 2021-04-09 21:31-0400\n"
 "Last-Translator: Felix Kaechele <felix@kaechele.ca>\n"
 "Language-Team: German\n"
@@ -26,20 +26,20 @@ msgstr "Caffeine schaltuhr"
 msgid "Infinite"
 msgstr "unendlich"
 
-#: extension.js:588 extension.js:603
+#: extension.js:587 extension.js:602
 msgid "Auto suspend and screensaver disabled"
 msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
 
-#: extension.js:592 extension.js:609
+#: extension.js:591 extension.js:608
 msgid "Auto suspend and screensaver enabled"
 msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
 
-#: extension.js:601
+#: extension.js:600
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr ""
 "Bereitschaftsmodus und Bildschirmschoner deaktiviert. Nachtmodus pausiert."
 
-#: extension.js:607
+#: extension.js:606
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr ""
 "Bereitschaftsmodus und Bildschirmschoner aktiviert. Nachtmodus fortgesetzt."

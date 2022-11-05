@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 12:54+0100\n"
+"POT-Creation-Date: 2022-11-05 19:05+0100\n"
 "PO-Revision-Date: 2015-11-28 21:06-0300\n"
 "Last-Translator: Sergio D. Márquez <marquez.sergio.d@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -26,20 +26,20 @@ msgstr "Caffeine temporizador"
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:588 extension.js:603
+#: extension.js:587 extension.js:602
 msgid "Auto suspend and screensaver disabled"
 msgstr "Auto suspensión y salvapantallas deshabilitados"
 
-#: extension.js:592 extension.js:609
+#: extension.js:591 extension.js:608
 msgid "Auto suspend and screensaver enabled"
 msgstr "Auto suspensión y salvapantallas habilitados"
 
-#: extension.js:601
+#: extension.js:600
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Auto suspensión y salvapantallas deshabilitados"
 
-#: extension.js:607
+#: extension.js:606
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Auto suspensión y salvapantallas habilitados"
@@ -117,7 +117,9 @@ msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
 #: preferences/generalPage.js:52
 msgid "Automatically enable when an app enters fullscreen mode"
-msgstr "Activar automáticamente cuando una aplicación entra en modo de pantalla completa"
+msgstr ""
+"Activar automáticamente cuando una aplicación entra en modo de pantalla "
+"completa"
 
 #: preferences/generalPage.js:63
 msgid "Remember state"

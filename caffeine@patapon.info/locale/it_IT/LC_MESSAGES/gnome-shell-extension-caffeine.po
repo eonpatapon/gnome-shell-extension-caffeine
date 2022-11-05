@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 12:54+0100\n"
+"POT-Creation-Date: 2022-11-05 19:05+0100\n"
 "PO-Revision-Date: 2022-05-09 16:53+0200\n"
 "Last-Translator: Simone Esposito <simoespo159@gmail.com>\n"
 "Language-Team: Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>\n"
@@ -18,7 +18,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:93
-#, fuzzy
 msgid "Caffeine timer"
 msgstr ""
 
@@ -26,20 +25,20 @@ msgstr ""
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:588 extension.js:603
+#: extension.js:587 extension.js:602
 msgid "Auto suspend and screensaver disabled"
 msgstr "Auto sospensione e screensaver disabilitato"
 
-#: extension.js:592 extension.js:609
+#: extension.js:591 extension.js:608
 msgid "Auto suspend and screensaver enabled"
 msgstr "Auto sospensione e screensaver abilitato"
 
-#: extension.js:601
+#: extension.js:600
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Auto sospensione e screensaver disabilitato"
 
-#: extension.js:607
+#: extension.js:606
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Auto sospensione e screensaver abilitato"

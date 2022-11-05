@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 12:54+0100\n"
+"POT-Creation-Date: 2022-11-05 19:05+0100\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -23,21 +23,21 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:588 extension.js:603
+#: extension.js:587 extension.js:602
 msgid "Auto suspend and screensaver disabled"
 msgstr "자동 대기 모드 진입 및 화면 보호기가 비활성화됨"
 
-#: extension.js:592 extension.js:609
+#: extension.js:591 extension.js:608
 msgid "Auto suspend and screensaver enabled"
 msgstr "자동 대기 모드 진입 및 화면 보호기가 활성화됨"
 
-#: extension.js:601
+#: extension.js:600
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr ""
 "자동 대기 모드 진입 및 화면 보호기가 비활성화되었습니다. 야간 모드를 멈춥니"
 "다."
 
-#: extension.js:607
+#: extension.js:606
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr ""
 "자동 대기 모드 진입 및 화면 보호기가 활성화되었습니다. 야간 모드를 다시 켭니"
