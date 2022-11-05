@@ -34,8 +34,18 @@ You can scroll on the indicator icon to Enable/disable auto suspend:
 ![Screenshot](screenshots/screenshot-notification-disable.png)
 
 
+### <ins>Timer option</ins>
+This option enable Caffeine for a given amount of time (similar to Caffeine in LineageOS).
+
+![Screenshot](screenshots/screenshot-timer-off.png)
+![Screenshot](screenshots/screenshot-timer-on.png)
+
+
+
 ### <ins>Preferences</ins>
 ![Preferences](screenshots/screenshot-prefs.png)
+![Preferences](screenshots/screenshot-prefs2.png)
+![Preferences](screenshots/screenshot-prefs3.png)
 
 
 ## Installation from GNOME Extensions
