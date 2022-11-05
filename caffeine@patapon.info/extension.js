@@ -19,7 +19,7 @@
 
 'use strict';
 
-const { Atk, Gdk, Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
+const { Atk, Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
@@ -112,11 +112,10 @@ const TIMERS = [
     {5:['5:00', 'caffeine-short-timer-symbolic']},
     {10:['10:00', 'caffeine-medium-timer-symbolic']},
     {30:['30:00', 'caffeine-long-timer-symbolic']},
-    {0:['Infinite', 'caffeine-infinite-timer-symbolic']},
+    {0:[_('Infinite'), 'caffeine-infinite-timer-symbolic']},
 ];
 
 let CaffeineIndicator;
-
 /*
 * ------- Load custom icon -------
 * hack (for Wayland?) via https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/1997
@@ -143,12 +142,16 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         
         this._settings = ExtensionUtils.getSettings();
                     
-        // Menu
+        // Icons
         let finalTimerMenuIcon = TimerMenuIcon;
         if (!Gtk.IconTheme.get_default().has_icon(TimerMenuIcon)) {
             finalTimerMenuIcon = 
                 Gio.icon_new_for_string(`${Me.path}/icons/${TimerMenuIcon}.svg`);
         }
+        this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        
+        // Menu
         this.menu.setHeader(finalTimerMenuIcon, TimerMenuName, null);
         
         this._timerItems = new Map();
@@ -181,7 +184,6 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         for (const timer of TIMERS) {
             const key = Object.keys(timer);
             const label = timer[key][0];
-            //const iconName = timer[key][1];
             if (!label)
                 continue;
             const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[key][1]}.svg`);
@@ -211,10 +213,10 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
     _iconName() {
         switch (this._settings.get_boolean(USER_ENABLED_KEY)) {
         case true:
-            this.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
+            this.gicon = this._icon_actived;
             break;
         case false:
-            this.gicon = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+            this.gicon = this._icon_desactived;
             break;
         }
     }    
@@ -440,7 +442,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             useGrouping: false
         });
         // Print Timer in system Indicator and Toggle menu subLabel
-        this._updateLabelTimer(min + ':' + minS);        
+        this._updateLabelTimer(min + ':' + minS);
     }
     
     _removeTimer(reset) {
@@ -753,6 +755,7 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
+
 
 
 
