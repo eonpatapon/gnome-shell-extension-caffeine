@@ -33,7 +33,7 @@ const SHOW_TIMER_KEY= 'show-timer';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
-const NIGHT_LIGHT_KEY = 'control-nightlight';
+const NIGHT_LIGHT_KEY = 'nightlight-control';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
 const TIMER_ENABLED_KEY = 'countdown-timer-enabled';
@@ -727,19 +727,8 @@ function init() {
  * Steps to run when the extension is enabled
  */
 function enable() {
-    // Migrate old nightlight settings
+    
     const _settings = ExtensionUtils.getSettings();
-    const controlNightLight = _settings.get_value('control-nightlight');
-    const controlNightLightForApp = _settings.get_value('control-nightlight-for-app');
-    if (controlNightLight.unpack() === true) {
-        let nightlightControl = ControlNightLight.ALWAYS;
-        if (controlNightLightForApp.unpack() === true)
-            nightlightControl = ControlNightLight.FOR_APPS;
-        _settings.set_enum('nightlight-control', nightlightControl);
-    }
-    // remove deprecated settings
-    _settings.reset('control-nightlight');
-    _settings.reset('control-nightlight-for-app');
 
     CaffeineIndicator = new Caffeine();
 

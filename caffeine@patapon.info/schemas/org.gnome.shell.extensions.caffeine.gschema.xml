@@ -62,16 +62,6 @@
         <summary>Allow screen blank</summary>
         <description>Allow turning off screen when Caffeine is enabled</description>
     </key>
-    <key type="b" name="control-nightlight">
-        <default>false</default>
-        <summary>DEPRECATED. Pause/resume Night Light</summary>
-        <description>Pause/resume Night Light when enabled/disabled</description>
-    </key>
-    <key type="b" name="control-nightlight-for-app">
-        <default>false</default>
-        <summary>DEPRECATED. Pause/resume Night Light for defined applications only</summary>
-        <description>Pause/resume Night Light for defined application when enabled/disabled</description>
-    </key>
     <key name="nightlight-control" enum="org.gnome.shell.extensions.caffeine.nightlight-control">
         <default>"never"</default>
         <summary>Night Light control mode</summary>
