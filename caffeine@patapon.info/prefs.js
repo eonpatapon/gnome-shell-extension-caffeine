@@ -38,6 +38,7 @@ const SettingsKey = {
     TOGGLE_SHORTCUT: 'toggle-shortcut',
     DEFAULT_WIDTH: 'prefs-default-width',
     DEFAULT_HEIGHT: 'prefs-default-height',
+    SCREEN_BLANK: 'screen-blank',
 };
 
 function init() {
@@ -77,4 +78,5 @@ function fillPreferencesWindow(window) {
         window.destroy();
     });
 }
+
 
