@@ -143,16 +143,16 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         this._settings = ExtensionUtils.getSettings();
                     
         // Icons
-        let finalTimerMenuIcon = TimerMenuIcon;
+        this.finalTimerMenuIcon = TimerMenuIcon;
         if (!Gtk.IconTheme.get_default().has_icon(TimerMenuIcon)) {
-            finalTimerMenuIcon = 
+            this.finalTimerMenuIcon = 
                 Gio.icon_new_for_string(`${Me.path}/icons/${TimerMenuIcon}.svg`);
         }
         this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
         this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         
         // Menu
-        this.menu.setHeader(finalTimerMenuIcon, TimerMenuName, null);
+        this.menu.setHeader(this.finalTimerMenuIcon, TimerMenuName, null);
         
         this._timerItems = new Map();
         this._itemsSection = new PopupMenu.PopupMenuSection();
@@ -466,7 +466,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     
     _updateLabelTimer(text) {
         this._timerLabel.text = text;
-        this._caffeineToggle.menu.setHeader(TimerMenuIcon, TimerMenuName, text);        
+        this._caffeineToggle.menu.setHeader(this._caffeineToggle.finalTimerMenuIcon, TimerMenuName, text);        
     }
     
     _handleScrollEvent(event) {
