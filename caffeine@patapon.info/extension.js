@@ -470,20 +470,24 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _handleScrollEvent(event) {
         switch(event.get_scroll_direction()) {
             case Clutter.ScrollDirection.UP:
-                // User state on - UP
-                this._settings.set_boolean(USER_ENABLED_KEY, true);
-                // Force notification here if disable in prefs
-                if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    this._sendOSDNotification(true);                
+                if(!this._state) {
+                    // User state on - UP
+                    this._settings.set_boolean(USER_ENABLED_KEY, true);
+                    // Force notification here if disable in prefs
+                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                        this._sendOSDNotification(true);    
+                }
                 break;
             case Clutter.ScrollDirection.DOWN:
-                // 
-                this._removeTimer(false);
-                // User state off - DOWN
-                this._settings.set_boolean(USER_ENABLED_KEY, false);
-                // Force notification here if disable in prefs
-                if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    this._sendOSDNotification(false);
+                if(this._state) {
+                    // Stop timer
+                    this._removeTimer(false);
+                    // User state off - DOWN
+                    this._settings.set_boolean(USER_ENABLED_KEY, false);
+                    // Force notification here if disable in prefs
+                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                        this._sendOSDNotification(false);
+                }
                 break;
         }
     }
