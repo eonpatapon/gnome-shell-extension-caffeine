@@ -16,6 +16,7 @@
    
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
+'use strict';
 
 const { Adw, Gtk, GObject, Gdk } = imports.gi;
 
@@ -78,10 +79,23 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             selected: this._settings.get_enum(this._settingsKey.NIGHT_LIGHT)
         });
         
+        // Allow blank screen
+        let allowBlankScreenSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+            active: this._settings.get_boolean(this._settingsKey.SCREEN_BLANK)
+        });
+        let allowBlankScreenRow = new Adw.ActionRow({
+            title: _("Allow screen blank"),
+            subtitle: _("Allow turning off screen when Caffeine is enabled"),
+            activatable_widget: allowBlankScreenSwitch
+        });
+        allowBlankScreenRow.add_suffix(allowBlankScreenSwitch);
+        
         // Add elements
         behaviorGroup.add(disableFullscreenRow);
         behaviorGroup.add(rememberStateRow);
         behaviorGroup.add(pauseNightLightRow);
+        behaviorGroup.add(allowBlankScreenRow);
         this.add(behaviorGroup);
         
         // Shortcut group
@@ -126,6 +140,9 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         });
         pauseNightLightRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.NIGHT_LIGHT, widget.selected);
+        });
+        allowBlankScreenSwitch.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.SCREEN_BLANK, widget.get_active());
         });
         deleteShortcutButton.connect('clicked', this._resetShortcut.bind(this));
         this._settings.connect(`changed::${this._settingsKey.TOGGLE_SHORTCUT}`, () => {

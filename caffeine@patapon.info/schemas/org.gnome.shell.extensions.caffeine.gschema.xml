@@ -57,6 +57,11 @@
         <summary>Enable when a fullscreen application is running</summary>
         <description>Enable when a fullscreen application is running</description>
     </key>
+    <key type="b" name="screen-blank">
+        <default>false</default>
+        <summary>Allow screen blank</summary>
+        <description>Allow turning off screen when Caffeine is enabled</description>
+    </key>
     <key type="b" name="control-nightlight">
         <default>false</default>
         <summary>DEPRECATED. Pause/resume Night Light</summary>
