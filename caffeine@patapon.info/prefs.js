@@ -39,6 +39,9 @@ const SettingsKey = {
     DEFAULT_WIDTH: 'prefs-default-width',
     DEFAULT_HEIGHT: 'prefs-default-height',
     SCREEN_BLANK: 'screen-blank',
+    INDICATOR_POSITION: 'indicator-position',
+    INDICATOR_INDEX: 'indicator-position-index',
+    INDICATOR_POS_MAX: 'indicator-position-max',
 };
 
 function init() {
