@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 19:05+0100\n"
+"POT-Creation-Date: 2022-11-07 00:53+0100\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -18,143 +18,163 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Gtranslator 3.32.0\n"
 
-#: extension.js:93
+#: extension.js:97
 msgid "Caffeine timer"
 msgstr ""
 
-#: extension.js:115
+#: extension.js:119
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:587 extension.js:602
+#: extension.js:659 extension.js:674
 msgid "Auto suspend and screensaver disabled"
 msgstr "Ekran koruyucu ve otomatik karartma kapalı"
 
-#: extension.js:591 extension.js:608
+#: extension.js:663 extension.js:680
 msgid "Auto suspend and screensaver enabled"
 msgstr "Ekran koruyucu ve otomatik karartma açık"
 
-#: extension.js:600
+#: extension.js:672
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Ekran koruyucu ve otomatik karartma kapalı"
 
-#: extension.js:606
+#: extension.js:678
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Ekran koruyucu ve otomatik karartma açık"
 
-#: preferences/appsPage.js:31
+#: preferences/appsPage.js:32
 msgid "Apps"
 msgstr ""
 
-#: preferences/appsPage.js:43
+#: preferences/appsPage.js:44
 msgid "Add"
 msgstr "Ekle"
 
-#: preferences/appsPage.js:47
+#: preferences/appsPage.js:48
 msgid "Apps that trigger Caffeine"
 msgstr ""
 
-#: preferences/displayPage.js:31 preferences/displayPage.js:41
+#: preferences/displayPage.js:32 preferences/displayPage.js:42
 msgid "Display"
 msgstr ""
 
-#: preferences/displayPage.js:46
+#: preferences/displayPage.js:47
 msgid "Only when active"
 msgstr "Yalnızca etkin olduğunda"
 
-#: preferences/displayPage.js:47 preferences/generalPage.js:72
+#: preferences/displayPage.js:48 preferences/generalPage.js:73
 msgid "Always"
 msgstr "Hep"
 
-#: preferences/displayPage.js:48 preferences/generalPage.js:71
+#: preferences/displayPage.js:49 preferences/generalPage.js:72
 msgid "Never"
 msgstr "Hiçbir zaman"
 
-#: preferences/displayPage.js:50
+#: preferences/displayPage.js:51
 #, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Göstergeyi üst panelde göster"
 
-#: preferences/displayPage.js:51
+#: preferences/displayPage.js:52
 #, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Göstergeyi üst panelde göster"
 
-#: preferences/displayPage.js:62
+#: preferences/displayPage.js:63
 #, fuzzy
 msgid "Show timer in top panel"
 msgstr "Caffeine üst panelde görünsün"
 
-#: preferences/displayPage.js:63
+#: preferences/displayPage.js:64
 #, fuzzy
 msgid "Enable or disable the timer in the top panel"
 msgstr "Göstergeyi üst panelde göster"
 
-#: preferences/displayPage.js:74
+#: preferences/displayPage.js:75
 #, fuzzy
 msgid "Notifications"
 msgstr "Bildirimleri göster"
 
-#: preferences/displayPage.js:75
+#: preferences/displayPage.js:76
 #, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: preferences/generalPage.js:32
+#: preferences/displayPage.js:98
+#, fuzzy
+msgid "Status indicator Position"
+msgstr "Göstergeyi üst panelde göster"
+
+#: preferences/displayPage.js:99
+msgid "The position relative of indicator icon to other items"
+msgstr ""
+
+#: preferences/generalPage.js:33
 msgid "General"
 msgstr ""
 
-#: preferences/generalPage.js:42
+#: preferences/generalPage.js:43
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:51
+#: preferences/generalPage.js:52
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
 
-#: preferences/generalPage.js:52
+#: preferences/generalPage.js:53
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: preferences/generalPage.js:63
+#: preferences/generalPage.js:64
 msgid "Remember state"
 msgstr ""
 
-#: preferences/generalPage.js:64
+#: preferences/generalPage.js:65
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Yeniden başlatma arasında durumu geri yükle"
 
-#: preferences/generalPage.js:73
+#: preferences/generalPage.js:74
 msgid "For apps on list"
 msgstr ""
 
-#: preferences/generalPage.js:75
+#: preferences/generalPage.js:76
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: preferences/generalPage.js:76
+#: preferences/generalPage.js:77
 msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: preferences/generalPage.js:97
+#: preferences/generalPage.js:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Allow screen blank"
+msgstr ""
+
+#: preferences/generalPage.js:89
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#, fuzzy
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+
+#: preferences/generalPage.js:111
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:105
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: preferences/generalPage.js:119
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:106
+#: preferences/generalPage.js:120
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:182 preferences/generalPage.js:214
+#: preferences/generalPage.js:199 preferences/generalPage.js:231
 msgid "New accelerator…"
 msgstr ""
 
@@ -215,44 +235,52 @@ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 msgid "Enable when a fullscreen application is running"
 msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
-#, fuzzy
-msgid "DEPRECATED. Pause/resume Night Light"
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
-#, fuzzy
-msgid "Pause/resume Night Light when enabled/disabled"
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
-
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
-msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
-#, fuzzy
-msgid "Pause/resume Night Light for defined application when enabled/disabled"
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Shortcut to toggle Caffeine."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Default width for the preferences window"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:86
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:81
 msgid "Default height for the preferences window"
 msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:85
+msgid "Visible position offset of status icon in indicator menu"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:89
+msgid ""
+"Real position offset of status icon in indicator menu that include invisible "
+"one"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+msgid "Last item index in indicator menu"
+msgstr ""
+
+#, fuzzy
+#~ msgid "DEPRECATED. Pause/resume Night Light"
+#~ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+
+#, fuzzy
+#~ msgid "Pause/resume Night Light when enabled/disabled"
+#~ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+
+#, fuzzy
+#~ msgid ""
+#~ "Pause/resume Night Light for defined application when enabled/disabled"
+#~ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
 #, fuzzy
 #~ msgid "Add Application"
