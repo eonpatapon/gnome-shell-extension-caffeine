@@ -80,6 +80,18 @@
       <default>600</default>
       <summary>Default height for the preferences window</summary>
     </key>
+    <key type="i" name="indicator-position">
+      <default>0</default>
+      <summary>Visible position offset of status icon in indicator menu</summary>
+    </key>
+    <key type="i" name="indicator-position-index">
+      <default>0</default>
+      <summary>Real position offset of status icon in indicator menu that include invisible one</summary>
+    </key>
+    <key type="i" name="indicator-position-max">
+      <default>1</default>
+      <summary>Last item index in indicator menu</summary>
+    </key>
   </schema>
 </schemalist>
 

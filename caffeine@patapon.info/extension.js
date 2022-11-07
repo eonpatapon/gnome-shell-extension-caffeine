@@ -38,6 +38,9 @@ const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
 const TIMER_ENABLED_KEY = 'countdown-timer-enabled';
 const SCREEN_BLANK = 'screen-blank';
+const INDICATOR_POSITION = 'indicator-position';
+const INDICATOR_INDEX = 'indicator-position-index';
+const INDICATOR_POS_MAX = 'indicator-position-max';
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
@@ -315,6 +318,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
         this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, this._startTimer.bind(this));
         this._settings.connect(`changed::${SHOW_TIMER_KEY}`, this._showIndicatorLabel.bind(this));
+        this._settings.connect(`changed::${INDICATOR_POSITION}`, this._updateIndicatorPosition.bind(this));
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
             this._manageShowIndicator();
             this._showIndicatorLabel();
@@ -334,9 +338,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.connect('destroy', () => {
             this.quickSettingsItems.forEach(item => item.destroy());
         });
-
-        QuickSettingsMenu._indicators.insert_child_at_index(this,0);
+        
+        // Init position and index of indicator icon
+        this.indicatorPosition = this._settings.get_int(INDICATOR_POSITION);
+        this.indicatorIndex = this._settings.get_int(INDICATOR_INDEX);        
+        this.lastIndicatorPosition = this.indicatorPosition;
+        
+        QuickSettingsMenu._indicators.insert_child_at_index(this,this.indicatorIndex);
         QuickSettingsMenu._addItems(this.quickSettingsItems);
+        
+        this._updateLastIndicatorPosition();
     }
 
     get inFullscreen() {
@@ -393,6 +404,62 @@ class Caffeine extends QuickSettings.SystemIndicator {
     removeInhibit(appId) {
         let index = this._apps.indexOf(appId);
         this._sessionManager.UninhibitRemote(this._cookies[index]);
+    }
+    
+    _updateLastIndicatorPosition() {
+        let pos = -1;
+        let nbItems = QuickSettingsMenu._indicators.get_n_children();
+        let targetIndicator = null;
+
+        // Count only the visible item in indicator bar
+        for (let i = 0; i < nbItems; i++) {
+            targetIndicator = QuickSettingsMenu._indicators.get_child_at_index(i);
+            if (targetIndicator.is_visible()) {
+                pos += 1;
+            }
+        }
+        this._settings.set_int(INDICATOR_POS_MAX, pos);
+    }
+    
+    _incrementIndicatorPosIndex() {
+        if (this.lastIndicatorPosition < this.indicatorPosition) {
+            this.indicatorIndex += 1;
+        } else {
+            this.indicatorIndex -= 1;
+        }
+    }
+    
+    _updateIndicatorPosition() {
+        this._updateLastIndicatorPosition();        
+        const newPosition = this._settings.get_int(INDICATOR_POSITION);
+        
+        if (this.indicatorPosition != newPosition) {
+            this.indicatorPosition = newPosition;          
+            this._incrementIndicatorPosIndex();
+            
+            // Skip invisible indicator
+            let targetIndicator = 
+                QuickSettingsMenu._indicators.get_child_at_index(this.indicatorIndex);
+            let maxIndex = QuickSettingsMenu._indicators.get_n_children();            
+            while (this.indicatorIndex < maxIndex && !targetIndicator.is_visible() && this.indicatorIndex > -1 ) {
+                this._incrementIndicatorPosIndex();
+                targetIndicator = 
+                    QuickSettingsMenu._indicators.get_child_at_index(this.indicatorIndex);
+            }
+            
+            // Always reset index to 0 on position 0
+            if (this.indicatorPosition == 0) {
+                this.indicatorIndex = 0;
+            }
+            
+            // Update last position
+            this.lastIndicatorPosition = newPosition;
+            
+            // Update indicator index
+            QuickSettingsMenu._indicators.remove_actor(this);
+            QuickSettingsMenu._indicators.insert_child_at_index(this,this.indicatorIndex);
+            this._settings.set_int(INDICATOR_INDEX, this.indicatorIndex);
+        }
     }
     
     _showIndicatorLabel() {
@@ -748,6 +815,7 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
+
 
 
 

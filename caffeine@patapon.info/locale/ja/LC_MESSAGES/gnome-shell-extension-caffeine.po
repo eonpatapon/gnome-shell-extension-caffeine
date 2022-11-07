@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 19:05+0100\n"
+"POT-Creation-Date: 2022-11-07 00:53+0100\n"
 "PO-Revision-Date: 2017-05-05 22:28+0900\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
@@ -17,141 +17,160 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:93
+#: extension.js:97
 msgid "Caffeine timer"
 msgstr ""
 
-#: extension.js:115
+#: extension.js:119
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:587 extension.js:602
+#: extension.js:659 extension.js:674
 msgid "Auto suspend and screensaver disabled"
 msgstr "自動サスペンドを無効にしました"
 
-#: extension.js:591 extension.js:608
+#: extension.js:663 extension.js:680
 msgid "Auto suspend and screensaver enabled"
 msgstr "自動サスペンドを有効にしました"
 
-#: extension.js:600
+#: extension.js:672
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "自動サスペンドを無効にしました"
 
-#: extension.js:606
+#: extension.js:678
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "自動サスペンドを有効にしました"
 
-#: preferences/appsPage.js:31
+#: preferences/appsPage.js:32
 msgid "Apps"
 msgstr ""
 
-#: preferences/appsPage.js:43
+#: preferences/appsPage.js:44
 msgid "Add"
 msgstr "追加"
 
-#: preferences/appsPage.js:47
+#: preferences/appsPage.js:48
 msgid "Apps that trigger Caffeine"
 msgstr ""
 
-#: preferences/displayPage.js:31 preferences/displayPage.js:41
+#: preferences/displayPage.js:32 preferences/displayPage.js:42
 msgid "Display"
 msgstr ""
 
-#: preferences/displayPage.js:46
+#: preferences/displayPage.js:47
 msgid "Only when active"
 msgstr "アクティブ時のみ"
 
-#: preferences/displayPage.js:47 preferences/generalPage.js:72
+#: preferences/displayPage.js:48 preferences/generalPage.js:73
 msgid "Always"
 msgstr "いつも"
 
-#: preferences/displayPage.js:48 preferences/generalPage.js:71
+#: preferences/displayPage.js:49 preferences/generalPage.js:72
 msgid "Never"
 msgstr "一度もない"
 
-#: preferences/displayPage.js:50
+#: preferences/displayPage.js:51
 #, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Caffeine をトップバーに表示する"
 
-#: preferences/displayPage.js:51
+#: preferences/displayPage.js:52
 #, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Caffeine をトップバーに表示する"
 
-#: preferences/displayPage.js:62
+#: preferences/displayPage.js:63
 #, fuzzy
 msgid "Show timer in top panel"
 msgstr "Caffeine をトップバーに表示する"
 
-#: preferences/displayPage.js:63
+#: preferences/displayPage.js:64
 #, fuzzy
 msgid "Enable or disable the timer in the top panel"
 msgstr "Caffeine をトップバーに表示する"
 
-#: preferences/displayPage.js:74
+#: preferences/displayPage.js:75
 #, fuzzy
 msgid "Notifications"
 msgstr "通知を有効にする"
 
-#: preferences/displayPage.js:75
+#: preferences/displayPage.js:76
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr ""
 
-#: preferences/generalPage.js:32
+#: preferences/displayPage.js:98
+#, fuzzy
+msgid "Status indicator Position"
+msgstr "Caffeine をトップバーに表示する"
+
+#: preferences/displayPage.js:99
+msgid "The position relative of indicator icon to other items"
+msgstr ""
+
+#: preferences/generalPage.js:33
 msgid "General"
 msgstr ""
 
-#: preferences/generalPage.js:42
+#: preferences/generalPage.js:43
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:51
+#: preferences/generalPage.js:52
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "フルスクリーンアプリケーション実行時に有効にする"
 
-#: preferences/generalPage.js:52
+#: preferences/generalPage.js:53
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: preferences/generalPage.js:63
+#: preferences/generalPage.js:64
 msgid "Remember state"
 msgstr "状態を記憶"
 
-#: preferences/generalPage.js:64
+#: preferences/generalPage.js:65
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "再起動後も状態を維持する"
 
-#: preferences/generalPage.js:73
+#: preferences/generalPage.js:74
 msgid "For apps on list"
 msgstr ""
 
-#: preferences/generalPage.js:75
+#: preferences/generalPage.js:76
 msgid "Pause and resume Night Light"
 msgstr ""
 
-#: preferences/generalPage.js:76
+#: preferences/generalPage.js:77
 msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: preferences/generalPage.js:97
+#: preferences/generalPage.js:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Allow screen blank"
+msgstr ""
+
+#: preferences/generalPage.js:89
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr ""
+
+#: preferences/generalPage.js:111
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:105
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: preferences/generalPage.js:119
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:106
+#: preferences/generalPage.js:120
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:182 preferences/generalPage.js:214
+#: preferences/generalPage.js:199 preferences/generalPage.js:231
 msgid "New accelerator…"
 msgstr ""
 
@@ -210,40 +229,38 @@ msgstr ""
 msgid "Enable when a fullscreen application is running"
 msgstr "フルスクリーンアプリケーション実行時に有効にする"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
-msgid "DEPRECATED. Pause/resume Night Light"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
-msgid "Pause/resume Night Light when enabled/disabled"
-msgstr ""
-
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
-msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
-msgid "Pause/resume Night Light for defined application when enabled/disabled"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Shortcut to toggle Caffeine."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Default width for the preferences window"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:86
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:81
 msgid "Default height for the preferences window"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:85
+msgid "Visible position offset of status icon in indicator menu"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:89
+msgid ""
+"Real position offset of status icon in indicator menu that include invisible "
+"one"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+msgid "Last item index in indicator menu"
 msgstr ""
 
 #, fuzzy
