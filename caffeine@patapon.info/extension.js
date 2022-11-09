@@ -99,7 +99,8 @@ const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
 
-const ControlNightLight = {
+//const ControlNightLight = {
+const ControlContext = {
     NEVER: 0,
     ALWAYS: 1,
     FOR_APPS: 2,
@@ -143,9 +144,9 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
             label: IndicatorName,
             toggleMode: true,
         });
-        
+
         this._settings = ExtensionUtils.getSettings();
-                    
+    
         // Icons
         this.finalTimerMenuIcon = TimerMenuIcon;
         if (!Gtk.IconTheme.get_default().has_icon(TimerMenuIcon)) {
@@ -169,7 +170,8 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         this._settings.bind(`${USER_ENABLED_KEY}`,
             this, 'checked',
             Gio.SettingsBindFlags.DEFAULT);
-        
+
+   
         // icon
         this._iconName();
 
@@ -241,6 +243,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         });
 
         this._night_light = false;
+        this._allow_blank= false;
+        this.inhibitFlags= 12;
 
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
             'org.gnome.SessionManager',
@@ -363,6 +367,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
     
     toggleFullscreen() {
+        this._manageScreenBlankState();
         Mainloop.timeout_add_seconds(2, () => {
             if (this.inFullscreen && !this._apps.includes('fullscreen')) {
                 this.addInhibit('fullscreen');
@@ -377,23 +382,20 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     toggleState() {
+        this._manageScreenBlankState();
         if (this._state) {
             this._removeTimer(false);
             this._apps.forEach(appId => this.removeInhibit(appId));
-            this._manageNightLight('enabled');
+            this._manageNightLight('enabled');            
         } else {     
             this.addInhibit('user');
             this._manageNightLight('disabled');
-        }
+        }        
     }
 
     addInhibit(appId) {
-        let inhibitFlags = 12
-        if (this._settings.get_boolean(SCREEN_BLANK)) {
-            inhibitFlags = 4
-        }
         this._sessionManager.InhibitRemote(appId,
-            0, 'Inhibit by %s'.format(IndicatorName), inhibitFlags,
+            0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
             cookie => {
                 this._last_cookie = cookie;
                 this._last_app = appId;
@@ -401,7 +403,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         );
     }
 
-    removeInhibit(appId) {
+    removeInhibit(appId) { 
         let index = this._apps.indexOf(appId);
         this._sessionManager.UninhibitRemote(this._cookies[index]);
     }
@@ -575,7 +577,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     appId = String(appId);
                     if (appId !== '' && appId === this._last_app) {
                         if (this._last_app === 'user')
-                            this._saveUserState(true);
+                            this._saveUserState(true);                            
                         this._apps.push(this._last_app);
                         this._cookies.push(this._last_cookie);
                         this._objects.push(object);
@@ -586,7 +588,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             // Indicator icon
                             this._manageShowIndicator();
                             this._indicator.gicon = this._icon_actived;
-                            // Shell OSD notifications
+                            // Shell OSD notifications                 
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendOSDNotification(true);
                         }
@@ -633,8 +635,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
+    _manageScreenBlankState() {
+        if(this._settings.get_enum(SCREEN_BLANK) === ControlContext.ALWAYS) {
+            this.inhibitFlags = 4;
+        } else {
+            this.inhibitFlags = 12;
+        }
+    }
+    
     _manageNightLight(state) {
-        const controlNl = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlNightLight.ALWAYS;
+        const controlNl = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
         if (state === 'enabled') {
             if (controlNl && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = false;
@@ -666,7 +676,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     // DEPRECATED
     _sendNotification(state) {
-        const controllingNl = this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlNightLight.NEVER;
+        const controllingNl = this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
         if (state === 'enabled') {
             if (controllingNl && this._night_light && this._proxy.DisabledUntilTomorrow)
                 Main.notify(_('Auto suspend and screensaver disabled. Night Light paused.'));
@@ -724,9 +734,17 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _appWindowsChanged(app) {
         let appId = app.get_id();
         let appState = app.get_state();
+        
+        // Allow blank screen
+        if (this._settings.get_enum(SCREEN_BLANK) > ControlContext.NEVER){
+            this.inhibitFlags = 4;
+        } else {
+            this.inhibitFlags = 12;
+        }
+
         if (appState !== Shell.AppState.STOPPED) {
             this.addInhibit(appId);
-            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlNightLight.NEVER && this._proxy.NightLightActive) {
+            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = true;
                 this._night_light = true;
             } else {
@@ -734,7 +752,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
         } else {
             this.removeInhibit(appId);
-            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlNightLight.NEVER && this._proxy.NightLightActive) {
+            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = false;
                 this._night_light = true;
             } else {
@@ -815,6 +833,7 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
+
 
 
 
