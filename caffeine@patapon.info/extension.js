@@ -289,6 +289,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._apps = [];
         this._cookies = [];
         this._objects = [];
+        this._inhibited_apps = [];
         
         // Init Timers
         this._timeOut = null;
@@ -401,11 +402,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._last_app = appId;
             }
         );
+        this._inhibited_apps.push(appId);
     }
 
     removeInhibit(appId) { 
         let index = this._apps.indexOf(appId);
         this._sessionManager.UninhibitRemote(this._cookies[index]);
+        this._inhibited_apps.splice(this._inhibited_apps.indexOf(appId),1);
     }
     
     _updateLastIndicatorPosition() {
@@ -619,6 +622,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
     
+    _isInhibited(appId) {
+        if (this._inhibited_apps.indexOf(appId) !== -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     _manageShowIndicator() {
         if (this._state) {
             if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.NEVER) {
@@ -710,6 +721,26 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._userState = state;
         this._settings.set_boolean(USER_ENABLED_KEY, state);
     }
+    
+    _toggleAppStateSignal(app, toEnable){
+        let data = {
+            windowsChangedId: 0,
+        };
+        if(toEnable) {
+            // Set signal on
+            data = {
+                windowsChangedId: app.connect('windows-changed',
+                    this._appWindowsChanged.bind(this)),
+            };        
+        } else {
+            // Set signal off
+            let winChangedId = this._appData.get(app).windowsChangedId;
+            if (winChangedId) {
+                app.disconnect(winChangedId); 
+            }
+        }
+        this._appData.set(app, data);
+    }
 
     _updateAppData() {
         let ids = this._appConfigs.slice();
@@ -735,6 +766,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let appId = app.get_id();
         let appState = app.get_state();
         
+        // Remove App state signal
+        this._toggleAppStateSignal(app, false);
+        
         // Allow blank screen
         if (this._settings.get_enum(SCREEN_BLANK) > ControlContext.NEVER){
             this.inhibitFlags = 4;
@@ -742,7 +776,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this.inhibitFlags = 12;
         }
 
-        if (appState !== Shell.AppState.STOPPED) {
+        if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
             this.addInhibit(appId);
             if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = true;
@@ -750,7 +784,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             } else {
                 this._night_light = false;
             }
-        } else {
+        } else if(this._isInhibited(appId)){
             this.removeInhibit(appId);
             if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER && this._proxy.NightLightActive) {
                 this._proxy.DisabledUntilTomorrow = false;
@@ -759,6 +793,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._night_light = false;
             }
         }
+        
+        // Add 200 ms delay before enable state event signal again
+        setTimeout(() => {
+            this._toggleAppStateSignal(app, true);
+        }, 200);
     }
 
     destroy() {
