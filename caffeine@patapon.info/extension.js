@@ -137,8 +137,8 @@ Gtk.IconTheme.get_default = function() {
     return theme;
 };
 
-const FeatureToggle = GObject.registerClass(
-class FeatureToggle extends QuickSettings.QuickMenuToggle {
+const CaffeineToggle = GObject.registerClass(
+class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _init() {
         super._init({
             label: IndicatorName,
@@ -155,26 +155,24 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         }
         this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
         this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._iconName();
         
         // Menu
         this.menu.setHeader(this.finalTimerMenuIcon, TimerMenuName, null);
-        
-        this._timerItems = new Map();
+
+        // Add elements
         this._itemsSection = new PopupMenu.PopupMenuSection();
-        
+        this.menu.addMenuItem(this._itemsSection);
+
         // Init Timers
+        this._timerItems = new Map();
         this._syncTimers();
         this._sync();
-        this.menu.addMenuItem(this._itemsSection);        
 
+        // Bind signals
         this._settings.bind(`${USER_ENABLED_KEY}`,
             this, 'checked',
             Gio.SettingsBindFlags.DEFAULT);
-
-   
-        // icon
-        this._iconName();
-
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
             this._iconName();
         });
@@ -217,13 +215,10 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
     }
 
     _iconName() {
-        switch (this._settings.get_boolean(USER_ENABLED_KEY)) {
-        case true:
+        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
             this.gicon = this._icon_actived;
-            break;
-        case false:
+        } else {
             this.gicon = this._icon_desactived;
-            break;
         }
     }    
 });
@@ -237,27 +232,21 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         this._settings = ExtensionUtils.getSettings();
 
-        this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
-            if (error)
-                log(error.message);
+        // D-bus
+        this._proxy = new ColorProxy(
+            Gio.DBus.session, 
+            'org.gnome.SettingsDaemon.Color', 
+            '/org/gnome/SettingsDaemon/Color', 
+            (proxy, error) => {
+                if (error)
+                    log(error.message);
         });
-
-        this._night_light = false;
-        this._allow_blank= false;
-        this.inhibitFlags= 12;
-
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
             'org.gnome.SessionManager',
             '/org/gnome/SessionManager');
-        this._inhibitorAddedId = this._sessionManager.connectSignal('InhibitorAdded', this._inhibitorAdded.bind(this));
-        this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved', this._inhibitorRemoved.bind(this));
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
         this._appSystem = Shell.AppSystem.get_default();
-
-        this._appsChangedId =
-            this._appSystem.connect('installed-changed',
-                this._updateAppData.bind(this));
 
         // ("screen" in global) is false on 3.28, although global.screen exists
         if (typeof global.screen !== 'undefined') {
@@ -281,14 +270,28 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         this._indicator.gicon = this._icon_desactived;
 
+        // Manage night light and allow blank screen
+        this._night_light = false;
+        this._allow_blank= false;
+        
+        /* Inhibited flag value
+        * - 4: Inhibit suspending the session or computer
+        * - 12: Inhibit the session being marked as idle
+        */
+        this.inhibitFlags= 12;
+        
+        // Caffeine state
         this._state = false;
         this._userState = false;
-        // who has requested the inhibition
+        
+        // Who has requested the inhibition
         this._last_app = '';
         this._last_cookie = '';
         this._apps = [];
         this._cookies = [];
         this._objects = [];
+        
+        // List of active inhibited app
         this._inhibited_apps = [];
         
         // Init Timers
@@ -315,10 +318,22 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this.toggleFullscreen();
         }
 
+        // Init app list
         this._appConfigs = [];
         this._appData = new Map();
-        
-        // Events
+        this._updateAppConfigs();
+
+        // QuickSettings
+        this._caffeineToggle = new CaffeineToggle();
+        this.quickSettingsItems.push(this._caffeineToggle);
+
+        // Bind signals
+        this._inhibitorAddedId = this._sessionManager.connectSignal(
+            'InhibitorAdded', 
+            this._inhibitorAdded.bind(this));
+        this._inhibitorRemovedId = this._sessionManager.connectSignal(
+            'InhibitorRemoved', 
+            this._inhibitorRemoved.bind(this));
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
         this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, this._startTimer.bind(this));
@@ -327,23 +342,19 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
             this._manageShowIndicator();
             this._showIndicatorLabel();
-        });    
-        
-        this._updateAppConfigs();
-        
-        // QuickSettings
-        this._caffeineToggle = new FeatureToggle();
-        this.quickSettingsItems.push(this._caffeineToggle);
-        
-        // Change user state on icon scroll event
-        this._indicator.reactive = true;
-        this._indicator.connect('scroll-event',
-            (actor, event) => this._handleScrollEvent(event));    
-            
+        });
+        this._appsChangedId = this._appSystem.connect(
+            'installed-changed',
+            this._updateAppData.bind(this));
         this.connect('destroy', () => {
             this.quickSettingsItems.forEach(item => item.destroy());
         });
-        
+
+        // Change user state on icon scroll event
+        this._indicator.reactive = true;
+        this._indicator.connect('scroll-event',
+            (actor, event) => this._handleScrollEvent(event));       
+            
         // Init position and index of indicator icon
         this.indicatorPosition = this._settings.get_int(INDICATOR_POSITION);
         this.indicatorIndex = this._settings.get_int(INDICATOR_INDEX);        
