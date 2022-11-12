@@ -368,7 +368,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
     
     toggleFullscreen() {
-        this._manageScreenBlankState();
+        this._manageScreenBlankState(false);
         Mainloop.timeout_add_seconds(2, () => {
             if (this.inFullscreen && !this._apps.includes('fullscreen')) {
                 this.addInhibit('fullscreen');
@@ -383,7 +383,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     toggleState() {
-        this._manageScreenBlankState();
+        this._manageScreenBlankState(false);
         if (this._state) {
             this._removeTimer(false);
             this._apps.forEach(appId => this.removeInhibit(appId));
@@ -646,8 +646,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    _manageScreenBlankState() {
-        if(this._settings.get_enum(SCREEN_BLANK) === ControlContext.ALWAYS) {
+    _manageScreenBlankState(isApp) {
+        let blankState = this._settings.get_enum(SCREEN_BLANK) === ControlContext.ALWAYS;
+        if (isApp)
+            blankState = this._settings.get_enum(SCREEN_BLANK) > ControlContext.NEVER;
+            
+        if (blankState) {
             this.inhibitFlags = 4;
         } else {
             this.inhibitFlags = 12;
@@ -770,11 +774,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._toggleAppStateSignal(app, false);
         
         // Allow blank screen
-        if (this._settings.get_enum(SCREEN_BLANK) > ControlContext.NEVER){
-            this.inhibitFlags = 4;
-        } else {
-            this.inhibitFlags = 12;
-        }
+        this._manageScreenBlankState(true);
 
         if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
             this.addInhibit(appId);
