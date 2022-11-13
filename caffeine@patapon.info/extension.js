@@ -99,7 +99,8 @@ const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
 
-const ControlNightLight = {
+//const ControlNightLight = {
+const ControlContext = {
     NEVER: 0,
     ALWAYS: 1,
     FOR_APPS: 2,
@@ -136,16 +137,16 @@ Gtk.IconTheme.get_default = function() {
     return theme;
 };
 
-const FeatureToggle = GObject.registerClass(
-class FeatureToggle extends QuickSettings.QuickMenuToggle {
+const CaffeineToggle = GObject.registerClass(
+class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _init() {
         super._init({
             label: IndicatorName,
             toggleMode: true,
         });
-        
+
         this._settings = ExtensionUtils.getSettings();
-                    
+    
         // Icons
         this.finalTimerMenuIcon = TimerMenuIcon;
         if (!Gtk.IconTheme.get_default().has_icon(TimerMenuIcon)) {
@@ -154,25 +155,24 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
         }
         this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
         this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._iconName();
         
         // Menu
         this.menu.setHeader(this.finalTimerMenuIcon, TimerMenuName, null);
-        
-        this._timerItems = new Map();
+
+        // Add elements
         this._itemsSection = new PopupMenu.PopupMenuSection();
-        
+        this.menu.addMenuItem(this._itemsSection);
+
         // Init Timers
+        this._timerItems = new Map();
         this._syncTimers();
         this._sync();
-        this.menu.addMenuItem(this._itemsSection);        
 
+        // Bind signals
         this._settings.bind(`${USER_ENABLED_KEY}`,
             this, 'checked',
             Gio.SettingsBindFlags.DEFAULT);
-        
-        // icon
-        this._iconName();
-
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
             this._iconName();
         });
@@ -215,13 +215,10 @@ class FeatureToggle extends QuickSettings.QuickMenuToggle {
     }
 
     _iconName() {
-        switch (this._settings.get_boolean(USER_ENABLED_KEY)) {
-        case true:
+        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
             this.gicon = this._icon_actived;
-            break;
-        case false:
+        } else {
             this.gicon = this._icon_desactived;
-            break;
         }
     }    
 });
@@ -235,25 +232,21 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         this._settings = ExtensionUtils.getSettings();
 
-        this._proxy = new ColorProxy(Gio.DBus.session, 'org.gnome.SettingsDaemon.Color', '/org/gnome/SettingsDaemon/Color', (proxy, error) => {
-            if (error)
-                log(error.message);
+        // D-bus
+        this._proxy = new ColorProxy(
+            Gio.DBus.session, 
+            'org.gnome.SettingsDaemon.Color', 
+            '/org/gnome/SettingsDaemon/Color', 
+            (proxy, error) => {
+                if (error)
+                    log(error.message);
         });
-
-        this._night_light = false;
-
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
             'org.gnome.SessionManager',
             '/org/gnome/SessionManager');
-        this._inhibitorAddedId = this._sessionManager.connectSignal('InhibitorAdded', this._inhibitorAdded.bind(this));
-        this._inhibitorRemovedId = this._sessionManager.connectSignal('InhibitorRemoved', this._inhibitorRemoved.bind(this));
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
         this._appSystem = Shell.AppSystem.get_default();
-
-        this._appsChangedId =
-            this._appSystem.connect('installed-changed',
-                this._updateAppData.bind(this));
 
         // ("screen" in global) is false on 3.28, although global.screen exists
         if (typeof global.screen !== 'undefined') {
@@ -277,14 +270,29 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         this._indicator.gicon = this._icon_desactived;
 
+        // Manage night light and allow blank screen
+        this._night_light = false;
+        this._allow_blank= false;
+        
+        /* Inhibited flag value
+        * - 4: Inhibit suspending the session or computer
+        * - 12: Inhibit the session being marked as idle
+        */
+        this.inhibitFlags= 12;
+        
+        // Caffeine state
         this._state = false;
         this._userState = false;
-        // who has requested the inhibition
+        
+        // Who has requested the inhibition
         this._last_app = '';
         this._last_cookie = '';
         this._apps = [];
         this._cookies = [];
         this._objects = [];
+        
+        // List of active inhibited app
+        this._inhibited_apps = [];
         
         // Init Timers
         this._timeOut = null;
@@ -310,10 +318,22 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this.toggleFullscreen();
         }
 
+        // Init app list
         this._appConfigs = [];
         this._appData = new Map();
-        
-        // Events
+        this._updateAppConfigs();
+
+        // QuickSettings
+        this._caffeineToggle = new CaffeineToggle();
+        this.quickSettingsItems.push(this._caffeineToggle);
+
+        // Bind signals
+        this._inhibitorAddedId = this._sessionManager.connectSignal(
+            'InhibitorAdded', 
+            this._inhibitorAdded.bind(this));
+        this._inhibitorRemovedId = this._sessionManager.connectSignal(
+            'InhibitorRemoved', 
+            this._inhibitorRemoved.bind(this));
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
         this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
         this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, this._startTimer.bind(this));
@@ -322,23 +342,19 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
             this._manageShowIndicator();
             this._showIndicatorLabel();
-        });    
-        
-        this._updateAppConfigs();
-        
-        // QuickSettings
-        this._caffeineToggle = new FeatureToggle();
-        this.quickSettingsItems.push(this._caffeineToggle);
-        
-        // Change user state on icon scroll event
-        this._indicator.reactive = true;
-        this._indicator.connect('scroll-event',
-            (actor, event) => this._handleScrollEvent(event));    
-            
+        });
+        this._appsChangedId = this._appSystem.connect(
+            'installed-changed',
+            this._updateAppData.bind(this));
         this.connect('destroy', () => {
             this.quickSettingsItems.forEach(item => item.destroy());
         });
-        
+
+        // Change user state on icon scroll event
+        this._indicator.reactive = true;
+        this._indicator.connect('scroll-event',
+            (actor, event) => this._handleScrollEvent(event));       
+            
         // Init position and index of indicator icon
         this.indicatorPosition = this._settings.get_int(INDICATOR_POSITION);
         this.indicatorIndex = this._settings.get_int(INDICATOR_INDEX);        
@@ -363,47 +379,47 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
     
     toggleFullscreen() {
+        this._manageScreenBlankState(false);
         Mainloop.timeout_add_seconds(2, () => {
             if (this.inFullscreen && !this._apps.includes('fullscreen')) {
                 this.addInhibit('fullscreen');
-                this._manageNightLight('disabled');
+                this._manageNightLight(false, false);
             }
         });
 
         if (!this.inFullscreen && this._apps.includes('fullscreen')) {
             this.removeInhibit('fullscreen');
-            this._manageNightLight('enabled');
+            this._manageNightLight(true, false);
         }
     }
 
     toggleState() {
+        this._manageScreenBlankState(false);
         if (this._state) {
             this._removeTimer(false);
             this._apps.forEach(appId => this.removeInhibit(appId));
-            this._manageNightLight('enabled');
+            this._manageNightLight(true, false);            
         } else {     
             this.addInhibit('user');
-            this._manageNightLight('disabled');
-        }
+            this._manageNightLight(false, false);
+        }        
     }
 
     addInhibit(appId) {
-        let inhibitFlags = 12
-        if (this._settings.get_boolean(SCREEN_BLANK)) {
-            inhibitFlags = 4
-        }
         this._sessionManager.InhibitRemote(appId,
-            0, 'Inhibit by %s'.format(IndicatorName), inhibitFlags,
+            0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
             cookie => {
                 this._last_cookie = cookie;
                 this._last_app = appId;
             }
         );
+        this._inhibited_apps.push(appId);
     }
 
-    removeInhibit(appId) {
+    removeInhibit(appId) { 
         let index = this._apps.indexOf(appId);
         this._sessionManager.UninhibitRemote(this._cookies[index]);
+        this._inhibited_apps.splice(this._inhibited_apps.indexOf(appId),1);
     }
     
     _updateLastIndicatorPosition() {
@@ -575,7 +591,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     appId = String(appId);
                     if (appId !== '' && appId === this._last_app) {
                         if (this._last_app === 'user')
-                            this._saveUserState(true);
+                            this._saveUserState(true);                            
                         this._apps.push(this._last_app);
                         this._cookies.push(this._last_cookie);
                         this._objects.push(object);
@@ -586,7 +602,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             // Indicator icon
                             this._manageShowIndicator();
                             this._indicator.gicon = this._icon_actived;
-                            // Shell OSD notifications
+                            // Shell OSD notifications                 
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendOSDNotification(true);
                         }
@@ -617,6 +633,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
     
+    _isInhibited(appId) {
+        if (this._inhibited_apps.indexOf(appId) !== -1 ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     _manageShowIndicator() {
         if (this._state) {
             if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.NEVER) {
@@ -633,51 +657,46 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    _manageNightLight(state) {
-        const controlNl = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlNightLight.ALWAYS;
-        if (state === 'enabled') {
-            if (controlNl && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = false;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
+    _manageScreenBlankState(isApp) {
+        let blankState = this._settings.get_enum(SCREEN_BLANK) === ControlContext.ALWAYS;
+        if (isApp)
+            blankState = this._settings.get_enum(SCREEN_BLANK) > ControlContext.NEVER;
+            
+        if (blankState) {
+            this.inhibitFlags = 4;
+        } else {
+            this.inhibitFlags = 12;
         }
-        if (state === 'disabled') {
-            if (controlNl && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = true;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
+    }
+    
+    _manageNightLight(isEnable, isApp) {
+        let nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
+        if (isApp)
+            nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER;
+        if (isEnable && (nightLightPref || this._night_light && this._proxy.DisabledUntilTomorrow)) {
+            this._proxy.DisabledUntilTomorrow = false;
+            this._night_light = false;
+        } else if (!isEnable && nightLightPref) {
+            this._proxy.DisabledUntilTomorrow = true;
+            this._night_light = true;
         }
     }
     
     _sendOSDNotification(state) {
+        const nightLightPref = 
+            this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
         if (state) {
+            let message = _('Auto suspend and screensaver disabled');
+            if (nightLightPref && this._night_light && this._proxy.NightLightActive)
+                message = message + '. ' + _('Night Light paused');
             Main.osdWindowManager.show(-1, this._icon_actived,
-                _('Auto suspend and screensaver disabled'), null, null);
-        }
-        else {
+                message, null, null);
+        } else {
+            let message = _('Auto suspend and screensaver enabled');
+            if (nightLightPref && !this._night_light && this._proxy.NightLightActive)
+                message = message + '. ' + _('Night Light resumed');
             Main.osdWindowManager.show(-1, this._icon_desactived, 
-                _('Auto suspend and screensaver enabled'), null, null);
-        }
-    }
-
-    // DEPRECATED
-    _sendNotification(state) {
-        const controllingNl = this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlNightLight.NEVER;
-        if (state === 'enabled') {
-            if (controllingNl && this._night_light && this._proxy.DisabledUntilTomorrow)
-                Main.notify(_('Auto suspend and screensaver disabled. Night Light paused.'));
-            else
-                Main.notify(_('Auto suspend and screensaver disabled'));
-        }
-        if (state === 'disabled') {
-            if (controllingNl && this._night_light && !this._proxy.DisabledUntilTomorrow)
-                Main.notify(_('Auto suspend and screensaver enabled. Night Light resumed.'));
-            else
-                Main.notify(_('Auto suspend and screensaver enabled'));
+                message, null, null);
         }
     }
 
@@ -699,6 +718,26 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _saveUserState(state) {
         this._userState = state;
         this._settings.set_boolean(USER_ENABLED_KEY, state);
+    }
+    
+    _toggleAppStateSignal(app, toEnable){
+        let data = {
+            windowsChangedId: 0,
+        };
+        if(toEnable) {
+            // Set signal on
+            data = {
+                windowsChangedId: app.connect('windows-changed',
+                    this._appWindowsChanged.bind(this)),
+            };        
+        } else {
+            // Set signal off
+            let winChangedId = this._appData.get(app).windowsChangedId;
+            if (winChangedId) {
+                app.disconnect(winChangedId); 
+            }
+        }
+        this._appData.set(app, data);
     }
 
     _updateAppData() {
@@ -724,23 +763,25 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _appWindowsChanged(app) {
         let appId = app.get_id();
         let appState = app.get_state();
-        if (appState !== Shell.AppState.STOPPED) {
+        
+        // Remove App state signal
+        this._toggleAppStateSignal(app, false);
+        
+        // Allow blank screen
+        this._manageScreenBlankState(true);
+
+        if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
+            this._manageNightLight(false, true);
             this.addInhibit(appId);
-            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlNightLight.NEVER && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = true;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
-        } else {
+        } else if(this._isInhibited(appId)){
+            this._manageNightLight(true, true);
             this.removeInhibit(appId);
-            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlNightLight.NEVER && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = false;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
         }
+        
+        // Add 200 ms delay before enable state event signal again
+        setTimeout(() => {
+            this._toggleAppStateSignal(app, true);
+        }, 200);
     }
 
     destroy() {
@@ -815,6 +856,7 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
+
 
 
 

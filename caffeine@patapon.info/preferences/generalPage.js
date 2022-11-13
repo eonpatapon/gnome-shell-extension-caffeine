@@ -26,6 +26,12 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, name, GObject.ParamFlags.READWRITE, ...dflt);
 
+const ComboBoxChoices = {
+    NEVER: _("Never"),
+    ALWAYS: _("Always"),
+    FOR_APPS: _("For apps on list"),
+};
+
 var GeneralPage = GObject.registerClass(
 class Caffeine_GeneralPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
@@ -69,9 +75,9 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         
         // Pause and resume Night Light
         let pauseNightLight = new Gtk.StringList();
-        pauseNightLight.append(_("Never"));
-        pauseNightLight.append(_("Always"));
-        pauseNightLight.append(_("For apps on list"));
+        pauseNightLight.append(ComboBoxChoices.NEVER);
+        pauseNightLight.append(ComboBoxChoices.ALWAYS);
+        pauseNightLight.append(ComboBoxChoices.FOR_APPS);
         let pauseNightLightRow = new Adw.ComboRow({
             title: _("Pause and resume Night Light"),
             subtitle: _("Toggles the night light together with Caffeine\'s state"),
@@ -80,17 +86,17 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         });
         
         // Allow blank screen
-        let allowBlankScreenSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.SCREEN_BLANK)
-        });
-        let allowBlankScreenRow = new Adw.ActionRow({
+        let allowBlankScreen = new Gtk.StringList();
+        allowBlankScreen.append(ComboBoxChoices.NEVER);
+        allowBlankScreen.append(ComboBoxChoices.ALWAYS);
+        allowBlankScreen.append(ComboBoxChoices.FOR_APPS);
+        let allowBlankScreenRow = new Adw.ComboRow({
             title: _("Allow screen blank"),
             subtitle: _("Allow turning off screen when Caffeine is enabled"),
-            activatable_widget: allowBlankScreenSwitch
+            model: allowBlankScreen,
+            selected: this._settings.get_enum(this._settingsKey.SCREEN_BLANK)
         });
-        allowBlankScreenRow.add_suffix(allowBlankScreenSwitch);
-        
+
         // Add elements
         behaviorGroup.add(disableFullscreenRow);
         behaviorGroup.add(rememberStateRow);
@@ -141,8 +147,8 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         pauseNightLightRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.NIGHT_LIGHT, widget.selected);
         });
-        allowBlankScreenSwitch.connect('notify::active', (widget) => {
-            this._settings.set_boolean(this._settingsKey.SCREEN_BLANK, widget.get_active());
+        allowBlankScreenRow.connect('notify::selected', (widget) => {
+            this._settings.set_enum(this._settingsKey.SCREEN_BLANK, widget.selected);
         });
         deleteShortcutButton.connect('clicked', this._resetShortcut.bind(this));
         this._settings.connect(`changed::${this._settingsKey.TOGGLE_SHORTCUT}`, () => {
@@ -323,6 +329,8 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         return Gtk.accelerator_valid(keyval, mask) || (keyval === Gdk.KEY_Tab && mask !== 0);
     }
 };
+
+
 
 
 
