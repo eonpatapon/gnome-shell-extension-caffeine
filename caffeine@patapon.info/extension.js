@@ -383,13 +383,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
         Mainloop.timeout_add_seconds(2, () => {
             if (this.inFullscreen && !this._apps.includes('fullscreen')) {
                 this.addInhibit('fullscreen');
-                this._manageNightLight('disabled');
+                this._manageNightLight(false, false);
             }
         });
 
         if (!this.inFullscreen && this._apps.includes('fullscreen')) {
             this.removeInhibit('fullscreen');
-            this._manageNightLight('enabled');
+            this._manageNightLight(true, false);
         }
     }
 
@@ -398,10 +398,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._state) {
             this._removeTimer(false);
             this._apps.forEach(appId => this.removeInhibit(appId));
-            this._manageNightLight('enabled');            
+            this._manageNightLight(true, false);            
         } else {     
             this.addInhibit('user');
-            this._manageNightLight('disabled');
+            this._manageNightLight(false, false);
         }        
     }
 
@@ -669,51 +669,34 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
     
-    _manageNightLight(state) {
-        const controlNl = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
-        if (state === 'enabled') {
-            if (controlNl && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = false;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
-        }
-        if (state === 'disabled') {
-            if (controlNl && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = true;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
+    _manageNightLight(isEnable, isApp) {
+        let nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
+        if (isApp)
+            nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER;
+        if (isEnable && (nightLightPref || this._night_light && this._proxy.DisabledUntilTomorrow)) {
+            this._proxy.DisabledUntilTomorrow = false;
+            this._night_light = false;
+        } else if (!isEnable && nightLightPref) {
+            this._proxy.DisabledUntilTomorrow = true;
+            this._night_light = true;
         }
     }
     
     _sendOSDNotification(state) {
+        const nightLightPref = 
+            this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
         if (state) {
+            let message = _('Auto suspend and screensaver disabled');
+            if (nightLightPref && this._night_light && this._proxy.NightLightActive)
+                message = message + '. ' + _('Night Light paused');
             Main.osdWindowManager.show(-1, this._icon_actived,
-                _('Auto suspend and screensaver disabled'), null, null);
-        }
-        else {
+                message, null, null);
+        } else {
+            let message = _('Auto suspend and screensaver enabled');
+            if (nightLightPref && !this._night_light && this._proxy.NightLightActive)
+                message = message + '. ' + _('Night Light resumed');
             Main.osdWindowManager.show(-1, this._icon_desactived, 
-                _('Auto suspend and screensaver enabled'), null, null);
-        }
-    }
-
-    // DEPRECATED
-    _sendNotification(state) {
-        const controllingNl = this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
-        if (state === 'enabled') {
-            if (controllingNl && this._night_light && this._proxy.DisabledUntilTomorrow)
-                Main.notify(_('Auto suspend and screensaver disabled. Night Light paused.'));
-            else
-                Main.notify(_('Auto suspend and screensaver disabled'));
-        }
-        if (state === 'disabled') {
-            if (controllingNl && this._night_light && !this._proxy.DisabledUntilTomorrow)
-                Main.notify(_('Auto suspend and screensaver enabled. Night Light resumed.'));
-            else
-                Main.notify(_('Auto suspend and screensaver enabled'));
+                message, null, null);
         }
     }
 
@@ -788,21 +771,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._manageScreenBlankState(true);
 
         if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
+            this._manageNightLight(false, true);
             this.addInhibit(appId);
-            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = true;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
         } else if(this._isInhibited(appId)){
+            this._manageNightLight(true, true);
             this.removeInhibit(appId);
-            if (this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER && this._proxy.NightLightActive) {
-                this._proxy.DisabledUntilTomorrow = false;
-                this._night_light = true;
-            } else {
-                this._night_light = false;
-            }
         }
         
         // Add 200 ms delay before enable state event signal again
