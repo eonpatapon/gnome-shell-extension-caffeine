@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 00:53+0100\n"
+"POT-Creation-Date: 2022-11-13 23:45+0100\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -22,27 +22,25 @@ msgstr ""
 msgid "Caffeine timer"
 msgstr ""
 
-#: extension.js:119
+#: extension.js:120
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:659 extension.js:674
+#: extension.js:689
 msgid "Auto suspend and screensaver disabled"
 msgstr "Ekran koruyucu ve otomatik karartma kapalı"
 
-#: extension.js:663 extension.js:680
+#: extension.js:691
+msgid "Night Light paused"
+msgstr ""
+
+#: extension.js:695
 msgid "Auto suspend and screensaver enabled"
 msgstr "Ekran koruyucu ve otomatik karartma açık"
 
-#: extension.js:672
-#, fuzzy
-msgid "Auto suspend and screensaver disabled. Night Light paused."
-msgstr "Ekran koruyucu ve otomatik karartma kapalı"
-
-#: extension.js:678
-#, fuzzy
-msgid "Auto suspend and screensaver enabled. Night Light resumed."
-msgstr "Ekran koruyucu ve otomatik karartma açık"
+#: extension.js:697
+msgid "Night Light resumed"
+msgstr ""
 
 #: preferences/appsPage.js:32
 msgid "Apps"
@@ -64,11 +62,11 @@ msgstr ""
 msgid "Only when active"
 msgstr "Yalnızca etkin olduğunda"
 
-#: preferences/displayPage.js:48 preferences/generalPage.js:73
+#: preferences/displayPage.js:48 preferences/generalPage.js:31
 msgid "Always"
 msgstr "Hep"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:72
+#: preferences/displayPage.js:49 preferences/generalPage.js:30
 msgid "Never"
 msgstr "Hiçbir zaman"
 
@@ -111,70 +109,69 @@ msgstr "Göstergeyi üst panelde göster"
 msgid "The position relative of indicator icon to other items"
 msgstr ""
 
-#: preferences/generalPage.js:33
+#: preferences/generalPage.js:32
+msgid "For apps on list"
+msgstr ""
+
+#: preferences/generalPage.js:39
 msgid "General"
 msgstr ""
 
-#: preferences/generalPage.js:43
+#: preferences/generalPage.js:49
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:52
+#: preferences/generalPage.js:58
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
 
-#: preferences/generalPage.js:53
+#: preferences/generalPage.js:59
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: preferences/generalPage.js:64
+#: preferences/generalPage.js:70
 msgid "Remember state"
 msgstr ""
 
-#: preferences/generalPage.js:65
+#: preferences/generalPage.js:71
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Yeniden başlatma arasında durumu geri yükle"
 
-#: preferences/generalPage.js:74
-msgid "For apps on list"
-msgstr ""
-
-#: preferences/generalPage.js:76
+#: preferences/generalPage.js:82
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: preferences/generalPage.js:77
+#: preferences/generalPage.js:83
 msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: preferences/generalPage.js:88
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: preferences/generalPage.js:94
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Allow screen blank"
 msgstr ""
 
-#: preferences/generalPage.js:89
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: preferences/generalPage.js:95
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
-#: preferences/generalPage.js:111
+#: preferences/generalPage.js:117
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:125
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:120
+#: preferences/generalPage.js:126
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:199 preferences/generalPage.js:231
+#: preferences/generalPage.js:205 preferences/generalPage.js:237
 msgid "New accelerator…"
 msgstr ""
 
@@ -235,13 +232,18 @@ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 msgid "Enable when a fullscreen application is running"
 msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Night Light control mode"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#, fuzzy
+msgid "Allow turning off screen when Caffeine is enabled."
+msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Shortcut to toggle Caffeine."
@@ -268,6 +270,14 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Last item index in indicator menu"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
+#~ msgstr "Ekran koruyucu ve otomatik karartma kapalı"
+
+#, fuzzy
+#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
+#~ msgstr "Ekran koruyucu ve otomatik karartma açık"
 
 #, fuzzy
 #~ msgid "DEPRECATED. Pause/resume Night Light"

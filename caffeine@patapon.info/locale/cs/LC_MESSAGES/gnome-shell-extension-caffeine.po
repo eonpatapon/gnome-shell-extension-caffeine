@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 00:53+0100\n"
+"POT-Creation-Date: 2022-11-13 23:45+0100\n"
 "PO-Revision-Date: 2022-04-13 15:18+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech\n"
@@ -21,28 +21,27 @@ msgstr ""
 msgid "Caffeine timer"
 msgstr ""
 
-#: extension.js:119
+#: extension.js:120
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:659 extension.js:674
+#: extension.js:689
 msgid "Auto suspend and screensaver disabled"
 msgstr "Automatické uspání a šetřič obrazovky jsou zakázané"
 
-#: extension.js:663 extension.js:680
+#: extension.js:691
+#, fuzzy
+msgid "Night Light paused"
+msgstr "Režim řízení Nočního světla"
+
+#: extension.js:695
 msgid "Auto suspend and screensaver enabled"
 msgstr "Automatické uspání a šetřič obrazovky jsou povolené"
 
-#: extension.js:672
-msgid "Auto suspend and screensaver disabled. Night Light paused."
-msgstr ""
-"Automatické uspání a šetřič obrazovky jsou zakázané. Noční světlo "
-"pozastaveno."
-
-#: extension.js:678
-msgid "Auto suspend and screensaver enabled. Night Light resumed."
-msgstr ""
-"Automatické uspání a šetřič obrazovky jsou povolené. Noční světlo obnoveno."
+#: extension.js:697
+#, fuzzy
+msgid "Night Light resumed"
+msgstr "Režim řízení Nočního světla"
 
 #: preferences/appsPage.js:32
 msgid "Apps"
@@ -64,11 +63,11 @@ msgstr ""
 msgid "Only when active"
 msgstr "Pouze když je aktivní"
 
-#: preferences/displayPage.js:48 preferences/generalPage.js:73
+#: preferences/displayPage.js:48 preferences/generalPage.js:31
 msgid "Always"
 msgstr "Vždy"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:72
+#: preferences/displayPage.js:49 preferences/generalPage.js:30
 msgid "Never"
 msgstr "Nikdy"
 
@@ -107,67 +106,66 @@ msgstr "Zobrazit indikátor stavu v horní liště"
 msgid "The position relative of indicator icon to other items"
 msgstr ""
 
-#: preferences/generalPage.js:33
-msgid "General"
-msgstr "Obecné"
-
-#: preferences/generalPage.js:43
-msgid "Behavior"
-msgstr ""
-
-#: preferences/generalPage.js:52
-msgid "Enable for fullscreen apps"
-msgstr "Povolit pro celoobrazovkové aplikace"
-
-#: preferences/generalPage.js:53
-msgid "Automatically enable when an app enters fullscreen mode"
-msgstr "Automaticky povolit, když aplikace přejde do režimu celé obrazovky"
-
-#: preferences/generalPage.js:64
-msgid "Remember state"
-msgstr "Pamatovat stav"
-
-#: preferences/generalPage.js:65
-msgid "Remember the last state across sessions and reboots"
-msgstr "Pamatovat si poslední stav mezi sezeními a restarty"
-
-#: preferences/generalPage.js:74
+#: preferences/generalPage.js:32
 msgid "For apps on list"
 msgstr "Pro aplikace na seznamu"
 
-#: preferences/generalPage.js:76
+#: preferences/generalPage.js:39
+msgid "General"
+msgstr "Obecné"
+
+#: preferences/generalPage.js:49
+msgid "Behavior"
+msgstr ""
+
+#: preferences/generalPage.js:58
+msgid "Enable for fullscreen apps"
+msgstr "Povolit pro celoobrazovkové aplikace"
+
+#: preferences/generalPage.js:59
+msgid "Automatically enable when an app enters fullscreen mode"
+msgstr "Automaticky povolit, když aplikace přejde do režimu celé obrazovky"
+
+#: preferences/generalPage.js:70
+msgid "Remember state"
+msgstr "Pamatovat stav"
+
+#: preferences/generalPage.js:71
+msgid "Remember the last state across sessions and reboots"
+msgstr "Pamatovat si poslední stav mezi sezeními a restarty"
+
+#: preferences/generalPage.js:82
 msgid "Pause and resume Night Light"
 msgstr "Pozastavit a obnovit Noční světlo"
 
-#: preferences/generalPage.js:77
+#: preferences/generalPage.js:83
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Přepne noční světlo spolu se stavem Caffeine"
 
-#: preferences/generalPage.js:88
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: preferences/generalPage.js:94
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Allow screen blank"
 msgstr ""
 
-#: preferences/generalPage.js:89
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: preferences/generalPage.js:95
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Povolit upozornění, když je Caffeine povoleno nebo zakázáno"
 
-#: preferences/generalPage.js:111
+#: preferences/generalPage.js:117
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:125
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:120
+#: preferences/generalPage.js:126
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:199 preferences/generalPage.js:231
+#: preferences/generalPage.js:205 preferences/generalPage.js:237
 msgid "New accelerator…"
 msgstr ""
 
@@ -227,14 +225,19 @@ msgstr "Zobrazit upozornění, když je povoleno/zakázáno"
 msgid "Enable when a fullscreen application is running"
 msgstr "Povolit, když je spuštěná aplikace v režimu celé obrazovky"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Night Light control mode"
 msgstr "Režim řízení Nočního světla"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
 "Nastavte způsob, kterým Caffeine interaguje s nastavením Nočního světla."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#, fuzzy
+msgid "Allow turning off screen when Caffeine is enabled."
+msgstr "Povolit upozornění, když je Caffeine povoleno nebo zakázáno"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Shortcut to toggle Caffeine."
@@ -261,6 +264,16 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Last item index in indicator menu"
 msgstr ""
+
+#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
+#~ msgstr ""
+#~ "Automatické uspání a šetřič obrazovky jsou zakázané. Noční světlo "
+#~ "pozastaveno."
+
+#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
+#~ msgstr ""
+#~ "Automatické uspání a šetřič obrazovky jsou povolené. Noční světlo "
+#~ "obnoveno."
 
 #~ msgid "DEPRECATED. Pause/resume Night Light"
 #~ msgstr "ZASTARALÉ. Pozastavit/obnovit Noční světlo"
