@@ -32,7 +32,7 @@ msgstr "Автоматический режим ожидания и застав
 #: extension.js:691
 #, fuzzy
 msgid "Night Light paused"
-msgstr "Режим управления ночной подсветкой"
+msgstr "Ночная подсветка"
 
 #: extension.js:695
 msgid "Auto suspend and screensaver enabled"
@@ -41,7 +41,7 @@ msgstr "Автоматический режим ожидания и застав
 #: extension.js:697
 #, fuzzy
 msgid "Night Light resumed"
-msgstr "Режим управления ночной подсветкой"
+msgstr "Ночная подсветка"
 
 #: preferences/appsPage.js:32
 msgid "Apps"

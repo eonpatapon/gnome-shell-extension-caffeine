@@ -32,7 +32,7 @@ msgstr "自动挂起与屏幕保护程序已禁用"
 #: extension.js:691
 #, fuzzy
 msgid "Night Light paused"
-msgstr "夜灯控制模式"
+msgstr "夜灯已暂停"
 
 #: extension.js:695
 msgid "Auto suspend and screensaver enabled"
@@ -41,7 +41,7 @@ msgstr "自动挂起与屏幕保护程序已启用"
 #: extension.js:697
 #, fuzzy
 msgid "Night Light resumed"
-msgstr "夜灯控制模式"
+msgstr "夜灯已恢复"
 
 #: preferences/appsPage.js:32
 msgid "Apps"

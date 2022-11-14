@@ -33,7 +33,7 @@ msgstr ""
 #: extension.js:691
 #, fuzzy
 msgid "Night Light paused"
-msgstr "Nachtlichtbediening"
+msgstr ""
 
 #: extension.js:695
 msgid "Auto suspend and screensaver enabled"

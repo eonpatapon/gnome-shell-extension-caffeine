@@ -38,7 +38,7 @@ msgstr "Mise en veille et écran de veille désactivés"
 #: extension.js:691
 #, fuzzy
 msgid "Night Light paused"
-msgstr "Mode de contrôle du Mode nuit"
+msgstr "Mode nuit suspendu"
 
 #: extension.js:695
 msgid "Auto suspend and screensaver enabled"
@@ -47,7 +47,7 @@ msgstr "Mise en veille et écran de veille activés"
 #: extension.js:697
 #, fuzzy
 msgid "Night Light resumed"
-msgstr "Mode de contrôle du Mode nuit"
+msgstr "Mode nuit réactivé"
 
 #: preferences/appsPage.js:32
 msgid "Apps"
@@ -106,11 +106,11 @@ msgstr "Activer les notifications quand Caféine est activé ou désactivé"
 #: preferences/displayPage.js:98
 #, fuzzy
 msgid "Status indicator Position"
-msgstr "Afficher l’indicateur d’état dans la barre supérieure"
+msgstr "Position de l'icone"
 
 #: preferences/displayPage.js:99
 msgid "The position relative of indicator icon to other items"
-msgstr ""
+msgstr "La position de l'icone dans la barre supérieure"
 
 #: preferences/generalPage.js:32
 msgid "For apps on list"
@@ -154,7 +154,7 @@ msgstr "Commute le Mode nuit en fonction de l’état de Caféine"
 #: preferences/generalPage.js:94
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Allow screen blank"
-msgstr ""
+msgstr "Autoriser la mise en veille l'écran seulement"
 
 #: preferences/generalPage.js:95
 #, fuzzy
@@ -196,12 +196,12 @@ msgstr "Enregistrer l’état utilisateur de Caféine"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 msgid "Start Timer countdown"
-msgstr ""
+msgstr "Démarrer le minuteur"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
 msgid "Specify time (minutes) for the timer countdown"
-msgstr ""
+msgstr "Durée du minuteur (en minutes)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 msgid "Restore caffeine state"
@@ -239,7 +239,7 @@ msgstr "Activer lorsqu’une application est en plein écran"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Night Light control mode"
-msgstr "Mode de contrôle du Mode nuit"
+msgstr "Contrôle du Mode nuit"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Set the way Caffeine interacts with the Night light setting."

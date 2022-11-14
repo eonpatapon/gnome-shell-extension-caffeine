@@ -30,7 +30,7 @@ msgstr "자동 대기 모드 진입 및 화면 보호기가 비활성화됨"
 #: extension.js:691
 #, fuzzy
 msgid "Night Light paused"
-msgstr "야간 모드 제어 모드"
+msgstr "야간 모드를 멈춥니"
 
 #: extension.js:695
 msgid "Auto suspend and screensaver enabled"
@@ -39,7 +39,7 @@ msgstr "자동 대기 모드 진입 및 화면 보호기가 활성화됨"
 #: extension.js:697
 #, fuzzy
 msgid "Night Light resumed"
-msgstr "야간 모드 제어 모드"
+msgstr "야간 모드를 다시 켭니"
 
 #: preferences/appsPage.js:32
 msgid "Apps"

@@ -32,7 +32,7 @@ msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
 
 #: extension.js:691
 msgid "Night Light paused"
-msgstr ""
+msgstr "Nachtmodus pausiert"
 
 #: extension.js:695
 msgid "Auto suspend and screensaver enabled"
@@ -40,7 +40,7 @@ msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
 
 #: extension.js:697
 msgid "Night Light resumed"
-msgstr ""
+msgstr "Nachtmodus fortgesetzt"
 
 #: preferences/appsPage.js:32
 msgid "Apps"

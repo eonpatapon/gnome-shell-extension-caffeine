@@ -32,7 +32,7 @@ msgstr "Automatické uspání a šetřič obrazovky jsou zakázané"
 #: extension.js:691
 #, fuzzy
 msgid "Night Light paused"
-msgstr "Režim řízení Nočního světla"
+msgstr "Noční světlo"
 
 #: extension.js:695
 msgid "Auto suspend and screensaver enabled"
@@ -41,7 +41,7 @@ msgstr "Automatické uspání a šetřič obrazovky jsou povolené"
 #: extension.js:697
 #, fuzzy
 msgid "Night Light resumed"
-msgstr "Režim řízení Nočního světla"
+msgstr "Noční světlo obnoveno"
 
 #: preferences/appsPage.js:32
 msgid "Apps"
