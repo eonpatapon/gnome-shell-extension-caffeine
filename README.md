@@ -1,7 +1,3 @@
-<style >
-H3{class="warning" color:Red !important;}
-</style> 
-
 # gnome-shell-extension-caffeine
 
 [<img src="https://github.com/pakaoraki/gnome-shell-extension-caffeine/raw/master/ressources/get_it_on_gnome_extensions.png" height="100" align="right">](https://extensions.gnome.org/extension/517/caffeine/)
