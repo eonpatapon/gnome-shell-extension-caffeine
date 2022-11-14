@@ -24,6 +24,7 @@ This extension supports GNOME Shell `3.4` -> `43`
 | gnome-shell-3.32-3.34 | 33 | Gnome 3.32 -> 3.34 |
 | gnome-shell-3.10-3.30 | - | Gnome 3.10 -> 3.30 |
 | gnome-shell-before-3.10 | - | Gnome 3.4 -> 3.8 |
+
 &nbsp;
 
 ## Installation From source
