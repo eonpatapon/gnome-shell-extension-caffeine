@@ -770,12 +770,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Allow blank screen
         this._manageScreenBlankState(true);
 
-        if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
-            this._manageNightLight(false, true);
-            this.addInhibit(appId);
-        } else if(this._isInhibited(appId)){
+        if (appState === Shell.AppState.STOPPED && this._isInhibited(appId)){
             this._manageNightLight(true, true);
-            this.removeInhibit(appId);
+            this.removeInhibit(appId); // Uninhibit app
+        } else if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
+            this._manageNightLight(false, true);
+            this.addInhibit(appId); // Inhibit app
         }
         
         // Add 200 ms delay before enable state event signal again
