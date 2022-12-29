@@ -35,6 +35,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         });
         this._settingsKey= settingsKey;
         this._settings = settings;
+        this._listApps=[];
         
         // Apps group
         // --------------
@@ -60,24 +61,35 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
     }
     
     _refreshApps() {
-        let _apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
-
-        // Check if the apps list UI needs updating
-        if (this._appsListUi != _apps) {
+        const _apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
         
-        // Remove the old list
-                if (this._count) {
-                    for (var i = 0; i < this._count; i++) {
-                        this.appsGroup.remove(this.apps[i].Row);
-                    }
-                    this._count = null;
+        // Clear the Apps list
+        this._listApps.length = 0;
+        
+        // Update the list & Check if app still exist
+        _apps.forEach(id => {
+            const appInfo = Gio.DesktopAppInfo.new(id);
+
+            if (appInfo)
+                this._listApps.push(id);
+        });
+        
+        // Check if the apps list UI needs updating
+        if (this._appsListUi != this._listApps) {
+        
+            // Remove the old list
+            if (this._count) {
+                for (var i = 0; i < this._count; i++) {
+                    this.appsGroup.remove(this.apps[i].Row);
                 }
+                    this._count = null;
+            }
                 
-            if (_apps.length > 0) {              
+            if (this._listApps.length > 0) { 
                 this.apps = {};
                 
                 // Build new apps UI list
-                for (let i in _apps) {
+                for (let i in this._listApps) {
                     this.apps[i] = {};
                     this.apps[i].ButtonBox = new Gtk.Box({
                         orientation: Gtk.Orientation.HORIZONTAL,
@@ -95,7 +107,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                     });
                     
                     // App info
-                    let appInfo = Gio.DesktopAppInfo.new(_apps[i]);
+                    let appInfo = Gio.DesktopAppInfo.new(this._listApps[i]);
                     const appIcon = new Gtk.Image({
                         gicon: appInfo.get_icon(),
                         pixel_size: 32,
@@ -103,7 +115,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                     appIcon.get_style_context().add_class('icon-dropshadow');
                     this.apps[i].Row = new Adw.ActionRow({
                         title: appInfo.get_display_name(),
-                        subtitle: _apps[i].replace('.desktop',''),
+                        subtitle: this._listApps[i].replace('.desktop',''),
                         activatable: true
                     });
                     
@@ -116,14 +128,14 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                 // Bind signals
                 for (let i in this.apps) {                    
                     this.apps[i].DeleteButton.connect('clicked', () => {
-                        log('delete app: ' + _apps[i] )
-                        this._onRemoveApp(_apps[i]);
+                        log('delete app: ' + this._listApps[i] )
+                        this._onRemoveApp(this._listApps[i]);
                     });
                     
                 }
-                this._count = _apps.length;
+                this._count = this._listApps.length;
             }
-            this._appsListUi = _apps;
+             this._appsListUi = [...this._listApps];
         }
         return 0;
     }
@@ -183,4 +195,5 @@ const NewAppDialog = GObject.registerClass(
                 appInfo && !apps.some(i => i.startsWith(appInfo.get_id())));
         }
     });
+
 
