@@ -719,26 +719,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._userState = state;
         this._settings.set_boolean(USER_ENABLED_KEY, state);
     }
-    
-    _toggleAppStateSignal(app, toEnable){
-        let data = {
-            windowsChangedId: 0,
-        };
-        if(toEnable) {
-            // Set signal on
-            data = {
-                windowsChangedId: app.connect('windows-changed',
-                    this._appWindowsChanged.bind(this)),
-            };        
-        } else {
-            // Set signal off
-            let winChangedId = this._appData.get(app).windowsChangedId;
-            if (winChangedId) {
-                app.disconnect(winChangedId); 
-            }
-        }
-        this._appData.set(app, data);
-    }
 
     _updateAppData() {
         let ids = this._appConfigs.slice();
@@ -765,7 +745,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let appState = app.get_state();
         
         // Remove App state signal
-        this._toggleAppStateSignal(app, false);
+        this._appSystem.block_signal_handler(this._appStateChangedSignalId);
         
         // Allow blank screen
         this._manageScreenBlankState(true);
@@ -780,7 +760,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         
         // Add 200 ms delay before enable state event signal again
         setTimeout(() => {
-            this._toggleAppStateSignal(app, true);
+            this._appSystem.unblock_signal_handler(this._appStateChangedSignalId);
         }, 200);
     }
 
