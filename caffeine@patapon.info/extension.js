@@ -118,7 +118,6 @@ const AppsTrigger = {
     ON_ACTIVE_WORKSPACE: 2,
 };
 
-//label: C_('Power profile', 'Performance'),
 const TIMERS = [    
     {5:['5:00', 'caffeine-short-timer-symbolic']},
     {10:['10:00', 'caffeine-medium-timer-symbolic']},
@@ -295,12 +294,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._state = false;
         this._userState = false;
         
-        // Who has requested the inhibition
-        this._last_app = '';
-        this._last_cookie = '';
-        this._apps = [];
-        this._cookies = [];
-        this._objects = [];
+        // Store the inhibition requests until processed
+        this._inhibition_added_fifo=[];
+        this._inhibition_removed_fifo=[];
         
         // List of active inhibited app
         this._inhibited_apps = [];
@@ -321,17 +317,18 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
 
         // Show icon
-        this._manageShowIndicator();
+        this._manageShowIndicator();        
 
+        // Init app list
+        this._appConfigs = [];
+        this._appInhibitedData = new Map();
+        this._updateAppConfigs();
+        
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._inFullscreenId = this._screen.connect('in-fullscreen-changed', this.toggleFullscreen.bind(this));
             this.toggleFullscreen();
         }
-
-        // Init app list
-        this._appConfigs = [];
-        this._updateAppConfigs();
 
         // QuickSettings
         this._caffeineToggle = new CaffeineToggle();
@@ -396,13 +393,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
     toggleFullscreen() {
         this._manageScreenBlankState(false);
         Mainloop.timeout_add_seconds(2, () => {
-            if (this.inFullscreen && !this._apps.includes('fullscreen')) {
+            if (this.inFullscreen && !this._appInhibitedData.has('fullscreen')) {
                 this.addInhibit('fullscreen');
                 this._manageNightLight(false, false);
             }
         });
 
-        if (!this.inFullscreen && this._apps.includes('fullscreen')) {
+        if (!this.inFullscreen && this._appInhibitedData.has('fullscreen')) {
             this.removeInhibit('fullscreen');
             this._manageNightLight(true, false);
         }
@@ -412,7 +409,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._manageScreenBlankState(false);
         if (this._state) {
             this._removeTimer(false);
-            this._apps.forEach(appId => this.removeInhibit(appId));
+            this._appInhibitedData.forEach((data, appId) => 
+                this.removeInhibit(appId)
+            );
             this._manageNightLight(true, false);            
         } else {     
             this.addInhibit('user');
@@ -423,18 +422,30 @@ class Caffeine extends QuickSettings.SystemIndicator {
     addInhibit(appId) {
         this._sessionManager.InhibitRemote(appId,
             0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
-            cookie => {
-                this._last_cookie = cookie;
-                this._last_app = appId;
+            cookie => {             
+                // Init app data
+                let data = {
+                    cookie: cookie,
+                    isToggled: true,
+                    isInhibited: false,
+                    object: '',
+                };                
+                this._appInhibitedData.set(appId, data);
             }
         );
         this._inhibited_apps.push(appId);
+        this._inhibition_added_fifo.push(appId);
     }
 
     removeInhibit(appId) { 
-        let index = this._apps.indexOf(appId);
-        this._sessionManager.UninhibitRemote(this._cookies[index]);
+        let appData = this._appInhibitedData.get(appId); 
+        if(appData && appData.isInhibited){            
+            this._sessionManager.UninhibitRemote(appData.cookie);
+            appData.isToggled = false;
+            this._appInhibitedData.set(appId, appData);            
+        }
         this._inhibited_apps.splice(this._inhibited_apps.indexOf(appId),1);
+        this._inhibition_removed_fifo.push(appId);
     }
     
     _updateLastIndicatorPosition() {
@@ -598,25 +609,31 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _inhibitorAdded(proxy, sender, [object]) {
         this._sessionManager.GetInhibitorsRemote(([inhibitors]) => {
+            // Get the first added request 
+            let requested_id = this._inhibition_added_fifo.shift();
+            
             for (let i of inhibitors) {
                 let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
                     'org.gnome.SessionManager',
                     i);
                 inhibitor.GetAppIdRemote(appId => {
                     appId = String(appId);
-                    if (appId !== '' && appId === this._last_app) {
-                        if (this._last_app === 'user')
-                            this._saveUserState(true);                            
-                        this._apps.push(this._last_app);
-                        this._cookies.push(this._last_cookie);
-                        this._objects.push(object);
-                        this._last_app = '';
-                        this._last_cookie = '';
+                    let appData = this._appInhibitedData.get(appId);
+                    if (appId !== '' && requested_id === appId && appData) {
+                        if (appId === 'user')
+                            this._saveUserState(true);
+                        appData.isInhibited = true;
+                        appData.object = object;
+                        this._appInhibitedData.set(appId, appData);
+                        
+                        // Update state
                         if (this._state === false) {
                             this._state = true;
+                            
                             // Indicator icon
                             this._manageShowIndicator();
                             this._indicator.gicon = this._icon_actived;
+                            
                             // Shell OSD notifications                 
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendOSDNotification(true);
@@ -628,22 +645,30 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _inhibitorRemoved(proxy, sender, [object]) {
-        let index = this._objects.indexOf(object);
-        if (index !== -1) {
-            if (this._apps[index] === 'user')
-                this._saveUserState(false);
-            // Remove app from list
-            this._apps.splice(index, 1);
-            this._cookies.splice(index, 1);
-            this._objects.splice(index, 1);
-            if (this._apps.length === 0) {
-                this._state = false;
-                // Indicator icon
-                this._manageShowIndicator();
-                this._indicator.gicon = this._icon_desactived;
-                // Shell OSD notifications
-                if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+        // Get the first removed request 
+        let requested_id = this._inhibition_removed_fifo.shift();
+
+        if(requested_id){
+            //let listInhibitedData = new Map(this._appInhibitedData);
+            let appData = this._appInhibitedData.get(requested_id);        
+            if (appData){
+                if (requested_id === 'user')
+                       this._saveUserState(false);
+                // Remove app from list
+                this._appInhibitedData.delete(requested_id);
+                
+                // Update state
+                if (this._appInhibitedData.size === 0) {
+                    this._state = false;
+ 
+                    // Indicator icon
+                    this._manageShowIndicator();
+                    this._indicator.gicon = this._icon_desactived;
+                            
+                    // Shell OSD notifications
+                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendOSDNotification(false);
+                }
             }
         }
     }
@@ -765,7 +790,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _updateAppEventMode() {
         let appsTriggeredMode = this._settings.get_enum(TRIGGER_APPS_MODE);
-        
+
         if (this._appConfigs.length === 0) {
             this._resetAppSignalId();
         } else {        
@@ -893,6 +918,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let listInhibitedApps = [...this._inhibited_apps]; // Clone list
         listInhibitedApps.forEach(appId => this.removeInhibit(appId));
         this._inhibited_apps.length = 0;
+        this._appInhibitedData.clear();
         
         // disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY))
