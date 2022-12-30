@@ -10,6 +10,11 @@
         <value value="1" nick="always"/>
         <value value="2" nick="never"/>
    </enum>
+   <enum id="org.gnome.shell.extensions.caffeine.app-trigger-mode">
+        <value value="0" nick="on-running"/>
+        <value value="1" nick="on-focus"/>
+        <value value="2" nick="on-active-workspace"/>
+   </enum>
 
   <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
     <key type="as" name="inhibit-apps">
@@ -67,6 +72,11 @@
         <summary>Allow screen blank</summary>
         <description>Allow turning off screen when Caffeine is enabled.</description>
     </key>
+    <key name="trigger-apps-mode" enum="org.gnome.shell.extensions.caffeine.app-trigger-mode">
+        <default>"on-running"</default>
+        <summary>Trigger App control mode</summary>
+        <description>Set the trigger method for apps.</description>
+    </key>
     <key type="as" name="toggle-shortcut">
         <default><![CDATA[[]]]></default>
         <summary>Toggle shortcut</summary>
@@ -94,6 +104,7 @@
     </key>
   </schema>
 </schemalist>
+
 
 
 
