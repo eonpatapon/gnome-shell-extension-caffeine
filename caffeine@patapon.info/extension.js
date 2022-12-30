@@ -298,9 +298,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._inhibition_added_fifo=[];
         this._inhibition_removed_fifo=[];
         
-        // List of active inhibited app
-        this._inhibited_apps = [];
-        
         // Init Timers
         this._timeOut = null;
         this._timePrint = null;
@@ -433,7 +430,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._appInhibitedData.set(appId, data);
             }
         );
-        this._inhibited_apps.push(appId);
         this._inhibition_added_fifo.push(appId);
     }
 
@@ -444,7 +440,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
             appData.isToggled = false;
             this._appInhibitedData.set(appId, appData);            
         }
-        this._inhibited_apps.splice(this._inhibited_apps.indexOf(appId),1);
         this._inhibition_removed_fifo.push(appId);
     }
     
@@ -649,7 +644,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let requested_id = this._inhibition_removed_fifo.shift();
 
         if(requested_id){
-            //let listInhibitedData = new Map(this._appInhibitedData);
             let appData = this._appInhibitedData.get(requested_id);        
             if (appData){
                 if (requested_id === 'user')
@@ -673,8 +667,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
     
-    _isInhibited(appId) {
-        if (this._inhibited_apps.indexOf(appId) !== -1 ) {
+    _isToggleInhibited(appId) {
+        let appData = this._appInhibitedData.get(appId);
+        if (appData && appData.isToggled) {
             return true;
         } else {
             return false;
@@ -750,8 +745,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         });
         
         // Remove inhibited app that are not in the list anymore
-        let inhibitedAppsToRemove = [...this._inhibited_apps]
-            .filter(a => !this._appConfigs.includes(a));
+        let inhibitedAppsToRemove = [...this._appInhibitedData.keys()]
+            .filter(id => !this._appConfigs.includes(id));
         inhibitedAppsToRemove.forEach(id => {
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(true, true);
@@ -848,11 +843,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._appConfigs.forEach( appId => {
             let app = this._appSystem.lookup_app(appId);
             let isOnWorkspace = app.is_on_workspace(workspace);
-            if(isOnWorkspace && !this._isInhibited(appId)){                
+            if(isOnWorkspace && !this._isToggleInhibited(appId)){                
                 this._manageScreenBlankState(true); // Allow blank screen
                 this._manageNightLight(false, true);
                 this.addInhibit(appId); // Inhibit app
-            } else if(!isOnWorkspace && this._isInhibited(appId)){
+            } else if(!isOnWorkspace && this._isToggleInhibited(appId)){
                 this._manageScreenBlankState(true); // Allow blank screen
                 this._manageNightLight(true, true);
                 this.removeInhibit(appId); // Uninhibit app
@@ -868,20 +863,19 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _appWindowFocusChanged() {
         let winTrack = Shell.WindowTracker.get_default();
         let appId = null;
-        let listInhibitedApps = [...this._inhibited_apps]; // Clone list
         let app = winTrack.focus_app;
-        
+
         if(app)
             appId = app.get_id();
-        if(this._appConfigs.includes(appId) && !this._isInhibited(appId)){
+        if(this._appConfigs.includes(appId) && !this._isToggleInhibited(appId)){
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(false, true);
             this.addInhibit(appId); // Inhibit app            
-        } else if (!this._appConfigs.includes(appId) && listInhibitedApps.length !== 0){
+        } else if (!this._appConfigs.includes(appId) && this._appInhibitedData.size !== 0){
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(true, true);
             // Uninhibit all apps
-            listInhibitedApps.forEach(id => {
+            this._appInhibitedData.forEach((data, id) => {
                 this.removeInhibit(id);
             });
         }
@@ -898,10 +892,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             // Allow blank screen
             this._manageScreenBlankState(true);
 
-            if (appState === Shell.AppState.STOPPED && this._isInhibited(appId)){
+            if (appState === Shell.AppState.STOPPED && this._isToggleInhibited(appId)){
                 this._manageNightLight(true, true);
                 this.removeInhibit(appId); // Uninhibit app
-            } else if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
+            } else if (appState !== Shell.AppState.STOPPED && !this._isToggleInhibited(appId)) {
                 this._manageNightLight(false, true);
                 this.addInhibit(appId); // Inhibit app
             }
@@ -915,9 +909,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     destroy() {
         // remove all inhibitors
-        let listInhibitedApps = [...this._inhibited_apps]; // Clone list
-        listInhibitedApps.forEach(appId => this.removeInhibit(appId));
-        this._inhibited_apps.length = 0;
+        this._appInhibitedData.forEach((data, appId) => this.removeInhibit(appId));
         this._appInhibitedData.clear();
         
         // disconnect from signals
