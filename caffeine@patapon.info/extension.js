@@ -745,7 +745,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let appState = app.get_state();
         
         // Remove App state signal
-        this._appSystem.block_signal_handler(this._appStateChangedSignalId);
+        let winChangedId = this._appData.get(app).windowsChangedId;
+        app.block_signal_handler(winChangedId);
         
         // Allow blank screen
         this._manageScreenBlankState(true);
@@ -760,7 +761,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         
         // Add 200 ms delay before enable state event signal again
         setTimeout(() => {
-            this._appSystem.unblock_signal_handler(this._appStateChangedSignalId);
+            app.unblock_signal_handler(winChangedId);
         }, 200);
     }
 
