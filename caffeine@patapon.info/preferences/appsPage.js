@@ -84,8 +84,10 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         this.add(this.appsGroup);
         
         // Bind signals
-        addAppsButton.connect('clicked', this._onAddApp.bind(this));
-        
+        addAppsButton.connect('clicked', this._onAddApp.bind(this)); 
+        appsTriggerModeRow.connect('notify::selected', (widget) => {
+            this._settings.set_enum(this._settingsKey.TRIGGER_APPS_MODE, widget.selected);
+        });
     }
     
     _refreshApps() {
@@ -223,5 +225,7 @@ const NewAppDialog = GObject.registerClass(
                 appInfo && !apps.some(i => i.startsWith(appInfo.get_id())));
         }
     });
+
+
 
 
