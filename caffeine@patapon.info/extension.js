@@ -354,10 +354,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._resetAppSignalId();
             this._updateAppEventMode();
         });
-        /*this._appsChangedId = this._appSystem.connect(
-            'installed-changed',
-            this._updateAppData.bind(this));
-        */
         this.connect('destroy', () => {
             this.quickSettingsItems.forEach(item => item.destroy());
         });
@@ -957,10 +953,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
             global.window_manager.disconnect(this._windowDestroyedId);
             this._windowDestroyedId = 0;
         }
-        /*if (this._appsChangedId) {
-            this._appSystem.disconnect(this._appsChangedId);
-            this._appsChangedId = 0;
-        }*/
         if (this._timeOut) {
             GLib.Source.remove(this._timeOut);
             this._timeOut = null;
