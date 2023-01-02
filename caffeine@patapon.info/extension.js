@@ -832,11 +832,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             global.workspace_manager.connect('workspace-switched', 
                                 this._appWorkspaceChanged.bind(this));
                     }
-                    /*if(this._appStateChangedSignalId === 0){
-                        this._appStateChangedSignalId =
-                            this._appSystem.connect('app-state-changed', 
-                                this._appWorkspaceChanged.bind(this));        
-                    }*/
                     // Check if App is currently on active workspace
                     this._appWorkspaceChanged();
                     break;
