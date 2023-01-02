@@ -252,11 +252,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
         this._appSystem = Shell.AppSystem.get_default();
+        this._activeWorkspace = null;
         
         // Init Apps Signals Id
         this._appStateChangedSignalId = 0;
         this._appDisplayChangedSignalId = 0;
         this._appWorkspaceChangedSignalId = 0;
+        this._appAddWindowSignalId = 0;
+        this._appRemoveWindowSignalId = 0;
 
         // ("screen" in global) is false on 3.28, although global.screen exists
         if (typeof global.screen !== 'undefined') {
@@ -780,6 +783,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._appWorkspaceChangedSignalId > 0) {
             global.workspace_manager.disconnect(this._appWorkspaceChangedSignalId);
             this._appWorkspaceChangedSignalId = 0;
+        }        
+        if (this._appAddWindowSignalId > 0) {            
+            this._activeWorkspace.disconnect(this._appAddWindowSignalId);
+            this._appAddWindowSignalId = 0;
+        }        
+        if (this._appRemoveWindowSignalId > 0) {
+            this._activeWorkspace.disconnect(this._appRemoveWindowSignalId);
+            this._appRemoveWindowSignalId = 0;
         } 
     }
 
@@ -821,11 +832,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             global.workspace_manager.connect('workspace-switched', 
                                 this._appWorkspaceChanged.bind(this));
                     }
-                    if(this._appStateChangedSignalId === 0){
+                    /*if(this._appStateChangedSignalId === 0){
                         this._appStateChangedSignalId =
                             this._appSystem.connect('app-state-changed', 
                                 this._appWorkspaceChanged.bind(this));        
-                    }
+                    }*/
                     // Check if App is currently on active workspace
                     this._appWorkspaceChanged();
                     break;
@@ -833,16 +844,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
     
-    _appWorkspaceChanged() {    
-        const workspace = global.workspace_manager.get_active_workspace();
-        
-        // Remove App state signal
-        this._appSystem.block_signal_handler(this._appStateChangedSignalId);
-
+    _toggleWorkspace() {
         // Search for triggered apps on active workspace
         this._appConfigs.forEach( appId => {
             let app = this._appSystem.lookup_app(appId);
-            let isOnWorkspace = app.is_on_workspace(workspace);
+            let isOnWorkspace = app.is_on_workspace(this._activeWorkspace);
             if(isOnWorkspace && !this._isToggleInhibited(appId)){                
                 this._manageScreenBlankState(true); // Allow blank screen
                 this._manageNightLight(false, true);
@@ -853,11 +859,36 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this.removeInhibit(appId); // Uninhibit app
             }
         });
+    }
+    
+    _appWorkspaceChanged() {    
+        // Reset signal for Add/remove windows on workspace
+        if (this._appAddWindowSignalId > 0) {            
+            this._activeWorkspace.disconnect(this._appAddWindowSignalId);
+            this._appAddWindowSignalId = 0;
+        }        
+        if (this._appRemoveWindowSignalId > 0) {
+            this._activeWorkspace.disconnect(this._appRemoveWindowSignalId);
+            this._appRemoveWindowSignalId = 0;
+        } 
         
-        // Add 200 ms delay before enable state event signal again
-        setTimeout(() => {
-            this._appSystem.unblock_signal_handler(this._appStateChangedSignalId);
-        }, 200); 
+        // Get active workspace
+        this._activeWorkspace = global.workspace_manager.get_active_workspace();
+        
+        // Add signal listener on add/remove windows for the active workspace
+        this._appAddWindowSignalId = 
+            this._activeWorkspace.connect('window-added', () => {
+            // Add 100 ms delay to handle window detection
+            setTimeout(this._toggleWorkspace.bind(this), 100);
+        });
+        this._appRemoveWindowSignalId = 
+            this._activeWorkspace.connect('window-removed', () => {
+            // Add 100 ms delay to handle window detection
+            setTimeout(this._toggleWorkspace.bind(this), 100);
+        });
+
+        // Check and toggle Caffeine
+        this._toggleWorkspace();
     }
  
     _appWindowFocusChanged() {
@@ -955,6 +986,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
             global.workspace_manager.disconnect(this._appWorkspaceChangedSignalId);
             this._appWorkspaceChangedSignalId = 0;
         }
+        if (this._appAddWindowSignalId > 0) {            
+            this._activeWorkspace.disconnect(this._appAddWindowSignalId);
+            this._appAddWindowSignalId = 0;
+        }        
+        if (this._appRemoveWindowSignalId > 0) {
+            this._activeWorkspace.disconnect(this._appRemoveWindowSignalId);
+            this._appRemoveWindowSignalId = 0;
+        } 
         this._appConfigs.length = 0;
         super.destroy();
     }
