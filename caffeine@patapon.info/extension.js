@@ -862,26 +862,34 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._activeWorkspace.disconnect(this._appRemoveWindowSignalId);
             this._appRemoveWindowSignalId = 0;
         } 
-        
+
         // Get active workspace
         this._activeWorkspace = global.workspace_manager.get_active_workspace();
         
         // Add signal listener on add/remove windows for the active workspace
         this._appAddWindowSignalId = 
-            this._activeWorkspace.connect('window-added', () => {
-            // Add 100 ms delay to handle window detection
-            setTimeout(this._toggleWorkspace.bind(this), 100);
+            this._activeWorkspace.connect('window-added', (wkspace, window) => {
+            const type = window.get_window_type();
+            // Accept only normal window, ignore all other type (dialog, menu,...)
+            if(type === 0) {
+                // Add 100 ms delay to handle window detection
+                setTimeout(this._toggleWorkspace.bind(this), 100);
+            }
         });
         this._appRemoveWindowSignalId = 
-            this._activeWorkspace.connect('window-removed', () => {
-            // Add 100 ms delay to handle window detection
-            setTimeout(this._toggleWorkspace.bind(this), 100);
+            this._activeWorkspace.connect('window-removed', (wkspace, window) => {
+            const type = window.get_window_type();
+            // Accept only normal window, ignore all other type (dialog, menu,...)
+            if(type === 0) {
+                // Add 100 ms delay to handle window detection
+                setTimeout(this._toggleWorkspace.bind(this), 100);
+            }
         });
 
         // Check and toggle Caffeine
         this._toggleWorkspace();
     }
- 
+
     _appWindowFocusChanged() {
         let winTrack = Shell.WindowTracker.get_default();
         let appId = null;
@@ -906,7 +914,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _appStateChanged(appSys, app) {
         let appId = app.get_id();
         let appState = app.get_state();
-        
+      
         if(this._appConfigs.includes(appId)){            
             // Block App state signal
             appSys.block_signal_handler(this._appStateChangedSignalId);
