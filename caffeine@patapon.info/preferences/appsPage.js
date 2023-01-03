@@ -26,9 +26,9 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 
 const AppsModeChoices = {
-    RUNNING: _("running"),
-    FOCUS: _("focus"),
-    WORKSPACE: _("on active workspace"),
+    RUNNING: _("Running"),
+    FOCUS: _("Focus"),
+    WORKSPACE: _("Active workspace"),
 };
 
 var AppsPage = GObject.registerClass(
@@ -55,7 +55,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         appsTriggerMode.append(AppsModeChoices.FOCUS);
         appsTriggerMode.append(AppsModeChoices.WORKSPACE);
         let appsTriggerModeRow = new Adw.ComboRow({
-            title: _("Apps trigger Caffeine when"),
+            title: _("Apps trigger Caffeine mode"),
             subtitle: _("Choose the way apps will trigger Caffeine"),
             model: appsTriggerMode,
             selected: this._settings.get_enum(this._settingsKey.TRIGGER_APPS_MODE)
