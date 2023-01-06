@@ -30,6 +30,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const SHOW_TIMER_KEY= 'show-timer';
+const TOGGLE_STATE_KEY= 'toggle-state';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
@@ -175,10 +176,10 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         this._sync();
 
         // Bind signals
-        this._settings.bind(`${USER_ENABLED_KEY}`,
+        this._settings.bind(`${TOGGLE_STATE_KEY}`,
             this, 'checked',
             Gio.SettingsBindFlags.DEFAULT);
-        this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
+        this._settings.connect(`changed::${TOGGLE_STATE_KEY}`, () => {
             this._iconName();
         });
         this._settings.connect(`changed::${TIMER_KEY}`, () => {
@@ -220,7 +221,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     }
 
     _iconName() {
-        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
+        if (this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             this.gicon = this._icon_actived;
         } else {
             this.gicon = this._icon_desactived;
@@ -309,6 +310,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Init settings keys and restore user state
         this._settings.reset(TIMER_ENABLED_KEY);
         this._settings.reset(TIMER_KEY);
+        this._settings.reset(TOGGLE_STATE_KEY);
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
             this.toggleState();
         } else {
@@ -342,7 +344,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             'InhibitorRemoved', 
             this._inhibitorRemoved.bind(this));
         this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
-        this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
+        this._settings.connect(`changed::${TOGGLE_STATE_KEY}`, this._updateMainState.bind(this));
         this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, this._startTimer.bind(this));
         this._settings.connect(`changed::${SHOW_TIMER_KEY}`, this._showIndicatorLabel.bind(this));
         this._settings.connect(`changed::${INDICATOR_POSITION}`, this._updateIndicatorPosition.bind(this));
@@ -516,7 +518,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._removeTimer(true);
             
             // Enable Caffeine
-            this._settings.set_boolean(USER_ENABLED_KEY, true);
+            this._settings.set_boolean(TOGGLE_STATE_KEY, true);
             
             // Get duration 
             let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
@@ -535,7 +537,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {    
                     // Disable Caffeine when timer ended
                     this._removeTimer(false);
-                    this._settings.set_boolean(USER_ENABLED_KEY, false);
+                    this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                     return GLib.SOURCE_REMOVE;
                 });
             }  
@@ -581,7 +583,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             case Clutter.ScrollDirection.UP:
                 if(!this._state) {
                     // User state on - UP
-                    this._settings.set_boolean(USER_ENABLED_KEY, true);
+                    this._settings.set_boolean(TOGGLE_STATE_KEY, true);
                     // Force notification here if disable in prefs
                     if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                         this._sendOSDNotification(true);    
@@ -592,7 +594,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     // Stop timer
                     this._removeTimer(false);
                     // User state off - DOWN
-                    this._settings.set_boolean(USER_ENABLED_KEY, false);
+                    this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                     // Force notification here if disable in prefs
                     if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                         this._sendOSDNotification(false);
@@ -622,8 +624,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                         
                         // Update state
                         if (this._state === false) {
-                            this._state = true;
-                            
+                            this._saveMainState(true);
                             // Indicator icon
                             this._manageShowIndicator();
                             this._indicator.gicon = this._icon_actived;
@@ -652,7 +653,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 
                 // Update state
                 if (this._appInhibitedData.size === 0) {
-                    this._state = false;
+                    this._saveMainState(false);
  
                     // Indicator icon
                     this._manageShowIndicator();
@@ -754,10 +755,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         
         this._updateAppEventMode();
     }
-    
-    _updateUserState() {
-        if (this._settings.get_boolean(USER_ENABLED_KEY) !== this._userState) {
-            this._userState = !this._userState;
+
+    _updateMainState() {
+        if (this._settings.get_boolean(TOGGLE_STATE_KEY) !== this._state) {
             this.toggleState();
         }
     }
@@ -765,6 +765,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _saveUserState(state) {
         this._userState = state;
         this._settings.set_boolean(USER_ENABLED_KEY, state);
+    }
+    
+    _saveMainState(state) {
+        this._state = state;
+        this._settings.set_boolean(TOGGLE_STATE_KEY, state);
     }
     
     _resetAppSignalId(){
