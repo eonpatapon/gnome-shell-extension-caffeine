@@ -929,7 +929,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let appState = app.get_state();
       
         if(this._appConfigs.includes(appId)){            
-            // Block App _activeWorkspacestate signal
+            // Block App state signal
             appSys.block_signal_handler(this._appStateChangedSignalId);
             
             // Allow blank screen
