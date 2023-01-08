@@ -30,6 +30,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const SHOW_TIMER_KEY= 'show-timer';
+const TOGGLE_STATE_KEY= 'toggle-state';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
@@ -38,6 +39,7 @@ const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
 const TIMER_ENABLED_KEY = 'countdown-timer-enabled';
 const SCREEN_BLANK = 'screen-blank';
+const TRIGGER_APPS_MODE = 'trigger-apps-mode';
 const INDICATOR_POSITION = 'indicator-position';
 const INDICATOR_INDEX = 'indicator-position-index';
 const INDICATOR_POS_MAX = 'indicator-position-max';
@@ -99,7 +101,6 @@ const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
 
-//const ControlNightLight = {
 const ControlContext = {
     NEVER: 0,
     ALWAYS: 1,
@@ -112,7 +113,12 @@ const ShowIndicator = {
     NEVER: 2,
 };
 
-//label: C_('Power profile', 'Performance'),
+const AppsTrigger = {
+    ON_RUNNING: 0,
+    ON_FOCUS: 1,
+    ON_ACTIVE_WORKSPACE: 2,
+};
+
 const TIMERS = [    
     {5:['5:00', 'caffeine-short-timer-symbolic']},
     {10:['10:00', 'caffeine-medium-timer-symbolic']},
@@ -170,14 +176,19 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         this._sync();
 
         // Bind signals
-        this._settings.bind(`${USER_ENABLED_KEY}`,
+        this._settings.bind(`${TOGGLE_STATE_KEY}`,
             this, 'checked',
             Gio.SettingsBindFlags.DEFAULT);
-        this._settings.connect(`changed::${USER_ENABLED_KEY}`, () => {
+        this._settings.connect(`changed::${TOGGLE_STATE_KEY}`, () => {
             this._iconName();
         });
         this._settings.connect(`changed::${TIMER_KEY}`, () => {
             this._sync();
+        });
+        this.connect('destroy', () => {
+            this._icon_actived=null;
+            this._icon_desactived=null;
+            this.gicon = null;
         });
     }
        
@@ -215,7 +226,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     }
 
     _iconName() {
-        if (this._settings.get_boolean(USER_ENABLED_KEY)) {
+        if (this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             this.gicon = this._icon_actived;
         } else {
             this.gicon = this._icon_desactived;
@@ -247,6 +258,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // From auto-move-windows@gnome-shell-extensions.gcampax.github.com
         this._appSystem = Shell.AppSystem.get_default();
+        this._activeWorkspace = null;
+        
+        // Init Apps Signals Id
+        this._appStateChangedSignalId = 0;
+        this._appDisplayChangedSignalId = 0;
+        this._appWorkspaceChangedSignalId = 0;
+        this._appAddWindowSignalId = 0;
+        this._appRemoveWindowSignalId = 0;
 
         // ("screen" in global) is false on 3.28, although global.screen exists
         if (typeof global.screen !== 'undefined') {
@@ -284,15 +303,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._state = false;
         this._userState = false;
         
-        // Who has requested the inhibition
-        this._last_app = '';
-        this._last_cookie = '';
-        this._apps = [];
-        this._cookies = [];
-        this._objects = [];
-        
-        // List of active inhibited app
-        this._inhibited_apps = [];
+        // Store the inhibition requests until processed
+        this._inhibition_added_fifo=[];
+        this._inhibition_removed_fifo=[];
         
         // Init Timers
         this._timeOut = null;
@@ -302,6 +315,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Init settings keys and restore user state
         this._settings.reset(TIMER_ENABLED_KEY);
         this._settings.reset(TIMER_KEY);
+        this._settings.reset(TOGGLE_STATE_KEY);
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
             this.toggleState();
         } else {
@@ -310,18 +324,18 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
 
         // Show icon
-        this._manageShowIndicator();
+        this._manageShowIndicator();        
 
+        // Init app list
+        this._appConfigs = [];
+        this._appInhibitedData = new Map();
+        this._updateAppConfigs();
+        
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._inFullscreenId = this._screen.connect('in-fullscreen-changed', this.toggleFullscreen.bind(this));
             this.toggleFullscreen();
         }
-
-        // Init app list
-        this._appConfigs = [];
-        this._appData = new Map();
-        this._updateAppConfigs();
 
         // QuickSettings
         this._caffeineToggle = new CaffeineToggle();
@@ -329,23 +343,27 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // Bind signals
         this._inhibitorAddedId = this._sessionManager.connectSignal(
-            'InhibitorAdded', 
-            this._inhibitorAdded.bind(this));
+            'InhibitorAdded', this._inhibitorAdded.bind(this));
         this._inhibitorRemovedId = this._sessionManager.connectSignal(
-            'InhibitorRemoved', 
-            this._inhibitorRemoved.bind(this));
-        this._settings.connect(`changed::${INHIBIT_APPS_KEY}`, this._updateAppConfigs.bind(this));
-        this._settings.connect(`changed::${USER_ENABLED_KEY}`, this._updateUserState.bind(this));
-        this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, this._startTimer.bind(this));
-        this._settings.connect(`changed::${SHOW_TIMER_KEY}`, this._showIndicatorLabel.bind(this));
-        this._settings.connect(`changed::${INDICATOR_POSITION}`, this._updateIndicatorPosition.bind(this));
-        this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
+            'InhibitorRemoved', this._inhibitorRemoved.bind(this));
+        this.inhibitId = this._settings.connect(`changed::${INHIBIT_APPS_KEY}`,
+            this._updateAppConfigs.bind(this));
+        this.stateId = this._settings.connect(`changed::${TOGGLE_STATE_KEY}`,
+            this._updateMainState.bind(this));
+        this.timerId = this._settings.connect(`changed::${TIMER_ENABLED_KEY}`, 
+            this._startTimer.bind(this));
+        this.showTimerId = this._settings.connect(`changed::${SHOW_TIMER_KEY}`, 
+            this._showIndicatorLabel.bind(this));
+        this.indicatorId = this._settings.connect(`changed::${INDICATOR_POSITION}`,
+            this._updateIndicatorPosition.bind(this));
+        this.showIndicatorId = this._settings.connect(`changed::${SHOW_INDICATOR_KEY}`, () => {
             this._manageShowIndicator();
             this._showIndicatorLabel();
         });
-        this._appsChangedId = this._appSystem.connect(
-            'installed-changed',
-            this._updateAppData.bind(this));
+        this.triggerId = this._settings.connect(`changed::${TRIGGER_APPS_MODE}`, () => {
+            this._resetAppSignalId();
+            this._updateAppEventMode();
+        });
         this.connect('destroy', () => {
             this.quickSettingsItems.forEach(item => item.destroy());
         });
@@ -381,13 +399,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
     toggleFullscreen() {
         this._manageScreenBlankState(false);
         Mainloop.timeout_add_seconds(2, () => {
-            if (this.inFullscreen && !this._apps.includes('fullscreen')) {
+            if (this.inFullscreen && !this._appInhibitedData.has('fullscreen')) {
                 this.addInhibit('fullscreen');
                 this._manageNightLight(false, false);
             }
         });
 
-        if (!this.inFullscreen && this._apps.includes('fullscreen')) {
+        if (!this.inFullscreen && this._appInhibitedData.has('fullscreen')) {
             this.removeInhibit('fullscreen');
             this._manageNightLight(true, false);
         }
@@ -397,7 +415,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._manageScreenBlankState(false);
         if (this._state) {
             this._removeTimer(false);
-            this._apps.forEach(appId => this.removeInhibit(appId));
+            this._appInhibitedData.forEach((data, appId) => 
+                this.removeInhibit(appId)
+            );
             this._manageNightLight(true, false);            
         } else {     
             this.addInhibit('user');
@@ -408,18 +428,28 @@ class Caffeine extends QuickSettings.SystemIndicator {
     addInhibit(appId) {
         this._sessionManager.InhibitRemote(appId,
             0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
-            cookie => {
-                this._last_cookie = cookie;
-                this._last_app = appId;
+            cookie => {             
+                // Init app data
+                let data = {
+                    cookie: cookie,
+                    isToggled: true,
+                    isInhibited: false,
+                    object: '',
+                };                
+                this._appInhibitedData.set(appId, data);
             }
         );
-        this._inhibited_apps.push(appId);
+        this._inhibition_added_fifo.push(appId);
     }
 
     removeInhibit(appId) { 
-        let index = this._apps.indexOf(appId);
-        this._sessionManager.UninhibitRemote(this._cookies[index]);
-        this._inhibited_apps.splice(this._inhibited_apps.indexOf(appId),1);
+        let appData = this._appInhibitedData.get(appId); 
+        if(appData && appData.isInhibited){            
+            this._sessionManager.UninhibitRemote(appData.cookie);
+            appData.isToggled = false;
+            this._appInhibitedData.set(appId, appData);            
+        }
+        this._inhibition_removed_fifo.push(appId);
     }
     
     _updateLastIndicatorPosition() {
@@ -496,7 +526,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._removeTimer(true);
             
             // Enable Caffeine
-            this._settings.set_boolean(USER_ENABLED_KEY, true);
+            this._settings.set_boolean(TOGGLE_STATE_KEY, true);
             
             // Get duration 
             let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
@@ -515,7 +545,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {    
                     // Disable Caffeine when timer ended
                     this._removeTimer(false);
-                    this._settings.set_boolean(USER_ENABLED_KEY, false);
+                    this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                     return GLib.SOURCE_REMOVE;
                 });
             }  
@@ -561,7 +591,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             case Clutter.ScrollDirection.UP:
                 if(!this._state) {
                     // User state on - UP
-                    this._settings.set_boolean(USER_ENABLED_KEY, true);
+                    this._settings.set_boolean(TOGGLE_STATE_KEY, true);
                     // Force notification here if disable in prefs
                     if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                         this._sendOSDNotification(true);    
@@ -572,7 +602,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     // Stop timer
                     this._removeTimer(false);
                     // User state off - DOWN
-                    this._settings.set_boolean(USER_ENABLED_KEY, false);
+                    this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                     // Force notification here if disable in prefs
                     if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                         this._sendOSDNotification(false);
@@ -583,25 +613,30 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _inhibitorAdded(proxy, sender, [object]) {
         this._sessionManager.GetInhibitorsRemote(([inhibitors]) => {
+            // Get the first added request 
+            let requested_id = this._inhibition_added_fifo.shift();
+            
             for (let i of inhibitors) {
                 let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
                     'org.gnome.SessionManager',
                     i);
                 inhibitor.GetAppIdRemote(appId => {
                     appId = String(appId);
-                    if (appId !== '' && appId === this._last_app) {
-                        if (this._last_app === 'user')
-                            this._saveUserState(true);                            
-                        this._apps.push(this._last_app);
-                        this._cookies.push(this._last_cookie);
-                        this._objects.push(object);
-                        this._last_app = '';
-                        this._last_cookie = '';
+                    let appData = this._appInhibitedData.get(appId);
+                    if (appId !== '' && requested_id === appId && appData) {
+                        if (appId === 'user')
+                            this._saveUserState(true);
+                        appData.isInhibited = true;
+                        appData.object = object;
+                        this._appInhibitedData.set(appId, appData);
+                        
+                        // Update state
                         if (this._state === false) {
-                            this._state = true;
+                            this._saveMainState(true);
                             // Indicator icon
                             this._manageShowIndicator();
                             this._indicator.gicon = this._icon_actived;
+                            
                             // Shell OSD notifications                 
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
                                 this._sendOSDNotification(true);
@@ -613,28 +648,36 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _inhibitorRemoved(proxy, sender, [object]) {
-        let index = this._objects.indexOf(object);
-        if (index !== -1) {
-            if (this._apps[index] === 'user')
-                this._saveUserState(false);
-            // Remove app from list
-            this._apps.splice(index, 1);
-            this._cookies.splice(index, 1);
-            this._objects.splice(index, 1);
-            if (this._apps.length === 0) {
-                this._state = false;
-                // Indicator icon
-                this._manageShowIndicator();
-                this._indicator.gicon = this._icon_desactived;
-                // Shell OSD notifications
-                if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+        // Get the first removed request 
+        let requested_id = this._inhibition_removed_fifo.shift();
+
+        if(requested_id){
+            let appData = this._appInhibitedData.get(requested_id);        
+            if (appData){
+                if (requested_id === 'user')
+                       this._saveUserState(false);
+                // Remove app from list
+                this._appInhibitedData.delete(requested_id);
+                
+                // Update state
+                if (this._appInhibitedData.size === 0) {
+                    this._saveMainState(false);
+ 
+                    // Indicator icon
+                    this._manageShowIndicator();
+                    this._indicator.gicon = this._icon_desactived;
+                            
+                    // Shell OSD notifications
+                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
                     this._sendOSDNotification(false);
+                }
             }
         }
     }
     
-    _isInhibited(appId) {
-        if (this._inhibited_apps.indexOf(appId) !== -1 ) {
+    _isToggleInhibited(appId) {
+        let appData = this._appInhibitedData.get(appId);
+        if (appData && appData.isToggled) {
             return true;
         } else {
             return false;
@@ -703,14 +746,26 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _updateAppConfigs() {
         this._appConfigs.length = 0;
         this._settings.get_strv(INHIBIT_APPS_KEY).forEach(appId => {
-            this._appConfigs.push(appId);
+            // Check if app still exist
+            const appInfo = Gio.DesktopAppInfo.new(appId);
+            if (appInfo)
+                this._appConfigs.push(appId);
         });
-        this._updateAppData();
+        
+        // Remove inhibited app that are not in the list anymore
+        let inhibitedAppsToRemove = [...this._appInhibitedData.keys()]
+            .filter(id => !this._appConfigs.includes(id));
+        inhibitedAppsToRemove.forEach(id => {
+            this._manageScreenBlankState(true); // Allow blank screen
+            this._manageNightLight(true, true);
+            this.removeInhibit(id); // Uninhibit app
+        });
+        
+        this._updateAppEventMode();
     }
-    
-    _updateUserState() {
-        if (this._settings.get_boolean(USER_ENABLED_KEY) !== this._userState) {
-            this._userState = !this._userState;
+
+    _updateMainState() {
+        if (this._settings.get_boolean(TOGGLE_STATE_KEY) !== this._state) {
             this.toggleState();
         }
     }
@@ -719,56 +774,188 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._userState = state;
         this._settings.set_boolean(USER_ENABLED_KEY, state);
     }
-
-    _updateAppData() {
-        let ids = this._appConfigs.slice();
-        let removedApps = [...this._appData.keys()]
-            .filter(a => !ids.includes(a.id));
-        removedApps.forEach(app => {
-            app.disconnect(this._appData.get(app).windowsChangedId);
-            this._appData.delete(app);
-        });
-        let addedApps = ids
-            .map(id => this._appSystem.lookup_app(id))
-            .filter(app => app && !this._appData.has(app));
-        addedApps.forEach(app => {
-            let data = {
-                windowsChangedId: app.connect('windows-changed',
-                    this._appWindowsChanged.bind(this)),
-            };
-            this._appData.set(app, data);
-        });
+    
+    _saveMainState(state) {
+        this._state = state;
+        this._settings.set_boolean(TOGGLE_STATE_KEY, state);
+    }
+    
+    _resetAppSignalId(){
+        if (this._appStateChangedSignalId > 0) {
+            this._appSystem.disconnect(this._appStateChangedSignalId);
+            this._appStateChangedSignalId = 0;
+        }      
+        if (this._appDisplayChangedSignalId > 0) {
+            global.display.disconnect(this._appDisplayChangedSignalId);
+            this._appDisplayChangedSignalId = 0;
+        } 
+        if (this._appWorkspaceChangedSignalId > 0) {
+            global.workspace_manager.disconnect(this._appWorkspaceChangedSignalId);
+            this._appWorkspaceChangedSignalId = 0;
+        }        
+        if (this._appAddWindowSignalId > 0) {            
+            this._activeWorkspace.disconnect(this._appAddWindowSignalId);
+            this._appAddWindowSignalId = 0;
+        }        
+        if (this._appRemoveWindowSignalId > 0) {
+            this._activeWorkspace.disconnect(this._appRemoveWindowSignalId);
+            this._appRemoveWindowSignalId = 0;
+        } 
     }
 
-    _appWindowsChanged(app) {
+    _updateAppEventMode() {
+        let appsTriggeredMode = this._settings.get_enum(TRIGGER_APPS_MODE);
+
+        if (this._appConfigs.length === 0) {
+            this._resetAppSignalId();
+        } else {        
+            switch (appsTriggeredMode) {
+                // TRIGGER APPS MODE: ON RUNNING
+                case AppsTrigger.ON_RUNNING:
+                    if(this._appStateChangedSignalId === 0){
+                        this._appStateChangedSignalId =
+                            this._appSystem.connect('app-state-changed', 
+                                this._appStateChanged.bind(this));        
+                    }                    
+                    // Check if currently running App
+                    this._appConfigs.forEach( id => {
+                        let app = this._appSystem.lookup_app(id);
+                        if(app && app.get_state() !== Shell.AppState.STOPPED) 
+                            this._appStateChanged(this._appSystem, app);
+                    });
+                    break;
+                // TRIGGER APPS MODE: ON FOCUS 
+                case AppsTrigger.ON_FOCUS:
+                    if(this._appDisplayChangedSignalId === 0){
+                        this._appDisplayChangedSignalId = 
+                            global.display.connect('notify::focus-window', 
+                                this._appWindowFocusChanged.bind(this));      
+                    }
+                    // Check if currently focused App
+                    this._appWindowFocusChanged();
+                    break;
+                // TRIGGER APPS MODE: ON ACTIVE WORKSPACE
+                case AppsTrigger.ON_ACTIVE_WORKSPACE:
+                    if(this._appWorkspaceChangedSignalId === 0){
+                        this._appWorkspaceChangedSignalId = 
+                            global.workspace_manager.connect('workspace-switched', 
+                                this._appWorkspaceChanged.bind(this));
+                    }
+                    // Check if App is currently on active workspace
+                    this._appWorkspaceChanged();
+                    break;
+            }
+        }
+    }
+    
+    _toggleWorkspace() {
+        // Search for triggered apps on active workspace
+        this._appConfigs.forEach( appId => {
+            let app = this._appSystem.lookup_app(appId);
+            let isOnWorkspace = app.is_on_workspace(this._activeWorkspace);
+            if(isOnWorkspace && !this._isToggleInhibited(appId)){                
+                this._manageScreenBlankState(true); // Allow blank screen
+                this._manageNightLight(false, true);
+                this.addInhibit(appId); // Inhibit app
+            } else if(!isOnWorkspace && this._isToggleInhibited(appId)){
+                this._manageScreenBlankState(true); // Allow blank screen
+                this._manageNightLight(true, true);
+                this.removeInhibit(appId); // Uninhibit app
+            }
+        });
+    }
+    
+    _appWorkspaceChanged() {    
+        // Reset signal for Add/remove windows on workspace
+        if (this._appAddWindowSignalId > 0) {            
+            this._activeWorkspace.disconnect(this._appAddWindowSignalId);
+            this._appAddWindowSignalId = 0;
+        }        
+        if (this._appRemoveWindowSignalId > 0) {
+            this._activeWorkspace.disconnect(this._appRemoveWindowSignalId);
+            this._appRemoveWindowSignalId = 0;
+        } 
+
+        // Get active workspace
+        this._activeWorkspace = global.workspace_manager.get_active_workspace();
+        
+        // Add signal listener on add/remove windows for the active workspace
+        this._appAddWindowSignalId = 
+            this._activeWorkspace.connect('window-added', (wkspace, window) => {
+            const type = window.get_window_type();
+            // Accept only normal window, ignore all other type (dialog, menu,...)
+            if(type === 0) {
+                // Add 100 ms delay to handle window detection
+                setTimeout(this._toggleWorkspace.bind(this), 100);
+            }
+        });
+        this._appRemoveWindowSignalId = 
+            this._activeWorkspace.connect('window-removed', (wkspace, window) => {
+            const type = window.get_window_type();
+            // Accept only normal window, ignore all other type (dialog, menu,...)
+            if(type === 0) {
+                // Add 100 ms delay to handle window detection
+                setTimeout(this._toggleWorkspace.bind(this), 100);
+            }
+        });
+
+        // Check and toggle Caffeine
+        this._toggleWorkspace();
+    }
+
+    _appWindowFocusChanged() {
+        let winTrack = Shell.WindowTracker.get_default();
+        let appId = null;
+        let app = winTrack.focus_app;
+
+        if(app)
+            appId = app.get_id();
+        if(this._appConfigs.includes(appId) && !this._isToggleInhibited(appId)){
+            this._manageScreenBlankState(true); // Allow blank screen
+            this._manageNightLight(false, true);
+            this.addInhibit(appId); // Inhibit app            
+        } else if (!this._appConfigs.includes(appId) && this._appInhibitedData.size !== 0){
+            this._manageScreenBlankState(true); // Allow blank screen
+            this._manageNightLight(true, true);
+            // Uninhibit all apps
+            this._appInhibitedData.forEach((data, id) => {
+                this.removeInhibit(id);
+            });
+        }
+    }
+
+    _appStateChanged(appSys, app) {
         let appId = app.get_id();
         let appState = app.get_state();
-        
-        // Remove App state signal
-        let winChangedId = this._appData.get(app).windowsChangedId;
-        app.block_signal_handler(winChangedId);
-        
-        // Allow blank screen
-        this._manageScreenBlankState(true);
+      
+        if(this._appConfigs.includes(appId)){            
+            // Block App state signal
+            appSys.block_signal_handler(this._appStateChangedSignalId);
+            
+            // Allow blank screen
+            this._manageScreenBlankState(true);
 
-        if (appState === Shell.AppState.STOPPED && this._isInhibited(appId)){
-            this._manageNightLight(true, true);
-            this.removeInhibit(appId); // Uninhibit app
-        } else if (appState !== Shell.AppState.STOPPED && !this._isInhibited(appId)) {
-            this._manageNightLight(false, true);
-            this.addInhibit(appId); // Inhibit app
+            if (appState === Shell.AppState.STOPPED && this._isToggleInhibited(appId)){
+                this._manageNightLight(true, true);
+                this.removeInhibit(appId); // Uninhibit app
+            } else if (appState !== Shell.AppState.STOPPED && !this._isToggleInhibited(appId)) {
+                this._manageNightLight(false, true);
+                this.addInhibit(appId); // Inhibit app
+            }
+            
+            // Add 200 ms delay before unblock state signal
+            setTimeout(() => {
+                appSys.unblock_signal_handler(this._appStateChangedSignalId);
+            }, 200);
         }
-        
-        // Add 200 ms delay before enable state event signal again
-        setTimeout(() => {
-            app.unblock_signal_handler(winChangedId);
-        }, 200);
     }
 
     destroy() {
-        // remove all inhibitors
-        this._apps.forEach(appId => this.removeInhibit(appId));
-        // disconnect from signals
+        // Remove all inhibitors
+        this._appInhibitedData.forEach((data, appId) => this.removeInhibit(appId));
+        this._appInhibitedData.clear();
+        
+        // Disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY))
             this._screen.disconnect(this._inFullscreenId);
         if (this._inhibitorAddedId) {
@@ -787,10 +974,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
             global.window_manager.disconnect(this._windowDestroyedId);
             this._windowDestroyedId = 0;
         }
-        if (this._appsChangedId) {
-            this._appSystem.disconnect(this._appsChangedId);
-            this._appsChangedId = 0;
-        }
         if (this._timeOut) {
             GLib.Source.remove(this._timeOut);
             this._timeOut = null;
@@ -799,8 +982,40 @@ class Caffeine extends QuickSettings.SystemIndicator {
             GLib.Source.remove(this._timePrint);
             this._timePrint = null;
         }
+        this._resetAppSignalId();
+
+        // Disconnect settings signals
+        if (this.inhibitId) {
+            this._settings.disconnect(this.inhibitId);
+            this.inhibitId = undefined;
+        }
+        if (this.stateId) {
+            this._settings.disconnect(this.stateId);
+            this.stateId = undefined;
+        }
+        if (this.timerId) {
+            this._settings.disconnect(this.timerId);
+            this.timerId = undefined;
+        }
+        if (this.showTimerId) {
+            this._settings.disconnect(this.showTimerId);
+            this.showTimerId = undefined;
+        }
+        if (this.indicatorId) {
+            this._settings.disconnect(this.indicatorId);
+            this.indicatorId = undefined;
+        }
+        if (this.showIndicatorId) {
+            this._settings.disconnect(this.showIndicatorId);
+            this.showIndicatorId = undefined;
+        }
+        if (this.triggerId) {
+            this._settings.disconnect(this.triggerId);
+            this.triggerId = undefined;
+        }
+
         this._appConfigs.length = 0;
-        this._updateAppData();
+        this._settings = null;
         super.destroy();
     }
 });
