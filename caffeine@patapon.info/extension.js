@@ -982,27 +982,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
             GLib.Source.remove(this._timePrint);
             this._timePrint = null;
         }
-        if (this._appStateChangedSignalId > 0) {
-            this._appSystem.disconnect(this._appStateChangedSignalId);
-            this._appStateChangedSignalId = 0;
-        }      
-        if (this._appDisplayChangedSignalId > 0) {
-            global.display.disconnect(this._appDisplayChangedSignalId);
-            this._appDisplayChangedSignalId = 0;
-        }       
-        if (this._appWorkspaceChangedSignalId > 0) {
-            global.workspace_manager.disconnect(this._appWorkspaceChangedSignalId);
-            this._appWorkspaceChangedSignalId = 0;
-        }
-        if (this._appAddWindowSignalId > 0) {            
-            this._activeWorkspace.disconnect(this._appAddWindowSignalId);
-            this._appAddWindowSignalId = 0;
-        }        
-        if (this._appRemoveWindowSignalId > 0) {
-            this._activeWorkspace.disconnect(this._appRemoveWindowSignalId);
-            this._appRemoveWindowSignalId = 0;
-        } 
-        
+        this._resetAppSignalId();
+
         // Disconnect settings signals
         if (this.inhibitId) {
             this._settings.disconnect(this.inhibitId);
