@@ -156,7 +156,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                     this.appsGroup.add(this.apps[i].Row);
                 }
                 // Bind signals
-                for (let i in this.apps) {                    
+                for (let i in this.apps) {
                     this.apps[i].DeleteButton.connect('clicked', () => {
                         log('delete app: ' + this._listApps[i] )
                         this._onRemoveApp(this._listApps[i]);
@@ -184,7 +184,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
             }
             dialog.destroy();
         });
-        dialog.show();        
+        dialog.show();
     }
     
     _onRemoveApp(appId) {
@@ -225,6 +225,7 @@ const NewAppDialog = GObject.registerClass(
                 appInfo && !apps.some(i => i.startsWith(appInfo.get_id())));
         }
     });
+
 
 
 

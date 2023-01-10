@@ -98,7 +98,7 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             title: _("Status indicator Position"),
             subtitle: _("The position relative of indicator icon to other items"),
             activatable_widget: this.posIndicatorOffsetButton
-        });        
+        });
         posIndicatorOffsetRow.add_suffix(this.posIndicatorOffsetButton);
 
         // Add elements
@@ -135,4 +135,5 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
         this.posIndicatorOffsetButton.adjustment.set_upper(this.lastIndicatorPos);
     }
 });
+
 

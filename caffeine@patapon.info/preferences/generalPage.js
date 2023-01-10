@@ -118,7 +118,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             header_suffix: deleteShortcutButton
         });
         
-        // Keyboard shortcut        
+        // Keyboard shortcut
         this.shortcutKeyBoard = new ShortcutSettingWidget(
             this._settings, 
             this._settingsKey.TOGGLE_SHORTCUT,
@@ -156,8 +156,8 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
                 deleteShortcutButton.visible = true;
             } else {
                 deleteShortcutButton.visible = false;
-            }              
-        });    
+            }
+        });
     }
     
     _resetShortcut() {
@@ -185,9 +185,8 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
               title: label,
               subtitle: sublabel,
               activatable: true
-
         });
-        
+
         this.shortcutBox = new Gtk.Box({
             orientation: Gtk.Orientation.HORIZONTAL,
             halign: Gtk.Align.CENTER,
@@ -215,7 +214,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         this.bind_property('shortcut', this.shortLabel, 'accelerator', GObject.BindingFlags.DEFAULT);
         [this.shortcut] = this._settings.get_strv(this._key);
  
-        this.add_suffix(this.shortcutBox);        
+        this.add_suffix(this.shortcutBox);
     }
     
     isAcceleratorSet() {
@@ -329,6 +328,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         return Gtk.accelerator_valid(keyval, mask) || (keyval === Gdk.KEY_Tab && mask !== 0);
     }
 };
+
 
 
 
