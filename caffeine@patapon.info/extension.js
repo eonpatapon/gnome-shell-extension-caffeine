@@ -289,9 +289,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._iconDesactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         this._indicator.gicon = this._iconDesactived;
 
-        // Manage night light and allow blank screen
+        // Manage night light
         this._nightLight = false;
-        this._allowBlank= false;
         
         /* Inhibited flag value
         * - 4: Inhibit suspending the session or computer
