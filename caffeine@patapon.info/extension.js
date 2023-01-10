@@ -159,8 +159,8 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this.finalTimerMenuIcon = 
                 Gio.icon_new_for_string(`${Me.path}/icons/${TimerMenuIcon}.svg`);
         }
-        this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
-        this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._iconActived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._iconDesactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         this._iconName();
         
         // Menu
@@ -186,8 +186,8 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this._sync();
         });
         this.connect('destroy', () => {
-            this._icon_actived=null;
-            this._icon_desactived=null;
+            this._iconActived=null;
+            this._iconDesactived=null;
             this.gicon = null;
         });
     }
@@ -227,9 +227,9 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
     _iconName() {
         if (this._settings.get_boolean(TOGGLE_STATE_KEY)) {
-            this.gicon = this._icon_actived;
+            this.gicon = this._iconActived;
         } else {
-            this.gicon = this._icon_desactived;
+            this.gicon = this._iconDesactived;
         }
     }    
 });
@@ -285,13 +285,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.add_child(this._timerLabel);
 
         // Icons
-        this._icon_actived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
-        this._icon_desactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
-        this._indicator.gicon = this._icon_desactived;
+        this._iconActived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._iconDesactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._indicator.gicon = this._iconDesactived;
 
         // Manage night light and allow blank screen
-        this._night_light = false;
-        this._allow_blank= false;
+        this._nightLight = false;
+        this._allowBlank= false;
         
         /* Inhibited flag value
         * - 4: Inhibit suspending the session or computer
@@ -304,8 +304,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._userState = false;
         
         // Store the inhibition requests until processed
-        this._inhibition_added_fifo=[];
-        this._inhibition_removed_fifo=[];
+        this._inhibitionAddedFifo=[];
+        this._inhibitionRemovedFifo=[];
         
         // Init Timers
         this._timeOut = null;
@@ -429,7 +429,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._sessionManager.InhibitRemote(appId,
             0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
             cookie => {
-                this._inhibition_added_fifo.push(appId);
+                this._inhibitionAddedFifo.push(appId);
                 // Init app data
                 let data = {
                     cookie: cookie,
@@ -445,7 +445,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     removeInhibit(appId) { 
         let appData = this._appInhibitedData.get(appId); 
         if(appData && appData.isInhibited){
-            this._inhibition_removed_fifo.push(appId);
+            this._inhibitionRemovedFifo.push(appId);
             this._sessionManager.UninhibitRemote(appData.cookie);
             appData.isToggled = false;
             this._appInhibitedData.set(appId, appData);
@@ -614,7 +614,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _inhibitorAdded(proxy, sender, [object]) {
         this._sessionManager.GetInhibitorsRemote(([inhibitors]) => {
             // Get the first added request 
-            let requested_id = this._inhibition_added_fifo.shift();
+            let requestedId = this._inhibitionAddedFifo.shift();
             
             for (let i of inhibitors) {
                 let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
@@ -623,7 +623,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 inhibitor.GetAppIdRemote(appId => {
                     appId = String(appId);
                     let appData = this._appInhibitedData.get(appId);
-                    if (appId !== '' && requested_id === appId && appData) {
+                    if (appId !== '' && requestedId === appId && appData) {
                         if (appId === 'user')
                             this._saveUserState(true);
                         appData.isInhibited = true;
@@ -635,7 +635,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             this._saveMainState(true);
                             // Indicator icon
                             this._manageShowIndicator();
-                            this._indicator.gicon = this._icon_actived;
+                            this._indicator.gicon = this._iconActived;
                             
                             // Shell OSD notifications                 
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
@@ -649,15 +649,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _inhibitorRemoved(proxy, sender, [object]) {
         // Get the first removed request 
-        let requested_id = this._inhibition_removed_fifo.shift();
+        let appId = this._inhibitionRemovedFifo.shift();
 
-        if(requested_id){
-            let appData = this._appInhibitedData.get(requested_id);        
+        if(appId){
+            let appData = this._appInhibitedData.get(appId);        
             if (appData){
-                if (requested_id === 'user')
+                if (appId === 'user')
                        this._saveUserState(false);
                 // Remove app from list
-                this._appInhibitedData.delete(requested_id);
+                this._appInhibitedData.delete(appId);
                 
                 // Update state
                 if (this._appInhibitedData.size === 0) {
@@ -665,7 +665,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
  
                     // Indicator icon
                     this._manageShowIndicator();
-                    this._indicator.gicon = this._icon_desactived;
+                    this._indicator.gicon = this._iconDesactived;
                             
                     // Shell OSD notifications
                     if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
@@ -716,12 +716,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
         if (isApp)
             nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER;
-        if (isEnable && (nightLightPref || this._night_light && this._proxy.DisabledUntilTomorrow)) {
+        if (isEnable && (nightLightPref || this._nightLight && this._proxy.DisabledUntilTomorrow)) {
             this._proxy.DisabledUntilTomorrow = false;
-            this._night_light = false;
+            this._nightLight = false;
         } else if (!isEnable && nightLightPref) {
             this._proxy.DisabledUntilTomorrow = true;
-            this._night_light = true;
+            this._nightLight = true;
         }
     }
     
@@ -730,15 +730,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
         if (state) {
             let message = _('Auto suspend and screensaver disabled');
-            if (nightLightPref && this._night_light && this._proxy.NightLightActive)
+            if (nightLightPref && this._nightLight && this._proxy.NightLightActive)
                 message = message + '. ' + _('Night Light paused');
-            Main.osdWindowManager.show(-1, this._icon_actived,
+            Main.osdWindowManager.show(-1, this._iconActived,
                 message, null, null);
         } else {
             let message = _('Auto suspend and screensaver enabled');
-            if (nightLightPref && !this._night_light && this._proxy.NightLightActive)
+            if (nightLightPref && !this._nightLight && this._proxy.NightLightActive)
                 message = message + '. ' + _('Night Light resumed');
-            Main.osdWindowManager.show(-1, this._icon_desactived, 
+            Main.osdWindowManager.show(-1, this._iconDesactived, 
                 message, null, null);
         }
     }
