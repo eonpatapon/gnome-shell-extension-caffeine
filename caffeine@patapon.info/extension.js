@@ -428,7 +428,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
     addInhibit(appId) {
         this._sessionManager.InhibitRemote(appId,
             0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
-            cookie => {             
+            cookie => {
+                this._inhibition_added_fifo.push(appId);
                 // Init app data
                 let data = {
                     cookie: cookie,
@@ -439,17 +440,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._appInhibitedData.set(appId, data);
             }
         );
-        this._inhibition_added_fifo.push(appId);
     }
 
     removeInhibit(appId) { 
         let appData = this._appInhibitedData.get(appId); 
-        if(appData && appData.isInhibited){            
+        if(appData && appData.isInhibited){
+            this._inhibition_removed_fifo.push(appId);
             this._sessionManager.UninhibitRemote(appData.cookie);
             appData.isToggled = false;
-            this._appInhibitedData.set(appId, appData);            
+            this._appInhibitedData.set(appId, appData);
         }
-        this._inhibition_removed_fifo.push(appId);
     }
     
     _updateLastIndicatorPosition() {
