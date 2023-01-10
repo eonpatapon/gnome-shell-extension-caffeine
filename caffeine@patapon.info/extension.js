@@ -593,8 +593,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     // User state on - UP
                     this._settings.set_boolean(TOGGLE_STATE_KEY, true);
                     // Force notification here if disable in prefs
-                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                        this._sendOSDNotification(true);    
+                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
+                        this._sendOSDNotification(true);
+                    }
                 }
                 break;
             case Clutter.ScrollDirection.DOWN:
@@ -604,8 +605,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     // User state off - DOWN
                     this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                     // Force notification here if disable in prefs
-                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
+                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
                         this._sendOSDNotification(false);
+                    }
                 }
                 break;
         }
@@ -624,8 +626,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     appId = String(appId);
                     let appData = this._appInhibitedData.get(appId);
                     if (appId !== '' && requestedId === appId && appData) {
-                        if (appId === 'user')
+                        if (appId === 'user') {
                             this._saveUserState(true);
+                        }
                         appData.isInhibited = true;
                         appData.object = object;
                         this._appInhibitedData.set(appId, appData);
@@ -638,8 +641,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             this._indicator.gicon = this._iconActived;
                             
                             // Shell OSD notifications                 
-                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen)
+                            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen) {
                                 this._sendOSDNotification(true);
+                            }
                         }
                     }
                 });
@@ -654,8 +658,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if(appId){
             let appData = this._appInhibitedData.get(appId);        
             if (appData){
-                if (appId === 'user')
+                if (appId === 'user') {
                        this._saveUserState(false);
+                }
                 // Remove app from list
                 this._appInhibitedData.delete(appId);
                 
@@ -668,8 +673,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     this._indicator.gicon = this._iconDesactived;
                             
                     // Shell OSD notifications
-                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY))
-                    this._sendOSDNotification(false);
+                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
+                        this._sendOSDNotification(false);
+                    }
                 }
             }
         }
@@ -702,8 +708,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _manageScreenBlankState(isApp) {
         let blankState = this._settings.get_enum(SCREEN_BLANK) === ControlContext.ALWAYS;
-        if (isApp)
+        if (isApp) {
             blankState = this._settings.get_enum(SCREEN_BLANK) > ControlContext.NEVER;
+        }
             
         if (blankState) {
             this.inhibitFlags = 4;
@@ -714,8 +721,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
     
     _manageNightLight(isEnable, isApp) {
         let nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
-        if (isApp)
+        if (isApp) {
             nightLightPref = this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER;
+        }
         if (isEnable && (nightLightPref || this._nightLight && this._proxy.DisabledUntilTomorrow)) {
             this._proxy.DisabledUntilTomorrow = false;
             this._nightLight = false;
@@ -730,14 +738,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
         if (state) {
             let message = _('Auto suspend and screensaver disabled');
-            if (nightLightPref && this._nightLight && this._proxy.NightLightActive)
+            if (nightLightPref && this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light paused');
+            }
             Main.osdWindowManager.show(-1, this._iconActived,
                 message, null, null);
         } else {
             let message = _('Auto suspend and screensaver enabled');
-            if (nightLightPref && !this._nightLight && this._proxy.NightLightActive)
+            if (nightLightPref && !this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light resumed');
+            }
             Main.osdWindowManager.show(-1, this._iconDesactived, 
                 message, null, null);
         }
@@ -748,8 +758,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._settings.get_strv(INHIBIT_APPS_KEY).forEach(appId => {
             // Check if app still exist
             const appInfo = Gio.DesktopAppInfo.new(appId);
-            if (appInfo)
+            if (appInfo) {
                 this._appConfigs.push(appId);
+            }
         });
         
         // Remove inhibited app that are not in the list anymore
@@ -820,8 +831,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     // Check if currently running App
                     this._appConfigs.forEach( id => {
                         let app = this._appSystem.lookup_app(id);
-                        if(app && app.get_state() !== Shell.AppState.STOPPED) 
+                        if(app && app.get_state() !== Shell.AppState.STOPPED) {
                             this._appStateChanged(this._appSystem, app);
+                        }
                     });
                     break;
                 // TRIGGER APPS MODE: ON FOCUS 
@@ -908,8 +920,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let appId = null;
         let app = winTrack.focus_app;
 
-        if(app)
+        if(app) {
             appId = app.get_id();
+        }
         if(this._appConfigs.includes(appId) && !this._isToggleInhibited(appId)){
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(false, true);
@@ -956,8 +969,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._appInhibitedData.clear();
         
         // Disconnect from signals
-        if (this._settings.get_boolean(FULLSCREEN_KEY))
+        if (this._settings.get_boolean(FULLSCREEN_KEY)) {
             this._screen.disconnect(this._inFullscreenId);
+        }
         if (this._inhibitorAddedId) {
             this._sessionManager.disconnectSignal(this._inhibitorAddedId);
             this._inhibitorAddedId = 0;
