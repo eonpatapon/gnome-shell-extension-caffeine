@@ -13,7 +13,7 @@
    If not, see <https://www.gnu.org/licenses/>.
 
    Copyright 2022 Pakaoraki
-   
+
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
 'use strict';
@@ -53,7 +53,7 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             model: showStatusIndicator,
             selected: this._settings.get_enum(this._settingsKey.SHOW_INDICATOR)
         });
-        
+
         // Show timer
         let showTimerSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
@@ -65,7 +65,7 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             activatable_widget: showTimerSwitch
         });
         showTimerRow.add_suffix(showTimerSwitch);
-        
+
         // Notifications
         let notificationSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
@@ -77,7 +77,7 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             activatable_widget: notificationSwitch
         });
         notificationRow.add_suffix(notificationSwitch);
-        
+
         // Indicator position offset
         this.lastIndicatorPos = this._settings.get_int(this._settingsKey.INDICATOR_POS_MAX);
         this.posIndicatorOffsetButton = new Gtk.SpinButton({
@@ -129,7 +129,7 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             Gio.SettingsBindFlags.DEFAULT);
         this._settings.connect(`changed::${this._settingsKey.INDICATOR_POS_MAX}`, this._updatePosMax.bind(this));
     }
-    
+
     _updatePosMax() {
         this.lastIndicatorPos = this._settings.get_int(this._settingsKey.INDICATOR_POS_MAX);
         this.posIndicatorOffsetButton.adjustment.set_upper(this.lastIndicatorPos);

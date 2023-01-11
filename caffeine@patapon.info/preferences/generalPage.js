@@ -13,7 +13,7 @@
    If not, see <https://www.gnu.org/licenses/>.
 
    Copyright 2022 Pakaoraki
-   
+
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
 'use strict';
@@ -48,7 +48,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         let behaviorGroup = new Adw.PreferencesGroup({
             title: _("Behavior")
         });
-        
+
         // Enable / Disable fullscreen apps
         let disableFullscreenSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
@@ -60,7 +60,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             activatable_widget: disableFullscreenSwitch
         });
         disableFullscreenRow.add_suffix(disableFullscreenSwitch);
-        
+
         // Remember state
         let rememberStateSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
@@ -72,7 +72,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             activatable_widget: rememberStateSwitch
         });
         rememberStateRow.add_suffix(rememberStateSwitch);
-        
+
         // Pause and resume Night Light
         let pauseNightLight = new Gtk.StringList();
         pauseNightLight.append(ComboBoxChoices.NEVER);
@@ -84,7 +84,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             model: pauseNightLight,
             selected: this._settings.get_enum(this._settingsKey.NIGHT_LIGHT)
         });
-        
+
         // Allow blank screen
         let allowBlankScreen = new Gtk.StringList();
         allowBlankScreen.append(ComboBoxChoices.NEVER);
@@ -103,7 +103,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         behaviorGroup.add(pauseNightLightRow);
         behaviorGroup.add(allowBlankScreenRow);
         this.add(behaviorGroup);
-        
+
         // Shortcut group
         // --------------
         let deleteShortcutButton = new Gtk.Button({
@@ -117,25 +117,25 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             title: _("Shortcut"),
             header_suffix: deleteShortcutButton
         });
-        
+
         // Keyboard shortcut
         this.shortcutKeyBoard = new ShortcutSettingWidget(
-            this._settings, 
+            this._settings,
             this._settingsKey.TOGGLE_SHORTCUT,
             _("Toggle shortcut"),
             _("Use Backspace to clear")
         );
-        
+
         // Hide/Show delete button
         if( ! this.shortcutKeyBoard.isAcceleratorSet() ) {
             deleteShortcutButton.visible = false;
         }
-        
+
         // Add elements
         shortcutGroup.add(this.shortcutKeyBoard);
         this.add(shortcutGroup);
-        
-        
+
+
         // Bind signals
         // --------------
         disableFullscreenSwitch.connect('notify::active', (widget) => {
@@ -159,7 +159,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             }
         });
     }
-    
+
     _resetShortcut() {
         this.shortcutKeyBoard.resetAccelerator();
     }
@@ -181,7 +181,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
     }
 
     constructor(settings, key, label, sublabel) {
-        super({ 
+        super({
               title: label,
               subtitle: sublabel,
               activatable: true
@@ -198,9 +198,9 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         this._key = key;
         this._settings = settings;
         this._description = sublabel;
-        
+
         this.add_suffix(this.shortcutBox);
-        this.shortLabel = new Gtk.ShortcutLabel({ 
+        this.shortLabel = new Gtk.ShortcutLabel({
             disabled_text: _('New accelerator…'),
             valign: Gtk.Align.CENTER,
             hexpand: false,
@@ -208,15 +208,15 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         });
 
         this.shortcutBox.append(this.shortLabel);
-        
+
         // Bind signals
         this.connect('activated', this._onActivated.bind(this));
         this.bind_property('shortcut', this.shortLabel, 'accelerator', GObject.BindingFlags.DEFAULT);
         [this.shortcut] = this._settings.get_strv(this._key);
- 
+
         this.add_suffix(this.shortcutBox);
     }
-    
+
     isAcceleratorSet() {
         if(this.shortLabel.get_accelerator()) {
             return true;
@@ -224,7 +224,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
             return false;
         }
     }
-    
+
     resetAccelerator() {
         this.saveShortcut(); // Clear shortcut
     }

@@ -13,7 +13,7 @@
    If not, see <https://www.gnu.org/licenses/>.
 
    Copyright 2022 Pakaoraki
-   
+
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
 'use strict';
@@ -48,7 +48,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         let appsBehaviorGroup = new Adw.PreferencesGroup({
             title: _("Trigger mode")
         });
-        
+
         // Apps behavior select mode
         let appsTriggerMode = new Gtk.StringList();
         appsTriggerMode.append(AppsModeChoices.RUNNING);
@@ -64,7 +64,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         // Add elements
         appsBehaviorGroup.add(appsTriggerModeRow);
         this.add(appsBehaviorGroup);
-        
+
         // Apps list group
         // --------------
         let addAppsButton = new Gtk.Button({
@@ -77,25 +77,25 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
             title: _('Apps that trigger Caffeine'),
             header_suffix: addAppsButton
         });
-        
+
         this._refreshApps();
-        
+
         // Add elements
         this.add(this.appsGroup);
-        
+
         // Bind signals
-        addAppsButton.connect('clicked', this._onAddApp.bind(this)); 
+        addAppsButton.connect('clicked', this._onAddApp.bind(this));
         appsTriggerModeRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.TRIGGER_APPS_MODE, widget.selected);
         });
     }
-    
+
     _refreshApps() {
         const _apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
-        
+
         // Clear the Apps list
         this._listApps.length = 0;
-        
+
         // Update the list & Check if app still exist
         _apps.forEach(id => {
             const appInfo = Gio.DesktopAppInfo.new(id);
@@ -103,10 +103,10 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
             if (appInfo)
                 this._listApps.push(id);
         });
-        
+
         // Check if the apps list UI needs updating
         if (this._appsListUi != this._listApps) {
-        
+
             // Remove the old list
             if (this._count) {
                 for (var i = 0; i < this._count; i++) {
@@ -114,10 +114,10 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                 }
                     this._count = null;
             }
-                
-            if (this._listApps.length > 0) { 
+
+            if (this._listApps.length > 0) {
                 this.apps = {};
-                
+
                 // Build new apps UI list
                 for (let i in this._listApps) {
                     this.apps[i] = {};
@@ -135,7 +135,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                         hexpand: false,
                         vexpand: false
                     });
-                    
+
                     // App info
                     let appInfo = Gio.DesktopAppInfo.new(this._listApps[i]);
                     const appIcon = new Gtk.Image({
@@ -148,7 +148,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                         subtitle: this._listApps[i].replace('.desktop',''),
                         activatable: true
                     });
-                    
+
                     // Add elements
                     this.apps[i].Row.add_prefix(appIcon);
                     this.apps[i].ButtonBox.append(this.apps[i].DeleteButton);
@@ -161,7 +161,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                         log('delete app: ' + this._listApps[i] )
                         this._onRemoveApp(this._listApps[i]);
                     });
-                    
+
                 }
                 this._count = this._listApps.length;
             }
@@ -169,7 +169,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         }
         return 0;
     }
-    
+
     _onAddApp() {
         const dialog = new NewAppDialog(this.get_root(), this._settingsKey);
         dialog.connect('response', (dlg, id) => {
@@ -186,7 +186,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         });
         dialog.show();
     }
-    
+
     _onRemoveApp(appId) {
         this._settings.set_strv(this._settingsKey.INHIBIT_APPS,
         this._settings.get_strv(this._settingsKey.INHIBIT_APPS).filter(id => {

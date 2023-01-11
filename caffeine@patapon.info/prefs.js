@@ -13,7 +13,7 @@
    If not, see <https://www.gnu.org/licenses/>.
 
    Copyright 2022 Pakaoraki
-   
+
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
 'use strict';
@@ -60,7 +60,7 @@ function fillPreferencesWindow(window) {
     const generalPage = new GeneralPrefs.GeneralPage(settings, SettingsKey);
     const displayPage = new DisplayPrefs.DisplayPage(settings, SettingsKey);
     const appsPage = new AppsPrefs.AppsPage(settings, SettingsKey);
-    
+
     let prefsWidth = settings.get_int(SettingsKey.DEFAULT_WIDTH);
     let prefsHeight = settings.get_int(SettingsKey.DEFAULT_HEIGHT);
 
