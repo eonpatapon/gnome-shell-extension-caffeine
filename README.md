@@ -1,31 +1,70 @@
-# This extension is barely maintained anymore, new maintainers are welcome!
+# gnome-shell-extension-caffeine
 
-## gnome-shell-extension-caffeine
-  - Fill the cup to inhibit auto suspend and screensaver
-  - This extension supports GNOME Shell `3.4` -> `43`
-    - `master`: `40` -> `43`
-    - `gnome-shell-3.36-3.38`: `3.36` -> `3.38`
-    - `gnome-shell-3.32-3.34`: `3.32` -> `3.34`
-    - `gnome-shell-3.10-3.30`: `3.10` -> `3.30`
-    - `gnome-shell-before-3.10`: `3.4` -> `3.8`
+[<img src="https://github.com/pakaoraki/gnome-shell-extension-caffeine/raw/master/resources/get_it_on_gnome_extensions.png" height="100" align="right">](https://extensions.gnome.org/extension/517/caffeine/)
 
-## Screenshots
-![Screenshot](screenshot.png)
-  - Empty cup = normal auto suspend and screensaver
-  - Filled cup = auto suspend and screensaver off
+[![License](https://img.shields.io/github/license/eonpatapon/gnome-shell-extension-caffeine)](https://github.com/eonpatapon/gnome-shell-extension-caffeine/blob/master/LICENSE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/tag/eonpatapon/gnome-shell-extension-caffeine)](https://github.com/eonpatapon/gnome-shell-extension-caffeine/releases/latest)
 
-![Preferences](screenshot-prefs.png)
+Enable/Disable auto suspend with quick setting toggle.
 
-## Installation from GNOME Extensions
-  - Get the extension [here](https://extensions.gnome.org/extension/517/caffeine/)
+![Quick Toggle Caffeine](screenshots/screenshot.png)
 
-## Installation from source
+
+###  ⚠️  __This extension is barely maintained anymore, new maintainers are welcome !__
+&nbsp;
+
+## Version
+This extension supports GNOME Shell `3.4` -> `43`
+
+|Branch|Version|Compatible Gnome version|
+|---|:---:|---|
+| master  | 43 | Gnome 43  |
+| gnome-shell-40-43  | 42 | Gnome 40 -> 43  |
+| gnome-shell-3.36-3.38: 3.36 | 37 | Gnome 3.36 -> 3.38 |
+| gnome-shell-3.32-3.34 | 33 | Gnome 3.32 -> 3.34 |
+| gnome-shell-3.10-3.30 | - | Gnome 3.10 -> 3.30 |
+| gnome-shell-before-3.10 | - | Gnome 3.4 -> 3.8 |
+
+&nbsp;
+
+## Installation From source
+
 ```
 make build
 make install
 ```
   - Restart the shell
   - Enable the extension
+&nbsp;
+
+## Screenshots & features
+
+
+### <ins>Scroll Indicator Icon</ins>
+![Screenshot](screenshots/screenshot-scroll-up.png)![Screenshot](screenshots/screenshot-scroll-down.png)
+
+You can scroll on the indicator icon to Enable/disable auto suspend:
+
+- Scroll UP -> Filled cup : auto suspend and screensaver off. 
+- Scroll DOWN -> Empty cup : normal auto suspend and screensaver.
+
+<ins>__Note__</ins>: the option "Show status indicator" must be set on "always" (see below).
+&nbsp;
+
+### <ins>Notifications</ins>
+![Screenshot](screenshots/screenshot-notification-enable.png)
+![Screenshot](screenshots/screenshot-notification-disable.png)
+&nbsp;
+
+### <ins>Timer option</ins>
+This option enable Caffeine for a given amount of time (similar to Caffeine in LineageOS).
+
+![Screenshot](screenshots/screenshot-timer-off.png)![Screenshot](screenshots/screenshot-timer-on.png)
+&nbsp;
+
+### <ins>Preferences</ins>
+![Preferences](screenshots/screenshot-prefs.png)
+
 
 ## CLI
 
