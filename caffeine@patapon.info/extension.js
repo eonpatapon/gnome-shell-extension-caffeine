@@ -159,8 +159,8 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this.finalTimerMenuIcon =
                 Gio.icon_new_for_string(`${Me.path}/icons/${TimerMenuIcon}.svg`);
         }
-        this._iconActived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
-        this._iconDesactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         this._iconName();
 
         // Menu
@@ -186,8 +186,8 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this._sync();
         });
         this.connect('destroy', () => {
-            this._iconActived=null;
-            this._iconDesactived=null;
+            this._iconActivated = null;
+            this._iconDeactivated = null;
             this.gicon = null;
         });
     }
@@ -227,9 +227,9 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
     _iconName() {
         if (this._settings.get_boolean(TOGGLE_STATE_KEY)) {
-            this.gicon = this._iconActived;
+            this.gicon = this._iconActivated;
         } else {
-            this.gicon = this._iconDesactived;
+            this.gicon = this._iconDeactivated;
         }
     }
 });
@@ -285,9 +285,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.add_child(this._timerLabel);
 
         // Icons
-        this._iconActived = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
-        this._iconDesactived = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
-        this._indicator.gicon = this._iconDesactived;
+        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._indicator.gicon = this._iconDeactivated;
 
         // Manage night light
         this._nightLight = false;
@@ -637,7 +637,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             this._saveMainState(true);
                             // Indicator icon
                             this._manageShowIndicator();
-                            this._indicator.gicon = this._iconActived;
+                            this._indicator.gicon = this._iconActivated;
 
                             // Shell OSD notifications
                             if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) && !this.inFullscreen) {
@@ -669,7 +669,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
                     // Indicator icon
                     this._manageShowIndicator();
-                    this._indicator.gicon = this._iconDesactived;
+                    this._indicator.gicon = this._iconDeactivated;
 
                     // Shell OSD notifications
                     if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
@@ -740,14 +740,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
             if (nightLightPref && this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light paused');
             }
-            Main.osdWindowManager.show(-1, this._iconActived,
+            Main.osdWindowManager.show(-1, this._iconActivated,
                 message, null, null);
         } else {
             let message = _('Auto suspend and screensaver enabled');
             if (nightLightPref && !this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light resumed');
             }
-            Main.osdWindowManager.show(-1, this._iconDesactived,
+            Main.osdWindowManager.show(-1, this._iconDeactivated,
                 message, null, null);
         }
     }
