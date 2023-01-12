@@ -10,7 +10,7 @@ Enable/Disable auto suspend with quick setting toggle.
 ![Quick Toggle Caffeine](screenshots/screenshot.png)
 
 
-###  ⚠️  __This extension is barely maintained anymore, new maintainers are welcome !__
+###  ⚠️  __This extension is barely maintained anymore, new maintainers are welcome!__
 &nbsp;
 
 ## Version
@@ -43,10 +43,10 @@ make install
 ### <ins>Scroll Indicator Icon</ins>
 ![Screenshot](screenshots/screenshot-scroll-up.png)![Screenshot](screenshots/screenshot-scroll-down.png)
 
-You can scroll on the indicator icon to Enable/disable auto suspend:
+You can scroll on the indicator icon to enable / disable auto suspend:
 
-- Scroll UP -> Filled cup : auto suspend and screensaver off. 
-- Scroll DOWN -> Empty cup : normal auto suspend and screensaver.
+- Scroll up -> Filled cup: Enable Caffeine
+- Scroll down -> Empty cup: Disable Caffeine
 
 <ins>__Note__</ins>: the option "Show status indicator" must be set on "always" (see below).
 &nbsp;
