@@ -736,14 +736,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         const nightLightPref =
             this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
         if (state) {
-            let message = _('Auto suspend and screensaver disabled');
+            let message = _('Caffeine enabled');
             if (nightLightPref && this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light paused');
             }
             Main.osdWindowManager.show(-1, this._iconActived,
                 message, null, null);
         } else {
-            let message = _('Auto suspend and screensaver enabled');
+            let message = _('Caffeine disabled');
             if (nightLightPref && !this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light resumed');
             }
