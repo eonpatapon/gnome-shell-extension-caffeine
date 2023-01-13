@@ -591,10 +591,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 if(!this._state) {
                     // User state on - UP
                     this._settings.set_boolean(TOGGLE_STATE_KEY, true);
-                    // Force notification here if disable in prefs
-                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
-                        this._sendOSDNotification(true);
-                    }
                 }
                 break;
             case Clutter.ScrollDirection.DOWN:
@@ -603,10 +599,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     this._removeTimer(false);
                     // User state off - DOWN
                     this._settings.set_boolean(TOGGLE_STATE_KEY, false);
-                    // Force notification here if disable in prefs
-                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
-                        this._sendOSDNotification(false);
-                    }
                 }
                 break;
         }
@@ -736,14 +728,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         const nightLightPref =
             this._settings.get_enum(NIGHT_LIGHT_KEY) !== ControlContext.NEVER;
         if (state) {
-            let message = _('Auto suspend and screensaver disabled');
+            let message = _('Caffeine enabled');
             if (nightLightPref && this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light paused');
             }
             Main.osdWindowManager.show(-1, this._iconActivated,
                 message, null, null);
         } else {
-            let message = _('Auto suspend and screensaver enabled');
+            let message = _('Caffeine disabled');
             if (nightLightPref && !this._nightLight && this._proxy.NightLightActive) {
                 message = message + '. ' + _('Night Light resumed');
             }
