@@ -591,10 +591,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 if(!this._state) {
                     // User state on - UP
                     this._settings.set_boolean(TOGGLE_STATE_KEY, true);
-                    // Force notification here if disable in prefs
-                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
-                        this._sendOSDNotification(true);
-                    }
                 }
                 break;
             case Clutter.ScrollDirection.DOWN:
@@ -603,10 +599,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     this._removeTimer(false);
                     // User state off - DOWN
                     this._settings.set_boolean(TOGGLE_STATE_KEY, false);
-                    // Force notification here if disable in prefs
-                    if (!this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY)) {
-                        this._sendOSDNotification(false);
-                    }
                 }
                 break;
         }
