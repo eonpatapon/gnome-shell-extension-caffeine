@@ -120,7 +120,7 @@ msgstr "Abilita le notifiche quando Caffeine è abilitata o disabilitata"
 
 #: preferences/displayPage.js:98
 msgid "Status indicator Position"
-msgstr "POsizione indicatore di stato"
+msgstr "Posizione indicatore di stato"
 
 #: preferences/displayPage.js:99
 msgid "The position relative of indicator icon to other items"
