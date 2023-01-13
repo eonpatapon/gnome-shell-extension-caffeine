@@ -45,8 +45,8 @@ make install
 
 You can scroll on the indicator icon to enable / disable auto suspend:
 
-- Scroll Up -> Filled cup: Enable Caffeine
-- Scroll Down -> Empty cup: Disable Caffeine
+- Scroll up -> Filled cup: Caffeine enabled
+- Scroll down -> Empty cup: Caffeine disabled
 
 <ins>__Note__</ins>: the option "Show status indicator" must be set on "always" (see below).
 &nbsp;
