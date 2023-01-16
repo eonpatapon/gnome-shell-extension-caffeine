@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:16+0100\n"
+"POT-Creation-Date: 2023-01-16 08:54+0100\n"
 "PO-Revision-Date: 2022-04-13 15:18+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech\n"
@@ -25,20 +25,20 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:739
-msgid "Auto suspend and screensaver disabled"
-msgstr "Automatické uspání a šetřič obrazovky jsou zakázané"
+#: extension.js:731
+msgid "Caffeine enabled"
+msgstr ""
 
-#: extension.js:741
+#: extension.js:733
 #, fuzzy
 msgid "Night Light paused"
 msgstr "Noční světlo"
 
-#: extension.js:746
-msgid "Auto suspend and screensaver enabled"
-msgstr "Automatické uspání a šetřič obrazovky jsou povolené"
+#: extension.js:738
+msgid "Caffeine disabled"
+msgstr ""
 
-#: extension.js:748
+#: extension.js:740
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "Noční světlo obnoveno"
@@ -304,6 +304,12 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Automatické uspání a šetřič obrazovky jsou zakázané"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Automatické uspání a šetřič obrazovky jsou povolené"
 
 #~ msgid "Auto suspend and screensaver disabled. Night Light paused."
 #~ msgstr ""

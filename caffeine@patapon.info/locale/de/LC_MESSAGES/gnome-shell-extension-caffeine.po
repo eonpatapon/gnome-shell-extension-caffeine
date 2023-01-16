@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:16+0100\n"
+"POT-Creation-Date: 2023-01-16 08:54+0100\n"
 "PO-Revision-Date: 2021-04-09 21:31-0400\n"
 "Last-Translator: Felix Kaechele <felix@kaechele.ca>\n"
 "Language-Team: German\n"
@@ -26,19 +26,20 @@ msgstr "Caffeine schaltuhr"
 msgid "Infinite"
 msgstr "unendlich"
 
-#: extension.js:739
-msgid "Auto suspend and screensaver disabled"
-msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
+#: extension.js:731
+msgid "Caffeine enabled"
+msgstr "Caffeine aktiviert"
 
-#: extension.js:741
+#: extension.js:733
 msgid "Night Light paused"
 msgstr "Nachtmodus pausiert"
 
-#: extension.js:746
-msgid "Auto suspend and screensaver enabled"
-msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
+#: extension.js:738
+#, fuzzy
+msgid "Caffeine disabled"
+msgstr "Caffeine aktiviert"
 
-#: extension.js:748
+#: extension.js:740
 msgid "Night Light resumed"
 msgstr "Nachtmodus fortgesetzt"
 
@@ -304,6 +305,12 @@ msgstr ""
 msgid "Last item index in indicator menu"
 msgstr ""
 
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Bereitschaftsmodus und Bildschirmschoner deaktiviert"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Bereitschaftsmodus und Bildschirmschoner aktiviert"
+
 #~ msgid "Auto suspend and screensaver disabled. Night Light paused."
 #~ msgstr ""
 #~ "Bereitschaftsmodus und Bildschirmschoner deaktiviert. Nachtmodus pausiert."
@@ -336,6 +343,3 @@ msgstr ""
 
 #~ msgid "Create new matching rule"
 #~ msgstr "Neue Regel definieren"
-
-#~ msgid "Caffeine enabled"
-#~ msgstr "Caffeine aktiviert"

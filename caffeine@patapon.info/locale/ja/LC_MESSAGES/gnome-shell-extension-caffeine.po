@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:16+0100\n"
+"POT-Creation-Date: 2023-01-16 08:54+0100\n"
 "PO-Revision-Date: 2017-05-05 22:28+0900\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
@@ -25,19 +25,20 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:739
-msgid "Auto suspend and screensaver disabled"
-msgstr "自動サスペンドを無効にしました"
+#: extension.js:731
+msgid "Caffeine enabled"
+msgstr "Caféine est activé"
 
-#: extension.js:741
+#: extension.js:733
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:746
-msgid "Auto suspend and screensaver enabled"
-msgstr "自動サスペンドを有効にしました"
+#: extension.js:738
+#, fuzzy
+msgid "Caffeine disabled"
+msgstr "Caféine est activé"
 
-#: extension.js:748
+#: extension.js:740
 msgid "Night Light resumed"
 msgstr ""
 
@@ -300,6 +301,12 @@ msgstr ""
 msgid "Last item index in indicator menu"
 msgstr ""
 
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "自動サスペンドを無効にしました"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "自動サスペンドを有効にしました"
+
 #, fuzzy
 #~ msgid "Auto suspend and screensaver disabled. Night Light paused."
 #~ msgstr "自動サスペンドを無効にしました"
@@ -320,6 +327,3 @@ msgstr ""
 
 #~ msgid "Create new matching rule"
 #~ msgstr "新規ルール"
-
-#~ msgid "Caffeine enabled"
-#~ msgstr "Caféine est activé"

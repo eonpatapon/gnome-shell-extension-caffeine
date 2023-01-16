@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:16+0100\n"
+"POT-Creation-Date: 2023-01-16 08:54+0100\n"
 "PO-Revision-Date: 2022-05-09 16:53+0200\n"
 "Last-Translator: Simone Esposito <simoespo159@gmail.com>\n"
 "Language-Team: Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>\n"
@@ -25,20 +25,21 @@ msgstr ""
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:739
-msgid "Auto suspend and screensaver disabled"
-msgstr "Auto sospensione e screensaver disabilitato"
+#: extension.js:731
+msgid "Caffeine enabled"
+msgstr "Caffeine aktiviert"
 
-#: extension.js:741
+#: extension.js:733
 #, fuzzy
 msgid "Night Light paused"
 msgstr "Modalità di controllo della modalità notturna"
 
-#: extension.js:746
-msgid "Auto suspend and screensaver enabled"
-msgstr "Auto sospensione e screensaver abilitato"
+#: extension.js:738
+#, fuzzy
+msgid "Caffeine disabled"
+msgstr "Caffeine aktiviert"
 
-#: extension.js:748
+#: extension.js:740
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "Modalità di controllo della modalità notturna"
@@ -315,6 +316,12 @@ msgstr ""
 msgid "Last item index in indicator menu"
 msgstr ""
 
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Auto sospensione e screensaver disabilitato"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Auto sospensione e screensaver abilitato"
+
 #, fuzzy
 #~ msgid "Auto suspend and screensaver disabled. Night Light paused."
 #~ msgstr "Auto sospensione e screensaver disabilitato"
@@ -348,6 +355,3 @@ msgstr ""
 
 #~ msgid "Create new matching rule"
 #~ msgstr "Crea una nuova regola corrispondente"
-
-#~ msgid "Caffeine enabled"
-#~ msgstr "Caffeine aktiviert"

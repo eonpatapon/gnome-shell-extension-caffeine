@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:16+0100\n"
+"POT-Creation-Date: 2023-01-16 08:54+0100\n"
 "PO-Revision-Date: 2022-06-30 11:54-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -25,20 +25,21 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:739
-msgid "Auto suspend and screensaver disabled"
-msgstr "自动挂起与屏幕保护程序已禁用"
+#: extension.js:731
+msgid "Caffeine enabled"
+msgstr "Caffeine 已开启"
 
-#: extension.js:741
+#: extension.js:733
 #, fuzzy
 msgid "Night Light paused"
 msgstr "夜灯已暂停"
 
-#: extension.js:746
-msgid "Auto suspend and screensaver enabled"
-msgstr "自动挂起与屏幕保护程序已启用"
+#: extension.js:738
+#, fuzzy
+msgid "Caffeine disabled"
+msgstr "Caffeine 已开启"
 
-#: extension.js:748
+#: extension.js:740
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "夜灯已恢复"
@@ -304,6 +305,12 @@ msgstr ""
 msgid "Last item index in indicator menu"
 msgstr ""
 
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "自动挂起与屏幕保护程序已禁用"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "自动挂起与屏幕保护程序已启用"
+
 #~ msgid "Auto suspend and screensaver disabled. Night Light paused."
 #~ msgstr "自动挂起与屏幕保护程序已禁用。夜灯已暂停。"
 
@@ -334,6 +341,3 @@ msgstr ""
 
 #~ msgid "Create new matching rule"
 #~ msgstr "创建新的匹配规则"
-
-#~ msgid "Caffeine enabled"
-#~ msgstr "Caffeine 已开启"

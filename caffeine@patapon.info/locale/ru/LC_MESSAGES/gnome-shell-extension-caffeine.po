@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-11 12:16+0100\n"
+"POT-Creation-Date: 2023-01-16 08:54+0100\n"
 "PO-Revision-Date: 2022-02-08 13:07+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -25,20 +25,20 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:739
-msgid "Auto suspend and screensaver disabled"
-msgstr "Автоматический режим ожидания и заставка отключены"
+#: extension.js:731
+msgid "Caffeine enabled"
+msgstr ""
 
-#: extension.js:741
+#: extension.js:733
 #, fuzzy
 msgid "Night Light paused"
 msgstr "Ночная подсветка"
 
-#: extension.js:746
-msgid "Auto suspend and screensaver enabled"
-msgstr "Автоматический режим ожидания и заставка включены"
+#: extension.js:738
+msgid "Caffeine disabled"
+msgstr ""
 
-#: extension.js:748
+#: extension.js:740
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "Ночная подсветка"
@@ -304,6 +304,12 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
+
+#~ msgid "Auto suspend and screensaver disabled"
+#~ msgstr "Автоматический режим ожидания и заставка отключены"
+
+#~ msgid "Auto suspend and screensaver enabled"
+#~ msgstr "Автоматический режим ожидания и заставка включены"
 
 #~ msgid "Auto suspend and screensaver disabled. Night Light paused."
 #~ msgstr ""
