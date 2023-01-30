@@ -19,7 +19,7 @@ This extension supports GNOME Shell `3.4` -> `43`
 |Branch|Version|Compatible Gnome version|
 |---|:---:|---|
 | master  | 43 | Gnome 43  |
-| gnome-shell-40-43  | 42 | Gnome 40 -> 43  |
+| gnome-shell-40-42  | 42 | Gnome 40 -> 42  |
 | gnome-shell-3.36-3.38: 3.36 | 37 | Gnome 3.36 -> 3.38 |
 | gnome-shell-3.32-3.34 | 33 | Gnome 3.32 -> 3.34 |
 | gnome-shell-3.10-3.30 | - | Gnome 3.10 -> 3.30 |
