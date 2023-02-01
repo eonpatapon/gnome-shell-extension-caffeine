@@ -309,6 +309,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timeOut = null;
         this._timePrint = null;
         this._timerEnable = false;
+        this._timeFullscreen = null;
+        this._timeWorkspaceAdd = null;
+        this._timeWorkspaceRemove = null;
+        this._timeAppUnblock = null;
 
         // Init settings keys and restore user state
         this._settings.reset(TIMER_ENABLED_KEY);
@@ -1002,6 +1006,18 @@ class Caffeine extends QuickSettings.SystemIndicator {
             GLib.Source.remove(this._timeFullscreen);
             this._timeFullscreen = null;
         }
+        if (this._timeWorkspaceAdd) {
+            GLib.Source.remove(this._timeWorkspaceAdd);
+            this._timeWorkspaceAdd = null;
+        }
+        if (this._timeWorkspaceRemove) {
+            GLib.Source.remove(this._timeWorkspaceRemove);
+            this._timeWorkspaceRemove = null;
+        }
+        if (this._timeAppUnblock) {
+            GLib.Source.remove(this._timeAppUnblock);
+            this._timeAppUnblock = null;
+        }
         this._resetAppSignalId();
 
         // Disconnect settings signals
@@ -1072,9 +1088,3 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
-
-
-
-
-
-
