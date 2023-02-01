@@ -404,9 +404,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             if (this.inFullscreen && !this._appInhibitedData.has('fullscreen')) {
                 this.addInhibit('fullscreen');
                 this._manageNightLight(false, false);
-                this._timeFullscreen = null;
-                return GLib.SOURCE_REMOVE;
             }
+
+            this._timeFullscreen = null;
+            return GLib.SOURCE_REMOVE;
         });
 
         if (!this.inFullscreen && this._appInhibitedData.has('fullscreen')) {
