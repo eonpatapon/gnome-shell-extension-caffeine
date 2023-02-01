@@ -21,7 +21,6 @@
 
 const { Atk, Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
 const Main = imports.ui.main;
-const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const QuickSettings = imports.ui.quickSettings;
 const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
@@ -397,10 +396,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     toggleFullscreen() {
         this._manageScreenBlankState(false);
-        Mainloop.timeout_add_seconds(2, () => {
+        this._timeFullscreen = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
             if (this.inFullscreen && !this._appInhibitedData.has('fullscreen')) {
                 this.addInhibit('fullscreen');
                 this._manageNightLight(false, false);
+
+                this._timeFullscreen = null;
+                return GLib.SOURCE_REMOVE;
             }
         });
 
@@ -986,6 +988,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._timePrint) {
             GLib.Source.remove(this._timePrint);
             this._timePrint = null;
+        }
+        if (this._timeFullscreen) {
+            GLib.Source.remove(this._timeFullscreen);
+            this._timeFullscreen = null;
         }
         this._resetAppSignalId();
 
