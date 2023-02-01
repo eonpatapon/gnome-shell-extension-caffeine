@@ -895,7 +895,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             // Accept only normal window, ignore all other type (dialog, menu,...)
             if(type === 0) {
                 // Add 100 ms delay to handle window detection
-                this._timeWorkspaceAdd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100 () => {
+                this._timeWorkspaceAdd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
                     this._toggleWorkspace.bind(this);
                     this._timeWorkspaceAdd = null;
                     return GLib.SOURCE_REMOVE;
@@ -908,7 +908,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             // Accept only normal window, ignore all other type (dialog, menu,...)
             if(type === 0) {
                 // Add 100 ms delay to handle window detection
-                this._timeWorkspaceRemove = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100 () => {
+                this._timeWorkspaceRemove = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
                     this._toggleWorkspace.bind(this);
                     this._timeWorkspaceRemove = null;
                     return GLib.SOURCE_REMOVE;
@@ -962,7 +962,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
 
             // Add 200 ms delay before unblock state signal
-            this._timeAppUnblock = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200 () => {
+            this._timeAppUnblock = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
                 appSys.unblock_signal_handler(this._appStateChangedSignalId);
                 this._timeAppUnblock = null;
                 return GLib.SOURCE_REMOVE;
