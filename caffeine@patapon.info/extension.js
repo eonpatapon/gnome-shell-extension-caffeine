@@ -21,7 +21,6 @@
 
 const { Atk, Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
 const Main = imports.ui.main;
-const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const QuickSettings = imports.ui.quickSettings;
 const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
@@ -310,6 +309,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timeOut = null;
         this._timePrint = null;
         this._timerEnable = false;
+        this._timeFullscreen = null;
+        this._timeWorkspaceAdd = null;
+        this._timeWorkspaceRemove = null;
+        this._timeAppUnblock = null;
 
         // Init settings keys and restore user state
         this._settings.reset(TIMER_ENABLED_KEY);
@@ -397,11 +400,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     toggleFullscreen() {
         this._manageScreenBlankState(false);
-        Mainloop.timeout_add_seconds(2, () => {
+        this._timeFullscreen = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
             if (this.inFullscreen && !this._appInhibitedData.has('fullscreen')) {
                 this.addInhibit('fullscreen');
                 this._manageNightLight(false, false);
             }
+
+            this._timeFullscreen = null;
+            return GLib.SOURCE_REMOVE;
         });
 
         if (!this.inFullscreen && this._appInhibitedData.has('fullscreen')) {
@@ -889,7 +895,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             // Accept only normal window, ignore all other type (dialog, menu,...)
             if(type === 0) {
                 // Add 100 ms delay to handle window detection
-                setTimeout(this._toggleWorkspace.bind(this), 100);
+                this._timeWorkspaceAdd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+                    this._toggleWorkspace.bind(this);
+                    this._timeWorkspaceAdd = null;
+                    return GLib.SOURCE_REMOVE;
+                });
             }
         });
         this._appRemoveWindowSignalId =
@@ -898,7 +908,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             // Accept only normal window, ignore all other type (dialog, menu,...)
             if(type === 0) {
                 // Add 100 ms delay to handle window detection
-                setTimeout(this._toggleWorkspace.bind(this), 100);
+                this._timeWorkspaceRemove = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+                    this._toggleWorkspace.bind(this);
+                    this._timeWorkspaceRemove = null;
+                    return GLib.SOURCE_REMOVE;
+                });
             }
         });
 
@@ -948,9 +962,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
 
             // Add 200 ms delay before unblock state signal
-            setTimeout(() => {
+            this._timeAppUnblock = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
                 appSys.unblock_signal_handler(this._appStateChangedSignalId);
-            }, 200);
+                this._timeAppUnblock = null;
+                return GLib.SOURCE_REMOVE;
+            });
         }
     }
 
@@ -986,6 +1002,22 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._timePrint) {
             GLib.Source.remove(this._timePrint);
             this._timePrint = null;
+        }
+        if (this._timeFullscreen) {
+            GLib.Source.remove(this._timeFullscreen);
+            this._timeFullscreen = null;
+        }
+        if (this._timeWorkspaceAdd) {
+            GLib.Source.remove(this._timeWorkspaceAdd);
+            this._timeWorkspaceAdd = null;
+        }
+        if (this._timeWorkspaceRemove) {
+            GLib.Source.remove(this._timeWorkspaceRemove);
+            this._timeWorkspaceRemove = null;
+        }
+        if (this._timeAppUnblock) {
+            GLib.Source.remove(this._timeAppUnblock);
+            this._timeAppUnblock = null;
         }
         this._resetAppSignalId();
 
@@ -1057,9 +1089,3 @@ function disable() {
     // Unregister shortcut
     Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
 }
-
-
-
-
-
-
