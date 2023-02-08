@@ -24,11 +24,11 @@ msgstr ""
 
 #: extension.js:99
 msgid "Caffeine timer"
-msgstr ""
+msgstr "Temporizador do Caffeine"
 
 #: extension.js:126
 msgid "Infinite"
-msgstr ""
+msgstr "Infinito"
 
 #: extension.js:731
 msgid "Caffeine enabled"
@@ -36,44 +36,44 @@ msgstr "Caffeine ativado"
 
 #: extension.js:733
 msgid "Night Light paused"
-msgstr ""
+msgstr "Luz Noturna pausado"
 
 #: extension.js:738
 #, fuzzy
 msgid "Caffeine disabled"
-msgstr "Caffeine ativado"
+msgstr "Caffeine desativado"
 
 #: extension.js:740
 msgid "Night Light resumed"
-msgstr ""
+msgstr "Luz Noturna resumido"
 
 #: preferences/appsPage.js:29
 msgid "Running"
-msgstr ""
+msgstr "Executando"
 
 #: preferences/appsPage.js:30
 msgid "Focus"
-msgstr ""
+msgstr "Em Foco"
 
 #: preferences/appsPage.js:31
 msgid "Active workspace"
-msgstr ""
+msgstr "Área de Trabalho Ativa"
 
 #: preferences/appsPage.js:38
 msgid "Apps"
-msgstr ""
+msgstr "Aplicativos"
 
 #: preferences/appsPage.js:49
 msgid "Trigger mode"
-msgstr ""
+msgstr "Modo de Gatilho"
 
 #: preferences/appsPage.js:58
 msgid "Apps trigger Caffeine mode"
-msgstr ""
+msgstr "Aplicativos que ativam o modo Caffeine"
 
 #: preferences/appsPage.js:59
 msgid "Choose the way apps will trigger Caffeine"
-msgstr ""
+msgstr "Escolha a maneira que os aplicativos irão ativar o Caffeine"
 
 #: preferences/appsPage.js:73
 msgid "Add"
@@ -81,11 +81,11 @@ msgstr "Adicionar"
 
 #: preferences/appsPage.js:77
 msgid "Apps that trigger Caffeine"
-msgstr ""
+msgstr "Aplicativos que ativam o modo Caffeine"
 
 #: preferences/displayPage.js:32 preferences/displayPage.js:42
 msgid "Display"
-msgstr ""
+msgstr "Tela"
 
 #: preferences/displayPage.js:47
 msgid "Only when active"
@@ -136,19 +136,19 @@ msgstr "Mostrar o indicador no painel superior"
 
 #: preferences/displayPage.js:99
 msgid "The position relative of indicator icon to other items"
-msgstr ""
+msgstr "Posição do indicador em relação aos outros icones"
 
 #: preferences/generalPage.js:32
 msgid "For apps on list"
-msgstr ""
+msgstr "Para aplicativos na lista"
 
 #: preferences/generalPage.js:39
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: preferences/generalPage.js:49
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamento"
 
 #: preferences/generalPage.js:58
 #, fuzzy
@@ -161,7 +161,7 @@ msgstr ""
 
 #: preferences/generalPage.js:70
 msgid "Remember state"
-msgstr ""
+msgstr "Lembrar estado"
 
 #: preferences/generalPage.js:71
 #, fuzzy
@@ -175,34 +175,34 @@ msgstr "Mostra notificações quando ativado/desativado"
 
 #: preferences/generalPage.js:83
 msgid "Toggles the night light together with Caffeine's state"
-msgstr ""
+msgstr "Alternar Luz Noturna junto do estado do Caffeine"
 
 #: preferences/generalPage.js:94
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
-msgstr ""
+msgstr "Permitir tela desligada"
 
 #: preferences/generalPage.js:95
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
-msgstr "Mostra notificações quando ativado/desativado"
+msgstr "Permitir desligar a tela quando o Caffeine está ativado"
 
 #: preferences/generalPage.js:117
 msgid "Shortcut"
-msgstr ""
+msgstr "Atalho"
 
 #: preferences/generalPage.js:125
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
-msgstr ""
+msgstr "Atalho para alternar"
 
 #: preferences/generalPage.js:126
 msgid "Use Backspace to clear"
-msgstr ""
+msgstr "Use Backspace para limpar"
 
 #: preferences/generalPage.js:204 preferences/generalPage.js:236
 msgid "New accelerator…"
-msgstr ""
+msgstr "Nova combinação..."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Application list"
@@ -226,12 +226,12 @@ msgstr "Armazenar estado do caffeine do usuário"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 msgid "Start Timer countdown"
-msgstr ""
+msgstr "Iniciar a contagem regressiva"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify time (minutes) for the timer countdown"
-msgstr ""
+msgstr "Especifique o tempo do temporizador em minutos"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
@@ -255,7 +255,7 @@ msgstr "Mostra notificações quando ativado/desativado"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show timer"
-msgstr ""
+msgstr "Mostrar temporizador"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 #, fuzzy
@@ -269,11 +269,11 @@ msgstr "Ativar enquanto um aplicativo em tela cheia estiver executando"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
-msgstr ""
+msgstr "Modo de controle da Luz Noturna"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr ""
+msgstr "Configure a maneira que o Caffeine interage com a configuração da Luz Noturna"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 #, fuzzy
@@ -282,27 +282,27 @@ msgstr "Mostra notificações quando ativado/desativado"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Trigger App control mode"
-msgstr ""
+msgstr "Modo de controle do Gatilho de Aplicativos"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the trigger method for apps."
-msgstr ""
+msgstr "Configure o metodo de gatilho para aplicativos"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
-msgstr ""
+msgstr "Atalho para alterar o Caffeine"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
-msgstr ""
+msgstr "Largura padrão para a janela de configurações"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
 msgid "Default height for the preferences window"
-msgstr ""
+msgstr "Altura padrão para a janela de configurações"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
-msgstr ""
+msgstr "Deslocamento visível da posição do icone"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
@@ -312,7 +312,7 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
-msgstr ""
+msgstr "Último índice do icone do menu indicador"
 
 #~ msgid "Auto suspend and screensaver disabled"
 #~ msgstr "Suspensão e proteção de tela automáticas desativadas"
