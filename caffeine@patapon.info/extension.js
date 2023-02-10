@@ -119,9 +119,9 @@ const AppsTrigger = {
 };
 
 const TIMERS = [
-    {5:['5:00', 'caffeine-short-timer-symbolic']},
-    {10:['10:00', 'caffeine-medium-timer-symbolic']},
-    {30:['30:00', 'caffeine-long-timer-symbolic']},
+    {15:['15:00', 'caffeine-short-timer-symbolic']},
+    {30:['30:00', 'caffeine-medium-timer-symbolic']},
+    {60:['60:00', 'caffeine-long-timer-symbolic']},
     {0:[_('Infinite'), 'caffeine-infinite-timer-symbolic']},
 ];
 
