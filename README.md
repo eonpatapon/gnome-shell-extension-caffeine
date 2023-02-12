@@ -10,11 +10,11 @@
     - `gnome-shell-before-3.10`: `3.4` -> `3.8`
 
 ## Screenshots
-![Screenshot](screenshot.png)
+![Screenshot](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot.png)
   - Empty cup = normal auto suspend and screensaver
   - Filled cup = auto suspend and screensaver off
 
-![Preferences](screenshot-prefs.png)
+![Preferences](https://github.com/eonpatapon/gnome-shell-extension-caffeine/raw/master/screenshot-prefs.png)
 
 ## Installation from GNOME Extensions
   - Get the extension [here](https://extensions.gnome.org/extension/517/caffeine/)
