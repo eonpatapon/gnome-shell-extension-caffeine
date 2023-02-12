@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-29 01:39+0300\n"
+"POT-Creation-Date: 2021-04-19 16:05-0400\n"
 "PO-Revision-Date: 2015-01-16 10:24+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak\n"
@@ -17,107 +17,95 @@ msgstr ""
 "X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:304
+#: extension.js:300
 #, fuzzy
 msgid "Auto suspend and screensaver disabled. Night Light paused."
 msgstr "Automatické uspanie a šetrič obrazovky sú zakázané"
 
-#: extension.js:306
+#: extension.js:302
 msgid "Auto suspend and screensaver disabled"
 msgstr "Automatické uspanie a šetrič obrazovky sú zakázané"
 
-#: extension.js:310
+#: extension.js:306
 #, fuzzy
 msgid "Auto suspend and screensaver enabled. Night Light resumed."
 msgstr "Automatické uspanie a šetrič obrazovky sú povolené"
 
-#: extension.js:312
+#: extension.js:308
 msgid "Auto suspend and screensaver enabled"
 msgstr "Automatické uspanie a šetrič obrazovky sú povolené"
 
-#: prefs.js:138
+#: prefs.js:133
 #, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Zobraziť Caffeine v hornej lište"
 
-#: prefs.js:138
+#: prefs.js:133
 #, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Zobraziť Caffeine v hornej lište"
 
-#: prefs.js:141
+#: prefs.js:136
 #, fuzzy
 msgid "Notifications"
 msgstr "Povoliť oznámenia"
 
-#: prefs.js:141
+#: prefs.js:136
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr ""
 
-#: prefs.js:144
+#: prefs.js:139
 msgid "Remember state"
 msgstr ""
 
-#: prefs.js:144
+#: prefs.js:139
 msgid "Remember the last state across sessions and reboots"
 msgstr ""
 
-#: prefs.js:147
+#: prefs.js:142
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Povoliť, keď je spustená aplikácia v režime na celú obrazovku"
 
-#: prefs.js:147
+#: prefs.js:142
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: prefs.js:150
+#: prefs.js:145
 msgid "Pause and resume Night Light"
 msgstr ""
 
-#: prefs.js:150
+#: prefs.js:145
 msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: prefs.js:152
+#: prefs.js:147
 msgid "Never"
 msgstr ""
 
-#: prefs.js:152
+#: prefs.js:147
 msgid "Always"
 msgstr ""
 
-#: prefs.js:152
+#: prefs.js:147
 msgid "For apps on list"
 msgstr ""
 
-#: prefs.js:157 schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
-msgid "Toggle shortcut"
-msgstr ""
-
-#: prefs.js:157
-msgid "Use Backspace to clear"
-msgstr ""
-
-#: prefs.js:189
+#: prefs.js:181
 msgid "Apps that trigger Caffeine"
 msgstr ""
 
-#: prefs.js:361
+#: prefs.js:353
 #, fuzzy
 msgid "Add Application"
 msgstr "Pridať aplikáciu"
 
-#: prefs.js:399
+#: prefs.js:391
 msgid "General"
 msgstr ""
 
-#: prefs.js:402
+#: prefs.js:394
 msgid "Apps"
-msgstr ""
-
-#: prefs.js:426 prefs.js:437
-msgid "New accelerator…"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:12
@@ -183,10 +171,6 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
-msgid "Shortcut to toggle Caffeine."
 msgstr ""
 
 #~ msgid "Show Caffeine in top panel"
