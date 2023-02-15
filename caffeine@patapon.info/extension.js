@@ -29,6 +29,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const SHOW_TIMER_KEY= 'show-timer';
+const DURATION_TIMER_INDEX= 'duration-timer';
 const TOGGLE_STATE_KEY= 'toggle-state';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
@@ -119,10 +120,10 @@ const AppsTrigger = {
 };
 
 const TIMERS = [
-    {5:['5:00', 'caffeine-short-timer-symbolic']},
-    {10:['10:00', 'caffeine-medium-timer-symbolic']},
-    {30:['30:00', 'caffeine-long-timer-symbolic']},
-    {0:[_('Infinite'), 'caffeine-infinite-timer-symbolic']},
+    [5,10,15,20,30,'caffeine-short-timer-symbolic'],
+    [10,20,30,40,50,'caffeine-medium-timer-symbolic'],
+    [30,45,60,75,80,'caffeine-long-timer-symbolic'],
+    [0,0,0,0,0,'caffeine-infinite-timer-symbolic'],
 ];
 
 let CaffeineIndicator;
@@ -184,6 +185,9 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         this._settings.connect(`changed::${TIMER_KEY}`, () => {
             this._sync();
         });
+        this._settings.connect(`changed::${DURATION_TIMER_INDEX}`, () => {
+            this._syncTimers();
+        });
         this.connect('destroy', () => {
             this._iconActivated = null;
             this._iconDeactivated = null;
@@ -194,17 +198,22 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _syncTimers() {
         this._itemsSection.removeAll();
         this._timerItems.clear();
+        const durationIndex = this._settings.get_int(DURATION_TIMER_INDEX);
 
         for (const timer of TIMERS) {
-            const key = Object.keys(timer);
-            const label = timer[key][0];
+            let label = null;
+            if(timer[0] === 0) {
+                label = _('Infinite');
+            } else {
+                label = timer[durationIndex] + ":00";
+            }
             if (!label)
                 continue;
-            const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[key][1]}.svg`);
+            const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[5]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
-            item.connect('activate',() => (this._checkTimer(Number(key))));
-            this._timerItems.set(Number(key), item);
-            this._itemsSection.addMenuItem(item);
+            item.connect('activate',() => (this._checkTimer(timer[durationIndex])));
+            this._timerItems.set(timer[durationIndex], item);
+            this._itemsSection.addMenuItem(item); 
         }
         this.menuEnabled = TIMERS.length > 2;
     }
