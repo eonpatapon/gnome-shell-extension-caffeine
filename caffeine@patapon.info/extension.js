@@ -896,7 +896,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             if(type === 0) {
                 // Add 100 ms delay to handle window detection
                 this._timeWorkspaceAdd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-                    this._toggleWorkspace.bind(this);
+                    this._toggleWorkspace();
                     this._timeWorkspaceAdd = null;
                     return GLib.SOURCE_REMOVE;
                 });
@@ -909,7 +909,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             if(type === 0) {
                 // Add 100 ms delay to handle window detection
                 this._timeWorkspaceRemove = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-                    this._toggleWorkspace.bind(this);
+                    this._toggleWorkspace();
                     this._timeWorkspaceRemove = null;
                     return GLib.SOURCE_REMOVE;
                 });
