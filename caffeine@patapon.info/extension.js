@@ -213,7 +213,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
             item.connect('activate',() => (this._checkTimer(timer[durationIndex])));
             this._timerItems.set(timer[durationIndex], item);
-            this._itemsSection.addMenuItem(item); 
+            this._itemsSection.addMenuItem(item);
         }
         this.menuEnabled = TIMERS.length > 2;
     }
