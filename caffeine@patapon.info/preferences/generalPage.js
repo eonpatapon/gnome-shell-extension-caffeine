@@ -217,7 +217,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         this.timerOptionRow.set_subtitle(_("Set to ") + TIMERS_DURATION[value] + _(" minutes"));
         if (durationIndex !== value) {
             this._settings.set_int(this._settingsKey.DURATION_TIMER_INDEX, value);
-        }          
+        }
     }
 
     _resetShortcut() {
