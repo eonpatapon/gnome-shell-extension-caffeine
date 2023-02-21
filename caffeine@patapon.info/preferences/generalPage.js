@@ -120,7 +120,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
 
         const durationIndex = this._settings.get_int(this._settingsKey.DURATION_TIMER_INDEX);
         this.timerOptionRow = new Adw.ActionRow({
-            title: _("Duration"),
+            title: _("Durations"),
             activatable: true
         });
 
