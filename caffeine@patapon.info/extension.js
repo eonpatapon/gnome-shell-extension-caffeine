@@ -205,7 +205,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             if(timer[0] === 0) {
                 label = _('Infinite');
             } else {
-                label = timer[durationIndex] + ":00";
+                label = parseInt(timer[durationIndex]) + 'm';
             }
             if (!label)
                 continue;
