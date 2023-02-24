@@ -42,6 +42,11 @@
         <summary>Specify time (minutes) for the timer countdown</summary>
         <description>Specify time (minutes) for the timer countdown</description>
     </key>
+    <key type="i" name="duration-timer">
+        <default>2</default>
+        <summary>Specify index of duration range for the timer</summary>
+        <description>Specify index of duration range for the timer</description>
+    </key>
     <key type="b" name="restore-state">
         <default>false</default>
         <summary>Restore caffeine state</summary>
@@ -88,11 +93,11 @@
         <description>Shortcut to toggle Caffeine.</description>
     </key>
     <key type="i" name="prefs-default-width">
-      <default>700</default>
+      <default>570</default>
       <summary>Default width for the preferences window</summary>
     </key>
     <key type="i" name="prefs-default-height">
-      <default>600</default>
+      <default>590</default>
       <summary>Default height for the preferences window</summary>
     </key>
     <key type="i" name="indicator-position">

@@ -32,6 +32,14 @@ const ComboBoxChoices = {
     FOR_APPS: _("For apps on list"),
 };
 
+const TIMERS_DURATION = [
+    "05, 10, 30",
+    "10, 20, 45",
+    "15, 30, 60",
+    "20, 40, 75",
+    "30, 50, 80"
+];
+
 var GeneralPage = GObject.registerClass(
 class Caffeine_GeneralPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
@@ -104,6 +112,48 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         behaviorGroup.add(allowBlankScreenRow);
         this.add(behaviorGroup);
 
+        // Timer group
+        // --------------
+        let timerGroup = new Adw.PreferencesGroup({
+            title: _("Timer")
+        });
+
+        const durationIndex = this._settings.get_int(this._settingsKey.DURATION_TIMER_INDEX);
+        this.timerOptionRow = new Adw.ActionRow({
+            title: _("Durations"),
+            activatable: true
+        });
+
+        let adjustSliderTimer = new Gtk.Adjustment({
+            lower: 0,
+            upper: 4,
+            step_increment: 0.1,
+            page_increment: 1,      
+            value: durationIndex
+        });
+        this._updateTimerDuration(durationIndex);
+
+        let sliderTimer = new Gtk.Scale({
+            valign: 'center',
+            hexpand: true,
+            width_request: '200px',
+            round_digits: false,
+            draw_value: false,
+            orientation: 'horizontal',
+            digits: 0,
+            adjustment: adjustSliderTimer
+        });
+        sliderTimer.add_mark(0, Gtk.PositionType.BOTTOM, null);
+        sliderTimer.add_mark(1, Gtk.PositionType.BOTTOM, null);
+        sliderTimer.add_mark(2, Gtk.PositionType.BOTTOM, null);
+        sliderTimer.add_mark(3, Gtk.PositionType.BOTTOM, null);
+        sliderTimer.add_mark(4, Gtk.PositionType.BOTTOM, null);
+        this.timerOptionRow.add_suffix(sliderTimer);
+
+        // Add elements
+        timerGroup.add(this.timerOptionRow);
+        this.add(timerGroup);
+
         // Shortcut group
         // --------------
         let deleteShortcutButton = new Gtk.Button({
@@ -150,6 +200,8 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         allowBlankScreenRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.SCREEN_BLANK, widget.selected);
         });
+        sliderTimer.connect('change-value',
+            (widget) => this._updateTimerDuration(widget.get_value()));
         deleteShortcutButton.connect('clicked', this._resetShortcut.bind(this));
         this._settings.connect(`changed::${this._settingsKey.TOGGLE_SHORTCUT}`, () => {
             if( this.shortcutKeyBoard.isAcceleratorSet() ) {
@@ -158,6 +210,14 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
                 deleteShortcutButton.visible = false;
             }
         });
+    }
+
+    _updateTimerDuration(value) {
+        const durationIndex = this._settings.get_int(this._settingsKey.DURATION_TIMER_INDEX);
+        this.timerOptionRow.set_subtitle(_("Set to ") + TIMERS_DURATION[value] + _(" minutes"));
+        if (durationIndex !== value) {
+            this._settings.set_int(this._settingsKey.DURATION_TIMER_INDEX, value);
+        }
     }
 
     _resetShortcut() {

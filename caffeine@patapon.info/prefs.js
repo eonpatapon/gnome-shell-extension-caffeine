@@ -32,6 +32,7 @@ const SettingsKey = {
     SHOW_INDICATOR: 'show-indicator',
     SHOW_NOTIFICATIONS: 'show-notifications',
     SHOW_TIMER: 'show-timer',
+    DURATION_TIMER_INDEX: 'duration-timer',
     FULLSCREEN: 'enable-fullscreen',
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
