@@ -710,17 +710,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _manageShowIndicator() {
         if (this._state) {
-            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.NEVER) {
-                this._indicator.visible = false;
-            } else {
-                this._indicator.visible = true;
-            }
+            this._indicator.visible = this._settings.get_enum(SHOW_INDICATOR_KEY) !== ShowIndicator.NEVER;
         } else {
-            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.ALWAYS) {
-                this._indicator.visible = true;
-            } else {
-                this._indicator.visible = false;
-            }
+            this._indicator.visible = this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.ALWAYS;
         }
     }
 
