@@ -20,10 +20,13 @@
 'use strict';
 
 const { Atk, Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
+const Config = imports.misc.config;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const QuickSettings = imports.ui.quickSettings;
 const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
+
+const ShellVersion = Number(Config.PACKAGE_VERSION.split('.')[0]);
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -139,7 +142,13 @@ let CaffeineIndicator;
 */
 Gtk.IconTheme.get_default = function() {
     let theme = new Gtk.IconTheme();
-    theme.set_custom_theme(St.Settings.get().gtk_icon_theme);
+    // gnome-shell switched away from GTK3 during the `44.rc` release. The Gtk.IconTheme method `set_custom_name`
+    // has been renamed to `set_theme_name`. The below line allows support for all versions of GNOME 43 and 44+.
+    if (theme.set_theme_name) {
+        theme.set_theme_name(St.Settings.get().gtk_icon_theme);
+    } else {
+        theme.set_custom_theme(St.Settings.get().gtk_icon_theme);
+    }
     return theme;
 };
 
@@ -147,7 +156,10 @@ const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _init() {
         super._init({
-            label: IndicatorName,
+            // The 'label' property was renamed to 'title' in GNOME 44 but quick settings have otherwise 
+            // not been changed. The below line allows support for both GNOME 43 and 44+ by using the 
+            // appropriate property name based on the GNOME version.
+            [ShellVersion >= 44 ? 'title' : 'label']: IndicatorName,
             toggleMode: true,
         });
 
@@ -698,17 +710,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _manageShowIndicator() {
         if (this._state) {
-            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.NEVER) {
-                this._indicator.visible = false;
-            } else {
-                this._indicator.visible = true;
-            }
+            this._indicator.visible = this._settings.get_enum(SHOW_INDICATOR_KEY) !== ShowIndicator.NEVER;
         } else {
-            if (this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.ALWAYS) {
-                this._indicator.visible = true;
-            } else {
-                this._indicator.visible = false;
-            }
+            this._indicator.visible = this._settings.get_enum(SHOW_INDICATOR_KEY) === ShowIndicator.ALWAYS;
         }
     }
 
