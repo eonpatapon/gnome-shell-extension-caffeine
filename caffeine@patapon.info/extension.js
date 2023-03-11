@@ -610,6 +610,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _updateLabelTimer(text) {
         this._timerLabel.text = text;
         this._caffeineToggle.menu.setHeader(this._caffeineToggle.finalTimerMenuIcon, TimerMenuName, text);
+        if (ShellVersion >= 44) {
+            this._caffeineToggle.subtitle = text;    
+        }   
     }
 
     _handleScrollEvent(event) {
