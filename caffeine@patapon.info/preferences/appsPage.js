@@ -39,9 +39,9 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
             icon_name: 'applications-symbolic',
             name: 'AppsPage'
         });
-        this._settingsKey= settingsKey;
+        this._settingsKey = settingsKey;
         this._settings = settings;
-        this._listApps=[];
+        this._listApps = [];
 
         // Apps behavior group
         // --------------
@@ -112,7 +112,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                 for (var i = 0; i < this._count; i++) {
                     this.appsGroup.remove(this.apps[i].Row);
                 }
-                    this._count = null;
+                this._count = null;
             }
 
             if (this._listApps.length > 0) {
@@ -158,14 +158,14 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                 // Bind signals
                 for (let i in this.apps) {
                     this.apps[i].DeleteButton.connect('clicked', () => {
-                        log('delete app: ' + this._listApps[i] )
+                        log('delete app: ' + this._listApps[i])
                         this._onRemoveApp(this._listApps[i]);
                     });
 
                 }
                 this._count = this._listApps.length;
             }
-             this._appsListUi = [...this._listApps];
+            this._appsListUi = [...this._listApps];
         }
         return 0;
     }
@@ -225,8 +225,3 @@ const NewAppDialog = GObject.registerClass(
                 appInfo && !apps.some(i => i.startsWith(appInfo.get_id())));
         }
     });
-
-
-
-
-
