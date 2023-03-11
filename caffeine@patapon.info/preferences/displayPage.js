@@ -95,7 +95,7 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             valign: Gtk.Align.CENTER
         });
         let posIndicatorOffsetRow = new Adw.ActionRow({
-            title: _("Status indicator Position"),
+            title: _("Status indicator position"),
             subtitle: _("The position relative of indicator icon to other items"),
             activatable_widget: this.posIndicatorOffsetButton
         });
