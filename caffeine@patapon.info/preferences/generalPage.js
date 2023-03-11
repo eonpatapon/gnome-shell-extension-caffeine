@@ -388,10 +388,3 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         return Gtk.accelerator_valid(keyval, mask) || (keyval === Gdk.KEY_Tab && mask !== 0);
     }
 };
-
-
-
-
-
-
-

@@ -135,5 +135,3 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
         this.posIndicatorOffsetButton.adjustment.set_upper(this.lastIndicatorPos);
     }
 });
-
-

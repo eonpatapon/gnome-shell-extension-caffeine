@@ -83,6 +83,3 @@ function fillPreferencesWindow(window) {
         window.destroy();
     });
 }
-
-
-
