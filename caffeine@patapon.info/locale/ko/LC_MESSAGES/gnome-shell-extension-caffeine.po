@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-16 08:54+0100\n"
+"POT-Creation-Date: 2023-03-11 23:33+0000\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -15,28 +15,28 @@ msgstr ""
 "X-Poedit-Basepath: ../../gnome-shell-extension-caffeine-master\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: extension.js:99
+#: extension.js:102
 msgid "Caffeine timer"
 msgstr ""
 
-#: extension.js:126
+#: extension.js:218
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:731
+#: extension.js:753
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:733
+#: extension.js:755
 #, fuzzy
 msgid "Night Light paused"
 msgstr "야간 모드를 멈춥니"
 
-#: extension.js:738
+#: extension.js:760
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:740
+#: extension.js:762
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "야간 모드를 다시 켭니"
@@ -123,7 +123,7 @@ msgstr "카페인을 켜고 끌 때마다 알림을 표시합니다."
 
 #: preferences/displayPage.js:98
 #, fuzzy
-msgid "Status indicator Position"
+msgid "Status indicator position"
 msgstr "상단 패널에 인디케이터 표시"
 
 #: preferences/displayPage.js:99
@@ -134,62 +134,78 @@ msgstr ""
 msgid "For apps on list"
 msgstr "목록에 있는 프로그램만"
 
-#: preferences/generalPage.js:39
+#: preferences/generalPage.js:47
 msgid "General"
 msgstr "일반"
 
-#: preferences/generalPage.js:49
+#: preferences/generalPage.js:57
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:66
 msgid "Enable for fullscreen apps"
 msgstr "전체 화면 프로그램에서 활성화"
 
-#: preferences/generalPage.js:59
+#: preferences/generalPage.js:67
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "전체 화면 모드에 진입한 프로그램을 사용할 시 자동으로 활성화합니다."
 
-#: preferences/generalPage.js:70
+#: preferences/generalPage.js:78
 msgid "Remember state"
 msgstr "상태 기억하기"
 
-#: preferences/generalPage.js:71
+#: preferences/generalPage.js:79
 msgid "Remember the last state across sessions and reboots"
 msgstr "세션을 바꾸거나 다시 시작할 때 마지막 상태를 기억합니다."
 
-#: preferences/generalPage.js:82
+#: preferences/generalPage.js:90
 msgid "Pause and resume Night Light"
 msgstr "야간 모드를 멈추거나 다시 켜기"
 
-#: preferences/generalPage.js:83
+#: preferences/generalPage.js:91
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "카페인의 상태에 맞춰 야간 모드를 제어합니다."
 
-#: preferences/generalPage.js:94
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: preferences/generalPage.js:102
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Allow screen blank"
 msgstr ""
 
-#: preferences/generalPage.js:95
+#: preferences/generalPage.js:103
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "카페인을 켜고 끌 때마다 알림을 표시합니다."
 
-#: preferences/generalPage.js:117
+#: preferences/generalPage.js:118
+msgid "Timer"
+msgstr ""
+
+#: preferences/generalPage.js:123
+msgid "Durations"
+msgstr ""
+
+#: preferences/generalPage.js:167
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:125
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+#: preferences/generalPage.js:175
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:126
+#: preferences/generalPage.js:176
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:204 preferences/generalPage.js:236
+#: preferences/generalPage.js:217
+msgid "Set to "
+msgstr ""
+
+#: preferences/generalPage.js:217
+msgid " minutes"
+msgstr ""
+
+#: preferences/generalPage.js:264 preferences/generalPage.js:296
 msgid "New accelerator…"
 msgstr ""
 
@@ -221,84 +237,89 @@ msgid "Specify time (minutes) for the timer countdown"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+msgid "Specify index of duration range for the timer"
+msgstr ""
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Restore caffeine state"
 msgstr "카페인 상태를 복원"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Show indicator"
 msgstr "인디케이터 표시"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show the indicator on the top panel"
 msgstr "상단 패널에 인디케이터 표시"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show notifications"
 msgstr "알림 표시"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show notifications when enabled/disabled"
 msgstr "카페인을 켜고 끌 때마다 알림 표시"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Show timer"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 #, fuzzy
 msgid "Show timer when enabled/disabled"
 msgstr "카페인을 켜고 끌 때마다 알림 표시"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Enable when a fullscreen application is running"
 msgstr "전체 화면 프로그램을 실행할 시 카페인 활성화"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Night Light control mode"
 msgstr "야간 모드 제어 모드"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "카페인 설정을 야간 모드 설정에 연동시킵니다."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "카페인을 켜고 끌 때마다 알림을 표시합니다."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 #, fuzzy
 msgid "Trigger App control mode"
 msgstr "야간 모드 제어 모드"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Set the trigger method for apps."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Shortcut to toggle Caffeine."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Default width for the preferences window"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:101
 msgid "Default height for the preferences window"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:105
 msgid "Visible position offset of status icon in indicator menu"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:109
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:113
 msgid "Last item index in indicator menu"
 msgstr ""
 
