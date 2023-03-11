@@ -2,20 +2,20 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="caffeine-on-symbolic.svg"
+   sodipodi:docname="my-caffeine-off-symbolic.svg"
    height="16"
    id="svg7384"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    version="1.1"
-   width="16">
+   width="16"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata90">
     <rdf:RDF>
@@ -33,8 +33,8 @@
      bordercolor="#666666"
      borderopacity="1"
      inkscape:current-layer="layer11"
-     inkscape:cx="6.0760965"
-     inkscape:cy="6.333427"
+     inkscape:cx="3.4863718"
+     inkscape:cy="8.404234"
      gridtolerance="10"
      inkscape:guide-bbox="true"
      guidetolerance="10"
@@ -55,27 +55,31 @@
      inkscape:snap-nodes="false"
      inkscape:snap-others="false"
      inkscape:snap-to-guides="true"
-     inkscape:window-height="741"
+     inkscape:window-height="1011"
      inkscape:window-maximized="1"
-     inkscape:window-width="1366"
-     inkscape:window-x="0"
-     inkscape:window-y="-3"
-     inkscape:zoom="32">
+     inkscape:window-width="1920"
+     inkscape:window-x="1920"
+     inkscape:window-y="32"
+     inkscape:zoom="21.655751"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#555753">
     <inkscape:grid
        empspacing="2"
        enabled="true"
        id="grid4866"
-       originx="-42.000009px"
-       originy="412px"
+       originx="-42.000009"
+       originy="412"
        snapvisiblegridlinesonly="true"
-       spacingx="1px"
-       spacingy="1px"
+       spacingx="1"
+       spacingy="1"
        type="xygrid"
        visible="true" />
     <sodipodi:guide
        orientation="0,1"
        position="3.4692426,9.4354561"
-       id="guide4029" />
+       id="guide4029"
+       inkscape:locked="false" />
   </sodipodi:namedview>
   <title
      id="title9167">Gnome Symbolic Icon Theme</title>
