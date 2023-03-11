@@ -1,6 +1,6 @@
 all: build install
 
-.PHONY: build install lint dist
+.PHONY: build dist install lint lint-fix
 
 build:
 	./update-locale.sh
