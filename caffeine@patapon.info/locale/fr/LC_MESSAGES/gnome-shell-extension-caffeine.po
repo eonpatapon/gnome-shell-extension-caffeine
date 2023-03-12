@@ -190,11 +190,11 @@ msgstr "Activer les notifications quand Caféine est activé ou désactivé"
 
 #: preferences/generalPage.js:118
 msgid "Timer"
-msgstr ""
+msgstr "Minuteur"
 
 #: preferences/generalPage.js:123
 msgid "Durations"
-msgstr ""
+msgstr "Durées"
 
 #: preferences/generalPage.js:167
 #, fuzzy
@@ -212,7 +212,7 @@ msgstr "Utiliser Retour arrière pour effacer"
 
 #: preferences/generalPage.js:217
 msgid "Set to "
-msgstr ""
+msgstr "Réglé sur "
 
 #: preferences/generalPage.js:217
 msgid " minutes"
@@ -255,7 +255,7 @@ msgstr "Durée du minuteur (en minutes)"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 #, fuzzy
 msgid "Specify index of duration range for the timer"
-msgstr "Durée du minuteur (en minutes)"
+msgstr "Index de selection des durées du minuteur"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Restore caffeine state"
@@ -312,7 +312,7 @@ msgstr "Contrôle du Mode nuit"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Set the trigger method for apps."
-msgstr ""
+msgstr "Sélection de la méthode de déclenchement par les applications"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Shortcut to toggle Caffeine."
@@ -320,25 +320,25 @@ msgstr "Raccourci pour commuter Caféine."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Default width for the preferences window"
-msgstr ""
+msgstr "Largeur par défaut de la fenêtre de préférences"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:101
 msgid "Default height for the preferences window"
-msgstr ""
+msgstr "Hauteur par défaut de la fenêtre de préférences"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:105
 msgid "Visible position offset of status icon in indicator menu"
-msgstr ""
+msgstr "Position relative de l’icône dans le menu indicator"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:109
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
-msgstr ""
+msgstr "Position réel de l’icône dans le menu indicator (comprend les icônes invisibles)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:113
 msgid "Last item index in indicator menu"
-msgstr ""
+msgstr "Index du dernier élément dans le menu indicator"
 
 #~ msgid "Auto suspend and screensaver disabled"
 #~ msgstr "Mise en veille et écran de veille désactivés"
