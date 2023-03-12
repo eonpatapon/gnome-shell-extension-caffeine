@@ -1,0 +1,27 @@
+# This workflow will build the extension and upload an artifact
+name: Build and upload extension
+
+on:
+  push:
+    branches: '**'
+  pull_request:
+    branches: '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install --no-install-recommends make gettext gnome-shell libglib2.0-bin zip
+
+    - name: Build the extension bundle
+      run: |
+        make dist
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: caffeine@patapon.info.zip
+        path: caffeine@patapon.info.zip

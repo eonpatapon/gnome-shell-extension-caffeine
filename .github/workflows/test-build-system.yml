@@ -1,0 +1,30 @@
+# This workflow will thoroughly test the build system
+name: Complete build system test
+
+on:
+  push:
+    branches: '**'
+  pull_request:
+    branches: '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install --no-install-recommends make gettext gnome-shell libglib2.0-bin
+
+    - name: Test extension builds from scratch
+      run: |
+        make build
+
+    - name: Test extension can be bundled
+      run: |
+        make dist
+
+    - name: Test extension installs
+      run: |
+        make install

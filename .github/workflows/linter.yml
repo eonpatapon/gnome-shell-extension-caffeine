@@ -1,0 +1,23 @@
+# Run eslint on the codebase
+name: Lint codebase
+
+on:
+  push:
+    branches: '**'
+  pull_request:
+    branches: '**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install --no-install-recommends make npm
+        sudo npm install -g eslint eslint-plugin-jsdoc
+
+    - name: Run linter target
+      run: |
+        make lint
