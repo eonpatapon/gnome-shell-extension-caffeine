@@ -158,7 +158,6 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                 // Bind signals
                 for (let i in this.apps) {
                     this.apps[i].DeleteButton.connect('clicked', () => {
-                        log('delete app: ' + this._listApps[i])
                         this._onRemoveApp(this._listApps[i]);
                     });
 
