@@ -9,38 +9,33 @@ Enable/Disable auto suspend with quick setting toggle.
 
 ![Quick Toggle Caffeine](screenshots/screenshot.png)
 
-
-###  ⚠️  __This extension is barely maintained anymore, new maintainers are welcome!__
-&nbsp;
-
 ## Version
-This extension supports GNOME Shell `3.4` -> `43`
 
-|Branch|Version|Compatible Gnome version|
-|---|:---:|---|
-| master  | 43 | Gnome 43  |
-| gnome-shell-40-42  | 42 | Gnome 40 -> 42  |
-| gnome-shell-3.36-3.38: 3.36 | 37 | Gnome 3.36 -> 3.38 |
-| gnome-shell-3.32-3.34 | 33 | Gnome 3.32 -> 3.34 |
-| gnome-shell-3.10-3.30 | - | Gnome 3.10 -> 3.30 |
-| gnome-shell-before-3.10 | - | Gnome 3.4 -> 3.8 |
+This extension supports GNOME Shell `3.4` -> `44`
 
-&nbsp;
+|Branch                   |Version|Compatible Gnome version|
+|-------------------------|:-----:|------------------------|
+| master                  |    45 | Gnome 43 -> 44         |
+| gnome-shell-40-42       |    42 | Gnome 40 -> 42         |
+| gnome-shell-3.36-3.38   |    37 | Gnome 3.36 -> 3.38     |
+| gnome-shell-3.32-3.34   |    33 | Gnome 3.32 -> 3.34     |
+| gnome-shell-3.10-3.30   |     - | Gnome 3.10 -> 3.30     |
+| gnome-shell-before-3.10 |     - | Gnome 3.4 -> 3.8       |
 
 ## Installation From source
 
-```
+```bash
 make build
 make install
 ```
-  - Restart the shell
-  - Enable the extension
-&nbsp;
+
+- Restart the shell
+- Enable the extension
 
 ## Screenshots & features
 
+### Scroll Indicator Icon
 
-### <ins>Scroll Indicator Icon</ins>
 ![Screenshot](screenshots/screenshot-scroll-up.png)![Screenshot](screenshots/screenshot-scroll-down.png)
 
 You can scroll on the indicator icon to enable / disable auto suspend:
@@ -48,23 +43,22 @@ You can scroll on the indicator icon to enable / disable auto suspend:
 - Scroll up -> Filled cup: Caffeine enabled
 - Scroll down -> Empty cup: Caffeine disabled
 
-<ins>__Note__</ins>: the option "Show status indicator" must be set on "always" (see below).
-&nbsp;
+__Note__: the option "Show status indicator" must be set on "always" (see below).
 
-### <ins>Notifications</ins>
+### Notifications
+
 ![Screenshot](screenshots/screenshot-notification-enable.png)
 ![Screenshot](screenshots/screenshot-notification-disable.png)
-&nbsp;
 
-### <ins>Timer option</ins>
+### Timer option
+
 This option enable Caffeine for a given amount of time (similar to Caffeine in LineageOS).
 
 ![Screenshot](screenshots/screenshot-timer-off.png)![Screenshot](screenshots/screenshot-timer-on.png)
-&nbsp;
 
-### <ins>Preferences</ins>
+### Preferences
+
 ![Preferences](screenshots/screenshot-prefs.png)
-
 
 ## CLI
 
