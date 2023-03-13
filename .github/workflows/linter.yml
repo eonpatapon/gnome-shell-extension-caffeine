@@ -2,8 +2,6 @@
 name: Lint codebase
 
 on:
-  push:
-    branches: '**'
   pull_request:
     branches: '**'
 

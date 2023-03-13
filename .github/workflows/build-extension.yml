@@ -2,8 +2,6 @@
 name: Build and upload extension
 
 on:
-  push:
-    branches: '**'
   pull_request:
     branches: '**'
 

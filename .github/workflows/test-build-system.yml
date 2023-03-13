@@ -2,8 +2,6 @@
 name: Complete build system test
 
 on:
-  push:
-    branches: '**'
   pull_request:
     branches: '**'
 
