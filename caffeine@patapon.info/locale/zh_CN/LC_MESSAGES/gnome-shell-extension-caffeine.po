@@ -19,11 +19,11 @@ msgstr ""
 
 #: extension.js:102
 msgid "Caffeine timer"
-msgstr ""
+msgstr "Caffeine 定时器"
 
 #: extension.js:218
 msgid "Infinite"
-msgstr ""
+msgstr "无限"
 
 #: extension.js:753
 msgid "Caffeine enabled"
@@ -37,7 +37,7 @@ msgstr "夜灯已暂停"
 #: extension.js:760
 #, fuzzy
 msgid "Caffeine disabled"
-msgstr "Caffeine 已开启"
+msgstr "Caffeine 已关闭"
 
 #: extension.js:762
 #, fuzzy
@@ -46,7 +46,7 @@ msgstr "夜灯已恢复"
 
 #: preferences/appsPage.js:29
 msgid "Running"
-msgstr ""
+msgstr "运行中"
 
 #: preferences/appsPage.js:30
 msgid "Focus"
@@ -62,7 +62,7 @@ msgstr "应用"
 
 #: preferences/appsPage.js:49
 msgid "Trigger mode"
-msgstr ""
+msgstr "触发模式"
 
 #: preferences/appsPage.js:58
 #, fuzzy
@@ -84,7 +84,7 @@ msgstr "触发 Caffeine 的应用"
 
 #: preferences/displayPage.js:32 preferences/displayPage.js:42
 msgid "Display"
-msgstr ""
+msgstr "显示"
 
 #: preferences/displayPage.js:47
 msgid "Only when active"
@@ -181,11 +181,11 @@ msgstr "在 Caffeine 被启用或禁用时显示通知"
 
 #: preferences/generalPage.js:118
 msgid "Timer"
-msgstr ""
+msgstr "计时器"
 
 #: preferences/generalPage.js:123
 msgid "Durations"
-msgstr ""
+msgstr "持续"
 
 #: preferences/generalPage.js:167
 msgid "Shortcut"
@@ -202,11 +202,11 @@ msgstr ""
 
 #: preferences/generalPage.js:217
 msgid "Set to "
-msgstr ""
+msgstr "设置到 "
 
 #: preferences/generalPage.js:217
 msgid " minutes"
-msgstr ""
+msgstr " 分钟"
 
 #: preferences/generalPage.js:264 preferences/generalPage.js:296
 msgid "New accelerator…"
@@ -266,7 +266,7 @@ msgstr "启用/禁用时显示通知"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Show timer"
-msgstr ""
+msgstr "显示计时器"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 #, fuzzy
