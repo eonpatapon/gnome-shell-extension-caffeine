@@ -13,7 +13,7 @@ jobs:
     - name: Install build dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install --no-install-recommends make gettext gnome-shell libglib2.0-bin zip
+        sudo apt-get install --no-install-recommends make gettext gnome-shell libglib2.0-bin
 
     - name: Test extension builds from scratch
       run: |
