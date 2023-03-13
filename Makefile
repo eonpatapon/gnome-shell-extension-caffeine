@@ -8,7 +8,7 @@ build:
 
 dist: build
 	rm -f caffeine@patapon.info.zip
-	cd caffeine@patapon.info && zip -r ../caffeine@patapon.info.zip ./* --exclude \*.po --exclude \*.gschema.xml
+	cd caffeine@patapon.info && zip -r ../caffeine@patapon.info.zip ./* --exclude \*.po
 
 install:
 	install -d ~/.local/share/gnome-shell/extensions
