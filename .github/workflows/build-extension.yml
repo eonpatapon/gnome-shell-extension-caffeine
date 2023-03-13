@@ -1,5 +1,5 @@
-# This workflow will build the extension and upload an artifact
-name: Build and upload extension
+# This workflow will test the build system, then build the extension and upload an artifact
+name: Test build system and upload extension
 
 on:
   pull_request:
@@ -15,9 +15,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install --no-install-recommends make gettext gnome-shell libglib2.0-bin zip
 
+    - name: Test extension builds from scratch
+      run: |
+        make build
+
     - name: Build the extension bundle
       run: |
         make dist
+
+    - name: Test extension installs
+      run: |
+        make install
 
     - uses: actions/upload-artifact@v3
       with:
