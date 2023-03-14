@@ -17,6 +17,10 @@ build:
 install:
 	gnome-extensions install $(BUNDLE_PATH) --force 
 
+clean:
+	@rm -fv $(BUNDLE_PATH)
+	@rm -fv $(EXTENSION_DIR)/schemas/gschemas.compiled
+
 lint:
 	eslint --resolve-plugins-relative-to "$(shell npm root -g)" $(EXTENSION_DIR)
 
