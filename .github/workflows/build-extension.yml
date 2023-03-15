@@ -10,18 +10,14 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
-    - name: Install build dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install --no-install-recommends make gettext gnome-shell libglib2.0-bin
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: make gettext gnome-shell libglib2.0-bin
+        version: 1.0
 
     - name: Test extension builds from scratch
       run: |
         make build
-
-    - name: Build the extension bundle
-      run: |
-        make dist
 
     - name: Test extension installs
       run: |
@@ -31,3 +27,7 @@ jobs:
       with:
         name: caffeine@patapon.info.zip
         path: caffeine@patapon.info.zip
+
+    - name: Test build area clean
+      run: |
+        make clean

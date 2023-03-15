@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
-    - name: Install build dependencies
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: make npm
+        version: 1.0
+    - name: Install eslint
       run: |
-        sudo apt-get update
-        sudo apt-get install --no-install-recommends make npm
         sudo npm install -g eslint eslint-plugin-jsdoc
 
     - name: Run linter target

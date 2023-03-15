@@ -2,8 +2,7 @@ name: Run shellcheck
 
 on:
   pull_request:
-    branches:
-      - '**'
+    branches: '**'
 
 jobs:
   shellcheck:
