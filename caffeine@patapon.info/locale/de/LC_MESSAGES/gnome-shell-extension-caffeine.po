@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-11 23:33+0000\n"
 "PO-Revision-Date: 2021-04-09 21:31-0400\n"
-"Last-Translator: Felix Kaechele <felix@kaechele.ca>\n"
+"Last-Translator: WebSnke <websnke@tutanota.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -20,11 +20,11 @@ msgstr ""
 #: extension.js:102
 #, fuzzy
 msgid "Caffeine timer"
-msgstr "Caffeine schaltuhr"
+msgstr "Caffeine Timer"
 
 #: extension.js:218
 msgid "Infinite"
-msgstr "unendlich"
+msgstr "Unendlich"
 
 #: extension.js:753
 msgid "Caffeine enabled"
@@ -37,7 +37,7 @@ msgstr "Nachtmodus pausiert"
 #: extension.js:760
 #, fuzzy
 msgid "Caffeine disabled"
-msgstr "Caffeine aktiviert"
+msgstr "Caffeine deaktiviert"
 
 #: extension.js:762
 msgid "Night Light resumed"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: preferences/appsPage.js:30
 msgid "Focus"
-msgstr ""
+msgstr "Fokus"
 
 #: preferences/appsPage.js:31
 msgid "Active workspace"
@@ -142,7 +142,7 @@ msgstr "Allgemein"
 
 #: preferences/generalPage.js:57
 msgid "Behavior"
-msgstr ""
+msgstr "Verhalten"
 
 #: preferences/generalPage.js:66
 msgid "Enable for fullscreen apps"
@@ -180,7 +180,7 @@ msgstr "Benachrichtigungen anzeigen, wenn aktiviert/deaktiviert"
 
 #: preferences/generalPage.js:118
 msgid "Timer"
-msgstr ""
+msgstr "Timer"
 
 #: preferences/generalPage.js:123
 msgid "Durations"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: preferences/generalPage.js:217
 msgid " minutes"
-msgstr ""
+msgstr " Minuten"
 
 #: preferences/generalPage.js:264 preferences/generalPage.js:296
 msgid "New accelerator…"
@@ -233,7 +233,7 @@ msgstr "Speichert die benutzerdefinierten Zustand"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 msgid "Start Timer countdown"
-msgstr ""
+msgstr "Countdown starten"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
@@ -267,7 +267,7 @@ msgstr "Benachrichtigungen anzeigen, wenn aktiviert/deaktiviert"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Show timer"
-msgstr ""
+msgstr "Timer anzeigen"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 #, fuzzy
