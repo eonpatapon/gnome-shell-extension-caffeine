@@ -20,7 +20,7 @@ msgstr ""
 #: extension.js:102
 #, fuzzy
 msgid "Caffeine timer"
-msgstr "Caffeine Timer"
+msgstr "Caffeine-Timer"
 
 #: extension.js:218
 msgid "Infinite"
@@ -53,7 +53,7 @@ msgstr "Fokus"
 
 #: preferences/appsPage.js:31
 msgid "Active workspace"
-msgstr ""
+msgstr "Aktive Arbeitsfläche"
 
 #: preferences/appsPage.js:38
 msgid "Apps"
@@ -125,12 +125,12 @@ msgstr "Benachrichtigungen anzeigen, wenn aktiviert/deaktiviert"
 
 #: preferences/displayPage.js:98
 #, fuzzy
-msgid "Status indicator position"
+msgid "Position des Indikator-Icons"
 msgstr "Indikator-Icon in der oberen Leiste anzeigen"
 
 #: preferences/displayPage.js:99
 msgid "The position relative of indicator icon to other items"
-msgstr ""
+msgstr "Die Position des Indikatorsymbols relativ zu anderen Elementen"
 
 #: preferences/generalPage.js:32
 msgid "For apps on list"
@@ -171,7 +171,7 @@ msgstr "Unterbricht den Nachtmodus wenn Caffeine aktiviert wird"
 #: preferences/generalPage.js:102
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Allow screen blank"
-msgstr ""
+msgstr "Erlaube es, den Bildschirm auszuschalten"
 
 #: preferences/generalPage.js:103
 #, fuzzy
@@ -184,11 +184,11 @@ msgstr "Timer"
 
 #: preferences/generalPage.js:123
 msgid "Durations"
-msgstr ""
+msgstr "Dauer"
 
 #: preferences/generalPage.js:167
 msgid "Shortcut"
-msgstr ""
+msgstr "Tastenkombination"
 
 #: preferences/generalPage.js:175
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
@@ -197,11 +197,11 @@ msgstr ""
 
 #: preferences/generalPage.js:176
 msgid "Use Backspace to clear"
-msgstr ""
+msgstr "Nutze die Leertaste zum löschen"
 
 #: preferences/generalPage.js:217
 msgid "Set to "
-msgstr ""
+msgstr "Einstellen auf"
 
 #: preferences/generalPage.js:217
 msgid " minutes"
@@ -285,7 +285,7 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr ""
+msgstr "Lege fest, wie Caffein mit dem Nachtmodus umgeht."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 #, fuzzy
@@ -302,15 +302,15 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Shortcut to toggle Caffeine."
-msgstr ""
+msgstr "Tastenkombination um Caffeine zu öffnen."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Default width for the preferences window"
-msgstr ""
+msgstr "Standardbreite für das Einstellungsfenster"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:101
 msgid "Default height for the preferences window"
-msgstr ""
+msgstr "Standardhöhe für das Einstellungsfenster"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:105
 msgid "Visible position offset of status icon in indicator menu"
