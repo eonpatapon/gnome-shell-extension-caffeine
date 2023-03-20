@@ -184,7 +184,6 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         // Init Timers
         this._timerItems = new Map();
         this._syncTimers(false);
-        //this._sync();
 
         // Bind signals
         this._settings.bind(`${TOGGLE_STATE_KEY}`,
