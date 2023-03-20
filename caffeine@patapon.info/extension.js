@@ -40,7 +40,6 @@ const FULLSCREEN_KEY = 'enable-fullscreen';
 const NIGHT_LIGHT_KEY = 'nightlight-control';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
-const TIMER_ENABLED_KEY = 'countdown-timer-enabled';
 const SCREEN_BLANK = 'screen-blank';
 const TRIGGER_APPS_MODE = 'trigger-apps-mode';
 const INDICATOR_POSITION = 'indicator-position';
@@ -184,8 +183,8 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
         // Init Timers
         this._timerItems = new Map();
-        this._syncTimers();
-        this._sync();
+        this._syncTimers(false);
+        //this._sync();
 
         // Bind signals
         this._settings.bind(`${TOGGLE_STATE_KEY}`,
@@ -198,7 +197,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this._sync();
         });
         this._settings.connect(`changed::${DURATION_TIMER_INDEX}`, () => {
-            this._syncTimers();
+            this._syncTimers(true);
         });
         this.connect('destroy', () => {
             this._iconActivated = null;
@@ -207,7 +206,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         });
     }
 
-    _syncTimers() {
+    _syncTimers(resetDefault) {
         this._itemsSection.removeAll();
         this._timerItems.clear();
         const durationIndex = this._settings.get_int(DURATION_TIMER_INDEX);
@@ -228,11 +227,18 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this._itemsSection.addMenuItem(item);
         }
         this.menuEnabled = TIMERS.length > 2;
+     
+        // Select active duration
+        if(resetDefault && this._settings.get_int(TIMER_KEY) !== 0) {
+            // Set default duration to 0
+            this._settings.set_int(TIMER_KEY, 0);
+        } else {
+            this._sync();
+        }
     }
 
     _sync() {
         const activeTimerId = this._settings.get_int(TIMER_KEY);
-
         for (const [timerId, item] of this._timerItems) {
             item.setOrnament(timerId === activeTimerId
                 ? PopupMenu.Ornament.CHECK
@@ -242,7 +248,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
     _checkTimer(timerId) {
         this._settings.set_int(TIMER_KEY, timerId);
-        this._settings.set_boolean(TIMER_ENABLED_KEY, true);
+        this._settings.set_boolean(TOGGLE_STATE_KEY, true);
     }
 
     _iconName() {
@@ -336,8 +342,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timeAppUnblock = null;
 
         // Init settings keys and restore user state
-        this._settings.reset(TIMER_ENABLED_KEY);
-        this._settings.reset(TIMER_KEY);
         this._settings.reset(TOGGLE_STATE_KEY);
         if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
             this.toggleState();
@@ -373,7 +377,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._updateAppConfigs.bind(this));
         this.stateId = this._settings.connect(`changed::${TOGGLE_STATE_KEY}`,
             this._updateMainState.bind(this));
-        this.timerId = this._settings.connect(`changed::${TIMER_ENABLED_KEY}`,
+        this.timerId = this._settings.connect(`changed::${TIMER_KEY}`,
             this._startTimer.bind(this));
         this.showTimerId = this._settings.connect(`changed::${SHOW_TIMER_KEY}`,
             this._showIndicatorLabel.bind(this));
@@ -545,36 +549,31 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _startTimer() {
-        if(this._settings.get_boolean(TIMER_ENABLED_KEY)) {
-            this._timerEnable = true;
+        this._timerEnable = true;
 
-            // Reset Timer
-            this._removeTimer(true);
+        // Reset timer
+        this._removeTimer(true);
 
-            // Enable Caffeine
-            this._settings.set_boolean(TOGGLE_STATE_KEY, true);
+        // Get duration
+        let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
 
-            // Get duration
-            let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
-
-            // Execute Timer only if duration isn't set on infinite time
-            if(timerDelay !== 0) {
-                let secondLeft = timerDelay;
-                this._showIndicatorLabel();
+        // Execute Timer only if duration isn't set on infinite time
+        if(timerDelay !== 0) {
+            let secondLeft = timerDelay;
+            this._showIndicatorLabel();
+            this._printTimer(secondLeft);
+            this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
+                secondLeft -= 1;
                 this._printTimer(secondLeft);
-                this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
-                    secondLeft -= 1;
-                    this._printTimer(secondLeft);
-                    return GLib.SOURCE_CONTINUE;
-                });
+                return GLib.SOURCE_CONTINUE;
+            });
 
-                this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {
-                    // Disable Caffeine when timer ended
-                    this._removeTimer(false);
-                    this._settings.set_boolean(TOGGLE_STATE_KEY, false);
-                    return GLib.SOURCE_REMOVE;
-                });
-            }
+            this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {
+                // Disable Caffeine when timer ended
+                this._removeTimer(false);
+                this._settings.set_boolean(TOGGLE_STATE_KEY, false);
+                return GLib.SOURCE_REMOVE;
+            });
         }
     }
 
@@ -590,12 +589,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _removeTimer(reset) {
         if(!reset) {
-            // Set duration back to 0
-            this._settings.set_int(TIMER_KEY, 0);
             // End timer
             this._timerEnable = false;
         }
-        this._settings.set_boolean(TIMER_ENABLED_KEY, false);
         this._updateLabelTimer(null);
 
         // Remove timer
@@ -789,8 +785,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _updateMainState() {
-        if (this._settings.get_boolean(TOGGLE_STATE_KEY) !== this._state) {
+        const caffeineToggleState = this._settings.get_boolean(TOGGLE_STATE_KEY);
+        if (caffeineToggleState !== this._state) {
             this.toggleState();
+        }
+
+        // Enable timer when duration is not set to zero
+        if (caffeineToggleState && this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
+            this._startTimer();
         }
     }
 
