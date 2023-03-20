@@ -787,11 +787,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         const caffeineToggleState = this._settings.get_boolean(TOGGLE_STATE_KEY);
         if (caffeineToggleState !== this._state) {
             this.toggleState();
-        }
 
-        // Enable timer when duration is not set to zero
-        if (caffeineToggleState && this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
-            this._startTimer();
+            // Enable timer when duration is not set to zero
+            if (caffeineToggleState && this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
+                this._startTimer();
+            }
         }
     }
 
