@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/eonpatapon/gnome-shell-extension-caffeine)](https://github.com/eonpatapon/gnome-shell-extension-caffeine/blob/master/LICENSE)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/tag/eonpatapon/gnome-shell-extension-caffeine)](https://github.com/eonpatapon/gnome-shell-extension-caffeine/releases/latest)
 
-Enable/Disable auto suspend with quick setting toggle.
+Enable / disable auto suspend with quick setting toggle.
 
 ![Quick Toggle Caffeine](screenshots/screenshot.png)
 
@@ -15,7 +15,7 @@ This extension supports GNOME Shell `3.4` -> `44`
 
 |Branch                   |Version|Compatible Gnome version|
 |-------------------------|:-----:|------------------------|
-| master                  |    45 | Gnome 43 -> 44         |
+| master                  |    46 | Gnome 43 -> 44         |
 | gnome-shell-40-42       |    42 | Gnome 40 -> 42         |
 | gnome-shell-3.36-3.38   |    37 | Gnome 3.36 -> 3.38     |
 | gnome-shell-3.32-3.34   |    33 | Gnome 3.32 -> 3.34     |
