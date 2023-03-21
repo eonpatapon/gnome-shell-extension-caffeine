@@ -767,18 +767,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    // Add the name of App as toggle button subtitle (=< Gnome 44)
+    // Add the name of App as subtitle (=< Gnome 44)
     _updateAppsSubtitle(id) {
         if (ShellVersion >= 44) {
             const listAppId = this._appInhibitedData.keys();
             let appId = id !== null ? id : listAppId.next().value;
-            //let appId = null;
-            
-            //if(id !== null) {
-            //    appId = id;
-            //} else {                          
-            //    appId = listAppId.next().value;
-            //}
             if (appId !== undefined) {
                 let appInfo = Gio.DesktopAppInfo.new(appId);        
                 this._caffeineToggle.subtitle = appInfo.get_display_name();
