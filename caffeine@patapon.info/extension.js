@@ -641,13 +641,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 inhibitor.GetAppIdRemote(appId => {
                     appId = String(appId);
                     let appData = this._appInhibitedData.get(appId);
-                    if (appId !== '' && requestedId === appId && appData) {
-                        if (appId === 'user') {
-                            this._saveUserState(true);
-                        }
+                    if (appId !== '' && requestedId === appId && appData) {                        
                         appData.isInhibited = true;
                         appData.object = object;
                         this._appInhibitedData.set(appId, appData);
+
+                        if (appId === 'user') {
+                            this._saveUserState(true);
+                        } else {
+                            this._updateAppsSubtitle(appId);
+                        }
 
                         // Update state
                         if (this._state === false) {
@@ -674,11 +677,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if(appId){
             let appData = this._appInhibitedData.get(appId);
             if (appData){
-                if (appId === 'user') {
-                       this._saveUserState(false);
-                }
                 // Remove app from list
                 this._appInhibitedData.delete(appId);
+
+                if (appId === 'user') {
+                    this._saveUserState(false);
+                } else {
+                    this._updateAppsSubtitle(null);
+                }
 
                 // Update state
                 if (this._appInhibitedData.size === 0) {
@@ -758,6 +764,27 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
             Main.osdWindowManager.show(-1, this._iconDeactivated,
                 message, null, null);
+        }
+    }
+
+    // Add the name of App as toggle button subtitle (=< Gnome 44)
+    _updateAppsSubtitle(id) {
+        if (ShellVersion >= 44) {
+            const listAppId = this._appInhibitedData.keys();
+            let appId = id !== null ? id : listAppId.next().value;
+            //let appId = null;
+            
+            //if(id !== null) {
+            //    appId = id;
+            //} else {                          
+            //    appId = listAppId.next().value;
+            //}
+            if (appId !== undefined) {
+                let appInfo = Gio.DesktopAppInfo.new(appId);        
+                this._caffeineToggle.subtitle = appInfo.get_display_name();
+            } else {
+                this._caffeineToggle.subtitle = null;
+            }
         }
     }
 
@@ -949,6 +976,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(false, true);
             this.addInhibit(appId); // Inhibit app
+
+            // Uninhibit previous focused apps
+            this._appInhibitedData.forEach((data, id) => {
+                if(id !== appId){
+                    this.removeInhibit(id);
+                }
+            });
         } else if (!this._appConfigs.includes(appId) && this._appInhibitedData.size !== 0){
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(true, true);
