@@ -366,6 +366,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // QuickSettings
         this._caffeineToggle = new CaffeineToggle();
         this.quickSettingsItems.push(this._caffeineToggle);
+        this._updateTimerSubtitle();
 
         // Bind signals
         this._inhibitorAddedId = this._sessionManager.connectSignal(
@@ -775,9 +776,17 @@ class Caffeine extends QuickSettings.SystemIndicator {
             if (appId !== undefined) {
                 let appInfo = Gio.DesktopAppInfo.new(appId);        
                 this._caffeineToggle.subtitle = appInfo.get_display_name();
-            } else {
-                this._caffeineToggle.subtitle = null;
             }
+        }
+    }
+
+    // Add the timer duration selected as subtitle (=< Gnome 44)
+    _updateTimerSubtitle() {
+        if (ShellVersion >= 44 && !this._settings.get_boolean(TOGGLE_STATE_KEY)) {
+            const timerDuration = this._settings.get_int(TIMER_KEY);
+            this._caffeineToggle.subtitle = timerDuration !== 0 
+                ? parseInt(timerDuration) + "m" 
+                : null;
         }
     }
 
@@ -808,11 +817,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (caffeineToggleState !== this._state) {
             this.toggleState();
 
-            // Enable timer when duration is not set to zero
+            // Enable timer when duration is not set to zero            
             if (caffeineToggleState && this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
                 this._startTimer();
             }
         }
+        // Add timer duration as Subtitle when disable
+        this._updateTimerSubtitle();
     }
 
     _saveUserState(state) {
