@@ -649,7 +649,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                         if (appId === 'user') {
                             this._saveUserState(true);
                         } else {
-                            this._updateAppsSubtitle(appId);
+                            this._updateAppSubtitle(appId);
                         }
 
                         // Update state
@@ -683,7 +683,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 if (appId === 'user') {
                     this._saveUserState(false);
                 } else {
-                    this._updateAppsSubtitle(null);
+                    this._updateAppSubtitle(null);
                 }
 
                 // Update state
@@ -768,7 +768,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     // Add the name of App as subtitle (=< Gnome 44)
-    _updateAppsSubtitle(id) {
+    _updateAppSubtitle(id) {
         if (ShellVersion >= 44) {
             const listAppId = this._appInhibitedData.keys();
             let appId = id !== null ? id : listAppId.next().value;
