@@ -452,6 +452,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         } else {
             this.addInhibit('user');
             this._manageNightLight(false, false);
+
+            // Enable timer when duration isn't null
+            if (this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
+                this._startTimer();
+            }
         }
     }
 
@@ -813,14 +818,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _updateMainState() {
-        const caffeineToggleState = this._settings.get_boolean(TOGGLE_STATE_KEY);
-        if (caffeineToggleState !== this._state) {
+        if (this._settings.get_boolean(TOGGLE_STATE_KEY) !== this._state) {
             this.toggleState();
-
-            // Enable timer when duration is not set to zero            
-            if (caffeineToggleState && this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
-                this._startTimer();
-            }
         }
         // Add timer duration as Subtitle when disable
         this._updateTimerSubtitle();
