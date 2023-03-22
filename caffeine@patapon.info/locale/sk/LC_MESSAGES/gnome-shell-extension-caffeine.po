@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-11 23:33+0000\n"
+"POT-Creation-Date: 2023-03-22 12:33+0100\n"
 "PO-Revision-Date: 2015-01-16 10:24+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak\n"
@@ -17,28 +17,32 @@ msgstr ""
 "X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:102
+#: extension.js:101
 msgid "Caffeine timer"
 msgstr ""
 
-#: extension.js:218
+#: extension.js:216
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:753
-msgid "Caffeine enabled"
-msgstr "Caffeine aktiviert"
-
-#: extension.js:755
-msgid "Night Light paused"
+#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+msgid " minutes"
 msgstr ""
 
 #: extension.js:760
+msgid "Caffeine enabled"
+msgstr "Caffeine aktiviert"
+
+#: extension.js:762
+msgid "Night Light paused"
+msgstr ""
+
+#: extension.js:767
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Caffeine aktiviert"
 
-#: extension.js:762
+#: extension.js:769
 msgid "Night Light resumed"
 msgstr ""
 
@@ -170,7 +174,7 @@ msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
 #: preferences/generalPage.js:102
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr ""
 
@@ -191,7 +195,7 @@ msgid "Shortcut"
 msgstr ""
 
 #: preferences/generalPage.js:175
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr ""
 
@@ -201,10 +205,6 @@ msgstr ""
 
 #: preferences/generalPage.js:217
 msgid "Set to "
-msgstr ""
-
-#: preferences/generalPage.js:217
-msgid " minutes"
 msgstr ""
 
 #: preferences/generalPage.js:264 preferences/generalPage.js:296
@@ -230,97 +230,93 @@ msgid "Store caffeine user state"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
-msgid "Start Timer countdown"
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+msgid "Specify time (minutes) for the timer countdown"
 msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
-msgid "Specify time (minutes) for the timer countdown"
-msgstr ""
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 msgid "Specify index of duration range for the timer"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 #, fuzzy
 msgid "Show the indicator on the top panel"
 msgstr "Zobraziť Caffeine v hornej lište"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 #, fuzzy
 msgid "Show notifications"
 msgstr "Povoliť oznámenia"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show notifications when enabled/disabled"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show timer"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show timer when enabled/disabled"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Enable when a fullscreen application is running"
 msgstr "Povoliť, keď je spustená aplikácia v režime na celú obrazovku"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Trigger App control mode"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the trigger method for apps."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:101
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
 msgid "Default height for the preferences window"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:105
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:109
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
 msgstr ""
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:113
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
 

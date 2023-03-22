@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-11 23:33+0000\n"
+"POT-Creation-Date: 2023-03-22 12:33+0100\n"
 "PO-Revision-Date: 2023-02-07 14:23+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -17,27 +17,31 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:102
+#: extension.js:101
 msgid "Caffeine timer"
 msgstr "Caffeine-tijdklok"
 
-#: extension.js:218
+#: extension.js:216
 msgid "Infinite"
 msgstr "Onbeperkt"
 
-#: extension.js:753
+#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+msgid " minutes"
+msgstr ""
+
+#: extension.js:760
 msgid "Caffeine enabled"
 msgstr "Caffeine is ingeschakeld"
 
-#: extension.js:755
+#: extension.js:762
 msgid "Night Light paused"
 msgstr "Nachtlicht is onderbroken"
 
-#: extension.js:760
+#: extension.js:767
 msgid "Caffeine disabled"
 msgstr "Caffeine is uitgeschakeld"
 
-#: extension.js:762
+#: extension.js:769
 msgid "Night Light resumed"
 msgstr "Nachtlicht is hervat"
 
@@ -164,7 +168,7 @@ msgid "Toggles the night light together with Caffeine's state"
 msgstr "Schakel nachtlicht tegelijk met Caffeine in/uit"
 
 #: preferences/generalPage.js:102
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr "Scherm uitschakelen"
 
@@ -185,7 +189,7 @@ msgid "Shortcut"
 msgstr "Sneltoets"
 
 #: preferences/generalPage.js:175
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr "Aan-/Uitsneltoets"
 
@@ -195,10 +199,6 @@ msgstr "Druk op backspace om te wissen"
 
 #: preferences/generalPage.js:217
 msgid "Set to "
-msgstr ""
-
-#: preferences/generalPage.js:217
-msgid " minutes"
 msgstr ""
 
 #: preferences/generalPage.js:264 preferences/generalPage.js:296
@@ -225,90 +225,86 @@ msgid "Store caffeine user state"
 msgstr "Huidige status bewaren"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
-msgid "Start Timer countdown"
-msgstr "Tijdklok inschakelen"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Specify time (minutes) for the timer countdown"
 msgstr "Geef aan hoelang de tijdklok dient af te tellen (in minuten)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 #, fuzzy
 msgid "Specify index of duration range for the timer"
 msgstr "Geef aan hoelang de tijdklok dient af te tellen (in minuten)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
 msgstr "Vorige status herstellen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
 msgstr "Indicator tonen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Show the indicator on the top panel"
 msgstr "Toon de indicator op de bovenbalk"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Show notifications"
 msgstr "Meldingen tonen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show notifications when enabled/disabled"
 msgstr "Toon meldingen als Caffeine wordt in- of uitgeschakeld"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show timer"
 msgstr "Tijdklok tonen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show timer when enabled/disabled"
 msgstr "Toon een tijdklok na in- of uitschakelen"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Enable when a fullscreen application is running"
 msgstr "Inschakelen als een toepassing de schermvullende modus gebruikt"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
 msgstr "Nachtlichtbediening"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "Geef aan hoe Caffeine dient om te gaan met de nachtlichtinstelling."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "Schakel het scherm uit als Caffeine wordt ingeschakeld."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Trigger App control mode"
 msgstr "Aan-/Uitbedieningsmodus"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the trigger method for apps."
 msgstr "Stel de aan-/uitmethode van toepassingen in."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
 msgstr "Sneltoets om Caffeine aan/uit te zetten."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
 msgstr "Standaardbreedte van het voorkeurenvenster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:101
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
 msgid "Default height for the preferences window"
 msgstr "Standaardhoogte van het voorkeurenvenster"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:105
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
 msgstr "Zichtbare locatieverschuiving van het pictogram in het indicatormenu"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:109
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
@@ -316,9 +312,12 @@ msgstr ""
 "Daadwerkelijke locatieverschuiving van het pictogram in het indicatormenu, "
 "inclusief het niet-getoonde"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:113
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr "Vorige itemlocatie in indicatormenu"
+
+#~ msgid "Start Timer countdown"
+#~ msgstr "Tijdklok inschakelen"
 
 #~ msgid "Auto suspend and screensaver disabled"
 #~ msgstr ""

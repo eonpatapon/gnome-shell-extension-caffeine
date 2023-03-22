@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-11 23:33+0000\n"
+"POT-Creation-Date: 2023-03-22 12:33+0100\n"
 "PO-Revision-Date: 2022-06-30 11:54-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -17,27 +17,31 @@ msgstr ""
 "X-Generator: Poedit 3.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:102
+#: extension.js:101
 msgid "Caffeine timer"
 msgstr "Caffeine 定时器"
 
-#: extension.js:218
+#: extension.js:216
 msgid "Infinite"
 msgstr "持续"
 
-#: extension.js:753
+#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+msgid " minutes"
+msgstr " 分钟"
+
+#: extension.js:760
 msgid "Caffeine enabled"
 msgstr "Caffeine 已开启"
 
-#: extension.js:755
+#: extension.js:762
 msgid "Night Light paused"
 msgstr "夜灯已暂停"
 
-#: extension.js:760
+#: extension.js:767
 msgid "Caffeine disabled"
 msgstr "Caffeine 已关闭"
 
-#: extension.js:762
+#: extension.js:769
 msgid "Night Light resumed"
 msgstr "夜灯已恢复"
 
@@ -162,7 +166,7 @@ msgid "Toggles the night light together with Caffeine's state"
 msgstr "随 Caffeine 的状态切换夜灯"
 
 #: preferences/generalPage.js:102
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr "允许屏幕保护"
 
@@ -183,7 +187,7 @@ msgid "Shortcut"
 msgstr "快捷键"
 
 #: preferences/generalPage.js:175
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr "修改快捷键"
 
@@ -194,10 +198,6 @@ msgstr "使用退格来清除"
 #: preferences/generalPage.js:217
 msgid "Set to "
 msgstr "设置到 "
-
-#: preferences/generalPage.js:217
-msgid " minutes"
-msgstr " 分钟"
 
 #: preferences/generalPage.js:264 preferences/generalPage.js:296
 msgid "New accelerator…"
@@ -221,97 +221,96 @@ msgid "Store caffeine user state"
 msgstr "保存 caffeine 状态"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
-msgid "Start Timer countdown"
-msgstr "开始计时器倒计时"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Specify time (minutes) for the timer countdown"
 msgstr "指定计时器倒计时的时间 (分钟)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify index of duration range for the timer"
 msgstr "指定计时器的持续时间"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
 msgstr "恢复 caffeine 状态"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
 msgstr "显示指示器"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Show the indicator on the top panel"
 msgstr "在顶部面板显示指示器"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Show notifications"
 msgstr "显示通知"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show notifications when enabled/disabled"
 msgstr "启用/禁用时显示通知"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show timer"
 msgstr "显示计时器"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show timer when enabled/disabled"
 msgstr "启用/禁用时显示计时器"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Enable when a fullscreen application is running"
 msgstr "运行全屏程序时自动启动"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
 msgstr "夜灯控制模式"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "设置 Caffeine 和夜灯设置交互的方式。"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "允许在 Caffeine 启用时关闭屏幕"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Trigger App control mode"
 msgstr "吃法应用控制模式"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the trigger method for apps."
 msgstr "设置应用的触发方式."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
 msgstr "切换 Caffeine 的快捷键"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
 msgstr "首选项窗口的默认宽度"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:101
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
 msgid "Default height for the preferences window"
 msgstr "首选项窗口的默认高度"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:105
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
 msgstr "菜单中状态指示器的位置偏移"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:109
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
 msgstr "菜单中状态指示器的真实位置偏移，包括不可见的"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:113
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr "菜单中的最后一项"
+
+#~ msgid "Start Timer countdown"
+#~ msgstr "开始计时器倒计时"
 
 #~ msgid "Auto suspend and screensaver disabled"
 #~ msgstr "自动挂起与屏幕保护程序已禁用"
