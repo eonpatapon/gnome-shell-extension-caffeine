@@ -215,7 +215,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             if(timer[0] === 0) {
                 label = _('Infinite');
             } else {
-                label = parseInt(timer[durationIndex]) + 'm';
+                label = parseInt(timer[durationIndex]) + _(' minutes');
             }
             if (!label)
                 continue;
@@ -790,7 +790,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (ShellVersion >= 44 && !this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             const timerDuration = this._settings.get_int(TIMER_KEY);
             this._caffeineToggle.subtitle = timerDuration !== 0 
-                ? parseInt(timerDuration) + "m" 
+                ? parseInt(timerDuration) + _(' minutes')
                 : null;
         }
     }
