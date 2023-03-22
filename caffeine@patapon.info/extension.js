@@ -228,7 +228,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         this.menuEnabled = TIMERS.length > 2;
      
         // Select active duration
-        if(resetDefault && this._settings.get_int(TIMER_KEY) !== 0) {
+        if (resetDefault && this._settings.get_int(TIMER_KEY) !== 0) {
             // Set default duration to 0
             this._settings.set_int(TIMER_KEY, 0);
         } else {
@@ -563,7 +563,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
 
         // Execute Timer only if duration isn't set on infinite time
-        if(timerDelay !== 0) {
+        if (timerDelay !== 0) {
             let secondLeft = timerDelay;
             this._showIndicatorLabel();
             this._printTimer(secondLeft);
@@ -982,7 +982,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
             // Uninhibit previous focused apps
             this._appInhibitedData.forEach((data, id) => {
-                if(id !== appId){
+                if (id !== appId) {
                     this.removeInhibit(id);
                 }
             });
