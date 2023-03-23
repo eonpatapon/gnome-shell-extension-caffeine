@@ -773,7 +773,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    // Add the name of App as subtitle (=< Gnome 44)
+    // Add the name of App as subtitle (>= Gnome 44)
     _updateAppSubtitle(id) {
         if (ShellVersion >= 44) {
             const listAppId = this._appInhibitedData.keys();
@@ -785,7 +785,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    // Add the timer duration selected as subtitle (=< Gnome 44)
+    // Add the timer duration selected as subtitle (>= Gnome 44)
     _updateTimerSubtitle() {
         if (ShellVersion >= 44 && !this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             const timerDuration = this._settings.get_int(TIMER_KEY);
