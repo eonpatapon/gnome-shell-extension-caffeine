@@ -340,15 +340,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timeWorkspaceRemove = null;
         this._timeAppUnblock = null;
 
-        // Init settings keys and restore user state
-        this._settings.reset(TOGGLE_STATE_KEY);
-        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
-            this.toggleState();
-        } else {
-            // reset user state
-            this._settings.reset(USER_ENABLED_KEY);
-        }
-
         // Show icon
         this._manageShowIndicator();
 
@@ -367,6 +358,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._caffeineToggle = new CaffeineToggle();
         this.quickSettingsItems.push(this._caffeineToggle);
         this._updateTimerSubtitle();
+
+        // Init settings keys and restore user state
+        this._settings.reset(TOGGLE_STATE_KEY);
+        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
+            this.toggleState();
+        } else {
+            // reset user state
+            this._settings.reset(USER_ENABLED_KEY);
+        }
 
         // Bind signals
         this._inhibitorAddedId = this._sessionManager.connectSignal(
