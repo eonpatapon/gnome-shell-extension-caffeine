@@ -444,7 +444,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     toggleState() {
         this._manageScreenBlankState(false);
         if (this._state) {
-            this._removeTimer(false);
+            this._removeTimer();
             this._appInhibitedData.forEach((data, appId) =>
                 this.removeInhibit(appId)
             );
@@ -554,10 +554,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _startTimer() {
-        this._timerEnable = true;
-
         // Reset timer
-        this._removeTimer(true);
+        this._removeTimer();
+        this._timerEnable = true;
 
         // Get duration
         let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
@@ -575,7 +574,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
             this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {
                 // Disable Caffeine when timer ended
-                this._removeTimer(false);
+                this._removeTimer();
                 this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                 return GLib.SOURCE_REMOVE;
             });
@@ -592,12 +591,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._updateLabelTimer(min + ':' + minS);
     }
 
-    _removeTimer(reset) {
-        if(!reset) {
-            // End timer
-            this._timerEnable = false;
-        }
+    _removeTimer() {
+        // End timer
+        this._timerEnable = false;
+
+        // Flush and hide timer label 
         this._updateLabelTimer(null);
+        this._timerLabel.visible = false;
 
         // Remove timer
         if((this._timeOut !== null) || (this._timePrint !== null)) {
@@ -627,7 +627,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             case Clutter.ScrollDirection.DOWN:
                 if(this._state) {
                     // Stop timer
-                    this._removeTimer(false);
+                    this._removeTimer();
                     // User state off - DOWN
                     this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                 }
