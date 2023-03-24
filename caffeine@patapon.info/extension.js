@@ -982,7 +982,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
             // Uninhibit previous focused apps
             this._appInhibitedData.forEach((data, id) => {
-                if (id !== appId) {
+                if (id !== appId && id !== 'user') {
                     this.removeInhibit(id);
                 }
             });
@@ -991,7 +991,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._manageNightLight(true, true);
             // Uninhibit all apps
             this._appInhibitedData.forEach((data, id) => {
-                this.removeInhibit(id);
+                if (id !== 'user') {
+                    this.removeInhibit(id);
+                }
             });
         }
     }
