@@ -391,9 +391,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._resetAppSignalId();
             this._updateAppEventMode();
         });
-        this.connect('destroy', () => {
-            this.quickSettingsItems.forEach(item => item.destroy());
-        });
 
         // Change user state on icon scroll event
         this._indicator.reactive = true;
@@ -1030,6 +1027,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Remove all inhibitors
         this._appInhibitedData.forEach((data, appId) => this.removeInhibit(appId));
         this._appInhibitedData.clear();
+
+        // Remove ToggleMenu
+        this.quickSettingsItems.forEach(item => item.destroy());
 
         // Disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
