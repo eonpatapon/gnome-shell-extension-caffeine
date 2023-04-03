@@ -40,7 +40,6 @@ const FULLSCREEN_KEY = 'enable-fullscreen';
 const NIGHT_LIGHT_KEY = 'nightlight-control';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
-const TIMER_ENABLED_KEY = 'countdown-timer-enabled';
 const SCREEN_BLANK = 'screen-blank';
 const TRIGGER_APPS_MODE = 'trigger-apps-mode';
 const INDICATOR_POSITION = 'indicator-position';
@@ -184,8 +183,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
         // Init Timers
         this._timerItems = new Map();
-        this._syncTimers();
-        this._sync();
+        this._syncTimers(false);
 
         // Bind signals
         this._settings.bind(`${TOGGLE_STATE_KEY}`,
@@ -198,7 +196,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this._sync();
         });
         this._settings.connect(`changed::${DURATION_TIMER_INDEX}`, () => {
-            this._syncTimers();
+            this._syncTimers(true);
         });
         this.connect('destroy', () => {
             this._iconActivated = null;
@@ -207,7 +205,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         });
     }
 
-    _syncTimers() {
+    _syncTimers(resetDefault) {
         this._itemsSection.removeAll();
         this._timerItems.clear();
         const durationIndex = this._settings.get_int(DURATION_TIMER_INDEX);
@@ -217,7 +215,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             if(timer[0] === 0) {
                 label = _('Infinite');
             } else {
-                label = parseInt(timer[durationIndex]) + 'm';
+                label = parseInt(timer[durationIndex]) + _(' minutes');
             }
             if (!label)
                 continue;
@@ -228,11 +226,18 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this._itemsSection.addMenuItem(item);
         }
         this.menuEnabled = TIMERS.length > 2;
+     
+        // Select active duration
+        if (resetDefault && this._settings.get_int(TIMER_KEY) !== 0) {
+            // Set default duration to 0
+            this._settings.set_int(TIMER_KEY, 0);
+        } else {
+            this._sync();
+        }
     }
 
     _sync() {
         const activeTimerId = this._settings.get_int(TIMER_KEY);
-
         for (const [timerId, item] of this._timerItems) {
             item.setOrnament(timerId === activeTimerId
                 ? PopupMenu.Ornament.CHECK
@@ -242,7 +247,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
     _checkTimer(timerId) {
         this._settings.set_int(TIMER_KEY, timerId);
-        this._settings.set_boolean(TIMER_ENABLED_KEY, true);
+        this._settings.set_boolean(TOGGLE_STATE_KEY, true);
     }
 
     _iconName() {
@@ -335,17 +340,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timeWorkspaceRemove = null;
         this._timeAppUnblock = null;
 
-        // Init settings keys and restore user state
-        this._settings.reset(TIMER_ENABLED_KEY);
-        this._settings.reset(TIMER_KEY);
-        this._settings.reset(TOGGLE_STATE_KEY);
-        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
-            this.toggleState();
-        } else {
-            // reset user state
-            this._settings.reset(USER_ENABLED_KEY);
-        }
-
         // Show icon
         this._manageShowIndicator();
 
@@ -363,6 +357,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // QuickSettings
         this._caffeineToggle = new CaffeineToggle();
         this.quickSettingsItems.push(this._caffeineToggle);
+        this._updateTimerSubtitle();
+
+        // Init settings keys and restore user state
+        this._settings.reset(TOGGLE_STATE_KEY);
+        if (this._settings.get_boolean(USER_ENABLED_KEY) && this._settings.get_boolean(RESTORE_KEY)) {
+            this.toggleState();
+        } else {
+            // reset user state
+            this._settings.reset(USER_ENABLED_KEY);
+        }
 
         // Bind signals
         this._inhibitorAddedId = this._sessionManager.connectSignal(
@@ -373,7 +377,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._updateAppConfigs.bind(this));
         this.stateId = this._settings.connect(`changed::${TOGGLE_STATE_KEY}`,
             this._updateMainState.bind(this));
-        this.timerId = this._settings.connect(`changed::${TIMER_ENABLED_KEY}`,
+        this.timerId = this._settings.connect(`changed::${TIMER_KEY}`,
             this._startTimer.bind(this));
         this.showTimerId = this._settings.connect(`changed::${SHOW_TIMER_KEY}`,
             this._showIndicatorLabel.bind(this));
@@ -386,9 +390,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.triggerId = this._settings.connect(`changed::${TRIGGER_APPS_MODE}`, () => {
             this._resetAppSignalId();
             this._updateAppEventMode();
-        });
-        this.connect('destroy', () => {
-            this.quickSettingsItems.forEach(item => item.destroy());
         });
 
         // Change user state on icon scroll event
@@ -448,7 +449,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     toggleState() {
         this._manageScreenBlankState(false);
         if (this._state) {
-            this._removeTimer(false);
+            this._removeTimer();
             this._appInhibitedData.forEach((data, appId) =>
                 this.removeInhibit(appId)
             );
@@ -456,6 +457,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         } else {
             this.addInhibit('user');
             this._manageNightLight(false, false);
+
+            // Enable timer when duration isn't null
+            if (this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
+                this._startTimer();
+            }
         }
     }
 
@@ -553,36 +559,30 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _startTimer() {
-        if(this._settings.get_boolean(TIMER_ENABLED_KEY)) {
-            this._timerEnable = true;
+        // Reset timer
+        this._removeTimer();
+        this._timerEnable = true;
 
-            // Reset Timer
-            this._removeTimer(true);
+        // Get duration
+        let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
 
-            // Enable Caffeine
-            this._settings.set_boolean(TOGGLE_STATE_KEY, true);
-
-            // Get duration
-            let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
-
-            // Execute Timer only if duration isn't set on infinite time
-            if(timerDelay !== 0) {
-                let secondLeft = timerDelay;
-                this._showIndicatorLabel();
+        // Execute Timer only if duration isn't set on infinite time
+        if (timerDelay !== 0) {
+            let secondLeft = timerDelay;
+            this._showIndicatorLabel();
+            this._printTimer(secondLeft);
+            this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
+                secondLeft -= 1;
                 this._printTimer(secondLeft);
-                this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
-                    secondLeft -= 1;
-                    this._printTimer(secondLeft);
-                    return GLib.SOURCE_CONTINUE;
-                });
+                return GLib.SOURCE_CONTINUE;
+            });
 
-                this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {
-                    // Disable Caffeine when timer ended
-                    this._removeTimer(false);
-                    this._settings.set_boolean(TOGGLE_STATE_KEY, false);
-                    return GLib.SOURCE_REMOVE;
-                });
-            }
+            this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {
+                // Disable Caffeine when timer ended
+                this._removeTimer();
+                this._settings.set_boolean(TOGGLE_STATE_KEY, false);
+                return GLib.SOURCE_REMOVE;
+            });
         }
     }
 
@@ -596,15 +596,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._updateLabelTimer(min + ':' + minS);
     }
 
-    _removeTimer(reset) {
-        if(!reset) {
-            // Set duration back to 0
-            this._settings.set_int(TIMER_KEY, 0);
-            // End timer
-            this._timerEnable = false;
-        }
-        this._settings.set_boolean(TIMER_ENABLED_KEY, false);
+    _removeTimer() {
+        // End timer
+        this._timerEnable = false;
+
+        // Flush and hide timer label 
         this._updateLabelTimer(null);
+        this._timerLabel.visible = false;
 
         // Remove timer
         if((this._timeOut !== null) || (this._timePrint !== null)) {
@@ -634,7 +632,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             case Clutter.ScrollDirection.DOWN:
                 if(this._state) {
                     // Stop timer
-                    this._removeTimer(false);
+                    this._removeTimer();
                     // User state off - DOWN
                     this._settings.set_boolean(TOGGLE_STATE_KEY, false);
                 }
@@ -654,13 +652,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 inhibitor.GetAppIdRemote(appId => {
                     appId = String(appId);
                     let appData = this._appInhibitedData.get(appId);
-                    if (appId !== '' && requestedId === appId && appData) {
-                        if (appId === 'user') {
-                            this._saveUserState(true);
-                        }
+                    if (appId !== '' && requestedId === appId && appData) {                        
                         appData.isInhibited = true;
                         appData.object = object;
                         this._appInhibitedData.set(appId, appData);
+
+                        if (appId === 'user') {
+                            this._saveUserState(true);
+                        } else {
+                            this._updateAppSubtitle(appId);
+                        }
 
                         // Update state
                         if (this._state === false) {
@@ -687,11 +688,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if(appId){
             let appData = this._appInhibitedData.get(appId);
             if (appData){
-                if (appId === 'user') {
-                       this._saveUserState(false);
-                }
                 // Remove app from list
                 this._appInhibitedData.delete(appId);
+
+                if (appId === 'user') {
+                    this._saveUserState(false);
+                } else {
+                    this._updateAppSubtitle(null);
+                }
 
                 // Update state
                 if (this._appInhibitedData.size === 0) {
@@ -774,6 +778,28 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
+    // Add the name of App as subtitle (>= Gnome 44)
+    _updateAppSubtitle(id) {
+        if (ShellVersion >= 44) {
+            const listAppId = this._appInhibitedData.keys();
+            let appId = id !== null ? id : listAppId.next().value;
+            if (appId !== undefined) {
+                let appInfo = Gio.DesktopAppInfo.new(appId);        
+                this._caffeineToggle.subtitle = appInfo.get_display_name();
+            }
+        }
+    }
+
+    // Add the timer duration selected as subtitle (>= Gnome 44)
+    _updateTimerSubtitle() {
+        if (ShellVersion >= 44 && !this._settings.get_boolean(TOGGLE_STATE_KEY)) {
+            const timerDuration = this._settings.get_int(TIMER_KEY);
+            this._caffeineToggle.subtitle = timerDuration !== 0 
+                ? parseInt(timerDuration) + _(' minutes')
+                : null;
+        }
+    }
+
     _updateAppConfigs() {
         this._appConfigs.length = 0;
         this._settings.get_strv(INHIBIT_APPS_KEY).forEach(appId => {
@@ -800,6 +826,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._settings.get_boolean(TOGGLE_STATE_KEY) !== this._state) {
             this.toggleState();
         }
+        // Add timer duration as Subtitle when disable
+        this._updateTimerSubtitle();
     }
 
     _saveUserState(state) {
@@ -956,12 +984,21 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(false, true);
             this.addInhibit(appId); // Inhibit app
+
+            // Uninhibit previous focused apps
+            this._appInhibitedData.forEach((data, id) => {
+                if (id !== appId && id !== 'user') {
+                    this.removeInhibit(id);
+                }
+            });
         } else if (!this._appConfigs.includes(appId) && this._appInhibitedData.size !== 0){
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(true, true);
             // Uninhibit all apps
             this._appInhibitedData.forEach((data, id) => {
-                this.removeInhibit(id);
+                if (id !== 'user') {
+                    this.removeInhibit(id);
+                }
             });
         }
     }
@@ -998,6 +1035,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Remove all inhibitors
         this._appInhibitedData.forEach((data, appId) => this.removeInhibit(appId));
         this._appInhibitedData.clear();
+
+        // Remove ToggleMenu
+        this.quickSettingsItems.forEach(item => item.destroy());
 
         // Disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
