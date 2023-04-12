@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-22 12:33+0100\n"
-"PO-Revision-Date: 2022-04-13 15:18+0200\n"
-"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
+"PO-Revision-Date: 2023-04-12 18:40+0200\n"
+"Last-Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -14,50 +14,48 @@ msgstr ""
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:101
 msgid "Caffeine timer"
-msgstr ""
+msgstr "Časovač Caffeine"
 
 #: extension.js:216
 msgid "Infinite"
-msgstr ""
+msgstr "Nekonečně"
 
 #: extension.js:218 extension.js:793 preferences/generalPage.js:217
 msgid " minutes"
-msgstr ""
+msgstr " minut"
 
 #: extension.js:760
 msgid "Caffeine enabled"
-msgstr ""
+msgstr "Caffeine povolen"
 
 #: extension.js:762
-#, fuzzy
 msgid "Night Light paused"
-msgstr "Noční světlo"
+msgstr "Noční světlo pozastaveno"
 
 #: extension.js:767
 msgid "Caffeine disabled"
-msgstr ""
+msgstr "Caffeine zakázán"
 
 #: extension.js:769
-#, fuzzy
 msgid "Night Light resumed"
 msgstr "Noční světlo obnoveno"
 
 #: preferences/appsPage.js:29
 msgid "Running"
-msgstr ""
+msgstr "Spuštěné"
 
 #: preferences/appsPage.js:30
 msgid "Focus"
-msgstr ""
+msgstr "Jako současné okno"
 
 #: preferences/appsPage.js:31
 msgid "Active workspace"
-msgstr ""
+msgstr "Na současné pracovní ploše"
 
 #: preferences/appsPage.js:38
 msgid "Apps"
@@ -65,29 +63,27 @@ msgstr "Aplikace"
 
 #: preferences/appsPage.js:49
 msgid "Trigger mode"
-msgstr ""
+msgstr "Režim aktivování"
 
 #: preferences/appsPage.js:58
-#, fuzzy
 msgid "Apps trigger Caffeine mode"
-msgstr "Aplikace, které spouštějí Caffeine"
+msgstr "Aplikace spustí režim Caffeine, když jsou"
 
 #: preferences/appsPage.js:59
-#, fuzzy
 msgid "Choose the way apps will trigger Caffeine"
-msgstr "Aplikace, které spouštějí Caffeine"
+msgstr "Vybrat způsob, jakým aplikace aktivují Caffeine"
 
 #: preferences/appsPage.js:73
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 #: preferences/appsPage.js:77
 msgid "Apps that trigger Caffeine"
-msgstr "Aplikace, které spouštějí Caffeine"
+msgstr "Aplikace, které aktivují Caffeine"
 
 #: preferences/displayPage.js:32 preferences/displayPage.js:42
 msgid "Display"
-msgstr ""
+msgstr "Displej"
 
 #: preferences/displayPage.js:47
 msgid "Only when active"
@@ -110,14 +106,12 @@ msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Povolit nebo zakázat ikonu Caffeine v horní liště"
 
 #: preferences/displayPage.js:63
-#, fuzzy
 msgid "Show timer in top panel"
-msgstr "Zobrazit indikátor stavu v horní liště"
+msgstr "Zobrazit časovač v horní liště"
 
 #: preferences/displayPage.js:64
-#, fuzzy
 msgid "Enable or disable the timer in the top panel"
-msgstr "Povolit nebo zakázat ikonu Caffeine v horní liště"
+msgstr "Povolit nebo zakázat časovač v horní liště"
 
 #: preferences/displayPage.js:75
 msgid "Notifications"
@@ -128,13 +122,12 @@ msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Povolit upozornění, když je Caffeine povoleno nebo zakázáno"
 
 #: preferences/displayPage.js:98
-#, fuzzy
 msgid "Status indicator position"
-msgstr "Zobrazit indikátor stavu v horní liště"
+msgstr "Pozice indikátoru stavu"
 
 #: preferences/displayPage.js:99
 msgid "The position relative of indicator icon to other items"
-msgstr ""
+msgstr "Relativní pozice ikony k ostatním položkám"
 
 #: preferences/generalPage.js:32
 msgid "For apps on list"
@@ -146,7 +139,7 @@ msgstr "Obecné"
 
 #: preferences/generalPage.js:57
 msgid "Behavior"
-msgstr ""
+msgstr "Chování"
 
 #: preferences/generalPage.js:66
 msgid "Enable for fullscreen apps"
@@ -175,41 +168,40 @@ msgstr "Přepne noční světlo spolu se stavem Caffeine"
 #: preferences/generalPage.js:102
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
-msgstr ""
+msgstr "Povolit prázdnou obrazovku"
 
 #: preferences/generalPage.js:103
-#, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
-msgstr "Povolit upozornění, když je Caffeine povoleno nebo zakázáno"
+msgstr "Povolit vypínání obrazovky s povoleným Caffeine"
 
 #: preferences/generalPage.js:118
 msgid "Timer"
-msgstr ""
+msgstr "Časovač"
 
 #: preferences/generalPage.js:123
 msgid "Durations"
-msgstr ""
+msgstr "Doby trvání"
 
 #: preferences/generalPage.js:167
 msgid "Shortcut"
-msgstr ""
+msgstr "Zkratka"
 
 #: preferences/generalPage.js:175
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
-msgstr ""
+msgstr "Zkratka přepnutí"
 
 #: preferences/generalPage.js:176
 msgid "Use Backspace to clear"
-msgstr ""
+msgstr "Použijte backspace pro vymazání"
 
 #: preferences/generalPage.js:217
 msgid "Set to "
-msgstr ""
+msgstr "Nastaveny na "
 
 #: preferences/generalPage.js:264 preferences/generalPage.js:296
 msgid "New accelerator…"
-msgstr ""
+msgstr "Nová zkratka…"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Application list"
@@ -221,9 +213,8 @@ msgid ""
 msgstr "Seznam řetězců, každý obsahující id aplikace (název desktop souboru)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
-#, fuzzy
 msgid "Store caffeine toggle state"
-msgstr "Uložit uživatelský stav caffeine"
+msgstr "Uložit stav zapnutí caffeine"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
@@ -232,7 +223,7 @@ msgstr "Uložit uživatelský stav caffeine"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Specify time (minutes) for the timer countdown"
-msgstr ""
+msgstr "Určete dobu (v minutách) pro odpočítávání časovače"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
@@ -261,12 +252,11 @@ msgstr "Zobrazit upozornění, když je povoleno/zakázáno"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show timer"
-msgstr ""
+msgstr "Zobrazit časovač"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
-#, fuzzy
 msgid "Show timer when enabled/disabled"
-msgstr "Zobrazit upozornění, když je povoleno/zakázáno"
+msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
@@ -283,30 +273,28 @@ msgstr ""
 "Nastavte způsob, kterým Caffeine interaguje s nastavením Nočního světla."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
-#, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled."
-msgstr "Povolit upozornění, když je Caffeine povoleno nebo zakázáno"
+msgstr "Povolit vypínání obrazovky s povoleným Caffeine."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
-#, fuzzy
 msgid "Trigger App control mode"
-msgstr "Režim řízení Nočního světla"
+msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the trigger method for apps."
-msgstr ""
+msgstr "Nastavit režim spuštění pro aplikace."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
-msgstr ""
+msgstr "Zkratka pro přepnutí Caffeine."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
-msgstr ""
+msgstr "Výchozí šířka okna nastavení"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
 msgid "Default height for the preferences window"
-msgstr ""
+msgstr "Výchozí výška okna nastavení"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
