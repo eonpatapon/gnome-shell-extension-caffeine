@@ -22,7 +22,7 @@ clean:
 	@rm -fv $(EXTENSION_DIR)/schemas/gschemas.compiled
 
 lint:
-	eslint --resolve-plugins-relative-to "$(shell npm root -g)" $(EXTENSION_DIR)
+	eslint -c .eslintrc.yml --resolve-plugins-relative-to "$(shell npm root -g)" $(EXTENSION_DIR)
 
 lint-fix:
-	eslint --resolve-plugins-relative-to "$(shell npm root -g)" --fix $(EXTENSION_DIR)
+	eslint -c .eslintrc.yml --resolve-plugins-relative-to "$(shell npm root -g)" --fix $(EXTENSION_DIR)
