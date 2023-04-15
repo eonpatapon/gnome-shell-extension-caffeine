@@ -8,3 +8,6 @@ rules: #Override some of the upstream rules to match this codebase
   comma-dangle:
    - error
    - never
+  arrow-parens:
+   - error
+   - always
