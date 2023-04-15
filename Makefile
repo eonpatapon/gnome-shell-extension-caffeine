@@ -15,7 +15,7 @@ build:
 	mv $(EXTENSION_DIR).shell-extension.zip ../$(BUNDLE_PATH)
 
 install:
-	gnome-extensions install $(BUNDLE_PATH) --force 
+	gnome-extensions install $(BUNDLE_PATH) --force
 
 clean:
 	@rm -fv $(BUNDLE_PATH)
