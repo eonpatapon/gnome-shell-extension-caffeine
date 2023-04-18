@@ -45,12 +45,15 @@ const TRIGGER_APPS_MODE = 'trigger-apps-mode';
 const INDICATOR_POSITION = 'indicator-position';
 const INDICATOR_INDEX = 'indicator-position-index';
 const INDICATOR_POS_MAX = 'indicator-position-max';
+const XSCREENSAVER_STOP = "xscreensaver-command -exit";
+const XSCREENSAVER_START = "xscreensaver -nosplash";
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
 const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
+const Util = imports.misc.util;
 
 const ColorInterface = '<node> \
   <interface name="org.gnome.SettingsDaemon.Color"> \
@@ -454,6 +457,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this.removeInhibit(appId)
             );
             this._manageNightLight(true, false);
+            Util.trySpawnCommandLine( XSCREENSAVER_START );
         } else {
             this.addInhibit('user');
             this._manageNightLight(false, false);
@@ -462,6 +466,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             if (this._settings.get_int(TIMER_KEY) !== 0 && !this._timerEnable) {
                 this._startTimer();
             }
+            Util.trySpawnCommandLine( XSCREENSAVER_STOP );
         }
     }
 
