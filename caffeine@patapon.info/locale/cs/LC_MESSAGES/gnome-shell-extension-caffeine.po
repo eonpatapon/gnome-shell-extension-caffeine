@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 22:28+0200\n"
+"POT-Creation-Date: 2023-04-19 23:31+0200\n"
 "PO-Revision-Date: 2023-04-12 18:40+0200\n"
 "Last-Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
 "Language-Team: Czech\n"
@@ -17,35 +17,35 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:101
+#: extension.js:160
 msgid "Caffeine"
 msgstr "Kofein"
 
-#: extension.js:102
+#: extension.js:177 extension.js:617
 msgid "Caffeine timer"
 msgstr "Časovač Kofein"
 
-#: extension.js:217
+#: extension.js:215
 msgid "Infinite"
 msgstr "Nekonečně"
 
-#: extension.js:219 extension.js:799 preferences/generalPage.js:217
+#: extension.js:217 extension.js:797 preferences/generalPage.js:217
 msgid " minutes"
 msgstr " minut"
 
-#: extension.js:766
+#: extension.js:764
 msgid "Caffeine enabled"
 msgstr "Kofein povolen"
 
-#: extension.js:768
+#: extension.js:766
 msgid "Night Light paused"
 msgstr "Noční světlo pozastaveno"
 
-#: extension.js:773
+#: extension.js:771
 msgid "Caffeine disabled"
 msgstr "Kofein zakázán"
 
-#: extension.js:775
+#: extension.js:773
 msgid "Night Light resumed"
 msgstr "Noční světlo obnoveno"
 
@@ -273,8 +273,7 @@ msgstr "Režim řízení Nočního světla"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr ""
-"Nastavte způsob, kterým Kofein interaguje s nastavením Nočního světla."
+msgstr "Nastavte způsob, kterým Kofein interaguje s nastavením Nočního světla."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."

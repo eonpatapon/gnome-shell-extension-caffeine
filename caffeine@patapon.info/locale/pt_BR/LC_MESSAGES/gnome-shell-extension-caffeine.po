@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 22:28+0200\n"
+"POT-Creation-Date: 2023-04-19 23:31+0200\n"
 "PO-Revision-Date: 2020-02-25 20:16-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -22,36 +22,36 @@ msgstr ""
 "X-Generator: Gtranslator 3.32.0\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:101
+#: extension.js:160
 msgid "Caffeine"
 msgstr "Cafeína"
 
-#: extension.js:102
+#: extension.js:177 extension.js:617
 msgid "Caffeine timer"
 msgstr "Temporizador do Cafeína"
 
-#: extension.js:217
+#: extension.js:215
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:219 extension.js:799 preferences/generalPage.js:217
+#: extension.js:217 extension.js:797 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:766
+#: extension.js:764
 msgid "Caffeine enabled"
 msgstr "Cafeína ativado"
 
-#: extension.js:768
+#: extension.js:766
 msgid "Night Light paused"
 msgstr "Luz Noturna pausado"
 
-#: extension.js:773
+#: extension.js:771
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Cafeína desativado"
 
-#: extension.js:775
+#: extension.js:773
 msgid "Night Light resumed"
 msgstr "Luz Noturna resumido"
 
