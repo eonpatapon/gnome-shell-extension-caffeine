@@ -25,7 +25,7 @@ msgstr ""
 
 #: extension.js:101
 msgid "Caffeine timer"
-msgstr "Caffeine minuteur"
+msgstr "Caféine minuteur"
 
 #: extension.js:216
 msgid "Infinite"
@@ -37,7 +37,7 @@ msgstr " minutes"
 
 #: extension.js:760
 msgid "Caffeine enabled"
-msgstr "Caffeine est activé"
+msgstr "Caféine est activé"
 
 #: extension.js:762
 msgid "Night Light paused"
@@ -45,7 +45,7 @@ msgstr "Mode nuit suspendu"
 
 #: extension.js:767
 msgid "Caffeine disabled"
-msgstr "Caffeine est désactivé"
+msgstr "Caféine est désactivé"
 
 #: extension.js:769
 msgid "Night Light resumed"
@@ -73,11 +73,11 @@ msgstr "Mode de déclenchement"
 
 #: preferences/appsPage.js:58
 msgid "Apps trigger Caffeine mode"
-msgstr "Mode de déclenchement applicatif de Caffeine"
+msgstr "Mode de déclenchement applicatif de Caféine"
 
 #: preferences/appsPage.js:59
 msgid "Choose the way apps will trigger Caffeine"
-msgstr "Spécifier la façon dont les applications vont déclencher Caffeine"
+msgstr "Spécifier la façon dont les applications vont déclencher Caféine"
 
 #: preferences/appsPage.js:73
 msgid "Add"
@@ -85,7 +85,7 @@ msgstr "Ajouter"
 
 #: preferences/appsPage.js:77
 msgid "Apps that trigger Caffeine"
-msgstr "Applications qui déclenchent Caffeine"
+msgstr "Applications qui déclenchent Caféine"
 
 #: preferences/displayPage.js:32 preferences/displayPage.js:42
 msgid "Display"
@@ -105,11 +105,11 @@ msgstr "Jamais"
 
 #: preferences/displayPage.js:51
 msgid "Show status indicator in top panel"
-msgstr "Afficher l’indicateur Caffeine dans la barre supérieure"
+msgstr "Afficher l’indicateur Caféine dans la barre supérieure"
 
 #: preferences/displayPage.js:52
 msgid "Enable or disable the Caffeine icon in the top panel"
-msgstr "Activer ou désactiver l’icône de Caffeine dans la barre supérieure"
+msgstr "Activer ou désactiver l’icône de Caféine dans la barre supérieure"
 
 #: preferences/displayPage.js:63
 msgid "Show timer in top panel"
@@ -125,7 +125,7 @@ msgstr "Notifications"
 
 #: preferences/displayPage.js:76
 msgid "Enable notifications when Caffeine is enabled or disabled"
-msgstr "Activer les notifications quand Caffeine est activé ou désactivé"
+msgstr "Activer les notifications quand Caféine est activé ou désactivé"
 
 #: preferences/displayPage.js:98
 msgid "Status indicator position"
