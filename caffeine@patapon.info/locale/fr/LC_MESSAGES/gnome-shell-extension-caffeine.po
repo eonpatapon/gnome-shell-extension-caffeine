@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 22:01+0100\n"
+"POT-Creation-Date: 2023-04-19 22:28+0200\n"
 "PO-Revision-Date: 2022-10-07 16:40+0200\n"
 "Last-Translator: Pakaoraki <pakaoraki@gmx.com>\n"
 "Language-Team: French\n"
@@ -24,30 +24,34 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:101
+msgid "Caffeine"
+msgstr "Caféine"
+
+#: extension.js:102
 msgid "Caffeine timer"
 msgstr "Caféine minuteur"
 
-#: extension.js:216
+#: extension.js:217
 msgid "Infinite"
 msgstr "Infini"
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:219 extension.js:799 preferences/generalPage.js:217
 msgid " minutes"
 msgstr " minutes"
 
-#: extension.js:760
+#: extension.js:766
 msgid "Caffeine enabled"
 msgstr "Caféine est activé"
 
-#: extension.js:762
+#: extension.js:768
 msgid "Night Light paused"
 msgstr "Mode nuit suspendu"
 
-#: extension.js:767
+#: extension.js:773
 msgid "Caffeine disabled"
 msgstr "Caféine est désactivé"
 
-#: extension.js:769
+#: extension.js:775
 msgid "Night Light resumed"
 msgstr "Mode nuit réactivé"
 
@@ -153,7 +157,8 @@ msgstr "Activer pour les applications en plein écran"
 
 #: preferences/generalPage.js:67
 msgid "Automatically enable when an app enters fullscreen mode"
-msgstr "Activer automatiquement lorsqu’une application entre en mode plein écran"
+msgstr ""
+"Activer automatiquement lorsqu’une application entre en mode plein écran"
 
 #: preferences/generalPage.js:78
 msgid "Remember state"
@@ -161,7 +166,9 @@ msgstr "Se souvenir de l’état"
 
 #: preferences/generalPage.js:79
 msgid "Remember the last state across sessions and reboots"
-msgstr "Se souvenir du dernier état au-delà des changements de session et redémarrages"
+msgstr ""
+"Se souvenir du dernier état au-delà des changements de session et "
+"redémarrages"
 
 #: preferences/generalPage.js:90
 msgid "Pause and resume Night Light"
@@ -277,7 +284,8 @@ msgstr "Contrôle du Mode nuit"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr "Définir la manière dont Caféine interagit avec les réglages du Mode nuit."
+msgstr ""
+"Définir la manière dont Caféine interagit avec les réglages du Mode nuit."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."

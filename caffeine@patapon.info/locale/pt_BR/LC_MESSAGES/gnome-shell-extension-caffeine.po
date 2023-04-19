@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-04-19 22:28+0200\n"
 "PO-Revision-Date: 2020-02-25 20:16-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -23,31 +23,35 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:101
-msgid "Caffeine timer"
-msgstr "Temporizador do Caffeine"
+msgid "Caffeine"
+msgstr "Cafeína"
 
-#: extension.js:216
+#: extension.js:102
+msgid "Caffeine timer"
+msgstr "Temporizador do Cafeína"
+
+#: extension.js:217
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:219 extension.js:799 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:766
 msgid "Caffeine enabled"
-msgstr "Caffeine ativado"
+msgstr "Cafeína ativado"
 
-#: extension.js:762
+#: extension.js:768
 msgid "Night Light paused"
 msgstr "Luz Noturna pausado"
 
-#: extension.js:767
+#: extension.js:773
 #, fuzzy
 msgid "Caffeine disabled"
-msgstr "Caffeine desativado"
+msgstr "Cafeína desativado"
 
-#: extension.js:769
+#: extension.js:775
 msgid "Night Light resumed"
 msgstr "Luz Noturna resumido"
 
@@ -73,11 +77,11 @@ msgstr "Modo de Gatilho"
 
 #: preferences/appsPage.js:58
 msgid "Apps trigger Caffeine mode"
-msgstr "Aplicativos que ativam o modo Caffeine"
+msgstr "Aplicativos que ativam o modo Cafeína"
 
 #: preferences/appsPage.js:59
 msgid "Choose the way apps will trigger Caffeine"
-msgstr "Escolha a maneira que os aplicativos irão ativar o Caffeine"
+msgstr "Escolha a maneira que os aplicativos irão ativar o Cafeína"
 
 #: preferences/appsPage.js:73
 msgid "Add"
@@ -85,7 +89,7 @@ msgstr "Adicionar"
 
 #: preferences/appsPage.js:77
 msgid "Apps that trigger Caffeine"
-msgstr "Aplicativos que ativam o modo Caffeine"
+msgstr "Aplicativos que ativam o modo Cafeína"
 
 #: preferences/displayPage.js:32 preferences/displayPage.js:42
 msgid "Display"
@@ -116,7 +120,7 @@ msgstr "Mostrar o indicador no painel superior"
 #: preferences/displayPage.js:63
 #, fuzzy
 msgid "Show timer in top panel"
-msgstr "Mostrar Caffeine no painel superior"
+msgstr "Mostrar Cafeína no painel superior"
 
 #: preferences/displayPage.js:64
 #, fuzzy
@@ -179,7 +183,7 @@ msgstr "Mostra notificações quando ativado/desativado"
 
 #: preferences/generalPage.js:91
 msgid "Toggles the night light together with Caffeine's state"
-msgstr "Alternar Luz Noturna junto do estado do Caffeine"
+msgstr "Alternar Luz Noturna junto do estado do Cafeína"
 
 #: preferences/generalPage.js:102
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
@@ -189,7 +193,7 @@ msgstr "Permitir tela desligada"
 #: preferences/generalPage.js:103
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
-msgstr "Permitir desligar a tela quando o Caffeine está ativado"
+msgstr "Permitir desligar a tela quando o Cafeína está ativado"
 
 #: preferences/generalPage.js:118
 msgid "Timer"
@@ -234,11 +238,11 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 #, fuzzy
 msgid "Store caffeine toggle state"
-msgstr "Armazenar estado do caffeine do usuário"
+msgstr "Armazenar estado do Cafeína do usuário"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
-msgstr "Armazenar estado do caffeine do usuário"
+msgstr "Armazenar estado do Cafeína do usuário"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
@@ -253,7 +257,7 @@ msgstr "Especifique o tempo do temporizador em minutos"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
-msgstr "Restaurar estado do caffeine"
+msgstr "Restaurar estado do Cafeína"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
@@ -292,7 +296,7 @@ msgstr "Modo de controle da Luz Noturna"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
-"Configure a maneira que o Caffeine interage com a configuração da Luz Noturna"
+"Configure a maneira que o Cafeína interage com a configuração da Luz Noturna"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 #, fuzzy
@@ -309,7 +313,7 @@ msgstr "Configure o metodo de gatilho para aplicativos"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
-msgstr "Atalho para alterar o Caffeine"
+msgstr "Atalho para alterar o Cafeína"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
@@ -371,7 +375,7 @@ msgstr "Último índice do icone do menu indicador"
 #~ msgstr "Ativar as notificações"
 
 #~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "Aplicativos que ativam o Caffeine automaticamente"
+#~ msgstr "Aplicativos que ativam o Cafeína automaticamente"
 
 #~ msgid "Create new matching rule"
 #~ msgstr "Criar nova regra"

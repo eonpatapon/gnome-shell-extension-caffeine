@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-04-19 22:28+0200\n"
 "PO-Revision-Date: 2018-06-22 21:22+0200\n"
 "Last-Translator: Kardos László <lacesz@NOSPAM@ox dot io>\n"
 "Language-Team: \n"
@@ -13,30 +13,34 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: extension.js:101
-msgid "Caffeine timer"
-msgstr ""
+msgid "Caffeine"
+msgstr "Koffein"
 
-#: extension.js:216
+#: extension.js:102
+msgid "Caffeine timer"
+msgstr "Koffein timer"
+
+#: extension.js:217
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:219 extension.js:799 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:766
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:762
+#: extension.js:768
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:767
+#: extension.js:773
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:769
+#: extension.js:775
 msgid "Night Light resumed"
 msgstr ""
 
@@ -107,7 +111,7 @@ msgstr "Indikátor megjelenítése a panelen"
 #: preferences/displayPage.js:63
 #, fuzzy
 msgid "Show timer in top panel"
-msgstr "Caffeine mutatása a felső panelen"
+msgstr "Koffein mutatása a felső panelen"
 
 #: preferences/displayPage.js:64
 #, fuzzy
@@ -227,11 +231,11 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 #, fuzzy
 msgid "Store caffeine toggle state"
-msgstr "Caffeine felhasználói állapot tárolása"
+msgstr "Koffein felhasználói állapot tárolása"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
-msgstr "Caffeine felhasználói állapot tárolása"
+msgstr "Koffein felhasználói állapot tárolása"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
@@ -245,7 +249,7 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
-msgstr "Caffeine állapot visszaállítása"
+msgstr "Koffein állapot visszaállítása"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
