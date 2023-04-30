@@ -785,7 +785,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             let appId = id !== null ? id : listAppId.next().value;
             if (appId !== undefined) {
                 let appInfo = Gio.DesktopAppInfo.new(appId);        
-                this._caffeineToggle.subtitle = appId !== null 
+                this._caffeineToggle.subtitle = appInfo !== null 
                     ? appInfo.get_display_name()
                     : null;
             }
