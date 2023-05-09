@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2022-02-08 13:07+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -25,24 +25,24 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:762
+#: extension.js:767
 #, fuzzy
 msgid "Night Light paused"
 msgstr "Ночная подсветка"
 
-#: extension.js:767
+#: extension.js:772
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:769
+#: extension.js:774
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "Ночная подсветка"
@@ -321,40 +321,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Автоматический режим ожидания и заставка отключены"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Автоматический режим ожидания и заставка включены"
-
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr ""
-#~ "Автоматический режим ожидания и заставка отключены. Ночная подсветка "
-#~ "приостановлена."
-
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr ""
-#~ "Автоматический режим ожидания и заставка включены. Ночная подсветка "
-#~ "возобновлена."
-
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "УСТАРЕВШЕЕ. Приостановка/возобновление ночной подсветки"
-
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr ""
-#~ "Приостановка/возобновление ночной подсветки при включении/выключении"
-
-#~ msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
-#~ msgstr ""
-#~ "УСТАРЕВШЕЕ. Приостановка/возобновление ночной подсветки только для "
-#~ "определенных приложений"
-
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr ""
-#~ "Приостановка/возобновление ночной подсветки для определенного приложения "
-#~ "при включении/выключении"
-
-#~ msgid "Add Application"
-#~ msgstr "Добавить приложение"

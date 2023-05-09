@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2022-10-07 16:40+0200\n"
 "Last-Translator: Simon Elst <kirmaha@duck.com>\n"
 "Language-Team: French\n"
@@ -31,25 +31,25 @@ msgstr "Caffeine minuteur"
 msgid "Infinite"
 msgstr "Infini"
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr "Caféine est activé"
 
-#: extension.js:762
+#: extension.js:767
 #, fuzzy
 msgid "Night Light paused"
 msgstr "Mode nuit suspendu"
 
-#: extension.js:767
+#: extension.js:772
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Caféine est activé"
 
-#: extension.js:769
+#: extension.js:774
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "Mode nuit réactivé"
@@ -337,47 +337,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr "Index du dernier élément dans le menu indicator"
-
-#~ msgid "Start Timer countdown"
-#~ msgstr "Démarrer le minuteur"
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Mise en veille et écran de veille désactivés"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Mise en veille et écran de veille activés"
-
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr "Mise en veille et écran de veille désactivés. Mode nuit suspendu."
-
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr "Mise en veille et écran de veille activés. Mode nuit réactivé."
-
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "OBSOLÈTE. Suspendre/réactiver le Mode nuit"
-
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "Suspendre/réactiver le Mode nuit si activé/désactivé"
-
-#~ msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
-#~ msgstr ""
-#~ "OBSOLÈTE. Suspendre/réactiver le Mode nuit pour les applications choisies "
-#~ "uniquement"
-
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr ""
-#~ "Suspendre/réactiver le Mode nuit pour les applications choisies si activé/"
-#~ "désactivé"
-
-#~ msgid "Add Application"
-#~ msgstr "Ajouter une application"
-
-#~ msgid "Enable notifications"
-#~ msgstr "Activer les notifications"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "Applications qui activent Caféine automatiquement"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "Nouvelle règle"

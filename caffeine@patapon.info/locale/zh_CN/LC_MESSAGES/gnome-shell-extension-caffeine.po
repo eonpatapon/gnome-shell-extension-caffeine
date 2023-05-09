@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2022-06-30 11:54-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -25,23 +25,23 @@ msgstr "Caffeine 定时器"
 msgid "Infinite"
 msgstr "持续"
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr " 分钟"
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr "Caffeine 已开启"
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr "夜灯已暂停"
 
-#: extension.js:767
+#: extension.js:772
 msgid "Caffeine disabled"
 msgstr "Caffeine 已关闭"
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr "夜灯已恢复"
 
@@ -308,43 +308,3 @@ msgstr "菜单中状态指示器的真实位置偏移，包括不可见的"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr "菜单中的最后一项"
-
-#~ msgid "Start Timer countdown"
-#~ msgstr "开始计时器倒计时"
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "自动挂起与屏幕保护程序已禁用"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "自动挂起与屏幕保护程序已启用"
-
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr "自动挂起与屏幕保护程序已禁用。夜灯已暂停。"
-
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr "自动挂起与屏幕保护程序已启用。夜灯已恢复。"
-
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "已弃用。暂停/恢复夜灯"
-
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "启用/禁用时暂停/恢复夜灯"
-
-#~ msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
-#~ msgstr "已弃用。只为规定的应用程序暂停/恢复夜灯"
-
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr "启用/禁用时为规定的应用程序暂停/恢复夜灯"
-
-#~ msgid "Add Application"
-#~ msgstr "添加应用程序"
-
-#~ msgid "Enable notifications"
-#~ msgstr "启用通知"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "自动激活 Caffeine 的程序"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "创建新的匹配规则"

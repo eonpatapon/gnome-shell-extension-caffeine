@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2018-06-22 21:22+0200\n"
 "Last-Translator: Kardos László <lacesz@NOSPAM@ox dot io>\n"
 "Language-Team: \n"
@@ -20,23 +20,23 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:767
+#: extension.js:772
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr ""
 
@@ -323,44 +323,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Az automatikus felfüggesztés és a képernyővédő letiltva"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Az automatikus felfüggesztés és a képernyővédő engedélyezve"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr "Az automatikus felfüggesztés és a képernyővédő letiltva"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr "Az automatikus felfüggesztés és a képernyővédő engedélyezve"
-
-#, fuzzy
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "Értesítések mutatásának engedélyezése/tiltása"
-
-#, fuzzy
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "Értesítések mutatásának engedélyezése/tiltása"
-
-#, fuzzy
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr "Értesítések mutatásának engedélyezése/tiltása"
-
-#, fuzzy
-#~ msgid "Add Application"
-#~ msgstr "Alkalmazás hozzáadás"
-
-#~ msgid "Enable notifications"
-#~ msgstr "Értesítések engedélyezése"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr ""
-#~ "Alkalmazások, amelyek lehetővé teszik a Caffeine automatikus működését"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "Új egyezési szabály létrehozása"

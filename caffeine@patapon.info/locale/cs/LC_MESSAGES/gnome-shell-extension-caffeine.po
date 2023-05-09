@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2023-04-12 18:40+0200\n"
 "Last-Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
 "Language-Team: Czech\n"
@@ -25,23 +25,23 @@ msgstr "Časovač Caffeine"
 msgid "Infinite"
 msgstr "Nekonečně"
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr " minut"
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr "Caffeine povolen"
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr "Noční světlo pozastaveno"
 
-#: extension.js:767
+#: extension.js:772
 msgid "Caffeine disabled"
 msgstr "Caffeine zakázán"
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr "Noční světlo obnoveno"
 
@@ -309,38 +309,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Automatické uspání a šetřič obrazovky jsou zakázané"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Automatické uspání a šetřič obrazovky jsou povolené"
-
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr ""
-#~ "Automatické uspání a šetřič obrazovky jsou zakázané. Noční světlo "
-#~ "pozastaveno."
-
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr ""
-#~ "Automatické uspání a šetřič obrazovky jsou povolené. Noční světlo "
-#~ "obnoveno."
-
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "ZASTARALÉ. Pozastavit/obnovit Noční světlo"
-
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "Pozastavit/obnovit Noční světlo, když je povoleno/zakázáno"
-
-#~ msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
-#~ msgstr ""
-#~ "ZASTARALÉ. Pozastavit/obnovit Noční světlo pouze pro určené aplikace"
-
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr ""
-#~ "Pozastavit/obnovit Noční světlo pro určené aplikace, když je povoleno/"
-#~ "zakázáno"
-
-#~ msgid "Add Application"
-#~ msgstr "Přidat aplikaci"

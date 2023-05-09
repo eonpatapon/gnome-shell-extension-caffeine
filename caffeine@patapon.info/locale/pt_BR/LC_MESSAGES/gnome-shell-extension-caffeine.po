@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2020-02-25 20:16-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -30,24 +30,24 @@ msgstr "Temporizador do Caffeine"
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr "Caffeine ativado"
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr "Luz Noturna pausado"
 
-#: extension.js:767
+#: extension.js:772
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Caffeine desativado"
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr "Luz Noturna resumido"
 
@@ -332,46 +332,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr "Último índice do icone do menu indicador"
-
-#~ msgid "Start Timer countdown"
-#~ msgstr "Iniciar a contagem regressiva"
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Suspensão e proteção de tela automáticas desativadas"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Suspensão e proteção de tela automáticas ativadas"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr "Suspensão e proteção de tela automáticas desativadas"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr "Suspensão e proteção de tela automáticas ativadas"
-
-#, fuzzy
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "Mostra notificações quando ativado/desativado"
-
-#, fuzzy
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "Mostra notificações quando ativado/desativado"
-
-#, fuzzy
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr "Mostra notificações quando ativado/desativado"
-
-#, fuzzy
-#~ msgid "Add Application"
-#~ msgstr "Adicionar aplicativo"
-
-#~ msgid "Enable notifications"
-#~ msgstr "Ativar as notificações"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "Aplicativos que ativam o Caffeine automaticamente"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "Criar nova regra"

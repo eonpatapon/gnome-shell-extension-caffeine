@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -26,24 +26,24 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr "Caffeine aktif"
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:767
+#: extension.js:772
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Caffeine aktif"
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr ""
 
@@ -325,43 +325,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Ekran koruyucu ve otomatik karartma kapalı"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Ekran koruyucu ve otomatik karartma açık"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr "Ekran koruyucu ve otomatik karartma kapalı"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr "Ekran koruyucu ve otomatik karartma açık"
-
-#, fuzzy
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
-
-#, fuzzy
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
-
-#, fuzzy
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
-
-#, fuzzy
-#~ msgid "Add Application"
-#~ msgstr "Uygulama ekle"
-
-#~ msgid "Enable notifications"
-#~ msgstr "Bildirimleri aktif et"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "Kafeini otomatik olarak etkinleştiren uygulamalar"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "Yeni eşleşme kuralı oluştur"

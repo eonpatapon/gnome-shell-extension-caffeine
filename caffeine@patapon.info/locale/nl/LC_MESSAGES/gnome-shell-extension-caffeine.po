@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2023-02-07 14:23+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -25,23 +25,23 @@ msgstr "Caffeine-tijdklok"
 msgid "Infinite"
 msgstr "Onbeperkt"
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr "Caffeine is ingeschakeld"
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr "Nachtlicht is onderbroken"
 
-#: extension.js:767
+#: extension.js:772
 msgid "Caffeine disabled"
 msgstr "Caffeine is uitgeschakeld"
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr "Nachtlicht is hervat"
 
@@ -315,52 +315,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr "Vorige itemlocatie in indicatormenu"
-
-#~ msgid "Start Timer countdown"
-#~ msgstr "Tijdklok inschakelen"
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr ""
-#~ "Automatisch in slaapstand zetten en schermbeveiliging zijn uitgeschakeld"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr ""
-#~ "Automatisch in slaapstand zetten en schermbeveiliging zijn ingeschakeld"
-
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr ""
-#~ "Automatisch in slaapstand zetten, schermbeveiliging en nachtlicht zijn "
-#~ "uitgeschakeld."
-
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr ""
-#~ "Automatisch in slaapstand zetten, schermbeveiliging en nachtlicht zijn "
-#~ "ingeschakeld."
-
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "VEROUDERD // Nachtlicht onderbreken/hervatten"
-
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "Onderbreek/Hervat nachtlicht bij in-/uitschakelen van Caffeine"
-
-#~ msgid "DEPRECATED. Pause/resume Night Light for defined applications only"
-#~ msgstr ""
-#~ "VEROUDERD // Nachtlicht onderbreken/hervatten bij opgegeven toepassingen"
-
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr ""
-#~ "Onderbreek/Hervat nachtlicht bij een opgegeven toepassing bij in-/"
-#~ "uitschakelen van Caffeine"
-
-#~ msgid "Add Application"
-#~ msgstr "Toepassing toevoegen"
-
-#~ msgid "Enable notifications"
-#~ msgstr "Benachrichtigungen aktivieren"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "Anwendungen, welche Caffeine automatisch aktivieren"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "Neue Regel definieren"

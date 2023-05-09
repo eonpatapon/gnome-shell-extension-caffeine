@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2016-10-02 17:24+0100\n"
 "Last-Translator: Piotr Wittchen <piotr@wittchen.biz.pl>\n"
 "Language-Team: Polish\n"
@@ -25,24 +25,24 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr "Caffeine włączone"
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:767
+#: extension.js:772
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Caffeine włączone"
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr ""
 
@@ -319,30 +319,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Automatycze wstrzymywanie i wygaszacz ekranu wyłączone"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Automatyczne wstrzymywanie i wygaszacz ekranu włączone"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr "Automatycze wstrzymywanie i wygaszacz ekranu wyłączone"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr "Automatyczne wstrzymywanie i wygaszacz ekranu włączone"
-
-#, fuzzy
-#~ msgid "Add Application"
-#~ msgstr "Dodaj aplikację"
-
-#~ msgid "Enable notifications"
-#~ msgstr "Włącz notyfikacje"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "Aplikacje, które aktywują Caffeine automatycznie"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "Stwórz nową regułę dopasowania"
