@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2018-04-04 20:35+0200\n"
 "Last-Translator: Morgan Antonsson <morgan.antonsson@gmail.com>\n"
 "Language-Team: \n"
@@ -19,23 +19,23 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:762
+#: extension.js:767
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:767
+#: extension.js:772
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:769
+#: extension.js:774
 msgid "Night Light resumed"
 msgstr ""
 
@@ -316,43 +316,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr "Automatiskt vänteläge och skärmsläckare inaktiverade"
-
-#, fuzzy
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr "Automatiskt vänteläge och skärmsläckare aktiverade"
-
-#, fuzzy
-#~ msgid "DEPRECATED. Pause/resume Night Light"
-#~ msgstr "Visa notifieringar vid aktivering/inaktivering"
-
-#, fuzzy
-#~ msgid "Pause/resume Night Light when enabled/disabled"
-#~ msgstr "Visa notifieringar vid aktivering/inaktivering"
-
-#, fuzzy
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr "Visa notifieringar vid aktivering/inaktivering"
-
-#, fuzzy
-#~ msgid "Add Application"
-#~ msgstr "Lägg till program"
-
-#~ msgid "Enable notifications"
-#~ msgstr "Aktivera notifieringar"
-
-#~ msgid "Applications which enable Caffeine automatically"
-#~ msgstr "Program som automatiskt aktiverar Caffeine"
-
-#~ msgid "Create new matching rule"
-#~ msgstr "Skapa ny matchande regel"

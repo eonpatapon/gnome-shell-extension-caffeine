@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 12:33+0100\n"
+"POT-Creation-Date: 2023-05-09 12:22+0100\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -23,24 +23,24 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:793 preferences/generalPage.js:217
+#: extension.js:218 extension.js:800 preferences/generalPage.js:217
 msgid " minutes"
 msgstr ""
 
-#: extension.js:760
+#: extension.js:765
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:762
+#: extension.js:767
 #, fuzzy
 msgid "Night Light paused"
 msgstr "야간 모드를 멈춥니"
 
-#: extension.js:767
+#: extension.js:772
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:769
+#: extension.js:774
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "야간 모드를 다시 켭니"
@@ -318,26 +318,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
 msgstr ""
-
-#~ msgid "Auto suspend and screensaver disabled"
-#~ msgstr "자동 대기 모드 진입 및 화면 보호기가 비활성화됨"
-
-#~ msgid "Auto suspend and screensaver enabled"
-#~ msgstr "자동 대기 모드 진입 및 화면 보호기가 활성화됨"
-
-#~ msgid "Auto suspend and screensaver disabled. Night Light paused."
-#~ msgstr ""
-#~ "자동 대기 모드 진입 및 화면 보호기가 비활성화되었습니다. 야간 모드를 멈춥"
-#~ "니다."
-
-#~ msgid "Auto suspend and screensaver enabled. Night Light resumed."
-#~ msgstr ""
-#~ "자동 대기 모드 진입 및 화면 보호기가 활성화되었습니다. 야간 모드를 다시 켭"
-#~ "니다."
-
-#~ msgid ""
-#~ "Pause/resume Night Light for defined application when enabled/disabled"
-#~ msgstr "카페인을 제어하게끔 정의된 프로그램에서 야간 모드를 제어"
-
-#~ msgid "Add Application"
-#~ msgstr "프로그램 추가"
