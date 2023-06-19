@@ -9,5 +9,8 @@
   "settings-schema": "org.gnome.shell.extensions.caffeine",
   "gettext-domain": "gnome-shell-extension-caffeine",
   "description": "Disable the screensaver and auto suspend",
-  "url": "https://github.com/eonpatapon/gnome-shell-extension-caffeine"
+  "url": "https://github.com/eonpatapon/gnome-shell-extension-caffeine",
+  "donations": {
+    "paypal": ["eonpatapon", "stuartahayhurst", "pakaoraki"]
+  }
 }
