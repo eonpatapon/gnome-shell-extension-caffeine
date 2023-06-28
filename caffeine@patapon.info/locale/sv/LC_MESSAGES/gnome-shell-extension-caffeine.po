@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-09 12:22+0100\n"
+"POT-Creation-Date: 2023-06-28 22:38+0100\n"
 "PO-Revision-Date: 2018-04-04 20:35+0200\n"
 "Last-Translator: Morgan Antonsson <morgan.antonsson@gmail.com>\n"
 "Language-Team: \n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: extension.js:101
-msgid "Caffeine timer"
+msgid "Caffeine Timer"
 msgstr ""
 
 #: extension.js:216

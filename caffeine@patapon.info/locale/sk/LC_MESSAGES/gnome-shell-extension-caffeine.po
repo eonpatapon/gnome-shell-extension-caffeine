@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-09 12:22+0100\n"
+"POT-Creation-Date: 2023-06-28 22:38+0100\n"
 "PO-Revision-Date: 2023-05-28 23:30+0200\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak\n"
@@ -18,7 +18,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:101
-msgid "Caffeine timer"
+#, fuzzy
+msgid "Caffeine Timer"
 msgstr "Časovač Caffeine"
 
 #: extension.js:216
@@ -269,7 +270,8 @@ msgstr "Režim riadenia Nočného svetla"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr "Nastavte spôsob, ktorým Caffeine spolupracuje s nastavením Nočného svetla."
+msgstr ""
+"Nastavte spôsob, ktorým Caffeine spolupracuje s nastavením Nočného svetla."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."

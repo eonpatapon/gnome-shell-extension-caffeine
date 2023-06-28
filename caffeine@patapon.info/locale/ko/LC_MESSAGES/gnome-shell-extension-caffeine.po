@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-09 12:22+0100\n"
+"POT-Creation-Date: 2023-06-28 22:38+0100\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: extension.js:101
-msgid "Caffeine timer"
+msgid "Caffeine Timer"
 msgstr ""
 
 #: extension.js:216
