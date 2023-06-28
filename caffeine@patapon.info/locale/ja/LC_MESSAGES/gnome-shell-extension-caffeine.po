@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-09 12:22+0100\n"
+"POT-Creation-Date: 2023-06-28 22:38+0100\n"
 "PO-Revision-Date: 2017-05-05 22:28+0900\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
@@ -18,8 +18,9 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:101
-msgid "Caffeine timer"
-msgstr ""
+#, fuzzy
+msgid "Caffeine Timer"
+msgstr "Caféine est activé"
 
 #: extension.js:216
 msgid "Infinite"

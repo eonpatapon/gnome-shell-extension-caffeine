@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-09 12:22+0100\n"
+"POT-Creation-Date: 2023-06-28 22:38+0100\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -19,8 +19,9 @@ msgstr ""
 "X-Generator: Gtranslator 3.32.0\n"
 
 #: extension.js:101
-msgid "Caffeine timer"
-msgstr ""
+#, fuzzy
+msgid "Caffeine Timer"
+msgstr "Caffeine aktif"
 
 #: extension.js:216
 msgid "Infinite"
