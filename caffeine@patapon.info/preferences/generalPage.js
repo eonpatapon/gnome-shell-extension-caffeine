@@ -242,9 +242,9 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
 
     constructor(settings, key, label, sublabel) {
         super({
-              title: label,
-              subtitle: sublabel,
-              activatable: true
+            title: label,
+            subtitle: sublabel,
+            activatable: true
         });
 
         this.shortcutBox = new Gtk.Box({

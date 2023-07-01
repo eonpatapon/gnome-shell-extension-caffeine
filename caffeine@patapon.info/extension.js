@@ -276,7 +276,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
             (proxy, error) => {
                 if (error)
                     log(error.message);
-        });
+            }
+        );
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
             'org.gnome.SessionManager',
             '/org/gnome/SessionManager');
@@ -623,20 +624,20 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _handleScrollEvent(event) {
         switch(event.get_scroll_direction()) {
-            case Clutter.ScrollDirection.UP:
-                if(!this._state) {
-                    // User state on - UP
-                    this._settings.set_boolean(TOGGLE_STATE_KEY, true);
-                }
-                break;
-            case Clutter.ScrollDirection.DOWN:
-                if(this._state) {
-                    // Stop timer
-                    this._removeTimer();
-                    // User state off - DOWN
-                    this._settings.set_boolean(TOGGLE_STATE_KEY, false);
-                }
-                break;
+        case Clutter.ScrollDirection.UP:
+            if(!this._state) {
+                // User state on - UP
+                this._settings.set_boolean(TOGGLE_STATE_KEY, true);
+            }
+            break;
+        case Clutter.ScrollDirection.DOWN:
+            if(this._state) {
+                // Stop timer
+                this._removeTimer();
+                // User state off - DOWN
+                this._settings.set_boolean(TOGGLE_STATE_KEY, false);
+            }
+            break;
         }
     }
 
@@ -872,41 +873,41 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._resetAppSignalId();
         } else {
             switch (appsTriggeredMode) {
-                // TRIGGER APPS MODE: ON RUNNING
-                case AppsTrigger.ON_RUNNING:
-                    if(this._appStateChangedSignalId === 0){
-                        this._appStateChangedSignalId =
-                            this._appSystem.connect('app-state-changed',
-                                this._appStateChanged.bind(this));
+            // TRIGGER APPS MODE: ON RUNNING
+            case AppsTrigger.ON_RUNNING:
+                if(this._appStateChangedSignalId === 0){
+                    this._appStateChangedSignalId =
+                        this._appSystem.connect('app-state-changed',
+                            this._appStateChanged.bind(this));
+                }
+                // Check if currently running App
+                this._appConfigs.forEach( id => {
+                    let app = this._appSystem.lookup_app(id);
+                    if(app && app.get_state() !== Shell.AppState.STOPPED) {
+                        this._appStateChanged(this._appSystem, app);
                     }
-                    // Check if currently running App
-                    this._appConfigs.forEach( id => {
-                        let app = this._appSystem.lookup_app(id);
-                        if(app && app.get_state() !== Shell.AppState.STOPPED) {
-                            this._appStateChanged(this._appSystem, app);
-                        }
-                    });
-                    break;
-                // TRIGGER APPS MODE: ON FOCUS
-                case AppsTrigger.ON_FOCUS:
-                    if(this._appDisplayChangedSignalId === 0){
-                        this._appDisplayChangedSignalId =
-                            global.display.connect('notify::focus-window',
-                                this._appWindowFocusChanged.bind(this));
-                    }
-                    // Check if currently focused App
-                    this._appWindowFocusChanged();
-                    break;
-                // TRIGGER APPS MODE: ON ACTIVE WORKSPACE
-                case AppsTrigger.ON_ACTIVE_WORKSPACE:
-                    if(this._appWorkspaceChangedSignalId === 0){
-                        this._appWorkspaceChangedSignalId =
-                            global.workspace_manager.connect('workspace-switched',
-                                this._appWorkspaceChanged.bind(this));
-                    }
-                    // Check if App is currently on active workspace
-                    this._appWorkspaceChanged();
-                    break;
+                });
+                break;
+            // TRIGGER APPS MODE: ON FOCUS
+            case AppsTrigger.ON_FOCUS:
+                if(this._appDisplayChangedSignalId === 0){
+                    this._appDisplayChangedSignalId =
+                        global.display.connect('notify::focus-window',
+                            this._appWindowFocusChanged.bind(this));
+                }
+                // Check if currently focused App
+                this._appWindowFocusChanged();
+                break;
+            // TRIGGER APPS MODE: ON ACTIVE WORKSPACE
+            case AppsTrigger.ON_ACTIVE_WORKSPACE:
+                if(this._appWorkspaceChangedSignalId === 0){
+                    this._appWorkspaceChangedSignalId =
+                        global.workspace_manager.connect('workspace-switched',
+                            this._appWorkspaceChanged.bind(this));
+                }
+                // Check if App is currently on active workspace
+                this._appWorkspaceChanged();
+                break;
             }
         }
     }
@@ -945,30 +946,30 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Add signal listener on add/remove windows for the active workspace
         this._appAddWindowSignalId =
             this._activeWorkspace.connect('window-added', (wkspace, window) => {
-            const type = window.get_window_type();
-            // Accept only normal window, ignore all other type (dialog, menu,...)
-            if(type === 0) {
-                // Add 100 ms delay to handle window detection
-                this._timeWorkspaceAdd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-                    this._toggleWorkspace();
-                    this._timeWorkspaceAdd = null;
-                    return GLib.SOURCE_REMOVE;
-                });
-            }
-        });
+                const type = window.get_window_type();
+                // Accept only normal window, ignore all other type (dialog, menu,...)
+                if(type === 0) {
+                    // Add 100 ms delay to handle window detection
+                    this._timeWorkspaceAdd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+                        this._toggleWorkspace();
+                        this._timeWorkspaceAdd = null;
+                        return GLib.SOURCE_REMOVE;
+                    });
+                }
+            });
         this._appRemoveWindowSignalId =
             this._activeWorkspace.connect('window-removed', (wkspace, window) => {
-            const type = window.get_window_type();
-            // Accept only normal window, ignore all other type (dialog, menu,...)
-            if(type === 0) {
-                // Add 100 ms delay to handle window detection
-                this._timeWorkspaceRemove = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-                    this._toggleWorkspace();
-                    this._timeWorkspaceRemove = null;
-                    return GLib.SOURCE_REMOVE;
-                });
-            }
-        });
+                const type = window.get_window_type();
+                // Accept only normal window, ignore all other type (dialog, menu,...)
+                if(type === 0) {
+                    // Add 100 ms delay to handle window detection
+                    this._timeWorkspaceRemove = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+                        this._toggleWorkspace();
+                        this._timeWorkspaceRemove = null;
+                        return GLib.SOURCE_REMOVE;
+                    });
+                }
+            });
 
         // Check and toggle Caffeine
         this._toggleWorkspace();

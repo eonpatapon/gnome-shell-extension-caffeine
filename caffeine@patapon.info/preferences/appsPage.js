@@ -188,9 +188,10 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
 
     _onRemoveApp(appId) {
         this._settings.set_strv(this._settingsKey.INHIBIT_APPS,
-        this._settings.get_strv(this._settingsKey.INHIBIT_APPS).filter(id => {
-            return id !== appId;
-        }));
+            this._settings.get_strv(this._settingsKey.INHIBIT_APPS).filter(id => {
+                return id !== appId;
+            })
+        );
         this._refreshApps();
     }
 
