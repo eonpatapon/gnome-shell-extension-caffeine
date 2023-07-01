@@ -19,7 +19,7 @@
 
 'use strict';
 
-const { Atk, Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
+const { Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
 const Config = imports.misc.config;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
