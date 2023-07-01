@@ -106,26 +106,26 @@ const TimerMenuIcon = 'stopwatch-symbolic';
 const ControlContext = {
     NEVER: 0,
     ALWAYS: 1,
-    FOR_APPS: 2,
+    FOR_APPS: 2
 };
 
 const ShowIndicator = {
     ONLY_ACTIVE: 0,
     ALWAYS: 1,
-    NEVER: 2,
+    NEVER: 2
 };
 
 const AppsTrigger = {
     ON_RUNNING: 0,
     ON_FOCUS: 1,
-    ON_ACTIVE_WORKSPACE: 2,
+    ON_ACTIVE_WORKSPACE: 2
 };
 
 const TIMERS = [
     [5, 10, 15, 20, 30, 'caffeine-short-timer-symbolic'],
     [10, 20, 30, 40, 50, 'caffeine-medium-timer-symbolic'],
     [30, 45, 60, 75, 80, 'caffeine-long-timer-symbolic'],
-    [0, 0, 0, 0, 0, 'caffeine-infinite-timer-symbolic'],
+    [0, 0, 0, 0, 0, 'caffeine-infinite-timer-symbolic']
 ];
 
 let CaffeineIndicator;
@@ -159,7 +159,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             // not been changed. The below line allows support for both GNOME 43 and 44+ by using the 
             // appropriate property name based on the GNOME version.
             [ShellVersion >= 44 ? 'title' : 'label']: IndicatorName,
-            toggleMode: true,
+            toggleMode: true
         });
 
         this._settings = ExtensionUtils.getSettings();
@@ -304,7 +304,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Add indicator label for the timer
         this._timerLabel = new St.Label({
             y_expand: true,
-            y_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER
         });
         this._timerLabel.visible = false;
         this.add_child(this._timerLabel);
@@ -475,7 +475,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                     cookie: cookie,
                     isToggled: true,
                     isInhibited: false,
-                    object: '',
+                    object: ''
                 };
                 this._appInhibitedData.set(appId, data);
             }

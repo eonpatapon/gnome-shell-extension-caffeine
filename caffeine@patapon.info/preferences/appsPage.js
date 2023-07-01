@@ -28,7 +28,7 @@ const _ = Gettext.gettext;
 const AppsModeChoices = {
     RUNNING: _('Running'),
     FOCUS: _('Focus'),
-    WORKSPACE: _('Active workspace'),
+    WORKSPACE: _('Active workspace')
 };
 
 var AppsPage = GObject.registerClass(
@@ -140,7 +140,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                     let appInfo = Gio.DesktopAppInfo.new(this._listApps[i]);
                     const appIcon = new Gtk.Image({
                         gicon: appInfo.get_icon(),
-                        pixel_size: 32,
+                        pixel_size: 32
                     });
                     appIcon.get_style_context().add_class('icon-dropshadow');
                     this.apps[i].Row = new Adw.ActionRow({
@@ -177,7 +177,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
             const apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
             if (appInfo && !apps.some(a => a === appInfo.get_id())) {
                 this._settings.set_strv(this._settingsKey.INHIBIT_APPS, [
-                    ...apps, appInfo.get_id(),
+                    ...apps, appInfo.get_id()
                 ]);
                 this._refreshApps();
             }
@@ -201,7 +201,7 @@ const NewAppDialog = GObject.registerClass(
         _init(parent, settingsKey) {
             super._init({
                 transient_for: parent,
-                modal: true,
+                modal: true
             });
 
             this._settings = ExtensionUtils.getSettings();
@@ -209,7 +209,7 @@ const NewAppDialog = GObject.registerClass(
 
             this.get_widget().set({
                 show_all: true,
-                show_other: true, // hide more button
+                show_other: true // hide more button
             });
 
             this.get_widget().connect('application-selected',

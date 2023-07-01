@@ -29,7 +29,7 @@ const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, na
 const ComboBoxChoices = {
     NEVER: _('Never'),
     ALWAYS: _('Always'),
-    FOR_APPS: _('For apps on list'),
+    FOR_APPS: _('For apps on list')
 };
 
 const TIMERS_DURATION = [
@@ -232,11 +232,11 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
     static {
         GObject.registerClass({
             Properties: {
-                shortcut: genParam('string', 'shortcut', ''),
+                shortcut: genParam('string', 'shortcut', '')
             },
             Signals: {
-                changed: { param_types: [GObject.TYPE_STRING] },
-            },
+                changed: { param_types: [GObject.TYPE_STRING] }
+            }
         }, this);
     }
 
@@ -295,7 +295,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         let content = new Adw.StatusPage({
             title: _('New accelerator…'),
             description: this._description,
-            icon_name: 'preferences-desktop-keyboard-shortcuts-symbolic',
+            icon_name: 'preferences-desktop-keyboard-shortcuts-symbolic'
         });
 
         this._editor = new Adw.Window({
@@ -304,7 +304,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
             transient_for: widget.get_root(),
             width_request: 480,
             height_request: 320,
-            content,
+            content
         });
 
         this._editor.add_controller(ctl);
@@ -364,7 +364,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
             Gdk.KEY_KP_Enter,
             Gdk.KEY_Return,
 
-            Gdk.KEY_Mode_switch,
+            Gdk.KEY_Mode_switch
         ].includes(keyval);
     }
 
