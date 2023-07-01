@@ -107,7 +107,6 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
 
         // Check if the apps list UI needs updating
         if (this._appsListUi != this._listApps) {
-
             // Remove the old list
             if (this._count) {
                 for (var i = 0; i < this._count; i++) {
@@ -161,7 +160,6 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                     this.apps[i].DeleteButton.connect('clicked', () => {
                         this._onRemoveApp(this._listApps[i]);
                     });
-
                 }
                 this._count = this._listApps.length;
             }
@@ -195,7 +193,6 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         );
         this._refreshApps();
     }
-
 });
 
 const NewAppDialog = GObject.registerClass(

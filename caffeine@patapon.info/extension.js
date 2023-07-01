@@ -31,9 +31,9 @@ const ShellVersion = Number(Config.PACKAGE_VERSION.split('.')[0]);
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
-const SHOW_TIMER_KEY= 'show-timer';
-const DURATION_TIMER_INDEX= 'duration-timer';
-const TOGGLE_STATE_KEY= 'toggle-state';
+const SHOW_TIMER_KEY = 'show-timer';
+const DURATION_TIMER_INDEX = 'duration-timer';
+const TOGGLE_STATE_KEY = 'toggle-state';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
@@ -139,7 +139,7 @@ let CaffeineIndicator;
 *  I get this error: "TypeError: Gtk.IconTheme.get_for_display is not a function"
 *  This same line of code works on prefs.js... (Gnome 43)
 */
-Gtk.IconTheme.get_default = function() {
+Gtk.IconTheme.get_default = function () {
     let theme = new Gtk.IconTheme();
     // gnome-shell switched away from GTK3 during the `44.rc` release. The Gtk.IconTheme method `set_custom_name`
     // has been renamed to `set_theme_name`. The below line allows support for all versions of GNOME 43 and 44+.
@@ -170,7 +170,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this.finalTimerMenuIcon =
                 Gio.icon_new_for_string(`${Me.path}/icons/${TimerMenuIcon}.svg`);
         }
-        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
         this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         this._iconName();
 
@@ -313,7 +313,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.add_child(this._timerLabel);
 
         // Icons
-        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);;
+        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
         this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
         this._indicator.gicon = this._iconDeactivated;
 
@@ -324,15 +324,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
         * - 4: Inhibit suspending the session or computer
         * - 12: Inhibit the session being marked as idle
         */
-        this.inhibitFlags= 12;
+        this.inhibitFlags = 12;
 
         // Caffeine state
         this._state = false;
         this._userState = false;
 
         // Store the inhibition requests until processed
-        this._inhibitionAddedFifo=[];
-        this._inhibitionRemovedFifo=[];
+        this._inhibitionAddedFifo = [];
+        this._inhibitionRemovedFifo = [];
 
         // Init Timers
         this._timeOut = null;
@@ -530,7 +530,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             let targetIndicator =
                 QuickSettingsMenu._indicators.get_child_at_index(this.indicatorIndex);
             let maxIndex = QuickSettingsMenu._indicators.get_n_children();
-            while (this.indicatorIndex < maxIndex && !targetIndicator.is_visible() && this.indicatorIndex > -1 ) {
+            while (this.indicatorIndex < maxIndex && !targetIndicator.is_visible() && this.indicatorIndex > -1) {
                 this._incrementIndicatorPosIndex();
                 targetIndicator =
                     QuickSettingsMenu._indicators.get_child_at_index(this.indicatorIndex);
@@ -555,9 +555,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._settings.get_boolean(SHOW_TIMER_KEY)
           && (this._settings.get_enum(SHOW_INDICATOR_KEY) !== ShowIndicator.NEVER)
           && this._timerEnable) {
-            this._timerLabel.visible=true;
+            this._timerLabel.visible = true;
         } else {
-            this._timerLabel.visible=false;
+            this._timerLabel.visible = false;
         }
     }
 
@@ -611,8 +611,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if ((this._timeOut !== null) || (this._timePrint !== null)) {
             GLib.Source.remove(this._timeOut);
             GLib.Source.remove(this._timePrint);
-            this._timeOut=null;
-            this._timePrint=null;
+            this._timeOut = null;
+            this._timePrint = null;
         }
     }
 
@@ -1137,7 +1137,6 @@ function init() {
  * Steps to run when the extension is enabled
  */
 function enable() {
-
     const _settings = ExtensionUtils.getSettings();
 
     CaffeineIndicator = new Caffeine();
