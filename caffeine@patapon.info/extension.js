@@ -222,7 +222,9 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             }
             const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[5]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
-            item.connect('activate', () => (this._checkTimer(timer[durationIndex])));
+            item.connect('activate', () => {
+                this._checkTimer(timer[durationIndex]);
+            });
             this._timerItems.set(timer[durationIndex], item);
             this._itemsSection.addMenuItem(item);
         }
@@ -567,20 +569,20 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerEnable = true;
 
         // Get duration
-        let timerDelay = (this._settings.get_int(TIMER_KEY) * 60);
+        let timerDelay = this._settings.get_int(TIMER_KEY) * 60;
 
         // Execute Timer only if duration isn't set on infinite time
         if (timerDelay !== 0) {
             let secondLeft = timerDelay;
             this._showIndicatorLabel();
             this._printTimer(secondLeft);
-            this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (1000), () => {
+            this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
                 secondLeft -= 1;
                 this._printTimer(secondLeft);
                 return GLib.SOURCE_CONTINUE;
             });
 
-            this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, (timerDelay * 1000), () => {
+            this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, timerDelay * 1000, () => {
                 // Disable Caffeine when timer ended
                 this._removeTimer();
                 this._settings.set_boolean(TOGGLE_STATE_KEY, false);
