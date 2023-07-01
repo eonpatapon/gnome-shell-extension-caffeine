@@ -97,7 +97,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         this._listApps.length = 0;
 
         // Update the list & Check if app still exist
-        _apps.forEach(id => {
+        _apps.forEach((id) => {
             const appInfo = Gio.DesktopAppInfo.new(id);
 
             if (appInfo) {
@@ -176,7 +176,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
             const appInfo = id === Gtk.ResponseType.OK
                 ? dialog.get_widget().get_app_info() : null;
             const apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
-            if (appInfo && !apps.some(a => a === appInfo.get_id())) {
+            if (appInfo && !apps.some((a) => a === appInfo.get_id())) {
                 this._settings.set_strv(this._settingsKey.INHIBIT_APPS, [
                     ...apps, appInfo.get_id()
                 ]);
@@ -189,7 +189,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
 
     _onRemoveApp(appId) {
         this._settings.set_strv(this._settingsKey.INHIBIT_APPS,
-            this._settings.get_strv(this._settingsKey.INHIBIT_APPS).filter(id => {
+            this._settings.get_strv(this._settingsKey.INHIBIT_APPS).filter((id) => {
                 return id !== appId;
             })
         );
@@ -223,6 +223,6 @@ const NewAppDialog = GObject.registerClass(
             const apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
             const appInfo = this.get_widget().get_app_info();
             this.set_response_sensitive(Gtk.ResponseType.OK,
-                appInfo && !apps.some(i => i.startsWith(appInfo.get_id())));
+                appInfo && !apps.some((i) => i.startsWith(appInfo.get_id())));
         }
     });

@@ -471,7 +471,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     addInhibit(appId) {
         this._sessionManager.InhibitRemote(appId,
             0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
-            cookie => {
+            (cookie) => {
                 this._inhibitionAddedFifo.push(appId);
                 // Init app data
                 let data = {
@@ -652,7 +652,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 let inhibitor = new DBusSessionManagerInhibitorProxy(Gio.DBus.session,
                     'org.gnome.SessionManager',
                     i);
-                inhibitor.GetAppIdRemote(appId => {
+                inhibitor.GetAppIdRemote((appId) => {
                     appId = String(appId);
                     let appData = this._appInhibitedData.get(appId);
                     if (appId !== '' && requestedId === appId && appData) {
@@ -807,7 +807,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _updateAppConfigs() {
         this._appConfigs.length = 0;
-        this._settings.get_strv(INHIBIT_APPS_KEY).forEach(appId => {
+        this._settings.get_strv(INHIBIT_APPS_KEY).forEach((appId) => {
             // Check if app still exist
             const appInfo = Gio.DesktopAppInfo.new(appId);
             if (appInfo) {
@@ -817,8 +817,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // Remove inhibited app that are not in the list anymore
         let inhibitedAppsToRemove = [...this._appInhibitedData.keys()]
-            .filter(id => !this._appConfigs.includes(id));
-        inhibitedAppsToRemove.forEach(id => {
+            .filter((id) => !this._appConfigs.includes(id));
+        inhibitedAppsToRemove.forEach((id) => {
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(true, true);
             this.removeInhibit(id); // Uninhibit app
@@ -883,7 +883,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                             this._appStateChanged.bind(this));
                 }
                 // Check if currently running App
-                this._appConfigs.forEach(id => {
+                this._appConfigs.forEach((id) => {
                     let app = this._appSystem.lookup_app(id);
                     if (app && app.get_state() !== Shell.AppState.STOPPED) {
                         this._appStateChanged(this._appSystem, app);
@@ -916,7 +916,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _toggleWorkspace() {
         // Search for triggered apps on active workspace
-        this._appConfigs.forEach(appId => {
+        this._appConfigs.forEach((appId) => {
             let app = this._appSystem.lookup_app(appId);
             let isOnWorkspace = app.is_on_workspace(this._activeWorkspace);
             if (isOnWorkspace && !this._isToggleInhibited(appId)) {
@@ -1042,7 +1042,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._appInhibitedData.clear();
 
         // Remove ToggleMenu
-        this.quickSettingsItems.forEach(item => item.destroy());
+        this.quickSettingsItems.forEach((item) => item.destroy());
 
         // Disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
