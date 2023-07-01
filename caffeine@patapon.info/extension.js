@@ -217,8 +217,9 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             } else {
                 label = parseInt(timer[durationIndex]) + _(' minutes');
             }
-            if (!label)
+            if (!label) {
                 continue;
+            }
             const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[5]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
             item.connect('activate', () => (this._checkTimer(timer[durationIndex])));
@@ -274,8 +275,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
             'org.gnome.SettingsDaemon.Color',
             '/org/gnome/SettingsDaemon/Color',
             (proxy, error) => {
-                if (error)
+                if (error) {
                     log(error.message);
+                }
             }
         );
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,

@@ -100,8 +100,9 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         _apps.forEach(id => {
             const appInfo = Gio.DesktopAppInfo.new(id);
 
-            if (appInfo)
+            if (appInfo) {
                 this._listApps.push(id);
+            }
         });
 
         // Check if the apps list UI needs updating

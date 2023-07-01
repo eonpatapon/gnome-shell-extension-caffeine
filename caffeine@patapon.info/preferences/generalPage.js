@@ -326,8 +326,9 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
             return Gdk.EVENT_STOP;
         }
 
-        if (!this.isValidBinding(mask, keycode, keyval) || !this.isValidAccel(mask, keyval))
+        if (!this.isValidBinding(mask, keycode, keyval) || !this.isValidAccel(mask, keyval)) {
             return Gdk.EVENT_STOP;
+        }
 
         this.saveShortcut(keyval, keycode, mask);
         return Gdk.EVENT_STOP;
