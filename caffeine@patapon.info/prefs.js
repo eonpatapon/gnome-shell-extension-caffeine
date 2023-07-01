@@ -56,7 +56,6 @@ function fillPreferencesWindow(window) {
         iconTheme.add_search_path(Me.path + '/icons');
     }
 
-    //const settings = ExtensionUtils.getSettings(Me.metadata['settings-schema']);
     const settings = ExtensionUtils.getSettings();
     const generalPage = new GeneralPrefs.GeneralPage(settings, SettingsKey);
     const displayPage = new DisplayPrefs.DisplayPage(settings, SettingsKey);
