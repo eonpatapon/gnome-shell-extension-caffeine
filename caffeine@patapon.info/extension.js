@@ -155,8 +155,8 @@ const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _init() {
         super._init({
-            // The 'label' property was renamed to 'title' in GNOME 44 but quick settings have otherwise 
-            // not been changed. The below line allows support for both GNOME 43 and 44+ by using the 
+            // The 'label' property was renamed to 'title' in GNOME 44 but quick settings have otherwise
+            // not been changed. The below line allows support for both GNOME 43 and 44+ by using the
             // appropriate property name based on the GNOME version.
             [ShellVersion >= 44 ? 'title' : 'label']: IndicatorName,
             toggleMode: true
@@ -226,7 +226,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             this._itemsSection.addMenuItem(item);
         }
         this.menuEnabled = TIMERS.length > 2;
-     
+
         // Select active duration
         if (resetDefault && this._settings.get_int(TIMER_KEY) !== 0) {
             // Set default duration to 0
@@ -601,7 +601,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // End timer
         this._timerEnable = false;
 
-        // Flush and hide timer label 
+        // Flush and hide timer label
         this._updateLabelTimer(null);
         this._timerLabel.visible = false;
 
@@ -618,8 +618,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerLabel.text = text;
         this._caffeineToggle.menu.setHeader(this._caffeineToggle.finalTimerMenuIcon, TimerMenuName, text);
         if (ShellVersion >= 44) {
-            this._caffeineToggle.subtitle = text;    
-        }   
+            this._caffeineToggle.subtitle = text;
+        }
     }
 
     _handleScrollEvent(event) {
@@ -653,7 +653,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 inhibitor.GetAppIdRemote(appId => {
                     appId = String(appId);
                     let appData = this._appInhibitedData.get(appId);
-                    if (appId !== '' && requestedId === appId && appData) {                        
+                    if (appId !== '' && requestedId === appId && appData) {
                         appData.isInhibited = true;
                         appData.object = object;
                         this._appInhibitedData.set(appId, appData);
@@ -785,8 +785,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
             const listAppId = this._appInhibitedData.keys();
             let appId = id !== null ? id : listAppId.next().value;
             if (appId !== undefined) {
-                let appInfo = Gio.DesktopAppInfo.new(appId);        
-                this._caffeineToggle.subtitle = appInfo !== null 
+                let appInfo = Gio.DesktopAppInfo.new(appId);
+                this._caffeineToggle.subtitle = appInfo !== null
                     ? appInfo.get_display_name()
                     : null;
             }
@@ -797,7 +797,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _updateTimerSubtitle() {
         if (ShellVersion >= 44 && !this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             const timerDuration = this._settings.get_int(TIMER_KEY);
-            this._caffeineToggle.subtitle = timerDuration !== 0 
+            this._caffeineToggle.subtitle = timerDuration !== 0
                 ? parseInt(timerDuration) + _(' minutes')
                 : null;
         }

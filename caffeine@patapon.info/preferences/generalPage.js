@@ -128,7 +128,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             lower: 0,
             upper: 4,
             step_increment: 0.1,
-            page_increment: 1,      
+            page_increment: 1,
             value: durationIndex
         });
         this._updateTimerDuration(durationIndex);
