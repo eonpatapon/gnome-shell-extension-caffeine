@@ -18,7 +18,7 @@
 */
 'use strict';
 
-const { Adw, Gtk, Gdk } = imports.gi;
+const { Gtk, Gdk } = imports.gi;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
