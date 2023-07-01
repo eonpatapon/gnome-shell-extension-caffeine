@@ -177,7 +177,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
         );
 
         // Hide/Show delete button
-        if( ! this.shortcutKeyBoard.isAcceleratorSet() ) {
+        if (!this.shortcutKeyBoard.isAcceleratorSet()) {
             deleteShortcutButton.visible = false;
         }
 
@@ -204,7 +204,7 @@ class Caffeine_GeneralPage extends Adw.PreferencesPage {
             (widget) => this._updateTimerDuration(widget.get_value()));
         deleteShortcutButton.connect('clicked', this._resetShortcut.bind(this));
         this._settings.connect(`changed::${this._settingsKey.TOGGLE_SHORTCUT}`, () => {
-            if( this.shortcutKeyBoard.isAcceleratorSet() ) {
+            if (this.shortcutKeyBoard.isAcceleratorSet()) {
                 deleteShortcutButton.visible = true;
             } else {
                 deleteShortcutButton.visible = false;
@@ -278,7 +278,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
     }
 
     isAcceleratorSet() {
-        if(this.shortLabel.get_accelerator()) {
+        if (this.shortLabel.get_accelerator()) {
             return true;
         } else {
             return false;

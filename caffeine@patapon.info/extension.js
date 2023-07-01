@@ -212,7 +212,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
         for (const timer of TIMERS) {
             let label = null;
-            if(timer[0] === 0) {
+            if (timer[0] === 0) {
                 label = _('Infinite');
             } else {
                 label = parseInt(timer[durationIndex]) + _(' minutes');
@@ -485,7 +485,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     removeInhibit(appId) {
         let appData = this._appInhibitedData.get(appId);
-        if(appData && appData.isInhibited){
+        if (appData && appData.isInhibited){
             this._inhibitionRemovedFifo.push(appId);
             this._sessionManager.UninhibitRemote(appData.cookie);
             appData.isToggled = false;
@@ -550,7 +550,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _showIndicatorLabel() {
-        if(this._settings.get_boolean(SHOW_TIMER_KEY)
+        if (this._settings.get_boolean(SHOW_TIMER_KEY)
           && (this._settings.get_enum(SHOW_INDICATOR_KEY) !== ShowIndicator.NEVER)
           && this._timerEnable) {
             this._timerLabel.visible=true;
@@ -606,7 +606,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerLabel.visible = false;
 
         // Remove timer
-        if((this._timeOut !== null) || (this._timePrint !== null)) {
+        if ((this._timeOut !== null) || (this._timePrint !== null)) {
             GLib.Source.remove(this._timeOut);
             GLib.Source.remove(this._timePrint);
             this._timeOut=null;
@@ -623,15 +623,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _handleScrollEvent(event) {
-        switch(event.get_scroll_direction()) {
+        switch (event.get_scroll_direction()) {
         case Clutter.ScrollDirection.UP:
-            if(!this._state) {
+            if (!this._state) {
                 // User state on - UP
                 this._settings.set_boolean(TOGGLE_STATE_KEY, true);
             }
             break;
         case Clutter.ScrollDirection.DOWN:
-            if(this._state) {
+            if (this._state) {
                 // Stop timer
                 this._removeTimer();
                 // User state off - DOWN
@@ -686,7 +686,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Get the first removed request
         let appId = this._inhibitionRemovedFifo.shift();
 
-        if(appId){
+        if (appId){
             let appData = this._appInhibitedData.get(appId);
             if (appData){
                 // Remove app from list
@@ -875,7 +875,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             switch (appsTriggeredMode) {
             // TRIGGER APPS MODE: ON RUNNING
             case AppsTrigger.ON_RUNNING:
-                if(this._appStateChangedSignalId === 0){
+                if (this._appStateChangedSignalId === 0){
                     this._appStateChangedSignalId =
                         this._appSystem.connect('app-state-changed',
                             this._appStateChanged.bind(this));
@@ -883,14 +883,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 // Check if currently running App
                 this._appConfigs.forEach( id => {
                     let app = this._appSystem.lookup_app(id);
-                    if(app && app.get_state() !== Shell.AppState.STOPPED) {
+                    if (app && app.get_state() !== Shell.AppState.STOPPED) {
                         this._appStateChanged(this._appSystem, app);
                     }
                 });
                 break;
             // TRIGGER APPS MODE: ON FOCUS
             case AppsTrigger.ON_FOCUS:
-                if(this._appDisplayChangedSignalId === 0){
+                if (this._appDisplayChangedSignalId === 0){
                     this._appDisplayChangedSignalId =
                         global.display.connect('notify::focus-window',
                             this._appWindowFocusChanged.bind(this));
@@ -900,7 +900,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 break;
             // TRIGGER APPS MODE: ON ACTIVE WORKSPACE
             case AppsTrigger.ON_ACTIVE_WORKSPACE:
-                if(this._appWorkspaceChangedSignalId === 0){
+                if (this._appWorkspaceChangedSignalId === 0){
                     this._appWorkspaceChangedSignalId =
                         global.workspace_manager.connect('workspace-switched',
                             this._appWorkspaceChanged.bind(this));
@@ -917,11 +917,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._appConfigs.forEach( appId => {
             let app = this._appSystem.lookup_app(appId);
             let isOnWorkspace = app.is_on_workspace(this._activeWorkspace);
-            if(isOnWorkspace && !this._isToggleInhibited(appId)){
+            if (isOnWorkspace && !this._isToggleInhibited(appId)){
                 this._manageScreenBlankState(true); // Allow blank screen
                 this._manageNightLight(false, true);
                 this.addInhibit(appId); // Inhibit app
-            } else if(!isOnWorkspace && this._isToggleInhibited(appId)){
+            } else if (!isOnWorkspace && this._isToggleInhibited(appId)){
                 this._manageScreenBlankState(true); // Allow blank screen
                 this._manageNightLight(true, true);
                 this.removeInhibit(appId); // Uninhibit app
@@ -948,7 +948,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._activeWorkspace.connect('window-added', (wkspace, window) => {
                 const type = window.get_window_type();
                 // Accept only normal window, ignore all other type (dialog, menu,...)
-                if(type === 0) {
+                if (type === 0) {
                     // Add 100 ms delay to handle window detection
                     this._timeWorkspaceAdd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
                         this._toggleWorkspace();
@@ -961,7 +961,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._activeWorkspace.connect('window-removed', (wkspace, window) => {
                 const type = window.get_window_type();
                 // Accept only normal window, ignore all other type (dialog, menu,...)
-                if(type === 0) {
+                if (type === 0) {
                     // Add 100 ms delay to handle window detection
                     this._timeWorkspaceRemove = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
                         this._toggleWorkspace();
@@ -980,10 +980,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let appId = null;
         let app = winTrack.focus_app;
 
-        if(app) {
+        if (app) {
             appId = app.get_id();
         }
-        if(this._appConfigs.includes(appId) && !this._isToggleInhibited(appId)){
+        if (this._appConfigs.includes(appId) && !this._isToggleInhibited(appId)){
             this._manageScreenBlankState(true); // Allow blank screen
             this._manageNightLight(false, true);
             this.addInhibit(appId); // Inhibit app
@@ -1010,7 +1010,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         let appId = app.get_id();
         let appState = app.get_state();
 
-        if(this._appConfigs.includes(appId)){
+        if (this._appConfigs.includes(appId)){
             // Block App state signal
             appSys.block_signal_handler(this._appStateChangedSignalId);
 
