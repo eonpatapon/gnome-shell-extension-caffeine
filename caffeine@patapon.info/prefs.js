@@ -52,8 +52,8 @@ function init() {
 
 function fillPreferencesWindow(window) {
     let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-    if (!iconTheme.get_search_path().includes(Me.path + "/icons")) {
-        iconTheme.add_search_path(Me.path + "/icons");
+    if (!iconTheme.get_search_path().includes(Me.path + '/icons')) {
+        iconTheme.add_search_path(Me.path + '/icons');
     }
 
     //const settings = ExtensionUtils.getSettings(Me.metadata['settings-schema']);

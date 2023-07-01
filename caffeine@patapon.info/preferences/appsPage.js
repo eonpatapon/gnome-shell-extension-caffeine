@@ -26,9 +26,9 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 
 const AppsModeChoices = {
-    RUNNING: _("Running"),
-    FOCUS: _("Focus"),
-    WORKSPACE: _("Active workspace"),
+    RUNNING: _('Running'),
+    FOCUS: _('Focus'),
+    WORKSPACE: _('Active workspace'),
 };
 
 var AppsPage = GObject.registerClass(
@@ -46,7 +46,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         // Apps behavior group
         // --------------
         let appsBehaviorGroup = new Adw.PreferencesGroup({
-            title: _("Trigger mode")
+            title: _('Trigger mode')
         });
 
         // Apps behavior select mode
@@ -55,8 +55,8 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         appsTriggerMode.append(AppsModeChoices.FOCUS);
         appsTriggerMode.append(AppsModeChoices.WORKSPACE);
         let appsTriggerModeRow = new Adw.ComboRow({
-            title: _("Apps trigger Caffeine mode"),
-            subtitle: _("Choose the way apps will trigger Caffeine"),
+            title: _('Apps trigger Caffeine mode'),
+            subtitle: _('Choose the way apps will trigger Caffeine'),
             model: appsTriggerMode,
             selected: this._settings.get_enum(this._settingsKey.TRIGGER_APPS_MODE)
         });
@@ -70,7 +70,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         let addAppsButton = new Gtk.Button({
             child: new Adw.ButtonContent({
                 icon_name: 'list-add-symbolic',
-                label: _("Add")
+                label: _('Add')
             })
         });
         this.appsGroup = new Adw.PreferencesGroup({
