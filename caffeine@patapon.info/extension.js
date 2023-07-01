@@ -122,10 +122,10 @@ const AppsTrigger = {
 };
 
 const TIMERS = [
-    [5,10,15,20,30,'caffeine-short-timer-symbolic'],
-    [10,20,30,40,50,'caffeine-medium-timer-symbolic'],
-    [30,45,60,75,80,'caffeine-long-timer-symbolic'],
-    [0,0,0,0,0,'caffeine-infinite-timer-symbolic'],
+    [5, 10, 15, 20, 30, 'caffeine-short-timer-symbolic'],
+    [10, 20, 30, 40, 50, 'caffeine-medium-timer-symbolic'],
+    [30, 45, 60, 75, 80, 'caffeine-long-timer-symbolic'],
+    [0, 0, 0, 0, 0, 'caffeine-infinite-timer-symbolic'],
 ];
 
 let CaffeineIndicator;
@@ -221,7 +221,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
                 continue;
             const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[5]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
-            item.connect('activate',() => (this._checkTimer(timer[durationIndex])));
+            item.connect('activate', () => (this._checkTimer(timer[durationIndex])));
             this._timerItems.set(timer[durationIndex], item);
             this._itemsSection.addMenuItem(item);
         }
@@ -402,7 +402,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.indicatorIndex = this._settings.get_int(INDICATOR_INDEX);
         this.lastIndicatorPosition = this.indicatorPosition;
 
-        QuickSettingsMenu._indicators.insert_child_at_index(this,this.indicatorIndex);
+        QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
         QuickSettingsMenu._addItems(this.quickSettingsItems);
 
         // Place the toggle above the background apps entry
@@ -543,7 +543,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
             // Update indicator index
             QuickSettingsMenu._indicators.remove_actor(this);
-            QuickSettingsMenu._indicators.insert_child_at_index(this,this.indicatorIndex);
+            QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
             this._settings.set_int(INDICATOR_INDEX, this.indicatorIndex);
         }
     }
