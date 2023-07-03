@@ -686,7 +686,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         });
     }
 
+    /* eslint-disable no-unused-vars */
     _inhibitorRemoved(proxy, sender, [object]) {
+    /* eslint-enable no-unused-vars */
         // Get the first removed request
         let appId = this._inhibitionRemovedFifo.shift();
 
