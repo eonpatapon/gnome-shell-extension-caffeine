@@ -3,7 +3,7 @@ EXTENSION_DIR = "caffeine@patapon.info"
 
 all: build install
 
-.PHONY: build install lint lint-fix
+.PHONY: build install translations lint lint-fix
 
 build:
 	glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
@@ -16,6 +16,9 @@ build:
 
 install:
 	gnome-extensions install $(BUNDLE_PATH) --force
+
+translations:
+	@./update-locale.sh
 
 clean:
 	@rm -fv $(BUNDLE_PATH)
