@@ -554,9 +554,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _showIndicatorLabel() {
-        if (this._settings.get_boolean(SHOW_TIMER_KEY)
-          && (this._settings.get_enum(SHOW_INDICATOR_KEY) !== ShowIndicator.NEVER)
-          && this._timerEnable) {
+        if (this._settings.get_boolean(SHOW_TIMER_KEY) &&
+           (this._settings.get_enum(SHOW_INDICATOR_KEY) !== ShowIndicator.NEVER) &&
+            this._timerEnable) {
             this._timerLabel.visible = true;
         } else {
             this._timerLabel.visible = false;
