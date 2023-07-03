@@ -27,7 +27,7 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 
 var DisplayPage = GObject.registerClass(
-class Caffeine_DisplayPage extends Adw.PreferencesPage {
+class CaffeineDisplayPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({
             title: _('Display'),

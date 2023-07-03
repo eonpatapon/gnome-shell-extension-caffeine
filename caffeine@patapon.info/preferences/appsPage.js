@@ -33,7 +33,7 @@ const AppsModeChoices = {
 };
 
 var AppsPage = GObject.registerClass(
-class Caffeine_AppsPage extends Adw.PreferencesPage {
+class CaffeineAppsPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({
             title: _('Apps'),

@@ -42,7 +42,7 @@ const TIMERS_DURATION = [
 ];
 
 var GeneralPage = GObject.registerClass(
-class Caffeine_GeneralPage extends Adw.PreferencesPage {
+class CaffeineGeneralPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({
             title: _('General'),
