@@ -477,7 +477,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._inhibitionAddedFifo.push(appId);
                 // Init app data
                 let data = {
-                    cookie: cookie,
+                    cookie,
                     isToggled: true,
                     isInhibited: false,
                     object: ''
