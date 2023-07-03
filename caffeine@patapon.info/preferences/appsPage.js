@@ -109,7 +109,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         if (this._appsListUi !== this._listApps) {
             // Remove the old list
             if (this._count) {
-                for (var i = 0; i < this._count; i++) {
+                for (let i = 0; i < this._count; i++) {
                     this.appsGroup.remove(this.apps[i].Row);
                 }
                 this._count = null;
