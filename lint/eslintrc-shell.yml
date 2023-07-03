@@ -7,5 +7,6 @@ rules:
     - error
     - always
   prefer-arrow-callback: error
+  prefer-template: off
 globals:
   global: readonly
