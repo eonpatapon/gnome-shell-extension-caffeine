@@ -524,7 +524,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._updateLastIndicatorPosition();
         const newPosition = this._settings.get_int(INDICATOR_POSITION);
 
-        if (this.indicatorPosition != newPosition) {
+        if (this.indicatorPosition !== newPosition) {
             this.indicatorPosition = newPosition;
             this._incrementIndicatorPosIndex();
 
@@ -539,7 +539,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
 
             // Always reset index to 0 on position 0
-            if (this.indicatorPosition == 0) {
+            if (this.indicatorPosition === 0) {
                 this.indicatorIndex = 0;
             }
 

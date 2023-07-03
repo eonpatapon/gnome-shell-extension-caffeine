@@ -106,7 +106,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         });
 
         // Check if the apps list UI needs updating
-        if (this._appsListUi != this._listApps) {
+        if (this._appsListUi !== this._listApps) {
             // Remove the old list
             if (this._count) {
                 for (var i = 0; i < this._count; i++) {
