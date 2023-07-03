@@ -16,6 +16,7 @@
 
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
+/* exported DisplayPage */
 'use strict';
 
 const { Adw, Gtk, GObject, Gio } = imports.gi;
