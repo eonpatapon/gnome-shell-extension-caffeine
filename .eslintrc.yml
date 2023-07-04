@@ -1,3 +1,13 @@
-extends:
+extends: #Imports upstream linting rules
  - ./lint/eslintrc-gjs.yml
  - ./lint/eslintrc-shell.yml
+rules: #Override some of the upstream rules to match this codebase
+  curly:
+   - error
+   - all
+  comma-dangle:
+   - error
+   - never
+  arrow-parens:
+   - error
+   - always

@@ -16,9 +16,10 @@
 
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
+/* exported init fillPreferencesWindow */
 'use strict';
 
-const { Adw, Gtk, Gdk } = imports.gi;
+const { Gtk, Gdk } = imports.gi;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
@@ -43,7 +44,7 @@ const SettingsKey = {
     TRIGGER_APPS_MODE: 'trigger-apps-mode',
     INDICATOR_POSITION: 'indicator-position',
     INDICATOR_INDEX: 'indicator-position-index',
-    INDICATOR_POS_MAX: 'indicator-position-max',
+    INDICATOR_POS_MAX: 'indicator-position-max'
 };
 
 function init() {
@@ -52,11 +53,10 @@ function init() {
 
 function fillPreferencesWindow(window) {
     let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-    if (!iconTheme.get_search_path().includes(Me.path + "/icons")) {
-        iconTheme.add_search_path(Me.path + "/icons");
+    if (!iconTheme.get_search_path().includes(Me.path + '/icons')) {
+        iconTheme.add_search_path(Me.path + '/icons');
     }
 
-    //const settings = ExtensionUtils.getSettings(Me.metadata['settings-schema']);
     const settings = ExtensionUtils.getSettings();
     const generalPage = new GeneralPrefs.GeneralPage(settings, SettingsKey);
     const displayPage = new DisplayPrefs.DisplayPage(settings, SettingsKey);
@@ -76,7 +76,7 @@ function fillPreferencesWindow(window) {
         let currentWidth = window.default_width;
         let currentHeight = window.default_height;
         // Remember user window size adjustments.
-        if (currentWidth != prefsWidth || currentHeight != prefsHeight) {
+        if (currentWidth !== prefsWidth || currentHeight !== prefsHeight) {
             settings.set_int(SettingsKey.DEFAULT_WIDTH, currentWidth);
             settings.set_int(SettingsKey.DEFAULT_HEIGHT, currentHeight);
         }

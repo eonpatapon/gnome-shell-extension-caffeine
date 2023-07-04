@@ -1,21 +1,31 @@
+BUNDLE_PATH = "caffeine@patapon.info.zip"
+EXTENSION_DIR = "caffeine@patapon.info"
+
 all: build install
 
-.PHONY: build install lint dist
+.PHONY: build install clean translations lint lint-fix
 
 build:
-	./update-locale.sh
 	glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
-
-dist: build
-	rm -f caffeine@patapon.info.zip
-	cd caffeine@patapon.info && zip -r ../caffeine@patapon.info.zip ./* --exclude \*.po
+	rm -f $(BUNDLE_PATH)
+	cd $(EXTENSION_DIR); \
+	gnome-extensions pack --force --podir=locale \
+	                      --extra-source=preferences/ \
+	                      --extra-source=icons/; \
+	mv $(EXTENSION_DIR).shell-extension.zip ../$(BUNDLE_PATH)
 
 install:
-	install -d ~/.local/share/gnome-shell/extensions
-	cp -a caffeine@patapon.info/ ~/.local/share/gnome-shell/extensions/
+	gnome-extensions install $(BUNDLE_PATH) --force
+
+clean:
+	@rm -fv $(BUNDLE_PATH)
+	@rm -fv $(EXTENSION_DIR)/schemas/gschemas.compiled
+
+translations:
+	@./update-locale.sh
 
 lint:
-	eslint --resolve-plugins-relative-to "$(shell npm root -g)" caffeine@patapon.info
+	eslint -c .eslintrc.yml --resolve-plugins-relative-to "$(shell npm root -g)" $(EXTENSION_DIR)
 
 lint-fix:
-	eslint --resolve-plugins-relative-to "$(shell npm root -g)" --fix caffeine@patapon.info
+	eslint -c .eslintrc.yml --resolve-plugins-relative-to "$(shell npm root -g)" --fix $(EXTENSION_DIR)

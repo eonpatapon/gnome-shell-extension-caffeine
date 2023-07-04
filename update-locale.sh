@@ -9,11 +9,9 @@ xgettext -j ./*.js -o "$pot" --from-code UTF-8 --no-wrap
 xgettext -j preferences/*.js -o "$pot" --from-code UTF-8 --no-wrap
 xgettext -j schemas/*.xml -o "$pot" --from-code UTF-8 --no-wrap
 
-for locale_lang in locale/*; do
-    po="$locale_lang/LC_MESSAGES/gnome-shell-extension-caffeine.po"
+for po in locale/*; do
     echo "$po"
     msgmerge --backup=off -U "$po" "$pot"
-    msgfmt "$po" -o "${po%po}mo"
 done
 
 rm "$pot"

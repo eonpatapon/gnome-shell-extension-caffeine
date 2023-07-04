@@ -16,6 +16,7 @@
 
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
+/* exported AppsPage */
 'use strict';
 
 const { Adw, Gtk, GObject, Gio } = imports.gi;
@@ -26,13 +27,13 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 
 const AppsModeChoices = {
-    RUNNING: _("Running"),
-    FOCUS: _("Focus"),
-    WORKSPACE: _("Active workspace"),
+    RUNNING: _('Running'),
+    FOCUS: _('Focus'),
+    WORKSPACE: _('Active workspace')
 };
 
 var AppsPage = GObject.registerClass(
-class Caffeine_AppsPage extends Adw.PreferencesPage {
+class CaffeineAppsPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({
             title: _('Apps'),
@@ -46,7 +47,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         // Apps behavior group
         // --------------
         let appsBehaviorGroup = new Adw.PreferencesGroup({
-            title: _("Trigger mode")
+            title: _('Trigger mode')
         });
 
         // Apps behavior select mode
@@ -55,8 +56,8 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         appsTriggerMode.append(AppsModeChoices.FOCUS);
         appsTriggerMode.append(AppsModeChoices.WORKSPACE);
         let appsTriggerModeRow = new Adw.ComboRow({
-            title: _("Apps trigger Caffeine mode"),
-            subtitle: _("Choose the way apps will trigger Caffeine"),
+            title: _('Apps trigger Caffeine mode'),
+            subtitle: _('Choose the way apps will trigger Caffeine'),
             model: appsTriggerMode,
             selected: this._settings.get_enum(this._settingsKey.TRIGGER_APPS_MODE)
         });
@@ -70,7 +71,7 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         let addAppsButton = new Gtk.Button({
             child: new Adw.ButtonContent({
                 icon_name: 'list-add-symbolic',
-                label: _("Add")
+                label: _('Add')
             })
         });
         this.appsGroup = new Adw.PreferencesGroup({
@@ -97,19 +98,19 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
         this._listApps.length = 0;
 
         // Update the list & Check if app still exist
-        _apps.forEach(id => {
+        _apps.forEach((id) => {
             const appInfo = Gio.DesktopAppInfo.new(id);
 
-            if (appInfo)
+            if (appInfo) {
                 this._listApps.push(id);
+            }
         });
 
         // Check if the apps list UI needs updating
-        if (this._appsListUi != this._listApps) {
-
+        if (this._appsListUi !== this._listApps) {
             // Remove the old list
             if (this._count) {
-                for (var i = 0; i < this._count; i++) {
+                for (let i = 0; i < this._count; i++) {
                     this.appsGroup.remove(this.apps[i].Row);
                 }
                 this._count = null;
@@ -140,12 +141,12 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                     let appInfo = Gio.DesktopAppInfo.new(this._listApps[i]);
                     const appIcon = new Gtk.Image({
                         gicon: appInfo.get_icon(),
-                        pixel_size: 32,
+                        pixel_size: 32
                     });
                     appIcon.get_style_context().add_class('icon-dropshadow');
                     this.apps[i].Row = new Adw.ActionRow({
                         title: appInfo.get_display_name(),
-                        subtitle: this._listApps[i].replace('.desktop',''),
+                        subtitle: this._listApps[i].replace('.desktop', ''),
                         activatable: true
                     });
 
@@ -160,7 +161,6 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
                     this.apps[i].DeleteButton.connect('clicked', () => {
                         this._onRemoveApp(this._listApps[i]);
                     });
-
                 }
                 this._count = this._listApps.length;
             }
@@ -175,9 +175,9 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
             const appInfo = id === Gtk.ResponseType.OK
                 ? dialog.get_widget().get_app_info() : null;
             const apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
-            if (appInfo && !apps.some(a => a === appInfo.get_id())) {
+            if (appInfo && !apps.some((a) => a === appInfo.get_id())) {
                 this._settings.set_strv(this._settingsKey.INHIBIT_APPS, [
-                    ...apps, appInfo.get_id(),
+                    ...apps, appInfo.get_id()
                 ]);
                 this._refreshApps();
             }
@@ -188,12 +188,12 @@ class Caffeine_AppsPage extends Adw.PreferencesPage {
 
     _onRemoveApp(appId) {
         this._settings.set_strv(this._settingsKey.INHIBIT_APPS,
-        this._settings.get_strv(this._settingsKey.INHIBIT_APPS).filter(id => {
-            return id !== appId;
-        }));
+            this._settings.get_strv(this._settingsKey.INHIBIT_APPS).filter((id) => {
+                return id !== appId;
+            })
+        );
         this._refreshApps();
     }
-
 });
 
 const NewAppDialog = GObject.registerClass(
@@ -201,7 +201,7 @@ const NewAppDialog = GObject.registerClass(
         _init(parent, settingsKey) {
             super._init({
                 transient_for: parent,
-                modal: true,
+                modal: true
             });
 
             this._settings = ExtensionUtils.getSettings();
@@ -209,7 +209,7 @@ const NewAppDialog = GObject.registerClass(
 
             this.get_widget().set({
                 show_all: true,
-                show_other: true, // hide more button
+                show_other: true // hide more button
             });
 
             this.get_widget().connect('application-selected',
@@ -221,6 +221,6 @@ const NewAppDialog = GObject.registerClass(
             const apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
             const appInfo = this.get_widget().get_app_info();
             this.set_response_sensitive(Gtk.ResponseType.OK,
-                appInfo && !apps.some(i => i.startsWith(appInfo.get_id())));
+                appInfo && !apps.some((i) => i.startsWith(appInfo.get_id())));
         }
     });

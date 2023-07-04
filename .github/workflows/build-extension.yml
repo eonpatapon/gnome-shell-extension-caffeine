@@ -1,0 +1,33 @@
+# This workflow will test the build system, then build the extension and upload an artifact
+name: Test build system and upload extension
+
+on:
+  pull_request:
+    branches: '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: make gettext gnome-shell libglib2.0-bin
+        version: 1.0
+
+    - name: Test extension builds from scratch
+      run: |
+        make build
+
+    - name: Test extension installs
+      run: |
+        make install
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: caffeine@patapon.info.zip
+        path: caffeine@patapon.info.zip
+
+    - name: Test build area clean
+      run: |
+        make clean

@@ -16,6 +16,7 @@
 
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
+/* exported DisplayPage */
 'use strict';
 
 const { Adw, Gtk, GObject, Gio } = imports.gi;
@@ -26,10 +27,10 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 
 var DisplayPage = GObject.registerClass(
-class Caffeine_DisplayPage extends Adw.PreferencesPage {
+class CaffeineDisplayPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({
-            title: _("Display"),
+            title: _('Display'),
             icon_name: 'video-display-symbolic',
             name: 'DisplayPage'
         });
@@ -39,17 +40,17 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
         // Display group
         // --------------
         let displayGroup = new Adw.PreferencesGroup({
-            title: _("Display")
+            title: _('Display')
         });
 
         // Show indicator
         let showStatusIndicator = new Gtk.StringList();
-        showStatusIndicator.append(_("Only when active"));
-        showStatusIndicator.append(_("Always"));
-        showStatusIndicator.append(_("Never"));
+        showStatusIndicator.append(_('Only when active'));
+        showStatusIndicator.append(_('Always'));
+        showStatusIndicator.append(_('Never'));
         let showStatusIndicatorRow = new Adw.ComboRow({
-            title: _("Show status indicator in top panel"),
-            subtitle: _("Enable or disable the Caffeine icon in the top panel"),
+            title: _('Show status indicator in top panel'),
+            subtitle: _('Enable or disable the Caffeine icon in the top panel'),
             model: showStatusIndicator,
             selected: this._settings.get_enum(this._settingsKey.SHOW_INDICATOR)
         });
@@ -60,8 +61,8 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             active: this._settings.get_boolean(this._settingsKey.SHOW_TIMER)
         });
         let showTimerRow = new Adw.ActionRow({
-            title: _("Show timer in top panel"),
-            subtitle: _("Enable or disable the timer in the top panel"),
+            title: _('Show timer in top panel'),
+            subtitle: _('Enable or disable the timer in the top panel'),
             activatable_widget: showTimerSwitch
         });
         showTimerRow.add_suffix(showTimerSwitch);
@@ -72,8 +73,8 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATIONS)
         });
         let notificationRow = new Adw.ActionRow({
-            title: _("Notifications"),
-            subtitle: _("Enable notifications when Caffeine is enabled or disabled"),
+            title: _('Notifications'),
+            subtitle: _('Enable notifications when Caffeine is enabled or disabled'),
             activatable_widget: notificationSwitch
         });
         notificationRow.add_suffix(notificationSwitch);
@@ -95,8 +96,8 @@ class Caffeine_DisplayPage extends Adw.PreferencesPage {
             valign: Gtk.Align.CENTER
         });
         let posIndicatorOffsetRow = new Adw.ActionRow({
-            title: _("Status indicator position"),
-            subtitle: _("The position relative of indicator icon to other items"),
+            title: _('Status indicator position'),
+            subtitle: _('The position relative of indicator icon to other items'),
             activatable_widget: this.posIndicatorOffsetButton
         });
         posIndicatorOffsetRow.add_suffix(this.posIndicatorOffsetButton);
