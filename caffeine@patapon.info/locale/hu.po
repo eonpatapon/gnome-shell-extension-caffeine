@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 22:38+0100\n"
+"POT-Creation-Date: 2023-07-04 19:03+0200\n"
 "PO-Revision-Date: 2018-06-22 21:22+0200\n"
 "Last-Translator: Kardos László <lacesz@NOSPAM@ox dot io>\n"
 "Language-Team: \n"
@@ -20,196 +20,196 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:800 preferences/generalPage.js:217
+#: extension.js:218 extension.js:807 preferences/generalPage.js:218
 msgid " minutes"
 msgstr ""
 
-#: extension.js:765
+#: extension.js:772
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:767
+#: extension.js:774
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:772
+#: extension.js:779
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:774
+#: extension.js:781
 msgid "Night Light resumed"
 msgstr ""
 
-#: preferences/appsPage.js:29
+#: preferences/appsPage.js:30
 msgid "Running"
 msgstr ""
 
-#: preferences/appsPage.js:30
+#: preferences/appsPage.js:31
 msgid "Focus"
 msgstr ""
 
-#: preferences/appsPage.js:31
+#: preferences/appsPage.js:32
 msgid "Active workspace"
 msgstr ""
 
-#: preferences/appsPage.js:38
+#: preferences/appsPage.js:39
 msgid "Apps"
 msgstr "Alkalmazások elemre"
 
-#: preferences/appsPage.js:49
+#: preferences/appsPage.js:50
 msgid "Trigger mode"
 msgstr ""
 
-#: preferences/appsPage.js:58
+#: preferences/appsPage.js:59
 #, fuzzy
 msgid "Apps trigger Caffeine mode"
 msgstr "Alkalmazások, amelyek aktiválják a koffeint"
 
-#: preferences/appsPage.js:59
+#: preferences/appsPage.js:60
 #, fuzzy
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "Alkalmazások, amelyek aktiválják a koffeint"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:74
 msgid "Add"
 msgstr "Hozzáadás\t"
 
-#: preferences/appsPage.js:77
+#: preferences/appsPage.js:78
 msgid "Apps that trigger Caffeine"
 msgstr "Alkalmazások, amelyek aktiválják a koffeint"
 
-#: preferences/displayPage.js:32 preferences/displayPage.js:42
+#: preferences/displayPage.js:33 preferences/displayPage.js:43
 msgid "Display"
 msgstr ""
 
-#: preferences/displayPage.js:47
+#: preferences/displayPage.js:48
 msgid "Only when active"
 msgstr "Csak aktív állapotban"
 
-#: preferences/displayPage.js:48 preferences/generalPage.js:31
+#: preferences/displayPage.js:49 preferences/generalPage.js:32
 msgid "Always"
 msgstr "Mindig"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:30
+#: preferences/displayPage.js:50 preferences/generalPage.js:31
 msgid "Never"
 msgstr "Soha"
 
-#: preferences/displayPage.js:51
+#: preferences/displayPage.js:52
 #, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Indikátor megjelenítése a panelen"
 
-#: preferences/displayPage.js:52
+#: preferences/displayPage.js:53
 #, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Indikátor megjelenítése a panelen"
 
-#: preferences/displayPage.js:63
+#: preferences/displayPage.js:64
 #, fuzzy
 msgid "Show timer in top panel"
 msgstr "Caffeine mutatása a felső panelen"
 
-#: preferences/displayPage.js:64
+#: preferences/displayPage.js:65
 #, fuzzy
 msgid "Enable or disable the timer in the top panel"
 msgstr "Indikátor megjelenítése a panelen"
 
-#: preferences/displayPage.js:75
+#: preferences/displayPage.js:76
 #, fuzzy
 msgid "Notifications"
 msgstr "Értesítések mutatása"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:77
 #, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Értesítések mutatásának engedélyezése/tiltása"
 
-#: preferences/displayPage.js:98
+#: preferences/displayPage.js:99
 #, fuzzy
 msgid "Status indicator position"
 msgstr "Indikátor megjelenítése a panelen"
 
-#: preferences/displayPage.js:99
+#: preferences/displayPage.js:100
 msgid "The position relative of indicator icon to other items"
 msgstr ""
 
-#: preferences/generalPage.js:32
+#: preferences/generalPage.js:33
 msgid "For apps on list"
 msgstr "A listán szereplő alkalmazásokhoz"
 
-#: preferences/generalPage.js:47
+#: preferences/generalPage.js:48
 msgid "General"
 msgstr "Tábornok"
 
-#: preferences/generalPage.js:57
+#: preferences/generalPage.js:58
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:66
+#: preferences/generalPage.js:67
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Engedélyezés, ha teljes képernyős alkalmazás fut"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:68
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 "Automatikus engedélyezés, amikor egy alkalmazás teljes képernyős módba lép"
 
-#: preferences/generalPage.js:78
+#: preferences/generalPage.js:79
 msgid "Remember state"
 msgstr "Emlékezz állapotra"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:80
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Állapot visszaállítása újraindítás közben"
 
-#: preferences/generalPage.js:90
+#: preferences/generalPage.js:91
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Értesítések mutatásának engedélyezése/tiltása"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:92
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Együtt kapcsolja az éjszakai fényt a koffein állapotával"
 
-#: preferences/generalPage.js:102
+#: preferences/generalPage.js:103
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr ""
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:104
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Értesítések mutatásának engedélyezése/tiltása"
 
-#: preferences/generalPage.js:118
+#: preferences/generalPage.js:119
 msgid "Timer"
 msgstr ""
 
-#: preferences/generalPage.js:123
+#: preferences/generalPage.js:124
 msgid "Durations"
 msgstr ""
 
-#: preferences/generalPage.js:167
+#: preferences/generalPage.js:168
 #, fuzzy
 msgid "Shortcut"
 msgstr "Parancsikon átváltása"
 
-#: preferences/generalPage.js:175
+#: preferences/generalPage.js:176
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr "Parancsikon átváltása"
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:177
 msgid "Use Backspace to clear"
 msgstr "A törléshez használja a Backspace gombot"
 
-#: preferences/generalPage.js:217
+#: preferences/generalPage.js:218
 msgid "Set to "
 msgstr ""
 
-#: preferences/generalPage.js:264 preferences/generalPage.js:296
+#: preferences/generalPage.js:265 preferences/generalPage.js:297
 msgid "New accelerator…"
 msgstr ""
 

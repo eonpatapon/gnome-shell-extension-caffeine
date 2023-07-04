@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 22:38+0100\n"
+"POT-Creation-Date: 2023-07-04 19:03+0200\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -23,189 +23,189 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:800 preferences/generalPage.js:217
+#: extension.js:218 extension.js:807 preferences/generalPage.js:218
 msgid " minutes"
 msgstr ""
 
-#: extension.js:765
-msgid "Caffeine enabled"
-msgstr ""
-
-#: extension.js:767
-#, fuzzy
-msgid "Night Light paused"
-msgstr "야간 모드를 멈춥니"
-
 #: extension.js:772
-msgid "Caffeine disabled"
+msgid "Caffeine enabled"
 msgstr ""
 
 #: extension.js:774
 #, fuzzy
+msgid "Night Light paused"
+msgstr "야간 모드를 멈춥니"
+
+#: extension.js:779
+msgid "Caffeine disabled"
+msgstr ""
+
+#: extension.js:781
+#, fuzzy
 msgid "Night Light resumed"
 msgstr "야간 모드를 다시 켭니"
 
-#: preferences/appsPage.js:29
+#: preferences/appsPage.js:30
 msgid "Running"
 msgstr ""
 
-#: preferences/appsPage.js:30
+#: preferences/appsPage.js:31
 msgid "Focus"
 msgstr ""
 
-#: preferences/appsPage.js:31
+#: preferences/appsPage.js:32
 msgid "Active workspace"
 msgstr ""
 
-#: preferences/appsPage.js:38
+#: preferences/appsPage.js:39
 msgid "Apps"
 msgstr "프로그램"
 
-#: preferences/appsPage.js:49
+#: preferences/appsPage.js:50
 msgid "Trigger mode"
 msgstr ""
 
-#: preferences/appsPage.js:58
+#: preferences/appsPage.js:59
 #, fuzzy
 msgid "Apps trigger Caffeine mode"
 msgstr "카페인을 제어할 프로그램"
 
-#: preferences/appsPage.js:59
+#: preferences/appsPage.js:60
 #, fuzzy
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "카페인을 제어할 프로그램"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:74
 msgid "Add"
 msgstr ""
 
-#: preferences/appsPage.js:77
+#: preferences/appsPage.js:78
 msgid "Apps that trigger Caffeine"
 msgstr "카페인을 제어할 프로그램"
 
-#: preferences/displayPage.js:32 preferences/displayPage.js:42
+#: preferences/displayPage.js:33 preferences/displayPage.js:43
 msgid "Display"
 msgstr ""
 
-#: preferences/displayPage.js:47
+#: preferences/displayPage.js:48
 msgid "Only when active"
 msgstr "활성화된 경우에만"
 
-#: preferences/displayPage.js:48 preferences/generalPage.js:31
+#: preferences/displayPage.js:49 preferences/generalPage.js:32
 msgid "Always"
 msgstr "항상"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:30
+#: preferences/displayPage.js:50 preferences/generalPage.js:31
 msgid "Never"
 msgstr "안 함"
 
-#: preferences/displayPage.js:51
+#: preferences/displayPage.js:52
 msgid "Show status indicator in top panel"
 msgstr "상단 패널에 인디케이터 표시"
 
-#: preferences/displayPage.js:52
+#: preferences/displayPage.js:53
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "카페인 아이콘을 상단에 표시할지 결정합니다."
 
-#: preferences/displayPage.js:63
+#: preferences/displayPage.js:64
 #, fuzzy
 msgid "Show timer in top panel"
 msgstr "상단 패널에 인디케이터 표시"
 
-#: preferences/displayPage.js:64
+#: preferences/displayPage.js:65
 #, fuzzy
 msgid "Enable or disable the timer in the top panel"
 msgstr "카페인 아이콘을 상단에 표시할지 결정합니다."
 
-#: preferences/displayPage.js:75
+#: preferences/displayPage.js:76
 msgid "Notifications"
 msgstr "알림"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:77
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "카페인을 켜고 끌 때마다 알림을 표시합니다."
 
-#: preferences/displayPage.js:98
+#: preferences/displayPage.js:99
 #, fuzzy
 msgid "Status indicator position"
 msgstr "상단 패널에 인디케이터 표시"
 
-#: preferences/displayPage.js:99
+#: preferences/displayPage.js:100
 msgid "The position relative of indicator icon to other items"
 msgstr ""
 
-#: preferences/generalPage.js:32
+#: preferences/generalPage.js:33
 msgid "For apps on list"
 msgstr "목록에 있는 프로그램만"
 
-#: preferences/generalPage.js:47
+#: preferences/generalPage.js:48
 msgid "General"
 msgstr "일반"
 
-#: preferences/generalPage.js:57
+#: preferences/generalPage.js:58
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:66
+#: preferences/generalPage.js:67
 msgid "Enable for fullscreen apps"
 msgstr "전체 화면 프로그램에서 활성화"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:68
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "전체 화면 모드에 진입한 프로그램을 사용할 시 자동으로 활성화합니다."
 
-#: preferences/generalPage.js:78
+#: preferences/generalPage.js:79
 msgid "Remember state"
 msgstr "상태 기억하기"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:80
 msgid "Remember the last state across sessions and reboots"
 msgstr "세션을 바꾸거나 다시 시작할 때 마지막 상태를 기억합니다."
 
-#: preferences/generalPage.js:90
+#: preferences/generalPage.js:91
 msgid "Pause and resume Night Light"
 msgstr "야간 모드를 멈추거나 다시 켜기"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:92
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "카페인의 상태에 맞춰 야간 모드를 제어합니다."
 
-#: preferences/generalPage.js:102
+#: preferences/generalPage.js:103
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr ""
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:104
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "카페인을 켜고 끌 때마다 알림을 표시합니다."
 
-#: preferences/generalPage.js:118
+#: preferences/generalPage.js:119
 msgid "Timer"
 msgstr ""
 
-#: preferences/generalPage.js:123
+#: preferences/generalPage.js:124
 msgid "Durations"
 msgstr ""
 
-#: preferences/generalPage.js:167
+#: preferences/generalPage.js:168
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:175
+#: preferences/generalPage.js:176
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:177
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:217
+#: preferences/generalPage.js:218
 msgid "Set to "
 msgstr ""
 
-#: preferences/generalPage.js:264 preferences/generalPage.js:296
+#: preferences/generalPage.js:265 preferences/generalPage.js:297
 msgid "New accelerator…"
 msgstr ""
 
