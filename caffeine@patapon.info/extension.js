@@ -1,4 +1,4 @@
- /* -*- mode: js2 - indent-tabs-mode: nil - js2-basic-offset: 4 -*- */
+/* -*- mode: js2 - indent-tabs-mode: nil - js2-basic-offset: 4 -*- */
 /* jshint multistr:true */
 /* jshint esnext:true */
 /* exported enable disable init */

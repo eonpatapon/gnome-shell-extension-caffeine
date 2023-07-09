@@ -26,7 +26,6 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 
-
 var AppsPage = GObject.registerClass(
 class CaffeineAppsPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
