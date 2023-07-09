@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-04 19:03+0200\n"
+"POT-Creation-Date: 2023-07-09 16:08+0200\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -18,69 +18,69 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Gtranslator 3.32.0\n"
 
-#: extension.js:101
+#: extension.js:177 extension.js:622
 #, fuzzy
 msgid "Caffeine Timer"
 msgstr "Caffeine aktif"
 
-#: extension.js:216
+#: extension.js:215
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:218 extension.js:807 preferences/generalPage.js:218
+#: extension.js:217 extension.js:806 preferences/generalPage.js:218
 msgid " minutes"
 msgstr ""
 
-#: extension.js:772
+#: extension.js:771
 msgid "Caffeine enabled"
 msgstr "Caffeine aktif"
 
-#: extension.js:774
+#: extension.js:773
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:779
+#: extension.js:778
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Caffeine aktif"
 
-#: extension.js:781
+#: extension.js:780
 msgid "Night Light resumed"
 msgstr ""
 
-#: preferences/appsPage.js:30
-msgid "Running"
-msgstr ""
-
-#: preferences/appsPage.js:31
-msgid "Focus"
-msgstr ""
-
-#: preferences/appsPage.js:32
-msgid "Active workspace"
-msgstr ""
-
-#: preferences/appsPage.js:39
+#: preferences/appsPage.js:34
 msgid "Apps"
 msgstr ""
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:45
 msgid "Trigger mode"
 msgstr ""
 
-#: preferences/appsPage.js:59
+#: preferences/appsPage.js:50
+msgid "Running"
+msgstr ""
+
+#: preferences/appsPage.js:51
+msgid "Focus"
+msgstr ""
+
+#: preferences/appsPage.js:52
+msgid "Active workspace"
+msgstr ""
+
+#: preferences/appsPage.js:54
 msgid "Apps trigger Caffeine mode"
 msgstr ""
 
-#: preferences/appsPage.js:60
+#: preferences/appsPage.js:55
 msgid "Choose the way apps will trigger Caffeine"
 msgstr ""
 
-#: preferences/appsPage.js:74
+#: preferences/appsPage.js:69
 msgid "Add"
 msgstr "Ekle"
 
-#: preferences/appsPage.js:78
+#: preferences/appsPage.js:73
 msgid "Apps that trigger Caffeine"
 msgstr ""
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-04 19:03+0200\n"
+"POT-Creation-Date: 2023-07-09 16:08+0200\n"
 "PO-Revision-Date: 2023-01-13 14:43+0200\n"
 "Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>\n"
@@ -17,68 +17,68 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:101
+#: extension.js:177 extension.js:622
 #, fuzzy
 msgid "Caffeine Timer"
 msgstr "Caffeine disabilitato"
 
-#: extension.js:216
+#: extension.js:215
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:218 extension.js:807 preferences/generalPage.js:218
+#: extension.js:217 extension.js:806 preferences/generalPage.js:218
 msgid " minutes"
 msgstr " minuti"
 
-#: extension.js:772
+#: extension.js:771
 msgid "Caffeine enabled"
 msgstr "Caffeine abilitata"
 
-#: extension.js:774
+#: extension.js:773
 msgid "Night Light paused"
 msgstr "Luce notturna in pausa"
 
-#: extension.js:779
+#: extension.js:778
 msgid "Caffeine disabled"
 msgstr "Caffeine disabilitato"
 
-#: extension.js:781
+#: extension.js:780
 msgid "Night Light resumed"
 msgstr "Luce notturna ripristinata"
 
-#: preferences/appsPage.js:30
-msgid "Running"
-msgstr "In esecuzione"
-
-#: preferences/appsPage.js:31
-msgid "Focus"
-msgstr ""
-
-#: preferences/appsPage.js:32
-msgid "Active workspace"
-msgstr "Area di lavoro attiva"
-
-#: preferences/appsPage.js:39
+#: preferences/appsPage.js:34
 msgid "Apps"
 msgstr "Applicazioni"
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:45
 msgid "Trigger mode"
 msgstr "Modalità di attivazione"
 
-#: preferences/appsPage.js:59
+#: preferences/appsPage.js:50
+msgid "Running"
+msgstr "In esecuzione"
+
+#: preferences/appsPage.js:51
+msgid "Focus"
+msgstr ""
+
+#: preferences/appsPage.js:52
+msgid "Active workspace"
+msgstr "Area di lavoro attiva"
+
+#: preferences/appsPage.js:54
 msgid "Apps trigger Caffeine mode"
 msgstr "Le app che attivano la modalità Caffeine"
 
-#: preferences/appsPage.js:60
+#: preferences/appsPage.js:55
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "Scegli il modo in cui le app attiveranno Caffeine"
 
-#: preferences/appsPage.js:74
+#: preferences/appsPage.js:69
 msgid "Add"
 msgstr "Aggiungi"
 
-#: preferences/appsPage.js:78
+#: preferences/appsPage.js:73
 msgid "Apps that trigger Caffeine"
 msgstr "Applicazioni che abilitano caffeine"
 

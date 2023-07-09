@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-04 19:03+0200\n"
+"POT-Creation-Date: 2023-07-09 16:08+0200\n"
 "PO-Revision-Date: 2023-04-12 18:40+0200\n"
 "Last-Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
 "Language-Team: Czech\n"
@@ -17,68 +17,68 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:101
+#: extension.js:177 extension.js:622
 #, fuzzy
 msgid "Caffeine Timer"
 msgstr "Časovač Caffeine"
 
-#: extension.js:216
+#: extension.js:215
 msgid "Infinite"
 msgstr "Nekonečně"
 
-#: extension.js:218 extension.js:807 preferences/generalPage.js:218
+#: extension.js:217 extension.js:806 preferences/generalPage.js:218
 msgid " minutes"
 msgstr " minut"
 
-#: extension.js:772
+#: extension.js:771
 msgid "Caffeine enabled"
 msgstr "Caffeine povolen"
 
-#: extension.js:774
+#: extension.js:773
 msgid "Night Light paused"
 msgstr "Noční světlo pozastaveno"
 
-#: extension.js:779
+#: extension.js:778
 msgid "Caffeine disabled"
 msgstr "Caffeine zakázán"
 
-#: extension.js:781
+#: extension.js:780
 msgid "Night Light resumed"
 msgstr "Noční světlo obnoveno"
 
-#: preferences/appsPage.js:30
-msgid "Running"
-msgstr "Spuštěné"
-
-#: preferences/appsPage.js:31
-msgid "Focus"
-msgstr "Jako současné okno"
-
-#: preferences/appsPage.js:32
-msgid "Active workspace"
-msgstr "Na současné pracovní ploše"
-
-#: preferences/appsPage.js:39
+#: preferences/appsPage.js:34
 msgid "Apps"
 msgstr "Aplikace"
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:45
 msgid "Trigger mode"
 msgstr "Režim aktivování"
 
-#: preferences/appsPage.js:59
+#: preferences/appsPage.js:50
+msgid "Running"
+msgstr "Spuštěné"
+
+#: preferences/appsPage.js:51
+msgid "Focus"
+msgstr "Jako současné okno"
+
+#: preferences/appsPage.js:52
+msgid "Active workspace"
+msgstr "Na současné pracovní ploše"
+
+#: preferences/appsPage.js:54
 msgid "Apps trigger Caffeine mode"
 msgstr "Aplikace spustí režim Caffeine, když jsou"
 
-#: preferences/appsPage.js:60
+#: preferences/appsPage.js:55
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "Vybrat způsob, jakým aplikace aktivují Caffeine"
 
-#: preferences/appsPage.js:74
+#: preferences/appsPage.js:69
 msgid "Add"
 msgstr "Přidat"
 
-#: preferences/appsPage.js:78
+#: preferences/appsPage.js:73
 msgid "Apps that trigger Caffeine"
 msgstr "Aplikace, které aktivují Caffeine"
 
