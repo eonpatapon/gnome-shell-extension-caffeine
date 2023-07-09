@@ -26,11 +26,6 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 
-const AppsModeChoices = {
-    RUNNING: _('Running'),
-    FOCUS: _('Focus'),
-    WORKSPACE: _('Active workspace')
-};
 
 var AppsPage = GObject.registerClass(
 class CaffeineAppsPage extends Adw.PreferencesPage {
@@ -52,9 +47,9 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
 
         // Apps behavior select mode
         let appsTriggerMode = new Gtk.StringList();
-        appsTriggerMode.append(AppsModeChoices.RUNNING);
-        appsTriggerMode.append(AppsModeChoices.FOCUS);
-        appsTriggerMode.append(AppsModeChoices.WORKSPACE);
+        appsTriggerMode.append(_('Running'));
+        appsTriggerMode.append(_('Focus'));
+        appsTriggerMode.append(_('Active workspace'));
         let appsTriggerModeRow = new Adw.ComboRow({
             title: _('Apps trigger Caffeine mode'),
             subtitle: _('Choose the way apps will trigger Caffeine'),
