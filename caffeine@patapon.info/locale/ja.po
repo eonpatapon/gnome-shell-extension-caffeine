@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 16:08+0200\n"
+"POT-Creation-Date: 2023-07-09 18:13+0200\n"
 "PO-Revision-Date: 2017-05-05 22:28+0900\n"
 "Last-Translator: Jean-Philippe Braun <eon@patapon.info>\n"
 "Language-Team: French\n"
@@ -17,10 +17,14 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
+#: extension.js:160
+msgid "Caffeine"
+msgstr "カフェイン"
+
 #: extension.js:177 extension.js:622
 #, fuzzy
 msgid "Caffeine Timer"
-msgstr "Caféine est activé"
+msgstr "カフェイン "
 
 #: extension.js:215
 msgid "Infinite"
@@ -47,39 +51,39 @@ msgstr "Caféine est activé"
 msgid "Night Light resumed"
 msgstr ""
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr ""
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr ""
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr ""
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr ""
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr ""
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
 msgstr ""
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
 msgstr ""
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr "追加"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
 msgstr ""
 

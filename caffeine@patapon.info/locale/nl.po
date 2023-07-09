@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 16:08+0200\n"
+"POT-Creation-Date: 2023-07-09 18:13+0200\n"
 "PO-Revision-Date: 2023-02-07 14:23+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -17,10 +17,13 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
+#: extension.js:160
+msgid "Caffeine"
+msgstr "Cafeïne"
+
 #: extension.js:177 extension.js:622
-#, fuzzy
 msgid "Caffeine Timer"
-msgstr "Caffeine-tijdklok"
+msgstr "Cafeïne-tijdklok"
 
 #: extension.js:215
 msgid "Infinite"
@@ -32,7 +35,7 @@ msgstr ""
 
 #: extension.js:771
 msgid "Caffeine enabled"
-msgstr "Caffeine is ingeschakeld"
+msgstr "Cafeïne is ingeschakeld"
 
 #: extension.js:773
 msgid "Night Light paused"
@@ -40,47 +43,47 @@ msgstr "Nachtlicht is onderbroken"
 
 #: extension.js:778
 msgid "Caffeine disabled"
-msgstr "Caffeine is uitgeschakeld"
+msgstr "Cafeïne is uitgeschakeld"
 
 #: extension.js:780
 msgid "Night Light resumed"
 msgstr "Nachtlicht is hervat"
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr "Toepassingen"
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr "In-/Uitschakelmodus"
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr "Actief"
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr "Focus"
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr "Actief werkblad"
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
-msgstr "Toepassingen die Caffeine in-/uitschakelen"
+msgstr "Toepassingen die Cafeïne in-/uitschakelen"
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
-msgstr "Geef aan hoe toepassingen Caffeine in-/uitschakelen"
+msgstr "Geef aan hoe toepassingen Cafeïne in-/uitschakelen"
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr "Toevoegen"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
-msgstr "Toepassingen die Caffeine in-/uitschakelen"
+msgstr "Toepassingen die Cafeïne in-/uitschakelen"
 
 #: preferences/displayPage.js:33 preferences/displayPage.js:43
 msgid "Display"
@@ -104,7 +107,7 @@ msgstr "Indicator tonen op bovenbalk"
 
 #: preferences/displayPage.js:53
 msgid "Enable or disable the Caffeine icon in the top panel"
-msgstr "Toon of verberg het Caffeine-pictogram op de bovenbalk"
+msgstr "Toon of verberg het Cafeïne-pictogram op de bovenbalk"
 
 #: preferences/displayPage.js:64
 msgid "Show timer in top panel"
@@ -120,7 +123,7 @@ msgstr "Meldingen"
 
 #: preferences/displayPage.js:77
 msgid "Enable notifications when Caffeine is enabled or disabled"
-msgstr "Toon meldingen als Caffeine wordt in- of uitgeschakeld"
+msgstr "Toon meldingen als Cafeïne wordt in- of uitgeschakeld"
 
 #: preferences/displayPage.js:99
 #, fuzzy
@@ -166,7 +169,7 @@ msgstr "Nachtlicht onderbreken en hervatten"
 
 #: preferences/generalPage.js:92
 msgid "Toggles the night light together with Caffeine's state"
-msgstr "Schakel nachtlicht tegelijk met Caffeine in/uit"
+msgstr "Schakel nachtlicht tegelijk met Cafeïne in/uit"
 
 #: preferences/generalPage.js:103
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
@@ -175,7 +178,7 @@ msgstr "Scherm uitschakelen"
 
 #: preferences/generalPage.js:104
 msgid "Allow turning off screen when Caffeine is enabled"
-msgstr "Schakel het scherm uit als Caffeine wordt ingeschakeld"
+msgstr "Schakel het scherm uit als Cafeïne wordt ingeschakeld"
 
 #: preferences/generalPage.js:119
 msgid "Timer"
@@ -254,7 +257,7 @@ msgstr "Meldingen tonen"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show notifications when enabled/disabled"
-msgstr "Toon meldingen als Caffeine wordt in- of uitgeschakeld"
+msgstr "Toon meldingen als Cafeïne wordt in- of uitgeschakeld"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show timer"
@@ -275,7 +278,7 @@ msgstr "Nachtlichtbediening"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr "Geef aan hoe Caffeine dient om te gaan met de nachtlichtinstelling."
+msgstr "Geef aan hoe Cafeïne dient om te gaan met de nachtlichtinstelling."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."
@@ -291,7 +294,7 @@ msgstr "Stel de aan-/uitmethode van toepassingen in."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
-msgstr "Sneltoets om Caffeine aan/uit te zetten."
+msgstr "Sneltoets om Cafeïne aan/uit te zetten."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 16:08+0200\n"
+"POT-Creation-Date: 2023-07-09 18:13+0200\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -14,6 +14,10 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ../../gnome-shell-extension-caffeine-master\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: extension.js:160
+msgid "Caffeine"
+msgstr "카페인"
 
 #: extension.js:177 extension.js:622
 msgid "Caffeine Timer"
@@ -45,41 +49,41 @@ msgstr ""
 msgid "Night Light resumed"
 msgstr "야간 모드를 다시 켭니"
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr "프로그램"
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr ""
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr ""
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr ""
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr ""
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 #, fuzzy
 msgid "Apps trigger Caffeine mode"
 msgstr "카페인을 제어할 프로그램"
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 #, fuzzy
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "카페인을 제어할 프로그램"
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr ""
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
 msgstr "카페인을 제어할 프로그램"
 

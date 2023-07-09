@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 16:08+0200\n"
+"POT-Creation-Date: 2023-07-09 18:13+0200\n"
 "PO-Revision-Date: 2016-10-02 17:24+0100\n"
 "Last-Translator: Piotr Wittchen <piotr@wittchen.biz.pl>\n"
 "Language-Team: Polish\n"
@@ -17,10 +17,13 @@ msgstr ""
 "X-Generator: Vim\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
+#: extension.js:160
+msgid "Caffeine"
+msgstr "Kofeina"
+
 #: extension.js:177 extension.js:622
-#, fuzzy
 msgid "Caffeine Timer"
-msgstr "Caffeine włączone"
+msgstr "Kofeina Regulator czasowy"
 
 #: extension.js:215
 msgid "Infinite"
@@ -32,7 +35,7 @@ msgstr ""
 
 #: extension.js:771
 msgid "Caffeine enabled"
-msgstr "Caffeine włączone"
+msgstr "Kofeina włączone"
 
 #: extension.js:773
 msgid "Night Light paused"
@@ -41,45 +44,45 @@ msgstr ""
 #: extension.js:778
 #, fuzzy
 msgid "Caffeine disabled"
-msgstr "Caffeine włączone"
+msgstr "Kofeina włączone"
 
 #: extension.js:780
 msgid "Night Light resumed"
 msgstr ""
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr ""
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr ""
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr ""
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr ""
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr ""
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
 msgstr ""
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
 msgstr ""
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr "Dodaj"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
 msgstr ""
 
@@ -102,22 +105,22 @@ msgstr "Nigdy"
 #: preferences/displayPage.js:52
 #, fuzzy
 msgid "Show status indicator in top panel"
-msgstr "Pokazuj Caffeine w górnym panelu"
+msgstr "Pokazuj Kofeina w górnym panelu"
 
 #: preferences/displayPage.js:53
 #, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
-msgstr "Pokazuj Caffeine w górnym panelu"
+msgstr "Pokazuj Kofeina w górnym panelu"
 
 #: preferences/displayPage.js:64
 #, fuzzy
 msgid "Show timer in top panel"
-msgstr "Pokazuj Caffeine w górnym panelu"
+msgstr "Pokazuj Kofeina w górnym panelu"
 
 #: preferences/displayPage.js:65
 #, fuzzy
 msgid "Enable or disable the timer in the top panel"
-msgstr "Pokazuj Caffeine w górnym panelu"
+msgstr "Pokazuj Kofeina w górnym panelu"
 
 #: preferences/displayPage.js:76
 #, fuzzy
@@ -131,7 +134,7 @@ msgstr ""
 #: preferences/displayPage.js:99
 #, fuzzy
 msgid "Status indicator position"
-msgstr "Pokazuj Caffeine w górnym panelu"
+msgstr "Pokazuj Kofeina w górnym panelu"
 
 #: preferences/displayPage.js:100
 msgid "The position relative of indicator icon to other items"
@@ -251,7 +254,7 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 #, fuzzy
 msgid "Show the indicator on the top panel"
-msgstr "Pokazuj Caffeine w górnym panelu"
+msgstr "Pokazuj Kofeina w górnym panelu"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 #, fuzzy

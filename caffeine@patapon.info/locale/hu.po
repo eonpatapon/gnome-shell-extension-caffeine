@@ -12,6 +12,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.1\n"
 
+#: extension.js:160
+msgid "Caffeine"
+msgstr "Koffein"
+
 #: extension.js:177 extension.js:622
 msgid "Caffeine Timer"
 msgstr "Koffein időzítő"
@@ -40,39 +44,39 @@ msgstr "Koffein letiltva"
 msgid "Night Light resumed"
 msgstr "Éjszakai fény folytatva"
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr "Alkalmazások"
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr "Aktiválási mód"
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr "Futtatás"
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr "Fókusz"
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr "Aktív munkaterület"
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
 msgstr "Alkalmazások Koffeint aktiváló módja"
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "Alkalmazások ebben a módban fogják aktiválni a Koffeint"
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
 msgstr "Alkalmazások, amelyek aktiválják a Koffeint"
 
