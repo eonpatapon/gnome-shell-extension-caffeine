@@ -98,7 +98,6 @@ const DBusSessionManagerInhibitorIface = '<node>\
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
 const IndicatorName = 'Caffeine';
-const TimerMenuName = _('Caffeine Timer');
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
@@ -175,7 +174,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         this._iconName();
 
         // Menu
-        this.menu.setHeader(this.finalTimerMenuIcon, TimerMenuName, null);
+        this.menu.setHeader(this.finalTimerMenuIcon, _('Caffeine Timer'), null);
 
         // Add elements
         this._itemsSection = new PopupMenu.PopupMenuSection();
@@ -620,7 +619,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     _updateLabelTimer(text) {
         this._timerLabel.text = text;
-        this._caffeineToggle.menu.setHeader(this._caffeineToggle.finalTimerMenuIcon, TimerMenuName, text);
+        this._caffeineToggle.menu.setHeader(this._caffeineToggle.finalTimerMenuIcon, _('Caffeine Timer'), text);
         if (ShellVersion >= 44) {
             this._caffeineToggle.subtitle = text;
         }
