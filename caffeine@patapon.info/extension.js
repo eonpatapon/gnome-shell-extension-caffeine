@@ -97,7 +97,6 @@ const DBusSessionManagerInhibitorIface = '<node>\
 
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
-const IndicatorName = 'Caffeine';
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
@@ -482,7 +481,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     addInhibit(appId) {
         this._sessionManager.InhibitRemote(appId,
-            0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
+            0, 'Inhibit by %s'.format(Me.metadata.name), this.inhibitFlags,
             (cookie) => {
                 this._inhibitionAddedFifo.push(appId);
                 // Init app data
