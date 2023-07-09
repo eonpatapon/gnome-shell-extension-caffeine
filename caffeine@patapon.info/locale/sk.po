@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 18:13+0200\n"
+"POT-Creation-Date: 2023-08-15 00:10+0200\n"
 "PO-Revision-Date: 2023-05-28 23:30+0200\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak\n"
@@ -17,35 +17,35 @@ msgstr ""
 "X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:160
+#: extension.js:159
 msgid "Caffeine"
 msgstr "Kofeín"
 
-#: extension.js:177 extension.js:622
+#: extension.js:176 extension.js:632
 msgid "Caffeine Timer"
 msgstr "Časovač Kofeín"
 
-#: extension.js:215
+#: extension.js:214
 msgid "Infinite"
 msgstr "Nekonečno"
 
-#: extension.js:217 extension.js:806 preferences/generalPage.js:218
+#: extension.js:216 extension.js:816 preferences/generalPage.js:212
 msgid " minutes"
 msgstr " minút"
 
-#: extension.js:771
+#: extension.js:781
 msgid "Caffeine enabled"
 msgstr "Kofeín povolený"
 
-#: extension.js:773
+#: extension.js:783
 msgid "Night Light paused"
 msgstr "Nočné svetlo pozastavené"
 
-#: extension.js:778
+#: extension.js:788
 msgid "Caffeine disabled"
 msgstr "Kofeín vypnutý"
 
-#: extension.js:780
+#: extension.js:790
 msgid "Night Light resumed"
 msgstr "Nočné svetlo obnovené"
 
@@ -93,11 +93,13 @@ msgstr "Displej"
 msgid "Only when active"
 msgstr "Len keď je aktívny"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:32
+#: preferences/displayPage.js:49 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
 msgid "Always"
 msgstr "Vždy"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:31
+#: preferences/displayPage.js:50 preferences/generalPage.js:81
+#: preferences/generalPage.js:93
 msgid "Never"
 msgstr "Nikdy"
 
@@ -133,77 +135,77 @@ msgstr "Umiestnenie indikátoru stavu"
 msgid "The position relative of indicator icon to other items"
 msgstr "Relatívne umiestnenie ikony voči ostatným položkám"
 
-#: preferences/generalPage.js:33
-msgid "For apps on list"
-msgstr "Pre aplikácie na zozname"
-
-#: preferences/generalPage.js:48
+#: preferences/generalPage.js:42
 msgid "General"
 msgstr "Všeobecné"
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:52
 msgid "Behavior"
 msgstr "Správanie"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:61
 msgid "Enable for fullscreen apps"
 msgstr "Povoliť pre celoobrazovkové aplikácie"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:62
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "Automaticky povoliť, keď aplikácia prejde do režimu celej obrazovky"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:73
 msgid "Remember state"
 msgstr "Pamätať stav"
 
-#: preferences/generalPage.js:80
+#: preferences/generalPage.js:74
 msgid "Remember the last state across sessions and reboots"
 msgstr "Pamätať si posledný stav medzi sedeniami a reštartami"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:83 preferences/generalPage.js:95
+msgid "For apps on list"
+msgstr "Pre aplikácie na zozname"
+
+#: preferences/generalPage.js:85
 msgid "Pause and resume Night Light"
 msgstr "Pozastaviť a obnoviť Nočné svetlo"
 
-#: preferences/generalPage.js:92
+#: preferences/generalPage.js:86
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Prepne Nočné svetlo spolu so stavom Kofeín"
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:97
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr "Povoliť prázdnu obrazovku"
 
-#: preferences/generalPage.js:104
+#: preferences/generalPage.js:98
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Povoliť vypínanie obrazovky s povoleným Kofeín"
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:113
 msgid "Timer"
 msgstr "Časovač"
 
-#: preferences/generalPage.js:124
+#: preferences/generalPage.js:118
 msgid "Durations"
 msgstr "Doby trvania"
 
-#: preferences/generalPage.js:168
+#: preferences/generalPage.js:162
 msgid "Shortcut"
 msgstr "Skratka"
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:170
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr "Skratka prepnutia"
 
-#: preferences/generalPage.js:177
+#: preferences/generalPage.js:171
 msgid "Use Backspace to clear"
 msgstr "Použite backspace pre vymazanie"
 
-#: preferences/generalPage.js:218
+#: preferences/generalPage.js:212
 msgid "Set to "
 msgstr "Nastavené na "
 
-#: preferences/generalPage.js:265 preferences/generalPage.js:297
+#: preferences/generalPage.js:259 preferences/generalPage.js:291
 msgid "New accelerator…"
 msgstr "Nová skratka…"
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 18:13+0200\n"
+"POT-Creation-Date: 2023-08-15 00:10+0200\n"
 "PO-Revision-Date: 2022-02-08 13:07+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -17,36 +17,36 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:160
+#: extension.js:159
 msgid "Caffeine"
 msgstr "кофеин"
 
-#: extension.js:177 extension.js:622
+#: extension.js:176 extension.js:632
 msgid "Caffeine Timer"
 msgstr ""
 
-#: extension.js:215
+#: extension.js:214
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:217 extension.js:806 preferences/generalPage.js:218
+#: extension.js:216 extension.js:816 preferences/generalPage.js:212
 msgid " minutes"
 msgstr ""
 
-#: extension.js:771
+#: extension.js:781
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:773
+#: extension.js:783
 #, fuzzy
 msgid "Night Light paused"
 msgstr "Ночная подсветка"
 
-#: extension.js:778
+#: extension.js:788
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:780
+#: extension.js:790
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "Ночная подсветка"
@@ -97,11 +97,13 @@ msgstr ""
 msgid "Only when active"
 msgstr "Только при активном"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:32
+#: preferences/displayPage.js:49 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
 msgid "Always"
 msgstr "Всегда"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:31
+#: preferences/displayPage.js:50 preferences/generalPage.js:81
+#: preferences/generalPage.js:93
 msgid "Never"
 msgstr "Никогда"
 
@@ -140,79 +142,79 @@ msgstr "Показывать индикатор состояния на верх
 msgid "The position relative of indicator icon to other items"
 msgstr ""
 
-#: preferences/generalPage.js:33
-msgid "For apps on list"
-msgstr "Для приложений из списка"
-
-#: preferences/generalPage.js:48
+#: preferences/generalPage.js:42
 msgid "General"
 msgstr "Общие"
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:52
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:61
 msgid "Enable for fullscreen apps"
 msgstr "Включить для полноэкранных приложений"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:62
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 "Автоматически включать, когда приложение переходит в полноэкранный режим"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:73
 msgid "Remember state"
 msgstr "Запомнить состояние"
 
-#: preferences/generalPage.js:80
+#: preferences/generalPage.js:74
 msgid "Remember the last state across sessions and reboots"
 msgstr "Запомнить последнее состояние после смены сеанса и перезагрузки"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:83 preferences/generalPage.js:95
+msgid "For apps on list"
+msgstr "Для приложений из списка"
+
+#: preferences/generalPage.js:85
 msgid "Pause and resume Night Light"
 msgstr "Приостановка и возобновление ночной подсветки"
 
-#: preferences/generalPage.js:92
+#: preferences/generalPage.js:86
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Переключение ночной подсветки вместе с состоянием Кофеина"
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:97
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr ""
 
-#: preferences/generalPage.js:104
+#: preferences/generalPage.js:98
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Включить уведомления о включении или отключении Кофеина"
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:113
 msgid "Timer"
 msgstr ""
 
-#: preferences/generalPage.js:124
+#: preferences/generalPage.js:118
 msgid "Durations"
 msgstr ""
 
-#: preferences/generalPage.js:168
+#: preferences/generalPage.js:162
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:170
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:177
+#: preferences/generalPage.js:171
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:218
+#: preferences/generalPage.js:212
 msgid "Set to "
 msgstr ""
 
-#: preferences/generalPage.js:265 preferences/generalPage.js:297
+#: preferences/generalPage.js:259 preferences/generalPage.js:291
 msgid "New accelerator…"
 msgstr ""
 

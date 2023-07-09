@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 18:13+0200\n"
+"POT-Creation-Date: 2023-08-15 00:10+0200\n"
 "PO-Revision-Date: 2023-02-07 14:23+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -17,35 +17,35 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:160
+#: extension.js:159
 msgid "Caffeine"
 msgstr "Cafeïne"
 
-#: extension.js:177 extension.js:622
+#: extension.js:176 extension.js:632
 msgid "Caffeine Timer"
 msgstr "Cafeïne-tijdklok"
 
-#: extension.js:215
+#: extension.js:214
 msgid "Infinite"
 msgstr "Onbeperkt"
 
-#: extension.js:217 extension.js:806 preferences/generalPage.js:218
+#: extension.js:216 extension.js:816 preferences/generalPage.js:212
 msgid " minutes"
 msgstr ""
 
-#: extension.js:771
+#: extension.js:781
 msgid "Caffeine enabled"
 msgstr "Cafeïne is ingeschakeld"
 
-#: extension.js:773
+#: extension.js:783
 msgid "Night Light paused"
 msgstr "Nachtlicht is onderbroken"
 
-#: extension.js:778
+#: extension.js:788
 msgid "Caffeine disabled"
 msgstr "Cafeïne is uitgeschakeld"
 
-#: extension.js:780
+#: extension.js:790
 msgid "Night Light resumed"
 msgstr "Nachtlicht is hervat"
 
@@ -93,11 +93,13 @@ msgstr "Weergave"
 msgid "Only when active"
 msgstr "Alleen indien actief"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:32
+#: preferences/displayPage.js:49 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
 msgid "Always"
 msgstr "Altijd"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:31
+#: preferences/displayPage.js:50 preferences/generalPage.js:81
+#: preferences/generalPage.js:93
 msgid "Never"
 msgstr "Nooit"
 
@@ -134,78 +136,78 @@ msgstr "Locatie van indicator"
 msgid "The position relative of indicator icon to other items"
 msgstr "De locatie van de indicator ten opzichte van andere items"
 
-#: preferences/generalPage.js:33
-msgid "For apps on list"
-msgstr "Bij toepassingen op de lijst"
-
-#: preferences/generalPage.js:48
+#: preferences/generalPage.js:42
 msgid "General"
 msgstr "Algemeen"
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:52
 msgid "Behavior"
 msgstr "Gedrag"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:61
 msgid "Enable for fullscreen apps"
 msgstr "Inschakelen bij schermvullende toepassingen"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:62
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 "Schakel automatisch in als een toepassing de schermvullende modus gebruikt"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:73
 msgid "Remember state"
 msgstr "Status onthouden"
 
-#: preferences/generalPage.js:80
+#: preferences/generalPage.js:74
 msgid "Remember the last state across sessions and reboots"
 msgstr "Herstel de recentste status na wisselen van sessie en herstarten"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:83 preferences/generalPage.js:95
+msgid "For apps on list"
+msgstr "Bij toepassingen op de lijst"
+
+#: preferences/generalPage.js:85
 msgid "Pause and resume Night Light"
 msgstr "Nachtlicht onderbreken en hervatten"
 
-#: preferences/generalPage.js:92
+#: preferences/generalPage.js:86
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Schakel nachtlicht tegelijk met Cafeïne in/uit"
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:97
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr "Scherm uitschakelen"
 
-#: preferences/generalPage.js:104
+#: preferences/generalPage.js:98
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Schakel het scherm uit als Cafeïne wordt ingeschakeld"
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:113
 msgid "Timer"
 msgstr ""
 
-#: preferences/generalPage.js:124
+#: preferences/generalPage.js:118
 msgid "Durations"
 msgstr ""
 
-#: preferences/generalPage.js:168
+#: preferences/generalPage.js:162
 msgid "Shortcut"
 msgstr "Sneltoets"
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:170
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr "Aan-/Uitsneltoets"
 
-#: preferences/generalPage.js:177
+#: preferences/generalPage.js:171
 msgid "Use Backspace to clear"
 msgstr "Druk op backspace om te wissen"
 
-#: preferences/generalPage.js:218
+#: preferences/generalPage.js:212
 msgid "Set to "
 msgstr ""
 
-#: preferences/generalPage.js:265 preferences/generalPage.js:297
+#: preferences/generalPage.js:259 preferences/generalPage.js:291
 msgid "New accelerator…"
 msgstr "Nieuwe sneltoets…"
 
