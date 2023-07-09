@@ -157,7 +157,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             // The 'label' property was renamed to 'title' in GNOME 44 but quick settings have otherwise
             // not been changed. The below line allows support for both GNOME 43 and 44+ by using the
             // appropriate property name based on the GNOME version.
-            [ShellVersion >= 44 ? 'title' : 'label']: IndicatorName,
+            [ShellVersion >= 44 ? 'title' : 'label']: _('Caffeine'),
             toggleMode: true
         });
 
