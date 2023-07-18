@@ -371,7 +371,7 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
     }
 
     isValidBinding(mask, keycode, keyval) {
-        return !(mask === 0 || mask === Gdk.SHIFT_MASK && keycode !== 0 &&
+        return !(mask === 0 || mask === Gdk.ModifierType.SHIFT_MASK && keycode !== 0 &&
                  ((keyval >= Gdk.KEY_a && keyval <= Gdk.KEY_z) ||
                      (keyval >= Gdk.KEY_A && keyval <= Gdk.KEY_Z) ||
                      (keyval >= Gdk.KEY_0 && keyval <= Gdk.KEY_9) ||
