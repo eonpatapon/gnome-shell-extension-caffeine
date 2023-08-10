@@ -202,7 +202,7 @@ msgstr "Einstellen auf"
 
 #: preferences/generalPage.js:265 preferences/generalPage.js:297
 msgid "New accelerator…"
-msgstr ""
+msgstr "Neuer Beschleuniger…"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Application list"
@@ -227,12 +227,12 @@ msgstr "Speichert die benutzerdefinierten Zustand"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Specify time (minutes) for the timer countdown"
-msgstr ""
+msgstr "Zeit (Minuten) für den Countdown des Timers angeben"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify index of duration range for the timer"
-msgstr ""
+msgstr "Index des Zeitraums für den Timer angeben"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
@@ -269,7 +269,7 @@ msgstr "Aktivieren, sobald eine Anwendung im Vollbildmodus läuft"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
-msgstr ""
+msgstr "Nachtlicht-Steuerungsmodus"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
