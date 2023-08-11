@@ -433,6 +433,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     toggleFullscreen() {
+        // Reset previous FullScreen delay
+        if (this._timeFullscreen !== null) {
+            GLib.Source.remove(this._timeFullscreen);
+            this._timeFullscreen = null;
+        }
+
         this._manageScreenBlankState(false);
         this._timeFullscreen = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
             if (this.inFullscreen && !this._appInhibitedData.has('fullscreen')) {
