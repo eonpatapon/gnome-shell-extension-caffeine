@@ -19,17 +19,16 @@ msgstr ""
 "X-Generator: Gtranslator 3.32.0\n"
 
 #: extension.js:177 extension.js:622
-#, fuzzy
 msgid "Caffeine Timer"
-msgstr "Caffeine aktif"
+msgstr "Caffeine Zamanlayıcısı"
 
 #: extension.js:215
 msgid "Infinite"
-msgstr ""
+msgstr "Süresiz"
 
 #: extension.js:217 extension.js:806 preferences/generalPage.js:218
 msgid " minutes"
-msgstr ""
+msgstr " dakika"
 
 #: extension.js:771
 msgid "Caffeine enabled"
@@ -37,44 +36,43 @@ msgstr "Caffeine aktif"
 
 #: extension.js:773
 msgid "Night Light paused"
-msgstr ""
+msgstr "Gece Işığı durduruldu"
 
 #: extension.js:778
-#, fuzzy
 msgid "Caffeine disabled"
-msgstr "Caffeine aktif"
+msgstr "Caffeine devre dışı"
 
 #: extension.js:780
 msgid "Night Light resumed"
-msgstr ""
+msgstr "Gece Işığı devam ettirildi"
 
 #: preferences/appsPage.js:34
 msgid "Apps"
-msgstr ""
+msgstr "Uygulamalar"
 
 #: preferences/appsPage.js:45
 msgid "Trigger mode"
-msgstr ""
+msgstr "Tetik Modu"
 
 #: preferences/appsPage.js:50
 msgid "Running"
-msgstr ""
+msgstr "Çalışıyor"
 
 #: preferences/appsPage.js:51
 msgid "Focus"
-msgstr ""
+msgstr "Odak"
 
 #: preferences/appsPage.js:52
 msgid "Active workspace"
-msgstr ""
+msgstr "Aktif Çalışma Alanı"
 
 #: preferences/appsPage.js:54
 msgid "Apps trigger Caffeine mode"
-msgstr ""
+msgstr "Caffeine modunu tetikleyen uygulamalar"
 
 #: preferences/appsPage.js:55
 msgid "Choose the way apps will trigger Caffeine"
-msgstr ""
+msgstr "Uygulamaların Caffeine'ini nasıl tetikleyeceğini seçiniz"
 
 #: preferences/appsPage.js:69
 msgid "Add"
@@ -82,11 +80,11 @@ msgstr "Ekle"
 
 #: preferences/appsPage.js:73
 msgid "Apps that trigger Caffeine"
-msgstr ""
+msgstr "Caffeine'ini tetikleyecek uygulamalar"
 
 #: preferences/displayPage.js:33 preferences/displayPage.js:43
 msgid "Display"
-msgstr ""
+msgstr "Ekran"
 
 #: preferences/displayPage.js:48
 msgid "Only when active"
@@ -94,128 +92,117 @@ msgstr "Yalnızca etkin olduğunda"
 
 #: preferences/displayPage.js:49 preferences/generalPage.js:32
 msgid "Always"
-msgstr "Hep"
+msgstr "Her zaman"
 
 #: preferences/displayPage.js:50 preferences/generalPage.js:31
 msgid "Never"
 msgstr "Hiçbir zaman"
 
 #: preferences/displayPage.js:52
-#, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Göstergeyi üst panelde göster"
 
 #: preferences/displayPage.js:53
-#, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
-msgstr "Göstergeyi üst panelde göster"
+msgstr "Caffeine'ini üst paneldeki simge ile aktif et yada devre dışı bırak"
 
 #: preferences/displayPage.js:64
-#, fuzzy
 msgid "Show timer in top panel"
-msgstr "Caffeine üst panelde görünsün"
+msgstr "Zamanlayıcıyı üst panelde göster"
 
 #: preferences/displayPage.js:65
-#, fuzzy
 msgid "Enable or disable the timer in the top panel"
-msgstr "Göstergeyi üst panelde göster"
+msgstr "Üst paneldeki zamanlayıcıyı aktif et yada devre dışı bırak"
 
 #: preferences/displayPage.js:76
-#, fuzzy
 msgid "Notifications"
-msgstr "Bildirimleri göster"
+msgstr "Bildirimler"
 
 #: preferences/displayPage.js:77
-#, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+msgstr "Caffeine aktif yada pasif olduğunda bildirimleri göster"
 
 #: preferences/displayPage.js:99
-#, fuzzy
 msgid "Status indicator position"
-msgstr "Göstergeyi üst panelde göster"
+msgstr "Durum göstergesinin konumu"
 
 #: preferences/displayPage.js:100
 msgid "The position relative of indicator icon to other items"
-msgstr ""
+msgstr "Gösterge simgesinin diğer öğelere göre konumu"
 
 #: preferences/generalPage.js:33
 msgid "For apps on list"
-msgstr ""
+msgstr "Listedeki uygulamalar için"
 
 #: preferences/generalPage.js:48
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: preferences/generalPage.js:58
 msgid "Behavior"
-msgstr ""
+msgstr "Davranış"
 
 #: preferences/generalPage.js:67
-#, fuzzy
 msgid "Enable for fullscreen apps"
-msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
+msgstr "Tam ekran uygulamalar için aktif et"
 
 #: preferences/generalPage.js:68
 msgid "Automatically enable when an app enters fullscreen mode"
-msgstr ""
+msgstr "Uygulamalar tam ekran olduğunda otomatik aktif et"
 
 #: preferences/generalPage.js:79
 msgid "Remember state"
-msgstr ""
+msgstr "Durumu hatırla"
 
 #: preferences/generalPage.js:80
-#, fuzzy
 msgid "Remember the last state across sessions and reboots"
-msgstr "Yeniden başlatma arasında durumu geri yükle"
+msgstr "Oturumlar ve yeniden başlatmalar arasındaki son durumu hatırla"
 
 #: preferences/generalPage.js:91
-#, fuzzy
 msgid "Pause and resume Night Light"
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+msgstr "Gece Işığı'ını durdur ve devam et"
 
 #: preferences/generalPage.js:92
 msgid "Toggles the night light together with Caffeine's state"
-msgstr ""
+msgstr "Gece Işığı'nı Caffeine durumuyla birlikte değiştir"
 
 #: preferences/generalPage.js:103
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
-msgstr ""
+msgstr "Boş ekrana izin ver"
 
 #: preferences/generalPage.js:104
-#, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+msgstr "Caffeine aktif edildiğinde ekranı kapatmaya izin ver"
 
 #: preferences/generalPage.js:119
 msgid "Timer"
-msgstr ""
+msgstr "Zamanlayıcı"
 
 #: preferences/generalPage.js:124
 msgid "Durations"
-msgstr ""
+msgstr "Süreler"
 
 #: preferences/generalPage.js:168
 msgid "Shortcut"
-msgstr ""
+msgstr "Kısayol"
 
 #: preferences/generalPage.js:176
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
-msgstr ""
+msgstr "Kısayolu değiştir"
 
 #: preferences/generalPage.js:177
 msgid "Use Backspace to clear"
-msgstr ""
+msgstr "Temizlemek için klavyedeki geri tuşunu kullan"
 
 #: preferences/generalPage.js:218
 msgid "Set to "
-msgstr ""
+msgstr "Ayarla "
 
 #: preferences/generalPage.js:265 preferences/generalPage.js:297
 msgid "New accelerator…"
-msgstr ""
+msgstr "Yeni hızlandırıcı..."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Application list"
@@ -228,27 +215,26 @@ msgstr ""
 "Her biri bir uygulama kimliği içeren bir dize listesi (masaüstü dosya adı)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
-#, fuzzy
 msgid "Store caffeine toggle state"
-msgstr "Kafein kullanıcı durumunu sakla"
+msgstr "Caffeine durumunu sakla"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
-msgstr "Kafein kullanıcı durumunu sakla"
+msgstr "Caffeine kullanıcı durumunu sakla"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Specify time (minutes) for the timer countdown"
-msgstr ""
+msgstr "Zamanlayıcı geri sayımı için zamanı (dakika) belirtin"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify index of duration range for the timer"
-msgstr ""
+msgstr "Zamanlayıcı için süre aralığı dizinini belirtin"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
-msgstr "Kafein durumunu geri yükle"
+msgstr "Caffeine durumunu geri yükle"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
@@ -268,61 +254,61 @@ msgstr "Aktif/Pasif olduğunda bildirimleri göster"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show timer"
-msgstr ""
+msgstr "Zamanlayıcıyı göster"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
-#, fuzzy
 msgid "Show timer when enabled/disabled"
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+msgstr "Aktif/Pasif olduğunda zamanlayıcıyı göster"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Enable when a fullscreen application is running"
-msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif olacaktır"
+msgstr "Tam ekran uygulama çalıştırıldığı zaman aktif et"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Night Light control mode"
-msgstr ""
+msgstr "Gece Işığı kontrol modu"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr ""
+msgstr "Caffeine'in Gece Işığı ayarıyla etkileşim kurma şeklini ayarlayın."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
-#, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled."
-msgstr "Aktif/Pasif olduğunda bildirimleri göster"
+msgstr "Caffeine aktif olduğunda ekranı kapatmaya izin ver"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Trigger App control mode"
-msgstr ""
+msgstr "Tetikleyici Uygulama kontrol modu"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the trigger method for apps."
-msgstr ""
+msgstr "Uygulamalar için tetikleme modunu ayarla"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
-msgstr ""
+msgstr "Caffeine durumu değiştirmek için kısayol"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
-msgstr ""
+msgstr "Tercihler ekranı için varsayılan genişlik"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
 msgid "Default height for the preferences window"
-msgstr ""
+msgstr "Tercihler ekranı için varsayılan yükseklik"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
-msgstr ""
+msgstr "Gösterge menüsünde durum simgesinin görünür konum ofseti"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
 msgstr ""
+"Görünmez içeren gösterge menüsünde durum simgesinin gerçek konum ofseti"
+"bir"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
-msgstr ""
+msgstr "Gösterge menüsünde son öğe dizini"
