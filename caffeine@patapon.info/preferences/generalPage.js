@@ -27,14 +27,6 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, name, GObject.ParamFlags.READWRITE, ...dflt);
 
-/*
-const ComboBoxChoices = {
-    NEVER: _('Never'),
-    ALWAYS: _('Always'),
-    FOR_APPS: _('For apps on list')
-};
-*/
-
 const TIMERS_DURATION = [
     '05, 10, 30',
     '10, 20, 45',
