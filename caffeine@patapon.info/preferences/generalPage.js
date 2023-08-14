@@ -27,12 +27,6 @@ const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
 const _ = Gettext.gettext;
 const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, name, GObject.ParamFlags.READWRITE, ...dflt);
 
-const ComboBoxChoices = {
-    NEVER: _('Never'),
-    ALWAYS: _('Always'),
-    FOR_APPS: _('For apps on list')
-};
-
 const TIMERS_DURATION = [
     '05, 10, 30',
     '10, 20, 45',
@@ -84,9 +78,9 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
 
         // Pause and resume Night Light
         let pauseNightLight = new Gtk.StringList();
-        pauseNightLight.append(ComboBoxChoices.NEVER);
-        pauseNightLight.append(ComboBoxChoices.ALWAYS);
-        pauseNightLight.append(ComboBoxChoices.FOR_APPS);
+        pauseNightLight.append(_('Never'));
+        pauseNightLight.append(_('Always'));
+        pauseNightLight.append(_('For apps on list'));
         let pauseNightLightRow = new Adw.ComboRow({
             title: _('Pause and resume Night Light'),
             subtitle: _('Toggles the night light together with Caffeine\'s state'),
@@ -96,9 +90,9 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
 
         // Allow blank screen
         let allowBlankScreen = new Gtk.StringList();
-        allowBlankScreen.append(ComboBoxChoices.NEVER);
-        allowBlankScreen.append(ComboBoxChoices.ALWAYS);
-        allowBlankScreen.append(ComboBoxChoices.FOR_APPS);
+        allowBlankScreen.append(_('Never'));
+        allowBlankScreen.append(_('Always'));
+        allowBlankScreen.append(_('For apps on list'));
         let allowBlankScreenRow = new Adw.ComboRow({
             title: _('Allow screen blank'),
             subtitle: _('Allow turning off screen when Caffeine is enabled'),
