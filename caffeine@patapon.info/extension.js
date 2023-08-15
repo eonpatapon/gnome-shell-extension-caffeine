@@ -1144,13 +1144,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
 });
 
 /**
- * Steps to run on initialization of the extension
- */
-function init() {
-    ExtensionUtils.initTranslations();
-}
-
-/**
  * Steps to run when the extension is enabled
  */
 function enable() {
