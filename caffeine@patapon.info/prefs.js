@@ -19,7 +19,6 @@
 /* exported CaffeinePrefs */
 'use strict';
 
-//Main imports
 import Gtk from 'gi://Gtk';
 import Gdk from 'gi://Gdk';
 
