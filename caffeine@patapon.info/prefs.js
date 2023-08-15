@@ -16,7 +16,7 @@
 
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
-/* exported init fillPreferencesWindow */
+/* exported fillPreferencesWindow */
 'use strict';
 
 //Main imports
@@ -46,10 +46,6 @@ const SettingsKey = {
     INDICATOR_INDEX: 'indicator-position-index',
     INDICATOR_POS_MAX: 'indicator-position-max'
 };
-
-function init() {
-    ExtensionUtils.initTranslations(Me.metadata['gettext-domain']);
-}
 
 function fillPreferencesWindow(window) {
     let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
