@@ -164,7 +164,7 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
     }
 
     _onAddApp() {
-        const dialog = new NewAppDialog(this.get_root(), this._settingsKey);
+        const dialog = new NewAppDialog(this.get_root(), this._settings, this._settingsKey);
         dialog.connect('response', (dlg, id) => {
             const appInfo = id === Gtk.ResponseType.OK
                 ? dialog.get_widget().get_app_info() : null;
@@ -192,13 +192,13 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
 
 const NewAppDialog = GObject.registerClass(
     class NewAppDialog extends Gtk.AppChooserDialog {
-        _init(parent, settingsKey) {
+        _init(parent, settings, settingsKey) {
             super._init({
                 transient_for: parent,
                 modal: true
             });
 
-            this._settings = ExtensionUtils.getSettings();
+            this._settings = settings;
             this._settingsKey = settingsKey;
 
             this.get_widget().set({
