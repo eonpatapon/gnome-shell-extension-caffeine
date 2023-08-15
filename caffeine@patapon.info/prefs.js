@@ -16,7 +16,7 @@
 
    // From https://gitlab.com/skrewball/openweather/-/blob/master/src/prefs.js
 */
-/* exported fillPreferencesWindow */
+/* exported CaffeinePrefs */
 'use strict';
 
 //Main imports
@@ -27,6 +27,8 @@ import Gdk from 'gi://Gdk';
 import * as GeneralPrefs from './preferences/generalPage.js';
 import * as DisplayPrefs from './preferences/displayPage.js';
 import * as AppsPrefs from './preferences/appsPage.js';
+
+import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const SettingsKey = {
     INHIBIT_APPS: 'inhibit-apps',
@@ -47,35 +49,37 @@ const SettingsKey = {
     INDICATOR_POS_MAX: 'indicator-position-max'
 };
 
-function fillPreferencesWindow(window) {
-    let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-    if (!iconTheme.get_search_path().includes(Me.path + '/icons')) {
-        iconTheme.add_search_path(Me.path + '/icons');
-    }
-
-    const settings = ExtensionUtils.getSettings();
-    const generalPage = new GeneralPrefs.GeneralPage(settings, SettingsKey);
-    const displayPage = new DisplayPrefs.DisplayPage(settings, SettingsKey);
-    const appsPage = new AppsPrefs.AppsPage(settings, SettingsKey);
-
-    let prefsWidth = settings.get_int(SettingsKey.DEFAULT_WIDTH);
-    let prefsHeight = settings.get_int(SettingsKey.DEFAULT_HEIGHT);
-
-    window.set_default_size(prefsWidth, prefsHeight);
-    window.set_search_enabled(true);
-
-    window.add(generalPage);
-    window.add(displayPage);
-    window.add(appsPage);
-
-    window.connect('close-request', () => {
-        let currentWidth = window.default_width;
-        let currentHeight = window.default_height;
-        // Remember user window size adjustments.
-        if (currentWidth !== prefsWidth || currentHeight !== prefsHeight) {
-            settings.set_int(SettingsKey.DEFAULT_WIDTH, currentWidth);
-            settings.set_int(SettingsKey.DEFAULT_HEIGHT, currentHeight);
+export default class CaffeinePrefs extends ExtensionPreferences {
+    fillPreferencesWindow(window) {
+        let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+        if (!iconTheme.get_search_path().includes(this.path + '/icons')) {
+            iconTheme.add_search_path(this.path + '/icons');
         }
-        window.destroy();
-    });
+
+        const settings = this.getSettings();
+        const generalPage = new GeneralPrefs.GeneralPage(settings, SettingsKey);
+        const displayPage = new DisplayPrefs.DisplayPage(settings, SettingsKey);
+        const appsPage = new AppsPrefs.AppsPage(settings, SettingsKey);
+
+        let prefsWidth = settings.get_int(SettingsKey.DEFAULT_WIDTH);
+        let prefsHeight = settings.get_int(SettingsKey.DEFAULT_HEIGHT);
+
+        window.set_default_size(prefsWidth, prefsHeight);
+        window.set_search_enabled(true);
+
+        window.add(generalPage);
+        window.add(displayPage);
+        window.add(appsPage);
+
+        window.connect('close-request', () => {
+            let currentWidth = window.default_width;
+            let currentHeight = window.default_height;
+            // Remember user window size adjustments.
+            if (currentWidth !== prefsWidth || currentHeight !== prefsHeight) {
+                settings.set_int(SettingsKey.DEFAULT_WIDTH, currentWidth);
+                settings.set_int(SettingsKey.DEFAULT_HEIGHT, currentHeight);
+            }
+            window.destroy();
+        });
+    }
 }
