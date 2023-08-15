@@ -1116,10 +1116,10 @@ export default class CaffeineExtension extends Extension {
 
         // Register shortcut
         Main.wm.addKeybinding(TOGGLE_SHORTCUT, this._settings,
-                              Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
-                              Shell.ActionMode.ALL, () => {
-            this._caffeineIndicator.toggleState();
-        });
+            Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+            Shell.ActionMode.ALL, () => {
+                this._caffeineIndicator.toggleState();
+            });
     }
 
     disable() {
