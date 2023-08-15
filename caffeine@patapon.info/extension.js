@@ -1,7 +1,7 @@
 /* -*- mode: js2 - indent-tabs-mode: nil - js2-basic-offset: 4 -*- */
 /* jshint multistr:true */
 /* jshint esnext:true */
-/* exported enable disable init */
+/* exported CaffeineExtension */
 /**
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -125,8 +125,6 @@ const TIMERS = [
     [30, 45, 60, 75, 80, 'caffeine-long-timer-symbolic'],
     [0, 0, 0, 0, 0, 'caffeine-infinite-timer-symbolic']
 ];
-
-let CaffeineIndicator;
 
 const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
