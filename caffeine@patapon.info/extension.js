@@ -19,12 +19,22 @@
 
 'use strict';
 
-const { Gtk, Gio, GObject, Shell, St, Meta, Clutter, GLib } = imports.gi;
-const Config = imports.misc.config;
-const Main = imports.ui.main;
-const PopupMenu = imports.ui.popupMenu;
-const QuickSettings = imports.ui.quickSettings;
-const QuickSettingsMenu = imports.ui.main.panel.statusArea.quickSettings;
+import Gtk from 'gi://Gtk';
+import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
+import Shell from 'gi://Shell';
+import St from 'gi://St';
+import Meta from 'gi://Meta';
+import Clutter from 'gi://Clutter';
+import GLib from 'gi://GLib';
+
+import {Extension, gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
+
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as Config from 'resource:///org/gnome/shell/misc/config.js';
+import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
+import * as QuickSettings from 'resource:///org/gnome/shell/ui/quickSettings.js';
+const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
 
 const ShellVersion = Number(Config.PACKAGE_VERSION.split('.')[0]);
 
@@ -45,12 +55,6 @@ const TRIGGER_APPS_MODE = 'trigger-apps-mode';
 const INDICATOR_POSITION = 'indicator-position';
 const INDICATOR_INDEX = 'indicator-position-index';
 const INDICATOR_POS_MAX = 'indicator-position-max';
-
-const Gettext = imports.gettext.domain('gnome-shell-extension-caffeine');
-const _ = Gettext.gettext;
-
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
 
 const ColorInterface = '<node> \
   <interface name="org.gnome.SettingsDaemon.Color"> \
