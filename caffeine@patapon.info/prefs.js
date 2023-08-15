@@ -19,14 +19,14 @@
 /* exported init fillPreferencesWindow */
 'use strict';
 
-const { Gtk, Gdk } = imports.gi;
+//Main imports
+import Gtk from 'gi://Gtk';
+import Gdk from 'gi://Gdk';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
 // Import preferences pages
-const GeneralPrefs = Me.imports.preferences.generalPage;
-const DisplayPrefs = Me.imports.preferences.displayPage;
-const AppsPrefs = Me.imports.preferences.appsPage;
+import * as GeneralPrefs from './preferences/generalPage.js';
+import * as DisplayPrefs from './preferences/displayPage.js';
+import * as AppsPrefs from './preferences/appsPage.js';
 
 const SettingsKey = {
     INHIBIT_APPS: 'inhibit-apps',

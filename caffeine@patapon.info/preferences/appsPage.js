@@ -19,12 +19,12 @@
 /* exported AppsPage */
 'use strict';
 
-const { Adw, Gtk, GObject, Gio } = imports.gi;
+import Adw from 'gi://Adw';
+import Gtk from 'gi://Gtk';
+import GObject from 'gi://GObject';
+import Gio from 'gi://Gio';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain']);
-const _ = Gettext.gettext;
+import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 var AppsPage = GObject.registerClass(
 class CaffeineAppsPage extends Adw.PreferencesPage {
