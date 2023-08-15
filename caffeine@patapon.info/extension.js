@@ -97,7 +97,6 @@ const DBusSessionManagerInhibitorIface = '<node>\
 
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
-const IndicatorName = 'Caffeine';
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
@@ -157,7 +156,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             // The 'label' property was renamed to 'title' in GNOME 44 but quick settings have otherwise
             // not been changed. The below line allows support for both GNOME 43 and 44+ by using the
             // appropriate property name based on the GNOME version.
-            [ShellVersion >= 44 ? 'title' : 'label']: IndicatorName,
+            [ShellVersion >= 44 ? 'title' : 'label']: _('Caffeine'),
             toggleMode: true
         });
 
@@ -482,7 +481,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     addInhibit(appId) {
         this._sessionManager.InhibitRemote(appId,
-            0, 'Inhibit by %s'.format(IndicatorName), this.inhibitFlags,
+            0, 'Inhibit by %s'.format(Me.metadata.name), this.inhibitFlags,
             (cookie) => {
                 this._inhibitionAddedFifo.push(appId);
                 // Init app data

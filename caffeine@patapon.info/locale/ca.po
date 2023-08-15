@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 16:08+0200\n"
+"POT-Creation-Date: 2023-08-15 00:10+0200\n"
 "PO-Revision-Date: 2023-08-05 16:21+0200\n"
 "Last-Translator: Ícar N. S. <icar.nin@protonmail.com>\n"
 "Language-Team: Catalan\n"
@@ -18,67 +18,72 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:177 extension.js:622
-msgid "Caffeine Timer"
-msgstr "Temporitzador"
+#: extension.js:159
+#, fuzzy
+msgid "Caffeine"
+msgstr "Cafeïna"
 
-#: extension.js:215
+#: extension.js:176 extension.js:632
+msgid "Caffeine Timer"
+msgstr "Cafeïna Temporitzador"
+
+#: extension.js:214
 msgid "Infinite"
 msgstr "Infinit"
 
-#: extension.js:217 extension.js:806 preferences/generalPage.js:218
+#: extension.js:216 extension.js:816 preferences/generalPage.js:212
 msgid " minutes"
 msgstr " minuts"
 
-#: extension.js:771
+#: extension.js:781
 msgid "Caffeine enabled"
 msgstr "Cafeïna activada"
 
-#: extension.js:773
+#: extension.js:783
 msgid "Night Light paused"
 msgstr "Llum nocturna pausada"
 
-#: extension.js:778
+#: extension.js:788
 msgid "Caffeine disabled"
 msgstr "Cafeïna desactivada"
 
-#: extension.js:780
+#: extension.js:790
 msgid "Night Light resumed"
 msgstr "Llum nocturna reactivada"
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr "Aplicacions"
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr "Mode d'activació"
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr "S'està executant"
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr "Focus"
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr "Espai de treball actiu"
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
 msgstr "Quan les aplicacions activen el mode cafeïna"
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "Escolliu amb quina condició les aplicacions activaran el mode cafeïna"
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr "Afegiu"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
 msgstr "Aplicacions que activen el mode cafeïna"
 
@@ -90,11 +95,13 @@ msgstr "Pantalla"
 msgid "Only when active"
 msgstr "Només en actiu"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:32
+#: preferences/displayPage.js:49 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
 msgid "Always"
 msgstr "Sempre"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:31
+#: preferences/displayPage.js:50 preferences/generalPage.js:81
+#: preferences/generalPage.js:93
 msgid "Never"
 msgstr "Mai"
 
@@ -131,77 +138,77 @@ msgid "The position relative of indicator icon to other items"
 msgstr ""
 "La posició de la icona indicadora de l'estat en relació als altres elements"
 
-#: preferences/generalPage.js:33
-msgid "For apps on list"
-msgstr "Per les aplicacions a la llista"
-
-#: preferences/generalPage.js:48
+#: preferences/generalPage.js:42
 msgid "General"
 msgstr "General"
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:52
 msgid "Behavior"
 msgstr "Comportament"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:61
 msgid "Enable for fullscreen apps"
 msgstr "Activa per aplicacions en pantalla completa"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:62
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "Activa automàticament quan una aplicació canvia a pantalla completa"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:73
 msgid "Remember state"
 msgstr "Recorda l'estat"
 
-#: preferences/generalPage.js:80
+#: preferences/generalPage.js:74
 msgid "Remember the last state across sessions and reboots"
 msgstr "Recorda l'últim estat entre inicis de sessió i reinicis"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:83 preferences/generalPage.js:95
+msgid "For apps on list"
+msgstr "Per les aplicacions a la llista"
+
+#: preferences/generalPage.js:85
 msgid "Pause and resume Night Light"
 msgstr "Pausa i activa la llum nocturna"
 
-#: preferences/generalPage.js:92
+#: preferences/generalPage.js:86
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Commuta la llum nocturna juntament amb el mode cafeïna"
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:97
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr "Permet que la pantalla s'apagui"
 
-#: preferences/generalPage.js:104
+#: preferences/generalPage.js:98
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Permet que la pantalla s'apagui quan el mode cafeïna està activat"
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:113
 msgid "Timer"
 msgstr "Temporitzador"
 
-#: preferences/generalPage.js:124
+#: preferences/generalPage.js:118
 msgid "Durations"
 msgstr "Duracions"
 
-#: preferences/generalPage.js:168
+#: preferences/generalPage.js:162
 msgid "Shortcut"
 msgstr "Drecera"
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:170
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr "Commuta la drecera"
 
-#: preferences/generalPage.js:177
+#: preferences/generalPage.js:171
 msgid "Use Backspace to clear"
 msgstr "Usa la tecla retrocés per desvincular la drecera"
 
-#: preferences/generalPage.js:218
+#: preferences/generalPage.js:212
 msgid "Set to "
 msgstr "Estableix a "
 
-#: preferences/generalPage.js:265 preferences/generalPage.js:297
+#: preferences/generalPage.js:259 preferences/generalPage.js:291
 msgid "New accelerator…"
 msgstr "Nova drecera..."
 
@@ -308,8 +315,8 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
-"Real position offset of status icon in indicator menu that include "
-"invisible one"
+"Real position offset of status icon in indicator menu that include invisible "
+"one"
 msgstr ""
 "Posició real del desplaçament de la icona d'estat al menú d'indicadors que "
 "inclou un invisible"

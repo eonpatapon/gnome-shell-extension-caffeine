@@ -12,67 +12,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: extension.js:177 extension.js:622
+#: extension.js:159
+msgid "Caffeine"
+msgstr "Koffein"
+
+#: extension.js:176 extension.js:632
 msgid "Caffeine Timer"
 msgstr "Koffein időzítő"
 
-#: extension.js:215
+#: extension.js:214
 msgid "Infinite"
 msgstr "Végtelen"
 
-#: extension.js:217 extension.js:806 preferences/generalPage.js:218
+#: extension.js:216 extension.js:816 preferences/generalPage.js:212
 msgid " minutes"
 msgstr " perc"
 
-#: extension.js:771
+#: extension.js:781
 msgid "Caffeine enabled"
 msgstr "Koffein engedélyezve"
 
-#: extension.js:773
+#: extension.js:783
 msgid "Night Light paused"
 msgstr "Éjszakai fény szüneteltetve"
 
-#: extension.js:778
+#: extension.js:788
 msgid "Caffeine disabled"
 msgstr "Koffein letiltva"
 
-#: extension.js:780
+#: extension.js:790
 msgid "Night Light resumed"
 msgstr "Éjszakai fény folytatva"
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr "Alkalmazások"
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr "Aktiválási mód"
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr "Futtatás"
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr "Fókusz"
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr "Aktív munkaterület"
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
 msgstr "Alkalmazások Koffeint aktiváló módja"
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "Alkalmazások ebben a módban fogják aktiválni a Koffeint"
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
 msgstr "Alkalmazások, amelyek aktiválják a Koffeint"
 
@@ -84,11 +88,13 @@ msgstr "Megjelenés"
 msgid "Only when active"
 msgstr "Csak aktív állapotban"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:32
+#: preferences/displayPage.js:49 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
 msgid "Always"
 msgstr "Mindig"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:31
+#: preferences/displayPage.js:50 preferences/generalPage.js:81
+#: preferences/generalPage.js:93
 msgid "Never"
 msgstr "Soha"
 
@@ -124,77 +130,77 @@ msgstr "Állapotjelző pozíciója"
 msgid "The position relative of indicator icon to other items"
 msgstr "Az állapotjelző pozíciója más elemkhez képest"
 
-#: preferences/generalPage.js:33
-msgid "For apps on list"
-msgstr "A listán szereplő alkalmazásokhoz"
-
-#: preferences/generalPage.js:48
+#: preferences/generalPage.js:42
 msgid "General"
 msgstr "Általános"
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:52
 msgid "Behavior"
 msgstr "Viselkedés"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:61
 msgid "Enable for fullscreen apps"
 msgstr "Engedélyezés teljes képernyős alkalmazásokhoz"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:62
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "Automatikus engedélyezés, amikor egy alkalmazás teljes képernyős módba lép"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:73
 msgid "Remember state"
 msgstr "Állapot megjegyzése"
 
-#: preferences/generalPage.js:80
+#: preferences/generalPage.js:74
 msgid "Remember the last state across sessions and reboots"
 msgstr "Legutóbbi állapot megjegyzése munkameneteken és újraindításokon át"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:83 preferences/generalPage.js:95
+msgid "For apps on list"
+msgstr "A listán szereplő alkalmazásokhoz"
+
+#: preferences/generalPage.js:85
 msgid "Pause and resume Night Light"
 msgstr "Éjszakai fény szüneteltetése és folytatása"
 
-#: preferences/generalPage.js:92
+#: preferences/generalPage.js:86
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Éjszakai fény átváltása a Koffein állapotával együtt"
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:97
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr "Képernyő elsötétítés engedélyezése"
 
-#: preferences/generalPage.js:104
+#: preferences/generalPage.js:98
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Képernyő kikapcsolásának engedélyezése Koffein engeélyezése közben"
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:113
 msgid "Timer"
 msgstr "Visszaszámláló"
 
-#: preferences/generalPage.js:124
+#: preferences/generalPage.js:118
 msgid "Durations"
 msgstr "Időtartamok"
 
-#: preferences/generalPage.js:168
+#: preferences/generalPage.js:162
 msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:170
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr "Átváltás gyorsbillentyűje"
 
-#: preferences/generalPage.js:177
+#: preferences/generalPage.js:171
 msgid "Use Backspace to clear"
 msgstr "A törléshez használja a Backspace billentyűt"
 
-#: preferences/generalPage.js:218
+#: preferences/generalPage.js:212
 msgid "Set to "
 msgstr "Kiválasztható "
 
-#: preferences/generalPage.js:265 preferences/generalPage.js:297
+#: preferences/generalPage.js:259 preferences/generalPage.js:291
 msgid "New accelerator…"
 msgstr "Új kombináció…"
 

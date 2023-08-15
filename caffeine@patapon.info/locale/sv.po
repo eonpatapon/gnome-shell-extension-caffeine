@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 16:08+0200\n"
+"POT-Creation-Date: 2023-08-15 00:10+0200\n"
 "PO-Revision-Date: 2018-04-04 20:35+0200\n"
 "Last-Translator: Morgan Antonsson <morgan.antonsson@gmail.com>\n"
 "Language-Team: \n"
@@ -11,67 +11,71 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:177 extension.js:622
+#: extension.js:159
+msgid "Caffeine"
+msgstr "Koffein"
+
+#: extension.js:176 extension.js:632
 msgid "Caffeine Timer"
 msgstr ""
 
-#: extension.js:215
+#: extension.js:214
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:217 extension.js:806 preferences/generalPage.js:218
+#: extension.js:216 extension.js:816 preferences/generalPage.js:212
 msgid " minutes"
 msgstr ""
 
-#: extension.js:771
+#: extension.js:781
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:773
+#: extension.js:783
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:778
+#: extension.js:788
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:780
+#: extension.js:790
 msgid "Night Light resumed"
 msgstr ""
 
-#: preferences/appsPage.js:34
+#: preferences/appsPage.js:33
 msgid "Apps"
 msgstr ""
 
-#: preferences/appsPage.js:45
+#: preferences/appsPage.js:44
 msgid "Trigger mode"
 msgstr ""
 
-#: preferences/appsPage.js:50
+#: preferences/appsPage.js:49
 msgid "Running"
 msgstr ""
 
-#: preferences/appsPage.js:51
+#: preferences/appsPage.js:50
 msgid "Focus"
 msgstr ""
 
-#: preferences/appsPage.js:52
+#: preferences/appsPage.js:51
 msgid "Active workspace"
 msgstr ""
 
-#: preferences/appsPage.js:54
+#: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
 msgstr ""
 
-#: preferences/appsPage.js:55
+#: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
 msgstr ""
 
-#: preferences/appsPage.js:69
+#: preferences/appsPage.js:68
 msgid "Add"
 msgstr "Lägg till"
 
-#: preferences/appsPage.js:73
+#: preferences/appsPage.js:72
 msgid "Apps that trigger Caffeine"
 msgstr ""
 
@@ -83,11 +87,13 @@ msgstr ""
 msgid "Only when active"
 msgstr "Samo ko je aktiven"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:32
+#: preferences/displayPage.js:49 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
 msgid "Always"
 msgstr "Nenehno"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:31
+#: preferences/displayPage.js:50 preferences/generalPage.js:81
+#: preferences/generalPage.js:93
 msgid "Never"
 msgstr "Nikoli"
 
@@ -104,7 +110,7 @@ msgstr "Visa indikator i panelen"
 #: preferences/displayPage.js:64
 #, fuzzy
 msgid "Show timer in top panel"
-msgstr "Visa Caffeine i panelen"
+msgstr "Visa koffein i panelen"
 
 #: preferences/displayPage.js:65
 #, fuzzy
@@ -130,81 +136,81 @@ msgstr "Visa indikator i panelen"
 msgid "The position relative of indicator icon to other items"
 msgstr ""
 
-#: preferences/generalPage.js:33
-msgid "For apps on list"
-msgstr ""
-
-#: preferences/generalPage.js:48
+#: preferences/generalPage.js:42
 msgid "General"
 msgstr ""
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:52
 msgid "Behavior"
 msgstr ""
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:61
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Aktivera när ett program använder helskärmsläget"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:62
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:73
 msgid "Remember state"
 msgstr ""
 
-#: preferences/generalPage.js:80
+#: preferences/generalPage.js:74
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Återställ tillstånd efter omstart"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:83 preferences/generalPage.js:95
+msgid "For apps on list"
+msgstr ""
+
+#: preferences/generalPage.js:85
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Visa notifieringar vid aktivering/inaktivering"
 
-#: preferences/generalPage.js:92
+#: preferences/generalPage.js:86
 msgid "Toggles the night light together with Caffeine's state"
 msgstr ""
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:97
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 msgid "Allow screen blank"
 msgstr ""
 
-#: preferences/generalPage.js:104
+#: preferences/generalPage.js:98
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Visa notifieringar vid aktivering/inaktivering"
 
-#: preferences/generalPage.js:119
+#: preferences/generalPage.js:113
 msgid "Timer"
 msgstr ""
 
-#: preferences/generalPage.js:124
+#: preferences/generalPage.js:118
 msgid "Durations"
 msgstr ""
 
-#: preferences/generalPage.js:168
+#: preferences/generalPage.js:162
 msgid "Shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:176
+#: preferences/generalPage.js:170
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Toggle shortcut"
 msgstr ""
 
-#: preferences/generalPage.js:177
+#: preferences/generalPage.js:171
 msgid "Use Backspace to clear"
 msgstr ""
 
-#: preferences/generalPage.js:218
+#: preferences/generalPage.js:212
 msgid "Set to "
 msgstr ""
 
-#: preferences/generalPage.js:265 preferences/generalPage.js:297
+#: preferences/generalPage.js:259 preferences/generalPage.js:291
 msgid "New accelerator…"
 msgstr ""
 
@@ -220,11 +226,11 @@ msgstr "En lista av strängar med program-ID:n (skrivbordets filnamn)"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
 #, fuzzy
 msgid "Store caffeine toggle state"
-msgstr "Spara caffeines användarstatus"
+msgstr "Spara koffein användarstatus"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
-msgstr "Spara caffeines användarstatus"
+msgstr "Spara koffein användarstatus"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
@@ -238,7 +244,7 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
-msgstr "Återställ caffeine-status"
+msgstr "Återställ koffein-status"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
