@@ -28,7 +28,7 @@ import * as GeneralPrefs from './preferences/generalPage.js';
 import * as DisplayPrefs from './preferences/displayPage.js';
 import * as AppsPrefs from './preferences/appsPage.js';
 
-import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const SettingsKey = {
     INHIBIT_APPS: 'inhibit-apps',
