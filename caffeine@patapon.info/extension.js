@@ -155,7 +155,7 @@ Gtk.IconTheme.get_default = function () {
 
 const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
-    _init() {
+    _init(settings, path) {
         super._init({
             // The 'label' property was renamed to 'title' in GNOME 44 but quick settings have otherwise
             // not been changed. The below line allows support for both GNOME 43 and 44+ by using the
@@ -164,16 +164,17 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             toggleMode: true
         });
 
-        this._settings = ExtensionUtils.getSettings();
+        this._settings = settings;
+        this._path = path;
 
         // Icons
         this.finalTimerMenuIcon = TimerMenuIcon;
         if (!Gtk.IconTheme.get_default().has_icon(TimerMenuIcon)) {
             this.finalTimerMenuIcon =
-                Gio.icon_new_for_string(`${Me.path}/icons/${TimerMenuIcon}.svg`);
+                Gio.icon_new_for_string(`${this._path}/icons/${TimerMenuIcon}.svg`);
         }
-        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
-        this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._iconActivated = Gio.icon_new_for_string(`${this._path}/icons/${EnabledIcon}.svg`);
+        this._iconDeactivated = Gio.icon_new_for_string(`${this._path}/icons/${DisabledIcon}.svg`);
         this._iconName();
 
         // Menu
@@ -222,7 +223,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             if (!label) {
                 continue;
             }
-            const icon = Gio.icon_new_for_string(`${Me.path}/icons/${timer[5]}.svg`);
+            const icon = Gio.icon_new_for_string(`${this._path}/icons/${timer[5]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
             item.connect('activate', () => {
                 this._checkTimer(timer[durationIndex]);
@@ -266,12 +267,12 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
 const Caffeine = GObject.registerClass(
 class Caffeine extends QuickSettings.SystemIndicator {
-    _init() {
+    _init(settings, path, name) {
         super._init();
 
         this._indicator = this._addIndicator();
-
-        this._settings = ExtensionUtils.getSettings();
+        this._settings = settings;
+        this._name = name;
 
         // D-bus
         this._proxy = new ColorProxy(
@@ -317,8 +318,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.add_child(this._timerLabel);
 
         // Icons
-        this._iconActivated = Gio.icon_new_for_string(`${Me.path}/icons/${EnabledIcon}.svg`);
-        this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}/icons/${DisabledIcon}.svg`);
+        this._iconActivated = Gio.icon_new_for_string(`${path}/icons/${EnabledIcon}.svg`);
+        this._iconDeactivated = Gio.icon_new_for_string(`${path}/icons/${DisabledIcon}.svg`);
         this._indicator.gicon = this._iconDeactivated;
 
         // Manage night light
@@ -362,7 +363,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
 
         // QuickSettings
-        this._caffeineToggle = new CaffeineToggle();
+        this._caffeineToggle = new CaffeineToggle(this._settings, path);
         this.quickSettingsItems.push(this._caffeineToggle);
         this._updateTimerSubtitle();
 
@@ -485,7 +486,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
     addInhibit(appId) {
         this._sessionManager.InhibitRemote(appId,
-            0, 'Inhibit by %s'.format(Me.metadata.name), this.inhibitFlags,
+            0, 'Inhibit by %s'.format(this._name), this.inhibitFlags,
             (cookie) => {
                 this._inhibitionAddedFifo.push(appId);
                 // Init app data
@@ -1143,27 +1144,24 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 });
 
-/**
- * Steps to run when the extension is enabled
- */
-function enable() {
-    const _settings = ExtensionUtils.getSettings();
+export default class CaffeineExtension extends Extension {
+    enable() {
+        this._settings = this.getSettings();
+        this._caffeineIndicator = new Caffeine(this._settings, this.path);
 
-    CaffeineIndicator = new Caffeine();
+        // Register shortcut
+        Main.wm.addKeybinding(TOGGLE_SHORTCUT, this._settings,
+                              Meta.KeyBindingFlags.IGNORE_AUTOREPEAT,
+                              Shell.ActionMode.ALL, () => {
+            this._caffeineIndicator.toggleState();
+        });
+    }
 
-    // Register shortcut
-    Main.wm.addKeybinding(TOGGLE_SHORTCUT, _settings, Meta.KeyBindingFlags.IGNORE_AUTOREPEAT, Shell.ActionMode.ALL, () => {
-        CaffeineIndicator.toggleState();
-    });
-}
+    disable() {
+        this._caffeineIndicator.destroy();
+        this._caffeineIndicator = null;
 
-/**
- * Steps to run when the extension is disabled
- */
-function disable() {
-    CaffeineIndicator.destroy();
-    CaffeineIndicator = null;
-
-    // Unregister shortcut
-    Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
+        // Unregister shortcut
+        Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
+    }
 }
