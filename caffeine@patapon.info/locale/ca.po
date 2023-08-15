@@ -21,11 +21,11 @@ msgstr ""
 #: extension.js:159
 #, fuzzy
 msgid "Caffeine"
-msgstr "Temporitzador"
+msgstr "Cafeïna"
 
 #: extension.js:176 extension.js:632
 msgid "Caffeine Timer"
-msgstr "Temporitzador"
+msgstr "Cafeïna Temporitzador"
 
 #: extension.js:214
 msgid "Infinite"
