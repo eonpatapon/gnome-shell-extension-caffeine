@@ -36,8 +36,6 @@ import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import * as QuickSettings from 'resource:///org/gnome/shell/ui/quickSettings.js';
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
 
-const ShellVersion = Number(Config.PACKAGE_VERSION.split('.')[0]);
-
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
@@ -157,10 +155,7 @@ const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _init(settings, path) {
         super._init({
-            // The 'label' property was renamed to 'title' in GNOME 44 but quick settings have otherwise
-            // not been changed. The below line allows support for both GNOME 43 and 44+ by using the
-            // appropriate property name based on the GNOME version.
-            [ShellVersion >= 44 ? 'title' : 'label']: _('Caffeine'),
+            'title': _('Caffeine'),
             toggleMode: true
         });
 
@@ -414,12 +409,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         QuickSettingsMenu._addItems(this.quickSettingsItems);
 
         // Place the toggle above the background apps entry
-        if (ShellVersion >= 44) {
-            this.quickSettingsItems.forEach((item) => {
-                QuickSettingsMenu.menu._grid.set_child_below_sibling(item,
-                    QuickSettingsMenu._backgroundApps.quickSettingsItems[0]);
-            });
-        }
+        this.quickSettingsItems.forEach((item) => {
+            QuickSettingsMenu.menu._grid.set_child_below_sibling(item,
+                QuickSettingsMenu._backgroundApps.quickSettingsItems[0]);
+        });
 
         this._updateLastIndicatorPosition();
     }
@@ -635,9 +628,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _updateLabelTimer(text) {
         this._timerLabel.text = text;
         this._caffeineToggle.menu.setHeader(this._caffeineToggle.finalTimerMenuIcon, _('Caffeine Timer'), text);
-        if (ShellVersion >= 44) {
-            this._caffeineToggle.subtitle = text;
-        }
+        this._caffeineToggle.subtitle = text;
     }
 
     _handleScrollEvent(event) {
@@ -799,23 +790,21 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    // Add the name of App as subtitle (>= Gnome 44)
+    // Add the name of App as subtitle
     _updateAppSubtitle(id) {
-        if (ShellVersion >= 44) {
-            const listAppId = this._appInhibitedData.keys();
-            let appId = id !== null ? id : listAppId.next().value;
-            if (appId !== undefined) {
-                let appInfo = Gio.DesktopAppInfo.new(appId);
-                this._caffeineToggle.subtitle = appInfo !== null
-                    ? appInfo.get_display_name()
-                    : null;
-            }
+        const listAppId = this._appInhibitedData.keys();
+        let appId = id !== null ? id : listAppId.next().value;
+        if (appId !== undefined) {
+            let appInfo = Gio.DesktopAppInfo.new(appId);
+            this._caffeineToggle.subtitle = appInfo !== null
+                ? appInfo.get_display_name()
+                : null;
         }
     }
 
-    // Add the timer duration selected as subtitle (>= Gnome 44)
+    // Add the timer duration selected as subtitle
     _updateTimerSubtitle() {
-        if (ShellVersion >= 44 && !this._settings.get_boolean(TOGGLE_STATE_KEY)) {
+        if (!this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             const timerDuration = this._settings.get_int(TIMER_KEY);
             this._caffeineToggle.subtitle = timerDuration !== 0
                 ? parseInt(timerDuration) + _(' minutes')
