@@ -24,7 +24,7 @@ import Gtk from 'gi://Gtk';
 import GObject from 'gi://GObject';
 import Gdk from 'gi://Gdk';
 
-import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, name, GObject.ParamFlags.READWRITE, ...dflt);
 
