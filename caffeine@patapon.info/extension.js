@@ -129,27 +129,6 @@ const TIMERS = [
 ];
 
 let CaffeineIndicator;
-/*
-* ------- Load custom icon -------
-* hack (for Wayland?) via https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/1997
-*
-* For some reasons, I cannot use this instead:
-*  'let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())'
-* see https://gjs.guide/extensions/upgrading/gnome-shell-40.html#custom-icon-theme
-*  I get this error: "TypeError: Gtk.IconTheme.get_for_display is not a function"
-*  This same line of code works on prefs.js... (Gnome 43)
-*/
-Gtk.IconTheme.get_default = function () {
-    let theme = new Gtk.IconTheme();
-    // gnome-shell switched away from GTK3 during the `44.rc` release. The Gtk.IconTheme method `set_custom_name`
-    // has been renamed to `set_theme_name`. The below line allows support for all versions of GNOME 43 and 44+.
-    if (theme.set_theme_name) {
-        theme.set_theme_name(St.Settings.get().gtk_icon_theme);
-    } else {
-        theme.set_custom_theme(St.Settings.get().gtk_icon_theme);
-    }
-    return theme;
-};
 
 const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
@@ -164,7 +143,8 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
         // Icons
         this.finalTimerMenuIcon = TimerMenuIcon;
-        if (!Gtk.IconTheme.get_default().has_icon(TimerMenuIcon)) {
+        let iconTheme = new St.IconTheme();
+        if (!iconTheme.has_icon(TimerMenuIcon)) {
             this.finalTimerMenuIcon =
                 Gio.icon_new_for_string(`${this._path}/icons/${TimerMenuIcon}.svg`);
         }
