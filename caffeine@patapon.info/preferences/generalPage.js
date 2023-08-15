@@ -36,7 +36,7 @@ const TIMERS_DURATION = [
     '30, 50, 80'
 ];
 
-var GeneralPage = GObject.registerClass(
+export var GeneralPage = GObject.registerClass(
 class CaffeineGeneralPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({

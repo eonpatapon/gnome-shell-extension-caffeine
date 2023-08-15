@@ -26,7 +26,7 @@ import Gio from 'gi://Gio';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-var DisplayPage = GObject.registerClass(
+export var DisplayPage = GObject.registerClass(
 class CaffeineDisplayPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({

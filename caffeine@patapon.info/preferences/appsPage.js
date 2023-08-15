@@ -26,7 +26,7 @@ import Gio from 'gi://Gio';
 
 import {gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
-var AppsPage = GObject.registerClass(
+export var AppsPage = GObject.registerClass(
 class CaffeineAppsPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
         super._init({
