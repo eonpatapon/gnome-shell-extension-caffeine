@@ -6,7 +6,6 @@ all: build install
 .PHONY: build install clean translations lint lint-fix
 
 build:
-	glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
 	rm -f $(BUNDLE_PATH)
 	cd $(EXTENSION_DIR); \
 	gnome-extensions pack --force --podir=locale \
