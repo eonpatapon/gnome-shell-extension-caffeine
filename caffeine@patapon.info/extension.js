@@ -382,13 +382,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.lastIndicatorPosition = this.indicatorPosition;
 
         QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
-        QuickSettingsMenu._addItems(this.quickSettingsItems);
-
-        // Place the toggle above the background apps entry
-        this.quickSettingsItems.forEach((item) => {
-            QuickSettingsMenu.menu._grid.set_child_below_sibling(item,
-                QuickSettingsMenu._backgroundApps.quickSettingsItems[0]);
-        });
+        QuickSettingsMenu.addExternalIndicator(this.quickSettingsItems);
 
         this._updateLastIndicatorPosition();
     }
