@@ -381,8 +381,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.indicatorIndex = this._settings.get_int(INDICATOR_INDEX);
         this.lastIndicatorPosition = this.indicatorPosition;
 
+        // Add indicator and toggle
+        QuickSettingsMenu.addExternalIndicator(this);
+        QuickSettingsMenu._indicators.remove_actor(this);
         QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
-        QuickSettingsMenu.addExternalIndicator(this.quickSettingsItems);
 
         this._updateLastIndicatorPosition();
     }
