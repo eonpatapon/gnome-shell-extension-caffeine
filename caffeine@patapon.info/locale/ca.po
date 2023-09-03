@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-15 00:10+0200\n"
-"PO-Revision-Date: 2023-08-05 16:21+0200\n"
+"PO-Revision-Date: 2023-09-03 23:38+0200\n"
 "Last-Translator: Ícar N. S. <icar.nin@protonmail.com>\n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -19,13 +19,12 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:159
-#, fuzzy
 msgid "Caffeine"
 msgstr "Cafeïna"
 
 #: extension.js:176 extension.js:632
 msgid "Caffeine Timer"
-msgstr "Cafeïna Temporitzador"
+msgstr "Temporitzador del Cafeïna"
 
 #: extension.js:214
 msgid "Infinite"
@@ -210,7 +209,7 @@ msgstr "Estableix a "
 
 #: preferences/generalPage.js:259 preferences/generalPage.js:291
 msgid "New accelerator…"
-msgstr "Nova drecera..."
+msgstr "Drecera nova..."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Application list"
