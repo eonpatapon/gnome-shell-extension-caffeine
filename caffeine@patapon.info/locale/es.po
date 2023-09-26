@@ -70,12 +70,10 @@ msgid "Active workspace"
 msgstr "Área de trabajo activa"
 
 #: preferences/appsPage.js:53
-#, fuzzy
 msgid "Apps trigger Caffeine mode"
-msgstr "Modo de activación de aplicaciones"
+msgstr "Las aplicaciones activan el modo de Cafeína"
 
 #: preferences/appsPage.js:54
-#, fuzzy
 msgid "Choose the way apps will trigger Caffeine"
 msgstr "Escoge la manera de la que las aplicaciones activan Cafeína"
 
@@ -240,7 +238,7 @@ msgstr "Especifica el tiempo (minutos) para el temporizador de cuenta atrás"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify index of duration range for the timer"
-msgstr "Especifíca el índice de rangos de duración para el temporizador"
+msgstr "Especifica el índice de rangos de duración para el temporizador"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
@@ -309,14 +307,14 @@ msgstr "Altura por defecto para la ventana de preferencias"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
-msgstr "Composenación de posición visible del icono de estado en el menú de indicadores"
+msgstr "Compensación de posición visible del icono de estado en el menú de indicadores"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
-msgstr "composensación de posición del icono en el menú de indicadores que incluye lo invisible"
+msgstr "Compensación real de la posición del icono en el menú de indicadores que incluye lo invisible"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
-msgstr ""
+msgstr "Índice del último elemento en el menú de indicadores"
