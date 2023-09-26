@@ -106,37 +106,30 @@ msgid "Never"
 msgstr "Nunca"
 
 #: preferences/displayPage.js:52
-#, fuzzy
 msgid "Show status indicator in top panel"
 msgstr "Mostrar el indicador de Cafeína en el panel superior"
 
 #: preferences/displayPage.js:53
-#, fuzzy
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Activa o desactiva el icono de Cafeína en el panel superior"
 
 #: preferences/displayPage.js:64
-#, fuzzy
 msgid "Show timer in top panel"
 msgstr "Mostrar el temporizador de Cafeína en el panel superior"
 
 #: preferences/displayPage.js:65
-#, fuzzy
 msgid "Enable or disable the timer in the top panel"
 msgstr "Activa o desactiva el temporizador en el panel superior"
 
 #: preferences/displayPage.js:76
-#, fuzzy
 msgid "Notifications"
 msgstr "Notificaciones"
 
 #: preferences/displayPage.js:77
-#, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Activar notificaciones de habilitado/deshabilitado"
 
 #: preferences/displayPage.js:99
-#, fuzzy
 msgid "Status indicator position"
 msgstr "Posición del indicador de estado"
 
@@ -153,7 +146,6 @@ msgid "Behavior"
 msgstr "Comportamiento"
 
 #: preferences/generalPage.js:61
-#, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Activar para aplicaciones a pantalla completa"
 
@@ -168,7 +160,6 @@ msgid "Remember state"
 msgstr "Recordar estado"
 
 #: preferences/generalPage.js:74
-#, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Recordar el estado entre sesiones y reinicios"
 
@@ -177,7 +168,6 @@ msgid "For apps on list"
 msgstr "Para aplicaciones en la lista"
 
 #: preferences/generalPage.js:85
-#, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Pausar y reanudar la Luz Nocturna"
 
@@ -191,7 +181,6 @@ msgid "Allow screen blank"
 msgstr "Permitir apagar la pantalla"
 
 #: preferences/generalPage.js:98
-#, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Permitir apagar la pantalla cuando Cafeína está habilitada"
 
@@ -225,7 +214,6 @@ msgid "New accelerator…"
 msgstr "Atajo de teclado nuevo…"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
-#, fuzzy
 msgid "Application list"
 msgstr "Lista de aplicaciones"
 
@@ -237,7 +225,6 @@ msgstr ""
 "(nombre de archivo desktop)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
-#, fuzzy
 msgid "Store caffeine toggle state"
 msgstr "Guardar estado de cafeína"
 
@@ -264,12 +251,10 @@ msgid "Show indicator"
 msgstr "Mostrar indicador"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
-#, fuzzy
 msgid "Show the indicator on the top panel"
 msgstr "Mostrar el indicador en el panel superior"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
-#, fuzzy
 msgid "Show notifications"
 msgstr "Motrar notificaciones"
 
@@ -282,7 +267,6 @@ msgid "Show timer"
 msgstr "Mostrar temporizador"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
-#, fuzzy
 msgid "Show timer when enabled/disabled"
 msgstr "Mostrar temporizador al habilitar/deshabilitar"
 
@@ -300,7 +284,6 @@ msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "Establece cómo Cafeína interactúa con el ajuste de Luz nocturna."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
-#, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "Permitir apagar la pantalla cuando Cafeína está habilitada"
 
