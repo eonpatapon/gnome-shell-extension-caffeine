@@ -1106,13 +1106,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
 });
 
 export default class CaffeineExtension extends Extension {
-    /**
-     * @param {ExtensionMeta} metadata - Caffeine extension metadata
-     */
-    constructor(metadata) {
-        super(metadata);
-    }
-
     enable() {
         this._settings = this.getSettings();
         this._caffeineIndicator = new Caffeine(this._settings, this.path, this.metadata.name);
