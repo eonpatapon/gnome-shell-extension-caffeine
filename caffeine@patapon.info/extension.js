@@ -1108,7 +1108,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 export default class CaffeineExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
-        this._caffeineIndicator = new Caffeine(this._settings, this.path);
+        this._caffeineIndicator = new Caffeine(this._settings, this.path, this.metadata.name);
 
         // Register shortcut
         Main.wm.addKeybinding(TOGGLE_SHORTCUT, this._settings,
