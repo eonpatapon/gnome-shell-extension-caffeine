@@ -15,8 +15,8 @@ This extension supports GNOME Shell `3.4` -> `45`
 
 |Branch                   |Version|Compatible GNOME version|
 |-------------------------|:-----:|------------------------|
-| master                  |    50 | GNOME 45               |
-| gnome-shell-43-44       |    49 | GNOME 43 -> 44         |
+| master                  |    52 | GNOME 45               |
+| gnome-shell-43-44       |    51 | GNOME 43 -> 44         |
 | gnome-shell-40-42       |    42 | GNOME 40 -> 42         |
 | gnome-shell-3.36-3.38   |    37 | GNOME 3.36 -> 3.38     |
 | gnome-shell-3.32-3.34   |    33 | GNOME 3.32 -> 3.34     |
