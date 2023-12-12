@@ -2,50 +2,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 00:10+0200\n"
-"PO-Revision-Date: 2021-04-09 21:31-0400\n"
-"Last-Translator: WebSnke <websnke@tutanota.com>\n"
+"POT-Creation-Date: 2023-12-12 13:18+0100\n"
+"PO-Revision-Date: 2023-12-12 14:27+0100\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:159
+#: extension.js:133
 msgid "Caffeine"
 msgstr "Koffein"
 
-#: extension.js:176 extension.js:632
+#: extension.js:152 extension.js:602
 msgid "Caffeine Timer"
 msgstr "Koffein-Timer"
 
-#: extension.js:214
+#: extension.js:190
 msgid "Infinite"
 msgstr "Unendlich"
 
-#: extension.js:216 extension.js:816 preferences/generalPage.js:212
+#: extension.js:192 extension.js:782 preferences/generalPage.js:213
 msgid " minutes"
 msgstr " Minuten"
 
-#: extension.js:781
+#: extension.js:749
 msgid "Caffeine enabled"
 msgstr "Koffein aktiviert"
 
-#: extension.js:783
+#: extension.js:751
 msgid "Night Light paused"
 msgstr "Nachtmodus pausiert"
 
-#: extension.js:788
+#: extension.js:756
 msgid "Caffeine disabled"
 msgstr "Koffein deaktiviert"
 
-#: extension.js:790
+#: extension.js:758
 msgid "Night Light resumed"
 msgstr "Nachtmodus fortgesetzt"
 
@@ -55,11 +55,11 @@ msgstr "Anwendungen"
 
 #: preferences/appsPage.js:44
 msgid "Trigger mode"
-msgstr ""
+msgstr "Aktivierungsmodus"
 
 #: preferences/appsPage.js:49
 msgid "Running"
-msgstr ""
+msgstr "Laufend"
 
 #: preferences/appsPage.js:50
 msgid "Focus"
@@ -71,11 +71,11 @@ msgstr "Aktive Arbeitsfläche"
 
 #: preferences/appsPage.js:53
 msgid "Apps trigger Caffeine mode"
-msgstr "Anwendungen, die Koffein aktivieren"
+msgstr "Anwendungen aktivieren Koffein"
 
 #: preferences/appsPage.js:54
 msgid "Choose the way apps will trigger Caffeine"
-msgstr "Wähle, wie Anwendungen Koffein aktivieren"
+msgstr "Wählen Sie, wie Anwendungen Koffein aktivieren"
 
 #: preferences/appsPage.js:68
 msgid "Add"
@@ -87,37 +87,37 @@ msgstr "Anwendungen, die Koffein aktivieren"
 
 #: preferences/displayPage.js:33 preferences/displayPage.js:43
 msgid "Display"
-msgstr ""
+msgstr "Anzeige"
 
 #: preferences/displayPage.js:48
 msgid "Only when active"
 msgstr "Nur wenn aktiv"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:82
-#: preferences/generalPage.js:94
+#: preferences/displayPage.js:49 preferences/generalPage.js:83
+#: preferences/generalPage.js:95
 msgid "Always"
 msgstr "Immer"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:81
-#: preferences/generalPage.js:93
+#: preferences/displayPage.js:50 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
 msgid "Never"
 msgstr "Nie"
 
 #: preferences/displayPage.js:52
 msgid "Show status indicator in top panel"
-msgstr "Indikator-Icon in der oberen Leiste anzeigen"
+msgstr "Indikatorsymbol in der oberen Leiste anzeigen"
 
 #: preferences/displayPage.js:53
 msgid "Enable or disable the Caffeine icon in the top panel"
-msgstr "Aktiviert oder deaktiviert das Koffein Icon in der oberen Leiste"
+msgstr "Das Koffeinsymbol in der oberen Leiste aktivieren/deaktivieren"
 
 #: preferences/displayPage.js:64
 msgid "Show timer in top panel"
-msgstr "Koffein in der oberen Leiste anzeigen"
+msgstr "Timer in der oberen Leiste anzeigen"
 
 #: preferences/displayPage.js:65
 msgid "Enable or disable the timer in the top panel"
-msgstr "Aktiviert oder deaktiviert das Koffein Icon in der oberen Leiste"
+msgstr "Den Timer in der oberen Leiste aktivieren oder deaktivieren"
 
 #: preferences/displayPage.js:76
 msgid "Notifications"
@@ -125,7 +125,7 @@ msgstr "Benachrichtigungen"
 
 #: preferences/displayPage.js:77
 msgid "Enable notifications when Caffeine is enabled or disabled"
-msgstr "Benachrichtigungen anzeigen, wenn aktiviert/deaktiviert"
+msgstr "Benachrichtigungen anzeigen, wenn Koffein aktiviert/deaktiviert wird"
 
 #: preferences/displayPage.js:99
 msgid "Status indicator position"
@@ -135,79 +135,80 @@ msgstr "Position der Statusanzeige"
 msgid "The position relative of indicator icon to other items"
 msgstr "Die Position des Indikatorsymbols relativ zu anderen Elementen"
 
-#: preferences/generalPage.js:42
+#: preferences/generalPage.js:43
 msgid "General"
 msgstr "Allgemein"
 
-#: preferences/generalPage.js:52
+#: preferences/generalPage.js:53
 msgid "Behavior"
 msgstr "Verhalten"
 
-#: preferences/generalPage.js:61
-msgid "Enable for fullscreen apps"
-msgstr "Aktiviere für Vollbild Anwendungen"
-
 #: preferences/generalPage.js:62
-msgid "Automatically enable when an app enters fullscreen mode"
-msgstr "Automatisch aktivieren wenn Anwendung in den Vollbildmodus wechselt"
+msgid "Enable for fullscreen apps"
+msgstr "Für Anwendungen im Vollbildmodus aktivieren"
 
-#: preferences/generalPage.js:73
-msgid "Remember state"
-msgstr "Zustand wiederherstellen"
+#: preferences/generalPage.js:63
+msgid "Automatically enable when an app enters fullscreen mode"
+msgstr ""
+"Automatisch aktivieren,wenn eine Anwendung in den Vollbildmodus wechselt"
 
 #: preferences/generalPage.js:74
+msgid "Remember state"
+msgstr "Zustand merken"
+
+#: preferences/generalPage.js:75
 msgid "Remember the last state across sessions and reboots"
-msgstr "Nach einem Neustart den Zustand wiederherstellen"
+msgstr "Den letzten Zustand über Sitzungen und Neustarts merken"
 
-#: preferences/generalPage.js:83 preferences/generalPage.js:95
+#: preferences/generalPage.js:84 preferences/generalPage.js:96
 msgid "For apps on list"
-msgstr "Für Apps auf Liste"
-
-#: preferences/generalPage.js:85
-msgid "Pause and resume Night Light"
-msgstr "Nachtmodus unterbrechen"
+msgstr "Für Anwendungen auf der Liste"
 
 #: preferences/generalPage.js:86
-msgid "Toggles the night light together with Caffeine's state"
-msgstr "Unterbricht den Nachtmodus wenn Koffein aktiviert wird"
+msgid "Pause and resume Night Light"
+msgstr "Nachtmodus pausieren und fortsetzen"
 
-#: preferences/generalPage.js:97
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
-msgid "Allow screen blank"
-msgstr "Erlaube es, den Bildschirm auszuschalten"
+#: preferences/generalPage.js:87
+msgid "Toggles the night light together with Caffeine's state"
+msgstr "Schaltet den Nachtmodus zusammen mit Koffein um"
 
 #: preferences/generalPage.js:98
-msgid "Allow turning off screen when Caffeine is enabled"
-msgstr "Ausschalten des Bildschirms, wenn Koffein an ist, erlauben"
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+msgid "Allow screen blank"
+msgstr "Leeren Bildschirm erlauben"
 
-#: preferences/generalPage.js:113
+#: preferences/generalPage.js:99
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr "Ausschalten des Bildschirms erlauben, wenn Koffein aktiviert ist"
+
+#: preferences/generalPage.js:114
 msgid "Timer"
 msgstr "Timer"
 
-#: preferences/generalPage.js:118
+#: preferences/generalPage.js:119
 msgid "Durations"
 msgstr "Dauer"
 
-#: preferences/generalPage.js:162
+#: preferences/generalPage.js:163
 msgid "Shortcut"
-msgstr "Tastenkombination"
-
-#: preferences/generalPage.js:170
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
-msgid "Toggle shortcut"
-msgstr ""
+msgstr "Tastenkürzel"
 
 #: preferences/generalPage.js:171
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+msgid "Toggle shortcut"
+msgstr "Tastenkürzel zur (De-)Aktivierung"
+
+#: preferences/generalPage.js:172
 msgid "Use Backspace to clear"
-msgstr "Nutze die Leertaste zum löschen"
+msgstr "Verwenden Sie die Leertaste zum Löschen"
 
-#: preferences/generalPage.js:212
+#: preferences/generalPage.js:213
 msgid "Set to "
-msgstr "Einstellen auf"
+msgstr "Einstellen auf "
 
-#: preferences/generalPage.js:259 preferences/generalPage.js:291
+#: preferences/generalPage.js:260 preferences/generalPage.js:292
 msgid "New accelerator…"
-msgstr "Neuer Beschleuniger…"
+msgstr "Neues Tastenkürzel …"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Application list"
@@ -217,31 +218,30 @@ msgstr "Anwendungsliste"
 msgid ""
 "A list of strings, each containing an application id (desktop file name)"
 msgstr ""
-"Eine Liste aus Zeichenfolgen, die jeweils eine Anwendungs-ID enthält "
+"Eine Liste aus Zeichenketten, die jeweils eine Anwendungs-ID enthalten "
 "(Desktop-Dateiname)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
-#, fuzzy
 msgid "Store caffeine toggle state"
-msgstr "Speichert die benutzerdefinierten Zustand"
+msgstr "Aktivierungszustand von Koffein speichern"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
-msgstr "Speichert die benutzerdefinierten Zustand"
+msgstr "Den Koffein-Status für den Benutzer speichern"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Specify time (minutes) for the timer countdown"
-msgstr "Zeit (Minuten) für den Countdown des Timers angeben"
+msgstr "Geben Sie die Zeit (Minuten) für den Timer-Countdown an"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify index of duration range for the timer"
-msgstr "Index des Zeitraums für den Timer angeben"
+msgstr "Geben Sie den Index des Zeitraums für den Timer an"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Restore caffeine state"
-msgstr "Koffein Zustand wiederherstellen"
+msgstr "Koffein-Status wiederherstellen"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Show indicator"
@@ -253,7 +253,7 @@ msgstr "Koffein-Indikator in der oberen Leiste anzeigen"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Show notifications"
-msgstr "Benachrichtigungen aktivieren"
+msgstr "Benachrichtigungen anzeigen"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show notifications when enabled/disabled"
@@ -278,23 +278,23 @@ msgstr "Nachtlicht-Steuerungsmodus"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Set the way Caffeine interacts with the Night light setting."
-msgstr "Lege fest, wie Caffein mit dem Nachtmodus umgeht."
+msgstr "Legen Sie fest, wie Koffein mit dem Nachtmodus umgeht."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Allow turning off screen when Caffeine is enabled."
-msgstr "Ausschalten des Bildschirms, wenn Koffein an ist, erlauben"
+msgstr "Ausschalten des Bildschirms erlauben, wenn Koffein aktiviert ist."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Trigger App control mode"
-msgstr ""
+msgstr "Anwendungskontrollmodus aktivieren"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the trigger method for apps."
-msgstr ""
+msgstr "Setzen Sie die Aktivierungsmethode für Anwendungen."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Shortcut to toggle Caffeine."
-msgstr "Tastenkombination um Koffein zu öffnen."
+msgstr "Tastenkürzel, um Koffein umzuschalten."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Default width for the preferences window"
@@ -306,14 +306,14 @@ msgstr "Standardhöhe für das Einstellungsfenster"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
 msgid "Visible position offset of status icon in indicator menu"
-msgstr ""
+msgstr "Sichtbarer Versatz des Statussymbols im Indikatormenü"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
-msgstr ""
+msgstr "Tatsächlicher Versatz des Statussymbols im Indikatormenü"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
 msgid "Last item index in indicator menu"
-msgstr ""
+msgstr "Index des letzten Elements im Indikatormenü"
