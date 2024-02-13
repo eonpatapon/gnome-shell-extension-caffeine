@@ -271,14 +271,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._appAddWindowSignalId = 0;
         this._appRemoveWindowSignalId = 0;
 
-        // ("screen" in global) is false on 3.28, although global.screen exists
-        if (typeof global.screen !== 'undefined') {
-            this._screen = global.screen;
-            this._display = this._screen.get_display();
-        } else {
-            this._screen = global.display;
-            this._display = this._screen;
-        }
+        this._screen = global.display;
+        this._display = this._screen;
 
         // Add indicator label for the timer
         this._timerLabel = new St.Label({
