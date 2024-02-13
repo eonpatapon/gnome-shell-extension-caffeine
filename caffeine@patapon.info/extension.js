@@ -271,9 +271,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._appAddWindowSignalId = 0;
         this._appRemoveWindowSignalId = 0;
 
-        this._screen = global.display;
-        this._display = this._screen;
-
         // Add indicator label for the timer
         this._timerLabel = new St.Label({
             y_expand: true,
@@ -323,7 +320,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // Enable caffeine when fullscreen app is running
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
-            this._inFullscreenId = this._screen.connect('in-fullscreen-changed', this.toggleFullscreen.bind(this));
+            this._inFullscreenId = global.display.connect('in-fullscreen-changed', this.toggleFullscreen.bind(this));
             this.toggleFullscreen();
         }
 
@@ -384,10 +381,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     get inFullscreen() {
-        let nbMonitors = this._screen.get_n_monitors();
+        let nbMonitors = global.display.get_n_monitors();
         let inFullscreen = false;
         for (let i = 0; i < nbMonitors; i++) {
-            if (this._screen.get_monitor_in_fullscreen(i)) {
+            if (global.display.get_monitor_in_fullscreen(i)) {
                 inFullscreen = true;
                 break;
             }
@@ -1019,7 +1016,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // Disconnect from signals
         if (this._settings.get_boolean(FULLSCREEN_KEY)) {
-            this._screen.disconnect(this._inFullscreenId);
+            global.display.disconnect(this._inFullscreenId);
         }
         if (this._inhibitorAddedId) {
             this._sessionManager.disconnectSignal(this._inhibitorAddedId);
@@ -1028,10 +1025,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._inhibitorRemovedId) {
             this._sessionManager.disconnectSignal(this._inhibitorRemovedId);
             this._inhibitorRemovedId = 0;
-        }
-        if (this._windowCreatedId) {
-            this._display.disconnect(this._windowCreatedId);
-            this._windowCreatedId = 0;
         }
         if (this._windowDestroyedId) {
             global.window_manager.disconnect(this._windowDestroyedId);
