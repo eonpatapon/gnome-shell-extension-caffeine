@@ -29,10 +29,12 @@ import GLib from 'gi://GLib';
 
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
 
+import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import * as QuickSettings from 'resource:///org/gnome/shell/ui/quickSettings.js';
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
+const ShellVersion = parseFloat(Config.PACKAGE_VERSION);
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
@@ -382,7 +384,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // Add indicator and toggle
         QuickSettingsMenu.addExternalIndicator(this);
-        QuickSettingsMenu._indicators.remove_actor(this);
+        if (ShellVersion >= 46) {
+          QuickSettingsMenu._indicators.remove_child(this);
+        } else {
+          QuickSettingsMenu._indicators.remove_actor(this);
+        }
         QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
 
         this._updateLastIndicatorPosition();
@@ -525,7 +531,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this.lastIndicatorPosition = newPosition;
 
             // Update indicator index
-            QuickSettingsMenu._indicators.remove_actor(this);
+            if (ShellVersion >= 46) {
+              QuickSettingsMenu._indicators.remove_child(this);
+            } else {
+              QuickSettingsMenu._indicators.remove_actor(this);
+            }
             QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
             this._settings.set_int(INDICATOR_INDEX, this.indicatorIndex);
         }
