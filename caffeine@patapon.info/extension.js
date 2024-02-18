@@ -372,6 +372,18 @@ class Caffeine extends QuickSettings.SystemIndicator {
             },
             this);
 
+        if (ShellVersion >= 46) {
+            QuickSettingsMenu._indicators.connectObject(
+                'child-added', () => this._updateMaxPosition(),
+                'child-removed', () => this._updateMaxPosition(),
+                this);
+        } else {
+            QuickSettingsMenu._indicators.connectObject(
+                'actor-added', () => this._updateMaxPosition(),
+                'actor-removed', () => this._updateMaxPosition(),
+                this);
+        }
+
         // Change user state on icon scroll event
         this._indicator.reactive = true;
         this._indicator.connectObject('scroll-event',
@@ -390,8 +402,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
             QuickSettingsMenu._indicators.remove_actor(this);
         }
         QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
-
-        this._updateLastIndicatorPosition();
     }
 
     get inFullscreen() {
@@ -452,6 +462,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 this._startTimer();
             }
         }
+        this._updateMaxPosition();
     }
 
     addInhibit(appId) {
@@ -481,21 +492,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    _updateLastIndicatorPosition() {
-        let pos = -1;
-        let nbItems = QuickSettingsMenu._indicators.get_n_children();
-        let targetIndicator = null;
-
-        // Count only the visible item in indicator bar
-        for (let i = 0; i < nbItems; i++) {
-            targetIndicator = QuickSettingsMenu._indicators.get_child_at_index(i);
-            if (targetIndicator.is_visible()) {
-                pos += 1;
-            }
-        }
-        this._settings.set_int(INDICATOR_POS_MAX, pos);
-    }
-
     _incrementIndicatorPosIndex() {
         if (this.lastIndicatorPosition < this.indicatorPosition) {
             this.indicatorIndex += 1;
@@ -504,8 +500,21 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
+    _updateMaxPosition() {
+        let pos = -1;
+        let indicators = QuickSettingsMenu._indicators.get_children();
+
+        // Count visible items in the status area
+        indicators.forEach((indicator) => {
+            if (indicator.is_visible()) {
+                pos += 1;
+            }
+        });
+
+        this._settings.set_int(INDICATOR_POS_MAX, pos);
+    }
+
     _updateIndicatorPosition() {
-        this._updateLastIndicatorPosition();
         const newPosition = this._settings.get_int(INDICATOR_POSITION);
 
         if (this.indicatorPosition !== newPosition) {
@@ -539,6 +548,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
             this._settings.set_int(INDICATOR_INDEX, this.indicatorIndex);
         }
+        this._updateMaxPosition();
     }
 
     _showIndicatorLabel() {
