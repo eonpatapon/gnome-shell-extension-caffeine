@@ -385,9 +385,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Add indicator and toggle
         QuickSettingsMenu.addExternalIndicator(this);
         if (ShellVersion >= 46) {
-          QuickSettingsMenu._indicators.remove_child(this);
+            QuickSettingsMenu._indicators.remove_child(this);
         } else {
-          QuickSettingsMenu._indicators.remove_actor(this);
+            QuickSettingsMenu._indicators.remove_actor(this);
         }
         QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
 
@@ -532,9 +532,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
             // Update indicator index
             if (ShellVersion >= 46) {
-              QuickSettingsMenu._indicators.remove_child(this);
+                QuickSettingsMenu._indicators.remove_child(this);
             } else {
-              QuickSettingsMenu._indicators.remove_actor(this);
+                QuickSettingsMenu._indicators.remove_actor(this);
             }
             QuickSettingsMenu._indicators.insert_child_at_index(this, this.indicatorIndex);
             this._settings.set_int(INDICATOR_INDEX, this.indicatorIndex);
