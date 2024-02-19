@@ -255,7 +255,6 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
         this._settings = settings;
         this._description = sublabel;
 
-        this.add_suffix(this.shortcutBox);
         this.shortLabel = new Gtk.ShortcutLabel({
             disabled_text: _('New accelerator…'),
             valign: Gtk.Align.CENTER,
