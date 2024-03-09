@@ -40,7 +40,6 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const SHOW_TIMER_KEY = 'show-timer';
-const DURATION_TIMER_INDEX = 'duration-timer';
 const DURATION_TIMER_SHORT = 'duration-timer-short';
 const DURATION_TIMER_MEDIUM = 'duration-timer-medium';
 const DURATION_TIMER_LONG = 'duration-timer-long';
@@ -124,13 +123,6 @@ const AppsTrigger = {
     ON_ACTIVE_WORKSPACE: 2
 };
 
-const TIMERS = [
-    [5, 10, 15, 20, 30, 'caffeine-short-timer-symbolic'],
-    [10, 20, 30, 40, 50, 'caffeine-medium-timer-symbolic'],
-    [30, 45, 60, 75, 80, 'caffeine-long-timer-symbolic'],
-    [0, 0, 0, 0, 0, 'caffeine-infinite-timer-symbolic']
-];
-
 const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _init(settings, path) {
@@ -192,7 +184,6 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _syncTimers(resetDefault) {
         this._itemsSection.removeAll();
         this._timerItems.clear();
-        const durationIndex = this._settings.get_int(DURATION_TIMER_INDEX);
 
         const shortTimer = this._settings.get_int(DURATION_TIMER_SHORT);
         const mediumTimer = this._settings.get_int(DURATION_TIMER_MEDIUM);
@@ -628,7 +619,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
         else {
             this._updateLabelTimer(min + ':' + sec);
-        }}
+        }
     }
 
     _removeTimer() {

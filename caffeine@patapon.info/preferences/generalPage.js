@@ -90,10 +90,6 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         behaviorGroup.add(allowBlankScreenRow);
         this.add(behaviorGroup);
 
-        // Add elements
-        timerGroup.add(this.timerOptionRow);
-        this.add(timerGroup);
-
         // Shortcut group
         // --------------
         let deleteShortcutButton = new Gtk.Button({
