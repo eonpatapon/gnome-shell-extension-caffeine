@@ -619,7 +619,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
         else {
             this._updateLabelTimer(min + ':' + sec);
-        }}
+        }
     }
 
     _removeTimer() {
