@@ -606,7 +606,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    _printTimer(second) {
+    _printTimer(seconds) {
         const hours = Math.floor(seconds / 3600);
         const min = Math.floor((seconds % 3600) / 60);
         const sec = Math.floor(seconds % 60).toLocaleString('en-US', {
