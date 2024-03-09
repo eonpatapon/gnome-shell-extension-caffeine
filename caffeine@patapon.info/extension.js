@@ -584,7 +584,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerEnable = true;
 
         // Get duration
-        let timerDelay = this._settings.get_int(TIMER_KEY) * 60;
+        let timerDelay = this._settings.get_int(TIMER_KEY);
 
         // Execute Timer only if duration isn't set on infinite time
         if (timerDelay !== 0) {
@@ -606,15 +606,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    _printTimer(second) {
-        const hours = Math.floor(seconds / 3600);
-        const min = Math.floor((seconds % 3600) / 60);
-        const sec = Math.floor(seconds % 60).toLocaleString('en-US', {
-            minimumIntegerDigits: 2,
-            useGrouping: false
-        });
+    _printTimer(seconds) {
+        const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
+        const min = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+        const sec = Math.floor(seconds % 60).toString().padStart(2, '0')
         // Print Timer in system Indicator and Toggle menu subLabel
-        if (hours !== 0) {
+        if (hours !== '00') {
             this._updateLabelTimer(hours + ':' + min + ':' + sec);
         }
         else {
@@ -823,8 +820,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             const hours = Math.floor(timerDuration / 3600);
             const min = Math.floor((timerDuration % 3600) / 60);
             let timeLabel = hours !== 0
-                ? parseInt(hours) + _(' hours ') + parseInt(min) + _(' minutes')
-                : parseInt(min) + _(' minutes');
+                ? parseInt(hours) + _(' hours ')
+                : '';
+            timeLabel += min !== 0
+                ? parseInt(min) + _(' minutes')
+                : '';
             this._caffeineToggle.subtitle = timerDuration !== 0
                 ? timeLabel
                 : null;
