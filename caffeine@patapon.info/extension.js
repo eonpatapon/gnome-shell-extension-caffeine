@@ -584,7 +584,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerEnable = true;
 
         // Get duration
-        let timerDelay = this._settings.get_int(TIMER_KEY) * 60;
+        let timerDelay = this._settings.get_int(TIMER_KEY);
 
         // Execute Timer only if duration isn't set on infinite time
         if (timerDelay !== 0) {
