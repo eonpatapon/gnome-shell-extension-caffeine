@@ -173,7 +173,13 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             () => this._iconName(),
             `changed::${TIMER_KEY}`,
             () => this._sync(),
-            `changed::${DURATION_TIMER_INDEX}`,
+            `changed::${DURATION_TIMER_SHORT}`,
+            () => this._syncTimers(true),
+            this);
+            `changed::${DURATION_TIMER_MEDIUM}`,
+            () => this._syncTimers(true),
+            this);
+            `changed::${DURATION_TIMER_LONG}`,
             () => this._syncTimers(true),
             this);
         this.connect('destroy', () => {
@@ -188,25 +194,42 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         this._timerItems.clear();
         const durationIndex = this._settings.get_int(DURATION_TIMER_INDEX);
 
-        for (const timer of TIMERS) {
+        const shortTimer = this._settings.get_int(DURATION_TIMER_SHORT);
+        const mediumTimer = this._settings.get_int(DURATION_TIMER_MEDIUM);
+        const longTimer = this._settings.get_int(DURATION_TIMER_LONG);
+        
+        const timerIcons = [
+            'caffeine-short-timer-symbolic',
+            'caffeine-medium-timer-symbolic',
+            'caffeine-long-timer-symbolic',
+            'caffeine-infinite-timer-symbolic'
+        ];
+
+        // Create menu timer
+        for (const [index, timer] of [shortTimer, mediumTimer, longTimer, 0].entries()) {
             let label = null;
-            if (timer[0] === 0) {
+            if (timer === 0) {
                 label = _('Infinite');
             } else {
-                label = parseInt(timer[durationIndex]) + _(' minutes');
+                let hours = Math.floor(timer / 3600);
+                let minutes = Math.floor((timer % 3600) / 60);
+                let seconds = Math.floor(timer % 60);
+                if (parseInt(hours) !== 0) {
+                    label = hours + _(' hours ');
+                }
+                if (parseInt(minutes) !== 0) {
+                    label = label + minutes + _(' minutes');
+                }
             }
             if (!label) {
                 continue;
             }
-
-            const icon = Gio.icon_new_for_string(`${this._path}/icons/${timer[5]}.svg`);
+            const icon = Gio.icon_new_for_string(`${this._path}/icons/${timerIcons[index]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
-
-            item.connectObject('activate', () => this._checkTimer(timer[durationIndex]), this);
-            this._timerItems.set(timer[durationIndex], item);
+            item.connectObject('activate', () => this._checkTimer(timer), this);
+            this._timerItems.set(timer, item);
             this._itemsSection.addMenuItem(item);
         }
-        this.menuEnabled = TIMERS.length > 2;
 
         // Select active duration
         if (resetDefault && this._settings.get_int(TIMER_KEY) !== 0) {
@@ -593,13 +616,19 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _printTimer(second) {
-        const min = Math.floor(second / 60);
-        const minS = Math.floor(second % 60).toLocaleString('en-US', {
+        const hours = Math.floor(seconds / 3600);
+        const min = Math.floor((seconds % 3600) / 60);
+        const sec = Math.floor(seconds % 60).toLocaleString('en-US', {
             minimumIntegerDigits: 2,
             useGrouping: false
         });
         // Print Timer in system Indicator and Toggle menu subLabel
-        this._updateLabelTimer(min + ':' + minS);
+        if (hours !== 0) {
+            this._updateLabelTimer(hours + ':' + min + ':' + sec);
+        }
+        else {
+            this._updateLabelTimer(min + ':' + sec);
+        }}
     }
 
     _removeTimer() {
@@ -800,8 +829,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _updateTimerSubtitle() {
         if (!this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             const timerDuration = this._settings.get_int(TIMER_KEY);
+            const hours = Math.floor(timerDuration / 3600);
+            const min = Math.floor((timerDuration % 3600) / 60);
+            let timeLabel = hours !== 0
+                ? parseInt(hours) + _(' hours ') + parseInt(min) + _(' minutes')
+                : parseInt(min) + _(' minutes');
             this._caffeineToggle.subtitle = timerDuration !== 0
-                ? parseInt(timerDuration) + _(' minutes')
+                ? timeLabel
                 : null;
         }
     }
