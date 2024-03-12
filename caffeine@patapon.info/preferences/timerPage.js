@@ -247,13 +247,13 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
     _activeCustomvalue() {
         if(this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)) {
-            this.sliderTimer.set_sensitive(false);
+            this.timerOptionRow.set_sensitive(false);
             this.shortTimerSelector.set_sensitive(true);
             this.mediumTimerSelector.set_sensitive(true);
             this.longTimerSelector.set_sensitive(true);
         }
         else {
-            this.sliderTimer.set_sensitive(true);
+            this.timerOptionRow.set_sensitive(true);
             this.shortTimerSelector.set_sensitive(false);
             this.mediumTimerSelector.set_sensitive(false);
             this.longTimerSelector.set_sensitive(false);
