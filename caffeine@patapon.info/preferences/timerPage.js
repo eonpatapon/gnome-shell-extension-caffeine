@@ -262,6 +262,19 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
     }
 
     timerSpinRow(name, step, value, minValue, maxValue) {
+        /*
+        * Tweak Adw.SpinRow
+        *
+        *     For some reasons, the output of the Gtk.Text from SpinRow can't be 
+        * modified using 'set_text()' without a bug with single increment. 
+        * Similar problem to this one: 
+        * https://stackoverflow.com/questions/61753800/formatting-gtk-spinbuttons-output-does-not-work-for-single-mouse-clicks
+        *
+        *     The workaround is to create a new separate Gtk.Entry to display HH:MM:SS
+        * and hide the original Gtk.Text.
+        */
+
+        // Create the SpinRow
         let spin_row = new Adw.SpinRow({
             title: name,
             climb_rate: 0,
@@ -275,29 +288,17 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             snap_to_ticks: true
         });
 
-        // Create new editable label
-        let time_text = new Gtk.Text({
+        // Create new Entry
+        let time_entry = new Gtk.Entry({
             editable: true,
             hexpand: true,
             halign: Gtk.Align.END,
             max_width_chars: 8,
-            buffer: new Gtk.EntryBuffer({
-                max_length: 8,
-                text: '00:00:00'
-            }),
+            max_length: 8,
+            margin_top: 8,
+            margin_bottom: 8,
+            has_frame: false
         });
-
-        /*
-        * Tweak Adw.SpinRow
-        *
-        *     For some reasons, the output of the Gtk.Text from SpinRow can't be 
-        * modified using 'set_text()' without a bug with single increment. 
-        * Similar problem to this one: 
-        * https://stackoverflow.com/questions/61753800/formatting-gtk-spinbuttons-output-does-not-work-for-single-mouse-clicks
-        *
-        *     The workaround is to create a new separate Gtk.Text to display HH:MM:SS
-        * and hide the original.
-        */
 
         // Get the Gtk.SpinButton and Gtk.Text
         let child_widget = spin_row.get_last_child();
@@ -312,10 +313,8 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         spin_row.remove(spin_button_widget);
         spin_button_widget.set_property('halign',Gtk.Align.END);
         spin_button_widget.set_property('hexpand',false);
-        spin_row.add_suffix(time_text);
+        spin_row.add_suffix(time_entry);
         spin_row.add_suffix(spin_button_widget);
-        
-        let buffer = time_text.get_buffer();
 
         // Display duration value as HH:MM:SS
         spin_row.connect('output', () => {
@@ -324,18 +323,20 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             let minutes = Math.floor((value % 3600) / 60);
             let seconds = Math.floor(value % 60);
             let newText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            if (buffer.get_text() !== newText){
-                buffer.set_text(newText,8);
+            if (spin_row.get_text() !== newText){
+                time_entry.set_text(newText);
             }
         });
 
         // Update value from the new text entry
-        buffer.connect('inserted-text', () => {
-            let text = time_text.get_buffer().get_text();
-            let [hh, mm, ss] = text.split(':').map(Number);
-            let value = hh * 3600 + mm * 60 + ss;
-            if(spin_row.get_value() !== value){
-                spin_row.set_value(value);
+        time_entry.connect('changed', () => {
+            let text = time_entry.get_text();
+            if ((text !== '') && (text !== null)){
+                let [hh, mm, ss] = text.split(':').map(Number);
+                let value = parseInt(hh * 3600 + mm * 60 + ss);
+                if((spin_row.get_value() !== value) && value !== null){
+                    spin_row.set_value(value);
+                }
             }
         });
         return spin_row;
