@@ -90,8 +90,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         // Custom value group
         // --------------
         this.resetCustomTimerButton = new Gtk.Button({
-            //icon_name: 'view-refresh-symbolic',
-            icon_name: 'edit-undo-symbolic',
+            icon_name: 'view-refresh-symbolic',
             valign: Gtk.Align.CENTER,
             css_classes: ['error'],
             hexpand: false,
