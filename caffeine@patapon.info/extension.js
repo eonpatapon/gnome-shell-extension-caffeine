@@ -104,6 +104,12 @@ const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSess
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
+const timerIcons = [
+    'caffeine-short-timer-symbolic',
+    'caffeine-medium-timer-symbolic',
+    'caffeine-long-timer-symbolic',
+    'caffeine-infinite-timer-symbolic'
+];
 
 const ControlContext = {
     NEVER: 0,
@@ -188,13 +194,6 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         const shortTimer = this._settings.get_int(DURATION_TIMER_SHORT);
         const mediumTimer = this._settings.get_int(DURATION_TIMER_MEDIUM);
         const longTimer = this._settings.get_int(DURATION_TIMER_LONG);
-        
-        const timerIcons = [
-            'caffeine-short-timer-symbolic',
-            'caffeine-medium-timer-symbolic',
-            'caffeine-long-timer-symbolic',
-            'caffeine-infinite-timer-symbolic'
-        ];
 
         // Create menu timer
         for (const [index, timer] of [shortTimer, mediumTimer, longTimer, 0].entries()) {
