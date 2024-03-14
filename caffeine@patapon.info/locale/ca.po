@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-13 23:29+0100\n"
+"POT-Creation-Date: 2024-03-14 17:56+0100\n"
 "PO-Revision-Date: 2023-09-03 23:38+0200\n"
 "Last-Translator: Ícar N. S. <icar.nin@protonmail.com>\n"
 "Language-Team: Catalan\n"
@@ -18,39 +18,39 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:128
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Cafeïna"
 
-#: extension.js:147 extension.js:615
+#: extension.js:153 extension.js:614
 msgid "Caffeine Timer"
 msgstr "Temporitzador del Cafeïna"
 
-#: extension.js:202
+#: extension.js:201
 msgid "Infinite"
 msgstr "Infinit"
 
-#: extension.js:208 extension.js:797
+#: extension.js:207 extension.js:796
 msgid " hours "
 msgstr " hores "
 
-#: extension.js:211 extension.js:800 preferences/timerPage.js:223
+#: extension.js:210 extension.js:799 preferences/timerPage.js:223
 msgid " minutes"
 msgstr " minuts"
 
-#: extension.js:762
+#: extension.js:761
 msgid "Caffeine enabled"
 msgstr "Cafeïna activada"
 
-#: extension.js:764
+#: extension.js:763
 msgid "Night Light paused"
 msgstr "Llum nocturna pausada"
 
-#: extension.js:769
+#: extension.js:768
 msgid "Caffeine disabled"
 msgstr "Cafeïna desactivada"
 
-#: extension.js:771
+#: extension.js:770
 msgid "Night Light resumed"
 msgstr "Llum nocturna reactivada"
 
@@ -280,6 +280,7 @@ msgstr "Utilitzeu valors de durada personalitzats per al temporitzador"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+msgid "Specify time (seconds) for the timer countdown"
 msgstr "Especifiqueu el temps (segons) per al compte enrere del temporitzador"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-13 23:29+0100\n"
+"POT-Creation-Date: 2024-03-14 17:38+0100\n"
 "PO-Revision-Date: 2023-09-11 21:41+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -17,39 +17,39 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: extension.js:128
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Кофеин"
 
-#: extension.js:147 extension.js:615
+#: extension.js:153 extension.js:614
 msgid "Caffeine Timer"
 msgstr "Таймер Кофеина"
 
-#: extension.js:202
+#: extension.js:201
 msgid "Infinite"
 msgstr "Бесконечность"
 
-#: extension.js:208 extension.js:797
+#: extension.js:207 extension.js:796
 msgid " hours "
 msgstr " часы "
 
-#: extension.js:211 extension.js:800 preferences/timerPage.js:223
+#: extension.js:210 extension.js:799 preferences/timerPage.js:223
 msgid " minutes"
 msgstr " минут"
 
-#: extension.js:762
+#: extension.js:761
 msgid "Caffeine enabled"
 msgstr "Кофеин включен"
 
-#: extension.js:764
+#: extension.js:763
 msgid "Night Light paused"
 msgstr "Ночной свет приостановлен"
 
-#: extension.js:769
+#: extension.js:768
 msgid "Caffeine disabled"
 msgstr "Кофеин отключен"
 
-#: extension.js:771
+#: extension.js:770
 msgid "Night Light resumed"
 msgstr "Ночной свет возобновлен"
 
@@ -254,7 +254,8 @@ msgstr "Таймер короткой длительности"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid "Specify the short duration for the timer countdown (seconds)"
-msgstr "Укажите короткую продолжительность обратного отсчета для таймера (секунды)"
+msgstr ""
+"Укажите короткую продолжительность обратного отсчета для таймера (секунды)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "Medium duration timer"
@@ -262,7 +263,8 @@ msgstr "Таймер средней продолжительности"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify the medium duration for the timer countdown (seconds)"
-msgstr "Укажите среднюю продолжительность обратного отсчета для таймера (секунды)"
+msgstr ""
+"Укажите среднюю продолжительность обратного отсчета для таймера (секунды)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
 msgid "Long duration timer"
@@ -270,7 +272,8 @@ msgstr "Таймер длительной продолжительности"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 msgid "Specify the long duration for the timer countdown (seconds)"
-msgstr "Укажите длительную продолжительность обратного отсчета для таймера (секунды)"
+msgstr ""
+"Укажите длительную продолжительность обратного отсчета для таймера (секунды)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Use custom duration values for the timer"

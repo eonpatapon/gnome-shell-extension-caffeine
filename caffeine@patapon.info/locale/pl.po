@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-13 23:29+0100\n"
+"POT-Creation-Date: 2024-03-14 17:38+0100\n"
 "PO-Revision-Date: 2016-10-02 17:24+0100\n"
 "Last-Translator: Piotr Wittchen <piotr@wittchen.biz.pl>\n"
 "Language-Team: Polish\n"
@@ -17,40 +17,40 @@ msgstr ""
 "X-Generator: Vim\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:128
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Kofeina"
 
-#: extension.js:147 extension.js:615
+#: extension.js:153 extension.js:614
 msgid "Caffeine Timer"
 msgstr "Kofeina Regulator czasowy"
 
-#: extension.js:202
+#: extension.js:201
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:208 extension.js:797
+#: extension.js:207 extension.js:796
 msgid " hours "
 msgstr " godziny "
 
-#: extension.js:211 extension.js:800 preferences/timerPage.js:223
+#: extension.js:210 extension.js:799 preferences/timerPage.js:223
 msgid " minutes"
 msgstr ""
 
-#: extension.js:762
+#: extension.js:761
 msgid "Caffeine enabled"
 msgstr "Kofeina włączone"
 
-#: extension.js:764
+#: extension.js:763
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:769
+#: extension.js:768
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Kofeina włączone"
 
-#: extension.js:771
+#: extension.js:770
 msgid "Night Light resumed"
 msgstr ""
 
