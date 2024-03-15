@@ -22,7 +22,6 @@
 import Adw from 'gi://Adw';
 import Gtk from 'gi://Gtk';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -48,7 +47,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         // Timer group
         // --------------
         let timerGroup = new Adw.PreferencesGroup({
-            title: _('Preset durations'),
+            title: _('Preset durations')
         });
 
         // Slider
@@ -64,7 +63,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             step_increment: 0.1,
             page_increment: 1,
             value: durationIndex
-        });        
+        });
 
         this.sliderTimer = new Gtk.Scale({
             valign: 'center',
@@ -108,7 +107,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             'Short timer',
             60,
             this._settings.get_int(this._settingsKey.DURATION_TIMER_SHORT),
-            60, 
+            60,
             maxValueSecond - 60*2
         );
         this.mediumTimerSelector = this.timerSpinRow(
@@ -119,7 +118,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             maxValueSecond - 60
         );
         this.longTimerSelector = this.timerSpinRow(
-            'Long timer', 
+            'Long timer',
             60,
             this._settings.get_int(this._settingsKey.DURATION_TIMER_LONG),
             60*3,
@@ -158,7 +157,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
         this.sliderTimer.connect('change-value',
             (widget) => this._updateTimerDuration(widget.get_value()));
-        this.resetCustomTimerButton.connect('clicked', (widget) => {
+        this.resetCustomTimerButton.connect('clicked', () => {
             this._updateCustomDurationFromIndex(this.sliderTimer.get_value());
         });
         this.shortTimerSelector.connect('notify::value', (widget) => {
@@ -167,7 +166,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             // Control hierarchy of custom duration
             const shortValue = this.shortTimerSelector.get_value();
             const mediumValue = this.mediumTimerSelector.get_value();
-            if(shortValue >= mediumValue){
+            if (shortValue >= mediumValue) {
                 this.mediumTimerSelector.set_value(shortValue + 60);
             }
         });
@@ -178,10 +177,10 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             const shortValue = this.shortTimerSelector.get_value();
             const mediumValue = this.mediumTimerSelector.get_value();
             const longValue = this.longTimerSelector.get_value();
-            if(mediumValue <= shortValue){
+            if (mediumValue <= shortValue) {
                 this.shortTimerSelector.set_value(mediumValue - 60);
             }
-            if(mediumValue >= longValue){
+            if (mediumValue >= longValue) {
                 this.longTimerSelector.set_value(mediumValue + 60);
             }
         });
@@ -191,7 +190,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             // Control hierarchy of custom duration
             const mediumValue = this.mediumTimerSelector.get_value();
             const longValue = this.longTimerSelector.get_value();
-            if(longValue <= mediumValue){
+            if (longValue <= mediumValue) {
                 this.mediumTimerSelector.set_value(longValue - 60);
             }
         });
@@ -202,14 +201,14 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         const mediumValue = this.mediumTimerSelector.get_value();
         const longValue = this.longTimerSelector.get_value();
         const durationIndex = this.sliderTimer.get_value();
-        let isCustomed = false; 
-        if (shortValue != parseInt(TIMERS_DURATION[durationIndex][0])*60) {
+        let isCustomed = false;
+        if (shortValue !== parseInt(TIMERS_DURATION[durationIndex][0]) * 60) {
             isCustomed = true;
         }
-        if (mediumValue != parseInt(TIMERS_DURATION[durationIndex][1])*60) {
+        if (mediumValue !== parseInt(TIMERS_DURATION[durationIndex][1]) * 60) {
             isCustomed = true;
         }
-        if (longValue != parseInt(TIMERS_DURATION[durationIndex][2])*60) {
+        if (longValue !== parseInt(TIMERS_DURATION[durationIndex][2]) * 60) {
             isCustomed = true;
         }
         return isCustomed;
@@ -217,41 +216,39 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
     _updateTimerDuration(value) {
         const durationIndex = this._settings.get_int(this._settingsKey.DURATION_TIMER_INDEX);
-        this.timerOptionRow.set_subtitle(_('Set to ') 
-            + TIMERS_DURATION[value][0] + ', '
-            + TIMERS_DURATION[value][1] + ', '
-            + TIMERS_DURATION[value][2] + _(' minutes'));
+        this.timerOptionRow.set_subtitle(_('Set to ') +
+            TIMERS_DURATION[value][0] + ', ' +
+            TIMERS_DURATION[value][1] + ', ' +
+            TIMERS_DURATION[value][2] + _(' minutes'));
         if (durationIndex !== value) {
             this._settings.set_int(this._settingsKey.DURATION_TIMER_INDEX, value);
         }
-        if(!this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)) {
+        if (!this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)) {
             this._updateCustomDurationFromIndex(value);
         }
     }
 
     _updateCustomDurationFromIndex(value) {
-        this.shortTimerSelector.set_value(TIMERS_DURATION[value][0]*60);
-        this.mediumTimerSelector.set_value(TIMERS_DURATION[value][1]*60);
-        this.longTimerSelector.set_value(TIMERS_DURATION[value][2]*60);
+        this.shortTimerSelector.set_value(TIMERS_DURATION[value][0] * 60);
+        this.mediumTimerSelector.set_value(TIMERS_DURATION[value][1] * 60);
+        this.longTimerSelector.set_value(TIMERS_DURATION[value][2] * 60);
     }
 
     _updateResetButtonState() {
         if (this._isCustomValueSet()) {
             this.resetCustomTimerButton.visible = true;
-        }
-        else {
+        } else {
             this.resetCustomTimerButton.visible = false;
         }
     }
 
     _activeCustomvalue() {
-        if(this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)) {
+        if (this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)) {
             this.timerOptionRow.set_sensitive(false);
             this.shortTimerSelector.set_sensitive(true);
             this.mediumTimerSelector.set_sensitive(true);
             this.longTimerSelector.set_sensitive(true);
-        }
-        else {
+        } else {
             this.timerOptionRow.set_sensitive(true);
             this.shortTimerSelector.set_sensitive(false);
             this.mediumTimerSelector.set_sensitive(false);
@@ -264,9 +261,9 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         /*
         * Tweak Adw.SpinRow
         *
-        *     For some reasons, the output of the Gtk.Text from SpinRow can't be 
-        * modified using 'set_text()' without a bug with single increment. 
-        * Similar problem to this one: 
+        *     For some reasons, the output of the Gtk.Text from SpinRow can't be
+        * modified using 'set_text()' without a bug with single increment.
+        * Similar problem to this one:
         * https://stackoverflow.com/questions/61753800/formatting-gtk-spinbuttons-output-does-not-work-for-single-mouse-clicks
         *
         *     The workaround is to create a new separate Gtk.Entry to display HH:MM:SS
@@ -274,7 +271,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         */
 
         // Create the SpinRow
-        let spin_row = new Adw.SpinRow({
+        let spinRow = new Adw.SpinRow({
             title: name,
             climb_rate: 0,
             adjustment: new Gtk.Adjustment({
@@ -288,7 +285,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
 
         // Create new Entry
-        let time_entry = new Gtk.Entry({
+        let timeEntry = new Gtk.Entry({
             editable: true,
             hexpand: true,
             halign: Gtk.Align.END,
@@ -300,44 +297,44 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
 
         // Get the Gtk.SpinButton and Gtk.Text
-        let child_widget = spin_row.get_last_child();
-        let box_widget = child_widget.get_last_child();
-        let spin_button_widget = box_widget.get_first_child();
-        let spin_button_text = spin_button_widget.get_first_child();
+        let childWidget = spinRow.get_last_child();
+        let boxWidget = childWidget.get_last_child();
+        let spinButtonWidget = boxWidget.get_first_child();
+        let spinButtonText = spinButtonWidget.get_first_child();
 
         // Hide the current text input
-        spin_button_text.visible = false;
+        spinButtonText.visible = false;
 
         // Add the new text input an re-order properly the widget component
-        spin_row.remove(spin_button_widget);
-        spin_button_widget.set_property('halign',Gtk.Align.END);
-        spin_button_widget.set_property('hexpand',false);
-        spin_row.add_suffix(time_entry);
-        spin_row.add_suffix(spin_button_widget);
+        spinRow.remove(spinButtonWidget);
+        spinButtonWidget.set_property('halign', Gtk.Align.END);
+        spinButtonWidget.set_property('hexpand', false);
+        spinRow.add_suffix(timeEntry);
+        spinRow.add_suffix(spinButtonWidget);
 
         // Display duration value as HH:MM:SS
-        spin_row.connect('output', () => {
-            let value = spin_row.get_value();
+        spinRow.connect('output', () => {
+            const value = spinRow.get_value();
             let hours = Math.floor(value / 3600);
             let minutes = Math.floor((value % 3600) / 60);
             let seconds = Math.floor(value % 60);
             let newText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            if (spin_row.get_text() !== newText){
-                time_entry.set_text(newText);
+            if (spinRow.get_text() !== newText) {
+                timeEntry.set_text(newText);
             }
         });
 
         // Update value from the new text entry
-        time_entry.connect('changed', () => {
-            let text = time_entry.get_text();
-            if ((text !== '') && (text !== null)){
+        timeEntry.connect('changed', () => {
+            let text = timeEntry.get_text();
+            if ((text !== '') && (text !== null)) {
                 let [hh, mm, ss] = text.split(':').map(Number);
                 let value = parseInt(hh * 3600 + mm * 60 + ss);
-                if((spin_row.get_value() !== value) && value !== null){
-                    spin_row.set_value(value);
+                if ((spinRow.get_value() !== value) && value !== null) {
+                    spinRow.set_value(value);
                 }
             }
         });
-        return spin_row;
+        return spinRow;
     }
 });

@@ -203,7 +203,6 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             } else {
                 let hours = Math.floor(timer / 3600);
                 let minutes = Math.floor((timer % 3600) / 60);
-                let seconds = Math.floor(timer % 60);
                 if (parseInt(hours) !== 0) {
                     label = hours + _(' hours ');
                 }
@@ -608,12 +607,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _printTimer(seconds) {
         const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
         const min = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-        const sec = Math.floor(seconds % 60).toString().padStart(2, '0')
+        const sec = Math.floor(seconds % 60).toString().padStart(2, '0');
         // Print Timer in system Indicator and Toggle menu subLabel
         if (hours !== '00') {
             this._updateLabelTimer(hours + ':' + min + ':' + sec);
-        }
-        else {
+        } else {
             this._updateLabelTimer(min + ':' + sec);
         }
     }
