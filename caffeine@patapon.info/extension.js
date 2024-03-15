@@ -203,7 +203,6 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             } else {
                 let hours = Math.floor(timer / 3600);
                 let minutes = Math.floor((timer % 3600) / 60);
-                let seconds = Math.floor(timer % 60);
                 if (parseInt(hours) !== 0) {
                     label = hours + _(' hours ');
                 }

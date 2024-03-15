@@ -22,7 +22,6 @@
 import Adw from 'gi://Adw';
 import Gtk from 'gi://Gtk';
 import GObject from 'gi://GObject';
-import Gio from 'gi://Gio';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -158,7 +157,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
         this.sliderTimer.connect('change-value',
             (widget) => this._updateTimerDuration(widget.get_value()));
-        this.resetCustomTimerButton.connect('clicked', (widget) => {
+        this.resetCustomTimerButton.connect('clicked', () => {
             this._updateCustomDurationFromIndex(this.sliderTimer.get_value());
         });
         this.shortTimerSelector.connect('notify::value', (widget) => {
