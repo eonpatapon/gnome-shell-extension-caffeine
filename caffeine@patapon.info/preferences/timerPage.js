@@ -280,7 +280,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             upper: maxValue,
             step_increment: step,
             page_increment: 960,
-            value: value
+            value
         });
 
         let spinRow = new Adw.SpinRow({
