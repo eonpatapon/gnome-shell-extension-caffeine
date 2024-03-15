@@ -107,18 +107,18 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         const durationValues = variantDuration.deepUnpack();
         this.shortTimerSelector = this.timerSpinRow(_('Short timer'),
             60,
-            durationValues[0],// Short duration
+            durationValues[0], // Short duration
             60,
-            maxValueSecond - 60*2);
+            maxValueSecond - 60 * 2);
         this.mediumTimerSelector = this.timerSpinRow(_('Medium timer'),
             60,
-            durationValues[1],// Medium duration
-            60*2,
+            durationValues[1], // Medium duration
+            60 * 2,
             maxValueSecond - 60);
         this.longTimerSelector = this.timerSpinRow(_('Long timer'),
             60,
-            durationValues[2],// Long duration
-            60*3,
+            durationValues[2], // Long duration
+            60 * 3,
             maxValueSecond);
 
         // Enable / Disable Custom value
