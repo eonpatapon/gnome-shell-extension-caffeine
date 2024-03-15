@@ -40,9 +40,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const SHOW_TIMER_KEY = 'show-timer';
-const DURATION_TIMER_SHORT = 'duration-timer-short';
-const DURATION_TIMER_MEDIUM = 'duration-timer-medium';
-const DURATION_TIMER_LONG = 'duration-timer-long';
+const DURATION_TIMER_LIST = 'duration-timer-list';
 const TOGGLE_STATE_KEY = 'toggle-state';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
@@ -171,13 +169,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             () => this._iconName(),
             `changed::${TIMER_KEY}`,
             () => this._sync(),
-            `changed::${DURATION_TIMER_SHORT}`,
-            () => this._syncTimers(true),
-            this);
-            `changed::${DURATION_TIMER_MEDIUM}`,
-            () => this._syncTimers(true),
-            this);
-            `changed::${DURATION_TIMER_LONG}`,
+            `changed::${DURATION_TIMER_LIST}`,
             () => this._syncTimers(true),
             this);
         this.connect('destroy', () => {
@@ -190,10 +182,11 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _syncTimers(resetDefault) {
         this._itemsSection.removeAll();
         this._timerItems.clear();
-
-        const shortTimer = this._settings.get_int(DURATION_TIMER_SHORT);
-        const mediumTimer = this._settings.get_int(DURATION_TIMER_MEDIUM);
-        const longTimer = this._settings.get_int(DURATION_TIMER_LONG);
+        const variantDuration = this._settings.get_value(DURATION_TIMER_LIST);
+        const durationValues = variantDuration.deepUnpack();
+        const shortTimer = durationValues[0];
+        const mediumTimer = durationValues[1];
+        const longTimer = durationValues[2];
 
         // Create menu timer
         for (const [index, timer] of [shortTimer, mediumTimer, longTimer, 0].entries()) {

@@ -22,6 +22,7 @@
 import Adw from 'gi://Adw';
 import Gtk from 'gi://Gtk';
 import GObject from 'gi://GObject';
+import GLib from 'gi://GLib';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
@@ -101,20 +102,22 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
 
         // Custom value Adw.spinRow
-        const maxValueSecond = 359940 // = 99 Hours, 99 minutes
+        const maxValueSecond = 359940; // = 99 Hours, 99 minutes
+        const variantDuration = this._settings.get_value(this._settingsKey.DURATION_TIMER_LIST);
+        const durationValues = variantDuration.deepUnpack();
         this.shortTimerSelector = this.timerSpinRow('Short timer',
             60,
-            this._settings.get_int(this._settingsKey.DURATION_TIMER_SHORT),
+            durationValues[0],// Short duration
             60,
             maxValueSecond - 60*2);
         this.mediumTimerSelector = this.timerSpinRow('Medium timer',
             60,
-            this._settings.get_int(this._settingsKey.DURATION_TIMER_MEDIUM),
+            durationValues[1],// Medium duration
             60*2,
             maxValueSecond - 60);
         this.longTimerSelector = this.timerSpinRow('Long timer',
             60,
-            this._settings.get_int(this._settingsKey.DURATION_TIMER_LONG),
+            durationValues[2],// Long duration
             60*3,
             maxValueSecond);
 
@@ -154,7 +157,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             this._updateCustomDurationFromIndex(this.sliderTimer.get_value());
         });
         this.shortTimerSelector.connect('notify::value', (widget) => {
-            this._settings.set_int(this._settingsKey.DURATION_TIMER_SHORT, widget.get_value());
+            this._updateDurationVarian(widget.get_value(), 0);
             this._updateResetButtonState();
             // Control hierarchy of custom duration
             const shortValue = this.shortTimerSelector.get_value();
@@ -164,7 +167,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             }
         });
         this.mediumTimerSelector.connect('notify::value', (widget) => {
-            this._settings.set_int(this._settingsKey.DURATION_TIMER_MEDIUM, widget.get_value());
+            this._updateDurationVarian(widget.get_value(), 1);
             this._updateResetButtonState();
             // Control hierarchy of custom duration
             const shortValue = this.shortTimerSelector.get_value();
@@ -178,7 +181,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             }
         });
         this.longTimerSelector.connect('notify::value', (widget) => {
-            this._settings.set_int(this._settingsKey.DURATION_TIMER_LONG, widget.get_value());
+            this._updateDurationVarian(widget.get_value(), 2);
             this._updateResetButtonState();
             // Control hierarchy of custom duration
             const mediumValue = this.mediumTimerSelector.get_value();
@@ -219,6 +222,14 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         if (!this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)) {
             this._updateCustomDurationFromIndex(value);
         }
+    }
+
+    _updateDurationVarian(value, index) {
+        const variantDuration = this._settings.get_value(this._settingsKey.DURATION_TIMER_LIST);
+        let currentDurationValues = variantDuration.deepUnpack();
+        currentDurationValues[index] = value;
+        const newVariant = new GLib.Variant('ai', currentDurationValues);
+        this._settings.set_value(this._settingsKey.DURATION_TIMER_LIST, newVariant);    
     }
 
     _updateCustomDurationFromIndex(value) {
