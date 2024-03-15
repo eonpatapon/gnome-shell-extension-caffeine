@@ -273,7 +273,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         */
 
         // Create the SpinRow
-        let spin_row = new Adw.SpinRow({
+        let spinRow = new Adw.SpinRow({
             title: name,
             climb_rate: 0,
             adjustment: new Gtk.Adjustment({
@@ -287,7 +287,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
 
         // Create new Entry
-        let time_entry = new Gtk.Entry({
+        let timeEntry = new Gtk.Entry({
             editable: true,
             hexpand: true,
             halign: Gtk.Align.END,
@@ -299,44 +299,44 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
 
         // Get the Gtk.SpinButton and Gtk.Text
-        let child_widget = spin_row.get_last_child();
-        let box_widget = child_widget.get_last_child();
-        let spin_button_widget = box_widget.get_first_child();
-        let spin_button_text = spin_button_widget.get_first_child();
+        let childWidget = spinRow.get_last_child();
+        let boxWidget = childWidget.get_last_child();
+        let spinButtonWidget = boxWidget.get_first_child();
+        let spinButtonText = spinButtonWidget.get_first_child();
 
         // Hide the current text input
-        spin_button_text.visible = false;
+        spinButtonText.visible = false;
 
         // Add the new text input an re-order properly the widget component
-        spin_row.remove(spin_button_widget);
-        spin_button_widget.set_property('halign',Gtk.Align.END);
-        spin_button_widget.set_property('hexpand',false);
-        spin_row.add_suffix(time_entry);
-        spin_row.add_suffix(spin_button_widget);
+        spinRow.remove(spinButtonWidget);
+        spinButtonWidget.set_property('halign',Gtk.Align.END);
+        spinButtonWidget.set_property('hexpand',false);
+        spinRow.add_suffix(timeEntry);
+        spinRow.add_suffix(spinButtonWidget);
 
         // Display duration value as HH:MM:SS
-        spin_row.connect('output', () => {
-            let value = spin_row.get_value();
+        spinRow.connect('output', () => {
+            let value = spinRow.get_value();
             let hours = Math.floor(value / 3600);
             let minutes = Math.floor((value % 3600) / 60);
             let seconds = Math.floor(value % 60);
             let newText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            if (spin_row.get_text() !== newText){
-                time_entry.set_text(newText);
+            if (spinRow.get_text() !== newText){
+                timeEntry.set_text(newText);
             }
         });
 
         // Update value from the new text entry
-        time_entry.connect('changed', () => {
-            let text = time_entry.get_text();
+        timeEntry.connect('changed', () => {
+            let text = timeEntry.get_text();
             if ((text !== '') && (text !== null)){
                 let [hh, mm, ss] = text.split(':').map(Number);
                 let value = parseInt(hh * 3600 + mm * 60 + ss);
-                if((spin_row.get_value() !== value) && value !== null){
-                    spin_row.set_value(value);
+                if((spinRow.get_value() !== value) && value !== null){
+                    spinRow.set_value(value);
                 }
             }
         });
-        return spin_row;
+        return spinRow;
     }
 });
