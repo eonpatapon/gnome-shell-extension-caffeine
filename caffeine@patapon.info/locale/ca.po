@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-14 17:56+0100\n"
+"POT-Creation-Date: 2024-03-15 21:51+0100\n"
 "PO-Revision-Date: 2023-09-03 23:38+0200\n"
 "Last-Translator: Ícar N. S. <icar.nin@protonmail.com>\n"
 "Language-Team: Catalan\n"
@@ -18,39 +18,39 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:134
+#: extension.js:132
 msgid "Caffeine"
 msgstr "Cafeïna"
 
-#: extension.js:153 extension.js:614
+#: extension.js:151 extension.js:605
 msgid "Caffeine Timer"
 msgstr "Temporitzador del Cafeïna"
 
-#: extension.js:201
+#: extension.js:194
 msgid "Infinite"
 msgstr "Infinit"
 
-#: extension.js:207 extension.js:796
+#: extension.js:199 extension.js:787
 msgid " hours "
 msgstr " hores "
 
-#: extension.js:210 extension.js:799 preferences/timerPage.js:223
+#: extension.js:202 extension.js:790 preferences/timerPage.js:218
 msgid " minutes"
 msgstr " minuts"
 
-#: extension.js:761
+#: extension.js:752
 msgid "Caffeine enabled"
 msgstr "Cafeïna activada"
 
-#: extension.js:763
+#: extension.js:754
 msgid "Night Light paused"
 msgstr "Llum nocturna pausada"
 
-#: extension.js:768
+#: extension.js:759
 msgid "Caffeine disabled"
 msgstr "Cafeïna desactivada"
 
-#: extension.js:770
+#: extension.js:761
 msgid "Night Light resumed"
 msgstr "Llum nocturna reactivada"
 
@@ -178,7 +178,7 @@ msgid "Toggles the night light together with Caffeine's state"
 msgstr "Commuta la llum nocturna juntament amb el mode cafeïna"
 
 #: preferences/generalPage.js:90
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Allow screen blank"
 msgstr "Permet que la pantalla s'apagui"
 
@@ -191,7 +191,7 @@ msgid "Shortcut"
 msgstr "Drecera"
 
 #: preferences/generalPage.js:121
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:107
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Toggle shortcut"
 msgstr "Commuta la drecera"
 
@@ -215,19 +215,32 @@ msgstr "Durades predefinides"
 msgid "Durations"
 msgstr "Duracions"
 
-#: preferences/timerPage.js:101
+#: preferences/timerPage.js:100
 msgid "Custom durations"
 msgstr "Durades personalitzades"
 
-#: preferences/timerPage.js:135
+#: preferences/timerPage.js:108
+#, fuzzy
+msgid "Short timer"
+msgstr "Mostra el temporitzador"
+
+#: preferences/timerPage.js:113
+msgid "Medium timer"
+msgstr "Temporitzador mitjà"
+
+#: preferences/timerPage.js:118
+msgid "Long timer"
+msgstr "Temporitzador llarg"
+
+#: preferences/timerPage.js:130
 msgid "Enable custom values"
 msgstr "Habilita valors personalitzats"
 
-#: preferences/timerPage.js:136
+#: preferences/timerPage.js:131
 msgid "Select custom value for each duration"
 msgstr "Selecciona un valor personalitzat per a cada durada"
 
-#: preferences/timerPage.js:220
+#: preferences/timerPage.js:215
 msgid "Set to "
 msgstr "Estableix a "
 
@@ -251,116 +264,104 @@ msgid "Store caffeine user state"
 msgstr "Desa l'estat del mode cafeïna per l'usuari"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
-msgid "Short duration timer"
-msgstr "Cronòmetre de curta durada"
+#, fuzzy
+msgid "List of duration timer"
+msgstr "Durades personalitzades"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
-msgid "Specify the short duration for the timer countdown (seconds)"
-msgstr "Especifiqueu la breu durada per al compte enrere del temporitzador (segons)"
+msgid ""
+"Specify the short, medium and long duration for the timer countdown (seconds)"
+msgstr ""
+"Especifiqueu la durada curta, mitjana i llarga per al compte enrere del "
+"temporitzador (segons)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-msgid "Medium duration timer"
-msgstr "Cronòmetre de durada mitjana"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
-msgid "Specify the medium duration for the timer countdown (seconds)"
-msgstr "Especifiqueu la durada mitjana per al compte enrere del temporitzador (segons)"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
-msgid "Long duration timer"
-msgstr "Cronòmetre de llarga durada"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
-msgid "Specify the long duration for the timer countdown (seconds)"
-msgstr "Especifiqueu la llarga durada per al compte enrere del temporitzador (segons)"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Use custom duration values for the timer"
 msgstr "Utilitzeu valors de durada personalitzats per al temporitzador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 msgid "Specify time (seconds) for the timer countdown"
 msgstr "Especifiqueu el temps (segons) per al compte enrere del temporitzador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
 msgid "Specify index of duration range for the timer"
 msgstr "Especifica l'índex de l'interval de duració per al temporitzador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Restore caffeine state"
 msgstr "Restableix l'estat del mode cafeïna"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show indicator"
 msgstr "Mostra l'indicador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show the indicator on the top panel"
 msgstr "Mostra l'indicador al panell superior"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Show notifications"
 msgstr "Mostra les notificacions"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Show notifications when enabled/disabled"
 msgstr "Mostra una notificació quan s'activa i quan es desactiva"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Show timer"
 msgstr "Mostra el temporitzador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Show timer when enabled/disabled"
 msgstr "Mostra el temporitzador quan s'activa o es desactiva"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Enable when a fullscreen application is running"
 msgstr "Activa quan una aplicació està en mode pantalla completa"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Night Light control mode"
 msgstr "Mode de control de la llum nocturna"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr ""
 "Estableix com el mode cafeïna interactua amb la configuració de la llum "
 "nocturna."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "Permet apagar la pantalla quan el mode cafeïna està activat."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Trigger App control mode"
 msgstr "Mode de control de l'aplicació activadora"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:103
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Set the trigger method for apps."
 msgstr "Estableix el mètode d'activació per a les aplicacions."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
 msgid "Shortcut to toggle Caffeine."
 msgstr "Drecera per commutar el mode cafeïna."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:112
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
 msgid "Default width for the preferences window"
 msgstr "Amplada per defecte de la finestra de preferències"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:116
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:106
 msgid "Default height for the preferences window"
 msgstr "Alçada per defecte de la finestra de preferències"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:120
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:110
 msgid "Visible position offset of status icon in indicator menu"
 msgstr ""
 "Desplaçament visible de la posició de la icona d'estat al menú indicador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:124
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:114
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
@@ -368,6 +369,12 @@ msgstr ""
 "Posició real del desplaçament de la icona d'estat al menú d'indicadors que "
 "inclou un invisible"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:128
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:118
 msgid "Last item index in indicator menu"
 msgstr "Índex de l'últim element al menú indicador"
+
+#~ msgid "Temporitzador curt"
+#~ msgstr "Mostra el temporitzador"
+
+#~ msgid "Llista de durades del temporitzador"
+#~ msgstr "Cronòmetre de llarga durada"
