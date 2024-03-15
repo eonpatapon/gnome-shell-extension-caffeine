@@ -105,17 +105,17 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         const maxValueSecond = 359940; // = 99 Hours, 99 minutes
         const variantDuration = this._settings.get_value(this._settingsKey.DURATION_TIMER_LIST);
         const durationValues = variantDuration.deepUnpack();
-        this.shortTimerSelector = this.timerSpinRow('Short timer',
+        this.shortTimerSelector = this.timerSpinRow(_('Short timer'),
             60,
             durationValues[0],// Short duration
             60,
             maxValueSecond - 60*2);
-        this.mediumTimerSelector = this.timerSpinRow('Medium timer',
+        this.mediumTimerSelector = this.timerSpinRow(_('Medium timer'),
             60,
             durationValues[1],// Medium duration
             60*2,
             maxValueSecond - 60);
-        this.longTimerSelector = this.timerSpinRow('Long timer',
+        this.longTimerSelector = this.timerSpinRow(_('Long timer'),
             60,
             durationValues[2],// Long duration
             60*3,
