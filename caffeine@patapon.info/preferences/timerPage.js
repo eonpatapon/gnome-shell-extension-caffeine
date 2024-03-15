@@ -276,11 +276,11 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
         // Create the SpinRow
         let spinRowAdjustment = new Gtk.Adjustment({
-                lower: minValue,
-                upper: maxValue,
-                step_increment: step,
-                page_increment: 960,
-                value: value
+            lower: minValue,
+            upper: maxValue,
+            step_increment: step,
+            page_increment: 960,
+            value: value
         });
         let spinRow = new Adw.SpinRow({
             title: name,
