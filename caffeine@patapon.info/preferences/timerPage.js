@@ -107,18 +107,18 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         const durationValues = variantDuration.deepUnpack();
         this.shortTimerSelector = this.timerSpinRow(_('Short timer'),
             60,
-            durationValues[0],// Short duration
+            durationValues[0], // Short duration
             60,
-            maxValueSecond - 60*2);
+            maxValueSecond - 60 * 2);
         this.mediumTimerSelector = this.timerSpinRow(_('Medium timer'),
             60,
-            durationValues[1],// Medium duration
-            60*2,
+            durationValues[1], // Medium duration
+            60 * 2,
             maxValueSecond - 60);
         this.longTimerSelector = this.timerSpinRow(_('Long timer'),
             60,
-            durationValues[2],// Long duration
-            60*3,
+            durationValues[2], // Long duration
+            60 * 3,
             maxValueSecond);
 
         // Enable / Disable Custom value
@@ -229,7 +229,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         let currentDurationValues = variantDuration.deepUnpack();
         currentDurationValues[index] = value;
         const newVariant = new GLib.Variant('ai', currentDurationValues);
-        this._settings.set_value(this._settingsKey.DURATION_TIMER_LIST, newVariant);    
+        this._settings.set_value(this._settingsKey.DURATION_TIMER_LIST, newVariant);
     }
 
     _updateCustomDurationFromIndex(value) {
@@ -275,16 +275,18 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         */
 
         // Create the SpinRow
+        let spinRowAdjustment = new Gtk.Adjustment({
+            lower: minValue,
+            upper: maxValue,
+            step_increment: step,
+            page_increment: 960,
+            value: value
+        });
+
         let spinRow = new Adw.SpinRow({
             title: name,
             climb_rate: 0,
-            adjustment: new Gtk.Adjustment({
-                lower: minValue,
-                upper: maxValue,
-                step_increment: step,
-                page_increment: 960,
-                value: value
-            }),
+            adjustment: spinRowAdjustment,
             snap_to_ticks: true
         });
 
