@@ -229,7 +229,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         let currentDurationValues = variantDuration.deepUnpack();
         currentDurationValues[index] = value;
         const newVariant = new GLib.Variant('ai', currentDurationValues);
-        this._settings.set_value(this._settingsKey.DURATION_TIMER_LIST, newVariant);    
+        this._settings.set_value(this._settingsKey.DURATION_TIMER_LIST, newVariant);
     }
 
     _updateCustomDurationFromIndex(value) {
