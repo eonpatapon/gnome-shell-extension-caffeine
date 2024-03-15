@@ -314,11 +314,11 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
         // Display duration value as HH:MM:SS
         spinRow.connect('output', () => {
-            const value = spinRow.get_value();
-            let hours = Math.floor(value / 3600);
-            let minutes = Math.floor((value % 3600) / 60);
-            let seconds = Math.floor(value % 60);
-            let newText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const currentValue = spinRow.get_value();
+            const hours = Math.floor(currentValue / 3600);
+            const minutes = Math.floor((currentValue % 3600) / 60);
+            const seconds = Math.floor(currentValue % 60);
+            const newText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             if (spinRow.get_text() !== newText) {
                 timeEntry.set_text(newText);
             }
@@ -326,12 +326,12 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
         // Update value from the new text entry
         timeEntry.connect('changed', () => {
-            let text = timeEntry.get_text();
+            const text = timeEntry.get_text();
             if ((text !== '') && (text !== null)) {
-                let [hh, mm, ss] = text.split(':').map(Number);
-                let value = parseInt(hh * 3600 + mm * 60 + ss);
-                if ((spinRow.get_value() !== value) && value !== null) {
-                    spinRow.set_value(value);
+                const [hh, mm, ss] = text.split(':').map(Number);
+                const currentValue = parseInt(hh * 3600 + mm * 60 + ss);
+                if ((spinRow.get_value() !== currentValue) && currentValue !== null) {
+                    spinRow.set_value(currentValue);
                 }
             }
         });
