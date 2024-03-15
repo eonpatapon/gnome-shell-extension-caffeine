@@ -102,7 +102,7 @@ const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSess
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
-const timerIcons = [
+const TimerIcons = [
     'caffeine-short-timer-symbolic',
     'caffeine-medium-timer-symbolic',
     'caffeine-long-timer-symbolic',
@@ -143,7 +143,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         let iconTheme = new St.IconTheme();
         if (!iconTheme.has_icon(TimerMenuIcon)) {
             this.finalTimerMenuIcon =
-                Gio.icon_new_for_string(`${this._path}/icons/${TimerMenuIcon}.svg`);
+                Gio.icon_new_for_string(`${this._path}/icons/hicolor/scalable/actions/${TimerMenuIcon}.svg`);
         }
         this._iconActivated = Gio.icon_new_for_string(`${this._path}/icons/${EnabledIcon}.svg`);
         this._iconDeactivated = Gio.icon_new_for_string(`${this._path}/icons/${DisabledIcon}.svg`);
@@ -182,31 +182,29 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _syncTimers(resetDefault) {
         this._itemsSection.removeAll();
         this._timerItems.clear();
-        const variantDuration = this._settings.get_value(DURATION_TIMER_LIST);
-        const durationValues = variantDuration.deepUnpack();
-        const shortTimer = durationValues[0];
-        const mediumTimer = durationValues[1];
-        const longTimer = durationValues[2];
+        // Get duration list and add '0' for the 'infinite' entry (no timer)
+        let durationValues = this._settings.get_value(DURATION_TIMER_LIST).deepUnpack();
+        durationValues.push(0);
 
         // Create menu timer
-        for (const [index, timer] of [shortTimer, mediumTimer, longTimer, 0].entries()) {
+        for (const [index, timer] of durationValues.entries()) {
             let label = null;
             if (timer === 0) {
                 label = _('Infinite');
             } else {
                 let hours = Math.floor(timer / 3600);
                 let minutes = Math.floor((timer % 3600) / 60);
-                if (parseInt(hours) !== 0) {
+                if (hours !== 0) {
                     label = hours + _(' hours ');
                 }
-                if (parseInt(minutes) !== 0) {
+                if (minutes !== 0) {
                     label = label + minutes + _(' minutes');
                 }
             }
             if (!label) {
                 continue;
             }
-            const icon = Gio.icon_new_for_string(`${this._path}/icons/${timerIcons[index]}.svg`);
+            const icon = Gio.icon_new_for_string(`${this._path}/icons/${TimerIcons[index]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
             item.connectObject('activate', () => this._checkTimer(timer), this);
             this._timerItems.set(timer, item);
@@ -810,10 +808,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             const hours = Math.floor(timerDuration / 3600);
             const min = Math.floor((timerDuration % 3600) / 60);
             let timeLabel = hours !== 0
-                ? parseInt(hours) + _(' hours ')
+                ? hours + _(' hours ')
                 : '';
             timeLabel += min !== 0
-                ? parseInt(min) + _(' minutes')
+                ? min + _(' minutes')
                 : '';
             this._caffeineToggle.subtitle = timerDuration !== 0
                 ? timeLabel

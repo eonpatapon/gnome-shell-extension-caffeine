@@ -122,16 +122,11 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             maxValueSecond);
 
         // Enable / Disable Custom value
-        let enableCustomTimerSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)
-        });
-        this.enableCustomTimerRow = new Adw.ActionRow({
+        this.enableCustomTimerRow = new Adw.SwitchRow({
             title: _('Enable custom values'),
             subtitle: _('Select custom value for each duration'),
-            activatable_widget: enableCustomTimerSwitch
+            active: this._settings.get_boolean(this._settingsKey.USE_CUSTOM_DURATION)
         });
-        this.enableCustomTimerRow.add_suffix(enableCustomTimerSwitch);
 
         // Add elements
         customDurationGroup.add(this.enableCustomTimerRow);
@@ -147,7 +142,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
         // Bind signals
         // --------------
-        enableCustomTimerSwitch.connect('notify::active', (widget) => {
+        this.enableCustomTimerRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.USE_CUSTOM_DURATION, widget.get_active());
             this._activeCustomvalue();
         });
@@ -280,7 +275,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             upper: maxValue,
             step_increment: step,
             page_increment: 960,
-            value: value
+            value
         });
 
         let spinRow = new Adw.SpinRow({

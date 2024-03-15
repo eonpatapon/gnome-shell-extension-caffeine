@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:13+0100\n"
+"POT-Creation-Date: 2024-03-27 18:44+0100\n"
 "PO-Revision-Date: 2019-03-21 06:48+0300\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -18,39 +18,39 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Gtranslator 3.32.0\n"
 
-#: extension.js:132
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Kafein"
 
-#: extension.js:151 extension.js:605
+#: extension.js:153 extension.js:629
 msgid "Caffeine Timer"
 msgstr "Kafein Zamanlayıcısı"
 
-#: extension.js:194
+#: extension.js:193
 msgid "Infinite"
 msgstr "Süresiz"
 
-#: extension.js:199 extension.js:787
+#: extension.js:198 extension.js:811
 msgid " hours "
 msgstr " saat "
 
-#: extension.js:202 extension.js:790 preferences/timerPage.js:218
+#: extension.js:201 extension.js:814 preferences/timerPage.js:213
 msgid " minutes"
 msgstr " dakika"
 
-#: extension.js:752
+#: extension.js:776
 msgid "Caffeine enabled"
 msgstr "Kafein aktif"
 
-#: extension.js:754
+#: extension.js:778
 msgid "Night Light paused"
 msgstr "Gece Işığı durduruldu"
 
-#: extension.js:759
+#: extension.js:783
 msgid "Caffeine disabled"
 msgstr "Kafein devre dışı"
 
-#: extension.js:761
+#: extension.js:785
 msgid "Night Light resumed"
 msgstr "Gece Işığı devam ettirildi"
 
@@ -230,15 +230,15 @@ msgstr "Orta süreli kronometre"
 msgid "Long timer"
 msgstr "Uzun süreli kronometre"
 
-#: preferences/timerPage.js:130
+#: preferences/timerPage.js:126
 msgid "Enable custom values"
 msgstr "Özel değerleri etkinleştir"
 
-#: preferences/timerPage.js:131
+#: preferences/timerPage.js:127
 msgid "Select custom value for each duration"
 msgstr "Her süre için özel bir değer seçin"
 
-#: preferences/timerPage.js:215
+#: preferences/timerPage.js:210
 msgid "Set to "
 msgstr "Ayarla "
 
@@ -267,7 +267,8 @@ msgstr "Kronometre süresi listesi"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
-msgstr "Zamanlayıcı geri sayımı için kısa, orta ve uzun süreyi belirtin (saniye)"
+msgstr ""
+"Zamanlayıcı geri sayımı için kısa, orta ve uzun süreyi belirtin (saniye)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "Use custom duration values for the timer"

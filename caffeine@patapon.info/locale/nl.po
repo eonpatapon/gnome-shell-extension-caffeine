@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:13+0100\n"
+"POT-Creation-Date: 2024-03-27 18:44+0100\n"
 "PO-Revision-Date: 2023-02-07 14:23+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -17,39 +17,39 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:132
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Cafeïne"
 
-#: extension.js:151 extension.js:605
+#: extension.js:153 extension.js:629
 msgid "Caffeine Timer"
 msgstr "Cafeïne-tijdklok"
 
-#: extension.js:194
+#: extension.js:193
 msgid "Infinite"
 msgstr "Onbeperkt"
 
-#: extension.js:199 extension.js:787
+#: extension.js:198 extension.js:811
 msgid " hours "
 msgstr " uren "
 
-#: extension.js:202 extension.js:790 preferences/timerPage.js:218
+#: extension.js:201 extension.js:814 preferences/timerPage.js:213
 msgid " minutes"
 msgstr ""
 
-#: extension.js:752
+#: extension.js:776
 msgid "Caffeine enabled"
 msgstr "Cafeïne is ingeschakeld"
 
-#: extension.js:754
+#: extension.js:778
 msgid "Night Light paused"
 msgstr "Nachtlicht is onderbroken"
 
-#: extension.js:759
+#: extension.js:783
 msgid "Caffeine disabled"
 msgstr "Cafeïne is uitgeschakeld"
 
-#: extension.js:761
+#: extension.js:785
 msgid "Night Light resumed"
 msgstr "Nachtlicht is hervat"
 
@@ -231,15 +231,15 @@ msgstr "Medium timer"
 msgid "Long timer"
 msgstr "Lange timer"
 
-#: preferences/timerPage.js:130
+#: preferences/timerPage.js:126
 msgid "Enable custom values"
 msgstr "Aangepaste waarden inschakelen"
 
-#: preferences/timerPage.js:131
+#: preferences/timerPage.js:127
 msgid "Select custom value for each duration"
 msgstr "Selecteer aangepaste waarde voor elke duur"
 
-#: preferences/timerPage.js:215
+#: preferences/timerPage.js:210
 msgid "Set to "
 msgstr ""
 
@@ -269,7 +269,9 @@ msgstr "Lijst van duur timer"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
-msgstr "Specificeer de korte, middellange en lange duur voor de timer countdown (seconden)"
+msgstr ""
+"Specificeer de korte, middellange en lange duur voor de timer countdown "
+"(seconden)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "Use custom duration values for the timer"

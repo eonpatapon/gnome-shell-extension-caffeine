@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:13+0100\n"
+"POT-Creation-Date: 2024-03-27 18:44+0100\n"
 "PO-Revision-Date: 2022-10-07 16:40+0200\n"
 "Last-Translator: Pakaoraki <pakaoraki@gmx.com>\n"
 "Language-Team: French\n"
@@ -23,39 +23,39 @@ msgstr ""
 "X-Generator: Poedit 3.1.1\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:132
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Caféine"
 
-#: extension.js:151 extension.js:605
+#: extension.js:153 extension.js:629
 msgid "Caffeine Timer"
 msgstr "Caféine Minuteur"
 
-#: extension.js:194
+#: extension.js:193
 msgid "Infinite"
 msgstr "Infini"
 
-#: extension.js:199 extension.js:787
+#: extension.js:198 extension.js:811
 msgid " hours "
 msgstr " heures "
 
-#: extension.js:202 extension.js:790 preferences/timerPage.js:218
+#: extension.js:201 extension.js:814 preferences/timerPage.js:213
 msgid " minutes"
 msgstr " minutes"
 
-#: extension.js:752
+#: extension.js:776
 msgid "Caffeine enabled"
 msgstr "Caféine est activé"
 
-#: extension.js:754
+#: extension.js:778
 msgid "Night Light paused"
 msgstr "Mode nuit suspendu"
 
-#: extension.js:759
+#: extension.js:783
 msgid "Caffeine disabled"
 msgstr "Caféine est désactivé"
 
-#: extension.js:761
+#: extension.js:785
 msgid "Night Light resumed"
 msgstr "Mode nuit réactivé"
 
@@ -238,15 +238,15 @@ msgstr "Minuteur de durée moyenne"
 msgid "Long timer"
 msgstr "Minuteur de longue durée"
 
-#: preferences/timerPage.js:130
+#: preferences/timerPage.js:126
 msgid "Enable custom values"
 msgstr "Utiliser des valeurs personnalisées"
 
-#: preferences/timerPage.js:131
+#: preferences/timerPage.js:127
 msgid "Select custom value for each duration"
 msgstr "Sélectionner une valeur personnalisée pour chaque durée"
 
-#: preferences/timerPage.js:215
+#: preferences/timerPage.js:210
 msgid "Set to "
 msgstr "Réglé sur "
 
@@ -277,8 +277,8 @@ msgstr "Liste des durées du minuteur"
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
 msgstr ""
-"Détermine la durée courte, moyenne et longue pour le compte à rebours du minuteur "
-"(secondes)"
+"Détermine la durée courte, moyenne et longue pour le compte à rebours du "
+"minuteur (secondes)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "Use custom duration values for the timer"

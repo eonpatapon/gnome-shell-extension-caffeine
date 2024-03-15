@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:13+0100\n"
+"POT-Creation-Date: 2024-03-27 18:44+0100\n"
 "PO-Revision-Date: 2023-04-12 18:40+0200\n"
 "Last-Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
 "Language-Team: Czech\n"
@@ -17,39 +17,39 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:132
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Kofein"
 
-#: extension.js:151 extension.js:605
+#: extension.js:153 extension.js:629
 msgid "Caffeine Timer"
 msgstr "Časovač Kofein"
 
-#: extension.js:194
+#: extension.js:193
 msgid "Infinite"
 msgstr "Nekonečně"
 
-#: extension.js:199 extension.js:787
+#: extension.js:198 extension.js:811
 msgid " hours "
 msgstr " hodiny "
 
-#: extension.js:202 extension.js:790 preferences/timerPage.js:218
+#: extension.js:201 extension.js:814 preferences/timerPage.js:213
 msgid " minutes"
 msgstr " minut"
 
-#: extension.js:752
+#: extension.js:776
 msgid "Caffeine enabled"
 msgstr "Kofein povolen"
 
-#: extension.js:754
+#: extension.js:778
 msgid "Night Light paused"
 msgstr "Noční světlo pozastaveno"
 
-#: extension.js:759
+#: extension.js:783
 msgid "Caffeine disabled"
 msgstr "Kofein zakázán"
 
-#: extension.js:761
+#: extension.js:785
 msgid "Night Light resumed"
 msgstr "Noční světlo obnoveno"
 
@@ -229,15 +229,15 @@ msgstr "Střední časovač"
 msgid "Long timer"
 msgstr "Dlouhý časovač"
 
-#: preferences/timerPage.js:130
+#: preferences/timerPage.js:126
 msgid "Enable custom values"
 msgstr "Povolit vlastní hodnoty"
 
-#: preferences/timerPage.js:131
+#: preferences/timerPage.js:127
 msgid "Select custom value for each duration"
 msgstr "Vyberte vlastní hodnotu pro každou dobu trvání"
 
-#: preferences/timerPage.js:215
+#: preferences/timerPage.js:210
 msgid "Set to "
 msgstr "Nastaveny na "
 
@@ -265,7 +265,8 @@ msgstr "Seznam časovače trvání"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
-msgstr "Určete krátkou, střední a dlouhou dobu pro odpočet času časovače (vteřiny)"
+msgstr ""
+"Určete krátkou, střední a dlouhou dobu pro odpočet času časovače (vteřiny)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "Use custom duration values for the timer"
