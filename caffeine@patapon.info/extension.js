@@ -102,7 +102,7 @@ const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSess
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
-const timerIcons = [
+const TimerIcons = [
     'caffeine-short-timer-symbolic',
     'caffeine-medium-timer-symbolic',
     'caffeine-long-timer-symbolic',
@@ -206,7 +206,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             if (!label) {
                 continue;
             }
-            const icon = Gio.icon_new_for_string(`${this._path}/icons/${timerIcons[index]}.svg`);
+            const icon = Gio.icon_new_for_string(`${this._path}/icons/${TimerIcons[index]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
             item.connectObject('activate', () => this._checkTimer(timer), this);
             this._timerItems.set(timer, item);
