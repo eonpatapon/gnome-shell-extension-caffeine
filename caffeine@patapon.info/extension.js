@@ -184,12 +184,10 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         this._timerItems.clear();
         const variantDuration = this._settings.get_value(DURATION_TIMER_LIST);
         const durationValues = variantDuration.deepUnpack();
-        const shortTimer = durationValues[0];
-        const mediumTimer = durationValues[1];
-        const longTimer = durationValues[2];
+        durationValues.push(0); // Add '0' for the 'infinite' entry (no timer)
 
         // Create menu timer
-        for (const [index, timer] of [shortTimer, mediumTimer, longTimer, 0].entries()) {
+        for (const [index, timer] of durationValues.entries()) {
             let label = null;
             if (timer === 0) {
                 label = _('Infinite');
