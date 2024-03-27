@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:13+0100\n"
+"POT-Creation-Date: 2024-03-27 18:44+0100\n"
 "PO-Revision-Date: 2016-10-02 17:24+0100\n"
 "Last-Translator: Piotr Wittchen <piotr@wittchen.biz.pl>\n"
 "Language-Team: Polish\n"
@@ -17,40 +17,40 @@ msgstr ""
 "X-Generator: Vim\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:132
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Kofeina"
 
-#: extension.js:151 extension.js:605
+#: extension.js:153 extension.js:629
 msgid "Caffeine Timer"
 msgstr "Kofeina Regulator czasowy"
 
-#: extension.js:194
+#: extension.js:193
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:199 extension.js:787
+#: extension.js:198 extension.js:811
 msgid " hours "
 msgstr " godziny "
 
-#: extension.js:202 extension.js:790 preferences/timerPage.js:218
+#: extension.js:201 extension.js:814 preferences/timerPage.js:213
 msgid " minutes"
 msgstr ""
 
-#: extension.js:752
+#: extension.js:776
 msgid "Caffeine enabled"
 msgstr "Kofeina włączone"
 
-#: extension.js:754
+#: extension.js:778
 msgid "Night Light paused"
 msgstr ""
 
-#: extension.js:759
+#: extension.js:783
 #, fuzzy
 msgid "Caffeine disabled"
 msgstr "Kofeina włączone"
 
-#: extension.js:761
+#: extension.js:785
 msgid "Night Light resumed"
 msgstr ""
 
@@ -237,15 +237,15 @@ msgstr "Średni minutnik"
 msgid "Long timer"
 msgstr "Długi minutnik"
 
-#: preferences/timerPage.js:130
+#: preferences/timerPage.js:126
 msgid "Enable custom values"
 msgstr "Włącz niestandardowe wartości"
 
-#: preferences/timerPage.js:131
+#: preferences/timerPage.js:127
 msgid "Select custom value for each duration"
 msgstr "Wybierz niestandardową wartość dla każdego okresu"
 
-#: preferences/timerPage.js:215
+#: preferences/timerPage.js:210
 msgid "Set to "
 msgstr ""
 
@@ -274,7 +274,8 @@ msgstr "Lista czasu trwania minutnika"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
-msgstr "Określ krótki, średni i długi czas trwania dla odliczania minutnika (sekundy)"
+msgstr ""
+"Określ krótki, średni i długi czas trwania dla odliczania minutnika (sekundy)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "Use custom duration values for the timer"

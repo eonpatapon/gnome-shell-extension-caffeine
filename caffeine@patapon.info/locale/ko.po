@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:13+0100\n"
+"POT-Creation-Date: 2024-03-27 18:44+0100\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -15,40 +15,40 @@ msgstr ""
 "X-Poedit-Basepath: ../../gnome-shell-extension-caffeine-master\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: extension.js:132
+#: extension.js:134
 msgid "Caffeine"
 msgstr "카페인"
 
-#: extension.js:151 extension.js:605
+#: extension.js:153 extension.js:629
 msgid "Caffeine Timer"
 msgstr ""
 
-#: extension.js:194
+#: extension.js:193
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:199 extension.js:787
+#: extension.js:198 extension.js:811
 msgid " hours "
 msgstr " 시간 "
 
-#: extension.js:202 extension.js:790 preferences/timerPage.js:218
+#: extension.js:201 extension.js:814 preferences/timerPage.js:213
 msgid " minutes"
 msgstr ""
 
-#: extension.js:752
+#: extension.js:776
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:754
+#: extension.js:778
 #, fuzzy
 msgid "Night Light paused"
 msgstr "야간 모드를 멈춥니"
 
-#: extension.js:759
+#: extension.js:783
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:761
+#: extension.js:785
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "야간 모드를 다시 켭니"
@@ -235,15 +235,15 @@ msgstr "중간 시간 타이머"
 msgid "Long timer"
 msgstr "긴 시간 타이머"
 
-#: preferences/timerPage.js:130
+#: preferences/timerPage.js:126
 msgid "Enable custom values"
 msgstr "사용자 정의 값 활성화"
 
-#: preferences/timerPage.js:131
+#: preferences/timerPage.js:127
 msgid "Select custom value for each duration"
 msgstr "각 기간에 대해 사용자 지정 값을 선택합니다"
 
-#: preferences/timerPage.js:215
+#: preferences/timerPage.js:210
 msgid "Set to "
 msgstr ""
 

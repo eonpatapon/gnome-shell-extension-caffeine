@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:13+0100\n"
+"POT-Creation-Date: 2024-03-27 18:44+0100\n"
 "PO-Revision-Date: 2023-06-28 22:18+0200\n"
 "Last-Translator: infeeeee <gyetpet@mailbox.org>\n"
 "Language-Team: \n"
@@ -12,39 +12,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: extension.js:132
+#: extension.js:134
 msgid "Caffeine"
 msgstr "Koffein"
 
-#: extension.js:151 extension.js:605
+#: extension.js:153 extension.js:629
 msgid "Caffeine Timer"
 msgstr "Koffein időzítő"
 
-#: extension.js:194
+#: extension.js:193
 msgid "Infinite"
 msgstr "Végtelen"
 
-#: extension.js:199 extension.js:787
+#: extension.js:198 extension.js:811
 msgid " hours "
 msgstr " órák "
 
-#: extension.js:202 extension.js:790 preferences/timerPage.js:218
+#: extension.js:201 extension.js:814 preferences/timerPage.js:213
 msgid " minutes"
 msgstr " perc"
 
-#: extension.js:752
+#: extension.js:776
 msgid "Caffeine enabled"
 msgstr "Koffein engedélyezve"
 
-#: extension.js:754
+#: extension.js:778
 msgid "Night Light paused"
 msgstr "Éjszakai fény szüneteltetve"
 
-#: extension.js:759
+#: extension.js:783
 msgid "Caffeine disabled"
 msgstr "Koffein letiltva"
 
-#: extension.js:761
+#: extension.js:785
 msgid "Night Light resumed"
 msgstr "Éjszakai fény folytatva"
 
@@ -225,15 +225,15 @@ msgstr "Közepes időmérő"
 msgid "Long timer"
 msgstr "Hosszú időmérő"
 
-#: preferences/timerPage.js:130
+#: preferences/timerPage.js:126
 msgid "Enable custom values"
 msgstr "Egyedi értékek engedélyezése"
 
-#: preferences/timerPage.js:131
+#: preferences/timerPage.js:127
 msgid "Select custom value for each duration"
 msgstr "Válasszon egyedi értéket minden időtartamhoz"
 
-#: preferences/timerPage.js:215
+#: preferences/timerPage.js:210
 msgid "Set to "
 msgstr "Kiválasztható "
 
@@ -264,8 +264,8 @@ msgstr "Időzítő időtartamának listája"
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
 msgstr ""
-"Határozza meg a rövid, közepes és hosszú időtartamot az időzítő visszaszámláláshoz "
-"(másodperc)"
+"Határozza meg a rövid, közepes és hosszú időtartamot az időzítő "
+"visszaszámláláshoz (másodperc)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
 msgid "Use custom duration values for the timer"
