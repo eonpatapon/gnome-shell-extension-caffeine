@@ -143,7 +143,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         let iconTheme = new St.IconTheme();
         if (!iconTheme.has_icon(TimerMenuIcon)) {
             this.finalTimerMenuIcon =
-                Gio.icon_new_for_string(`${this._path}/icons/${TimerMenuIcon}.svg`);
+                Gio.icon_new_for_string(`${this._path}/icons/hicolor/scalable/actions/${TimerMenuIcon}.svg`);
         }
         this._iconActivated = Gio.icon_new_for_string(`${this._path}/icons/${EnabledIcon}.svg`);
         this._iconDeactivated = Gio.icon_new_for_string(`${this._path}/icons/${DisabledIcon}.svg`);
