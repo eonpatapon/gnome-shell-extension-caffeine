@@ -16,7 +16,7 @@ jobs:
         version: 1.0
     - name: Install eslint
       run: |
-        npm install -g eslint@8.57.0 eslint-plugin-jsdoc
+        npm install -g eslint@8.57.0
 
     - name: Run linter target
       run: |

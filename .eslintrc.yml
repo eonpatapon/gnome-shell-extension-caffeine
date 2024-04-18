@@ -13,5 +13,4 @@ rules: #Override some of the upstream rules to match this codebase
   curly:
    - error
    - all
-  jsdoc/require-jsdoc: off
   prefer-template: off
