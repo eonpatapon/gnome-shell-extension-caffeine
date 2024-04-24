@@ -1,0 +1,332 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-15 00:10+0200\n"
+"PO-Revision-Date: 2024-04-24 15:36+0300\n"
+"Last-Translator: Αθανάσιος Νεκτάριος Καραχάλιος Στάγκας <nasos.karachalios."
+"stagkas@proton.me>\n"
+"Language-Team: Spanish\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: extension.js:159
+msgid "Caffeine"
+msgstr "Καφεΐνη"
+
+#: extension.js:176 extension.js:632
+msgid "Caffeine Timer"
+msgstr "Καφεΐνη χρονόμετρο"
+
+#: extension.js:214
+msgid "Infinite"
+msgstr "Άπειρο"
+
+#: extension.js:216 extension.js:816 preferences/generalPage.js:212
+msgid " minutes"
+msgstr " λεπτά"
+
+#: extension.js:781
+msgid "Caffeine enabled"
+msgstr "Καφεΐνη ενεργοποιημένη"
+
+#: extension.js:783
+msgid "Night Light paused"
+msgstr "Νυχτερινό φως σε παύση"
+
+#: extension.js:788
+msgid "Caffeine disabled"
+msgstr "Καφεΐνη απενεργοποιημένη"
+
+#: extension.js:790
+msgid "Night Light resumed"
+msgstr "Νυχτερινό φως σε συνέχεια"
+
+#: preferences/appsPage.js:33
+msgid "Apps"
+msgstr "Εφαρμογές"
+
+#: preferences/appsPage.js:44
+msgid "Trigger mode"
+msgstr "Λειτουργία πυροδότησης"
+
+#: preferences/appsPage.js:49
+msgid "Running"
+msgstr "Τρέχει"
+
+#: preferences/appsPage.js:50
+msgid "Focus"
+msgstr "Εστίαση"
+
+#: preferences/appsPage.js:51
+msgid "Active workspace"
+msgstr "Ενεργός χώρος εργασίας"
+
+#: preferences/appsPage.js:53
+msgid "Apps trigger Caffeine mode"
+msgstr "Οι εφαρμογές πυροδοτούν τη λειτουργία Καφεΐνη"
+
+#: preferences/appsPage.js:54
+msgid "Choose the way apps will trigger Caffeine"
+msgstr "Επιλέξτε τον τρόπο με τον οποίο οι εφαρμογές θα πυροδοτούν την Καφεΐνη"
+
+#: preferences/appsPage.js:68
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: preferences/appsPage.js:72
+msgid "Apps that trigger Caffeine"
+msgstr "Εφαρμογές που πυροδοτούν την καφεΐνη"
+
+#: preferences/displayPage.js:33 preferences/displayPage.js:43
+msgid "Display"
+msgstr "Οθόνη"
+
+#: preferences/displayPage.js:48
+msgid "Only when active"
+msgstr "Μόνο όταν είναι ενεργή"
+
+#: preferences/displayPage.js:49 preferences/generalPage.js:82
+#: preferences/generalPage.js:94
+msgid "Always"
+msgstr "Πάντα"
+
+#: preferences/displayPage.js:50 preferences/generalPage.js:81
+#: preferences/generalPage.js:93
+msgid "Never"
+msgstr "Ποτέ"
+
+#: preferences/displayPage.js:52
+msgid "Show status indicator in top panel"
+msgstr "Εμφάνιση ένδειξης κατάστασης στον επάνω πάνελ"
+
+#: preferences/displayPage.js:53
+msgid "Enable or disable the Caffeine icon in the top panel"
+msgstr "Ενεργοποίηση ή απενεργοποίηση του εικονιδίου Caffeine στον επάνω πάνελ"
+
+#: preferences/displayPage.js:64
+msgid "Show timer in top panel"
+msgstr "Εμφάνιση χρονοδιακόπτη στον επάνω πάνελ"
+
+#: preferences/displayPage.js:65
+msgid "Enable or disable the timer in the top panel"
+msgstr "Ενεργοποίηση ή απενεργοποίηση του χρονοδιακόπτη στον επάνω πάνελ"
+
+#: preferences/displayPage.js:76
+msgid "Notifications"
+msgstr "Ειδοποιήσεις"
+
+#: preferences/displayPage.js:77
+msgid "Enable notifications when Caffeine is enabled or disabled"
+msgstr ""
+"Ενεργοποίηση ειδοποιήσεων όταν η καφεΐνη είναι ενεργοποιημένη ή "
+"απενεργοποιημένη"
+
+#: preferences/displayPage.js:99
+msgid "Status indicator position"
+msgstr "Θέση ένδειξης κατάστασης"
+
+#: preferences/displayPage.js:100
+msgid "The position relative of indicator icon to other items"
+msgstr "Η θέση του εικονιδίου του δείκτη σε σχέση με άλλα στοιχεία"
+
+#: preferences/generalPage.js:42
+msgid "General"
+msgstr "Γενικά"
+
+#: preferences/generalPage.js:52
+msgid "Behavior"
+msgstr "Συμπεριφορά"
+
+#: preferences/generalPage.js:61
+msgid "Enable for fullscreen apps"
+msgstr "Ενεργοποίηση για εφαρμογές πλήρους οθόνης"
+
+#: preferences/generalPage.js:62
+msgid "Automatically enable when an app enters fullscreen mode"
+msgstr ""
+"Αυτόματη ενεργοποίηση όταν μια εφαρμογή εισέρχεται σε λειτουργία πλήρους "
+"οθόνης"
+
+#: preferences/generalPage.js:73
+msgid "Remember state"
+msgstr "Να θυμάστε την κατάσταση"
+
+#: preferences/generalPage.js:74
+msgid "Remember the last state across sessions and reboots"
+msgstr ""
+"Να θυμάστε την τελευταία κατάσταση σε όλες τις συνεδρίες και επανεκκινήσεις"
+
+#: preferences/generalPage.js:83 preferences/generalPage.js:95
+msgid "For apps on list"
+msgstr "Για εφαρμογές στη λίστα"
+
+#: preferences/generalPage.js:85
+msgid "Pause and resume Night Light"
+msgstr "Παύση και συνέχιση Νυχτερινό φως"
+
+#: preferences/generalPage.js:86
+msgid "Toggles the night light together with Caffeine's state"
+msgstr "Αλλάζει το νυχτερινό φως μαζί με την κατάσταση της καφεΐνης"
+
+#: preferences/generalPage.js:97
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+msgid "Allow screen blank"
+msgstr "Επιτρέψτε την απενεργοποίηση οθόνης"
+
+#: preferences/generalPage.js:98
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr ""
+"Επιτρέψτε την απενεργοποίηση της οθόνης όταν είναι ενεργοποιημένη η καφεΐνη"
+
+#: preferences/generalPage.js:113
+msgid "Timer"
+msgstr "Χρονοδιακόπτης"
+
+#: preferences/generalPage.js:118
+msgid "Durations"
+msgstr "Διάρκεια"
+
+#: preferences/generalPage.js:162
+msgid "Shortcut"
+msgstr "Συντόμευση"
+
+#: preferences/generalPage.js:170
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+msgid "Toggle shortcut"
+msgstr "Εναλλαγή συντόμευσης"
+
+#: preferences/generalPage.js:171
+msgid "Use Backspace to clear"
+msgstr "Χρησιμοποιήστε Backspace για να διαγράψετε"
+
+#: preferences/generalPage.js:212
+msgid "Set to "
+msgstr "Ορίστε σε "
+
+#: preferences/generalPage.js:259 preferences/generalPage.js:291
+msgid "New accelerator…"
+msgstr "Νέος επιταχυντής..."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+msgid "Application list"
+msgstr "Λίστα εφαρμογών"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:23
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
+msgstr ""
+"Μια λίστα συμβολοσειρών, κάθε μία από τις οποίες περιέχει ένα αναγνωριστικό "
+"εφαρμογής (όνομα αρχείου επιφάνειας εργασίας)"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+msgid "Store caffeine toggle state"
+msgstr "Αποθήκευση κατάστασης εναλλαγής καφεΐνης"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+msgid "Store caffeine user state"
+msgstr "Αποθήκευση κατάστασης χρήστη καφεΐνης"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+msgid "Specify time (minutes) for the timer countdown"
+msgstr ""
+"Καθορίστε το χρόνο (λεπτά) για την αντίστροφη μέτρηση του χρονοδιακόπτη"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+msgid "Specify index of duration range for the timer"
+msgstr "Καθορίστε τον δείκτη του εύρους διάρκειας για τον χρονοδιακόπτη"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+msgid "Restore caffeine state"
+msgstr "Επαναφορά κατάστασης καφεΐνης"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+msgid "Show indicator"
+msgstr "Εμφάνιση ένδειξης"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+msgid "Show the indicator on the top panel"
+msgstr "Εμφάνιση της ένδειξης στο επάνω πάνελ"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+msgid "Show notifications"
+msgstr "Εμφάνιση ειδοποιήσεων"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+msgid "Show notifications when enabled/disabled"
+msgstr "Εμφάνιση ειδοποιήσεων κατά την ενεργοποίηση/απενεργοποίηση"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Show timer"
+msgstr "Εμφάνιση χρονομέτρου"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+msgid "Show timer when enabled/disabled"
+msgstr "Εμφάνιση χρονομέτρου κατά την ενεργοποίηση/απενεργοποίηση"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+msgid "Enable when a fullscreen application is running"
+msgstr "Ενεργοποίηση όταν εκτελείται μια εφαρμογή πλήρους οθόνης"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+msgid "Night Light control mode"
+msgstr "Λειτουργία ελέγχου νυχτερινού φωτός"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+msgid "Set the way Caffeine interacts with the Night light setting."
+msgstr ""
+"Ρυθμίστε τον τρόπο με τον οποίο η Καφεΐνη αλληλεπιδρά με τη ρύθμιση "
+"Νυχτερινό φως."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+msgid "Allow turning off screen when Caffeine is enabled."
+msgstr ""
+"Επιτρέψτε την απενεργοποίηση της οθόνης όταν είναι ενεργοποιημένη η καφεΐνη."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+msgid "Trigger App control mode"
+msgstr "Λειτουργία ελέγχου πυροδότησης εφαρμογής"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+msgid "Set the trigger method for apps."
+msgstr "Ορίστε τη μέθοδο πυροδότησης για τις εφαρμογές."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+msgid "Shortcut to toggle Caffeine."
+msgstr "Συντόμευση για εναλλαγή της καφεΐνης."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+msgid "Default width for the preferences window"
+msgstr "Προεπιλεγμένο πλάτος για το παράθυρο προτιμήσεων"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
+msgid "Default height for the preferences window"
+msgstr "Προεπιλεγμένο ύψος για το παράθυρο προτιμήσεων"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
+msgid "Visible position offset of status icon in indicator menu"
+msgstr ""
+"Μετατόπιση της ορατής θέσης του εικονιδίου κατάστασης στο μενού ενδείξεων"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
+msgid ""
+"Real position offset of status icon in indicator menu that include invisible "
+"one"
+msgstr ""
+"Μετατόπιση της πραγματικής θέσης του εικονιδίου κατάστασης στο μενού "
+"ενδείξεων που περιλαμβάνει το αόρατο εικονίδιο"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
+msgid "Last item index in indicator menu"
+msgstr "Δείκτης τελευταίου στοιχείου στο μενού ενδείξεων"
