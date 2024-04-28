@@ -81,7 +81,9 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
 
         // Indicator position offset
         this.lastIndicatorPos = this._settings.get_int(this._settingsKey.INDICATOR_POS_MAX);
-        this.posIndicatorOffsetButton = new Gtk.SpinButton({
+        this.posIndicatorOffsetRow = new Adw.SpinRow({
+            title: _('Status indicator position'),
+            subtitle: _('The position relative of indicator icon to other items'),
             adjustment: new Gtk.Adjustment({
                 lower: -1,
                 upper: this.lastIndicatorPos,
@@ -90,23 +92,13 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
                 page_size: 0,
                 value: this._settings.get_int(this._settingsKey.INDICATOR_POSITION)
             }),
-            climb_rate: 1,
-            digits: 0,
-            numeric: true,
-            valign: Gtk.Align.CENTER
-        });
-        let posIndicatorOffsetRow = new Adw.ActionRow({
-            title: _('Status indicator position'),
-            subtitle: _('The position relative of indicator icon to other items'),
-            activatable_widget: this.posIndicatorOffsetButton
-        });
-        posIndicatorOffsetRow.add_suffix(this.posIndicatorOffsetButton);
+        })
 
         // Add elements
         displayGroup.add(showStatusIndicatorRow);
         displayGroup.add(showTimerRow);
         displayGroup.add(notificationRow);
-        displayGroup.add(posIndicatorOffsetRow);
+        displayGroup.add(this.posIndicatorOffsetRow);
         this.add(displayGroup);
 
         // Bind signals
@@ -126,13 +118,13 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
             this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS, widget.get_active());
         });
         this._settings.bind(this._settingsKey.INDICATOR_POSITION,
-            this.posIndicatorOffsetButton, 'value',
+            this.posIndicatorOffsetRow, 'value',
             Gio.SettingsBindFlags.DEFAULT);
         this._settings.connect(`changed::${this._settingsKey.INDICATOR_POS_MAX}`, this._updatePosMax.bind(this));
     }
 
     _updatePosMax() {
         this.lastIndicatorPos = this._settings.get_int(this._settingsKey.INDICATOR_POS_MAX);
-        this.posIndicatorOffsetButton.adjustment.set_upper(this.lastIndicatorPos);
+        this.posIndicatorOffsetRow.adjustment.set_upper(this.lastIndicatorPos);
     }
 });
