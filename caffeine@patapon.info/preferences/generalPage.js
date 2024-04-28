@@ -53,29 +53,19 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
             title: _('Behavior')
         });
 
-        // Enable / Disable fullscreen apps
-        let disableFullscreenSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.FULLSCREEN)
-        });
-        let disableFullscreenRow = new Adw.ActionRow({
+        // Enable / disable fullscreen apps
+        let disableFullscreenRow = new Adw.SwitchRow({
             title: _('Enable for fullscreen apps'),
             subtitle: _('Automatically enable when an app enters fullscreen mode'),
-            activatable_widget: disableFullscreenSwitch
+            active: this._settings.get_boolean(this._settingsKey.FULLSCREEN)
         });
-        disableFullscreenRow.add_suffix(disableFullscreenSwitch);
 
         // Remember state
-        let rememberStateSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.RESTORE)
-        });
-        let rememberStateRow = new Adw.ActionRow({
+        let rememberStateRow = new Adw.SwitchRow({
             title: _('Remember state'),
             subtitle: _('Remember the last state across sessions and reboots'),
-            activatable_widget: rememberStateSwitch
+            active: this._settings.get_boolean(this._settingsKey.RESTORE)
         });
-        rememberStateRow.add_suffix(rememberStateSwitch);
 
         // Pause and resume Night Light
         let pauseNightLight = new Gtk.StringList();
@@ -184,10 +174,10 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
 
         // Bind signals
         // --------------
-        disableFullscreenSwitch.connect('notify::active', (widget) => {
+        disableFullscreenRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.FULLSCREEN, widget.get_active());
         });
-        rememberStateSwitch.connect('notify::active', (widget) => {
+        rememberStateRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.RESTORE, widget.get_active());
         });
         pauseNightLightRow.connect('notify::selected', (widget) => {
