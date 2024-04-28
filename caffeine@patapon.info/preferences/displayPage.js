@@ -94,6 +94,7 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         // Bind signals
         // --------------
         showStatusIndicatorRow.connect('notify::selected', (widget) => {
+            // Grey out show timer setting if the indicator is set to never show
             if (widget.selected === 2) {
                 showTimerRow.set_sensitive(false);
             } else {
