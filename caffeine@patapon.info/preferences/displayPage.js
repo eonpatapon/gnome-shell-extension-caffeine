@@ -91,7 +91,7 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
                 page_increment: 1,
                 page_size: 0,
                 value: this._settings.get_int(this._settingsKey.INDICATOR_POSITION)
-            }),
+            })
         });
 
         // Add elements
