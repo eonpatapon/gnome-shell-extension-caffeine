@@ -56,28 +56,18 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         });
 
         // Show timer
-        let showTimerSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.SHOW_TIMER)
-        });
-        let showTimerRow = new Adw.ActionRow({
+        let showTimerRow = new Adw.SwitchRow({
             title: _('Show timer in top panel'),
             subtitle: _('Enable or disable the timer in the top panel'),
-            activatable_widget: showTimerSwitch
+            active: this._settings.get_boolean(this._settingsKey.SHOW_TIMER)
         });
-        showTimerRow.add_suffix(showTimerSwitch);
 
         // Notifications
-        let notificationSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATIONS)
-        });
-        let notificationRow = new Adw.ActionRow({
+        let notificationRow = new Adw.SwitchRow({
             title: _('Notifications'),
             subtitle: _('Enable notifications when Caffeine is enabled or disabled'),
-            activatable_widget: notificationSwitch
+            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATIONS)
         });
-        notificationRow.add_suffix(notificationSwitch);
 
         // Indicator position offset
         this.lastIndicatorPos = this._settings.get_int(this._settingsKey.INDICATOR_POS_MAX);
@@ -104,17 +94,18 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         // Bind signals
         // --------------
         showStatusIndicatorRow.connect('notify::selected', (widget) => {
+            // Grey out show timer setting if the indicator is set to never show
             if (widget.selected === 2) {
-                showTimerSwitch.set_sensitive(false);
+                showTimerRow.set_sensitive(false);
             } else {
-                showTimerSwitch.set_sensitive(true);
+                showTimerRow.set_sensitive(true);
             }
             this._settings.set_enum(this._settingsKey.SHOW_INDICATOR, widget.selected);
         });
-        showTimerSwitch.connect('notify::active', (widget) => {
+        showTimerRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.SHOW_TIMER, widget.get_active());
         });
-        notificationSwitch.connect('notify::active', (widget) => {
+        notificationRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS, widget.get_active());
         });
         this._settings.bind(this._settingsKey.INDICATOR_POSITION,
