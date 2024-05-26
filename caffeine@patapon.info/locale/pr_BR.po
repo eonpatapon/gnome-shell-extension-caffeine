@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-27 18:44+0100\n"
+"POT-Creation-Date: 2024-05-26 19:00+0200\n"
 "PO-Revision-Date: 2020-02-25 20:16-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -102,13 +102,13 @@ msgstr "Tela"
 msgid "Only when active"
 msgstr "Somente ativo"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:75
-#: preferences/generalPage.js:87
+#: preferences/displayPage.js:49 preferences/generalPage.js:65
+#: preferences/generalPage.js:77
 msgid "Always"
 msgstr "Sempre"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:74
-#: preferences/generalPage.js:86
+#: preferences/displayPage.js:50 preferences/generalPage.js:64
+#: preferences/generalPage.js:76
 msgid "Never"
 msgstr "Nunca"
 
@@ -122,32 +122,32 @@ msgstr "Mostrar o indicador no painel superior"
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Mostrar o indicador no painel superior"
 
-#: preferences/displayPage.js:64
+#: preferences/displayPage.js:60
 #, fuzzy
 msgid "Show timer in top panel"
 msgstr "Mostrar Cafeína no painel superior"
 
-#: preferences/displayPage.js:65
+#: preferences/displayPage.js:61
 #, fuzzy
 msgid "Enable or disable the timer in the top panel"
 msgstr "Mostrar o indicador no painel superior"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:67
 #, fuzzy
 msgid "Notifications"
 msgstr "Mostrar notificações"
 
-#: preferences/displayPage.js:77
+#: preferences/displayPage.js:68
 #, fuzzy
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Mostra notificações quando ativado/desativado"
 
-#: preferences/displayPage.js:99
+#: preferences/displayPage.js:75
 #, fuzzy
 msgid "Status indicator position"
 msgstr "Mostrar o indicador no painel superior"
 
-#: preferences/displayPage.js:100
+#: preferences/displayPage.js:76
 msgid "The position relative of indicator icon to other items"
 msgstr "Posição do indicador em relação aos outros icones"
 
@@ -159,61 +159,61 @@ msgstr "Geral"
 msgid "Behavior"
 msgstr "Comportamento"
 
-#: preferences/generalPage.js:54
+#: preferences/generalPage.js:50
 #, fuzzy
 msgid "Enable for fullscreen apps"
 msgstr "Ativar enquanto um aplicativo em tela cheia estiver executando"
 
-#: preferences/generalPage.js:55
+#: preferences/generalPage.js:51
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 
-#: preferences/generalPage.js:66
+#: preferences/generalPage.js:57
 msgid "Remember state"
 msgstr "Lembrar estado"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:58
 #, fuzzy
 msgid "Remember the last state across sessions and reboots"
 msgstr "Restaurar estado entre reinicializações"
 
-#: preferences/generalPage.js:76 preferences/generalPage.js:88
+#: preferences/generalPage.js:66 preferences/generalPage.js:78
 msgid "For apps on list"
 msgstr "Para aplicativos na lista"
 
-#: preferences/generalPage.js:78
+#: preferences/generalPage.js:68
 #, fuzzy
 msgid "Pause and resume Night Light"
 msgstr "Mostra notificações quando ativado/desativado"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:69
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Alternar Luz Noturna junto do estado do Cafeína"
 
-#: preferences/generalPage.js:90
+#: preferences/generalPage.js:80
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Allow screen blank"
 msgstr "Permitir tela desligada"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:81
 #, fuzzy
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Permitir desligar a tela quando o Cafeína está ativado"
 
-#: preferences/generalPage.js:113
+#: preferences/generalPage.js:103
 msgid "Shortcut"
 msgstr "Atalho"
 
-#: preferences/generalPage.js:121
+#: preferences/generalPage.js:111
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Toggle shortcut"
 msgstr "Atalho para alternar"
 
-#: preferences/generalPage.js:122
+#: preferences/generalPage.js:112
 msgid "Use Backspace to clear"
 msgstr "Use Backspace para limpar"
 
-#: preferences/generalPage.js:199 preferences/generalPage.js:231
+#: preferences/generalPage.js:189 preferences/generalPage.js:221
 msgid "New accelerator…"
 msgstr "Nova combinação..."
 

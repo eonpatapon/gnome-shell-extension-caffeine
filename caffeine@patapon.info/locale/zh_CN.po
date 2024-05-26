@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-27 18:44+0100\n"
+"POT-Creation-Date: 2024-05-26 19:00+0200\n"
 "PO-Revision-Date: 2022-06-30 11:54-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
@@ -97,13 +97,13 @@ msgstr "显示"
 msgid "Only when active"
 msgstr "仅在活动时"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:75
-#: preferences/generalPage.js:87
+#: preferences/displayPage.js:49 preferences/generalPage.js:65
+#: preferences/generalPage.js:77
 msgid "Always"
 msgstr "总是"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:74
-#: preferences/generalPage.js:86
+#: preferences/displayPage.js:50 preferences/generalPage.js:64
+#: preferences/generalPage.js:76
 msgid "Never"
 msgstr "从不"
 
@@ -115,27 +115,27 @@ msgstr "在顶部面板显示状态指示器"
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "在顶部面板启用或禁用 咖啡因 图标"
 
-#: preferences/displayPage.js:64
+#: preferences/displayPage.js:60
 msgid "Show timer in top panel"
 msgstr "在顶部面板显示 咖啡因 计时器"
 
-#: preferences/displayPage.js:65
+#: preferences/displayPage.js:61
 msgid "Enable or disable the timer in the top panel"
 msgstr "在顶部面板启用或禁用 咖啡因 计时器"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:67
 msgid "Notifications"
 msgstr "通知"
 
-#: preferences/displayPage.js:77
+#: preferences/displayPage.js:68
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "在 咖啡因 被启用或禁用时显示通知"
 
-#: preferences/displayPage.js:99
+#: preferences/displayPage.js:75
 msgid "Status indicator position"
 msgstr "在顶部面板显示状态指示器"
 
-#: preferences/displayPage.js:100
+#: preferences/displayPage.js:76
 msgid "The position relative of indicator icon to other items"
 msgstr "状态指示器的相对位置"
 
@@ -147,57 +147,57 @@ msgstr "常规"
 msgid "Behavior"
 msgstr "行为"
 
-#: preferences/generalPage.js:54
+#: preferences/generalPage.js:50
 msgid "Enable for fullscreen apps"
 msgstr "为全屏程序启用"
 
-#: preferences/generalPage.js:55
+#: preferences/generalPage.js:51
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "在有应用进入全屏模式时自动启用"
 
-#: preferences/generalPage.js:66
+#: preferences/generalPage.js:57
 msgid "Remember state"
 msgstr "记住状态"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:58
 msgid "Remember the last state across sessions and reboots"
 msgstr "跨会话和重启记住上一次的状态"
 
-#: preferences/generalPage.js:76 preferences/generalPage.js:88
+#: preferences/generalPage.js:66 preferences/generalPage.js:78
 msgid "For apps on list"
 msgstr "用于列表上的应用"
 
-#: preferences/generalPage.js:78
+#: preferences/generalPage.js:68
 msgid "Pause and resume Night Light"
 msgstr "暂停和恢复夜灯"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:69
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "随 咖啡因 的状态切换夜灯"
 
-#: preferences/generalPage.js:90
+#: preferences/generalPage.js:80
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Allow screen blank"
 msgstr "允许屏幕保护"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:81
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "允许在 咖啡因 启用时关闭屏幕"
 
-#: preferences/generalPage.js:113
+#: preferences/generalPage.js:103
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: preferences/generalPage.js:121
+#: preferences/generalPage.js:111
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Toggle shortcut"
 msgstr "修改快捷键"
 
-#: preferences/generalPage.js:122
+#: preferences/generalPage.js:112
 msgid "Use Backspace to clear"
 msgstr "使用退格来清除"
 
-#: preferences/generalPage.js:199 preferences/generalPage.js:231
+#: preferences/generalPage.js:189 preferences/generalPage.js:221
 msgid "New accelerator…"
 msgstr "新快捷键…"
 

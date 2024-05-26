@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-27 18:44+0100\n"
+"POT-Creation-Date: 2024-05-26 19:00+0200\n"
 "PO-Revision-Date: 2023-12-12 14:27+0100\n"
 "Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German\n"
@@ -97,13 +97,13 @@ msgstr "Anzeige"
 msgid "Only when active"
 msgstr "Nur wenn aktiv"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:75
-#: preferences/generalPage.js:87
+#: preferences/displayPage.js:49 preferences/generalPage.js:65
+#: preferences/generalPage.js:77
 msgid "Always"
 msgstr "Immer"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:74
-#: preferences/generalPage.js:86
+#: preferences/displayPage.js:50 preferences/generalPage.js:64
+#: preferences/generalPage.js:76
 msgid "Never"
 msgstr "Nie"
 
@@ -115,27 +115,27 @@ msgstr "Indikatorsymbol in der oberen Leiste anzeigen"
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Das Koffeinsymbol in der oberen Leiste aktivieren/deaktivieren"
 
-#: preferences/displayPage.js:64
+#: preferences/displayPage.js:60
 msgid "Show timer in top panel"
 msgstr "Timer in der oberen Leiste anzeigen"
 
-#: preferences/displayPage.js:65
+#: preferences/displayPage.js:61
 msgid "Enable or disable the timer in the top panel"
 msgstr "Den Timer in der oberen Leiste aktivieren oder deaktivieren"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:67
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: preferences/displayPage.js:77
+#: preferences/displayPage.js:68
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Benachrichtigungen anzeigen, wenn Koffein aktiviert/deaktiviert wird"
 
-#: preferences/displayPage.js:99
+#: preferences/displayPage.js:75
 msgid "Status indicator position"
 msgstr "Position der Statusanzeige"
 
-#: preferences/displayPage.js:100
+#: preferences/displayPage.js:76
 msgid "The position relative of indicator icon to other items"
 msgstr "Die Position des Indikatorsymbols relativ zu anderen Elementen"
 
@@ -147,58 +147,58 @@ msgstr "Allgemein"
 msgid "Behavior"
 msgstr "Verhalten"
 
-#: preferences/generalPage.js:54
+#: preferences/generalPage.js:50
 msgid "Enable for fullscreen apps"
 msgstr "Für Anwendungen im Vollbildmodus aktivieren"
 
-#: preferences/generalPage.js:55
+#: preferences/generalPage.js:51
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr ""
 "Automatisch aktivieren,wenn eine Anwendung in den Vollbildmodus wechselt"
 
-#: preferences/generalPage.js:66
+#: preferences/generalPage.js:57
 msgid "Remember state"
 msgstr "Zustand merken"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:58
 msgid "Remember the last state across sessions and reboots"
 msgstr "Den letzten Zustand über Sitzungen und Neustarts merken"
 
-#: preferences/generalPage.js:76 preferences/generalPage.js:88
+#: preferences/generalPage.js:66 preferences/generalPage.js:78
 msgid "For apps on list"
 msgstr "Für Anwendungen auf der Liste"
 
-#: preferences/generalPage.js:78
+#: preferences/generalPage.js:68
 msgid "Pause and resume Night Light"
 msgstr "Nachtmodus pausieren und fortsetzen"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:69
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Schaltet den Nachtmodus zusammen mit Koffein um"
 
-#: preferences/generalPage.js:90
+#: preferences/generalPage.js:80
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Allow screen blank"
 msgstr "Leeren Bildschirm erlauben"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:81
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Ausschalten des Bildschirms erlauben, wenn Koffein aktiviert ist"
 
-#: preferences/generalPage.js:113
+#: preferences/generalPage.js:103
 msgid "Shortcut"
 msgstr "Tastenkürzel"
 
-#: preferences/generalPage.js:121
+#: preferences/generalPage.js:111
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Toggle shortcut"
 msgstr "Tastenkürzel zur (De-)Aktivierung"
 
-#: preferences/generalPage.js:122
+#: preferences/generalPage.js:112
 msgid "Use Backspace to clear"
 msgstr "Verwenden Sie die Leertaste zum Löschen"
 
-#: preferences/generalPage.js:199 preferences/generalPage.js:231
+#: preferences/generalPage.js:189 preferences/generalPage.js:221
 msgid "New accelerator…"
 msgstr "Neues Tastenkürzel …"
 

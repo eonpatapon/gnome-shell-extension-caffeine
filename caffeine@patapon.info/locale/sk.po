@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-27 18:44+0100\n"
+"POT-Creation-Date: 2024-05-26 19:00+0200\n"
 "PO-Revision-Date: 2023-05-28 23:30+0200\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak\n"
@@ -97,13 +97,13 @@ msgstr "Displej"
 msgid "Only when active"
 msgstr "Len keď je aktívny"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:75
-#: preferences/generalPage.js:87
+#: preferences/displayPage.js:49 preferences/generalPage.js:65
+#: preferences/generalPage.js:77
 msgid "Always"
 msgstr "Vždy"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:74
-#: preferences/generalPage.js:86
+#: preferences/displayPage.js:50 preferences/generalPage.js:64
+#: preferences/generalPage.js:76
 msgid "Never"
 msgstr "Nikdy"
 
@@ -115,27 +115,27 @@ msgstr "Zobraziť indikátor stavu v hornej lište"
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "Povoliť alebo zakázať Kofeín v hornej lište"
 
-#: preferences/displayPage.js:64
+#: preferences/displayPage.js:60
 msgid "Show timer in top panel"
 msgstr "Zobraziť časovač v hornej lište"
 
-#: preferences/displayPage.js:65
+#: preferences/displayPage.js:61
 msgid "Enable or disable the timer in the top panel"
 msgstr "Povoliť alebo zakázať Caffeine v hornej lište"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:67
 msgid "Notifications"
 msgstr "Oznámenia"
 
-#: preferences/displayPage.js:77
+#: preferences/displayPage.js:68
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Povoliť oznámenia, keď je Kofeín povolené alebo zakázané"
 
-#: preferences/displayPage.js:99
+#: preferences/displayPage.js:75
 msgid "Status indicator position"
 msgstr "Umiestnenie indikátoru stavu"
 
-#: preferences/displayPage.js:100
+#: preferences/displayPage.js:76
 msgid "The position relative of indicator icon to other items"
 msgstr "Relatívne umiestnenie ikony voči ostatným položkám"
 
@@ -147,57 +147,57 @@ msgstr "Všeobecné"
 msgid "Behavior"
 msgstr "Správanie"
 
-#: preferences/generalPage.js:54
+#: preferences/generalPage.js:50
 msgid "Enable for fullscreen apps"
 msgstr "Povoliť pre celoobrazovkové aplikácie"
 
-#: preferences/generalPage.js:55
+#: preferences/generalPage.js:51
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "Automaticky povoliť, keď aplikácia prejde do režimu celej obrazovky"
 
-#: preferences/generalPage.js:66
+#: preferences/generalPage.js:57
 msgid "Remember state"
 msgstr "Pamätať stav"
 
-#: preferences/generalPage.js:67
+#: preferences/generalPage.js:58
 msgid "Remember the last state across sessions and reboots"
 msgstr "Pamätať si posledný stav medzi sedeniami a reštartami"
 
-#: preferences/generalPage.js:76 preferences/generalPage.js:88
+#: preferences/generalPage.js:66 preferences/generalPage.js:78
 msgid "For apps on list"
 msgstr "Pre aplikácie na zozname"
 
-#: preferences/generalPage.js:78
+#: preferences/generalPage.js:68
 msgid "Pause and resume Night Light"
 msgstr "Pozastaviť a obnoviť Nočné svetlo"
 
-#: preferences/generalPage.js:79
+#: preferences/generalPage.js:69
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Prepne Nočné svetlo spolu so stavom Kofeín"
 
-#: preferences/generalPage.js:90
+#: preferences/generalPage.js:80
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Allow screen blank"
 msgstr "Povoliť prázdnu obrazovku"
 
-#: preferences/generalPage.js:91
+#: preferences/generalPage.js:81
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Povoliť vypínanie obrazovky s povoleným Kofeín"
 
-#: preferences/generalPage.js:113
+#: preferences/generalPage.js:103
 msgid "Shortcut"
 msgstr "Skratka"
 
-#: preferences/generalPage.js:121
+#: preferences/generalPage.js:111
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Toggle shortcut"
 msgstr "Skratka prepnutia"
 
-#: preferences/generalPage.js:122
+#: preferences/generalPage.js:112
 msgid "Use Backspace to clear"
 msgstr "Použite backspace pre vymazanie"
 
-#: preferences/generalPage.js:199 preferences/generalPage.js:231
+#: preferences/generalPage.js:189 preferences/generalPage.js:221
 msgid "New accelerator…"
 msgstr "Nová skratka…"
 
