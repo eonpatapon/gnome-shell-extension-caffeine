@@ -23,7 +23,7 @@ jobs:
       run: |
         make install
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: caffeine@patapon.info.zip
         path: caffeine@patapon.info.zip
