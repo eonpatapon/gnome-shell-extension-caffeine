@@ -7,9 +7,9 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
         packages: make gettext gnome-shell
@@ -23,7 +23,7 @@ jobs:
       run: |
         make install
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: caffeine@patapon.info.zip
         path: caffeine@patapon.info.zip
