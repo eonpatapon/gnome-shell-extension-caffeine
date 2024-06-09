@@ -22,11 +22,6 @@
         <summary>Application list</summary>
         <description>A list of strings, each containing an application id (desktop file name)</description>
     </key>
-    <key type="b" name="toggle-state">
-        <default>false</default>
-        <summary>Store caffeine toggle state</summary>
-        <description></description>
-    </key>
     <key type="b" name="user-enabled">
         <default>false</default>
         <summary>Store caffeine user state</summary>
