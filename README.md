@@ -60,20 +60,3 @@ This option enable Caffeine for a given amount of time (similar to Caffeine in L
 ### Preferences
 
 ![Preferences](screenshots/screenshot-prefs.png)
-
-## CLI
-
-- Get current state:
-  ```sh
-  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ get org.gnome.shell.extensions.caffeine toggle-state
-  ```
-- Enable Caffeine:
-  ```sh
-  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ set org.gnome.shell.extensions.caffeine toggle-state true
-  ```
-- Disable Caffeine:
-  ```sh
-  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ set org.gnome.shell.extensions.caffeine toggle-state false
-  ```
-
-`--schemadir` — path to the extension schemas directory. It may be different on your system.
