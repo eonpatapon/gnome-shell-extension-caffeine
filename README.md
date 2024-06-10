@@ -15,7 +15,7 @@ This extension supports GNOME Shell `3.4` -> `45`
 
 |Branch                   |Version|Compatible GNOME version|
 |-------------------------|:-----:|------------------------|
-| master                  |    53 | GNOME 45 -> 46         |
+| master                  |    54 | GNOME 45 -> 46         |
 | gnome-shell-43-44       |    51 | GNOME 43 -> 44         |
 | gnome-shell-40-42       |    42 | GNOME 40 -> 42         |
 | gnome-shell-3.36-3.38   |    37 | GNOME 3.36 -> 3.38     |
@@ -60,20 +60,3 @@ This option enable Caffeine for a given amount of time (similar to Caffeine in L
 ### Preferences
 
 ![Preferences](screenshots/screenshot-prefs.png)
-
-## CLI
-
-- Get current state:
-  ```sh
-  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ get org.gnome.shell.extensions.caffeine toggle-state
-  ```
-- Enable Caffeine:
-  ```sh
-  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ set org.gnome.shell.extensions.caffeine toggle-state true
-  ```
-- Disable Caffeine:
-  ```sh
-  gsettings --schemadir ~/.local/share/gnome-shell/extensions/caffeine@patapon.info/schemas/ set org.gnome.shell.extensions.caffeine toggle-state false
-  ```
-
-`--schemadir` — path to the extension schemas directory. It may be different on your system.
