@@ -120,7 +120,8 @@ const InhibitorManager = GObject.registerClass({
         this._inhibitorCookie = null;
         this._userEnabled = false;
         this._triggerApp = null;
-        this._previousReasons = [];
+        this._lastReasons = [];
+        this._ignoredReasons = [];
 
         // DBus proxies
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
@@ -255,20 +256,19 @@ const InhibitorManager = GObject.registerClass({
     _updateState() {
         // Get the reasons for inhibiting
         let reasons = this._getInhibitReasons();
+
+        // If any ignored reasons are no longer active, stop ignoring them
+        this._ignoredReasons = this._ignoredReasons.filter(Set.prototype.has, new Set(reasons));
+
+        // Ignore any reasons in the ignore list, then save them
+        reasons = reasons.filter((n) => !this._ignoredReasons.includes(n));
+        this._lastReasons = [...reasons];
         let shouldInhibit = reasons.length !== 0;
 
-        // If previous reasons includes the user's choice and now it doesn't force disable
-        let forceDisable = false;
-        if (this._previousReasons.includes('user') && !reasons.includes('user')) {
-            forceDisable = true;
-        }
-        this._previousReasons = reasons;
-
         // Update inhibitor and night light if required
-        let newState = shouldInhibit && !forceDisable;
         let handleNightLight = this.isNightLightManaged();
-        if (this._isInhibited !== newState) {
-            if (newState) {
+        if (this._isInhibited !== shouldInhibit) {
+            if (shouldInhibit) {
                 this._addInhibitor(reasons);
 
                 if (handleNightLight) {
@@ -337,7 +337,7 @@ const InhibitorManager = GObject.registerClass({
 
     isNightLightManaged() {
         let handleNightLight = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
-        if (this._previousReasons.includes('app')) {
+        if (this._lastReasons.includes('app')) {
             handleNightLight = this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER;
         }
 
@@ -363,6 +363,10 @@ const InhibitorManager = GObject.registerClass({
 
     setUserEnabled(enabled) {
         this._userEnabled = enabled;
+        if (!enabled) {
+            this._ignoredReasons = this._getInhibitReasons();
+        }
+
         this._updateState();
     }
 
