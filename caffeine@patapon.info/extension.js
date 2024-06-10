@@ -56,7 +56,6 @@ const INDICATOR_POS_MAX = 'indicator-position-max';
 const ColorInterface = '<node> \
   <interface name="org.gnome.SettingsDaemon.Color"> \
     <property name="DisabledUntilTomorrow" type="b" access="readwrite"/>\
-    <property name="NightLightActive" type="b" access="read"/>\
   </interface>\
   </node>';
 
@@ -120,6 +119,7 @@ const InhibitorManager = GObject.registerClass({
         this._inhibitorCookie = null;
         this._userEnabled = false;
         this._triggerApp = null;
+        this._tempManageLight = false;
         this._lastReasons = [];
         this._ignoredReasons = [];
 
@@ -140,7 +140,6 @@ const InhibitorManager = GObject.registerClass({
 
         this._settings = settings;
         this._appSystem = Shell.AppSystem.get_default();
-        this._lastNightLightDisabled = this._colorProxy.DisabledUntilTomorrow;
 
         // Update state when extension settings changed
         this._settings.connectObject(
@@ -265,30 +264,43 @@ const InhibitorManager = GObject.registerClass({
         this._lastReasons = [...reasons];
         let shouldInhibit = reasons.length !== 0;
 
-        // Update inhibitor and night light if required
-        let handleNightLight = this.isNightLightManaged();
+        /* If no trigger app is running, and the light is in app-only mode,
+           and we left it blocked, unblock it
+        */
+        if (!reasons.includes('app')) {
+            if (this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.FOR_APPS) {
+                if (this._colorProxy.DisabledUntilTomorrow === true) {
+                    this._tempManageLight = true;
+                }
+            }
+        }
+
+        // Update inhibitor if required
         if (this._isInhibited !== shouldInhibit) {
             if (shouldInhibit) {
                 this._addInhibitor(reasons);
-
-                if (handleNightLight) {
-                    // Turn night light on
-                    this._colorProxy.DisabledUntilTomorrow = false;
-                    this._lastNightLightDisabled = false;
-                }
             } else {
                 this._removeInhibitor();
+            }
+        }
 
-                if (handleNightLight) {
-                    // Turn night light off
-                    this._colorProxy.DisabledUntilTomorrow = true;
-                    this._lastNightLightDisabled = true;
-                }
+        // Update night light if required
+        if (this.isNightLightManaged()) {
+            // If this._tempManageLight is true we're actually disabling
+            if (shouldInhibit && !this._tempManageLight) {
+                // Block night light
+                this._colorProxy.DisabledUntilTomorrow = true;
+            } else {
+                // Allow night light
+                this._colorProxy.DisabledUntilTomorrow = false;
             }
         }
 
         // Let indicator know that either the state or reasons may have changed
         this.emit('update');
+
+        // Remove any night light management override now the signal is done
+        this._tempManageLight = false;
     }
 
     _addInhibitor(reasons) {
@@ -336,21 +348,18 @@ const InhibitorManager = GObject.registerClass({
     }
 
     isNightLightManaged() {
+        // Don't bother checking settings if it's overridden
+        if (this._tempManageLight) {
+            return true;
+        }
+
+        // Decide if we should control the night light from user preference
         let handleNightLight = this._settings.get_enum(NIGHT_LIGHT_KEY) === ControlContext.ALWAYS;
         if (this._lastReasons.includes('app')) {
             handleNightLight = this._settings.get_enum(NIGHT_LIGHT_KEY) > ControlContext.NEVER;
         }
 
-        // Don't handle the night light if it's been changed
-        if (this._lastNightLightDisabled !== this._colorProxy.DisabledUntilTomorrow) {
-            handleNightLight = false;
-        }
-
         return handleNightLight;
-    }
-
-    isNightLightOn() {
-        return this._colorProxy.NightLightActive;
     }
 
     getInhibitState() {
@@ -855,10 +864,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
 
         if (this._inhibitorManager.isNightLightManaged()) {
-            if (this._inhibitorManager.isNightLightOn()) {
-                message = message + '. ' + _('Night Light resumed');
-            } else {
+            if (state) {
                 message = message + '. ' + _('Night Light paused');
+            } else {
+                message = message + '. ' + _('Night Light resumed');
             }
         }
 
