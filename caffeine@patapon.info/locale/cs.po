@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 19:00+0200\n"
+"POT-Creation-Date: 2024-06-22 11:15+0200\n"
 "PO-Revision-Date: 2023-04-12 18:40+0200\n"
 "Last-Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
 "Language-Team: Czech\n"
@@ -33,7 +33,7 @@ msgstr "Nekonečně"
 msgid " hours "
 msgstr " hodiny "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:213
+#: extension.js:201 extension.js:814 preferences/timerPage.js:211
 msgid " minutes"
 msgstr " minut"
 
@@ -213,31 +213,31 @@ msgstr "Přednastavená trvání"
 msgid "Durations"
 msgstr "Doby trvání"
 
-#: preferences/timerPage.js:100
+#: preferences/timerPage.js:98
 msgid "Custom durations"
 msgstr "Vlastní trvání"
 
-#: preferences/timerPage.js:108
+#: preferences/timerPage.js:106
 msgid "Short timer"
 msgstr "Krátký časovač"
 
-#: preferences/timerPage.js:113
+#: preferences/timerPage.js:111
 msgid "Medium timer"
 msgstr "Střední časovač"
 
-#: preferences/timerPage.js:118
+#: preferences/timerPage.js:116
 msgid "Long timer"
 msgstr "Dlouhý časovač"
 
-#: preferences/timerPage.js:126
+#: preferences/timerPage.js:124
 msgid "Enable custom values"
 msgstr "Povolit vlastní hodnoty"
 
-#: preferences/timerPage.js:127
+#: preferences/timerPage.js:125
 msgid "Select custom value for each duration"
 msgstr "Vyberte vlastní hodnotu pro každou dobu trvání"
 
-#: preferences/timerPage.js:210
+#: preferences/timerPage.js:208
 msgid "Set to "
 msgstr "Nastaveny na "
 

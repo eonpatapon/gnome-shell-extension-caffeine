@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 19:00+0200\n"
+"POT-Creation-Date: 2024-06-22 11:15+0200\n"
 "PO-Revision-Date: 2023-08-15 12:00+0200\n"
 "Last-Translator: Pakaoraki <pakaoraki@gmx.com>\n"
 "Language-Team: French\n"
@@ -33,7 +33,7 @@ msgstr "無限"
 msgid " hours "
 msgstr " 時間 "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:213
+#: extension.js:201 extension.js:814 preferences/timerPage.js:211
 msgid " minutes"
 msgstr " 分"
 
@@ -221,31 +221,31 @@ msgstr "プリセットの期間"
 msgid "Durations"
 msgstr ""
 
-#: preferences/timerPage.js:100
+#: preferences/timerPage.js:98
 msgid "Custom durations"
 msgstr "カスタム期間"
 
-#: preferences/timerPage.js:108
+#: preferences/timerPage.js:106
 msgid "Short timer"
 msgstr "短時間タイマー"
 
-#: preferences/timerPage.js:113
+#: preferences/timerPage.js:111
 msgid "Medium timer"
 msgstr "中期タイマー"
 
-#: preferences/timerPage.js:118
+#: preferences/timerPage.js:116
 msgid "Long timer"
 msgstr "長時間タイマー"
 
-#: preferences/timerPage.js:126
+#: preferences/timerPage.js:124
 msgid "Enable custom values"
 msgstr "カスタム値を有効にする"
 
-#: preferences/timerPage.js:127
+#: preferences/timerPage.js:125
 msgid "Select custom value for each duration"
 msgstr "各期間にカスタム値を選択します"
 
-#: preferences/timerPage.js:210
+#: preferences/timerPage.js:208
 msgid "Set to "
 msgstr ""
 

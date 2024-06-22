@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 19:00+0200\n"
+"POT-Creation-Date: 2024-06-22 11:15+0200\n"
 "PO-Revision-Date: 2024-04-24 15:36+0300\n"
 "Last-Translator: Αθανάσιος Νεκτάριος Καραχάλιος Στάγκας <nasos.karachalios."
 "stagkas@proton.me>\n"
@@ -34,7 +34,7 @@ msgstr "Άπειρο"
 msgid " hours "
 msgstr " ώρες "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:213
+#: extension.js:201 extension.js:814 preferences/timerPage.js:211
 msgid " minutes"
 msgstr " λεπτά"
 
@@ -220,31 +220,31 @@ msgstr "Προκαθορισμένες διάρκειες"
 msgid "Durations"
 msgstr "Διάρκεια"
 
-#: preferences/timerPage.js:100
+#: preferences/timerPage.js:98
 msgid "Custom durations"
 msgstr "Προσαρμοσμένες διάρκειες"
 
-#: preferences/timerPage.js:108
+#: preferences/timerPage.js:106
 msgid "Short timer"
 msgstr "Σύντομος χρονομετρητής"
 
-#: preferences/timerPage.js:113
+#: preferences/timerPage.js:111
 msgid "Medium timer"
 msgstr "Μεσαίος χρονομετρητής"
 
-#: preferences/timerPage.js:118
+#: preferences/timerPage.js:116
 msgid "Long timer"
 msgstr "Μακρύς χρονομετρητής"
 
-#: preferences/timerPage.js:126
+#: preferences/timerPage.js:124
 msgid "Enable custom values"
 msgstr "Ενεργοποίηση προσαρμοσμένων τιμών"
 
-#: preferences/timerPage.js:127
+#: preferences/timerPage.js:125
 msgid "Select custom value for each duration"
 msgstr "Επιλέξτε προσαρμοσμένη τιμή για κάθε διάρκεια"
 
-#: preferences/timerPage.js:210
+#: preferences/timerPage.js:208
 msgid "Set to "
 msgstr "Ορίστε σε "
 

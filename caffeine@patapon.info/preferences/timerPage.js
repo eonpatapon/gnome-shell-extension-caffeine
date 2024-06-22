@@ -76,11 +76,9 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             digits: 0,
             adjustment: adjustSliderTimer
         });
-        this.sliderTimer.add_mark(0, Gtk.PositionType.BOTTOM, null);
-        this.sliderTimer.add_mark(1, Gtk.PositionType.BOTTOM, null);
-        this.sliderTimer.add_mark(2, Gtk.PositionType.BOTTOM, null);
-        this.sliderTimer.add_mark(3, Gtk.PositionType.BOTTOM, null);
-        this.sliderTimer.add_mark(4, Gtk.PositionType.BOTTOM, null);
+        for (let index = 0; index < 5; index++) {
+            this.sliderTimer.add_mark(index, Gtk.PositionType.BOTTOM, null);
+        }
         this.timerOptionRow.add_suffix(this.sliderTimer);
 
         // Add elements

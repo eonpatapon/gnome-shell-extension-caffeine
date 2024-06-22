@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 19:00+0200\n"
+"POT-Creation-Date: 2024-06-22 11:15+0200\n"
 "PO-Revision-Date: 2024-04-24 06:13+0300\n"
 "Language-Team: Arabic <>\n"
 "Language: ar\n"
@@ -36,7 +36,7 @@ msgstr "لانهائي"
 msgid " hours "
 msgstr " ساعات "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:213
+#: extension.js:201 extension.js:814 preferences/timerPage.js:211
 msgid " minutes"
 msgstr "دقائق"
 
@@ -216,31 +216,31 @@ msgstr "المدد المحددة مسبقًا"
 msgid "Durations"
 msgstr "مدَد المؤقت"
 
-#: preferences/timerPage.js:100
+#: preferences/timerPage.js:98
 msgid "Custom durations"
 msgstr "مدد مخصصة"
 
-#: preferences/timerPage.js:108
+#: preferences/timerPage.js:106
 msgid "Short timer"
 msgstr "مؤقت قصير"
 
-#: preferences/timerPage.js:113
+#: preferences/timerPage.js:111
 msgid "Medium timer"
 msgstr "مؤقت متوسط"
 
-#: preferences/timerPage.js:118
+#: preferences/timerPage.js:116
 msgid "Long timer"
 msgstr "مؤقت طويل"
 
-#: preferences/timerPage.js:126
+#: preferences/timerPage.js:124
 msgid "Enable custom values"
 msgstr "تمكين القيم المخصصة"
 
-#: preferences/timerPage.js:127
+#: preferences/timerPage.js:125
 msgid "Select custom value for each duration"
 msgstr "اختر قيمة مخصصة لكل مدة"
 
-#: preferences/timerPage.js:210
+#: preferences/timerPage.js:208
 msgid "Set to "
 msgstr "عيّن إلى"
 

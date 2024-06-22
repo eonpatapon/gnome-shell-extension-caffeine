@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 19:00+0200\n"
+"POT-Creation-Date: 2024-06-22 11:15+0200\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid " hours "
 msgstr " 시간 "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:213
+#: extension.js:201 extension.js:814 preferences/timerPage.js:211
 msgid " minutes"
 msgstr ""
 
@@ -219,31 +219,31 @@ msgstr "프리셋 기간"
 msgid "Durations"
 msgstr ""
 
-#: preferences/timerPage.js:100
+#: preferences/timerPage.js:98
 msgid "Custom durations"
 msgstr "사용자 지정 기간"
 
-#: preferences/timerPage.js:108
+#: preferences/timerPage.js:106
 msgid "Short timer"
 msgstr "짧은 시간 타이머"
 
-#: preferences/timerPage.js:113
+#: preferences/timerPage.js:111
 msgid "Medium timer"
 msgstr "중간 시간 타이머"
 
-#: preferences/timerPage.js:118
+#: preferences/timerPage.js:116
 msgid "Long timer"
 msgstr "긴 시간 타이머"
 
-#: preferences/timerPage.js:126
+#: preferences/timerPage.js:124
 msgid "Enable custom values"
 msgstr "사용자 정의 값 활성화"
 
-#: preferences/timerPage.js:127
+#: preferences/timerPage.js:125
 msgid "Select custom value for each duration"
 msgstr "각 기간에 대해 사용자 지정 값을 선택합니다"
 
-#: preferences/timerPage.js:210
+#: preferences/timerPage.js:208
 msgid "Set to "
 msgstr ""
 
