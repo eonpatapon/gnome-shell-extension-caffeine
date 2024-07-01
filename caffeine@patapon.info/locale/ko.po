@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-22 11:15+0200\n"
+"POT-Creation-Date: 2024-07-01 15:10+0200\n"
 "PO-Revision-Date: 2022-09-10 10:53+0900\n"
 "Last-Translator: kuroehanako <kmj10727@gmail.com>\n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Caffeine"
 msgstr "카페인"
 
-#: extension.js:153 extension.js:629
+#: extension.js:153 extension.js:643
 msgid "Caffeine Timer"
 msgstr ""
 
@@ -27,31 +27,47 @@ msgstr ""
 msgid "Infinite"
 msgstr ""
 
-#: extension.js:198 extension.js:811
+#: extension.js:201 extension.js:829
+msgid " hour "
+msgstr " 시간 "
+
+#: extension.js:204 extension.js:832
 msgid " hours "
 msgstr " 시간 "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:211
-msgid " minutes"
-msgstr ""
+#: extension.js:211
+msgid " minute"
+msgstr " 분"
 
-#: extension.js:776
+#: extension.js:214 preferences/timerPage.js:211
+msgid " minutes"
+msgstr " 분"
+
+#: extension.js:790
 msgid "Caffeine enabled"
 msgstr ""
 
-#: extension.js:778
+#: extension.js:792
 #, fuzzy
 msgid "Night Light paused"
 msgstr "야간 모드를 멈춥니"
 
-#: extension.js:783
+#: extension.js:797
 msgid "Caffeine disabled"
 msgstr ""
 
-#: extension.js:785
+#: extension.js:799
 #, fuzzy
 msgid "Night Light resumed"
 msgstr "야간 모드를 다시 켭니"
+
+#: extension.js:839
+msgid " minute "
+msgstr ""
+
+#: extension.js:842
+msgid " minutes "
+msgstr ""
 
 #: preferences/appsPage.js:33
 msgid "Apps"

@@ -194,11 +194,25 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             } else {
                 let hours = Math.floor(timer / 3600);
                 let minutes = Math.floor((timer % 3600) / 60);
-                if (hours !== 0) {
-                    label = hours + _(' hours ');
+                switch (hours) {
+                    case 0:
+                        break;
+                    case 1:
+                        label = hours + _(' hour ');
+                        break;
+                    default:
+                        label = hours + _(' hours ');
+                        break;
                 }
-                if (minutes !== 0) {
-                    label = label + minutes + _(' minutes');
+                switch (minutes) {
+                    case 0:
+                        break;
+                    case 1:
+                        label = label + minutes + _(' minute');
+                        break;
+                    default:
+                        label = label + minutes + _(' minutes');
+                        break;
                 }
             }
             if (!label) {
@@ -807,12 +821,27 @@ class Caffeine extends QuickSettings.SystemIndicator {
             const timerDuration = this._settings.get_int(TIMER_KEY);
             const hours = Math.floor(timerDuration / 3600);
             const min = Math.floor((timerDuration % 3600) / 60);
-            let timeLabel = hours !== 0
-                ? hours + _(' hours ')
-                : '';
-            timeLabel += min !== 0
-                ? min + _(' minutes')
-                : '';
+            let timeLabel = '';
+            switch (hours) {
+                case 0:
+                    break;
+                case 1:
+                    timeLabel = hours + _(' hour ');
+                    break;
+                default:
+                    timeLabel = hours + _(' hours ');
+                    break;
+            }
+            switch (min) {
+                case 0:
+                    break;
+                case 1:
+                    timeLabel += min + _(' minute ');
+                    break;
+                default:
+                    timeLabel += min + _(' minutes ');
+                    break;
+            }
             this._caffeineToggle.subtitle = timerDuration !== 0
                 ? timeLabel
                 : null;
@@ -1120,3 +1149,4 @@ export default class CaffeineExtension extends Extension {
         Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
     }
 }
+

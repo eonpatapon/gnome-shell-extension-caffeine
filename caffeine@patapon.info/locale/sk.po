@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-22 11:15+0200\n"
+"POT-Creation-Date: 2024-07-01 15:10+0200\n"
 "PO-Revision-Date: 2023-05-28 23:30+0200\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Caffeine"
 msgstr "Kofeín"
 
-#: extension.js:153 extension.js:629
+#: extension.js:153 extension.js:643
 msgid "Caffeine Timer"
 msgstr "Časovač Kofeín"
 
@@ -29,29 +29,47 @@ msgstr "Časovač Kofeín"
 msgid "Infinite"
 msgstr "Nekonečno"
 
-#: extension.js:198 extension.js:811
+#: extension.js:201 extension.js:829
+msgid " hour "
+msgstr " hodina "
+
+#: extension.js:204 extension.js:832
 msgid " hours "
 msgstr " hodiny "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:211
-msgid " minutes"
-msgstr " minút"
+#: extension.js:211
+msgid " minute"
+msgstr " minúta"
 
-#: extension.js:776
+#: extension.js:214 preferences/timerPage.js:211
+msgid " minutes"
+msgstr " minúty"
+
+#: extension.js:790
 msgid "Caffeine enabled"
 msgstr "Kofeín povolený"
 
-#: extension.js:778
+#: extension.js:792
 msgid "Night Light paused"
 msgstr "Nočné svetlo pozastavené"
 
-#: extension.js:783
+#: extension.js:797
 msgid "Caffeine disabled"
 msgstr "Kofeín vypnutý"
 
-#: extension.js:785
+#: extension.js:799
 msgid "Night Light resumed"
 msgstr "Nočné svetlo obnovené"
+
+#: extension.js:839
+#, fuzzy
+msgid " minute "
+msgstr " minút"
+
+#: extension.js:842
+#, fuzzy
+msgid " minutes "
+msgstr " minút"
 
 #: preferences/appsPage.js:33
 msgid "Apps"

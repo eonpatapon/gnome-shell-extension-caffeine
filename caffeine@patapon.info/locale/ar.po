@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-22 11:15+0200\n"
+"POT-Creation-Date: 2024-07-01 15:10+0200\n"
 "PO-Revision-Date: 2024-04-24 06:13+0300\n"
 "Language-Team: Arabic <>\n"
 "Language: ar\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Caffeine"
 msgstr "الكافيين"
 
-#: extension.js:153 extension.js:629
+#: extension.js:153 extension.js:643
 msgid "Caffeine Timer"
 msgstr "مؤقت الكافيين"
 
@@ -32,29 +32,47 @@ msgstr "مؤقت الكافيين"
 msgid "Infinite"
 msgstr "لانهائي"
 
-#: extension.js:198 extension.js:811
+#: extension.js:201 extension.js:829
+msgid " hour "
+msgstr " ساعة "
+
+#: extension.js:204 extension.js:832
 msgid " hours "
 msgstr " ساعات "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:211
+#: extension.js:211
+msgid " minute"
+msgstr "دقيقة"
+
+#: extension.js:214 preferences/timerPage.js:211
 msgid " minutes"
 msgstr "دقائق"
 
-#: extension.js:776
+#: extension.js:790
 msgid "Caffeine enabled"
 msgstr "فُعِّل الكافيين"
 
-#: extension.js:778
+#: extension.js:792
 msgid "Night Light paused"
 msgstr "الضوء الليلي متوقف"
 
-#: extension.js:783
+#: extension.js:797
 msgid "Caffeine disabled"
 msgstr "الكافيين مُعطَّل"
 
-#: extension.js:785
+#: extension.js:799
 msgid "Night Light resumed"
 msgstr "استئنف الضوء الليلي"
+
+#: extension.js:839
+#, fuzzy
+msgid " minute "
+msgstr "دقائق"
+
+#: extension.js:842
+#, fuzzy
+msgid " minutes "
+msgstr "دقائق"
 
 #: preferences/appsPage.js:33
 msgid "Apps"

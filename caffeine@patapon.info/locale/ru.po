@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-22 11:15+0200\n"
+"POT-Creation-Date: 2024-07-01 15:10+0200\n"
 "PO-Revision-Date: 2023-09-11 21:41+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Caffeine"
 msgstr "Кофеин"
 
-#: extension.js:153 extension.js:629
+#: extension.js:153 extension.js:643
 msgid "Caffeine Timer"
 msgstr "Таймер Кофеина"
 
@@ -29,29 +29,47 @@ msgstr "Таймер Кофеина"
 msgid "Infinite"
 msgstr "Бесконечность"
 
-#: extension.js:198 extension.js:811
+#: extension.js:201 extension.js:829
+msgid " hour "
+msgstr " Час "
+
+#: extension.js:204 extension.js:832
 msgid " hours "
 msgstr " часы "
 
-#: extension.js:201 extension.js:814 preferences/timerPage.js:211
+#: extension.js:211
+msgid " minute"
+msgstr " минута"
+
+#: extension.js:214 preferences/timerPage.js:211
 msgid " minutes"
 msgstr " минут"
 
-#: extension.js:776
+#: extension.js:790
 msgid "Caffeine enabled"
 msgstr "Кофеин включен"
 
-#: extension.js:778
+#: extension.js:792
 msgid "Night Light paused"
 msgstr "Ночной свет приостановлен"
 
-#: extension.js:783
+#: extension.js:797
 msgid "Caffeine disabled"
 msgstr "Кофеин отключен"
 
-#: extension.js:785
+#: extension.js:799
 msgid "Night Light resumed"
 msgstr "Ночной свет возобновлен"
+
+#: extension.js:839
+#, fuzzy
+msgid " minute "
+msgstr " минут"
+
+#: extension.js:842
+#, fuzzy
+msgid " minutes "
+msgstr " минут"
 
 #: preferences/appsPage.js:33
 msgid "Apps"
