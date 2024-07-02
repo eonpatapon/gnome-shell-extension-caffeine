@@ -186,21 +186,16 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
     }
 
     _isCustomValueSet() {
-        const shortValue = this.shortTimerSelector.get_value();
-        const mediumValue = this.mediumTimerSelector.get_value();
-        const longValue = this.longTimerSelector.get_value();
+        const selectors = [this.shortTimerSelector, this.mediumTimerSelector, this.longTimerSelector];
         const durationIndex = this.sliderTimer.get_value();
-        let isCustomed = false;
-        if (shortValue !== parseInt(TIMERS_DURATION[durationIndex][0]) * 60) {
-            isCustomed = true;
+        let isCustom = false;
+        for (const [i, selector] of selectors.entries()) {
+            if (selector.get_value() !== parseInt(TIMERS_DURATION[durationIndex][i]) * 60) {
+                isCustom = true;
+                break;
+            }
         }
-        if (mediumValue !== parseInt(TIMERS_DURATION[durationIndex][1]) * 60) {
-            isCustomed = true;
-        }
-        if (longValue !== parseInt(TIMERS_DURATION[durationIndex][2]) * 60) {
-            isCustomed = true;
-        }
-        return isCustomed;
+        return isCustom;
     }
 
     _updateTimerDuration(value) {
