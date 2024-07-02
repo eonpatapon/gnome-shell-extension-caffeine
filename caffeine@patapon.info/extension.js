@@ -195,24 +195,24 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
                 let hours = Math.floor(timer / 3600);
                 let minutes = Math.floor((timer % 3600) / 60);
                 switch (hours) {
-                    case 0:
-                        break;
-                    case 1:
-                        label = hours + _(' hour ');
-                        break;
-                    default:
-                        label = hours + _(' hours ');
-                        break;
+                case 0:
+                    break;
+                case 1:
+                    label = hours + _(' hour ');
+                    break;
+                default:
+                    label = hours + _(' hours ');
+                    break;
                 }
                 switch (minutes) {
-                    case 0:
-                        break;
-                    case 1:
-                        label = label + minutes + _(' minute');
-                        break;
-                    default:
-                        label = label + minutes + _(' minutes');
-                        break;
+                case 0:
+                    break;
+                case 1:
+                    label = label + minutes + _(' minute');
+                    break;
+                default:
+                    label = label + minutes + _(' minutes');
+                    break;
                 }
             }
             if (!label) {
@@ -823,24 +823,24 @@ class Caffeine extends QuickSettings.SystemIndicator {
             const min = Math.floor((timerDuration % 3600) / 60);
             let timeLabel = '';
             switch (hours) {
-                case 0:
-                    break;
-                case 1:
-                    timeLabel = hours + _(' hour ');
-                    break;
-                default:
-                    timeLabel = hours + _(' hours ');
-                    break;
+            case 0:
+                break;
+            case 1:
+                timeLabel = hours + _(' hour ');
+                break;
+            default:
+                timeLabel = hours + _(' hours ');
+                break;
             }
             switch (min) {
-                case 0:
-                    break;
-                case 1:
-                    timeLabel += min + _(' minute ');
-                    break;
-                default:
-                    timeLabel += min + _(' minutes ');
-                    break;
+            case 0:
+                break;
+            case 1:
+                timeLabel += min + _(' minute ');
+                break;
+            default:
+                timeLabel += min + _(' minutes ');
+                break;
             }
             this._caffeineToggle.subtitle = timerDuration !== 0
                 ? timeLabel
