@@ -199,8 +199,10 @@ const InhibitorManager = GObject.registerClass({
 
         for (let appId of possibleTriggerApps) {
             let app = this._appSystem.lookup_app(appId);
-            if (app.is_on_workspace(activeWorkspace)) {
-                return appId;
+            if (app !== null) {
+                if (app.is_on_workspace(activeWorkspace)) {
+                    return appId;
+                }
             }
         }
 
