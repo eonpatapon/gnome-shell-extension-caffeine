@@ -40,7 +40,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const SHOW_TIMER_KEY = 'show-timer';
-const DURATION_TIMER_INDEX = 'duration-timer';
+const DURATION_TIMER_LIST = 'duration-timer-list';
 const TOGGLE_STATE_KEY = 'toggle-state';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
@@ -102,6 +102,12 @@ const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSess
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
+const TimerIcons = [
+    'caffeine-short-timer-symbolic',
+    'caffeine-medium-timer-symbolic',
+    'caffeine-long-timer-symbolic',
+    'caffeine-infinite-timer-symbolic'
+];
 
 const ControlContext = {
     NEVER: 0,
@@ -121,13 +127,6 @@ const AppsTrigger = {
     ON_ACTIVE_WORKSPACE: 2
 };
 
-const TIMERS = [
-    [5, 10, 15, 20, 30, 'caffeine-short-timer-symbolic'],
-    [10, 20, 30, 40, 50, 'caffeine-medium-timer-symbolic'],
-    [30, 45, 60, 75, 80, 'caffeine-long-timer-symbolic'],
-    [0, 0, 0, 0, 0, 'caffeine-infinite-timer-symbolic']
-];
-
 const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _init(settings, path) {
@@ -144,7 +143,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         let iconTheme = new St.IconTheme();
         if (!iconTheme.has_icon(TimerMenuIcon)) {
             this.finalTimerMenuIcon =
-                Gio.icon_new_for_string(`${this._path}/icons/${TimerMenuIcon}.svg`);
+                Gio.icon_new_for_string(`${this._path}/icons/hicolor/scalable/actions/${TimerMenuIcon}.svg`);
         }
         this._iconActivated = Gio.icon_new_for_string(`${this._path}/icons/${EnabledIcon}.svg`);
         this._iconDeactivated = Gio.icon_new_for_string(`${this._path}/icons/${DisabledIcon}.svg`);
@@ -170,7 +169,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             () => this._iconName(),
             `changed::${TIMER_KEY}`,
             () => this._sync(),
-            `changed::${DURATION_TIMER_INDEX}`,
+            `changed::${DURATION_TIMER_LIST}`,
             () => this._syncTimers(true),
             this);
         this.connect('destroy', () => {
@@ -183,27 +182,48 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
     _syncTimers(resetDefault) {
         this._itemsSection.removeAll();
         this._timerItems.clear();
-        const durationIndex = this._settings.get_int(DURATION_TIMER_INDEX);
+        // Get duration list and add '0' for the 'infinite' entry (no timer)
+        let durationValues = this._settings.get_value(DURATION_TIMER_LIST).deepUnpack();
+        durationValues.push(0);
 
-        for (const timer of TIMERS) {
+        // Create menu timer
+        for (const [index, timer] of durationValues.entries()) {
             let label = null;
-            if (timer[0] === 0) {
+            if (timer === 0) {
                 label = _('Infinite');
             } else {
-                label = parseInt(timer[durationIndex]) + _(' minutes');
+                let hours = Math.floor(timer / 3600);
+                let minutes = Math.floor((timer % 3600) / 60);
+                switch (hours) {
+                case 0:
+                    break;
+                case 1:
+                    label = hours + _(' hour ');
+                    break;
+                default:
+                    label = hours + _(' hours ');
+                    break;
+                }
+                switch (minutes) {
+                case 0:
+                    break;
+                case 1:
+                    label = label + minutes + _(' minute');
+                    break;
+                default:
+                    label = label + minutes + _(' minutes');
+                    break;
+                }
             }
             if (!label) {
                 continue;
             }
-
-            const icon = Gio.icon_new_for_string(`${this._path}/icons/${timer[5]}.svg`);
+            const icon = Gio.icon_new_for_string(`${this._path}/icons/${TimerIcons[index]}.svg`);
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
-
-            item.connectObject('activate', () => this._checkTimer(timer[durationIndex]), this);
-            this._timerItems.set(timer[durationIndex], item);
+            item.connectObject('activate', () => this._checkTimer(timer), this);
+            this._timerItems.set(timer, item);
             this._itemsSection.addMenuItem(item);
         }
-        this.menuEnabled = TIMERS.length > 2;
 
         // Select active duration
         if (resetDefault && this._settings.get_int(TIMER_KEY) !== 0) {
@@ -567,7 +587,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerEnable = true;
 
         // Get duration
-        let timerDelay = this._settings.get_int(TIMER_KEY) * 60;
+        let timerDelay = this._settings.get_int(TIMER_KEY);
 
         // Execute Timer only if duration isn't set on infinite time
         if (timerDelay !== 0) {
@@ -589,14 +609,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
     }
 
-    _printTimer(second) {
-        const min = Math.floor(second / 60);
-        const minS = Math.floor(second % 60).toLocaleString('en-US', {
-            minimumIntegerDigits: 2,
-            useGrouping: false
-        });
+    _printTimer(seconds) {
+        const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
+        const min = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+        const sec = Math.floor(seconds % 60).toString().padStart(2, '0');
         // Print Timer in system Indicator and Toggle menu subLabel
-        this._updateLabelTimer(min + ':' + minS);
+        if (hours !== '00') {
+            this._updateLabelTimer(hours + ':' + min + ':' + sec);
+        } else {
+            this._updateLabelTimer(min + ':' + sec);
+        }
     }
 
     _removeTimer() {
@@ -797,8 +819,31 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _updateTimerSubtitle() {
         if (!this._settings.get_boolean(TOGGLE_STATE_KEY)) {
             const timerDuration = this._settings.get_int(TIMER_KEY);
+            const hours = Math.floor(timerDuration / 3600);
+            const min = Math.floor((timerDuration % 3600) / 60);
+            let timeLabel = '';
+            switch (hours) {
+            case 0:
+                break;
+            case 1:
+                timeLabel = hours + _(' hour ');
+                break;
+            default:
+                timeLabel = hours + _(' hours ');
+                break;
+            }
+            switch (min) {
+            case 0:
+                break;
+            case 1:
+                timeLabel += min + _(' minute ');
+                break;
+            default:
+                timeLabel += min + _(' minutes ');
+                break;
+            }
             this._caffeineToggle.subtitle = timerDuration !== 0
-                ? parseInt(timerDuration) + _(' minutes')
+                ? timeLabel
                 : null;
         }
     }
@@ -1104,3 +1149,4 @@ export default class CaffeineExtension extends Extension {
         Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
     }
 }
+

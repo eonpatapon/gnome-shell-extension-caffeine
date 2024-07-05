@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-24 05:33+0300\n"
+"POT-Creation-Date: 2024-07-01 15:10+0200\n"
 "PO-Revision-Date: 2024-04-24 06:13+0300\n"
 "Language-Team: Arabic <>\n"
 "Language: ar\n"
@@ -20,37 +20,59 @@ msgstr ""
 "X-Generator: Gtranslator 45.3\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:135
+#: extension.js:134
 msgid "Caffeine"
 msgstr "الكافيين"
 
-#: extension.js:154 extension.js:621
+#: extension.js:153 extension.js:643
 msgid "Caffeine Timer"
 msgstr "مؤقت الكافيين"
 
-#: extension.js:191
+#: extension.js:193
 msgid "Infinite"
 msgstr "لانهائي"
 
-#: extension.js:193 extension.js:801 preferences/generalPage.js:213
+#: extension.js:201 extension.js:829
+msgid " hour "
+msgstr " ساعة "
+
+#: extension.js:204 extension.js:832
+msgid " hours "
+msgstr " ساعات "
+
+#: extension.js:211
+msgid " minute"
+msgstr "دقيقة"
+
+#: extension.js:214 preferences/timerPage.js:211
 msgid " minutes"
 msgstr "دقائق"
 
-#: extension.js:768
+#: extension.js:790
 msgid "Caffeine enabled"
 msgstr "فُعِّل الكافيين"
 
-#: extension.js:770
+#: extension.js:792
 msgid "Night Light paused"
 msgstr "الضوء الليلي متوقف"
 
-#: extension.js:775
+#: extension.js:797
 msgid "Caffeine disabled"
 msgstr "الكافيين مُعطَّل"
 
-#: extension.js:777
+#: extension.js:799
 msgid "Night Light resumed"
 msgstr "استئنف الضوء الليلي"
+
+#: extension.js:839
+#, fuzzy
+msgid " minute "
+msgstr "دقائق"
+
+#: extension.js:842
+#, fuzzy
+msgid " minutes "
+msgstr "دقائق"
 
 #: preferences/appsPage.js:33
 msgid "Apps"
@@ -96,13 +118,13 @@ msgstr "العرض"
 msgid "Only when active"
 msgstr "فقط حينما يكون نشطًا"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:83
-#: preferences/generalPage.js:95
+#: preferences/displayPage.js:49 preferences/generalPage.js:65
+#: preferences/generalPage.js:77
 msgid "Always"
 msgstr "دائمًا"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:82
-#: preferences/generalPage.js:94
+#: preferences/displayPage.js:50 preferences/generalPage.js:64
+#: preferences/generalPage.js:76
 msgid "Never"
 msgstr "أبدًا"
 
@@ -114,103 +136,131 @@ msgstr "اعرض مؤشر الحالة في اللوحة العليا"
 msgid "Enable or disable the Caffeine icon in the top panel"
 msgstr "فَعِّل أو عَطِّل أيقونة الكافيين في اللوحة العليا"
 
-#: preferences/displayPage.js:64
+#: preferences/displayPage.js:60
 msgid "Show timer in top panel"
 msgstr "أظهر المؤقت في اللوحة العليا"
 
-#: preferences/displayPage.js:65
+#: preferences/displayPage.js:61
 msgid "Enable or disable the timer in the top panel"
 msgstr "فَعِّل أو عَطِّل المؤقت في اللوحة العليا"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:67
 msgid "Notifications"
 msgstr "الإشعارات"
 
-#: preferences/displayPage.js:77
+#: preferences/displayPage.js:68
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "فعل الإشعارات أثناء تفعيل أو تعطيل الكافيين"
 
-#: preferences/displayPage.js:99
+#: preferences/displayPage.js:75
 msgid "Status indicator position"
 msgstr "موضع مؤشر الحالة"
 
-#: preferences/displayPage.js:100
+#: preferences/displayPage.js:76
 msgid "The position relative of indicator icon to other items"
 msgstr "موضع الأيقونة الدالة بالنسبة للعناصر الأخرى"
 
-#: preferences/generalPage.js:43
+#: preferences/generalPage.js:35
 msgid "General"
 msgstr "عام"
 
-#: preferences/generalPage.js:53
+#: preferences/generalPage.js:45
 msgid "Behavior"
 msgstr "سلوك"
 
-#: preferences/generalPage.js:62
+#: preferences/generalPage.js:50
 msgid "Enable for fullscreen apps"
 msgstr "فَعِّل لتطبيقات ملء الشاشة"
 
-#: preferences/generalPage.js:63
+#: preferences/generalPage.js:51
 msgid "Automatically enable when an app enters fullscreen mode"
 msgstr "التفعيل تلقائيًا حينما يدخل التطبيق وضع ملء الشاشة"
 
-#: preferences/generalPage.js:74
+#: preferences/generalPage.js:57
 msgid "Remember state"
 msgstr "تذكر الحالة"
 
-#: preferences/generalPage.js:75
+#: preferences/generalPage.js:58
 msgid "Remember the last state across sessions and reboots"
 msgstr "يتذكر آخر حالة أثناء الجلسات وإعادة الإقلاع"
 
-#: preferences/generalPage.js:84 preferences/generalPage.js:96
+#: preferences/generalPage.js:66 preferences/generalPage.js:78
 msgid "For apps on list"
 msgstr "للتطبيقات على القائمة"
 
-#: preferences/generalPage.js:86
+#: preferences/generalPage.js:68
 msgid "Pause and resume Night Light"
 msgstr "أوقف أو استئنف الضوء الليلي"
 
-#: preferences/generalPage.js:87
+#: preferences/generalPage.js:69
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "يُشغل ضوء الليل مع حالة الكافيين"
 
-#: preferences/generalPage.js:98
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: preferences/generalPage.js:80
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Allow screen blank"
 msgstr "السماح بإفراغ الشاشة"
 
-#: preferences/generalPage.js:99
+#: preferences/generalPage.js:81
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "يسمح بإطفاء الشاشة أثناء تفعيل الكافيين"
 
-#: preferences/generalPage.js:114
-msgid "Timer"
-msgstr "المؤقت"
-
-#: preferences/generalPage.js:119
-msgid "Durations"
-msgstr "مدَد المؤقت"
-
-#: preferences/generalPage.js:163
+#: preferences/generalPage.js:103
 msgid "Shortcut"
 msgstr "اخْتِصَار"
 
-#: preferences/generalPage.js:171
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+#: preferences/generalPage.js:111
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Toggle shortcut"
 msgstr "شغل اخْتِصَارًا"
 
-#: preferences/generalPage.js:172
+#: preferences/generalPage.js:112
 msgid "Use Backspace to clear"
 msgstr "استخدم مفتاح فراغ للخلف ← للحذف"
 
-#: preferences/generalPage.js:213
-msgid "Set to "
-msgstr "عيّن إلى"
-
-#: preferences/generalPage.js:259 preferences/generalPage.js:291
+#: preferences/generalPage.js:189 preferences/generalPage.js:221
 msgid "New accelerator…"
 msgstr "مسرِّع جديد…"
+
+#: preferences/timerPage.js:41
+msgid "Timer"
+msgstr "المؤقت"
+
+#: preferences/timerPage.js:51
+msgid "Preset durations"
+msgstr "المدد المحددة مسبقًا"
+
+#: preferences/timerPage.js:57
+msgid "Durations"
+msgstr "مدَد المؤقت"
+
+#: preferences/timerPage.js:98
+msgid "Custom durations"
+msgstr "مدد مخصصة"
+
+#: preferences/timerPage.js:106
+msgid "Short timer"
+msgstr "مؤقت قصير"
+
+#: preferences/timerPage.js:111
+msgid "Medium timer"
+msgstr "مؤقت متوسط"
+
+#: preferences/timerPage.js:116
+msgid "Long timer"
+msgstr "مؤقت طويل"
+
+#: preferences/timerPage.js:124
+msgid "Enable custom values"
+msgstr "تمكين القيم المخصصة"
+
+#: preferences/timerPage.js:125
+msgid "Select custom value for each duration"
+msgstr "اختر قيمة مخصصة لكل مدة"
+
+#: preferences/timerPage.js:208
+msgid "Set to "
+msgstr "عيّن إلى"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
 msgid "Application list"
@@ -230,85 +280,101 @@ msgid "Store caffeine user state"
 msgstr "خزّن حالة مستخدم الكافيين"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+msgid "List of duration timer"
+msgstr ""
+
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
-msgid "Specify time (minutes) for the timer countdown"
+#, fuzzy
+msgid ""
+"Specify the short, medium and long duration for the timer countdown (seconds)"
 msgstr "حدد الزمن (بالدقائق) لمؤقت العد التنازلي"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
-msgid "Specify index of duration range for the timer"
+#, fuzzy
+msgid "Use custom duration values for the timer"
 msgstr "حدد فترات الزمن المختارة للمؤقت"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#, fuzzy
+msgid "Specify time (seconds) for the timer countdown"
+msgstr "حدد الزمن (بالدقائق) لمؤقت العد التنازلي"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+msgid "Specify index of duration range for the timer"
+msgstr "حدد فترات الزمن المختارة للمؤقت"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Restore caffeine state"
 msgstr "استعد حالة الكافيين"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show indicator"
 msgstr "أظهر المؤشر"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show the indicator on the top panel"
 msgstr "أظهر المؤشر في اللوحة العليا"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Show notifications"
 msgstr "أظهر الإشعارات"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Show notifications when enabled/disabled"
 msgstr "اعرض الإشعارات عند التفعيل/التعطيل"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
 msgid "Show timer"
 msgstr "اعرض المؤقت"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
 msgid "Show timer when enabled/disabled"
 msgstr "اعرض المؤقت عند التفعيل/التعطيل"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Enable when a fullscreen application is running"
 msgstr "فَعِّل أثناء تشغيل برنامج في وضع ملء الشاشة"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Night Light control mode"
 msgstr "وضع التحكم بالضوء الليلي"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "حدد الطريقة التي يتفاعل بها «كافيين» مع إعداد الضوء الليلي."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "السماح بإطفاء الشاشة أثناء تفعيل «كافيين»."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Trigger App control mode"
 msgstr "وضع التحكم بتشغيل التطبيق"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Set the trigger method for apps."
 msgstr "اختر وسيلة التشغيل للتطبيقات."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
 msgid "Shortcut to toggle Caffeine."
 msgstr "اختصار لتشغيل «كافيين»."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
 msgid "Default width for the preferences window"
 msgstr "العَرْض الإفتراضي لنافذة التفضيلات"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:96
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:106
 msgid "Default height for the preferences window"
 msgstr "الارتفاع الإفتراضي لنافذة التفضيلات"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:100
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:110
 msgid "Visible position offset of status icon in indicator menu"
 msgstr "موقع الإزاحة المرئي لأيقونة الحالة في قائمة المؤشر"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:104
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:114
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
@@ -316,6 +382,6 @@ msgstr ""
 "موقع الإزاحة المرئي الحقيقي لأيقونة الحالة في قائمة المؤشر التي تتضمن واحدة "
 "خفية"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:108
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:118
 msgid "Last item index in indicator menu"
 msgstr "فهرس آخر الأغراض في قائمة المؤشر"

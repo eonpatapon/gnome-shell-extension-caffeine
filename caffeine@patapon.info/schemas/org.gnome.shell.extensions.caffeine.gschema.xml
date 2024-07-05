@@ -32,10 +32,20 @@
         <summary>Store caffeine user state</summary>
         <description></description>
     </key>
+    <key type="ai" name="duration-timer-list">
+        <default>[900, 1800, 3600]</default>
+        <summary>List of duration timer</summary>
+        <description>Specify the short, medium and long duration for the timer countdown (seconds)</description>
+    </key>
+    <key type="b" name="use-custom-duration">
+        <default>false</default>
+        <summary>Use custom duration values for the timer</summary>
+        <description></description>
+    </key>
     <key type="i" name="countdown-timer">
         <default>0</default>
-        <summary>Specify time (minutes) for the timer countdown</summary>
-        <description>Specify time (minutes) for the timer countdown</description>
+        <summary>Specify time (seconds) for the timer countdown</summary>
+        <description>Specify time (seconds) for the timer countdown</description>
     </key>
     <key type="i" name="duration-timer">
         <default>2</default>
