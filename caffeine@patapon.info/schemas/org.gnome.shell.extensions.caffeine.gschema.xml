@@ -67,6 +67,11 @@
         <summary>Show timer</summary>
         <description>Show timer when enabled/disabled</description>
     </key>
+    <key type="b" name="show-toggle">
+        <default>true</default>
+        <summary>Show toggle</summary>
+        <description>Show the quick settings toggle</description>
+    </key>
     <key type="b" name="enable-fullscreen">
         <default>true</default>
         <summary>Enable when a fullscreen application is running</summary>
