@@ -331,11 +331,14 @@ const InhibitorManager = GObject.registerClass({
                 this._isWaitingInhibit = false;
 
                 // Delete the inhibitor if we're not supposed to have it
-                if (!this._skipInhibit) {
+                /* We shouldn't need to check for this._isInhibited, but we
+                   might be able to recover from a bug if we do
+                */
+                if (this._skipInhibit || this._isInhibited) {
+                    this._removeInhibitor();
+                } else {
                     this._isInhibited = true;
                     this._inhibitorCookie = cookie;
-                } else {
-                    this._removeInhibitor();
                 }
             }
         );
