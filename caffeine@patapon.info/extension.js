@@ -639,6 +639,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._removeTimer();
         }
 
+        this._updateTimerSubtitle();
         this._updateMaxPosition();
     }
 
