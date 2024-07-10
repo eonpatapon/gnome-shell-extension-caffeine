@@ -116,6 +116,8 @@ const InhibitorManager = GObject.registerClass({
         super._init();
 
         this._isInhibited = false;
+        this._isWaitingInhibit = false;
+        this._skipInhibit = false;
         this._inhibitorCookie = null;
         this._userEnabled = false;
         this._triggerApp = null;
@@ -246,7 +248,7 @@ const InhibitorManager = GObject.registerClass({
 
     _forceUpdate() {
         // Remove any inhibitor, as settings / inhibit flags may have changed
-        if (this._isInhibited) {
+        if (this._isInhibited || this._isWaitingInhibit) {
             this._removeInhibitor();
         }
 
@@ -278,7 +280,7 @@ const InhibitorManager = GObject.registerClass({
         }
 
         // Update inhibitor if required
-        if (this._isInhibited !== shouldInhibit) {
+        if ((this._isInhibited || this._isWaitingInhibit) !== shouldInhibit) {
             if (shouldInhibit) {
                 this._addInhibitor(reasons);
             } else {
@@ -322,20 +324,35 @@ const InhibitorManager = GObject.registerClass({
         }
 
         // Add an inhibitor and save the cookie
+        this._isWaitingInhibit = true;
         this._sessionManager.InhibitRemote('caffeine-gnome-extension', 0,
             'Inhibit by %s'.format(this._name), inhibitFlags,
             (cookie) => {
-                this._inhibitorCookie = cookie;
+                this._isWaitingInhibit = false;
+
+                // Delete the inhibitor if we're not supposed to have it
+                if (!this._skipInhibit) {
+                    this._isInhibited = true;
+                    this._inhibitorCookie = cookie;
+                } else {
+                    this._removeInhibitor();
+                }
             }
         );
-        this._isInhibited = true;
     }
 
     _removeInhibitor() {
+        // If we haven't actually inhibited yet, just skip creating it
+        if (this._isWaitingInhibit) {
+            this._skipInhibit = true;
+            return;
+        }
+
         // Use the cookie to remove the inhibitor
         this._sessionManager.UninhibitRemote(this._inhibitorCookie);
         this._inhibitorCookie = null;
         this._isInhibited = false;
+        this._skipInhibit = false;
     }
 
     isFullscreen() {
@@ -365,7 +382,7 @@ const InhibitorManager = GObject.registerClass({
     }
 
     getInhibitState() {
-        return this._isInhibited;
+        return this._isInhibited || this._isWaitingInhibit;
     }
 
     getInhibitApp() {
