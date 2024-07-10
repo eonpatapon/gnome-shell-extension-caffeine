@@ -574,7 +574,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timeOut = null;
         this._timePrint = null;
         this._timerEnable = false;
-        this._timeAppUnblock = null;
 
         // Show icon
         this._manageShowIndicator();
@@ -938,10 +937,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         if (this._timePrint) {
             GLib.Source.remove(this._timePrint);
             this._timePrint = null;
-        }
-        if (this._timeAppUnblock) {
-            GLib.Source.remove(this._timeAppUnblock);
-            this._timeAppUnblock = null;
         }
 
         this._inhibitorManager.destroy();
