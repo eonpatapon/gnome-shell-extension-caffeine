@@ -324,24 +324,26 @@ const InhibitorManager = GObject.registerClass({
         }
 
         // Add an inhibitor and save the cookie
-        this._isWaitingInhibit = true;
-        this._sessionManager.InhibitRemote('caffeine-gnome-extension', 0,
-            'Inhibit by %s'.format(this._name), inhibitFlags,
-            (cookie) => {
-                this._isWaitingInhibit = false;
+        if (!this._isWaitingInhibit) {
+            this._isWaitingInhibit = true;
+            this._sessionManager.InhibitRemote('caffeine-gnome-extension', 0,
+                'Inhibit by %s'.format(this._name), inhibitFlags,
+                (cookie) => {
+                    this._isWaitingInhibit = false;
 
-                // Delete the inhibitor if we're not supposed to have it
-                /* We shouldn't need to check for this._isInhibited, but we
-                   might be able to recover from a bug if we do
-                */
-                if (this._skipInhibit || this._isInhibited) {
-                    this._removeInhibitor();
-                } else {
-                    this._isInhibited = true;
-                    this._inhibitorCookie = cookie;
+                    // Delete the inhibitor if we're not supposed to have it
+                    /* We shouldn't need to check for this._isInhibited, but we
+                       might be able to recover from a bug if we do
+                    */
+                    if (this._skipInhibit || this._isInhibited) {
+                        this._removeInhibitor();
+                    } else {
+                        this._isInhibited = true;
+                        this._inhibitorCookie = cookie;
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     _removeInhibitor() {
