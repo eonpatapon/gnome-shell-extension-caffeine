@@ -128,6 +128,7 @@ const InhibitorManager = GObject.registerClass({
         this._appStateSignal = null;
         this._focusWindowSignal = null;
         this._workspaceSignal = null;
+        this._restackedSignal = null;
 
         // DBus proxies
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
@@ -189,6 +190,8 @@ const InhibitorManager = GObject.registerClass({
                 () => this._updateState());
             this._workspaceSignal = global.workspace_manager.connect('workspace-switched',
                 () => this._updateState());
+            this._restackedSignal = global.display.connect('restacked',
+                () => this._updateState());
             break;
         }
     }
@@ -203,8 +206,12 @@ const InhibitorManager = GObject.registerClass({
             this._focusWindowSignal = null;
         }
         if (this._workspaceSignal !== null) {
-            global.workspace_manager.disconnect();
+            global.workspace_manager.disconnect(this._workspaceSignal);
             this._workspaceSignal = null;
+        }
+        if (this._restackedSignal !== null) {
+            global.display.disconnect(this._restackedSignal);
+            this._restackedSignal = null;
         }
     }
 
