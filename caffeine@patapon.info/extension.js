@@ -125,6 +125,11 @@ const InhibitorManager = GObject.registerClass({
         this._lastReasons = [];
         this._ignoredReasons = [];
 
+        // App trigger signal IDs
+        this._appStateSignal = null;
+        this._focusWindowSignal = null;
+        this._workspaceSignal = null;
+
         // DBus proxies
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
             'org.gnome.SessionManager',
@@ -154,18 +159,54 @@ const InhibitorManager = GObject.registerClass({
             `changed::${INHIBIT_APPS_KEY}`,
             () => this._updateState(),
             `changed::${TRIGGER_APPS_MODE}`,
-            () => this._updateState(), this);
+            () => {
+                this._disconnectTriggerSignals();
+                this._connectTriggerSignals();
+                this._updateState();
+            }, this);
 
         // Update state when fullscreened
         global.display.connectObject('in-fullscreen-changed', () => this._updateState(), this);
 
         // Update when possible app triggers change
-        this._appSystem.connectObject('app-state-changed', () => this._updateState(), this);
-        global.display.connectObject('notify::focus-window', () => this._updateState(), this);
-        global.workspace_manager.connectObject('workspace-switched',
-            () => this._updateState(), this);
+        this._connectTriggerSignals();
 
         this._updateState();
+    }
+
+    _connectTriggerSignals() {
+        // Only connect to relevant signals for the selected trigger
+        switch (this._settings.get_enum(TRIGGER_APPS_MODE)) {
+        case AppsTrigger.ON_RUNNING:
+            this._appStateSignal = this._appSystem.connect('app-state-changed',
+                () => this._updateState());
+            break;
+        case AppsTrigger.ON_FOCUS:
+            this._focusWindowSignal = global.display.connect('notify::focus-window',
+                () => this._updateState());
+            break;
+        case AppsTrigger.ON_ACTIVE_WORKSPACE:
+            this._appStateSignal = this._appSystem.connect('app-state-changed',
+                () => this._updateState());
+            this._workspaceSignal = global.workspace_manager.connect('workspace-switched',
+                () => this._updateState());
+            break;
+        }
+    }
+
+    _disconnectTriggerSignals() {
+        if (this._appStateSignal !== null) {
+            this._appSystem.disconnect(this._appStateSignal);
+            this._appStateSignal = null;
+        }
+        if (this._focusWindowSignal !== null) {
+            global.display.disconnect(this._focusWindowSignal);
+            this._focusWindowSignal = null;
+        }
+        if (this._workspaceSignal !== null) {
+            global.workspace_manager.disconnect();
+            this._workspaceSignal = null;
+        }
     }
 
     _findRunningApp() {
@@ -404,11 +445,9 @@ const InhibitorManager = GObject.registerClass({
     }
 
     destroy() {
+        this._disconnectTriggerSignals();
         global.display.disconnectObject(this);
         this._settings.disconnectObject(this);
-        this._appSystem.disconnectObject(this);
-        global.display.disconnectObject(this);
-        global.workspace_manager.disconnectObject(this);
 
         if (this._isInhibited) {
             this._removeInhibitor();
