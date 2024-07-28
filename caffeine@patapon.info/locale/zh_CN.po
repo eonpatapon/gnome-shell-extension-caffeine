@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 15:10+0200\n"
-"PO-Revision-Date: 2022-06-30 11:54-0400\n"
+"POT-Creation-Date: 2024-07-28 16:47-0400\n"
+"PO-Revision-Date: 2024-07-28 16:50-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:134
@@ -41,7 +41,7 @@ msgstr " 小时 "
 msgid " minute"
 msgstr " 分钟"
 
-#: extension.js:214 preferences/timerPage.js:211
+#: extension.js:214 preferences/timerPage.js:206
 msgid " minutes"
 msgstr " 分钟"
 
@@ -62,14 +62,12 @@ msgid "Night Light resumed"
 msgstr "夜灯已恢复"
 
 #: extension.js:839
-#, fuzzy
 msgid " minute "
-msgstr " 分钟"
+msgstr " 分钟 "
 
 #: extension.js:842
-#, fuzzy
 msgid " minutes "
-msgstr " 分钟"
+msgstr " 分钟 "
 
 #: preferences/appsPage.js:33
 msgid "Apps"
@@ -225,7 +223,7 @@ msgstr "计时器"
 
 #: preferences/timerPage.js:51
 msgid "Preset durations"
-msgstr " 预设时长"
+msgstr "预设时长"
 
 #: preferences/timerPage.js:57
 msgid "Durations"
@@ -255,7 +253,7 @@ msgstr "启用自定义值"
 msgid "Select custom value for each duration"
 msgstr "为每个时长选择自定义值"
 
-#: preferences/timerPage.js:208
+#: preferences/timerPage.js:203
 msgid "Set to "
 msgstr "设置到 "
 
@@ -342,19 +340,19 @@ msgstr "设置 咖啡因 和夜灯设置交互的方式。"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Allow turning off screen when Caffeine is enabled."
-msgstr "允许在 咖啡因 启用时关闭屏幕"
+msgstr "允许在 咖啡因 启用时关闭屏幕。"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Trigger App control mode"
-msgstr "吃法应用控制模式"
+msgstr "触发应用控制模式"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Set the trigger method for apps."
-msgstr "设置应用的触发方式."
+msgstr "设置应用的触发方式。"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
 msgid "Shortcut to toggle Caffeine."
-msgstr "切换 咖啡因 的快捷键"
+msgstr "切换 咖啡因 的快捷键。"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
 msgid "Default width for the preferences window"
