@@ -1,7 +1,7 @@
 {
   "version": 53,
   "shell-version": [
-    "45", "46"
+    "45", "46", "47"
   ],
   "uuid": "caffeine@patapon.info",
   "name": "Caffeine",
