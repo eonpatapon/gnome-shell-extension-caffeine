@@ -22,11 +22,6 @@
         <summary>Application list</summary>
         <description>A list of strings, each containing an application id (desktop file name)</description>
     </key>
-    <key type="b" name="toggle-state">
-        <default>false</default>
-        <summary>Store caffeine toggle state</summary>
-        <description></description>
-    </key>
     <key type="b" name="user-enabled">
         <default>false</default>
         <summary>Store caffeine user state</summary>
@@ -71,6 +66,11 @@
         <default>true</default>
         <summary>Show timer</summary>
         <description>Show timer when enabled/disabled</description>
+    </key>
+    <key type="b" name="show-toggle">
+        <default>true</default>
+        <summary>Show toggle</summary>
+        <description>Show the quick settings toggle</description>
     </key>
     <key type="b" name="enable-fullscreen">
         <default>true</default>
@@ -119,8 +119,3 @@
     </key>
   </schema>
 </schemalist>
-
-
-
-
-
