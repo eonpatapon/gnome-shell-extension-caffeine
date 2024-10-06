@@ -223,7 +223,7 @@ msgstr "Timer"
 
 #: preferences/timerPage.js:51
 msgid "Preset durations"
-msgstr "Ustawione z góry okresy"
+msgstr "Wstępnie ustawione czasy trwania"
 
 #: preferences/timerPage.js:57
 msgid "Durations"
