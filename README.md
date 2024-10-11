@@ -11,11 +11,11 @@ Enable / disable auto suspend with quick setting toggle.
 
 ## Version
 
-This extension supports GNOME Shell `3.4` -> `45`
+This extension supports GNOME Shell `3.4` -> `47`
 
 |Branch                   |Version|Compatible GNOME version|
 |-------------------------|:-----:|------------------------|
-| master                  |    54 | GNOME 45 -> 46         |
+| master                  |    55 | GNOME 45 -> 47         |
 | gnome-shell-43-44       |    51 | GNOME 43 -> 44         |
 | gnome-shell-40-42       |    42 | GNOME 40 -> 42         |
 | gnome-shell-3.36-3.38   |    37 | GNOME 3.36 -> 3.38     |
