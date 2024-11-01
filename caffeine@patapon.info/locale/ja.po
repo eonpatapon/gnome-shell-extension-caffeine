@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 15:10+0200\n"
+"POT-Creation-Date: 2024-11-01 07:51+0100\n"
 "PO-Revision-Date: 2023-08-15 12:00+0200\n"
 "Last-Translator: Pakaoraki <pakaoraki@gmx.com>\n"
 "Language-Team: French\n"
@@ -21,52 +21,56 @@ msgstr ""
 msgid "Caffeine"
 msgstr "カフェイン"
 
-#: extension.js:153 extension.js:643
+#: extension.js:153 extension.js:651
 msgid "Caffeine Timer"
 msgstr "カフェインタイマー"
 
-#: extension.js:193
+#: extension.js:161
+msgid "Settings"
+msgstr ""
+
+#: extension.js:201
 msgid "Infinite"
 msgstr "無限"
 
-#: extension.js:201 extension.js:829
+#: extension.js:209 extension.js:837
 msgid " hour "
 msgstr " 時間 "
 
-#: extension.js:204 extension.js:832
+#: extension.js:212 extension.js:840
 msgid " hours "
 msgstr " 時間 "
 
-#: extension.js:211
+#: extension.js:219
 msgid " minute"
 msgstr " 分"
 
-#: extension.js:214 preferences/timerPage.js:211
+#: extension.js:222 preferences/timerPage.js:206
 msgid " minutes"
 msgstr " 分"
 
-#: extension.js:790
+#: extension.js:798
 msgid "Caffeine enabled"
 msgstr "カフェイン機能有効"
 
-#: extension.js:792
+#: extension.js:800
 msgid "Night Light paused"
 msgstr "ナイトライト一時停止"
 
-#: extension.js:797
+#: extension.js:805
 msgid "Caffeine disabled"
 msgstr "カフェイン機能無効"
 
-#: extension.js:799
+#: extension.js:807
 msgid "Night Light resumed"
 msgstr "ナイトライト再開"
 
-#: extension.js:839
+#: extension.js:847
 #, fuzzy
 msgid " minute "
 msgstr " 分"
 
-#: extension.js:842
+#: extension.js:850
 #, fuzzy
 msgid " minutes "
 msgstr " 分"
@@ -263,7 +267,7 @@ msgstr "カスタム値を有効にする"
 msgid "Select custom value for each duration"
 msgstr "各期間にカスタム値を選択します"
 
-#: preferences/timerPage.js:208
+#: preferences/timerPage.js:203
 msgid "Set to "
 msgstr ""
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 15:10+0200\n"
+"POT-Creation-Date: 2024-11-01 07:51+0100\n"
 "PO-Revision-Date: 2023-01-13 14:43+0200\n"
 "Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>\n"
@@ -21,52 +21,56 @@ msgstr ""
 msgid "Caffeine"
 msgstr "Caffeina"
 
-#: extension.js:153 extension.js:643
+#: extension.js:153 extension.js:651
 msgid "Caffeine Timer"
 msgstr "Caffeina Timer"
 
-#: extension.js:193
+#: extension.js:161
+msgid "Settings"
+msgstr ""
+
+#: extension.js:201
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:201 extension.js:829
+#: extension.js:209 extension.js:837
 msgid " hour "
 msgstr " ora "
 
-#: extension.js:204 extension.js:832
+#: extension.js:212 extension.js:840
 msgid " hours "
 msgstr " ore "
 
-#: extension.js:211
+#: extension.js:219
 msgid " minute"
 msgstr " minuto"
 
-#: extension.js:214 preferences/timerPage.js:211
+#: extension.js:222 preferences/timerPage.js:206
 msgid " minutes"
 msgstr " minuti"
 
-#: extension.js:790
+#: extension.js:798
 msgid "Caffeine enabled"
 msgstr "Caffeina abilitata"
 
-#: extension.js:792
+#: extension.js:800
 msgid "Night Light paused"
 msgstr "Luce notturna in pausa"
 
-#: extension.js:797
+#: extension.js:805
 msgid "Caffeine disabled"
 msgstr "Caffeina disabilitato"
 
-#: extension.js:799
+#: extension.js:807
 msgid "Night Light resumed"
 msgstr "Luce notturna ripristinata"
 
-#: extension.js:839
+#: extension.js:847
 #, fuzzy
 msgid " minute "
 msgstr " minuti"
 
-#: extension.js:842
+#: extension.js:850
 #, fuzzy
 msgid " minutes "
 msgstr " minuti"
@@ -256,7 +260,7 @@ msgstr "Abilita valori personalizzati"
 msgid "Select custom value for each duration"
 msgstr "Seleziona un valore personalizzato per ogni durata"
 
-#: preferences/timerPage.js:208
+#: preferences/timerPage.js:203
 msgid "Set to "
 msgstr "Impostato su "
 
