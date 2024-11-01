@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 15:10+0200\n"
+"POT-Creation-Date: 2024-11-01 07:51+0100\n"
 "PO-Revision-Date: 2022-10-07 16:40+0200\n"
 "Last-Translator: Pakaoraki <pakaoraki@gmx.com>\n"
 "Language-Team: French\n"
@@ -27,52 +27,56 @@ msgstr ""
 msgid "Caffeine"
 msgstr "Caféine"
 
-#: extension.js:153 extension.js:643
+#: extension.js:153 extension.js:651
 msgid "Caffeine Timer"
 msgstr "Caféine Minuteur"
 
-#: extension.js:193
+#: extension.js:161
+msgid "Settings"
+msgstr ""
+
+#: extension.js:201
 msgid "Infinite"
 msgstr "Infini"
 
-#: extension.js:201 extension.js:829
+#: extension.js:209 extension.js:837
 msgid " hour "
 msgstr " heure "
 
-#: extension.js:204 extension.js:832
+#: extension.js:212 extension.js:840
 msgid " hours "
 msgstr " heures "
 
-#: extension.js:211
+#: extension.js:219
 msgid " minute"
 msgstr " minute"
 
-#: extension.js:214 preferences/timerPage.js:211
+#: extension.js:222 preferences/timerPage.js:206
 msgid " minutes"
 msgstr " minutes"
 
-#: extension.js:790
+#: extension.js:798
 msgid "Caffeine enabled"
 msgstr "Caféine est activé"
 
-#: extension.js:792
+#: extension.js:800
 msgid "Night Light paused"
 msgstr "Mode nuit suspendu"
 
-#: extension.js:797
+#: extension.js:805
 msgid "Caffeine disabled"
 msgstr "Caféine est désactivé"
 
-#: extension.js:799
+#: extension.js:807
 msgid "Night Light resumed"
 msgstr "Mode nuit réactivé"
 
-#: extension.js:839
+#: extension.js:847
 #, fuzzy
 msgid " minute "
 msgstr " minutes"
 
-#: extension.js:842
+#: extension.js:850
 #, fuzzy
 msgid " minutes "
 msgstr " minutes"
@@ -264,7 +268,7 @@ msgstr "Utiliser des valeurs personnalisées"
 msgid "Select custom value for each duration"
 msgstr "Sélectionner une valeur personnalisée pour chaque durée"
 
-#: preferences/timerPage.js:208
+#: preferences/timerPage.js:203
 msgid "Set to "
 msgstr "Réglé sur "
 
