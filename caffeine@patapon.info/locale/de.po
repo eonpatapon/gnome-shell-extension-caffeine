@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 15:10+0200\n"
-"PO-Revision-Date: 2023-12-12 14:27+0100\n"
-"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
+"POT-Creation-Date: 2024-11-01 07:51+0100\n"
+"PO-Revision-Date: 2024-11-01 07:52+0100\n"
+"Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -14,62 +14,64 @@ msgstr ""
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:134
 msgid "Caffeine"
 msgstr "Koffein"
 
-#: extension.js:153 extension.js:643
+#: extension.js:153 extension.js:651
 msgid "Caffeine Timer"
 msgstr "Koffein-Timer"
 
-#: extension.js:193
+#: extension.js:161
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: extension.js:201
 msgid "Infinite"
 msgstr "Unendlich"
 
-#: extension.js:201 extension.js:829
+#: extension.js:209 extension.js:837
 msgid " hour "
 msgstr " stunde "
 
-#: extension.js:204 extension.js:832
+#: extension.js:212 extension.js:840
 msgid " hours "
 msgstr " stunden "
 
-#: extension.js:211
+#: extension.js:219
 msgid " minute"
 msgstr " minute"
 
-#: extension.js:214 preferences/timerPage.js:211
+#: extension.js:222 preferences/timerPage.js:206
 msgid " minutes"
 msgstr " Minuten"
 
-#: extension.js:790
+#: extension.js:798
 msgid "Caffeine enabled"
 msgstr "Koffein aktiviert"
 
-#: extension.js:792
+#: extension.js:800
 msgid "Night Light paused"
 msgstr "Nachtmodus pausiert"
 
-#: extension.js:797
+#: extension.js:805
 msgid "Caffeine disabled"
 msgstr "Koffein deaktiviert"
 
-#: extension.js:799
+#: extension.js:807
 msgid "Night Light resumed"
 msgstr "Nachtmodus fortgesetzt"
 
-#: extension.js:839
-#, fuzzy
+#: extension.js:847
 msgid " minute "
-msgstr " Minuten"
+msgstr " Minuten "
 
-#: extension.js:842
-#, fuzzy
+#: extension.js:850
 msgid " minutes "
-msgstr " Minuten"
+msgstr " Minuten "
 
 #: preferences/appsPage.js:33
 msgid "Apps"
@@ -256,7 +258,7 @@ msgstr "Benutzerdefinierte Werte aktivieren"
 msgid "Select custom value for each duration"
 msgstr "Wählen Sie für jede Dauer einen benutzerdefinierten Wert aus"
 
-#: preferences/timerPage.js:208
+#: preferences/timerPage.js:203
 msgid "Set to "
 msgstr "Einstellen auf "
 
