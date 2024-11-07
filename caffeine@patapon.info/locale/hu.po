@@ -26,11 +26,11 @@ msgstr "Végtelen"
 
 #: extension.js:201 extension.js:829
 msgid " hour "
-msgstr " órá "
+msgstr " óra "
 
 #: extension.js:204 extension.js:832
 msgid " hours "
-msgstr " órák "
+msgstr " óra "
 
 #: extension.js:211
 msgid " minute"
@@ -38,7 +38,7 @@ msgstr " perc"
 
 #: extension.js:214 preferences/timerPage.js:211
 msgid " minutes"
-msgstr " percek"
+msgstr " perc"
 
 #: extension.js:790
 msgid "Caffeine enabled"
