@@ -141,8 +141,8 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
         // Icons
         this.finalTimerMenuIcon = TimerMenuIcon;
-        this._iconActivated = DisabledIcon;
-        this._iconDeactivated = EnabledIcon;
+        this._iconActivated = Gio.ThemedIcon.new(EnabledIcon);
+        this._iconDeactivated = Gio.ThemedIcon.new(DisabledIcon);
         this._iconTheme = new St.IconTheme();
         if (!this._iconTheme.has_icon(TimerMenuIcon)) {
             this.finalTimerMenuIcon =
@@ -208,7 +208,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
                     label = hours + _(' hour ');
                     break;
                 default:
-                    label = hours + _(' hours ');
+                    label = hours + _(' hours ');s
                     break;
                 }
                 switch (minutes) {
@@ -225,7 +225,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             if (!label) {
                 continue;
             }
-            let icon = TimerIcons[index];
+            let icon = Gio.ThemedIcon.new(TimerIcons[index]);
             if (!this._iconTheme.has_icon(TimerIcons[index])) {
                 icon = Gio.icon_new_for_string(`${this._path}${ActionsPath}${TimerIcons[index]}.svg`);
             }
@@ -311,8 +311,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.add_child(this._timerLabel);
 
         // Icons
-        this._iconActivated = EnabledIcon;
-        this._iconDeactivated = DisabledIcon;
+        this._iconActivated = Gio.ThemedIcon.new(EnabledIcon);
+        this._iconDeactivated = Gio.ThemedIcon.new(DisabledIcon);
         this._iconTheme = new St.IconTheme();
         if (!this._iconTheme.has_icon(EnabledIcon)) {
             this._iconActivated = Gio.icon_new_for_string(`${path}${ActionsPath}${EnabledIcon}.svg`);
@@ -1166,4 +1166,5 @@ export default class CaffeineExtension extends Extension {
         Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
     }
 }
+
 
