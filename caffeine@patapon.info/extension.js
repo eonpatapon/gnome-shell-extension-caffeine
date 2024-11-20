@@ -99,6 +99,7 @@ const DBusSessionManagerInhibitorIface = '<node>\
 
 const DBusSessionManagerInhibitorProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerInhibitorIface);
 
+const ActionsPath = '/icons/hicolor/scalable/actions/';
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
 const TimerMenuIcon = 'stopwatch-symbolic';
@@ -140,13 +141,19 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
         // Icons
         this.finalTimerMenuIcon = TimerMenuIcon;
-        let iconTheme = new St.IconTheme();
-        if (!iconTheme.has_icon(TimerMenuIcon)) {
+        this._iconActivated = DisabledIcon;
+        this._iconDeactivated = EnabledIcon;
+        this._iconTheme = new St.IconTheme();
+        if (!this._iconTheme.has_icon(TimerMenuIcon)) {
             this.finalTimerMenuIcon =
-                Gio.icon_new_for_string(`${this._path}/icons/hicolor/scalable/actions/${TimerMenuIcon}.svg`);
+                Gio.icon_new_for_string(`${this._path}${ActionsPath}${TimerMenuIcon}.svg`);
         }
-        this._iconActivated = Gio.icon_new_for_string(`${this._path}/icons/${EnabledIcon}.svg`);
-        this._iconDeactivated = Gio.icon_new_for_string(`${this._path}/icons/${DisabledIcon}.svg`);
+        if (!this._iconTheme.has_icon(EnabledIcon)) {
+            this._iconActivated = Gio.icon_new_for_string(`${this._path}${ActionsPath}${EnabledIcon}.svg`);
+        }
+        if (!this._iconTheme.has_icon(DisabledIcon)) {
+            this._iconDeactivated = Gio.icon_new_for_string(`${this._path}${ActionsPath}${DisabledIcon}.svg`);
+        }
         this._iconName();
 
         // Menu
@@ -218,7 +225,10 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
             if (!label) {
                 continue;
             }
-            const icon = Gio.icon_new_for_string(`${this._path}/icons/${TimerIcons[index]}.svg`);
+            let icon = TimerIcons[index];
+            if (!this._iconTheme.has_icon(TimerIcons[index])) {
+                icon = Gio.icon_new_for_string(`${this._path}${ActionsPath}${TimerIcons[index]}.svg`);
+            }
             const item = new PopupMenu.PopupImageMenuItem(label, icon);
             item.connectObject('activate', () => this._checkTimer(timer), this);
             this._timerItems.set(timer, item);
@@ -301,8 +311,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.add_child(this._timerLabel);
 
         // Icons
-        this._iconActivated = Gio.icon_new_for_string(`${path}/icons/${EnabledIcon}.svg`);
-        this._iconDeactivated = Gio.icon_new_for_string(`${path}/icons/${DisabledIcon}.svg`);
+        this._iconActivated = DisabledIcon;
+        this._iconDeactivated = EnabledIcon;
+        this._iconTheme = new St.IconTheme();
+        if (!this._iconTheme.has_icon(EnabledIcon)) {
+            this._iconActivated = Gio.icon_new_for_string(`${this._path}${ActionsPath}${EnabledIcon}.svg`);
+        }
+        if (!this._iconTheme.has_icon(DisabledIcon)) {
+            this._iconDeactivated = Gio.icon_new_for_string(`${this._path}${ActionsPath}${DisabledIcon}.svg`);
+        }
         this._indicator.gicon = this._iconDeactivated;
 
         // Manage night light
