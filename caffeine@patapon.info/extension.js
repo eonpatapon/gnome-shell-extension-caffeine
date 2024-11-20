@@ -208,7 +208,7 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
                     label = hours + _(' hour ');
                     break;
                 default:
-                    label = hours + _(' hours ');s
+                    label = hours + _(' hours ');
                     break;
                 }
                 switch (minutes) {
