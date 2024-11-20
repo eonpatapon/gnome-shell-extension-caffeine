@@ -311,14 +311,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.add_child(this._timerLabel);
 
         // Icons
-        this._iconActivated = DisabledIcon;
-        this._iconDeactivated = EnabledIcon;
+        this._iconActivated = EnabledIcon;
+        this._iconDeactivated = DisabledIcon;
         this._iconTheme = new St.IconTheme();
         if (!this._iconTheme.has_icon(EnabledIcon)) {
-            this._iconActivated = Gio.icon_new_for_string(`${this._path}${ActionsPath}${EnabledIcon}.svg`);
+            this._iconActivated = Gio.icon_new_for_string(`${path}${ActionsPath}${EnabledIcon}.svg`);
         }
         if (!this._iconTheme.has_icon(DisabledIcon)) {
-            this._iconDeactivated = Gio.icon_new_for_string(`${this._path}${ActionsPath}${DisabledIcon}.svg`);
+            this._iconDeactivated = Gio.icon_new_for_string(`${path}${ActionsPath}${DisabledIcon}.svg`);
         }
         this._indicator.gicon = this._iconDeactivated;
 
