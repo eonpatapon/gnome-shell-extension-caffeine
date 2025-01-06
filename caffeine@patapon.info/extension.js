@@ -116,8 +116,6 @@ const InhibitorManager = GObject.registerClass({
         super._init();
 
         this._isInhibited = false;
-        this._isWaitingInhibit = false;
-        this._skipInhibit = false;
         this._inhibitorCookie = null;
         this._userEnabled = false;
         this._triggerApp = null;
@@ -296,7 +294,7 @@ const InhibitorManager = GObject.registerClass({
 
     _forceUpdate() {
         // Remove any inhibitor, as settings / inhibit flags may have changed
-        if (this._isInhibited || this._isWaitingInhibit) {
+        if (this._isInhibited) {
             this._removeInhibitor();
         }
 
@@ -328,7 +326,7 @@ const InhibitorManager = GObject.registerClass({
         }
 
         // Update inhibitor if required
-        if ((this._isInhibited || this._isWaitingInhibit) !== shouldInhibit) {
+        if (this._isInhibited !== shouldInhibit) {
             if (shouldInhibit) {
                 this._addInhibitor(reasons);
             } else {
@@ -371,41 +369,34 @@ const InhibitorManager = GObject.registerClass({
             inhibitFlags = 12;
         }
 
-        // Add an inhibitor and save the cookie
-        if (!this._isWaitingInhibit) {
-            this._isWaitingInhibit = true;
-            this._sessionManager.InhibitRemote('caffeine-gnome-extension', 0,
-                'Inhibit by %s'.format(this._name), inhibitFlags,
-                (cookie) => {
-                    this._isWaitingInhibit = false;
+        // Pack the parameters for DBus
+        let params = [
+            GLib.Variant.new_string('caffeine-gnome-extension'),
+            GLib.Variant.new_uint32(0),
+            GLib.Variant.new_string('Inhibit by %s'.format(this._name)),
+            GLib.Variant.new_uint32(inhibitFlags)
+        ];
+        let paramsVariant = GLib.Variant.new_tuple(params);
 
-                    // Delete the inhibitor if we're not supposed to have it
-                    /* We shouldn't need to check for this._isInhibited, but we
-                       might be able to recover from a bug if we do
-                    */
-                    if (this._skipInhibit || this._isInhibited) {
-                        this._removeInhibitor();
-                    } else {
-                        this._isInhibited = true;
-                        this._inhibitorCookie = cookie;
-                    }
-                }
-            );
+        // Synchronously add the inhibitor
+        let cookieTuple = this._sessionManager.call_sync('Inhibit', paramsVariant,
+            Gio.DBusCallFlags.NONE, -1, null);
+        if (cookieTuple !== null) {
+            this._inhibitorCookie = cookieTuple.get_child_value(0).get_uint32();
+            this._isInhibited = true;
+        } else {
+            log('Failed to add inhibitor');
         }
     }
 
     _removeInhibitor() {
-        // If we haven't actually inhibited yet, just skip creating it
-        if (this._isWaitingInhibit) {
-            this._skipInhibit = true;
-            return;
+        // Remove the inhibitor if it's active
+        if (this._isInhibited) {
+            // Use the cookie to remove the inhibitor
+            this._sessionManager.UninhibitRemote(this._inhibitorCookie);
+            this._inhibitorCookie = null;
+            this._isInhibited = false;
         }
-
-        // Use the cookie to remove the inhibitor
-        this._sessionManager.UninhibitRemote(this._inhibitorCookie);
-        this._inhibitorCookie = null;
-        this._isInhibited = false;
-        this._skipInhibit = false;
     }
 
     isFullscreen() {
@@ -435,7 +426,7 @@ const InhibitorManager = GObject.registerClass({
     }
 
     getInhibitState() {
-        return this._isInhibited || this._isWaitingInhibit;
+        return this._isInhibited;
     }
 
     getInhibitApp() {
