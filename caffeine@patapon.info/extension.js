@@ -130,14 +130,14 @@ const AppsTrigger = {
 
 const CaffeineToggle = GObject.registerClass(
 class CaffeineToggle extends QuickSettings.QuickMenuToggle {
-    _init(settings, path) {
+    _init(Me) {
         super._init({
             'title': _('Caffeine'),
             toggleMode: true
         });
 
-        this._settings = settings;
-        this._path = path;
+        this._settings = Me._settings;
+        this._path = Me.path;
 
         // Icons
         this.finalTimerMenuIcon = TimerMenuIcon;
@@ -162,6 +162,14 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
         // Add elements
         this._itemsSection = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(this._itemsSection);
+
+        // Add an entry-point for more settings
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        const settingsItem = this.menu.addAction(_('Settings'), () => Me._openPreferences());
+
+        // Ensure the settings are unavailable when the screen is locked
+        settingsItem.visible = Main.sessionMode.allowSettings;
+        this.menu._settingsActions[Me.uuid] = settingsItem;
 
         // Init Timers
         this._timerItems = new Map();
@@ -269,12 +277,12 @@ class CaffeineToggle extends QuickSettings.QuickMenuToggle {
 
 const Caffeine = GObject.registerClass(
 class Caffeine extends QuickSettings.SystemIndicator {
-    _init(settings, path, name) {
+    _init(Me) {
         super._init();
 
         this._indicator = this._addIndicator();
-        this._settings = settings;
-        this._name = name;
+        this._settings = Me._settings;
+        this._name = Me.metadata.name;
 
         // D-bus
         this._proxy = new ColorProxy(
@@ -315,10 +323,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._iconDeactivated = Gio.ThemedIcon.new(DisabledIcon);
         this._iconTheme = new St.IconTheme();
         if (!this._iconTheme.has_icon(EnabledIcon)) {
-            this._iconActivated = Gio.icon_new_for_string(`${path}${ActionsPath}${EnabledIcon}.svg`);
+            this._iconActivated = Gio.icon_new_for_string(`${Me.path}${ActionsPath}${EnabledIcon}.svg`);
         }
         if (!this._iconTheme.has_icon(DisabledIcon)) {
-            this._iconDeactivated = Gio.icon_new_for_string(`${path}${ActionsPath}${DisabledIcon}.svg`);
+            this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}${ActionsPath}${DisabledIcon}.svg`);
         }
         this._indicator.gicon = this._iconDeactivated;
 
@@ -368,7 +376,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
 
         // QuickSettings
-        this._caffeineToggle = new CaffeineToggle(this._settings, path);
+        this._caffeineToggle = new CaffeineToggle(Me);
         this.quickSettingsItems.push(this._caffeineToggle);
         this._updateTimerSubtitle();
 
@@ -1148,7 +1156,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 export default class CaffeineExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
-        this._caffeineIndicator = new Caffeine(this._settings, this.path, this.metadata.name);
+        this._caffeineIndicator = new Caffeine(this);
 
         // Register shortcut
         Main.wm.addKeybinding(TOGGLE_SHORTCUT, this._settings,
@@ -1164,6 +1172,10 @@ export default class CaffeineExtension extends Extension {
 
         // Unregister shortcut
         Main.wm.removeKeybinding(TOGGLE_SHORTCUT);
+    }
+
+    _openPreferences() {
+        this.openPreferences();
     }
 }
 
