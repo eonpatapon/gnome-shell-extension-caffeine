@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-01 07:51+0100\n"
-"PO-Revision-Date: 2024-11-01 07:52+0100\n"
+"PO-Revision-Date: 2025-01-14 19:52+0100\n"
 "Last-Translator: Christian Lauinger <christian@lauinger-clan.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -35,15 +35,15 @@ msgstr "Unendlich"
 
 #: extension.js:209 extension.js:837
 msgid " hour "
-msgstr " stunde "
+msgstr " Stunde "
 
 #: extension.js:212 extension.js:840
 msgid " hours "
-msgstr " stunden "
+msgstr " Stunden "
 
 #: extension.js:219
 msgid " minute"
-msgstr " minute"
+msgstr " Minute"
 
 #: extension.js:222 preferences/timerPage.js:206
 msgid " minutes"
@@ -67,7 +67,7 @@ msgstr "Nachtmodus fortgesetzt"
 
 #: extension.js:847
 msgid " minute "
-msgstr " Minuten "
+msgstr " Minute "
 
 #: extension.js:850
 msgid " minutes "
