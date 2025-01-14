@@ -11,5 +11,6 @@
   "url": "https://github.com/eonpatapon/gnome-shell-extension-caffeine",
   "donations": {
     "paypal": ["eonpatapon", "stuartahayhurst", "pakaoraki"]
-  }
+  },
+  "session-modes": ["user", "unlock-dialog"]
 }
