@@ -28,14 +28,6 @@ import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensio
 
 const genParam = (type, name, ...dflt) => GObject.ParamSpec[type](name, name, name, GObject.ParamFlags.READWRITE, ...dflt);
 
-const TIMERS_DURATION = [
-    '05, 10, 30',
-    '10, 20, 45',
-    '15, 30, 60',
-    '20, 40, 75',
-    '30, 50, 80'
-];
-
 export var GeneralPage = GObject.registerClass(
 class CaffeineGeneralPage extends Adw.PreferencesPage {
     _init(settings, settingsKey) {
@@ -53,29 +45,19 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
             title: _('Behavior')
         });
 
-        // Enable / Disable fullscreen apps
-        let disableFullscreenSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.FULLSCREEN)
-        });
-        let disableFullscreenRow = new Adw.ActionRow({
+        // Enable / disable fullscreen apps
+        let disableFullscreenRow = new Adw.SwitchRow({
             title: _('Enable for fullscreen apps'),
             subtitle: _('Automatically enable when an app enters fullscreen mode'),
-            activatable_widget: disableFullscreenSwitch
+            active: this._settings.get_boolean(this._settingsKey.FULLSCREEN)
         });
-        disableFullscreenRow.add_suffix(disableFullscreenSwitch);
 
         // Remember state
-        let rememberStateSwitch = new Gtk.Switch({
-            valign: Gtk.Align.CENTER,
-            active: this._settings.get_boolean(this._settingsKey.RESTORE)
-        });
-        let rememberStateRow = new Adw.ActionRow({
+        let rememberStateRow = new Adw.SwitchRow({
             title: _('Remember state'),
             subtitle: _('Remember the last state across sessions and reboots'),
-            activatable_widget: rememberStateSwitch
+            active: this._settings.get_boolean(this._settingsKey.RESTORE)
         });
-        rememberStateRow.add_suffix(rememberStateSwitch);
 
         // Pause and resume Night Light
         let pauseNightLight = new Gtk.StringList();
@@ -107,48 +89,6 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         behaviorGroup.add(pauseNightLightRow);
         behaviorGroup.add(allowBlankScreenRow);
         this.add(behaviorGroup);
-
-        // Timer group
-        // --------------
-        let timerGroup = new Adw.PreferencesGroup({
-            title: _('Timer')
-        });
-
-        const durationIndex = this._settings.get_int(this._settingsKey.DURATION_TIMER_INDEX);
-        this.timerOptionRow = new Adw.ActionRow({
-            title: _('Durations'),
-            activatable: true
-        });
-
-        let adjustSliderTimer = new Gtk.Adjustment({
-            lower: 0,
-            upper: 4,
-            step_increment: 0.1,
-            page_increment: 1,
-            value: durationIndex
-        });
-        this._updateTimerDuration(durationIndex);
-
-        let sliderTimer = new Gtk.Scale({
-            valign: 'center',
-            hexpand: true,
-            width_request: '200px',
-            round_digits: false,
-            draw_value: false,
-            orientation: 'horizontal',
-            digits: 0,
-            adjustment: adjustSliderTimer
-        });
-        sliderTimer.add_mark(0, Gtk.PositionType.BOTTOM, null);
-        sliderTimer.add_mark(1, Gtk.PositionType.BOTTOM, null);
-        sliderTimer.add_mark(2, Gtk.PositionType.BOTTOM, null);
-        sliderTimer.add_mark(3, Gtk.PositionType.BOTTOM, null);
-        sliderTimer.add_mark(4, Gtk.PositionType.BOTTOM, null);
-        this.timerOptionRow.add_suffix(sliderTimer);
-
-        // Add elements
-        timerGroup.add(this.timerOptionRow);
-        this.add(timerGroup);
 
         // Shortcut group
         // --------------
@@ -184,10 +124,10 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
 
         // Bind signals
         // --------------
-        disableFullscreenSwitch.connect('notify::active', (widget) => {
+        disableFullscreenRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.FULLSCREEN, widget.get_active());
         });
-        rememberStateSwitch.connect('notify::active', (widget) => {
+        rememberStateRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.RESTORE, widget.get_active());
         });
         pauseNightLightRow.connect('notify::selected', (widget) => {
@@ -196,8 +136,6 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         allowBlankScreenRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.SCREEN_BLANK, widget.selected);
         });
-        sliderTimer.connect('change-value',
-            (widget) => this._updateTimerDuration(widget.get_value()));
         deleteShortcutButton.connect('clicked', this._resetShortcut.bind(this));
         this._settings.connect(`changed::${this._settingsKey.TOGGLE_SHORTCUT}`, () => {
             if (this.shortcutKeyBoard.isAcceleratorSet()) {
@@ -206,14 +144,6 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
                 deleteShortcutButton.visible = false;
             }
         });
-    }
-
-    _updateTimerDuration(value) {
-        const durationIndex = this._settings.get_int(this._settingsKey.DURATION_TIMER_INDEX);
-        this.timerOptionRow.set_subtitle(_('Set to ') + TIMERS_DURATION[value] + _(' minutes'));
-        if (durationIndex !== value) {
-            this._settings.set_int(this._settingsKey.DURATION_TIMER_INDEX, value);
-        }
     }
 
     _resetShortcut() {

@@ -1,7 +1,7 @@
 {
-  "version": 53,
+  "version": 55,
   "shell-version": [
-    "45", "46"
+    "45", "46", "47"
   ],
   "uuid": "caffeine@patapon.info",
   "name": "Caffeine",
@@ -11,5 +11,6 @@
   "url": "https://github.com/eonpatapon/gnome-shell-extension-caffeine",
   "donations": {
     "paypal": ["eonpatapon", "stuartahayhurst", "pakaoraki"]
-  }
+  },
+  "session-modes": ["user", "unlock-dialog"]
 }
