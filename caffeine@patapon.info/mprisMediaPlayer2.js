@@ -113,20 +113,22 @@ class _MprisPlayer extends GObject.Object {
         return this.#isPlaying
     }
 
+    #lastEmittedPlayStatus = false;
+
     async #init() {
         await this.refresh();
     }
 
     async refresh() {
-        console.log("REFRESHING!");
         const dbusNames = await this.#getMPlayerApps();
-        console.log(1)
         dbusNames.forEach(dbusName => this.#addPlayer(dbusName));
-        console.log(2)
+        this.#emitPlayStatus(true);
+    }
 
-        console.log(this.#activePlayers.keys());
-
-        this.emit('changes');
+    #emitPlayStatus(forceEmit = false) {
+        if (this.#lastEmittedPlayStatus === this.isPlaying && !forceEmit) return;
+        this.#lastEmittedPlayStatus = this.isPlaying;
+        this.emit("isPlaying", this.isPlaying);
     }
 
     #addPlayer(dbusName) {
@@ -154,11 +156,9 @@ class _MprisPlayer extends GObject.Object {
         let isPlaying = false;
         for (const player of this.#activePlayers.values()) {
             if (player.PlaybackStatus === "Playing") isPlaying = true;
-            console.log("Active player: ", player)
         };
         this.#isPlaying = isPlaying;
-
-        console.log("isPlaying: ", this.#isPlaying);
+        this.#emitPlayStatus();
     }
 
     #onNameOwnerChanged(_proxy, _sender, [name, oldOwner, newOwner]) {
@@ -174,7 +174,6 @@ class _MprisPlayer extends GObject.Object {
         const [names] = await this.#dbusProxy.ListNamesAsync()
         const mprisPlayers = names.filter((dbusName) => dbusName.startsWith(this.#mprisPrefix));
 
-        console.log(mprisPlayers)
         return mprisPlayers;
     }
 
@@ -204,7 +203,7 @@ class _MprisPlayer extends GObject.Object {
             Gio.DBus.session,
             "org.freedesktop.DBus",
             "/org/freedesktop/DBus",
-            (player) => this.#onPlayerChange(player),
+            (/** @type {DBusMprisPlayerProxy} */ player) => this.#onPlayerChange(player),
         );
 
         this.#dbusProxy.connectSignal(
@@ -226,7 +225,9 @@ class _MprisPlayer extends GObject.Object {
  */
 const MprisPlayer = GObject.registerClass({
     Signals: {
-        'changes': {},
+        'isPlaying': {
+            param_types: [GObject.TYPE_BOOLEAN],
+        },
     },
 }, _MprisPlayer)
 
@@ -236,11 +237,10 @@ export { MprisPlayer }
 
 const a = await MprisPlayer.Get();
 
-a.connect('changes',
+a.connect('isPlaying',
     (...args) => console.log('example-signal emitted!', args));
 
 await a.refresh();
-
 
 let loop = new GLib.MainLoop(null, false);
 loop.run();
