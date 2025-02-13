@@ -73,14 +73,17 @@ class _MprisPlayer extends GObject.Object {
      */
     static #instance;
 
+    static get isActive() {
+        return this.#instance !== undefined;
+    }
+
     /**
      * Get singleton instance of MprisMediaPlayer2
-     * @returns { Promise<_MprisPlayer> }
+     * @returns { _MprisPlayer }
      */
-    static async Get() {
+    static Get() {
         if (this.#instance) return this.#instance;
         this.#instance = new MprisPlayer(new PrivateContructorParams());
-        await this.#instance.#init();
         return this.#instance;
     }
 
@@ -128,12 +131,8 @@ class _MprisPlayer extends GObject.Object {
 
     #lastEmittedPlayStatus = false;
 
-    async #init() {
-        await this.refresh();
-    }
-
-    async refresh() {
-        const dbusNames = await this.#getMPlayerApps();
+    refresh() {
+        const dbusNames = this.#getMPlayerApps();
         dbusNames.forEach((dbusName) => this.#addPlayer(dbusName));
         this.#emitPlayStatus(true);
     }
@@ -196,10 +195,10 @@ class _MprisPlayer extends GObject.Object {
 
     /**
      * Get the dbus name list for mpris players
-     * @returns {Promise<string[]>}
+     * @returns {string[]}
      */
-    async #getMPlayerApps() {
-        const [names] = await this.#dbusProxy.ListNamesAsync();
+    #getMPlayerApps() {
+        const [names] = this.#dbusProxy.ListNamesSync();
         const mprisPlayers = names.filter((dbusName) =>
             dbusName.startsWith(this.#mprisPrefix)
         );
@@ -247,12 +246,14 @@ class _MprisPlayer extends GObject.Object {
             "NameOwnerChanged",
             (...args) => this.#onNameOwnerChanged(...args)
         );
+
+        this.refresh();
     }
 }
 
 /**
  * MprisPlayer singleton class.
- * Call `await MprisPlayer.Get()` & `MprisPlayer.Destroy()`.
+ * Call `MprisPlayer.Get()` & `MprisPlayer.Destroy()`.
  * @type { typeof _MprisPlayer }
  */
 const MprisPlayer = GObject.registerClass(
