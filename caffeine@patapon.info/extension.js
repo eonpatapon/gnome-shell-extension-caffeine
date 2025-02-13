@@ -380,7 +380,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
 
         // Enable caffeine when mpris player app is playing
-        MprisPlayer.Get().connect('isPlaying', (_object, isPlaying) => this.toggleMprisPlayer(isPlaying));
+        this._mprisIsPlayingId = MprisPlayer.Get().connect('isPlaying', (_object, isPlaying) => this.toggleMprisPlayer(isPlaying));
 
         // QuickSettings
         this._caffeineToggle = new CaffeineToggle(Me);
