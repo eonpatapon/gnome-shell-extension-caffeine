@@ -10,7 +10,8 @@ build:
 	cd $(EXTENSION_DIR); \
 	gnome-extensions pack --force --podir=locale \
 	                      --extra-source=preferences/ \
-	                      --extra-source=icons/; \
+	                      --extra-source=icons/ \
+												--extra-source=mprisMediaPlayer2.js; \
 	mv $(EXTENSION_DIR).shell-extension.zip ../$(BUNDLE_PATH)
 
 install:

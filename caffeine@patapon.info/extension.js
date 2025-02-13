@@ -28,6 +28,7 @@ import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
+import { MprisPlayer } from './mprisMediaPlayer2.js'
 
 import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -351,6 +352,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._inhibitorAddedId = null;
         this._inhibitorRemovedId = null;
 
+        // Init mpris signals
+        this._mprisIsPlayingId = null;
+
         // Init Timers
         this._timeOut = null;
         this._timePrint = null;
@@ -374,6 +378,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 () => this.toggleFullscreen(), this);
             this.toggleFullscreen();
         }
+
+        // Enable caffeine when mpris player app is playing
+        MprisPlayer.Get().connect('isPlaying', (_, isPlaying) => this.toggleMprisPlayer(isPlaying));
 
         // QuickSettings
         this._caffeineToggle = new CaffeineToggle(Me);
@@ -459,6 +466,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
         }
         return inFullscreen;
+    }
+
+    toggleMprisPlayer(isPlaying) {
+        const inhibitId = 'mpris';
+        if (!isPlaying && this._appInhibitedData.has(inhibitId)) {
+            this.removeInhibit(inhibitId);
+        }
+        if (isPlaying && !this._appInhibitedData.has(inhibitId)) {
+            this.addInhibit(inhibitId)
+        }
     }
 
     toggleFullscreen() {
@@ -1121,6 +1138,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._sessionManager.disconnectSignal(this._inhibitorRemovedId);
             this._inhibitorRemovedId = null;
         }
+        if (this._mprisIsPlayingId && MprisPlayer.isActive) {
+            const mprisPlayer = MprisPlayer.Get();
+            mprisPlayer.disconnect(this._mprisIsPlayingId);
+        }
         if (this._timeOut) {
             GLib.Source.remove(this._timeOut);
             this._timeOut = null;
@@ -1149,6 +1170,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         this._appConfigs.length = 0;
         this._settings = null;
+        MprisPlayer.Destroy();
         super.destroy();
     }
 });
