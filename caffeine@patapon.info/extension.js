@@ -28,7 +28,7 @@ import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
-import { MprisPlayer } from './mprisMediaPlayer2.js'
+import { MprisPlayer } from './mprisMediaPlayer2.js';
 
 import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -380,7 +380,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         }
 
         // Enable caffeine when mpris player app is playing
-        MprisPlayer.Get().connect('isPlaying', (_, isPlaying) => this.toggleMprisPlayer(isPlaying));
+        MprisPlayer.Get().connect('isPlaying', (_object, isPlaying) => this.toggleMprisPlayer(isPlaying));
 
         // QuickSettings
         this._caffeineToggle = new CaffeineToggle(Me);
@@ -474,7 +474,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this.removeInhibit(inhibitId);
         }
         if (isPlaying && !this._appInhibitedData.has(inhibitId)) {
-            this.addInhibit(inhibitId)
+            this.addInhibit(inhibitId);
         }
     }
 
