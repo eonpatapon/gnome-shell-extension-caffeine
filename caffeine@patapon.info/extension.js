@@ -40,6 +40,7 @@ const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
 const SHOW_TIMER_KEY = 'show-timer';
+const SHOW_TOGGLE_KEY = 'show-toggle';
 const DURATION_TIMER_LIST = 'duration-timer-list';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
@@ -484,7 +485,7 @@ const CaffeineToggle = GObject.registerClass({
         }
         this.updateIcon();
 
-        // Menu
+        // Set up entry
         this.menu.setHeader(this.finalTimerMenuIcon, _('Caffeine Timer'), null);
 
         // Add elements
@@ -509,6 +510,10 @@ const CaffeineToggle = GObject.registerClass({
             () => this._sync(),
             `changed::${DURATION_TIMER_LIST}`,
             () => this._syncTimers(true),
+            `changed::${SHOW_TOGGLE_KEY}`,
+            () => {
+                this.visible = this._settings.get_boolean(SHOW_TOGGLE_KEY);
+            },
             this);
         this.connect('destroy', () => {
             this._iconActivated = null;
