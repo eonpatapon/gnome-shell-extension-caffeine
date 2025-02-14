@@ -35,6 +35,7 @@ const SettingsKey = {
     SHOW_INDICATOR: 'show-indicator',
     SHOW_NOTIFICATIONS: 'show-notifications',
     SHOW_TIMER: 'show-timer',
+    SHOW_TOGGLE: 'show-toggle',
     DURATION_TIMER_INDEX: 'duration-timer',
     DURATION_TIMER_LIST: 'duration-timer-list',
     USE_CUSTOM_DURATION: 'use-custom-duration',
