@@ -85,7 +85,8 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         allowBlankScreen.append(_('For apps on list'));
         let allowBlankScreenRow = new Adw.ComboRow({
             title: _('Allow screen blank'),
-            subtitle: _('Allow turning off screen when Caffeine is enabled'),
+            subtitle: _('Allow turning off screen when Caffeine is enabled\n' +
+                        'This may disable manual suspend / shutdown'),
             model: allowBlankScreen,
             selected: this._settings.get_enum(this._settingsKey.SCREEN_BLANK)
         });
