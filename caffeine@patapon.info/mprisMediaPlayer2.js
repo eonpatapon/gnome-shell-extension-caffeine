@@ -151,8 +151,8 @@ class _MprisPlayer extends GObject.Object {
     /**
      * Set a callback function to isPlaying status changes.
      * Self owned so no need to disconnect externally.
-     * `MprisPlayer.Destroy()` 
-     * @param {(isPlaying: boolean) => void} callbackFn
+     * `MprisPlayer.Destroy()`
+     * @param {(isPlaying: boolean) => void} callbackFn Callback function
      * @returns {void}
      */
     connectIsPlaying(callbackFn) {
