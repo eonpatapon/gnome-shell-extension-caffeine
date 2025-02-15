@@ -129,6 +129,12 @@ class _MprisPlayer extends GObject.Object {
      */
     _activePlayers = new Map();
 
+    /**
+     * All players with player dbusProxy instance
+     * @type {Set<any>}
+     */
+    _connections = new Set();
+
     _isPlaying = false;
     get isPlaying() {
         return this._isPlaying;
@@ -140,6 +146,21 @@ class _MprisPlayer extends GObject.Object {
         const dbusNames = this._getMPlayerApps();
         dbusNames.forEach((dbusName) => this._addPlayer(dbusName));
         this._emitPlayStatus(true);
+    }
+
+    /**
+     * Set a callback function to isPlaying status changes.
+     * Self owned so no need to disconnect externally.
+     * `MprisPlayer.Destroy()` 
+     * @param {(isPlaying: boolean) => void} callbackFn
+     * @returns {void}
+     */
+    connectIsPlaying(callbackFn) {
+        const connectId = this.connect(
+            'isPlaying',
+            (_, isPlaying) => callbackFn(isPlaying)
+        );
+        this._connections.add(connectId);
     }
 
     _emitPlayStatus(forceEmit = false) {
@@ -231,6 +252,11 @@ class _MprisPlayer extends GObject.Object {
             this._removePlayer(dbusName);
         }
         this._activePlayers.clear();
+
+        for (const connectId of this._connections.values()) {
+            this.disconnect(connectId);
+        }
+        this._connections.clear();
     }
 
     /**
@@ -238,12 +264,15 @@ class _MprisPlayer extends GObject.Object {
      */
     constructor(params) {
         super();
-        // Declare some GObject.Object (non typescript has some difficulty with this weird import)
+        // Declare some GObject.Object properties (non typescript has some difficulty with this weird import)
         if (!this.emit) {
             this.emit = super.emit;
         }
         if (!this.connect) {
             this.connect = super.connect;
+        }
+        if (!this.disconnect) {
+            this.disconnect = super.disconnect;
         }
 
         if (!(params instanceof PrivateContructorParams)) {

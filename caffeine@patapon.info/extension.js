@@ -168,6 +168,9 @@ const InhibitorManager = GObject.registerClass({
         // Update state when fullscreened
         global.display.connectObject('in-fullscreen-changed', () => this._updateState(), this);
 
+        // Update state when mpris Player Playback status changed
+        MprisPlayer.Get().connectIsPlaying((_isPlaying) => this._updateState());
+
         // Update when possible app triggers change
         this._connectTriggerSignals();
 
@@ -262,6 +265,10 @@ const InhibitorManager = GObject.registerClass({
         let reasons = [];
         if (this.isFullscreen() && this._settings.get_boolean(FULLSCREEN_KEY)) {
             reasons.push('fullscreen');
+        }
+
+        if (MprisPlayer.Get().isPlaying) {
+            reasons.push('mpris');
         }
 
         if (this._userEnabled) {
@@ -999,11 +1006,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._timePrint = null;
         }
 
+        MprisPlayer.Destroy();
         this._inhibitorManager.destroy();
         this._inhibitorManager = null;
 
         this._settings = null;
-        MprisPlayer.Destroy();
         super.destroy();
     }
 });
