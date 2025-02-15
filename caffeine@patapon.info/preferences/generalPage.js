@@ -52,6 +52,13 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
             active: this._settings.get_boolean(this._settingsKey.FULLSCREEN)
         });
 
+        // Enable / disable mpris apps
+        let enableMprisRow = new Adw.SwitchRow({
+            title: _('Enable when an app is playing media'),
+            subtitle: _('Automatically enable when an app reports playback'),
+            active: this._settings.get_boolean(this._settingsKey.MPRIS)
+        });
+
         // Remember state
         let rememberStateRow = new Adw.SwitchRow({
             title: _('Remember state'),
@@ -85,6 +92,7 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
 
         // Add elements
         behaviorGroup.add(disableFullscreenRow);
+        behaviorGroup.add(enableMprisRow);
         behaviorGroup.add(rememberStateRow);
         behaviorGroup.add(pauseNightLightRow);
         behaviorGroup.add(allowBlankScreenRow);
@@ -126,6 +134,9 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         // --------------
         disableFullscreenRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.FULLSCREEN, widget.get_active());
+        });
+        enableMprisRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.MPRIS, widget.get_active());
         });
         rememberStateRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.RESTORE, widget.get_active());

@@ -45,6 +45,7 @@ const DURATION_TIMER_LIST = 'duration-timer-list';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const MPRIS_KEY = 'enable-mpris';
 const NIGHT_LIGHT_KEY = 'nightlight-control';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
@@ -153,6 +154,8 @@ const InhibitorManager = GObject.registerClass({
             `changed::${SCREEN_BLANK}`,
             () => this._forceUpdate(),
             `changed::${FULLSCREEN_KEY}`,
+            () => this._updateState(),
+            `changed::${MPRIS_KEY}`,
             () => this._updateState(),
             `changed::${NIGHT_LIGHT_KEY}`,
             () => this._updateState(),
@@ -267,7 +270,7 @@ const InhibitorManager = GObject.registerClass({
             reasons.push('fullscreen');
         }
 
-        if (MprisPlayer.Get().isPlaying) {
+        if (this._settings.get_boolean(MPRIS_KEY) && MprisPlayer.Get().isPlaying) {
             reasons.push('mpris');
         }
 
