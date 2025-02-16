@@ -62,6 +62,13 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
             active: this._settings.get_boolean(this._settingsKey.SHOW_TIMER)
         });
 
+        // Show quick settings toggle
+        let showToggleRow = new Adw.SwitchRow({
+            title: _('Show quick settings toggle'),
+            subtitle: _('Enable or disable the toggle in the quick settings menu'),
+            active: this._settings.get_boolean(this._settingsKey.SHOW_TOGGLE)
+        });
+
         // Notifications
         let notificationRow = new Adw.SwitchRow({
             title: _('Notifications'),
@@ -87,6 +94,7 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         // Add elements
         displayGroup.add(showStatusIndicatorRow);
         displayGroup.add(showTimerRow);
+        displayGroup.add(showToggleRow);
         displayGroup.add(notificationRow);
         displayGroup.add(this.posIndicatorOffsetRow);
         this.add(displayGroup);
@@ -104,6 +112,9 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         });
         showTimerRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.SHOW_TIMER, widget.get_active());
+        });
+        showToggleRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.SHOW_TOGGLE, widget.get_active());
         });
         notificationRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS, widget.get_active());
