@@ -28,6 +28,7 @@ import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 
 import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
+import { MprisPlayer } from './mprisMediaPlayer2.js';
 
 import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -45,6 +46,7 @@ const DURATION_TIMER_LIST = 'duration-timer-list';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const MPRIS_KEY = 'enable-mpris';
 const NIGHT_LIGHT_KEY = 'nightlight-control';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
@@ -154,6 +156,8 @@ const InhibitorManager = GObject.registerClass({
             () => this._forceUpdate(),
             `changed::${FULLSCREEN_KEY}`,
             () => this._updateState(),
+            `changed::${MPRIS_KEY}`,
+            () => this._updateState(),
             `changed::${NIGHT_LIGHT_KEY}`,
             () => this._updateState(),
             `changed::${INHIBIT_APPS_KEY}`,
@@ -167,6 +171,9 @@ const InhibitorManager = GObject.registerClass({
 
         // Update state when fullscreened
         global.display.connectObject('in-fullscreen-changed', () => this._updateState(), this);
+
+        // Update state when mpris Player Playback status changed
+        MprisPlayer.Get().connectIsPlaying((_isPlaying) => this._updateState());
 
         // Update when possible app triggers change
         this._connectTriggerSignals();
@@ -262,6 +269,10 @@ const InhibitorManager = GObject.registerClass({
         let reasons = [];
         if (this.isFullscreen() && this._settings.get_boolean(FULLSCREEN_KEY)) {
             reasons.push('fullscreen');
+        }
+
+        if (this._settings.get_boolean(MPRIS_KEY) && MprisPlayer.Get().isPlaying) {
+            reasons.push('mpris');
         }
 
         if (this._userEnabled) {
@@ -1003,6 +1014,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._timePrint = null;
         }
 
+        MprisPlayer.Destroy();
         this._inhibitorManager.destroy();
         this._inhibitorManager = null;
 
