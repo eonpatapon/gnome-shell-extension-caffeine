@@ -80,7 +80,7 @@ class _MprisPlayer extends GObject.Object {
 
     /**
      * Get singleton instance of MprisMediaPlayer2
-     * @returns { _MprisPlayer }
+     * @returns {_MprisPlayer}
      */
     static Get() {
         if (this._instance) {
@@ -90,6 +90,10 @@ class _MprisPlayer extends GObject.Object {
         return this._instance;
     }
 
+    /**
+     * Destroy the singleton instance of MprisMediaPlayer2
+     * @returns {void}
+     */
     static Destroy() {
         if (this._instance) {
             this._instance._onDestroy();
@@ -150,10 +154,10 @@ class _MprisPlayer extends GObject.Object {
 
     /**
      * Set a callback function to isPlaying status changes.
-     * Self owned so no need to disconnect externally.
-     * `MprisPlayer.Destroy()`
+     * Use `disconnectIsPlaying(connectId)` to disconnect manually or `MprisPlayer.Destroy()`
+     * to destroy all connections.
      * @param {(isPlaying: boolean) => void} callbackFn Callback function
-     * @returns {void}
+     * @returns {any}
      */
     connectIsPlaying(callbackFn) {
         const connectId = this.connect(
@@ -161,6 +165,22 @@ class _MprisPlayer extends GObject.Object {
             (_, isPlaying) => callbackFn(isPlaying)
         );
         this._connections.add(connectId);
+        return connectId;
+    }
+
+    /**
+     * Manually disable a single `connectIsPlaying` connection.
+     * Run `MprisPlayer.Destroy()` to cleanup all connections.
+     * @param {any} connectId The `connectId` recieved from `connectIsPlaying()`.
+     * @returns {void}
+     */
+    disconnectIsPlaying(connectId) {
+        if (!this._connections.has(connectId)) {
+            return;
+        }
+        this.disconnect(connectId);
+        this._connections.delete(connectId);
+        return connectId;
     }
 
     _emitPlayStatus(forceEmit = false) {
@@ -254,7 +274,7 @@ class _MprisPlayer extends GObject.Object {
         this._activePlayers.clear();
 
         for (const connectId of this._connections.values()) {
-            this.disconnect(connectId);
+            this.disconnectIsPlaying(connectId);
         }
         this._connections.clear();
     }
