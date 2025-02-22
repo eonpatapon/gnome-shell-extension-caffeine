@@ -244,12 +244,11 @@ class _MprisPlayer extends GObject.Object {
         if (!name.startsWith(this._mprisPrefix)) {
             return;
         }
-        if (oldOwner && !newOwner) {
-            this._removePlayer(name);
-        }
-        if (newOwner && !oldOwner) {
-            this._addPlayer(name);
-        }
+    if (newOwner === "") {
+        this._removePlayer(name);
+    } else if (oldOwner === "") {
+        this._addPlayer(name);
+    }
         this._onPlayerChange();
     }
 
