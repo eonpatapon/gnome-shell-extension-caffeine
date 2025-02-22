@@ -13,7 +13,7 @@ import GObject from 'gi://GObject';
  *  ListNamesRemote(callbackFn: (data: [string[]]) => never): never;
  *  ListNamesSync(): [string[]];
  *  ListNamesAsync(): Promise<[string[]]>;
- *  connectSignal(signal: string, callbackFn: (proxy, sender, [name, oldOwner, newOwner]) => void): any
+ *  connectSignal(signal: string, callbackFn: (proxy, sender, []: [name: string, oldOwner: string, newOwner: string]) => void): any
  *  disconnectSignal(handlerId: any): void
  *  }} DBusProxy
  */
@@ -230,6 +230,12 @@ class _MprisPlayer extends GObject.Object {
         this._emitPlayStatus();
     }
 
+    /**
+     * @param {*} _proxy 
+     * @param {*} _sender 
+     * @param {[string, string, string]} owner 
+     * @returns {void}
+     */
     _onNameOwnerChanged(_proxy, _sender, [name, oldOwner, newOwner]) {
         if (!name.startsWith(this._mprisPrefix)) {
             return;
