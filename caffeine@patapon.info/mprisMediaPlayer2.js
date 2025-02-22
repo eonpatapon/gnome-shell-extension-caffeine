@@ -1,7 +1,4 @@
-// @ts-check
-// @ts-expect-error
 import Gio from 'gi://Gio';
-// @ts-expect-error
 import GObject from 'gi://GObject';
 
 // eslint-disable-next-line
@@ -276,16 +273,6 @@ class _MprisPlayer extends GObject.Object {
 
     constructor() {
         super();
-        // Declare some GObject.Object properties (non typescript has some difficulty with this weird import)
-        if (!this.emit) {
-            this.emit = super.emit;
-        }
-        if (!this.connect) {
-            this.connect = super.connect;
-        }
-        if (!this.disconnect) {
-            this.disconnect = super.disconnect;
-        }
 
         /** @type {DBusProxyClass} */
         const DBusProxy = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
