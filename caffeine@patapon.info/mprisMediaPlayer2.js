@@ -61,7 +61,17 @@ const DBusMprisPlayerInterface = `<node>
 
 // ======================
 
-class _MprisPlayer extends GObject.Object {
+/**
+ * MprisPlayer singleton class.
+ * Call `MprisPlayer.Get()` & `MprisPlayer.Destroy()`.
+ */
+const MprisPlayer = GObject.registerClass({
+    Signals: {
+        isPlaying: {
+            param_types: [GObject.TYPE_BOOLEAN]
+        }
+    }
+}, class MprisPlayer extends GObject.Object {
     /**
      * @type {_MprisPlayer | undefined}
      */
@@ -294,22 +304,6 @@ class _MprisPlayer extends GObject.Object {
 
         this.refresh();
     }
-}
-
-/**
- * MprisPlayer singleton class.
- * Call `MprisPlayer.Get()` & `MprisPlayer.Destroy()`.
- * @type { typeof _MprisPlayer }
- */
-const MprisPlayer = GObject.registerClass(
-    {
-        Signals: {
-            isPlaying: {
-                param_types: [GObject.TYPE_BOOLEAN]
-            }
-        }
-    },
-    _MprisPlayer
-);
+});
 
 export { MprisPlayer };
