@@ -99,12 +99,6 @@ class _MprisPlayer extends GObject.Object {
 
     /**
      * @readonly
-     * @type {DBusProxyClass}
-     */
-    _DBusProxy;
-
-    /**
-     * @readonly
      * @type {DBusMprisPlayerProxyClass}
      */
     _DBusPlayerProxy;
@@ -287,12 +281,13 @@ class _MprisPlayer extends GObject.Object {
             this.disconnect = super.disconnect;
         }
 
-        this._DBusProxy = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
+        /** @type {DBusProxyClass} */
+        const DBusProxy = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
         this._DBusPlayerProxy = Gio.DBusProxy.makeProxyWrapper(
             DBusMprisPlayerInterface
         );
 
-        this._dbusProxy = new this._DBusProxy(
+        this._dbusProxy = new DBusProxy(
             Gio.DBus.session,
             'org.freedesktop.DBus',
             '/org/freedesktop/DBus',
