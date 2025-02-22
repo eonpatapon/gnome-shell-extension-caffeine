@@ -80,7 +80,7 @@
     <key type="b" name="enable-mpris">
         <default>false</default>
         <summary>Enable when an application is playing media</summary>
-        <description>Enable when an application is reporting playback status via mpris</description>
+        <description>Enable when an application is reporting playback status via MPRIS</description>
     </key>
     <key name="nightlight-control" enum="org.gnome.shell.extensions.caffeine.context-control">
         <default>"never"</default>
