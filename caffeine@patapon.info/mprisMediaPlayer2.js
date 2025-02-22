@@ -228,18 +228,18 @@ class _MprisPlayer extends GObject.Object {
     }
 
     /**
-     * @param {*} _proxy 
-     * @param {*} _sender 
-     * @param {[string, string, string]} owner 
+     * @param {*} _proxy -
+     * @param {*} _sender -
+     * @param {[string, string, string]} owner -
      * @returns {void}
      */
     _onNameOwnerChanged(_proxy, _sender, [name, oldOwner, newOwner]) {
         if (!name.startsWith(this._mprisPrefix)) {
             return;
         }
-        if (newOwner === "") {
+        if (newOwner === '') {
             this._removePlayer(name);
-        } else if (oldOwner === "") {
+        } else if (oldOwner === '') {
             this._addPlayer(name);
         }
         this._onPlayerChange();
