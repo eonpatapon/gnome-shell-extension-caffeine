@@ -62,10 +62,6 @@ const DBusMprisPlayerInterface = `<node>
   </interface>
 </node>`;
 
-class PrivateContructorParams {
-    dont = 'doit';
-}
-
 // ======================
 
 class _MprisPlayer extends GObject.Object {
@@ -86,7 +82,7 @@ class _MprisPlayer extends GObject.Object {
         if (this._instance) {
             return this._instance;
         }
-        this._instance = new MprisPlayer(new PrivateContructorParams());
+        this._instance = new MprisPlayer();
         return this._instance;
     }
 
@@ -278,10 +274,7 @@ class _MprisPlayer extends GObject.Object {
         this._connections.clear();
     }
 
-    /**
-     * @param {any} params No params needed
-     */
-    constructor(params) {
+    constructor() {
         super();
         // Declare some GObject.Object properties (non typescript has some difficulty with this weird import)
         if (!this.emit) {
@@ -292,13 +285,6 @@ class _MprisPlayer extends GObject.Object {
         }
         if (!this.disconnect) {
             this.disconnect = super.disconnect;
-        }
-
-        if (!(params instanceof PrivateContructorParams)) {
-            throw new TypeError(
-                'MprisMediaPlayer2 is not constructable. ' +
-                'Use `MprisMediaPlayer2.Get()` and `MprisMediaPlayer2.Destroy()`'
-            );
         }
 
         this._DBusProxy = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
