@@ -157,7 +157,7 @@ const InhibitorManager = GObject.registerClass({
             `changed::${FULLSCREEN_KEY}`,
             () => this._updateState(),
             `changed::${MPRIS_KEY}`,
-            () => this._updateState(),
+            () => this._onMprisSettingChange(),
             `changed::${NIGHT_LIGHT_KEY}`,
             () => this._updateState(),
             `changed::${INHIBIT_APPS_KEY}`,
@@ -172,12 +172,22 @@ const InhibitorManager = GObject.registerClass({
         // Update state when fullscreened
         global.display.connectObject('in-fullscreen-changed', () => this._updateState(), this);
 
-        // Update state when mpris Player Playback status changed
-        MprisPlayer.Get().connectIsPlaying((_isPlaying) => this._updateState());
+        // Init mpris
+        this._onMprisSettingChange();
 
         // Update when possible app triggers change
         this._connectTriggerSignals();
 
+        this._updateState();
+    }
+
+    _onMprisSettingChange() {
+        const enable = this._settings.get_boolean(MPRIS_KEY);
+        if (enable && !MprisPlayer.isActive) {
+            MprisPlayer.Get().connectIsPlaying((_isPlaying) => this._updateState());
+        } else {
+            MprisPlayer.Destroy();
+        }
         this._updateState();
     }
 
@@ -271,7 +281,7 @@ const InhibitorManager = GObject.registerClass({
             reasons.push('fullscreen');
         }
 
-        if (this._settings.get_boolean(MPRIS_KEY) && MprisPlayer.Get().isPlaying) {
+        if (MprisPlayer.isActive && MprisPlayer.Get().isPlaying) {
             reasons.push('mpris');
         }
 
