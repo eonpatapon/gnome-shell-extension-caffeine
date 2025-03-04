@@ -22,7 +22,7 @@ msgstr "Koffein időzítő"
 
 #: extension.js:161
 msgid "Settings"
-msgstr ""
+msgstr "Beállítások"
 
 #: extension.js:201
 msgid "Infinite"
