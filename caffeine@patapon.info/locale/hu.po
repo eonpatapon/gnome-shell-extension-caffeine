@@ -61,12 +61,10 @@ msgid "Night Light resumed"
 msgstr "Éjszakai fény folytatva"
 
 #: extension.js:847
-#, fuzzy
 msgid " minute "
 msgstr " perc"
 
 #: extension.js:850
-#, fuzzy
 msgid " minutes "
 msgstr " perc"
 
