@@ -61,12 +61,10 @@ msgid "Night Light resumed"
 msgstr "Éjszakai fény folytatva"
 
 #: extension.js:847
-#, fuzzy
 msgid " minute "
 msgstr " perc"
 
 #: extension.js:850
-#, fuzzy
 msgid " minutes "
 msgstr " perc"
 
@@ -383,3 +381,11 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:118
 msgid "Last item index in indicator menu"
 msgstr "Utolsó elem indexe az állapotjelző menüben"
+
+#: preferences/displayPage.js:67
+msgid "Show quick settings toggle"
+msgstr "Gyors beállítások kapcsoló megjelenítése"
+
+#: preferences/displayPage.js:68
+msgid "Enable or disable the toggle in the quick settings menu"
+msgstr "A kapcsoló engedélyezése vagy letiltása a gyors beállítások menüben"
