@@ -40,6 +40,7 @@ const SettingsKey = {
     DURATION_TIMER_LIST: 'duration-timer-list',
     USE_CUSTOM_DURATION: 'use-custom-duration',
     FULLSCREEN: 'enable-fullscreen',
+    MPRIS: 'enable-mpris',
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
     TOGGLE_SHORTCUT: 'toggle-shortcut',
