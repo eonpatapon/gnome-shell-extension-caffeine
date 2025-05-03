@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-01 07:51+0100\n"
+"POT-Creation-Date: 2025-05-03 13:42+0300\n"
 "PO-Revision-Date: 2023-06-28 22:18+0200\n"
 "Last-Translator: infeeeee <gyetpet@mailbox.org>\n"
 "Language-Team: \n"
@@ -12,59 +12,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.3.1\n"
 
-#: extension.js:134
+#: extension.js:486
 msgid "Caffeine"
 msgstr "Koffein"
 
-#: extension.js:153 extension.js:651
+#: extension.js:511 extension.js:890
 msgid "Caffeine Timer"
 msgstr "Koffein időzítő"
 
-#: extension.js:161
+#: extension.js:519
 msgid "Settings"
 msgstr "Beállítások"
 
-#: extension.js:201
+#: extension.js:558
 msgid "Infinite"
 msgstr "Végtelen"
 
-#: extension.js:209 extension.js:837
+#: extension.js:566 extension.js:992
 msgid " hour "
 msgstr " óra "
 
-#: extension.js:212 extension.js:840
+#: extension.js:569 extension.js:995
 msgid " hours "
 msgstr " óra "
 
-#: extension.js:219
+#: extension.js:576
 msgid " minute"
 msgstr " perc"
 
-#: extension.js:222 preferences/timerPage.js:206
+#: extension.js:579 preferences/timerPage.js:206
 msgid " minutes"
 msgstr " perc"
 
-#: extension.js:798
+#: extension.js:947
 msgid "Caffeine enabled"
 msgstr "Koffein engedélyezve"
 
-#: extension.js:800
-msgid "Night Light paused"
-msgstr "Éjszakai fény szüneteltetve"
-
-#: extension.js:805
+#: extension.js:950
 msgid "Caffeine disabled"
 msgstr "Koffein letiltva"
 
-#: extension.js:807
+#: extension.js:956
+msgid "Night Light paused"
+msgstr "Éjszakai fény szüneteltetve"
+
+#: extension.js:958
 msgid "Night Light resumed"
 msgstr "Éjszakai fény folytatva"
 
-#: extension.js:847
+#: extension.js:1002
 msgid " minute "
 msgstr " perc"
 
-#: extension.js:850
+#: extension.js:1005
 msgid " minutes "
 msgstr " perc"
 
@@ -112,13 +112,13 @@ msgstr "Megjelenés"
 msgid "Only when active"
 msgstr "Csak aktív állapotban"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:65
-#: preferences/generalPage.js:77
+#: preferences/displayPage.js:49 preferences/generalPage.js:72
+#: preferences/generalPage.js:84
 msgid "Always"
 msgstr "Mindig"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:64
-#: preferences/generalPage.js:76
+#: preferences/displayPage.js:50 preferences/generalPage.js:71
+#: preferences/generalPage.js:83
 msgid "Never"
 msgstr "Soha"
 
@@ -139,18 +139,26 @@ msgid "Enable or disable the timer in the top panel"
 msgstr "Visszaszámláló engedélyezése a felső sávon"
 
 #: preferences/displayPage.js:67
+msgid "Show quick settings toggle"
+msgstr "Gyors beállítások kapcsoló megjelenítése"
+
+#: preferences/displayPage.js:68
+msgid "Enable or disable the toggle in the quick settings menu"
+msgstr "A kapcsoló engedélyezése vagy letiltása a gyors beállítások menüben"
+
+#: preferences/displayPage.js:74
 msgid "Notifications"
 msgstr "Értesítések"
 
-#: preferences/displayPage.js:68
+#: preferences/displayPage.js:75
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Értesítések megjelenítése Koffein engedélyezésekor vagy letiltásakor"
 
-#: preferences/displayPage.js:75
+#: preferences/displayPage.js:82
 msgid "Status indicator position"
 msgstr "Állapotjelző pozíciója"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:83
 msgid "The position relative of indicator icon to other items"
 msgstr "Az állapotjelző pozíciója más elemkhez képest"
 
@@ -172,48 +180,59 @@ msgstr ""
 "Automatikus engedélyezés, amikor egy alkalmazás teljes képernyős módba lép"
 
 #: preferences/generalPage.js:57
+#, fuzzy
+msgid "Enable when an app is playing media"
+msgstr "Engedélyezés, ha teljes képernyős alkalmazás fut"
+
+#: preferences/generalPage.js:58
+#, fuzzy
+msgid "Automatically enable when an app reports playback"
+msgstr ""
+"Automatikus engedélyezés, amikor egy alkalmazás teljes képernyős módba lép"
+
+#: preferences/generalPage.js:64
 msgid "Remember state"
 msgstr "Állapot megjegyzése"
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:65
 msgid "Remember the last state across sessions and reboots"
 msgstr "Legutóbbi állapot megjegyzése munkameneteken és újraindításokon át"
 
-#: preferences/generalPage.js:66 preferences/generalPage.js:78
+#: preferences/generalPage.js:73 preferences/generalPage.js:85
 msgid "For apps on list"
 msgstr "A listán szereplő alkalmazásokhoz"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:75
 msgid "Pause and resume Night Light"
 msgstr "Éjszakai fény szüneteltetése és folytatása"
 
-#: preferences/generalPage.js:69
+#: preferences/generalPage.js:76
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Éjszakai fény átváltása a Koffein állapotával együtt"
 
-#: preferences/generalPage.js:80
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+#: preferences/generalPage.js:87
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Allow screen blank"
 msgstr "Képernyő elsötétítés engedélyezése"
 
-#: preferences/generalPage.js:81
+#: preferences/generalPage.js:88
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Képernyő kikapcsolásának engedélyezése Koffein engeélyezése közben"
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:111
 msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
-#: preferences/generalPage.js:111
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+#: preferences/generalPage.js:119
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
 msgid "Toggle shortcut"
 msgstr "Átváltás gyorsbillentyűje"
 
-#: preferences/generalPage.js:112
+#: preferences/generalPage.js:120
 msgid "Use Backspace to clear"
 msgstr "A törléshez használja a Backspace billentyűt"
 
-#: preferences/generalPage.js:189 preferences/generalPage.js:221
+#: preferences/generalPage.js:200 preferences/generalPage.js:232
 msgid "New accelerator…"
 msgstr "Új kombináció…"
 
@@ -269,65 +288,71 @@ msgstr ""
 "alkalmazásazonosítót (asztali fájlnév)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
-msgid "Store caffeine toggle state"
-msgstr "Koffein engedélyezési állapot tárolása"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
 msgstr "Caffeine felhasználói állapot tárolása"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "List of duration timer"
 msgstr "Időzítő időtartamának listája"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
 msgstr ""
 "Határozza meg a rövid, közepes és hosszú időtartamot az időzítő "
 "visszaszámláláshoz (másodperc)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 msgid "Use custom duration values for the timer"
 msgstr "Használjon egyéni időtartamértékeket az időzítőhöz"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify time (seconds) for the timer countdown"
 msgstr "Határozza meg az időt (másodperc) az időzítő visszaszámlálásához"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 msgid "Specify index of duration range for the timer"
 msgstr "Időtartam tartomány indexének megadása az időzítőhöz"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Restore caffeine state"
 msgstr "Koffein állapot visszaállítása"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Show indicator"
 msgstr "Állapotjelző megjelenítése"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show the indicator on the top panel"
 msgstr "Állapotjelző megjelenítése a felső sávon"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show notifications"
 msgstr "Értesítések mutatása"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show notifications when enabled/disabled"
 msgstr "Értesítések mutatásának engedélyezése/tiltása"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Show timer"
 msgstr "Időzítő megjelenítése"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Show timer when enabled/disabled"
 msgstr "Időzítő mutatásának engedélyezése/tiltása"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#, fuzzy
+msgid "Show toggle"
+msgstr "Időzítő megjelenítése"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#, fuzzy
+msgid "Show the quick settings toggle"
+msgstr "Gyors beállítások kapcsoló megjelenítése"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
@@ -335,42 +360,52 @@ msgid "Enable when a fullscreen application is running"
 msgstr "Engedélyezés, ha teljes képernyős alkalmazás fut"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#, fuzzy
+msgid "Enable when an application is playing media"
+msgstr "Engedélyezés, ha teljes képernyős alkalmazás fut"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#, fuzzy
+msgid "Enable when an application is reporting playback status via MPRIS"
+msgstr "Engedélyezés, ha teljes képernyős alkalmazás fut"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Night Light control mode"
 msgstr "Éjszakai fény vezérlésének módja"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "Koffein éjszakai fény beállításával való együttműködésének a módja."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "Képernyő kikapcsolásának megengedése Koffein engedélyezésekor."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Trigger App control mode"
 msgstr "Alkalmazás általi aktiválás vezérlésének a módja"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
 msgid "Set the trigger method for apps."
 msgstr "Alkalmazások aktiválási módjának a beállítása."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:103
 msgid "Shortcut to toggle Caffeine."
 msgstr "Gyorsbillentyű Koffein átváltásához."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:107
 msgid "Default width for the preferences window"
 msgstr "Beállítások ablak alapértelmezett szélessége"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:106
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:111
 msgid "Default height for the preferences window"
 msgstr "Beállítások ablak alapértelmezett magassága"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:110
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:115
 msgid "Visible position offset of status icon in indicator menu"
 msgstr "Ikon látható pozíciójának eltolása az állapotjelző menüben"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:114
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:119
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
@@ -378,14 +413,9 @@ msgstr ""
 "Ikon valós pozíciójának eltolása az állapotjelző menüben, ami tartalmazza az "
 "elrejtetteket is"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:118
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:123
 msgid "Last item index in indicator menu"
 msgstr "Utolsó elem indexe az állapotjelző menüben"
 
-#: preferences/displayPage.js:67
-msgid "Show quick settings toggle"
-msgstr "Gyors beállítások kapcsoló megjelenítése"
-
-#: preferences/displayPage.js:68
-msgid "Enable or disable the toggle in the quick settings menu"
-msgstr "A kapcsoló engedélyezése vagy letiltása a gyors beállítások menüben"
+#~ msgid "Store caffeine toggle state"
+#~ msgstr "Koffein engedélyezési állapot tárolása"
