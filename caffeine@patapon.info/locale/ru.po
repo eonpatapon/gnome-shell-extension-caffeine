@@ -414,5 +414,3 @@ msgstr ""
 msgid "Last item index in indicator menu"
 msgstr "Индекс последнего пункта в меню индикатора"
 
-#~ msgid "Store caffeine toggle state"
-#~ msgstr "Сохранять состояние переключения Кофеина"
