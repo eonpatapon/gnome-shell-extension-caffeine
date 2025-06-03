@@ -4,6 +4,12 @@
         <value value="0" nick="never"/>
         <value value="1" nick="always"/>
         <value value="2" nick="for-apps"/>
+    </enum>
+    <enum id="org.gnome.shell.extensions.caffeine.show-notifications-opts">
+        <value value="0" nick="state"/>
+        <value value="1" nick="timer-run-out"/>
+        <value value="2" nick="both"/>
+        <value value="3" nick="disable"/>
    </enum>
    <enum id="org.gnome.shell.extensions.caffeine.show-indicator">
         <value value="0" nick="only-active"/>
@@ -57,10 +63,20 @@
         <summary>Show indicator</summary>
         <description>Show the indicator on the top panel</description>
     </key>
+    <key name="show-notifications-opts" enum="org.gnome.shell.extensions.caffeine.show-notifications-opts">
+        <default>"both"</default>
+        <summary>Show notifications</summary>
+        <description>Show notifications when state changes or timer is running out</description>
+    </key>
     <key type="b" name="show-notifications">
         <default>true</default>
         <summary>Show notifications</summary>
-        <description>Show notifications when enabled/disabled</description>
+        <description>Show notifications when state changes</description>
+    </key>
+    <key type="b" name="show-notifications-timer">
+        <default>true</default>
+        <summary>Show notifications</summary>
+        <description>Show notifications when timer is running out</description>
     </key>
     <key type="b" name="show-timer">
         <default>true</default>

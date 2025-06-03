@@ -35,12 +35,14 @@ import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import * as QuickSettings from 'resource:///org/gnome/shell/ui/quickSettings.js';
+import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
 const ShellVersion = parseFloat(Config.PACKAGE_VERSION);
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
 const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
+const SHOW_NOTIFICATIONS_TIMER_KEY = 'show-notifications-timer';
 const SHOW_TIMER_KEY = 'show-timer';
 const SHOW_TOGGLE_KEY = 'show-toggle';
 const DURATION_TIMER_LIST = 'duration-timer-list';
@@ -580,6 +582,7 @@ const CaffeineToggle = GObject.registerClass({
                     break;
                 }
             }
+
             if (!label) {
                 continue;
             }
@@ -655,6 +658,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}${ActionsPath}${DisabledIcon}.svg`);
         }
         this._indicator.gicon = this._iconDeactivated;
+
+        // Init system notification
+        this._systemNotification = null;
+        this._systemNotificationSource = null;
 
         // Init Timers
         this._timeOut = null;
@@ -740,6 +747,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Pass the new user state to the inhibitor manager, causes state to invert
         this._inhibitorManager.setUserEnabled(!this._state);
         this._settings.set_boolean(USER_ENABLED_KEY, this._state);
+
+        if (this._systemNotification !== null) {
+            this._systemNotification.destroy();
+            this._systemNotification = null;
+        }
 
         if (this._state) {
             // Enable timer when toggled on and duration is set
@@ -839,6 +851,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._showIndicatorLabel();
             this._printTimer(secondLeft);
             this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+                if (secondLeft ===  60) {
+                    if (this._settings.get_boolean(SHOW_NOTIFICATIONS_TIMER_KEY) &&
+                        !this._inhibitorManager.isFullscreen()) {
+                        this._sendSystemNotification();
+                    }
+                }
                 secondLeft -= 1;
                 this._printTimer(secondLeft);
                 return GLib.SOURCE_CONTINUE;
@@ -850,9 +868,72 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 if (this._state) {
                     this._handleToggleClick();
                 }
+
                 return GLib.SOURCE_REMOVE;
             });
         }
+    }
+
+    _toISO8601(rawSeconds) {
+        const hh = Math.floor(rawSeconds / 3600);
+        const mm = Math.floor((rawSeconds % 3600) / 60);
+        const ss = Math.floor(rawSeconds % 3600) % 60;
+
+        let iso8601 = `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+        if (hh !== 0) {
+            iso8601 = `${String(hh).padStart(2, '0')}:${iso8601}`;
+        }
+        return iso8601;
+    }
+
+    _getSystemNotificationSource() {
+        if (!this._systemNotificationSource) {
+            const notificationPolicy = new MessageTray.NotificationGenericPolicy();
+
+            this._systemNotificationSource = new MessageTray.Source({
+                title: _('Caffeine'),
+                icon: this._iconActivated,
+                policy: notificationPolicy
+            });
+
+            this._systemNotificationSource.connect('destroy', (_source) => {
+                this._systemNotificationSource = null;
+            });
+
+            Main.messageTray.add(this._systemNotificationSource);
+        }
+
+        return this._systemNotificationSource;
+    }
+
+    _sendSystemNotification() {
+        const systemSource = this._getSystemNotificationSource();
+
+        if (this._systemNotification) {
+            this._systemNotification.destroy();
+            this._systemNotification = null;
+        }
+
+        this._systemNotification = new MessageTray.Notification({
+            source: systemSource,
+            title: _('You are out of Caffeine'),
+            body: _('select a duration if you still want to continue'),
+            gicon: this._iconDeactivated,
+            urgency: MessageTray.Urgency.CRITICAL
+        });
+
+        let durationValues = this._settings.get_value(DURATION_TIMER_LIST).deepUnpack();
+
+        for (const timer of durationValues.values()) {
+            this._systemNotification.addAction(`${this._toISO8601(timer)}`, () => {
+                console.log(`YOU ADDED: +${this._toISO8601(timer)}`);
+                this._settings.set_boolean(SHOW_TIMER_KEY, true);
+                this._settings.set_int(TIMER_KEY, timer);
+                this._forceToggleClick();
+            });
+        }
+
+        systemSource.addNotification(this._systemNotification);
     }
 
     _printTimer(seconds) {
@@ -1014,6 +1095,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
     destroy() {
         // Remove ToggleMenu
         this.quickSettingsItems.forEach((item) => item.destroy());
+
+        if (this._systemNotification !== null) {
+            this._systemNotification.destroy();
+            this._systemNotification = null;
+        }
+
+        if (this._systemNotificationSource !== null) {
+            this._systemNotificationSource.destroy();
+            this._systemNotificationSource = null;
+        }
 
         // Disconnect from signals
         if (this._timeOut) {
