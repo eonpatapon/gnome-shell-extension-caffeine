@@ -922,11 +922,10 @@ class Caffeine extends QuickSettings.SystemIndicator {
             urgency: MessageTray.Urgency.CRITICAL
         });
 
-        let durationValues = this._settings.get_value(DURATION_TIMER_LIST).deepUnpack();
+        const durationValues = this._settings.get_value(DURATION_TIMER_LIST).deepUnpack();
 
         for (const timer of durationValues.values()) {
             this._systemNotification.addAction(`${this._toISO8601(timer)}`, () => {
-                console.log(`YOU ADDED: +${this._toISO8601(timer)}`);
                 this._settings.set_boolean(SHOW_TIMER_KEY, true);
                 this._settings.set_int(TIMER_KEY, timer);
                 this._forceToggleClick();
@@ -937,15 +936,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _printTimer(seconds) {
-        const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
-        const min = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-        const sec = Math.floor(seconds % 60).toString().padStart(2, '0');
-        // Print Timer in system Indicator and Toggle menu subLabel
-        if (hours !== '00') {
-            this._updateLabelTimer(hours + ':' + min + ':' + sec);
-        } else {
-            this._updateLabelTimer(min + ':' + sec);
-        }
+        this._updateLabelTimer(this._toISO8601(seconds));
     }
 
     _removeTimer() {
