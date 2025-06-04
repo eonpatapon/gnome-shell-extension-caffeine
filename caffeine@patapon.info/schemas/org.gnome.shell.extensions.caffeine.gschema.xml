@@ -59,13 +59,13 @@
     </key>
     <key type="b" name="show-notification-token">
         <default>true</default>
-        <summary>Show notification</summary>
+        <summary>Show notifications</summary>
         <description>Show notification token when state changes</description>
     </key>
     <key type="b" name="show-notification-timer">
         <default>true</default>
-        <summary>Show notification</summary>
-        <description>Show notification when timer is running out</description>
+        <summary>Show timer notifications</summary>
+        <description>Show a notification when the timer is running out</description>
     </key>
     <key type="b" name="show-timer">
         <default>true</default>
