@@ -929,6 +929,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._systemNotification.addAction(`${this._toISO8601(timer)}`, () => {
                 this._settings.set_boolean(SHOW_TIMER_KEY, true);
                 this._settings.set_int(TIMER_KEY, timer);
+                if (this._state) {
+                    this._handleToggleClick();
+                }
                 this._forceToggleClick();
             });
         }
