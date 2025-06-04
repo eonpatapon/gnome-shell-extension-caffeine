@@ -41,8 +41,8 @@ const ShellVersion = parseFloat(Config.PACKAGE_VERSION);
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
-const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
-const SHOW_NOTIFICATIONS_TIMER_KEY = 'show-notifications-timer';
+const SHOW_NOTIFICATIONS_TOKEN_KEY = 'show-notification-token';
+const SHOW_NOTIFICATIONS_TIMER_KEY = 'show-notification-timer';
 const SHOW_TIMER_KEY = 'show-timer';
 const SHOW_TOGGLE_KEY = 'show-toggle';
 const DURATION_TIMER_LIST = 'duration-timer-list';
@@ -854,6 +854,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 if (secondLeft ===  60) {
                     if (this._settings.get_boolean(SHOW_NOTIFICATIONS_TIMER_KEY) &&
                         !this._inhibitorManager.isFullscreen()) {
+                        console.log(this._settings.get_boolean(SHOW_NOTIFICATIONS_TIMER_KEY));
                         this._sendSystemNotification();
                     }
                 }
@@ -994,7 +995,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // Send an OSD notification, if enabled and state changed
         if (this._state !== oldState) {
-            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) &&
+            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_TOKEN_KEY) &&
                 !this._inhibitorManager.isFullscreen()) {
                 this._sendOSDNotification(this._state);
             }

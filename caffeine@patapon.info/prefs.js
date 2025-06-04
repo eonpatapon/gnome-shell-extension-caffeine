@@ -33,9 +33,8 @@ import { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/
 const SettingsKey = {
     INHIBIT_APPS: 'inhibit-apps',
     SHOW_INDICATOR: 'show-indicator',
-    SHOW_NOTIFICATIONS_OPTS: 'show-notifications-opts',
-    SHOW_NOTIFICATIONS: 'show-notifications',
-    SHOW_NOTIFICATIONS_TIMER: 'show-notifications-timer',
+    SHOW_NOTIFICATIONS_TOKEN: 'show-notification-token',
+    SHOW_NOTIFICATIONS_TIMER: 'show-notification-timer',
     SHOW_TIMER: 'show-timer',
     SHOW_TOGGLE: 'show-toggle',
     DURATION_TIMER_INDEX: 'duration-timer',

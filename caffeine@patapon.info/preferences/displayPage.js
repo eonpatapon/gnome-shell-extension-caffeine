@@ -70,16 +70,15 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         });
 
         // Notifications
-        let showNotificationsList =  new Gtk.StringList();
-        showNotificationsList.append(_('Show state'));
-        showNotificationsList.append(_('Show timer running out'));
-        showNotificationsList.append(_('Show both'));
-        showNotificationsList.append(_('Disable'));
-        let showNotificationsRow = new Adw.ComboRow({
-            title: _('Notifications'),
-            subtitle: _('Enable notifications for state changes or timer is running out'),
-            model: showNotificationsList,
-            selected: this._settings.get_enum(this._settingsKey.SHOW_NOTIFICATIONS_OPTS)
+        let showNotificationsTokenRow = new Adw.SwitchRow({
+            title: _('Notification token'),
+            subtitle: _('Show notification token for state changes'),
+            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TOKEN)
+        });
+        let showNotificationsTimerRow = new Adw.SwitchRow({
+            title: _('Timer notification'),
+            subtitle: _('Get notified as the timer nears completion'),
+            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TIMER)
         });
 
         // Indicator position offset
@@ -101,7 +100,8 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         displayGroup.add(showStatusIndicatorRow);
         displayGroup.add(showTimerRow);
         displayGroup.add(showToggleRow);
-        displayGroup.add(showNotificationsRow);
+        displayGroup.add(showNotificationsTokenRow);
+        displayGroup.add(showNotificationsTimerRow);
         displayGroup.add(this.posIndicatorOffsetRow);
         this.add(displayGroup);
 
@@ -122,22 +122,11 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         showToggleRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.SHOW_TOGGLE, widget.get_active());
         });
-        showNotificationsRow.connect('notify::selected', (widget) => {
-            let showNotifications = false;
-            let showNotificationsTimer = false;
-            if (widget.selected === 0) {
-                showNotifications = true;
-            } else if (widget.selected === 1) {
-                showNotificationsTimer = true;
-            } else if (widget.selected === 2) {
-                showNotifications = true;
-                showNotificationsTimer = true;
-            }
-
-            console.log(`${showNotifications}  ${showNotificationsTimer}`);
-
-            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS, showNotifications);
-            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TIMER, showNotificationsTimer);
+        showNotificationsTokenRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TOKEN, widget.get_active());
+        });
+        showNotificationsTimerRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TIMER, widget.get_active());
         });
         this._settings.bind(this._settingsKey.INDICATOR_POSITION,
             this.posIndicatorOffsetRow, 'value',
