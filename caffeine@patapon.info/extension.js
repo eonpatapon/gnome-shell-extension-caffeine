@@ -917,7 +917,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         this._systemNotification = new MessageTray.Notification({
             source: systemSource,
-            title: _('You are out of Caffeine'),
+            title: _('You are running out of Caffeine'),
             body: _('select a duration if you still want to continue'),
             gicon: this._iconDeactivated,
             urgency: MessageTray.Urgency.CRITICAL
