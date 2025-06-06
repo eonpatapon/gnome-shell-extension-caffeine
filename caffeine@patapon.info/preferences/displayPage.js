@@ -123,7 +123,7 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
             this._settings.set_boolean(this._settingsKey.SHOW_TOGGLE, widget.get_active());
         });
         showNotificationToastRow.connect('notify::active', (widget) => {
-            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATION_TOKEN, widget.get_active());
+            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATION_TOAST, widget.get_active());
         });
         showNotificationTimerRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATION_TIMER, widget.get_active());
