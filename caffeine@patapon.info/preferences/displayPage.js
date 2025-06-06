@@ -70,15 +70,15 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         });
 
         // Notifications
-        let showNotificationsTokenRow = new Adw.SwitchRow({
-            title: _('Notification token'),
-            subtitle: _('Show notification token for state changes'),
-            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TOKEN)
+        let showNotificationToastRow = new Adw.SwitchRow({
+            title: _('Toast notification'),
+            subtitle: _('Show a toast notification when state changes'),
+            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATION_TOAST)
         });
-        let showNotificationsTimerRow = new Adw.SwitchRow({
+        let showNotificationTimerRow = new Adw.SwitchRow({
             title: _('Timer notification'),
             subtitle: _('Get notified as the timer nears completion'),
-            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TIMER)
+            active: this._settings.get_boolean(this._settingsKey.SHOW_NOTIFICATION_TIMER)
         });
 
         // Indicator position offset
@@ -100,8 +100,8 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         displayGroup.add(showStatusIndicatorRow);
         displayGroup.add(showTimerRow);
         displayGroup.add(showToggleRow);
-        displayGroup.add(showNotificationsTokenRow);
-        displayGroup.add(showNotificationsTimerRow);
+        displayGroup.add(showNotificationToastRow);
+        displayGroup.add(showNotificationTimerRow);
         displayGroup.add(this.posIndicatorOffsetRow);
         this.add(displayGroup);
 
@@ -122,11 +122,11 @@ class CaffeineDisplayPage extends Adw.PreferencesPage {
         showToggleRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.SHOW_TOGGLE, widget.get_active());
         });
-        showNotificationsTokenRow.connect('notify::active', (widget) => {
-            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TOKEN, widget.get_active());
+        showNotificationToastRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATION_TOKEN, widget.get_active());
         });
-        showNotificationsTimerRow.connect('notify::active', (widget) => {
-            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATIONS_TIMER, widget.get_active());
+        showNotificationTimerRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.SHOW_NOTIFICATION_TIMER, widget.get_active());
         });
         this._settings.bind(this._settingsKey.INDICATOR_POSITION,
             this.posIndicatorOffsetRow, 'value',

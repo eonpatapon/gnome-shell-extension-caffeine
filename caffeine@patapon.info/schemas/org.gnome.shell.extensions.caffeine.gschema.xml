@@ -57,10 +57,10 @@
         <summary>Show indicator</summary>
         <description>Show the indicator on the top panel</description>
     </key>
-    <key type="b" name="show-notification-token">
+    <key type="b" name="show-notification-toast">
         <default>true</default>
-        <summary>Show notifications</summary>
-        <description>Show notification token when state changes</description>
+        <summary>Show toast notifications</summary>
+        <description>Show a toast notification when state changes</description>
     </key>
     <key type="b" name="show-notification-timer">
         <default>true</default>
