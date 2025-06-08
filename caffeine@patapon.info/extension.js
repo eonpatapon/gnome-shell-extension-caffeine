@@ -662,6 +662,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Init system notification
         this._systemNotification = null;
         this._systemNotificationSource = null;
+        this._closedByAction = false;
 
         // Init Timers
         this._timeOut = null;
@@ -748,10 +749,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._inhibitorManager.setUserEnabled(!this._state);
         this._settings.set_boolean(USER_ENABLED_KEY, this._state);
 
-        if (this._systemNotification !== null) {
+        if (this._systemNotification && !this._closedByAction) {
             this._systemNotification.destroy();
             this._systemNotification = null;
         }
+
 
         if (this._state) {
             // Enable timer when toggled on and duration is set
@@ -908,13 +910,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _sendSystemNotification() {
+        this._closedByAction = false;
+
         const systemSource = this._getSystemNotificationSource();
-
-        if (this._systemNotification) {
-            this._systemNotification.destroy();
-            this._systemNotification = null;
-        }
-
         this._systemNotification = new MessageTray.Notification({
             source: systemSource,
             title: _('You are running out of Caffeine'),
@@ -925,10 +923,17 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         const durationValues = this._settings.get_value(DURATION_TIMER_LIST).deepUnpack();
 
+        this._systemNotification.connect('destroy', () => {
+            this._closedByAction = true;
+        });
+
         for (const timer of durationValues.values()) {
             this._systemNotification.addAction(`${this._toISO8601(timer)}`, () => {
+                this._closedByAction = true;
                 this._settings.set_boolean(SHOW_TIMER_KEY, true);
                 this._settings.set_int(TIMER_KEY, timer);
+
+                // force set toggle inactive for _forceToggleClick to take effect
                 if (this._state) {
                     this._handleToggleClick();
                 }
