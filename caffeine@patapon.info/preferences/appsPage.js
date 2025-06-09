@@ -203,6 +203,12 @@ const CustomAppChooser = GObject.registerClass({
             modal: true
         });
 
+        this.connect('close-request', () => {
+            this.destroy();
+            console.log('Destroyed');
+            return false;
+        });
+
         this.set_size_request(500, 250);
 
         this._appInfo = null;
@@ -250,16 +256,52 @@ const CustomAppChooser = GObject.registerClass({
         // AppList And Filters
         const appInfosStore = this._getAppInfosStore();
         const appFilter = Gtk.CustomFilter.new((appInfo) => {
+            const dAppInfo = Gio.DesktopAppInfo.new(appInfo.get_id());
             const query = entry.text.toLowerCase();
-            return appInfo.get_display_name().toLowerCase().includes(query);
-        });
 
+            const directMatch = appInfo.get_display_name().toLowerCase().includes(query);
+            const idMatch = appInfo.get_id().toLowerCase().includes(query);
+            // check each word in list of keywords
+            const keywordMatch = dAppInfo?.get_keywords()?.some((keyword) =>
+                keyword.toLowerCase().includes(query));
+            const genericNameMatch = dAppInfo?.get_generic_name()?.toLowerCase().includes(query);
+            const categoryMatch = dAppInfo?.get_categories()?.split(';').some((category) =>
+                category.toLowerCase().includes(query));
+
+            // arranged according to priority
+            const priorities = [directMatch, idMatch, keywordMatch, genericNameMatch, categoryMatch];
+            return priorities.some((match) => match); // if higher priority doesnt match, moves to lower priority
+        });
         const filterModel = new Gtk.FilterListModel({
             model: appInfosStore,
             filter: appFilter
         });
 
-        const singleSelection = Gtk.SingleSelection.new(filterModel);
+        const appSorter = Gtk.CustomSorter.new((appInfo1, appInfo2) => {
+            const query = entry.text.toLowerCase();
+            let appInfo1Index = appInfo1.get_display_name().toLowerCase().indexOf(query);
+            let appInfo2Index = appInfo2.get_display_name().toLowerCase().indexOf(query);
+
+            // handle -1 (not matched index)
+            appInfo1Index = appInfo1Index < 0 ? 9999 : appInfo1Index;
+            appInfo2Index = appInfo2Index < 0 ? 9999 : appInfo2Index;
+
+            if (appInfo1Index < appInfo2Index) {
+                return Gtk.Ordering.SMALLER;
+            } else if (appInfo1Index > appInfo2Index) {
+                return Gtk.Ordering.LARGER;
+            } else {
+                return Gtk.Ordering.EQUAL;
+            }
+        });
+
+        const sorterModel = new Gtk.SortListModel({
+            model: filterModel,
+            sorter: appSorter
+        });
+
+
+        const singleSelection = Gtk.SingleSelection.new(sorterModel);
         const factory = new Gtk.SignalListItemFactory();
         const listView = new Gtk.ListView({
             model: singleSelection,
@@ -355,6 +397,8 @@ const CustomAppChooser = GObject.registerClass({
         entry.connect('search-changed', (obj) => {
             console.log(obj.get_text());
             appFilter.changed(Gtk.FilterChange.DIFFERENT);
+            appSorter.changed(Gtk.SorterChange.DIFFERENT);
+            singleSelection.set_selected(0);
         });
 
         container.append(headerBar);
