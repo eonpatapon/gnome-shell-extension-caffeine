@@ -202,13 +202,7 @@ const CustomAppChooser = GObject.registerClass({
             transient_for: parent,
             modal: true
         });
-
-        this.connect('close-request', () => {
-            this.destroy();
-            console.log('Destroyed');
-            return false;
-        });
-
+ 
         this.set_size_request(500, 250);
 
         this._appInfo = null;
@@ -337,6 +331,7 @@ const CustomAppChooser = GObject.registerClass({
         searchToggle.connect('toggled', (obj) => {
             if (obj.active) {
                 revealer.reveal_child = true;
+                entry.grab_focus();
             } else {
                 revealer.reveal_child = false;
             }
