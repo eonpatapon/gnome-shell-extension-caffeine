@@ -202,10 +202,10 @@ const CustomAppChooser = GObject.registerClass({
             transient_for: parent,
             modal: true
         });
- 
         this.set_size_request(500, 250);
 
         this._appInfo = null;
+        this._desktopAppInfoCache = new Map();
 
         const container = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
@@ -213,7 +213,24 @@ const CustomAppChooser = GObject.registerClass({
             homogeneous: false
         });
 
-        // Header headerBar
+        this._setupHeaderBar();
+        this._setupSearchRevealer();
+        this._setupAppList();
+
+        this._connectSignalsAppList();
+        this._connectSignalsHeaderBar();
+
+        container.append(this._headerBar);
+        container.append(this._revealer);
+        container.append(this._scrollView);
+        this.set_content(container);
+    }
+
+    get appInfo() {
+        return this._appInfo;
+    }
+
+    _setupHeaderBar() {
         const headerBar = new Gtk.HeaderBar({
             margin_bottom: 0
         });
@@ -236,22 +253,28 @@ const CustomAppChooser = GObject.registerClass({
         headerBar.pack_end(searchToggle);
         headerBar.set_title_widget(titleWidget);
 
-        // Revealer
-        const revealer = new Gtk.Revealer();
-        const entry = new Gtk.SearchEntry({
+        this._headerBar = headerBar;
+        this._cancelButton = cancelButton;
+        this._selectButton = selectButton;
+        this._searchToggle = searchToggle;
+    }
+
+    _setupSearchRevealer() {
+        this._revealer = new Gtk.Revealer();
+        this._entry = new Gtk.SearchEntry({
             margin_start: 6,
             margin_end: 6,
             margin_bottom: 6
         });
-        entry.add_css_class('search');
+        this._entry.add_css_class('search');
+        this._revealer.set_child(this._entry);
+    }
 
-        revealer.set_child(entry);
-
-        // AppList And Filters
+    _setupAppList() {
         const appInfosStore = this._getAppInfosStore();
-        const appFilter = Gtk.CustomFilter.new((appInfo) => {
-            const dAppInfo = Gio.DesktopAppInfo.new(appInfo.get_id());
-            const query = entry.text.toLowerCase();
+        this._appFilter = Gtk.CustomFilter.new((appInfo) => {
+            const dAppInfo = this._getDesktopInfoFromCache(appInfo.get_id());
+            const query = this._entry.text.toLowerCase();
 
             const directMatch = appInfo.get_display_name().toLowerCase().includes(query);
             const idMatch = appInfo.get_id().toLowerCase().includes(query);
@@ -268,11 +291,11 @@ const CustomAppChooser = GObject.registerClass({
         });
         const filterModel = new Gtk.FilterListModel({
             model: appInfosStore,
-            filter: appFilter
+            filter: this._appFilter
         });
 
-        const appSorter = Gtk.CustomSorter.new((appInfo1, appInfo2) => {
-            const query = entry.text.toLowerCase();
+        this._appSorter = Gtk.CustomSorter.new((appInfo1, appInfo2) => {
+            const query = this._entry.text.toLowerCase();
             let appInfo1Index = appInfo1.get_display_name().toLowerCase().indexOf(query);
             let appInfo2Index = appInfo2.get_display_name().toLowerCase().indexOf(query);
 
@@ -291,19 +314,19 @@ const CustomAppChooser = GObject.registerClass({
 
         const sorterModel = new Gtk.SortListModel({
             model: filterModel,
-            sorter: appSorter
+            sorter: this._appSorter
         });
 
 
-        const singleSelection = Gtk.SingleSelection.new(sorterModel);
-        const factory = new Gtk.SignalListItemFactory();
+        this._singleSelection = Gtk.SingleSelection.new(sorterModel);
+        this._factory = new Gtk.SignalListItemFactory();
         const listView = new Gtk.ListView({
-            model: singleSelection,
-            factory,
+            model: this._singleSelection,
+            factory: this._factory,
             vexpand: true
         });
 
-        const scrollView = new Gtk.ScrolledWindow({
+        this._scrollView = new Gtk.ScrolledWindow({
             vexpand: true,
             margin_top: 0,
             margin_bottom: 0,
@@ -313,37 +336,26 @@ const CustomAppChooser = GObject.registerClass({
             max_content_height: 500,
             has_frame: true
         });
-        scrollView.set_child(listView);
+        this._scrollView.set_child(listView);
+    }
 
-
-        // Bottom Bar
-        const findNewAppsButton = new Gtk.Button({
-            label: 'Find New Apps',
-            hexpand: true,
-            margin_top: 6,
-            margin_bottom: 6,
-            margin_start: 6,
-            margin_end: 6
-        });
-        findNewAppsButton.add_css_class('raised');
-
-        // Signals
-        searchToggle.connect('toggled', (obj) => {
+    _connectSignalsHeaderBar() {
+        this._searchToggle.connect('toggled', (obj) => {
             if (obj.active) {
-                revealer.reveal_child = true;
-                entry.grab_focus();
+                this._revealer.reveal_child = true;
+                this._entry.grab_focus();
             } else {
-                revealer.reveal_child = false;
+                this._revealer.reveal_child = false;
             }
         });
 
-        cancelButton.connect('clicked', () => {
+        this._cancelButton.connect('clicked', () => {
             this._appInfo = null;
             this.emit('response', CustomAppChooser.ResponseType.CANCEL);
             this.destroy();
         });
-        selectButton.connect('clicked', () => {
-            const selectedItem = singleSelection.get_selected_item();
+        this._selectButton.connect('clicked', () => {
+            const selectedItem = this._singleSelection.get_selected_item();
             if (selectedItem) {
                 this._appInfo = selectedItem;
                 this.emit('response', CustomAppChooser.ResponseType.OK);
@@ -354,7 +366,16 @@ const CustomAppChooser = GObject.registerClass({
             this.destroy();
         });
 
-        factory.connect('setup', (_factory, listItem) => {
+        this._entry.connect('search-changed', (obj) => {
+            console.log(obj.get_text());
+            this._appFilter.changed(Gtk.FilterChange.DIFFERENT);
+            this._appSorter.changed(Gtk.SorterChange.DIFFERENT);
+            this._singleSelection.set_selected(0);
+        });
+    }
+
+    _connectSignalsAppList() {
+        this._factory.connect('setup', (_factory, listItem) => {
             const box = new Gtk.Box({ spacing: 6 });
             const image = new Gtk.Image({ pixel_size: 24 });
             const label = new Gtk.Label({ xalign: 0, hexpand: true });
@@ -362,7 +383,7 @@ const CustomAppChooser = GObject.registerClass({
             box.append(label);
             listItem.set_child(box);
         });
-        factory.connect('bind', (_factory, listItem) => {
+        this._factory.connect('bind', (_factory, listItem) => {
             const appInfo = listItem.get_item();
             const icon = appInfo.get_icon();
             const box = listItem.get_child();
@@ -385,42 +406,18 @@ const CustomAppChooser = GObject.registerClass({
             label.set_label(appInfo.get_display_name());
         });
 
-        singleSelection.connect('notify::selected', () => {
+        this._singleSelection.connect('notify::selected', () => {
             console.log('notifiy selected: singleSelection');
         });
-
-        entry.connect('search-changed', (obj) => {
-            console.log(obj.get_text());
-            appFilter.changed(Gtk.FilterChange.DIFFERENT);
-            appSorter.changed(Gtk.SorterChange.DIFFERENT);
-            singleSelection.set_selected(0);
-        });
-
-        container.append(headerBar);
-        container.append(revealer);
-        container.append(scrollView);
-        container.append(findNewAppsButton);
-        this.set_content(container);
     }
 
-    get appInfo() {
-        return this._appInfo;
-    }
+    _getDesktopInfoFromCache(id) {
+        if (!this._desktopAppInfoCache.has(id)) {
+            const info = Gio.DesktopAppInfo.new(id);
+            this._desktopAppInfoCache.set(id, info);
+        }
 
-    _setupHeaderBar() {
-        // todo
-    }
-
-    _setupBottomBar() {
-        // todo
-    }
-
-    _setupScrolledWindow() {
-        // todo
-    }
-
-    _handleItemDoubleClick() {
-        // todo
+        return this._desktopAppInfoCache.get(id);
     }
 
     _getAppInfosStore() {
@@ -432,6 +429,11 @@ const CustomAppChooser = GObject.registerClass({
         });
 
         return store;
+    }
+
+    destroy() {
+        this._desktopAppInfoCache.clear();
+        super.destroy();
     }
 });
 
