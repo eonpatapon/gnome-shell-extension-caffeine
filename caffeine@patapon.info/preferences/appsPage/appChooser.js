@@ -81,8 +81,29 @@ class CustomAppList extends Gtk.ScrolledWindow {
     constructor() {
         super({
             vexpand: true,
+            hexpand: true,
             has_frame: true
         });
+
+        /** Fix Scroll Behavior **/
+        let oldScroll = 0;
+        let jumpPossible = false;
+        let newScroll = 0;
+        this.get_vadjustment().connect('value-changed', (obj) => {
+            const scroll = obj.value;
+            oldScroll = scroll;
+            // sometimes scroll jumps to top of listview. this line prevents it.
+            if (jumpPossible) {
+                jumpPossible = false;
+                obj.set_value(newScroll);
+            }
+        });
+        this.get_vadjustment().connect('changed', (obj) => {
+            obj.set_value(oldScroll);
+            jumpPossible = true;
+            newScroll = oldScroll;
+        });
+        /** **/
 
         this._query = null;
         this._desktopAppInfoCache = new Map();
@@ -102,7 +123,8 @@ class CustomAppList extends Gtk.ScrolledWindow {
         this._initFactory();
         const listView = new Gtk.ListView({
             factory: this._factory,
-            model: this._singleSelection
+            model: this._singleSelection,
+            hexpand: true
         });
 
         this.set_child(listView);
@@ -115,6 +137,7 @@ class CustomAppList extends Gtk.ScrolledWindow {
     updateModel() {
         this._singleSelection.get_model().get_model().get_filter().changed(Gtk.FilterChange.DIFFERENT);
         this._singleSelection.get_model().get_sorter().changed(Gtk.SorterChange.DIFFERENT);
+        this._singleSelection.set_selected(0);
     }
 
     _filterCallBack(appInfo) {
@@ -229,11 +252,13 @@ export const AppChooser = GObject.registerClass({
             spacing: 0,
             orientation: Gtk.Orientation.VERTICAL,
             margin_start: 6,
-            margin_end: 6
+            margin_end: 6,
+            vexpand: true
         });
         const revealer = new Gtk.Revealer();
         const searchEntry = new Gtk.SearchEntry();
         revealer.set_child(searchEntry);
+
         toolbarViewContent.append(revealer);
 
         const toolbarView = new Adw.ToolbarView({
@@ -248,8 +273,6 @@ export const AppChooser = GObject.registerClass({
             appList.query = s.text;
             appList.updateModel();
         });
-
-
 
         const header = new CustomHeaderBar();
         header.connect('action-triggered', (h, actionType) => {
