@@ -76,13 +76,17 @@ const CustomHeaderBar =  GObject.registerClass({
     }
 });
 
-const CustomAppList = GObject.registerClass(
-class CustomAppList extends Gtk.ScrolledWindow {
+const CustomAppList = GObject.registerClass({
+    Signals: {
+        'active-selection': {
+            param_types: []
+        }
+    }
+}, class CustomAppList extends Gtk.ScrolledWindow {
     constructor() {
         super({
             vexpand: true,
-            hexpand: true,
-            has_frame: true
+            hexpand: true
         });
 
         /** Fix Scroll Behavior **/
@@ -125,6 +129,9 @@ class CustomAppList extends Gtk.ScrolledWindow {
             factory: this._factory,
             model: this._singleSelection,
             hexpand: true
+        });
+        listView.connect('activate', () => {
+            this.emit('active-selection');
         });
 
         this.set_child(listView);
@@ -180,8 +187,15 @@ class CustomAppList extends Gtk.ScrolledWindow {
         // blueprint
         this._factory.connect('setup', (f, listItem) => {
             const box = new Gtk.Box({ spacing: 6 });
-            const img = new Gtk.Image({ pixel_size: 24 });
-            const label = new Gtk.Label({ xalign: 0, hexpand: true });
+            const img = new Gtk.Image({
+                pixel_size: 24,
+                margin_start: 6
+            });
+            const label = new Gtk.Label({
+                xalign: 0,
+                hexpand: true,
+                margin_end: 6
+            });
             box.append(img);
             box.append(label);
             listItem.set_child(box);
@@ -251,12 +265,16 @@ export const AppChooser = GObject.registerClass({
         const toolbarViewContent = new Gtk.Box({
             spacing: 0,
             orientation: Gtk.Orientation.VERTICAL,
-            margin_start: 6,
-            margin_end: 6,
+            margin_start: 0,
+            margin_end: 0,
             vexpand: true
         });
         const revealer = new Gtk.Revealer();
-        const searchEntry = new Gtk.SearchEntry();
+        const searchEntry = new Gtk.SearchEntry({
+            margin_start: 6,
+            margin_end: 6,
+            margin_bottom: 6
+        });
         revealer.set_child(searchEntry);
 
         toolbarViewContent.append(revealer);
@@ -266,12 +284,12 @@ export const AppChooser = GObject.registerClass({
             bottom_bar_style: Adw.ToolbarStyle.FLAT
         });
 
-        const appList = new CustomAppList();
-        toolbarViewContent.append(appList);
+        this._appList = new CustomAppList();
+        toolbarViewContent.append(this._appList);
 
         searchEntry.connect('search-changed', (s) => {
-            appList.query = s.text;
-            appList.updateModel();
+            this._appList.query = s.text;
+            this._appList.updateModel();
         });
 
         const header = new CustomHeaderBar();
@@ -280,22 +298,17 @@ export const AppChooser = GObject.registerClass({
                 revealer.reveal_child = h.search_command;
                 searchEntry.grab_focus();
             } else if (actionType === CustomHeaderBar.ActionType.SELECT) {
-                const selectedItem = appList.get_child().get_model().get_selected_item();
-                if (selectedItem) {
-                    this._appInfo = selectedItem;
-                    this.emit('response', AppChooser.ResponseType.OK);
-                } else {
-                    this._appInfo = null;
-                    this.emit('response', AppChooser.ResponseType.BAD);
-                }
-                this.destroy();
+                this._selectCB(this);
             } else if (actionType === CustomHeaderBar.ActionType.CANCEL) {
                 this._appInfo = null;
                 this.emit('response', AppChooser.ResponseType.CANCEL);
                 this.destroy();
             }
-        }
-        );
+        });
+
+        this._appList.connect('active-selection', () => {
+            this._selectCB(this);
+        });
 
         toolbarView.add_top_bar(header);
         toolbarView.set_content(toolbarViewContent);
@@ -304,6 +317,18 @@ export const AppChooser = GObject.registerClass({
 
     get appInfo() {
         return this._appInfo;
+    }
+
+    _selectCB() {
+        const selectedItem = this._appList.get_child().get_model().get_selected_item();
+        if (selectedItem) {
+            this._appInfo = selectedItem;
+            this.emit('response', AppChooser.ResponseType.OK);
+        } else {
+            this._appInfo = null;
+            this.emit('response', AppChooser.ResponseType.BAD);
+        }
+        this.destroy();
     }
 });
 
