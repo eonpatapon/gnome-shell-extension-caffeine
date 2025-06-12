@@ -112,17 +112,19 @@ const CustomAppList = GObject.registerClass({
         this._query = null;
         this._desktopAppInfoCache = new Map();
 
-        const baseModel = this._generateBaseModel();
-        const filterModel = new Gtk.FilterListModel({
-            model: baseModel,
-            filter: Gtk.CustomFilter.new(this._filterCallBack.bind(this))
+        this._baseModel = this._generateBaseModel();
+        this._filter = Gtk.CustomFilter.new(this._filterCallBack.bind(this));
+        this._filterModel = new Gtk.FilterListModel({
+            model: this._baseModel,
+            filter: this._filter
         });
-        const sortModel = new Gtk.SortListModel({
-            model: filterModel,
-            sorter: Gtk.CustomSorter.new(this._sorterCallBack.bind(this))
+        this._sorter = Gtk.CustomSorter.new(this._sorterCallBack.bind(this));
+        this._sortModel = new Gtk.SortListModel({
+            model: this._filterModel,
+            sorter: this._sorter
         });
 
-        this._singleSelection = Gtk.SingleSelection.new(sortModel);
+        this._singleSelection = Gtk.SingleSelection.new(this._sortModel);
         this._factory = new Gtk.SignalListItemFactory();
         this._initFactory();
         const listView = new Gtk.ListView({
@@ -136,6 +138,21 @@ const CustomAppList = GObject.registerClass({
         // prevents tab navigation on list view items
         listView.set_tab_behavior(Gtk.ListTabBehavior.ITEM);
         this.set_child(listView);
+
+
+        this.connect('destroy', () => {
+            this._desktopAppInfoCache.clear();
+            this._desktopAppInfoCache = null;
+        });
+    }
+
+    reloadApps() {
+        this._desktopAppInfoCache.clear();
+
+        const appInfos = Gio.AppInfo.get_all().filter((info) => info.should_show());
+        this._baseModel.splice(0, this._baseModel.get_n_items(), appInfos);
+
+        this.updateModel();
     }
 
     set query(q) {
@@ -143,8 +160,8 @@ const CustomAppList = GObject.registerClass({
     }
 
     updateModel() {
-        this._singleSelection.get_model().get_model().get_filter().changed(Gtk.FilterChange.DIFFERENT);
-        this._singleSelection.get_model().get_sorter().changed(Gtk.SorterChange.DIFFERENT);
+        this._filter.changed(Gtk.FilterChange.DIFFERENT);
+        this._sorter.changed(Gtk.SorterChange.DIFFERENT);
         this._singleSelection.set_selected(0);
     }
 
@@ -255,12 +272,16 @@ export const AppChooser = GObject.registerClass({
         BAD: 2
     };
 
-    constructor(parent) {
+    constructor(parent, settings, settingsKey) {
         super({
             transient_for: parent,
             modal: true  // avoid interactive with parent window if Self is not destroyed
         });
         this.set_size_request(450, 250);
+
+        this._settings = settings;
+        this._settingsKey = settingsKey;
+
         this._appInfo = null;
 
         const toolbarViewContent = new Gtk.Box({
@@ -314,6 +335,17 @@ export const AppChooser = GObject.registerClass({
         toolbarView.add_top_bar(header);
         toolbarView.set_content(toolbarViewContent);
         this.set_content(toolbarView);
+
+
+        this.connect('destroy', () => {
+            this._appList.destroy();
+            this._appInfo = null;
+        });
+
+        this._settings.connect(`changed::${this._settingsKey.INSTALLED_CHANGED}`, () => {
+            console.log('install changed');
+            this._appList.reloadApps();
+        });
     }
 
     get appInfo() {

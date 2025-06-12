@@ -165,7 +165,7 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
     }
 
     _onAddApp() {
-        const dialog = new AppChooser(this.get_root());
+        const dialog = new AppChooser(this.get_root(), this._settings, this._settingsKey);
         dialog.connect('response', (dlg, id) => {
             const appInfo = id === AppChooser.ResponseType.OK
                 ? dlg.appInfo : null;
