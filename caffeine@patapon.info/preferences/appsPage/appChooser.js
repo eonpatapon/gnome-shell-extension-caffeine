@@ -133,7 +133,8 @@ const CustomAppList = GObject.registerClass({
         listView.connect('activate', () => {
             this.emit('active-selection');
         });
-
+        // prevents tab navigation on list view items
+        listView.set_tab_behavior(Gtk.ListTabBehavior.ITEM);
         this.set_child(listView);
     }
 
