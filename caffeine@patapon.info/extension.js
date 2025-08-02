@@ -542,6 +542,9 @@ const CaffeineToggle = GObject.registerClass({
             this._iconDeactivated = null;
             this.gicon = null;
         });
+
+        // Set menu visibility
+        this.visible = this._settings.get_boolean(SHOW_TOGGLE_KEY);
     }
 
     _syncTimers(resetDefault) {
