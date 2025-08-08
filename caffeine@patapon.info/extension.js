@@ -962,7 +962,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             }
         }
 
-        Main.osdWindowManager.show(-1, icon, message, null, null);
+        if (ShellVersion >= 49) {
+            Main.osdWindowManager.showAll(icon, message, null, null);
+        } else {
+            Main.osdWindowManager.show(-1, icon, message, null, null);
+        }
     }
 
     // Add the name of the app as subtitle
