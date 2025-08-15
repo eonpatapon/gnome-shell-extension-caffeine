@@ -57,10 +57,15 @@
         <summary>Show indicator</summary>
         <description>Show the indicator on the top panel</description>
     </key>
-    <key type="b" name="show-notifications">
+    <key type="b" name="show-notification-toast">
         <default>true</default>
-        <summary>Show notifications</summary>
-        <description>Show notifications when enabled/disabled</description>
+        <summary>Show toast notifications</summary>
+        <description>Show a toast notification when state changes</description>
+    </key>
+    <key type="b" name="show-notification-timer">
+        <default>true</default>
+        <summary>Show timer notifications</summary>
+        <description>Show a notification when the timer is running out</description>
     </key>
     <key type="b" name="show-timer">
         <default>true</default>
