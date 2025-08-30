@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-01 07:51+0100\n"
+"POT-Creation-Date: 2025-08-30 20:56+0200\n"
 "PO-Revision-Date: 2023-09-26 09:30+0200\n"
 "Last-Translator: Delthia <translate@delthia.com>\n"
 "Language-Team: Spanish\n"
@@ -17,60 +17,60 @@ msgstr ""
 "X-Generator: Poedit 1.8.6\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: extension.js:134
+#: extension.js:486
 msgid "Caffeine"
 msgstr "Cafeína"
 
-#: extension.js:153 extension.js:651
+#: extension.js:511 extension.js:893
 msgid "Caffeine Timer"
 msgstr "Temporizador Cafeína"
 
-#: extension.js:161
+#: extension.js:519
 msgid "Settings"
 msgstr "Configuración"
 
-#: extension.js:201
+#: extension.js:561
 msgid "Infinite"
 msgstr "Infinito"
 
-#: extension.js:209 extension.js:837
+#: extension.js:569 extension.js:999
 msgid " hour "
 msgstr " hora "
 
-#: extension.js:212 extension.js:840
+#: extension.js:572 extension.js:1002
 msgid " hours "
 msgstr " horas "
 
-#: extension.js:219
+#: extension.js:579
 msgid " minute"
 msgstr " minuto"
 
-#: extension.js:222 preferences/timerPage.js:206
+#: extension.js:582 preferences/timerPage.js:206
 msgid " minutes"
 msgstr " minutos"
 
-#: extension.js:798
+#: extension.js:950
 msgid "Caffeine enabled"
 msgstr "Cafeína activada"
 
-#: extension.js:800
-msgid "Night Light paused"
-msgstr "Luz Nocturna pausada"
-
-#: extension.js:805
+#: extension.js:953
 msgid "Caffeine disabled"
 msgstr "Cafeína desactivada"
 
-#: extension.js:807
+#: extension.js:959
+msgid "Night Light paused"
+msgstr "Luz Nocturna pausada"
+
+#: extension.js:961
 msgid "Night Light resumed"
 msgstr "Luz Nocturna reanudada"
 
-#: extension.js:847
+#: extension.js:1009
 #, fuzzy
 msgid " minute "
 msgstr " minutos"
 
-#: extension.js:850
+#: extension.js:1012
 #, fuzzy
 msgid " minutes "
 msgstr " minutos"
@@ -119,13 +119,13 @@ msgstr "Monitor"
 msgid "Only when active"
 msgstr "Solo cuando activo"
 
-#: preferences/displayPage.js:49 preferences/generalPage.js:65
-#: preferences/generalPage.js:77
+#: preferences/displayPage.js:49 preferences/generalPage.js:72
+#: preferences/generalPage.js:84
 msgid "Always"
 msgstr "Siempre"
 
-#: preferences/displayPage.js:50 preferences/generalPage.js:64
-#: preferences/generalPage.js:76
+#: preferences/displayPage.js:50 preferences/generalPage.js:71
+#: preferences/generalPage.js:83
 msgid "Never"
 msgstr "Nunca"
 
@@ -146,18 +146,27 @@ msgid "Enable or disable the timer in the top panel"
 msgstr "Activa o desactiva el temporizador en el panel superior"
 
 #: preferences/displayPage.js:67
+msgid "Show quick settings toggle"
+msgstr "Mostrar interruptor en los ajustes rápidos"
+
+#: preferences/displayPage.js:68
+#, fuzzy
+msgid "Enable or disable the toggle in the quick settings menu"
+msgstr "Activa o desactiva el interruptor en el menú de ajustes rápidos"
+
+#: preferences/displayPage.js:74
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: preferences/displayPage.js:68
+#: preferences/displayPage.js:75
 msgid "Enable notifications when Caffeine is enabled or disabled"
 msgstr "Activar notificaciones de habilitado/deshabilitado"
 
-#: preferences/displayPage.js:75
+#: preferences/displayPage.js:82
 msgid "Status indicator position"
 msgstr "Posición del indicador de estado"
 
-#: preferences/displayPage.js:76
+#: preferences/displayPage.js:83
 msgid "The position relative of indicator icon to other items"
 msgstr "La posición relativa del indicador con respecto a otros elementos"
 
@@ -180,48 +189,60 @@ msgstr ""
 "completa"
 
 #: preferences/generalPage.js:57
+#, fuzzy
+msgid "Enable when an app is playing media"
+msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
+
+#: preferences/generalPage.js:58
+#, fuzzy
+msgid "Automatically enable when an app reports playback"
+msgstr ""
+"Activar automáticamente cuando una aplicación entra en modo de pantalla "
+"completa"
+
+#: preferences/generalPage.js:64
 msgid "Remember state"
 msgstr "Recordar estado"
 
-#: preferences/generalPage.js:58
+#: preferences/generalPage.js:65
 msgid "Remember the last state across sessions and reboots"
 msgstr "Recordar el estado entre sesiones y reinicios"
 
-#: preferences/generalPage.js:66 preferences/generalPage.js:78
+#: preferences/generalPage.js:73 preferences/generalPage.js:85
 msgid "For apps on list"
 msgstr "Para aplicaciones en la lista"
 
-#: preferences/generalPage.js:68
+#: preferences/generalPage.js:75
 msgid "Pause and resume Night Light"
 msgstr "Pausar y reanudar la Luz Nocturna"
 
-#: preferences/generalPage.js:69
+#: preferences/generalPage.js:76
 msgid "Toggles the night light together with Caffeine's state"
 msgstr "Alterna la luz nocturna junto al estado de Cafeína"
 
-#: preferences/generalPage.js:80
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+#: preferences/generalPage.js:87
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Allow screen blank"
 msgstr "Permitir apagar la pantalla"
 
-#: preferences/generalPage.js:81
+#: preferences/generalPage.js:88
 msgid "Allow turning off screen when Caffeine is enabled"
 msgstr "Permitir apagar la pantalla cuando Cafeína está habilitada"
 
-#: preferences/generalPage.js:103
+#: preferences/generalPage.js:111
 msgid "Shortcut"
 msgstr "Atajo"
 
-#: preferences/generalPage.js:111
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+#: preferences/generalPage.js:119
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
 msgid "Toggle shortcut"
 msgstr "Atajo de alternado"
 
-#: preferences/generalPage.js:112
+#: preferences/generalPage.js:120
 msgid "Use Backspace to clear"
 msgstr "Utiliza retroceso para limpiarlo"
 
-#: preferences/generalPage.js:189 preferences/generalPage.js:221
+#: preferences/generalPage.js:200 preferences/generalPage.js:232
 msgid "New accelerator…"
 msgstr "Atajo de teclado nuevo…"
 
@@ -277,65 +298,70 @@ msgstr ""
 "archivo desktop)"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
-msgid "Store caffeine toggle state"
-msgstr "Guardar estado de cafeína"
-
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "Store caffeine user state"
 msgstr "Guardar estado de usuario de cafeína"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
 msgid "List of duration timer"
 msgstr "Lista de duración del temporizador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:38
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
 msgid ""
 "Specify the short, medium and long duration for the timer countdown (seconds)"
 msgstr ""
 "Especifique la duración corta, media y larga para la cuenta atrás del "
 "temporizador (segundos)"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
 msgid "Use custom duration values for the timer"
 msgstr "Utilice valores de duración personalizados para el temporizador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
 msgid "Specify time (seconds) for the timer countdown"
 msgstr "Especifique el tiempo (segundos) para la cuenta atrás del temporizador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:53
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
 msgid "Specify index of duration range for the timer"
 msgstr "Especifica el índice de rangos de duración para el temporizador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
 msgid "Restore caffeine state"
 msgstr "Restablecer estado de cafeína"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
 msgid "Show indicator"
 msgstr "Mostrar indicador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
 msgid "Show the indicator on the top panel"
 msgstr "Mostrar el indicador en el panel superior"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
 msgid "Show notifications"
 msgstr "Motrar notificaciones"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
 msgid "Show notifications when enabled/disabled"
 msgstr "Mostrar notificaciones de habilitado/deshabilitado"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
 msgid "Show timer"
 msgstr "Mostrar temporizador"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
 msgid "Show timer when enabled/disabled"
 msgstr "Mostrar temporizador al habilitar/deshabilitar"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+#, fuzzy
+msgid "Show toggle"
+msgstr "Mostrar temporizador"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+msgid "Show the quick settings toggle"
+msgstr "Mostrar interruptor en los ajustes rápidos"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
@@ -343,44 +369,54 @@ msgid "Enable when a fullscreen application is running"
 msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+#, fuzzy
+msgid "Enable when an application is playing media"
+msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#, fuzzy
+msgid "Enable when an application is reporting playback status via MPRIS"
+msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
 msgid "Night Light control mode"
 msgstr "Modo de control de Luz Nocturna"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Set the way Caffeine interacts with the Night light setting."
 msgstr "Establece cómo Cafeína interactúa con el ajuste de Luz nocturna."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Allow turning off screen when Caffeine is enabled."
 msgstr "Permitir apagar la pantalla cuando Cafeína está habilitada"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
 msgid "Trigger App control mode"
 msgstr "Modo de control de activación de aplicaciones"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
 msgid "Set the trigger method for apps."
 msgstr "Establece el método de activación para aplicaciones."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:103
 msgid "Shortcut to toggle Caffeine."
 msgstr "Atajo de teclado para conmutar Cafeína."
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:107
 msgid "Default width for the preferences window"
 msgstr "Anchura por defecto para la ventana de preferencias"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:106
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:111
 msgid "Default height for the preferences window"
 msgstr "Altura por defecto para la ventana de preferencias"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:110
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:115
 msgid "Visible position offset of status icon in indicator menu"
 msgstr ""
 "Compensación de posición visible del icono de estado en el menú de "
 "indicadores"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:114
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:119
 msgid ""
 "Real position offset of status icon in indicator menu that include invisible "
 "one"
@@ -388,6 +424,9 @@ msgstr ""
 "Compensación real de la posición del icono en el menú de indicadores que "
 "incluye lo invisible"
 
-#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:118
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:123
 msgid "Last item index in indicator menu"
 msgstr "Índice del último elemento en el menú de indicadores"
+
+#~ msgid "Store caffeine toggle state"
+#~ msgstr "Guardar estado de cafeína"
