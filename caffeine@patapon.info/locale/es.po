@@ -27,7 +27,7 @@ msgstr "Temporizador Cafeína"
 
 #: extension.js:161
 msgid "Settings"
-msgstr ""
+msgstr "Configuración"
 
 #: extension.js:201
 msgid "Infinite"
