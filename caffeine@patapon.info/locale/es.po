@@ -66,12 +66,10 @@ msgid "Night Light resumed"
 msgstr "Luz Nocturna reanudada"
 
 #: extension.js:1009
-#, fuzzy
 msgid " minute "
 msgstr " minutos"
 
 #: extension.js:1012
-#, fuzzy
 msgid " minutes "
 msgstr " minutos"
 
@@ -150,7 +148,6 @@ msgid "Show quick settings toggle"
 msgstr "Mostrar interruptor en los ajustes rápidos"
 
 #: preferences/displayPage.js:68
-#, fuzzy
 msgid "Enable or disable the toggle in the quick settings menu"
 msgstr "Activa o desactiva el interruptor en el menú de ajustes rápidos"
 
@@ -189,12 +186,10 @@ msgstr ""
 "completa"
 
 #: preferences/generalPage.js:57
-#, fuzzy
 msgid "Enable when an app is playing media"
 msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
 #: preferences/generalPage.js:58
-#, fuzzy
 msgid "Automatically enable when an app reports playback"
 msgstr ""
 "Activar automáticamente cuando una aplicación entra en modo de pantalla "
@@ -355,7 +350,6 @@ msgid "Show timer when enabled/disabled"
 msgstr "Mostrar temporizador al habilitar/deshabilitar"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
-#, fuzzy
 msgid "Show toggle"
 msgstr "Mostrar temporizador"
 
@@ -369,12 +363,10 @@ msgid "Enable when a fullscreen application is running"
 msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
-#, fuzzy
 msgid "Enable when an application is playing media"
 msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
-#, fuzzy
 msgid "Enable when an application is reporting playback status via MPRIS"
 msgstr "Activar cuando una aplicación a pantalla completa esté en ejecución"
 
@@ -427,6 +419,3 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:123
 msgid "Last item index in indicator menu"
 msgstr "Índice del último elemento en el menú de indicadores"
-
-#~ msgid "Store caffeine toggle state"
-#~ msgstr "Guardar estado de cafeína"
