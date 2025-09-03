@@ -389,7 +389,7 @@ const InhibitorManager = GObject.registerClass({
             inhibitFlags = 4;
         } else {
             // Inhibit the session being marked as idle
-            inhibitFlags = 12;
+            inhibitFlags = 8;
         }
 
         // Pack the parameters for DBus
