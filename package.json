@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@eslint/js": "^9.35.0",
+    "@stylistic/eslint-plugin": "^5.3.1",
+    "eslint": "^9.35.0"
+  }
+}
