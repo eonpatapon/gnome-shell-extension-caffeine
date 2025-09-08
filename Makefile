@@ -25,7 +25,7 @@ translations:
 	@./update-locale.sh
 
 lint:
-	eslint -c .eslintrc.yml --resolve-plugins-relative-to "$(shell npm root -g)" $(EXTENSION_DIR)
+	npx eslint $(EXTENSION_DIR)
 
 lint-fix:
-	eslint -c .eslintrc.yml --resolve-plugins-relative-to "$(shell npm root -g)" --fix $(EXTENSION_DIR)
+	npx eslint --fix $(EXTENSION_DIR)
