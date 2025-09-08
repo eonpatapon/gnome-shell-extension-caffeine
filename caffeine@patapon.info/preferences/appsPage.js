@@ -25,6 +25,7 @@ import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 
 import { gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import { AppChooser } from './appsPage/appChooser.js';
 
 import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
 const ShellVersion = parseFloat(Config.PACKAGE_VERSION);
@@ -183,10 +184,10 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
     }
 
     _onAddApp() {
-        const dialog = new NewAppDialog(this.get_root(), this._settings, this._settingsKey);
+        const dialog = new AppChooser(this.get_root(), this._settings, this._settingsKey);
         dialog.connect('response', (dlg, id) => {
-            const appInfo = id === Gtk.ResponseType.OK
-                ? dialog.get_widget().get_app_info() : null;
+            const appInfo = id === AppChooser.ResponseType.OK
+                ? dlg.appInfo : null;
             const apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
             if (appInfo && !apps.some((a) => a === appInfo.get_id())) {
                 this._settings.set_strv(this._settingsKey.INHIBIT_APPS, [
@@ -208,32 +209,3 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
         this._refreshApps();
     }
 });
-
-const NewAppDialog = GObject.registerClass(
-    class NewAppDialog extends Gtk.AppChooserDialog {
-        _init(parent, settings, settingsKey) {
-            super._init({
-                transient_for: parent,
-                modal: true
-            });
-
-            this._settings = settings;
-            this._settingsKey = settingsKey;
-
-            this.get_widget().set({
-                show_all: true,
-                show_other: true // hide more button
-            });
-
-            this.get_widget().connect('application-selected',
-                this._updateSensitivity.bind(this));
-            this._updateSensitivity();
-        }
-
-        _updateSensitivity() {
-            const apps = this._settings.get_strv(this._settingsKey.INHIBIT_APPS);
-            const appInfo = this.get_widget().get_app_info();
-            this.set_response_sensitive(Gtk.ResponseType.OK,
-                appInfo && !apps.some((i) => i.startsWith(appInfo.get_id())));
-        }
-    });
