@@ -35,12 +35,14 @@ import * as Config from 'resource:///org/gnome/shell/misc/config.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import * as QuickSettings from 'resource:///org/gnome/shell/ui/quickSettings.js';
+import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
 const QuickSettingsMenu = Main.panel.statusArea.quickSettings;
 const ShellVersion = parseFloat(Config.PACKAGE_VERSION);
 
 const INHIBIT_APPS_KEY = 'inhibit-apps';
 const SHOW_INDICATOR_KEY = 'show-indicator';
-const SHOW_NOTIFICATIONS_KEY = 'show-notifications';
+const SHOW_NOTIFICATION_TOAST_KEY = 'show-notification-toast';
+const SHOW_NOTIFICATION_TIMER_KEY = 'show-notification-timer';
 const SHOW_TIMER_KEY = 'show-timer';
 const SHOW_TOGGLE_KEY = 'show-toggle';
 const DURATION_TIMER_LIST = 'duration-timer-list';
@@ -583,6 +585,7 @@ const CaffeineToggle = GObject.registerClass({
                     break;
                 }
             }
+
             if (!label) {
                 continue;
             }
@@ -658,6 +661,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._iconDeactivated = Gio.icon_new_for_string(`${Me.path}${ActionsPath}${DisabledIcon}.svg`);
         }
         this._indicator.gicon = this._iconDeactivated;
+
+        // Init system notification
+        this._systemNotification = null;
+        this._systemNotificationSource = null;
+        this._closedByAction = false;
 
         // Init Timers
         this._timeOut = null;
@@ -743,6 +751,12 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Pass the new user state to the inhibitor manager, causes state to invert
         this._inhibitorManager.setUserEnabled(!this._state);
         this._settings.set_boolean(USER_ENABLED_KEY, this._state);
+
+        if (this._systemNotification && !this._closedByAction) {
+            this._systemNotification.destroy();
+            this._systemNotification = null;
+        }
+
 
         if (this._state) {
             // Enable timer when toggled on and duration is set
@@ -842,6 +856,13 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._showIndicatorLabel();
             this._printTimer(secondLeft);
             this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+                if (secondLeft ===  60) {
+                    if (this._settings.get_boolean(SHOW_NOTIFICATION_TIMER_KEY) &&
+                        !this._inhibitorManager.isFullscreen()) {
+                        console.log(this._settings.get_boolean(SHOW_NOTIFICATION_TIMER_KEY));
+                        this._sendSystemNotification();
+                    }
+                }
                 secondLeft -= 1;
                 this._printTimer(secondLeft);
                 return GLib.SOURCE_CONTINUE;
@@ -853,21 +874,81 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 if (this._state) {
                     this._handleToggleClick();
                 }
+
                 return GLib.SOURCE_REMOVE;
             });
         }
     }
 
-    _printTimer(seconds) {
-        const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
-        const min = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-        const sec = Math.floor(seconds % 60).toString().padStart(2, '0');
-        // Print Timer in system Indicator and Toggle menu subLabel
-        if (hours !== '00') {
-            this._updateLabelTimer(hours + ':' + min + ':' + sec);
-        } else {
-            this._updateLabelTimer(min + ':' + sec);
+    _toISO8601(rawSeconds) {
+        const hh = Math.floor(rawSeconds / 3600);
+        const mm = Math.floor((rawSeconds % 3600) / 60);
+        const ss = Math.floor(rawSeconds % 3600) % 60;
+
+        let iso8601 = `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+        if (hh !== 0) {
+            iso8601 = `${String(hh).padStart(2, '0')}:${iso8601}`;
         }
+        return iso8601;
+    }
+
+    _getSystemNotificationSource() {
+        if (!this._systemNotificationSource) {
+            const notificationPolicy = new MessageTray.NotificationGenericPolicy();
+
+            this._systemNotificationSource = new MessageTray.Source({
+                title: _('Caffeine'),
+                icon: this._iconActivated,
+                policy: notificationPolicy
+            });
+
+            this._systemNotificationSource.connect('destroy', (_source) => {
+                this._systemNotificationSource = null;
+            });
+
+            Main.messageTray.add(this._systemNotificationSource);
+        }
+
+        return this._systemNotificationSource;
+    }
+
+    _sendSystemNotification() {
+        this._closedByAction = false;
+
+        const systemSource = this._getSystemNotificationSource();
+        this._systemNotification = new MessageTray.Notification({
+            source: systemSource,
+            title: _('You are running out of Caffeine'),
+            body: _('select a duration if you still want to continue'),
+            gicon: this._iconDeactivated,
+            urgency: MessageTray.Urgency.CRITICAL
+        });
+
+        const durationValues = this._settings.get_value(DURATION_TIMER_LIST).deepUnpack();
+
+        this._systemNotification.connect('destroy', () => {
+            this._closedByAction = true;
+        });
+
+        for (const timer of durationValues.values()) {
+            this._systemNotification.addAction(`${this._toISO8601(timer)}`, () => {
+                this._closedByAction = true;
+                this._settings.set_boolean(SHOW_TIMER_KEY, true);
+                this._settings.set_int(TIMER_KEY, timer);
+
+                // force set toggle inactive for _forceToggleClick to take effect
+                if (this._state) {
+                    this._handleToggleClick();
+                }
+                this._forceToggleClick();
+            });
+        }
+
+        systemSource.addNotification(this._systemNotification);
+    }
+
+    _printTimer(seconds) {
+        this._updateLabelTimer(this._toISO8601(seconds));
     }
 
     _removeTimer() {
@@ -925,7 +1006,7 @@ class Caffeine extends QuickSettings.SystemIndicator {
 
         // Send an OSD notification, if enabled and state changed
         if (this._state !== oldState) {
-            if (this._settings.get_boolean(SHOW_NOTIFICATIONS_KEY) &&
+            if (this._settings.get_boolean(SHOW_NOTIFICATION_TOAST_KEY) &&
                 !this._inhibitorManager.isFullscreen()) {
                 this._sendOSDNotification(this._state);
             }
@@ -1021,6 +1102,16 @@ class Caffeine extends QuickSettings.SystemIndicator {
     destroy() {
         // Remove ToggleMenu
         this.quickSettingsItems.forEach((item) => item.destroy());
+
+        if (this._systemNotification !== null) {
+            this._systemNotification.destroy();
+            this._systemNotification = null;
+        }
+
+        if (this._systemNotificationSource !== null) {
+            this._systemNotificationSource.destroy();
+            this._systemNotificationSource = null;
+        }
 
         // Disconnect from signals
         if (this._timeOut) {
