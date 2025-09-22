@@ -55,7 +55,7 @@ const SettingsKey = {
 
 export default class CaffeinePrefs extends ExtensionPreferences {
     fillPreferencesWindow(window) {
-        let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+        const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
         if (!iconTheme.get_search_path().includes(this.path + '/icons')) {
             iconTheme.add_search_path(this.path + '/icons');
         }
@@ -66,8 +66,8 @@ export default class CaffeinePrefs extends ExtensionPreferences {
         const timerPage = new TimerPrefs.TimerPage(settings, SettingsKey);
         const appsPage = new AppsPrefs.AppsPage(settings, SettingsKey);
 
-        let prefsWidth = settings.get_int(SettingsKey.DEFAULT_WIDTH);
-        let prefsHeight = settings.get_int(SettingsKey.DEFAULT_HEIGHT);
+        const prefsWidth = settings.get_int(SettingsKey.DEFAULT_WIDTH);
+        const prefsHeight = settings.get_int(SettingsKey.DEFAULT_HEIGHT);
 
         window.set_default_size(prefsWidth, prefsHeight);
         window.set_search_enabled(true);
@@ -78,8 +78,8 @@ export default class CaffeinePrefs extends ExtensionPreferences {
         window.add(appsPage);
 
         window.connect('close-request', () => {
-            let currentWidth = window.default_width;
-            let currentHeight = window.default_height;
+            const currentWidth = window.default_width;
+            const currentHeight = window.default_height;
             // Remember user window size adjustments.
             if (currentWidth !== prefsWidth || currentHeight !== prefsHeight) {
                 settings.set_int(SettingsKey.DEFAULT_WIDTH, currentWidth);

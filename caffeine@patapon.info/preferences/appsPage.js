@@ -49,16 +49,16 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
 
         // Apps behavior group
         // --------------
-        let appsBehaviorGroup = new Adw.PreferencesGroup({
+        const appsBehaviorGroup = new Adw.PreferencesGroup({
             title: _('Trigger mode')
         });
 
         // Apps behavior select mode
-        let appsTriggerMode = new Gtk.StringList();
+        const appsTriggerMode = new Gtk.StringList();
         appsTriggerMode.append(_('Running'));
         appsTriggerMode.append(_('Focus'));
         appsTriggerMode.append(_('Active workspace'));
-        let appsTriggerModeRow = new Adw.ComboRow({
+        const appsTriggerModeRow = new Adw.ComboRow({
             title: _('Apps trigger Caffeine mode'),
             subtitle: _('Choose the way apps will trigger Caffeine'),
             model: appsTriggerMode,
@@ -71,7 +71,7 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
 
         // Apps list group
         // --------------
-        let addAppsButton = new Gtk.Button({
+        const addAppsButton = new Gtk.Button({
             child: new Adw.ButtonContent({
                 icon_name: 'list-add-symbolic',
                 label: _('Add')
@@ -128,7 +128,7 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
                 this.apps = {};
 
                 // Build new apps UI list
-                for (let i in this._listApps) {
+                for (const i in this._listApps) {
                     this.apps[i] = {};
                     this.apps[i].ButtonBox = new Gtk.Box({
                         orientation: Gtk.Orientation.HORIZONTAL,
@@ -170,7 +170,7 @@ class CaffeineAppsPage extends Adw.PreferencesPage {
                     this.appsGroup.add(this.apps[i].Row);
                 }
                 // Bind signals
-                for (let i in this.apps) {
+                for (const i in this.apps) {
                     this.apps[i].DeleteButton.connect('clicked', () => {
                         this._onRemoveApp(this._listApps[i]);
                     });

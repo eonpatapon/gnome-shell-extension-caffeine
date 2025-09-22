@@ -47,7 +47,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
         // Timer group
         // --------------
-        let timerGroup = new Adw.PreferencesGroup({
+        const timerGroup = new Adw.PreferencesGroup({
             title: _('Preset durations')
         });
 
@@ -58,7 +58,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             activatable: true
         });
 
-        let adjustSliderTimer = new Gtk.Adjustment({
+        const adjustSliderTimer = new Gtk.Adjustment({
             lower: 0,
             upper: 4,
             step_increment: 0.1,
@@ -94,7 +94,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             vexpand: false
         });
 
-        let customDurationGroup = new Adw.PreferencesGroup({
+        const customDurationGroup = new Adw.PreferencesGroup({
             title: _('Custom durations'),
             header_suffix: this.resetCustomTimerButton
         });
@@ -214,7 +214,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
 
     _updateDurationVarian(value, index) {
         const variantDuration = this._settings.get_value(this._settingsKey.DURATION_TIMER_LIST);
-        let currentDurationValues = variantDuration.deepUnpack();
+        const currentDurationValues = variantDuration.deepUnpack();
         currentDurationValues[index] = value;
         const newVariant = new GLib.Variant('ai', currentDurationValues);
         this._settings.set_value(this._settingsKey.DURATION_TIMER_LIST, newVariant);
@@ -263,7 +263,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         */
 
         // Create the SpinRow
-        let spinRowAdjustment = new Gtk.Adjustment({
+        const spinRowAdjustment = new Gtk.Adjustment({
             lower: minValue,
             upper: maxValue,
             step_increment: step,
@@ -271,7 +271,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
             value
         });
 
-        let spinRow = new Adw.SpinRow({
+        const spinRow = new Adw.SpinRow({
             title: name,
             climb_rate: 0,
             adjustment: spinRowAdjustment,
@@ -279,7 +279,7 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
 
         // Create new Entry
-        let timeEntry = new Gtk.Entry({
+        const timeEntry = new Gtk.Entry({
             editable: true,
             hexpand: true,
             halign: Gtk.Align.END,
@@ -291,10 +291,10 @@ class CaffeineTimerPage extends Adw.PreferencesPage {
         });
 
         // Get the Gtk.SpinButton and Gtk.Text
-        let childWidget = spinRow.get_last_child();
-        let boxWidget = childWidget.get_last_child();
-        let spinButtonWidget = boxWidget.get_first_child();
-        let spinButtonText = spinButtonWidget.get_first_child();
+        const childWidget = spinRow.get_last_child();
+        const boxWidget = childWidget.get_last_child();
+        const spinButtonWidget = boxWidget.get_first_child();
+        const spinButtonText = spinButtonWidget.get_first_child();
 
         // Hide the current text input
         spinButtonText.visible = false;
