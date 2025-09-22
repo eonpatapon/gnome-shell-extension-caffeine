@@ -41,37 +41,37 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
 
         // Behavior group
         // --------------
-        let behaviorGroup = new Adw.PreferencesGroup({
+        const behaviorGroup = new Adw.PreferencesGroup({
             title: _('Behavior')
         });
 
         // Enable / disable fullscreen apps
-        let disableFullscreenRow = new Adw.SwitchRow({
+        const disableFullscreenRow = new Adw.SwitchRow({
             title: _('Enable for fullscreen apps'),
             subtitle: _('Automatically enable when an app enters fullscreen mode'),
             active: this._settings.get_boolean(this._settingsKey.FULLSCREEN)
         });
 
         // Enable / disable mpris apps
-        let enableMprisRow = new Adw.SwitchRow({
+        const enableMprisRow = new Adw.SwitchRow({
             title: _('Enable when an app is playing media'),
             subtitle: _('Automatically enable when an app reports playback'),
             active: this._settings.get_boolean(this._settingsKey.MPRIS)
         });
 
         // Remember state
-        let rememberStateRow = new Adw.SwitchRow({
+        const rememberStateRow = new Adw.SwitchRow({
             title: _('Remember state'),
             subtitle: _('Remember the last state across sessions and reboots'),
             active: this._settings.get_boolean(this._settingsKey.RESTORE)
         });
 
         // Pause and resume Night Light
-        let pauseNightLight = new Gtk.StringList();
+        const pauseNightLight = new Gtk.StringList();
         pauseNightLight.append(_('Never'));
         pauseNightLight.append(_('Always'));
         pauseNightLight.append(_('For apps on list'));
-        let pauseNightLightRow = new Adw.ComboRow({
+        const pauseNightLightRow = new Adw.ComboRow({
             title: _('Pause and resume Night Light'),
             subtitle: _('Toggles the night light together with Caffeine\'s state'),
             model: pauseNightLight,
@@ -79,11 +79,11 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         });
 
         // Allow blank screen
-        let allowBlankScreen = new Gtk.StringList();
+        const allowBlankScreen = new Gtk.StringList();
         allowBlankScreen.append(_('Never'));
         allowBlankScreen.append(_('Always'));
         allowBlankScreen.append(_('For apps on list'));
-        let allowBlankScreenRow = new Adw.ComboRow({
+        const allowBlankScreenRow = new Adw.ComboRow({
             title: _('Allow screen blank'),
             subtitle: _('Allow turning off screen when Caffeine is enabled\n' +
                         'This may disable manual suspend / shutdown'),
@@ -101,14 +101,14 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
 
         // Shortcut group
         // --------------
-        let deleteShortcutButton = new Gtk.Button({
+        const deleteShortcutButton = new Gtk.Button({
             icon_name: 'edit-delete-symbolic',
             valign: Gtk.Align.CENTER,
             css_classes: ['error'],
             hexpand: false,
             vexpand: false
         });
-        let shortcutGroup = new Adw.PreferencesGroup({
+        const shortcutGroup = new Adw.PreferencesGroup({
             title: _('Shortcut'),
             header_suffix: deleteShortcutButton
         });
@@ -227,9 +227,9 @@ const ShortcutSettingWidget = class extends Adw.ActionRow {
     }
 
     _onActivated(widget) {
-        let ctl = new Gtk.EventControllerKey();
+        const ctl = new Gtk.EventControllerKey();
 
-        let content = new Adw.StatusPage({
+        const content = new Adw.StatusPage({
             title: _('New accelerator…'),
             description: this._description,
             icon_name: 'preferences-desktop-keyboard-shortcuts-symbolic'

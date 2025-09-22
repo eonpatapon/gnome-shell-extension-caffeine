@@ -164,6 +164,7 @@ module.exports = defineConfig([
             'operator-linebreak': ["error"],
             'padded-blocks': ["error", "never"],
             'prefer-arrow-callback': ["error"],
+            'prefer-const': ["error"],
             'prefer-destructuring': ["error"],
             'prefer-numeric-literals': ["error"],
             'prefer-promise-reject-errors': ["error"],
