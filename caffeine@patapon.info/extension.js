@@ -912,7 +912,22 @@ class Caffeine extends QuickSettings.SystemIndicator {
     }
 
     _handleScrollEvent(event) {
-        switch (event.get_scroll_direction()) {
+        // Undo natural scrolling inversions (available on GNOME 49+)
+        let scrollDirection = event.get_scroll_direction();
+        if (ShellVersion >= 49) {
+            if (event.get_scroll_flags() & Clutter.ScrollFlags.INVERTED) {
+                switch (scrollDirection) {
+                case Clutter.ScrollDirection.UP:
+                    scrollDirection = Clutter.ScrollDirection.DOWN;
+                    break;
+                case Clutter.ScrollDirection.DOWN:
+                    scrollDirection = Clutter.ScrollDirection.UP;
+                    break;
+                }
+            }
+        }
+
+        switch (scrollDirection) {
         case Clutter.ScrollDirection.UP:
             if (!this._state) {
                 // User state on - UP
