@@ -56,6 +56,7 @@ const TRIGGER_APPS_MODE = 'trigger-apps-mode';
 const INDICATOR_POSITION = 'indicator-position';
 const INDICATOR_INDEX = 'indicator-position-index';
 const INDICATOR_POS_MAX = 'indicator-position-max';
+const CLI_TOGGLE_KEY = 'cli-toggle';
 
 const ColorInterface = '<node> \
   <interface name="org.gnome.SettingsDaemon.Color"> \
@@ -732,6 +733,22 @@ class Caffeine extends QuickSettings.SystemIndicator {
             // Restore Caffeine as enabled (fake a user click)
             this._forceToggleClick();
         }
+
+        // Connect command line toggle
+        this._settings.set_boolean(CLI_TOGGLE_KEY, this._state);
+        this._settings.connectObject(
+            `changed::${CLI_TOGGLE_KEY}`,
+            () => this._commandStateChanged(),
+            this);
+    }
+
+    _commandStateChanged() {
+        const commandState = this._settings.get_boolean(CLI_TOGGLE_KEY);
+        if (commandState === this._state) {
+            return;
+        }
+
+        this._handleToggleClick();
     }
 
     _forceToggleClick() {
@@ -917,6 +934,9 @@ class Caffeine extends QuickSettings.SystemIndicator {
         // Update the tracked state
         const oldState = this._state;
         this._state = this._inhibitorManager.getInhibitState();
+
+        // Sync command state
+        this._settings.set_boolean(CLI_TOGGLE_KEY, this._state);
 
         // Update the visual state and subtitle
         this._caffeineToggle.checked = this._state;
