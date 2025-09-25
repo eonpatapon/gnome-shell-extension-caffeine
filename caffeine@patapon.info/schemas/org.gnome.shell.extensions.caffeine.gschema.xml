@@ -122,5 +122,9 @@
       <default>1</default>
       <summary>Last item index in indicator menu</summary>
     </key>
+    <key type="b" name="cli-toggle">
+      <default>false</default>
+      <summary>Command line key to toggle state</summary>
+    </key>
   </schema>
 </schemalist>
