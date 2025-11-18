@@ -22,6 +22,12 @@
         <summary>Application list</summary>
         <description>A list of strings, each containing an application id (desktop file name)</description>
     </key>
+    <key type="b" name="installed-changed">
+        <default>false</default>
+        <summary>True or False flip to indicate install list changed</summary>
+        <description></description>
+    </key>
+
     <key type="b" name="user-enabled">
         <default>false</default>
         <summary>Store caffeine user state</summary>
