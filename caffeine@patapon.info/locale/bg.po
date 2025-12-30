@@ -1,0 +1,415 @@
+# Bulgarian translation for gnome-shell-extension-caffeine
+# Copyright (C) 2025 Wissle.
+# This file is distributed under the same license as the gnome-shell-extension-caffeine package.
+# Translator: YOUR NAME <YOUR@EMAIL>, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-04 15:12+0300\n"
+"PO-Revision-Date: 2025-12-30 00:00+0200\n"
+"Last-Translator: YOUR NAME <YOUR@EMAIL>\n"
+"Language-Team: Bulgarian\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.6\n"
+
+#: extension.js:486
+msgid "Caffeine"
+msgstr "„Кофеин“"
+
+#: extension.js:511 extension.js:890
+msgid "Caffeine Timer"
+msgstr "Таймер на „Кофеин“"
+
+#: extension.js:519
+msgid "Settings"
+msgstr "Настройки"
+
+#: extension.js:558
+msgid "Infinite"
+msgstr "Безкрайно"
+
+#: extension.js:566 extension.js:992
+msgid " hour "
+msgstr " час "
+
+#: extension.js:569 extension.js:995
+msgid " hours "
+msgstr " часа "
+
+#: extension.js:576
+msgid " minute"
+msgstr " минута"
+
+#: extension.js:579 preferences/timerPage.js:206
+msgid " minutes"
+msgstr " минути"
+
+#: extension.js:947
+msgid "Caffeine enabled"
+msgstr "„Кофеин“ е включен"
+
+#: extension.js:950
+msgid "Caffeine disabled"
+msgstr "„Кофеин“ е изключен"
+
+#: extension.js:956
+msgid "Night Light paused"
+msgstr "Нощния режим е паузиран"
+
+#: extension.js:958
+msgid "Night Light resumed"
+msgstr "Нощния режим е възобновен"
+
+#: extension.js:1002
+msgid " minute "
+msgstr " минута"
+
+#: extension.js:1005
+msgid " minutes "
+msgstr " минути "
+
+#: preferences/appsPage.js:33
+msgid "Apps"
+msgstr "Приложения"
+
+#: preferences/appsPage.js:44
+msgid "Trigger mode"
+msgstr "Режим на задействане"
+
+#: preferences/appsPage.js:49
+msgid "Running"
+msgstr "Работещи"
+
+#: preferences/appsPage.js:50
+msgid "Focus"
+msgstr "Фокус"
+
+#: preferences/appsPage.js:51
+msgid "Active workspace"
+msgstr "Активен работен плот"
+
+#: preferences/appsPage.js:53
+msgid "Apps trigger Caffeine mode"
+msgstr "Приложения, задействащи режим на „Кофеин“"
+
+#: preferences/appsPage.js:54
+msgid "Choose the way apps will trigger Caffeine"
+msgstr "Изберете начина, по който приложенията ще задействат „Кофеин“"
+
+#: preferences/appsPage.js:68
+msgid "Add"
+msgstr "Добави"
+
+#: preferences/appsPage.js:72
+msgid "Apps that trigger Caffeine"
+msgstr "Приложения, които задействат „Кофеин“"
+
+#: preferences/displayPage.js:33 preferences/displayPage.js:43
+msgid "Display"
+msgstr "Показване"
+
+#: preferences/displayPage.js:48
+msgid "Only when active"
+msgstr "Само когато е активен"
+
+#: preferences/displayPage.js:49 preferences/generalPage.js:72
+#: preferences/generalPage.js:84
+msgid "Always"
+msgstr "Винаги"
+
+#: preferences/displayPage.js:50 preferences/generalPage.js:71
+#: preferences/generalPage.js:83
+msgid "Never"
+msgstr "Никога"
+
+#: preferences/displayPage.js:52
+msgid "Show status indicator in top panel"
+msgstr "Показване на индикатор за състояние в горния панел"
+
+#: preferences/displayPage.js:53
+msgid "Enable or disable the Caffeine icon in the top panel"
+msgstr "Включване или изключване на иконата на „Кофеин“ в горния панел"
+
+#: preferences/displayPage.js:60
+msgid "Show timer in top panel"
+msgstr "Показване на таймера в горния панел"
+
+#: preferences/displayPage.js:61
+msgid "Enable or disable the timer in the top panel"
+msgstr "Включване или изключване на таймера в горния панел"
+
+#: preferences/displayPage.js:67
+msgid "Show quick settings toggle"
+msgstr "Показване превключвател в бързите настройки"
+
+#: preferences/displayPage.js:68
+msgid "Enable or disable the toggle in the quick settings menu"
+msgstr "Включване или изключване на превключвателя в менюто за бързи настройки"
+
+#: preferences/displayPage.js:74
+msgid "Notifications"
+msgstr "Известия"
+
+#: preferences/displayPage.js:75
+msgid "Enable notifications when Caffeine is enabled or disabled"
+msgstr "Включване на известия при включване/изключване на „Кофеин“"
+
+#: preferences/displayPage.js:82
+msgid "Status indicator position"
+msgstr "Позиция на индикатора за състояние"
+
+#: preferences/displayPage.js:83
+msgid "The position relative of indicator icon to other items"
+msgstr "Позицията на иконата на индикатора спрямо другите елементи"
+
+#: preferences/generalPage.js:35
+msgid "General"
+msgstr "Общи"
+
+#: preferences/generalPage.js:45
+msgid "Behavior"
+msgstr "Поведение"
+
+#: preferences/generalPage.js:50
+msgid "Enable for fullscreen apps"
+msgstr "Включи за приложенията на цял екран"
+
+#: preferences/generalPage.js:51
+msgid "Automatically enable when an app enters fullscreen mode"
+msgstr "Автоматично включване, когато приложение влезе в режим на цял екран"
+
+#: preferences/generalPage.js:57
+msgid "Enable when an app is playing media"
+msgstr "Включване, когато приложение възпроизвежда медия"
+
+#: preferences/generalPage.js:58
+msgid "Automatically enable when an app reports playback"
+msgstr "Автоматично включване, когато приложение съобщи за възпроизвеждане"
+
+#: preferences/generalPage.js:64
+msgid "Remember state"
+msgstr "Запомни състоянието"
+
+#: preferences/generalPage.js:65
+msgid "Remember the last state across sessions and reboots"
+msgstr "Запомни последното състояние между сесиите и след рестартиране"
+
+#: preferences/generalPage.js:73 preferences/generalPage.js:85
+msgid "For apps on list"
+msgstr "За приложения от списъка"
+
+#: preferences/generalPage.js:75
+msgid "Pause and resume Night Light"
+msgstr "Пауза и възобновяване на нощния режим"
+
+#: preferences/generalPage.js:76
+msgid "Toggles the night light together with Caffeine's state"
+msgstr "Превключва нощния режим заедно със състоянието на „Кофеин“"
+
+#: preferences/generalPage.js:87
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+msgid "Allow screen blank"
+msgstr "Позволи гасенето на екрана"
+
+#: preferences/generalPage.js:88
+msgid "Allow turning off screen when Caffeine is enabled"
+msgstr "Позволяване на изключването на екрана, когато „Кофеин“ е включен"
+
+#: preferences/generalPage.js:111
+msgid "Shortcut"
+msgstr "Клавишна комбинация"
+
+#: preferences/generalPage.js:119
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
+msgid "Toggle shortcut"
+msgstr "Клавиш за превключване"
+
+#: preferences/generalPage.js:120
+msgid "Use Backspace to clear"
+msgstr "Използване на backspace за изчистване"
+
+#: preferences/generalPage.js:200 preferences/generalPage.js:232
+msgid "New accelerator…"
+msgstr "Нова комбинация…"
+
+#: preferences/timerPage.js:41
+msgid "Timer"
+msgstr "Таймер"
+
+#: preferences/timerPage.js:51
+msgid "Preset durations"
+msgstr "Предварително зададени продължителности"
+
+#: preferences/timerPage.js:57
+msgid "Durations"
+msgstr "Продължителности"
+
+#: preferences/timerPage.js:98
+msgid "Custom durations"
+msgstr "Персонализирани продължителности"
+
+#: preferences/timerPage.js:106
+msgid "Short timer"
+msgstr "Кратък таймер"
+
+#: preferences/timerPage.js:111
+msgid "Medium timer"
+msgstr "Среден таймер"
+
+#: preferences/timerPage.js:116
+msgid "Long timer"
+msgstr "Дълъг таймер"
+
+#: preferences/timerPage.js:124
+msgid "Enable custom values"
+msgstr "Разрешаване на персонализираните стойности"
+
+#: preferences/timerPage.js:125
+msgid "Select custom value for each duration"
+msgstr "Избиране на персонализирана стойност за всяка продължителност"
+
+#: preferences/timerPage.js:203
+msgid "Set to "
+msgstr "Задаване на "
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+msgid "Application list"
+msgstr "Списък с приложения"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:23
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
+msgstr "Списък от низове, всеки съдържащ id на приложение (име на .desktop файл)"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+msgid "Store caffeine user state"
+msgstr "Запазване на потребителското състояние на „Кофеин“"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+msgid "List of duration timer"
+msgstr "Списък с продължителности на таймера"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
+msgid ""
+"Specify the short, medium and long duration for the timer countdown (seconds)"
+msgstr ""
+"Задаване на кратката, средната и дългата продължителност за обратното броене на таймера (в секунди)"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+msgid "Use custom duration values for the timer"
+msgstr "Използване на персонализирани стойности за продължителността на таймера"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+msgid "Specify time (seconds) for the timer countdown"
+msgstr "Задаване на време (в секунди) за обратното броене на таймера"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+msgid "Specify index of duration range for the timer"
+msgstr "Задаване на индекс на диапазона продължителности за таймера"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+msgid "Restore caffeine state"
+msgstr "Възстановяване на състоянието на „Кофеин“"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+msgid "Show indicator"
+msgstr "Показване на индикатор"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+msgid "Show the indicator on the top panel"
+msgstr "Показване на индикатора в горния панел"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Show notifications"
+msgstr "Показване на известия"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+msgid "Show notifications when enabled/disabled"
+msgstr "Показване на известия при включване/изключване"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+msgid "Show timer"
+msgstr "Показване на таймер"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+msgid "Show timer when enabled/disabled"
+msgstr "Показване на таймера при включване/изключване"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+msgid "Show toggle"
+msgstr "Показване на превключвател"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+msgid "Show the quick settings toggle"
+msgstr "Показване превключвателя в бързите настройки"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+msgid "Enable when a fullscreen application is running"
+msgstr "Включване, когато работи приложение на цял екран"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+msgid "Enable when an application is playing media"
+msgstr "Включване, когато приложение възпроизвежда медия"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+msgid "Enable when an application is reporting playback status via MPRIS"
+msgstr "Включване, когато приложение съобщава статус на възпроизвеждане чрез MPRIS"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+msgid "Night Light control mode"
+msgstr "Режим за управление на нощния режим"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+msgid "Set the way Caffeine interacts with the Night light setting."
+msgstr "Настройване как „Кофеин“ взаимодейства с настройката за нощен режим."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+msgid "Allow turning off screen when Caffeine is enabled."
+msgstr "Позволяване на изключването на екрана, когато „Кофеин“ е включен."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+msgid "Trigger App control mode"
+msgstr "Режим за управление на приложението активатор"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
+msgid "Set the trigger method for apps."
+msgstr "Задаване на метода на задействане за приложенията."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:103
+msgid "Shortcut to toggle Caffeine."
+msgstr "Клавиш за превключване на „Кофеин“."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:107
+msgid "Default width for the preferences window"
+msgstr "Ширина по подразбиране на прозореца с настройки"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:111
+msgid "Default height for the preferences window"
+msgstr "Височина по подразбиране на прозореца с настройки"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:115
+msgid "Visible position offset of status icon in indicator menu"
+msgstr "Видимо отклонение на позицията на иконата в менюто на индикатора"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:119
+msgid ""
+"Real position offset of status icon in indicator menu that include invisible "
+"one"
+msgstr ""
+"Реално отклонение на позицията на иконата в менюто на индикатора, което включва невидими икони"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:123
+msgid "Last item index in indicator menu"
+msgstr "Индекс на последния елемент в менюто на индикатора"
