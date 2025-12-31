@@ -416,5 +416,3 @@ msgstr ""
 msgid "Last item index in indicator menu"
 msgstr "Poslední index položky v nabídce indikátorů"
 
-#~ msgid "Store caffeine toggle state"
-#~ msgstr "Uložit stav zapnutí Kofein"
