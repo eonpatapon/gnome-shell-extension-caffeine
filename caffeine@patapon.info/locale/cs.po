@@ -3,12 +3,9 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-30 14:56+0100\n"
-<<<<<<< HEAD
 "PO-Revision-Date: 2026-01-14 15:22+0100\n"
-=======
 "PO-Revision-Date: 2025-10-30 15:11+0100\n"
 "Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
->>>>>>> 395e8d8e208dd9ce7c01b0ecd1f25b7a7085127f
 "Last-Translator: Ludek Vydra <lvtran@u.k2.cz>\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
@@ -421,8 +418,3 @@ msgstr ""
 msgid "Last item index in indicator menu"
 msgstr "Poslední index položky v nabídce indikátorů"
 
-<<<<<<< HEAD
-#~ msgid "Store caffeine toggle state"
-#~ msgstr "Uložit stav zapnutí Kofein"
-=======
->>>>>>> 395e8d8e208dd9ce7c01b0ecd1f25b7a7085127f
