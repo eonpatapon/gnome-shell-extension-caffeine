@@ -33,6 +33,7 @@ import { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/
 const SettingsKey = {
     INHIBIT_APPS: 'inhibit-apps',
     SHOW_INDICATOR: 'show-indicator',
+    INSTALLED_CHANGED: 'installed-changed',
     SHOW_NOTIFICATIONS: 'show-notifications',
     SHOW_TIMER: 'show-timer',
     SHOW_TOGGLE: 'show-toggle',

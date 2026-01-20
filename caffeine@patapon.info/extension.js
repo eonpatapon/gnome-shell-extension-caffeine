@@ -47,6 +47,7 @@ const DURATION_TIMER_LIST = 'duration-timer-list';
 const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
+const INSTALLED_CHANGED_KEY = 'installed-changed';
 const MPRIS_KEY = 'enable-mpris';
 const NIGHT_LIGHT_KEY = 'nightlight-control';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
@@ -634,9 +635,17 @@ class Caffeine extends QuickSettings.SystemIndicator {
     _init(Me) {
         super._init();
 
-        this._appSystem = Shell.AppSystem.get_default();
-        this._indicator = this._addIndicator();
+
         this._settings = Me._settings;
+
+        this._appSystem = Shell.AppSystem.get_default();
+        this._appSystemInstalledChangedId = this._appSystem.connect('installed-changed', () => {
+            this._settings.set_boolean(
+                INSTALLED_CHANGED_KEY,
+                !this._settings.get_boolean(INSTALLED_CHANGED_KEY)
+            );
+        });
+        this._indicator = this._addIndicator();
         this._name = Me.metadata.name;
         this._state = false;
 
@@ -1041,6 +1050,11 @@ class Caffeine extends QuickSettings.SystemIndicator {
     destroy() {
         // Remove ToggleMenu
         this.quickSettingsItems.forEach((item) => item.destroy());
+
+        if (this._appSystemInstalledChangedId) {
+            this._appSystem.disconnect(this._appSystemInstalledChangedId);
+            this._appSystemInstalledChangedId = null;
+        }
 
         // Disconnect from signals
         if (this._timeOut) {
