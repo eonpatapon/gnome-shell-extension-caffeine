@@ -16,7 +16,7 @@ jobs:
         version: 1.0
     - name: Install eslint
       run: |
-        npm install eslint @eslint/js @stylistic/eslint-plugin
+        npm install
 
     - name: Run linter target
       run: |
