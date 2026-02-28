@@ -64,7 +64,8 @@ module.exports = defineConfig([
                     future it's intended to be a decorator
                  */
                 "ignoredNodes": ["CallExpression[callee.object.name=GObject][callee.property.name=registerClass] > ClassExpression:first-child"],
-                "MemberExpression": "off"
+                "MemberExpression": "off",
+                "SwitchCase": 0
             }],
             '@stylistic/key-spacing': ["error", {
                 "beforeColon": false,
