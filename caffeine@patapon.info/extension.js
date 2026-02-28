@@ -397,7 +397,7 @@ const InhibitorManager = GObject.registerClass({
         const params = [
             GLib.Variant.new_string('caffeine-gnome-extension'),
             GLib.Variant.new_uint32(0),
-            GLib.Variant.new_string('Inhibit by %s'.format(this._name)),
+            GLib.Variant.new_string('Inhibited by Caffeine GNOME extension'),
             GLib.Variant.new_uint32(inhibitFlags)
         ];
         const paramsVariant = GLib.Variant.new_tuple(params);
@@ -637,7 +637,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._appSystem = Shell.AppSystem.get_default();
         this._indicator = this._addIndicator();
         this._settings = Me._settings;
-        this._name = Me.metadata.name;
         this._state = false;
 
         // Add indicator label for the timer
