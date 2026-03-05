@@ -23,10 +23,11 @@ jobs:
       run: |
         make install
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: caffeine@patapon.info.zip
         path: caffeine@patapon.info.zip
+        archive: false
 
     - name: Test build area clean
       run: |
