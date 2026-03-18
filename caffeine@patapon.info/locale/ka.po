@@ -1,0 +1,425 @@
+# Georgian translation for gnome-shell-extension-caffeine.
+# Copyright (C) 2026 gnome-shell-extension-caffeine's authors.
+# This file is distributed under the same license as the gnome-shell-extension-caffeine package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-caffeine\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-16 15:11+0100\n"
+"PO-Revision-Date: 2026-03-18 06:58+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: extension.js:487
+msgid "Caffeine"
+msgstr "Caffeine"
+
+#: extension.js:512 extension.js:909
+msgid "Caffeine Timer"
+msgstr "კოფეინის ტაიმერი"
+
+#: extension.js:520
+msgid "Settings"
+msgstr "მორგება"
+
+#: extension.js:562
+msgid "Infinite"
+msgstr "უსასრულო"
+
+#: extension.js:570 extension.js:1033
+msgid " hour "
+msgstr " საათი "
+
+#: extension.js:573 extension.js:1036
+msgid " hours "
+msgstr " საათი "
+
+#: extension.js:580
+msgid " minute"
+msgstr " წუთი"
+
+#: extension.js:583 preferences/timerPage.js:206
+msgid " minutes"
+msgstr " წუთი"
+
+#: extension.js:984
+msgid "Caffeine enabled"
+msgstr "Caffeine ჩართულია"
+
+#: extension.js:987
+msgid "Caffeine disabled"
+msgstr "Caffeine გამორთულია"
+
+#: extension.js:993
+msgid "Night Light paused"
+msgstr "ღამის ფერები შეჩერებულია"
+
+#: extension.js:995
+msgid "Night Light resumed"
+msgstr "ღამის ფერები განახლდა"
+
+#: extension.js:1043
+msgid " minute "
+msgstr " წუთი "
+
+#: extension.js:1046
+msgid " minutes "
+msgstr " წუთი "
+
+#: preferences/appsPage.js:42
+msgid "Apps"
+msgstr "აპები"
+
+#: preferences/appsPage.js:53
+msgid "Trigger mode"
+msgstr "ტრიგერის რეჟიმი"
+
+#: preferences/appsPage.js:58
+msgid "Running"
+msgstr "გაშვებულია"
+
+#: preferences/appsPage.js:59
+msgid "Focus"
+msgstr "ფოკუსი"
+
+#: preferences/appsPage.js:60
+msgid "Active workspace"
+msgstr "აქტიური სამუშაო სივრცე"
+
+#: preferences/appsPage.js:62
+msgid "Apps trigger Caffeine mode"
+msgstr "აპები, რომლებიც Caffeine-ის რეჟიმს ატრიგერებენ"
+
+#: preferences/appsPage.js:63
+msgid "Choose the way apps will trigger Caffeine"
+msgstr "აირჩიეთ გზები, რომლითაც აპები Caffeine-ს ატრიგერებენ"
+
+#: preferences/appsPage.js:77
+msgid "Add"
+msgstr "დამატება"
+
+#: preferences/appsPage.js:81
+msgid "Apps that trigger Caffeine"
+msgstr "აპები, რომლებიც Caffeine-ს ატრიგერებენ"
+
+#: preferences/displayPage.js:33 preferences/displayPage.js:43
+msgid "Display"
+msgstr "ჩვენება"
+
+#: preferences/displayPage.js:48
+msgid "Only when active"
+msgstr "მხოლოდ, როცა აქტიურია"
+
+#: preferences/displayPage.js:49 preferences/generalPage.js:72
+#: preferences/generalPage.js:84
+msgid "Always"
+msgstr "ყოველთვის"
+
+#: preferences/displayPage.js:50 preferences/generalPage.js:71
+#: preferences/generalPage.js:83
+msgid "Never"
+msgstr "არასდროს"
+
+#: preferences/displayPage.js:52
+msgid "Show status indicator in top panel"
+msgstr "სტატუსის მაჩვენებლის ჩვენება ზედა პანელში"
+
+#: preferences/displayPage.js:53
+msgid "Enable or disable the Caffeine icon in the top panel"
+msgstr "Caffeine-ის ხატულას ჩართვა, ან გამორთვა ზედა პანელზე"
+
+#: preferences/displayPage.js:60
+msgid "Show timer in top panel"
+msgstr "ტაიმერის ჩვენება ზედა პანელში"
+
+#: preferences/displayPage.js:61
+msgid "Enable or disable the timer in the top panel"
+msgstr "ზედა პანელში ტაიმერის ჩართვა, ან გამორთვა"
+
+#: preferences/displayPage.js:67
+msgid "Show quick settings toggle"
+msgstr "სწრაფი პარამეტრების გადამრთველის ჩვენება"
+
+#: preferences/displayPage.js:68
+msgid "Enable or disable the toggle in the quick settings menu"
+msgstr "სწრაფი მორგების მენიუში გადამრთველის ჩართვა, ან გამორთვა"
+
+#: preferences/displayPage.js:74
+msgid "Notifications"
+msgstr "გაფრთხილებები"
+
+#: preferences/displayPage.js:75
+msgid "Enable notifications when Caffeine is enabled or disabled"
+msgstr "გაფრთხილებების ჩვენება, როცა Caffeine ჩართული, ან გამორთულია"
+
+#: preferences/displayPage.js:82
+msgid "Status indicator position"
+msgstr "სტატუსის მაჩვენებლის მდებარეობა"
+
+#: preferences/displayPage.js:83
+msgid "The position relative of indicator icon to other items"
+msgstr "მაჩვენებლის ხატულას მდებარეობა სხვა ელემენტებთან შეფარდებით"
+
+#: preferences/generalPage.js:35
+msgid "General"
+msgstr "ზოგადი"
+
+#: preferences/generalPage.js:45
+msgid "Behavior"
+msgstr "ქცევა"
+
+#: preferences/generalPage.js:50
+msgid "Enable for fullscreen apps"
+msgstr "ჩართვა სრულეკრანიანი აპლიკაციებისთვის"
+
+#: preferences/generalPage.js:51
+msgid "Automatically enable when an app enters fullscreen mode"
+msgstr "ავტომატური ჩართვა, როცა აპი სრულეკრანიან რეჟიმზე გადადის"
+
+#: preferences/generalPage.js:57
+msgid "Enable when an app is playing media"
+msgstr "ჩართვა, როცა აპი მედიას უკრავს"
+
+#: preferences/generalPage.js:58
+msgid "Automatically enable when an app reports playback"
+msgstr "ავტომატური ჩართვა, როცა აპი ამბობს, რომ უკრავს"
+
+#: preferences/generalPage.js:64
+msgid "Remember state"
+msgstr "მდგომარეობის დამახსოვრება"
+
+#: preferences/generalPage.js:65
+msgid "Remember the last state across sessions and reboots"
+msgstr "ბოლო მდგომარეობის დამახსოვრება სესიებსა და გადატვირთვებს შორის"
+
+#: preferences/generalPage.js:73 preferences/generalPage.js:85
+msgid "For apps on list"
+msgstr "სიაში არსებული აპებისთვის"
+
+#: preferences/generalPage.js:75
+msgid "Pause and resume Night Light"
+msgstr "ღამის განათების შეჩერება და გაგრძელება"
+
+#: preferences/generalPage.js:76
+msgid "Toggles the night light together with Caffeine's state"
+msgstr "გადართავს ღამის განათებას და Caffeine-ის მდგომარეობას"
+
+#: preferences/generalPage.js:87
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
+msgid "Allow screen blank"
+msgstr "შავი ეკრანის დაშვება"
+
+#: preferences/generalPage.js:88
+msgid ""
+"Allow turning off screen when Caffeine is enabled\n"
+"This may disable manual suspend / shutdown"
+msgstr ""
+"ეკრანის გამორთვის დაშვება, როცა Caffeine ჩართულია\n"
+"ამან, შეიძლება, ხელით დაძინება / გამორთვა გათიშოს"
+
+#: preferences/generalPage.js:112
+msgid "Shortcut"
+msgstr "მალსახმობი"
+
+#: preferences/generalPage.js:120
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:102
+msgid "Toggle shortcut"
+msgstr "მალსახმობის გადართვა"
+
+#: preferences/generalPage.js:121
+msgid "Use Backspace to clear"
+msgstr "გასასუფთავებლად გამოიყენეთ ღილაკი Backspace"
+
+#: preferences/generalPage.js:201 preferences/generalPage.js:233
+msgid "New accelerator…"
+msgstr "ახალი აქსელერატორი…"
+
+#: preferences/timerPage.js:41
+msgid "Timer"
+msgstr "წამმზომი"
+
+#: preferences/timerPage.js:51
+msgid "Preset durations"
+msgstr "წინასწარ დაყენებული ხანგრძლივობა"
+
+#: preferences/timerPage.js:57
+msgid "Durations"
+msgstr "ხანგრძლივობები"
+
+#: preferences/timerPage.js:98
+msgid "Custom durations"
+msgstr "მორგებული ხანგრძლივობები"
+
+#: preferences/timerPage.js:106
+msgid "Short timer"
+msgstr "მოკლე ტაიმერი"
+
+#: preferences/timerPage.js:111
+msgid "Medium timer"
+msgstr "საშუალო ტაიმერი"
+
+#: preferences/timerPage.js:116
+msgid "Long timer"
+msgstr "გრძელი ტაიმერი"
+
+#: preferences/timerPage.js:124
+msgid "Enable custom values"
+msgstr "მორგებული მნიშვნელობების ჩართვა"
+
+#: preferences/timerPage.js:125
+msgid "Select custom value for each duration"
+msgstr "აირჩიეთ მორგებული მნიშვნელობა თითოეული ხანგრძლივობისთვის"
+
+#: preferences/timerPage.js:203
+msgid "Set to "
+msgstr "დაყენება მნიშვნელობაზე "
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:22
+msgid "Application list"
+msgstr "აპლიკაციების სია"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:23
+msgid ""
+"A list of strings, each containing an application id (desktop file name)"
+msgstr ""
+"სტრიქონების სია, რომელშიც თითოეული აპლიკაციის id-ს (სამუშაო მაგიდის ფაილის "
+"სახელს) შეიცავს"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:27
+msgid "Store caffeine user state"
+msgstr "Caffeine-ის მომხმარებლის მდგომარეობის შენახვა"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:32
+msgid "List of duration timer"
+msgstr "ხანგრძლივობის ტაიმერების სია"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:33
+msgid ""
+"Specify the short, medium and long duration for the timer countdown (seconds)"
+msgstr ""
+"მიუთითეთ მოკლე, საშუალო და გრძელი ხანგრძლივობები ტაიმერის ათვლისთვის "
+"(წამებში)"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:37
+msgid "Use custom duration values for the timer"
+msgstr "მორგებული ხანგრძლივობის მნიშვნელობების გამოყენება ტაიმერისთვის"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:42
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:43
+msgid "Specify time (seconds) for the timer countdown"
+msgstr "მიუთითეთ დრო (წამებში) ტაიმერის ათვლისთვის"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:47
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:48
+msgid "Specify index of duration range for the timer"
+msgstr "მიუთითეთ ხანგრძლივობის შუალედის ინდექსი ტაიმერისთვის"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:52
+msgid "Restore caffeine state"
+msgstr "Caffeine-ის მდგომარეობის აღდგენა"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:57
+msgid "Show indicator"
+msgstr "მაჩვენებლის ჩვენება"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:58
+msgid "Show the indicator on the top panel"
+msgstr "მაჩვენებლის ჩვენება ზედა პანელზე"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:62
+msgid "Show notifications"
+msgstr "გაფრთხილებების ჩვენება"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:63
+msgid "Show notifications when enabled/disabled"
+msgstr "გაფრთხილებების ჩვენება ჩართვისას/გამორთვისას"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:67
+msgid "Show timer"
+msgstr "ტაიმერის ჩვენება"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:68
+msgid "Show timer when enabled/disabled"
+msgstr "ტაიმერის ჩვენება, როცა ჩართულია/გამორთულია"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+msgid "Show toggle"
+msgstr "გადამრთველის ჩვენება"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+msgid "Show the quick settings toggle"
+msgstr "სწრაფი პარამეტრების გადამრთველის ჩვენება"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
+msgid "Enable when a fullscreen application is running"
+msgstr "ჩართვა, როცა გაშვებულია სრულეკრანიანი აპლიკაცია"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+msgid "Enable when an application is playing media"
+msgstr "ჩართვა, როცა აპი მედიას უკრავს"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+msgid "Enable when an application is reporting playback status via MPRIS"
+msgstr "ჩართვა, როცა აპლიკაცია დაკვრის სტატუსს MPRIS-ით გვაწვდის"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:87
+msgid "Night Light control mode"
+msgstr "ღამის განათების მართვის რეჟიმი"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
+msgid "Set the way Caffeine interacts with the Night light setting."
+msgstr ""
+"დააყენეთ გზა, რომლითაც Caffeine-ს ღამის განათების პარამეტრთან აქვს "
+"ურთიერთობა."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
+msgid "Allow turning off screen when Caffeine is enabled."
+msgstr "ეკრანის გამორთვის დაშვება, როცა Caffeine ჩართულია."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:97
+msgid "Trigger App control mode"
+msgstr "აპის მართვის რეჟიმის ტრიგერი"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
+msgid "Set the trigger method for apps."
+msgstr "ტრიგერის მეთოდის დაყენება აპებისთვის."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:103
+msgid "Shortcut to toggle Caffeine."
+msgstr "მალსახმობი Caffeine-ის გადასართავად."
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:107
+msgid "Default width for the preferences window"
+msgstr "ნაგულისხმევი სიგანე მორგების ფანჯრისთვის"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:111
+msgid "Default height for the preferences window"
+msgstr "ნაგულისხმევი სიმაღლე მორგების ფანჯრისთვის"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:115
+msgid "Visible position offset of status icon in indicator menu"
+msgstr "სტატუსის ხატულას ხილული მდებარეობის წანაცვლება მაჩვენებლის მენიუში"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:119
+msgid ""
+"Real position offset of status icon in indicator menu that include invisible "
+"one"
+msgstr ""
+"სტატუსის ხატულას რეალური მდებარეობის წანაცვლება მაჩვენებლის მენიუში, რომელიც "
+"უჩინარსაც შეიცავს"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:123
+msgid "Last item index in indicator menu"
+msgstr "ბოლო ელემენტის ინდექსი მაჩვენებლის მენიუში"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:127
+msgid "Command line key to toggle state"
+msgstr "ბრძანების სტრიქონის პარამეტრი მდგომარეობის გადასართავად"
