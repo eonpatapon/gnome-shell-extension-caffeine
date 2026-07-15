@@ -122,6 +122,7 @@ const InhibitorManager = GObject.registerClass({
 
         this._isInhibited = false;
         this._inhibitorCookie = null;
+        this._inhibitGeneration = 0;
         this._userEnabled = false;
         this._triggerApp = null;
         this._tempManageLight = false;
@@ -393,32 +394,44 @@ const InhibitorManager = GObject.registerClass({
             inhibitFlags = 8;
         }
 
-        // Pack the parameters for DBus
-        const params = [
-            GLib.Variant.new_string('caffeine-gnome-extension'),
-            GLib.Variant.new_uint32(0),
-            GLib.Variant.new_string('Inhibited by Caffeine GNOME extension'),
-            GLib.Variant.new_uint32(inhibitFlags)
-        ];
-        const paramsVariant = GLib.Variant.new_tuple(params);
-
-        // Synchronously add the inhibitor
-        const cookieTuple = this._sessionManager.call_sync('Inhibit', paramsVariant,
-            Gio.DBusCallFlags.NONE, -1, null);
-        if (cookieTuple !== null) {
-            this._inhibitorCookie = cookieTuple.get_child_value(0).get_uint32();
-            this._isInhibited = true;
-        } else {
-            log('Failed to add inhibitor');
-        }
+        this._isInhibited = true;
+        const generation = ++this._inhibitGeneration;
+        this._sessionManager.InhibitRemote(
+            'caffeine-gnome-extension',
+            0,
+            'Inhibited by Caffeine GNOME extension',
+            inhibitFlags,
+            (result, error) => {
+                // Ignore stale responses: a remove or a newer inhibit
+                // superseded this request while it was in flight
+                if (generation !== this._inhibitGeneration) {
+                    if (!error) {
+                        const [cookie] = result;
+                        this._sessionManager.UninhibitRemote(cookie);
+                    }
+                    return;
+                }
+                if (error) {
+                    this._isInhibited = false;
+                    log(`Failed to add inhibitor: ${error}`);
+                    this.emit('update');
+                    return;
+                }
+                const [cookie] = result;
+                this._inhibitorCookie = cookie;
+            }
+        );
     }
 
     _removeInhibitor() {
         // Remove the inhibitor if it's active
         if (this._isInhibited) {
-            // Use the cookie to remove the inhibitor
-            this._sessionManager.UninhibitRemote(this._inhibitorCookie);
-            this._inhibitorCookie = null;
+            // Invalidate any in-flight inhibit request
+            this._inhibitGeneration++;
+            if (this._inhibitorCookie !== null) {
+                this._sessionManager.UninhibitRemote(this._inhibitorCookie);
+                this._inhibitorCookie = null;
+            }
             this._isInhibited = false;
         }
     }
@@ -660,7 +673,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._indicator.gicon = this._iconDeactivated;
 
         // Init Timers
-        this._timeOut = null;
         this._timePrint = null;
         this._timerEnable = false;
 
@@ -860,16 +872,15 @@ class Caffeine extends QuickSettings.SystemIndicator {
             this._timePrint = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
                 secondLeft -= 1;
                 this._printTimer(secondLeft);
-                return GLib.SOURCE_CONTINUE;
-            });
-
-            this._timeOut = GLib.timeout_add(GLib.PRIORITY_DEFAULT, timerDelay * 1000, () => {
-                // Disable Caffeine when timer ended
-                this._removeTimer();
-                if (this._state) {
-                    this._handleToggleClick();
+                if (secondLeft <= 0) {
+                    this._timePrint = null;
+                    this._removeTimer();
+                    if (this._state) {
+                        this._handleToggleClick();
+                    }
+                    return GLib.SOURCE_REMOVE;
                 }
-                return GLib.SOURCE_REMOVE;
+                return GLib.SOURCE_CONTINUE;
             });
         }
     }
@@ -895,10 +906,8 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this._timerLabel.visible = false;
 
         // Remove timer
-        if ((this._timeOut !== null) || (this._timePrint !== null)) {
-            GLib.Source.remove(this._timeOut);
+        if (this._timePrint !== null) {
             GLib.Source.remove(this._timePrint);
-            this._timeOut = null;
             this._timePrint = null;
         }
     }
@@ -1057,10 +1066,6 @@ class Caffeine extends QuickSettings.SystemIndicator {
         this.quickSettingsItems.forEach((item) => item.destroy());
 
         // Disconnect from signals
-        if (this._timeOut) {
-            GLib.Source.remove(this._timeOut);
-            this._timeOut = null;
-        }
         if (this._timePrint) {
             GLib.Source.remove(this._timePrint);
             this._timePrint = null;
