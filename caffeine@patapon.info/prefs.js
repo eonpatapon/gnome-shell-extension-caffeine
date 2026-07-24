@@ -43,6 +43,7 @@ const SettingsKey = {
     MPRIS: 'enable-mpris',
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
+    WELLBEING: 'wellbeing-control',
     TOGGLE_SHORTCUT: 'toggle-shortcut',
     DEFAULT_WIDTH: 'prefs-default-width',
     DEFAULT_HEIGHT: 'prefs-default-height',

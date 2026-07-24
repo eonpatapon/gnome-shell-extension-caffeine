@@ -92,6 +92,16 @@
         <summary>Allow screen blank</summary>
         <description>Allow turning off screen when Caffeine is enabled.</description>
     </key>
+    <key name="wellbeing-control" enum="org.gnome.shell.extensions.caffeine.context-control">
+        <default>"never"</default>
+        <summary>Break reminders control mode</summary>
+        <description>Set the way Caffeine interacts with the GNOME break reminders (wellbeing) setting.</description>
+    </key>
+    <key type="as" name="wellbeing-state">
+        <default>[]</default>
+        <summary>Saved break reminders</summary>
+        <description>Backup of the user's selected break reminders while Caffeine has them paused</description>
+    </key>
     <key name="trigger-apps-mode" enum="org.gnome.shell.extensions.caffeine.app-trigger-mode">
         <default>"on-running"</default>
         <summary>Trigger App control mode</summary>
