@@ -49,6 +49,8 @@ const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const MPRIS_KEY = 'enable-mpris';
 const NIGHT_LIGHT_KEY = 'nightlight-control';
+const WELLBEING_KEY = 'wellbeing-control';
+const WELLBEING_STATE_KEY = 'wellbeing-state';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
 const SCREEN_BLANK = 'screen-blank';
@@ -65,6 +67,10 @@ const ColorInterface = '<node> \
   </node>';
 
 const ColorProxy = Gio.DBusProxy.makeProxyWrapper(ColorInterface);
+
+// GNOME 48+ break reminders (wellbeing). Absent on older shells.
+const BREAK_REMINDERS_SCHEMA = 'org.gnome.desktop.break-reminders';
+const BREAK_REMINDERS_KEY = 'selected-breaks';
 
 const DBusSessionManagerIface = '<node>\
   <interface name="org.gnome.SessionManager">\
@@ -125,6 +131,8 @@ const InhibitorManager = GObject.registerClass({
         this._userEnabled = false;
         this._triggerApp = null;
         this._tempManageLight = false;
+        this._tempManageWellbeing = false;
+        this._wellbeingPaused = false;
         this._lastReasons = [];
         this._ignoredReasons = [];
 
@@ -152,6 +160,14 @@ const InhibitorManager = GObject.registerClass({
         this._settings = settings;
         this._appSystem = Shell.AppSystem.get_default();
 
+        // Break reminders (wellbeing) settings, only on shells that ship them
+        this._breakReminders = null;
+        const breakSchema = Gio.SettingsSchemaSource.get_default()
+            .lookup(BREAK_REMINDERS_SCHEMA, true);
+        if (breakSchema !== null) {
+            this._breakReminders = new Gio.Settings({ settings_schema: breakSchema });
+        }
+
         // Update state when extension settings changed
         this._settings.connectObject(
             `changed::${SCREEN_BLANK}`,
@@ -161,6 +177,8 @@ const InhibitorManager = GObject.registerClass({
             `changed::${MPRIS_KEY}`,
             () => this._onMprisSettingChange(),
             `changed::${NIGHT_LIGHT_KEY}`,
+            () => this._updateState(),
+            `changed::${WELLBEING_KEY}`,
             () => this._updateState(),
             `changed::${INHIBIT_APPS_KEY}`,
             () => this._updateState(),
@@ -347,6 +365,11 @@ const InhibitorManager = GObject.registerClass({
                     this._tempManageLight = true;
                 }
             }
+            if (this._settings.get_enum(WELLBEING_KEY) === ControlContext.FOR_APPS) {
+                if (this._wellbeingPaused) {
+                    this._tempManageWellbeing = true;
+                }
+            }
         }
 
         // Update inhibitor if required
@@ -370,11 +393,39 @@ const InhibitorManager = GObject.registerClass({
             }
         }
 
+        // Pause / resume break reminders if required
+        this._updateWellbeing(shouldInhibit);
+
         // Let indicator know that either the state or reasons may have changed
         this.emit('update');
 
-        // Remove any night light management override now the signal is done
+        // Remove any management overrides now the signal is done
         this._tempManageLight = false;
+        this._tempManageWellbeing = false;
+    }
+
+    _updateWellbeing(shouldInhibit) {
+        if (this._breakReminders === null) {
+            return;
+        }
+
+        // Pause only while managed and actually inhibiting; the temp override
+        // forces a resume when an app trigger drops but Caffeine stays on
+        const shouldPause = this.isWellbeingManaged() && shouldInhibit &&
+            !this._tempManageWellbeing;
+
+        if (shouldPause && !this._wellbeingPaused) {
+            // Save the user's current breaks, then clear them
+            this._settings.set_strv(WELLBEING_STATE_KEY,
+                this._breakReminders.get_strv(BREAK_REMINDERS_KEY));
+            this._breakReminders.set_strv(BREAK_REMINDERS_KEY, []);
+            this._wellbeingPaused = true;
+        } else if (!shouldPause && this._wellbeingPaused) {
+            // Restore the breaks we saved when pausing
+            this._breakReminders.set_strv(BREAK_REMINDERS_KEY,
+                this._settings.get_strv(WELLBEING_STATE_KEY));
+            this._wellbeingPaused = false;
+        }
     }
 
     _addInhibitor(reasons) {
@@ -449,6 +500,25 @@ const InhibitorManager = GObject.registerClass({
         return handleNightLight;
     }
 
+    isWellbeingManaged() {
+        if (this._breakReminders === null) {
+            return false;
+        }
+
+        // Don't bother checking settings if it's overridden
+        if (this._tempManageWellbeing) {
+            return true;
+        }
+
+        // Decide if we should control break reminders from user preference
+        let handleWellbeing = this._settings.get_enum(WELLBEING_KEY) === ControlContext.ALWAYS;
+        if (this._lastReasons.includes('app')) {
+            handleWellbeing = this._settings.get_enum(WELLBEING_KEY) > ControlContext.NEVER;
+        }
+
+        return handleWellbeing;
+    }
+
     getInhibitState() {
         return this._isInhibited;
     }
@@ -473,6 +543,13 @@ const InhibitorManager = GObject.registerClass({
 
         if (this._isInhibited) {
             this._removeInhibitor();
+        }
+
+        // Restore any break reminders we paused
+        if (this._wellbeingPaused && this._breakReminders !== null) {
+            this._breakReminders.set_strv(BREAK_REMINDERS_KEY,
+                this._settings.get_strv(WELLBEING_STATE_KEY));
+            this._wellbeingPaused = false;
         }
     }
 });
@@ -993,6 +1070,14 @@ class Caffeine extends QuickSettings.SystemIndicator {
                 message = message + '. ' + _('Night Light paused');
             } else {
                 message = message + '. ' + _('Night Light resumed');
+            }
+        }
+
+        if (this._inhibitorManager.isWellbeingManaged()) {
+            if (state) {
+                message = message + '. ' + _('Break reminders paused');
+            } else {
+                message = message + '. ' + _('Break reminders resumed');
             }
         }
 
