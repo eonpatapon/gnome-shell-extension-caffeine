@@ -48,6 +48,8 @@ const USER_ENABLED_KEY = 'user-enabled';
 const RESTORE_KEY = 'restore-state';
 const FULLSCREEN_KEY = 'enable-fullscreen';
 const MPRIS_KEY = 'enable-mpris';
+const EXTERNAL_MONITOR_KEY = 'enable-external-monitor';
+const MONITOR_POWER_KEY = 'external-monitor-power-condition';
 const NIGHT_LIGHT_KEY = 'nightlight-control';
 const TOGGLE_SHORTCUT = 'toggle-shortcut';
 const TIMER_KEY = 'countdown-timer';
@@ -83,6 +85,28 @@ const DBusSessionManagerIface = '<node>\
 
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
 
+const UPowerInterface = '<node> \
+  <interface name="org.freedesktop.UPower"> \
+    <property name="OnBattery" type="b" access="read"/>\
+  </interface>\
+  </node>';
+
+const UPowerProxy = Gio.DBusProxy.makeProxyWrapper(UPowerInterface);
+
+const DisplayConfigInterface = '<node>\
+  <interface name="org.gnome.Mutter.DisplayConfig">\
+    <method name="GetCurrentState">\
+        <arg name="serial" type="u" direction="out" />\
+        <arg name="monitors" type="a((ssss)a(siiddada{sv})a{sv})" direction="out" />\
+        <arg name="logical_monitors" type="a(iiduba(ssss)a{sv})" direction="out" />\
+        <arg name="properties" type="a{sv}" direction="out" />\
+    </method>\
+    <signal name="MonitorsChanged" />\
+  </interface>\
+</node>';
+
+const DisplayConfigProxy = Gio.DBusProxy.makeProxyWrapper(DisplayConfigInterface);
+
 const ActionsPath = '/icons/hicolor/scalable/actions/';
 const DisabledIcon = 'my-caffeine-off-symbolic';
 const EnabledIcon = 'my-caffeine-on-symbolic';
@@ -112,6 +136,12 @@ const AppsTrigger = {
     ON_ACTIVE_WORKSPACE: 2
 };
 
+const PowerCondition = {
+    ANY: 0,
+    ON_BATTERY: 1,
+    ON_AC: 2
+};
+
 const InhibitorManager = GObject.registerClass({
     Signals: {
         'update': {}
@@ -127,6 +157,9 @@ const InhibitorManager = GObject.registerClass({
         this._tempManageLight = false;
         this._lastReasons = [];
         this._ignoredReasons = [];
+        this._externalMonitor = false;
+        this._onBattery = false;
+        this._monitorsChangedId = null;
 
         // App trigger signal IDs
         this._appStateSignal = null;
@@ -152,6 +185,43 @@ const InhibitorManager = GObject.registerClass({
         this._settings = settings;
         this._appSystem = Shell.AppSystem.get_default();
 
+        this._upowerProxy = new UPowerProxy(
+            Gio.DBus.system,
+            'org.freedesktop.UPower',
+            '/org/freedesktop/UPower',
+            (proxy, error) => {
+                // The proxy may resolve after the extension is disabled
+                if (error || this._upowerProxy === null) {
+                    if (error) {
+                        log(error.message);
+                    }
+                    return;
+                }
+                this._onBattery = proxy.OnBattery === true;
+                proxy.connectObject('g-properties-changed', () => {
+                    this._onBattery = proxy.OnBattery === true;
+                    this._updateState();
+                }, this);
+                this._updateState();
+            }
+        );
+        this._displayConfigProxy = new DisplayConfigProxy(
+            Gio.DBus.session,
+            'org.gnome.Mutter.DisplayConfig',
+            '/org/gnome/Mutter/DisplayConfig',
+            (proxy, error) => {
+                if (error || this._displayConfigProxy === null) {
+                    if (error) {
+                        log(error.message);
+                    }
+                    return;
+                }
+                this._monitorsChangedId = proxy.connectSignal('MonitorsChanged',
+                    () => this._refreshMonitorState());
+                this._refreshMonitorState();
+            }
+        );
+
         // Update state when extension settings changed
         this._settings.connectObject(
             `changed::${SCREEN_BLANK}`,
@@ -160,6 +230,10 @@ const InhibitorManager = GObject.registerClass({
             () => this._updateState(),
             `changed::${MPRIS_KEY}`,
             () => this._onMprisSettingChange(),
+            `changed::${EXTERNAL_MONITOR_KEY}`,
+            () => this._updateState(),
+            `changed::${MONITOR_POWER_KEY}`,
+            () => this._updateState(),
             `changed::${NIGHT_LIGHT_KEY}`,
             () => this._updateState(),
             `changed::${INHIBIT_APPS_KEY}`,
@@ -191,6 +265,43 @@ const InhibitorManager = GObject.registerClass({
             MprisPlayer.Destroy();
         }
         this._updateState();
+    }
+
+    _refreshMonitorState() {
+        if (this._displayConfigProxy === null) {
+            return;
+        }
+
+        this._displayConfigProxy.GetCurrentStateRemote((result, error) => {
+            if (error) {
+                log(error.message);
+                return;
+            }
+
+            // Monitors are (monitor spec, modes, properties); a monitor is
+            // external when its properties don't mark it as built-in
+            const [, monitors] = result;
+            const external = monitors.some(([, , properties]) => {
+                const isBuiltin = properties['is-builtin'];
+                return isBuiltin === undefined || isBuiltin.unpack() === false;
+            });
+
+            if (external !== this._externalMonitor) {
+                this._externalMonitor = external;
+                this._updateState();
+            }
+        });
+    }
+
+    isPowerConditionMet() {
+        switch (this._settings.get_enum(MONITOR_POWER_KEY)) {
+        case PowerCondition.ON_BATTERY:
+            return this._onBattery;
+        case PowerCondition.ON_AC:
+            return !this._onBattery;
+        default:
+            return true;
+        }
     }
 
     _connectTriggerSignals() {
@@ -285,6 +396,11 @@ const InhibitorManager = GObject.registerClass({
 
         if (MprisPlayer.isActive && MprisPlayer.Get().isPlaying) {
             reasons.push('mpris');
+        }
+
+        if (this._settings.get_boolean(EXTERNAL_MONITOR_KEY) &&
+            this._externalMonitor && this.isPowerConditionMet()) {
+            reasons.push('monitor');
         }
 
         if (this._userEnabled) {
@@ -470,6 +586,17 @@ const InhibitorManager = GObject.registerClass({
         this._disconnectTriggerSignals();
         global.display.disconnectObject(this);
         this._settings.disconnectObject(this);
+
+        if (this._monitorsChangedId !== null) {
+            this._displayConfigProxy.disconnectSignal(this._monitorsChangedId);
+            this._monitorsChangedId = null;
+        }
+        this._displayConfigProxy = null;
+
+        if (this._upowerProxy !== null) {
+            this._upowerProxy.disconnectObject(this);
+            this._upowerProxy = null;
+        }
 
         if (this._isInhibited) {
             this._removeInhibitor();

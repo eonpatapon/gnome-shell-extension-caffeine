@@ -59,6 +59,26 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
             active: this._settings.get_boolean(this._settingsKey.MPRIS)
         });
 
+        // Enable / disable external monitor trigger
+        const enableExternalMonitorRow = new Adw.SwitchRow({
+            title: _('Enable when an external monitor is connected'),
+            subtitle: _('Automatically enable while a display other than the built-in one is connected'),
+            active: this._settings.get_boolean(this._settingsKey.EXTERNAL_MONITOR)
+        });
+
+        // Restrict the external monitor trigger to a power source
+        const monitorPowerCondition = new Gtk.StringList();
+        monitorPowerCondition.append(_('Any power source'));
+        monitorPowerCondition.append(_('Only on battery'));
+        monitorPowerCondition.append(_('Only when plugged in'));
+        const monitorPowerRow = new Adw.ComboRow({
+            title: _('External monitor power source'),
+            subtitle: _('Restrict the external monitor trigger to a power source'),
+            model: monitorPowerCondition,
+            selected: this._settings.get_enum(this._settingsKey.MONITOR_POWER),
+            sensitive: this._settings.get_boolean(this._settingsKey.EXTERNAL_MONITOR)
+        });
+
         // Remember state
         const rememberStateRow = new Adw.SwitchRow({
             title: _('Remember state'),
@@ -94,6 +114,8 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         // Add elements
         behaviorGroup.add(disableFullscreenRow);
         behaviorGroup.add(enableMprisRow);
+        behaviorGroup.add(enableExternalMonitorRow);
+        behaviorGroup.add(monitorPowerRow);
         behaviorGroup.add(rememberStateRow);
         behaviorGroup.add(pauseNightLightRow);
         behaviorGroup.add(allowBlankScreenRow);
@@ -138,6 +160,13 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         });
         enableMprisRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.MPRIS, widget.get_active());
+        });
+        enableExternalMonitorRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.EXTERNAL_MONITOR, widget.get_active());
+            monitorPowerRow.sensitive = widget.get_active();
+        });
+        monitorPowerRow.connect('notify::selected', (widget) => {
+            this._settings.set_enum(this._settingsKey.MONITOR_POWER, widget.selected);
         });
         rememberStateRow.connect('notify::active', (widget) => {
             this._settings.set_boolean(this._settingsKey.RESTORE, widget.get_active());
