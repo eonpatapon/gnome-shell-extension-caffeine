@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-caffeine\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-01 07:51+0100\n"
-"PO-Revision-Date: 2022-10-07 16:40+0200\n"
+"PO-Revision-Date: 2026-09-17 10:26+0200\n"
 "Last-Translator: Pakaoraki <pakaoraki@gmx.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: extension.js:134
@@ -33,7 +33,7 @@ msgstr "Caféine Minuteur"
 
 #: extension.js:161
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: extension.js:201
 msgid "Infinite"
@@ -72,14 +72,12 @@ msgid "Night Light resumed"
 msgstr "Mode nuit réactivé"
 
 #: extension.js:847
-#, fuzzy
 msgid " minute "
-msgstr " minutes"
+msgstr " minute "
 
 #: extension.js:850
-#, fuzzy
 msgid " minutes "
-msgstr " minutes"
+msgstr " minutes "
 
 #: preferences/appsPage.js:33
 msgid "Apps"
@@ -360,7 +358,7 @@ msgstr ""
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:88
 msgid "Allow turning off screen when Caffeine is enabled."
-msgstr "Activer les notifications quand Caféine est activé ou désactivé"
+msgstr "Autoriser l'extinction de l'écran quand Caféine est activé."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:92
 msgid "Trigger App control mode"
@@ -368,7 +366,7 @@ msgstr "Contrôle du Mode nuit"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:93
 msgid "Set the trigger method for apps."
-msgstr "Sélection de la méthode de déclenchement par les applications"
+msgstr "Sélection de la méthode de déclenchement par les applications."
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:98
 msgid "Shortcut to toggle Caffeine."
