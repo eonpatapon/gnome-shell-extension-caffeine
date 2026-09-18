@@ -168,7 +168,7 @@ const MprisPlayer = GObject.registerClass({
     /**
      * Manually disable a single `connectIsPlaying` connection.
      * Run `MprisPlayer.Destroy()` to cleanup all connections.
-     * @param {any} connectId The `connectId` recieved from `connectIsPlaying()`.
+     * @param {any} connectId The `connectId` received from `connectIsPlaying()`.
      * @returns {void}
      */
     disconnectIsPlaying(connectId) {

@@ -1,6 +1,6 @@
 # Brazilian Portuguese translation for GNOME Shell Extension Caffeine.
 # Copyright (C) 2020 Jean-Philippe Braun
-# This file is distributed under the same license as the gnome-shell-extesion-caffeine package.
+# This file is distributed under the same license as the gnome-shell-extension-caffeine package.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2014-2020.
 #
 msgid ""
