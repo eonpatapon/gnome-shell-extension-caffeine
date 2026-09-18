@@ -126,5 +126,10 @@
       <default>false</default>
       <summary>Command line key to toggle state</summary>
     </key>
+    <key type="b" name="inhibit-lid">
+      <default>false</default>
+      <summary>Inhibit sleep on lid close</summary>
+      <description>Prevent the laptop from going to sleep when the lid is closed</description>
+    </key>
   </schema>
 </schemalist>

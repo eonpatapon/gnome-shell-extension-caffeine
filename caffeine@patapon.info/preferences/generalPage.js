@@ -91,12 +91,20 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
             selected: this._settings.get_enum(this._settingsKey.SCREEN_BLANK)
         });
 
+        // Inhibit lid
+        const inhibitLidRow = new Adw.SwitchRow({
+            title: _('Inhibit sleep on lid close'),
+            subtitle: _('Prevent the laptop from going to sleep when the lid is closed'),
+            active: this._settings.get_boolean(this._settingsKey.INHIBIT_LID)
+        });
+
         // Add elements
         behaviorGroup.add(disableFullscreenRow);
         behaviorGroup.add(enableMprisRow);
         behaviorGroup.add(rememberStateRow);
         behaviorGroup.add(pauseNightLightRow);
         behaviorGroup.add(allowBlankScreenRow);
+        behaviorGroup.add(inhibitLidRow);
         this.add(behaviorGroup);
 
         // Shortcut group
@@ -147,6 +155,9 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         });
         allowBlankScreenRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.SCREEN_BLANK, widget.selected);
+        });
+        inhibitLidRow.connect('notify::active', (widget) => {
+            this._settings.set_boolean(this._settingsKey.INHIBIT_LID, widget.get_active());
         });
         deleteShortcutButton.connect('clicked', this._resetShortcut.bind(this));
         this._settings.connect(`changed::${this._settingsKey.TOGGLE_SHORTCUT}`, () => {
