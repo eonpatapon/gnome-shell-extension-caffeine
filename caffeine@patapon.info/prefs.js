@@ -50,7 +50,8 @@ const SettingsKey = {
     TRIGGER_APPS_MODE: 'trigger-apps-mode',
     INDICATOR_POSITION: 'indicator-position',
     INDICATOR_INDEX: 'indicator-position-index',
-    INDICATOR_POS_MAX: 'indicator-position-max'
+    INDICATOR_POS_MAX: 'indicator-position-max',
+    LID_SWITCH: 'lid-switch-mode'
 };
 
 export default class CaffeinePrefs extends ExtensionPreferences {

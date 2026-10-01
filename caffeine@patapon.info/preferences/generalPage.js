@@ -91,12 +91,25 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
             selected: this._settings.get_enum(this._settingsKey.SCREEN_BLANK)
         });
 
+        // Inhibit lid switch
+        const lidSwitch = new Gtk.StringList();
+        lidSwitch.append(_('Never'));
+        lidSwitch.append(_('On AC power only'));
+        lidSwitch.append(_('Always'));
+        const lidSwitchRow = new Adw.ComboRow({
+            title: _('Stay awake when the lid is closed'),
+            subtitle: _('Closing the lid will not suspend while Caffeine is enabled'),
+            model: lidSwitch,
+            selected: this._settings.get_enum(this._settingsKey.LID_SWITCH)
+        });
+
         // Add elements
         behaviorGroup.add(disableFullscreenRow);
         behaviorGroup.add(enableMprisRow);
         behaviorGroup.add(rememberStateRow);
         behaviorGroup.add(pauseNightLightRow);
         behaviorGroup.add(allowBlankScreenRow);
+        behaviorGroup.add(lidSwitchRow);
         this.add(behaviorGroup);
 
         // Shortcut group
@@ -147,6 +160,9 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         });
         allowBlankScreenRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.SCREEN_BLANK, widget.selected);
+        });
+        lidSwitchRow.connect('notify::selected', (widget) => {
+            this._settings.set_enum(this._settingsKey.LID_SWITCH, widget.selected);
         });
         deleteShortcutButton.connect('clicked', this._resetShortcut.bind(this));
         this._settings.connect(`changed::${this._settingsKey.TOGGLE_SHORTCUT}`, () => {
