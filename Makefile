@@ -3,7 +3,7 @@ EXTENSION_DIR = "caffeine@patapon.info"
 
 all: build install
 
-.PHONY: build install clean translations lint lint-fix
+.PHONY: build install clean test translations lint lint-fix
 
 build:
 	rm -f $(BUNDLE_PATH)
@@ -20,6 +20,9 @@ install:
 clean:
 	@rm -fv $(BUNDLE_PATH)
 	@rm -fv $(EXTENSION_DIR)/schemas/gschemas.compiled
+
+test:
+	@python3 tests/test_install_e2e.py
 
 translations:
 	@./update-locale.sh

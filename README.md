@@ -11,11 +11,11 @@ Enable / disable auto suspend with quick setting toggle.
 
 ## Version
 
-This extension supports GNOME Shell `3.4` -> `50`
+This extension supports GNOME Shell `3.4` -> `51`
 
 |Branch                   |Version|Compatible GNOME version|
 |-------------------------|:-----:|------------------------|
-| master                  |    59 | GNOME 45 -> 50         |
+| master                  |    61 | GNOME 45 -> 51         |
 | gnome-shell-43-44       |    51 | GNOME 43 -> 44         |
 | gnome-shell-40-42       |    42 | GNOME 40 -> 42         |
 | gnome-shell-3.36-3.38   |    37 | GNOME 3.36 -> 3.38     |
@@ -32,6 +32,21 @@ make install
 
 - Restart the shell
 - Enable the extension
+
+## Testing
+
+The test suite builds and installs the extension into a temporary
+`XDG_DATA_HOME` (your own installation is left alone), then boots a headless
+nested GNOME Shell and checks that the extension reaches the `ACTIVE` state
+without logging any errors:
+
+```bash
+make test
+```
+
+Because the check runs against the real shell, it is also what verifies support
+for a newly added GNOME Shell version. Requirements: `gnome-shell`, `dbus`,
+`make`, `gnome-extensions` and Python 3.
 
 ## Screenshots & features
 
