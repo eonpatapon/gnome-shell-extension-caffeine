@@ -41,6 +41,8 @@ const SettingsKey = {
     USE_CUSTOM_DURATION: 'use-custom-duration',
     FULLSCREEN: 'enable-fullscreen',
     MPRIS: 'enable-mpris',
+    EXTERNAL_MONITOR: 'enable-external-monitor',
+    MONITOR_POWER: 'external-monitor-power-condition',
     RESTORE: 'restore-state',
     NIGHT_LIGHT: 'nightlight-control',
     TOGGLE_SHORTCUT: 'toggle-shortcut',

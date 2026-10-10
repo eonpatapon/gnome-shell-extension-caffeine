@@ -15,6 +15,11 @@
         <value value="1" nick="on-focus"/>
         <value value="2" nick="on-active-workspace"/>
    </enum>
+   <enum id="org.gnome.shell.extensions.caffeine.power-condition">
+        <value value="0" nick="any"/>
+        <value value="1" nick="on-battery"/>
+        <value value="2" nick="on-ac"/>
+   </enum>
 
   <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
     <key type="as" name="inhibit-apps">
@@ -81,6 +86,16 @@
         <default>false</default>
         <summary>Enable when an application is playing media</summary>
         <description>Enable when an application is reporting playback status via MPRIS</description>
+    </key>
+    <key type="b" name="enable-external-monitor">
+        <default>false</default>
+        <summary>Enable when an external monitor is connected</summary>
+        <description>Enable when a monitor other than the built-in display is connected</description>
+    </key>
+    <key name="external-monitor-power-condition" enum="org.gnome.shell.extensions.caffeine.power-condition">
+        <default>"any"</default>
+        <summary>Power source required by the external monitor trigger</summary>
+        <description>Restrict the external monitor trigger to a power source. Has no effect unless the external monitor trigger is enabled.</description>
     </key>
     <key name="nightlight-control" enum="org.gnome.shell.extensions.caffeine.context-control">
         <default>"never"</default>
