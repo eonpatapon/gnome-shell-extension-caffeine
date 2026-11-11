@@ -15,6 +15,11 @@
         <value value="1" nick="on-focus"/>
         <value value="2" nick="on-active-workspace"/>
    </enum>
+   <enum id="org.gnome.shell.extensions.caffeine.lid-switch-mode">
+        <value value="0" nick="never"/>
+        <value value="1" nick="on-ac"/>
+        <value value="2" nick="always"/>
+   </enum>
 
   <schema path="/org/gnome/shell/extensions/caffeine/" id="org.gnome.shell.extensions.caffeine">
     <key type="as" name="inhibit-apps">
@@ -125,6 +130,11 @@
     <key type="b" name="cli-toggle">
       <default>false</default>
       <summary>Command line key to toggle state</summary>
+    </key>
+    <key name="lid-switch-mode" enum="org.gnome.shell.extensions.caffeine.lid-switch-mode">
+      <default>"never"</default>
+      <summary>Prevent suspend when the lid is closed</summary>
+      <description>While Caffeine is active, ask systemd-logind to ignore the lid switch, so closing the lid does not suspend the computer. Can be limited to when the computer is on AC power.</description>
     </key>
   </schema>
 </schemalist>

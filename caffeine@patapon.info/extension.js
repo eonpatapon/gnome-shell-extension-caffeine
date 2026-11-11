@@ -57,6 +57,7 @@ const INDICATOR_POSITION = 'indicator-position';
 const INDICATOR_INDEX = 'indicator-position-index';
 const INDICATOR_POS_MAX = 'indicator-position-max';
 const CLI_TOGGLE_KEY = 'cli-toggle';
+const LID_SWITCH_KEY = 'lid-switch-mode';
 
 const ColorInterface = '<node> \
   <interface name="org.gnome.SettingsDaemon.Color"> \
@@ -81,7 +82,14 @@ const DBusSessionManagerIface = '<node>\
   </interface>\
 </node>';
 
+const UPowerInterface = '<node>\
+  <interface name="org.freedesktop.UPower">\
+    <property name="OnBattery" type="b" access="read" />\
+  </interface>\
+</node>';
+
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
+const UPowerProxy = Gio.DBusProxy.makeProxyWrapper(UPowerInterface);
 
 const ActionsPath = '/icons/hicolor/scalable/actions/';
 const DisabledIcon = 'my-caffeine-off-symbolic';
@@ -106,6 +114,12 @@ const ShowIndicator = {
     NEVER: 2
 };
 
+const LidSwitch = {
+    NEVER: 0,
+    ON_AC: 1,
+    ALWAYS: 2
+};
+
 const AppsTrigger = {
     ON_RUNNING: 0,
     ON_FOCUS: 1,
@@ -122,6 +136,9 @@ const InhibitorManager = GObject.registerClass({
 
         this._isInhibited = false;
         this._inhibitorCookie = null;
+        this._lidInhibitorFd = null;
+        this._lidRequestId = 0;
+        this._lidRequested = false;
         this._userEnabled = false;
         this._triggerApp = null;
         this._tempManageLight = false;
@@ -148,6 +165,20 @@ const InhibitorManager = GObject.registerClass({
                 }
             }
         );
+        this._upowerProxy = new UPowerProxy(
+            Gio.DBus.system,
+            'org.freedesktop.UPower',
+            '/org/freedesktop/UPower',
+            (proxy, error) => {
+                if (error) {
+                    log(error.message);
+                    return;
+                }
+                this._upowerProxy.connectObject('g-properties-changed',
+                    () => this._updateLidInhibitor(), this);
+                this._updateLidInhibitor();
+            }
+        );
 
         this._settings = settings;
         this._appSystem = Shell.AppSystem.get_default();
@@ -164,6 +195,8 @@ const InhibitorManager = GObject.registerClass({
             () => this._updateState(),
             `changed::${INHIBIT_APPS_KEY}`,
             () => this._updateState(),
+            `changed::${LID_SWITCH_KEY}`,
+            () => this._updateLidInhibitor(),
             `changed::${TRIGGER_APPS_MODE}`,
             () => {
                 this._disconnectTriggerSignals();
@@ -408,6 +441,8 @@ const InhibitorManager = GObject.registerClass({
         if (cookieTuple !== null) {
             this._inhibitorCookie = cookieTuple.get_child_value(0).get_uint32();
             this._isInhibited = true;
+
+            this._updateLidInhibitor();
         } else {
             log('Failed to add inhibitor');
         }
@@ -420,6 +455,82 @@ const InhibitorManager = GObject.registerClass({
             this._sessionManager.UninhibitRemote(this._inhibitorCookie);
             this._inhibitorCookie = null;
             this._isInhibited = false;
+        }
+
+        this._removeLidInhibitor();
+    }
+
+    _updateLidInhibitor() {
+        // Treat an unknown power source as battery, so 'on-ac' fails safe
+        const onBattery = this._upowerProxy.OnBattery ?? true;
+        const mode = this._settings.get_enum(LID_SWITCH_KEY);
+        const shouldInhibit = this._isInhibited &&
+            (mode === LidSwitch.ALWAYS || (mode === LidSwitch.ON_AC && !onBattery));
+
+        if (shouldInhibit && !this._lidRequested) {
+            this._addLidInhibitor();
+        } else if (!shouldInhibit && this._lidRequested) {
+            this._removeLidInhibitor();
+        }
+    }
+
+    _addLidInhibitor() {
+        /* The session inhibitor only creates high-level 'sleep' / 'idle' locks,
+           which logind ignores for the lid switch by default
+           (LidSwitchIgnoreInhibited=yes), so take a 'handle-lid-switch' lock
+           from logind directly. The lock is held until its fd is closed.
+        */
+        const requestId = ++this._lidRequestId;
+        this._lidRequested = true;
+        const params = new GLib.Variant('(ssss)', [
+            'handle-lid-switch',
+            'caffeine-gnome-extension',
+            'Inhibited by Caffeine GNOME extension',
+            'block'
+        ]);
+
+        Gio.DBus.system.call_with_unix_fd_list('org.freedesktop.login1',
+            '/org/freedesktop/login1', 'org.freedesktop.login1.Manager',
+            'Inhibit', params, new GLib.VariantType('(h)'),
+            Gio.DBusCallFlags.NONE, -1, null, null, (connection, result) => {
+                let fd = null;
+                try {
+                    const [reply, fdList] = connection.call_with_unix_fd_list_finish(result);
+                    const fds = fdList.steal_fds();
+                    const index = reply.get_child_value(0).get_handle();
+                    fds.forEach((stolenFd, i) => {
+                        if (i === index) {
+                            fd = stolenFd;
+                        } else {
+                            GLib.close(stolenFd);
+                        }
+                    });
+                } catch (e) {
+                    log(`Failed to add lid switch inhibitor: ${e.message}`);
+                    // Allow a later update to retry
+                    if (requestId === this._lidRequestId) {
+                        this._lidRequested = false;
+                    }
+                    return;
+                }
+
+                // Release the lock straight away if it was removed while pending
+                if (requestId !== this._lidRequestId) {
+                    GLib.close(fd);
+                    return;
+                }
+                this._lidInhibitorFd = fd;
+            });
+    }
+
+    _removeLidInhibitor() {
+        // Invalidate any pending request
+        this._lidRequestId++;
+        this._lidRequested = false;
+
+        if (this._lidInhibitorFd !== null) {
+            GLib.close(this._lidInhibitorFd);
+            this._lidInhibitorFd = null;
         }
     }
 
@@ -470,6 +581,7 @@ const InhibitorManager = GObject.registerClass({
         this._disconnectTriggerSignals();
         global.display.disconnectObject(this);
         this._settings.disconnectObject(this);
+        this._upowerProxy.disconnectObject(this);
 
         if (this._isInhibited) {
             this._removeInhibitor();
