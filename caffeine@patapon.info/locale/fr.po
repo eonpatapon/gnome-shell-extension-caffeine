@@ -150,6 +150,14 @@ msgid "Enable or disable the timer in the top panel"
 msgstr "Activer ou désactiver l'affichage du minuteur dans la barre supérieure"
 
 #: preferences/displayPage.js:67
+msgid "Show quick settings toggle"
+msgstr "Afficher le bouton dans les paramètres rapides"
+
+#: preferences/displayPage.js:68
+msgid "Enable or disable the toggle in the quick settings menu"
+msgstr "Activer ou désactiver le bouton dans le menu des paramètres rapides"
+
+#: preferences/displayPage.js:67
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -183,6 +191,14 @@ msgstr ""
 "Activer automatiquement lorsqu’une application entre en mode plein écran"
 
 #: preferences/generalPage.js:57
+msgid "Enable when an app is playing media"
+msgstr "Activer quand une application lit un média"
+
+#: preferences/generalPage.js:58
+msgid "Automatically enable when an app reports playback"
+msgstr "Activer automatiquement quand une application signale une lecture en cours"
+
+#: preferences/generalPage.js:57
 msgid "Remember state"
 msgstr "Se souvenir de l’état"
 
@@ -209,9 +225,13 @@ msgstr "Commute le Mode nuit en fonction de l’état de Caféine"
 msgid "Allow screen blank"
 msgstr "Autoriser la mise en veille de l'écran seulement"
 
-#: preferences/generalPage.js:81
-msgid "Allow turning off screen when Caffeine is enabled"
-msgstr "Autoriser la mise en veille de l'écran quand Caféine est activé"
+#: preferences/generalPage.js:88
+msgid ""
+"Allow turning off screen when Caffeine is enabled\n"
+"This may disable manual suspend / shutdown"
+msgstr ""
+"Autoriser l’extinction de l’écran quand Caféine est activé\n"
+"Cela peut empêcher la mise en veille ou l’extinction manuelle"
 
 #: preferences/generalPage.js:103
 msgid "Shortcut"
@@ -342,10 +362,26 @@ msgstr "Afficher le minuteur"
 msgid "Show timer when enabled/disabled"
 msgstr "Afficher le minuteur si activé/désactivé"
 
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:72
+msgid "Show toggle"
+msgstr "Afficher le bouton"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:73
+msgid "Show the quick settings toggle"
+msgstr "Afficher le bouton des paramètres rapides"
+
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:77
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:78
 msgid "Enable when a fullscreen application is running"
 msgstr "Activer lorsqu’une application est en plein écran"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
+msgid "Enable when an application is playing media"
+msgstr "Activer quand une application lit un média"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:83
+msgid "Enable when an application is reporting playback status via MPRIS"
+msgstr "Activer quand une application signale une lecture en cours via MPRIS"
 
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:82
 msgid "Night Light control mode"
@@ -395,3 +431,7 @@ msgstr ""
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:118
 msgid "Last item index in indicator menu"
 msgstr "Index du dernier élément dans le menu indicator"
+
+#: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:127
+msgid "Command line key to toggle state"
+msgstr "Clé de ligne de commande pour basculer l’état"
