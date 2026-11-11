@@ -432,6 +432,3 @@ msgstr "Index du dernier élément dans le menu indicator"
 #: schemas/org.gnome.shell.extensions.caffeine.gschema.xml:127
 msgid "Command line key to toggle state"
 msgstr "Clé de ligne de commande pour basculer l’état"
-
-#~ msgid "Store caffeine toggle state"
-#~ msgstr "Enregistrer l’état de Caféine"
