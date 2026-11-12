@@ -57,6 +57,7 @@ const INDICATOR_POSITION = 'indicator-position';
 const INDICATOR_INDEX = 'indicator-position-index';
 const INDICATOR_POS_MAX = 'indicator-position-max';
 const CLI_TOGGLE_KEY = 'cli-toggle';
+const INHIBIT_LID_KEY = 'inhibit-lid';
 
 const ColorInterface = '<node> \
   <interface name="org.gnome.SettingsDaemon.Color"> \
@@ -81,7 +82,20 @@ const DBusSessionManagerIface = '<node>\
   </interface>\
 </node>';
 
+const LogindInterface = '<node>\
+  <interface name="org.freedesktop.login1.Manager">\
+    <method name="Inhibit">\
+        <arg type="s" direction="in" />\
+        <arg type="s" direction="in" />\
+        <arg type="s" direction="in" />\
+        <arg type="s" direction="in" />\
+        <arg type="h" direction="out" />\
+    </method>\
+  </interface>\
+</node>';
+
 const DBusSessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(DBusSessionManagerIface);
+const LogindProxy = Gio.DBusProxy.makeProxyWrapper(LogindInterface);
 
 const ActionsPath = '/icons/hicolor/scalable/actions/';
 const DisabledIcon = 'my-caffeine-off-symbolic';
@@ -122,6 +136,7 @@ const InhibitorManager = GObject.registerClass({
 
         this._isInhibited = false;
         this._inhibitorCookie = null;
+        this._logindInhibitorFd = null;
         this._userEnabled = false;
         this._triggerApp = null;
         this._tempManageLight = false;
@@ -138,6 +153,15 @@ const InhibitorManager = GObject.registerClass({
         this._sessionManager = new DBusSessionManagerProxy(Gio.DBus.session,
             'org.gnome.SessionManager',
             '/org/gnome/SessionManager');
+        this._logindProxy = new LogindProxy(Gio.DBus.system,
+            'org.freedesktop.login1',
+            '/org/freedesktop/login1',
+            (proxy, error) => {
+                if (error) {
+                    log(error.message);
+                }
+            }
+        );
         this._colorProxy = new ColorProxy(
             Gio.DBus.session,
             'org.gnome.SettingsDaemon.Color',
@@ -164,6 +188,8 @@ const InhibitorManager = GObject.registerClass({
             () => this._updateState(),
             `changed::${INHIBIT_APPS_KEY}`,
             () => this._updateState(),
+            `changed::${INHIBIT_LID_KEY}`,
+            () => this._forceUpdate(),
             `changed::${TRIGGER_APPS_MODE}`,
             () => {
                 this._disconnectTriggerSignals();
@@ -411,6 +437,31 @@ const InhibitorManager = GObject.registerClass({
         } else {
             log('Failed to add inhibitor');
         }
+
+        // Add systemd-logind inhibitor to prevent lid-close sleep directly
+        if (this._settings.get_boolean(INHIBIT_LID_KEY)) {
+            try {
+                const logindParams = [
+                    GLib.Variant.new_string('handle-lid-switch'),
+                    GLib.Variant.new_string('caffeine-gnome-extension'),
+                    GLib.Variant.new_string('Inhibited by Caffeine GNOME extension'),
+                    GLib.Variant.new_string('block')
+                ];
+                const logindParamsVariant = GLib.Variant.new_tuple(logindParams);
+
+                const [, fdList] = this._logindProxy.call_with_unix_fd_list_sync(
+                    'Inhibit', logindParamsVariant,
+                    Gio.DBusCallFlags.NONE, -1, null, null);
+                if (fdList && fdList.get_length() > 0) {
+                    const fds = fdList.steal_fds();
+                    if (fds.length > 0) {
+                        this._logindInhibitorFd = fds[0];
+                    }
+                }
+            } catch (e) {
+                log(`Caffeine: Failed to call logind inhibitor: ${e.message}`);
+            }
+        }
     }
 
     _removeInhibitor() {
@@ -420,6 +471,17 @@ const InhibitorManager = GObject.registerClass({
             this._sessionManager.UninhibitRemote(this._inhibitorCookie);
             this._inhibitorCookie = null;
             this._isInhibited = false;
+        }
+
+        // Remove logind inhibitor by closing the file descriptor
+        if (this._logindInhibitorFd !== null) {
+            try {
+                // In GJS, closing the raw FD is done via GLib
+                GLib.close(this._logindInhibitorFd);
+                this._logindInhibitorFd = null;
+            } catch (e) {
+                log(`Caffeine: Failed to remove systemd-logind inhibitor: ${e.message}`);
+            }
         }
     }
 
