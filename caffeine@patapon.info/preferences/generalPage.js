@@ -78,6 +78,18 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
             selected: this._settings.get_enum(this._settingsKey.NIGHT_LIGHT)
         });
 
+        // Pause and resume break reminders (wellbeing)
+        const pauseWellbeing = new Gtk.StringList();
+        pauseWellbeing.append(_('Never'));
+        pauseWellbeing.append(_('Always'));
+        pauseWellbeing.append(_('For apps on list'));
+        const pauseWellbeingRow = new Adw.ComboRow({
+            title: _('Pause and resume break reminders'),
+            subtitle: _('Pauses GNOME break reminders together with Caffeine\'s state'),
+            model: pauseWellbeing,
+            selected: this._settings.get_enum(this._settingsKey.WELLBEING)
+        });
+
         // Allow blank screen
         const allowBlankScreen = new Gtk.StringList();
         allowBlankScreen.append(_('Never'));
@@ -96,6 +108,7 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         behaviorGroup.add(enableMprisRow);
         behaviorGroup.add(rememberStateRow);
         behaviorGroup.add(pauseNightLightRow);
+        behaviorGroup.add(pauseWellbeingRow);
         behaviorGroup.add(allowBlankScreenRow);
         this.add(behaviorGroup);
 
@@ -144,6 +157,9 @@ class CaffeineGeneralPage extends Adw.PreferencesPage {
         });
         pauseNightLightRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.NIGHT_LIGHT, widget.selected);
+        });
+        pauseWellbeingRow.connect('notify::selected', (widget) => {
+            this._settings.set_enum(this._settingsKey.WELLBEING, widget.selected);
         });
         allowBlankScreenRow.connect('notify::selected', (widget) => {
             this._settings.set_enum(this._settingsKey.SCREEN_BLANK, widget.selected);
