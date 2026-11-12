@@ -23,6 +23,12 @@ jobs:
       run: |
         make install
 
+    - name: Run Shexli on the extension
+      uses: stuarthayhurst/shexli-github-action@v1
+      with:
+        path: caffeine@patapon.info.zip
+        ignored-checks: 'EGO-M-004'
+
     - uses: actions/upload-artifact@v7
       with:
         name: caffeine@patapon.info.zip
